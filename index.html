@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criativos - Sistema de gestão</title>
+<meta name="description" content="Sistema de gestão para quem entrega criativos digitais: preço calculado a partir dos seus custos, orçamento, cronograma, contrato, portal do cliente, equipe e relatórios em um só lugar.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Criativos - Sistema de gestão">
+<meta property="og:description" content="Do briefing ao recebimento, sem digitar duas vezes. Preço, orçamento, cronograma, contrato, portal do cliente e relatórios em um só lugar.">
+<meta property="og:image" content="https://site-criativos-five.vercel.app/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="img/logo.svg">
+<link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/wizard-0.webp" as="image" type="image/webp">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="topo" id="topo">
+  <div class="topo-in">
+    <a class="marca" href="#inicio" aria-label="Criativos - Sistema de gestão, voltar ao início">
+      <svg class="marca-ic" viewBox="0 0 64 64" width="26" height="26" aria-hidden="true" focusable="false"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c709b"/><stop offset="1" stop-color="#17435e"/></linearGradient></defs><rect width="64" height="64" rx="17" fill="url(#lg1)"/><path d="M43 22.5A15 15 0 1 0 43 41.5" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="32" r="4.2" fill="#a9d1e8"/></svg><span class="marca-nome">Criativos</span><span class="marca-sub">Sistema de gestão</span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Seções da página">
+      <span class="menu-ind" aria-hidden="true"></span>
+      <a href="#sistema">Sistema</a>
+      <a href="#fluxo">Fluxo</a>
+      <a href="#modulos">Módulos</a>
+      <a href="#portais">Portais e acesso</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#planos">Planos</a>
+      <a href="#ficha">Ficha técnica</a>
+      <a href="#perguntas">Perguntas</a>
+    </nav>
+    <a class="btn btn-pri topo-cta" href="#adquirir">Solicitar teste</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span class="menu-btn-ic" aria-hidden="true"></span></button>
+  </div>
+  <span class="topo-prog" aria-hidden="true"></span>
+</header>
+
+<main id="conteudo">
+
+<!-- ============ ABERTURA ============ -->
+<section class="hero" id="inicio" aria-labelledby="t-hero">
+  <div class="hero-brilho" aria-hidden="true"></div>
+  <div class="wrap hero-cab">
+    <h1 id="t-hero">Do briefing ao recebimento, sem digitar duas vezes.</h1>
+    <p class="lead">Criativos - Sistema de gestão é o painel de quem cria para clientes. Ele calcula o preço do trabalho, monta orçamento, cronograma e contrato, acompanha cada entrega e avisa quando chegou a hora de cobrar.</p>
+    <div class="hero-acoes">
+      <a class="btn btn-pri btn-grande" href="#adquirir" data-wa="teste">Solicitar teste</a>
+      <a class="link-seta" href="#fluxo">Ver como funciona</a>
+    </div>
+  </div>
+
+  <div class="wrap hero-palco">
+    <div class="sim" id="sim-hero" role="group" aria-label="Simulação automática: uma demanda percorrendo as telas do sistema">
+      <div class="hero-frame">
+        <div class="frame-barra" aria-hidden="true"><i></i><i></i><i></i><span>Criativos - Sistema de gestão</span><div class="hero-selo"><span class="hero-selo-proj"><b>Festival Raízes 2026</b><span id="sh-num">BRF-0001</span></span><span class="sim-selo" id="sh-selo">Em briefing</span>
+        </div></div>
+        <div class="hero-telas">
+          <img class="on" data-p="0" src="img/wizard-0.webp" width="1440" height="900" alt="Tela do sistema: briefing da demanda em seis etapas, com o cliente e o projeto.">
+          <img data-p="1" src="img/wizard-2.webp" width="1440" height="900" decoding="async" alt="Tela do sistema: serviços e valores do orçamento, com o preço calculado por serviço.">
+          <img data-p="2" src="img/portal-orcamento.webp" width="1440" height="900" decoding="async" alt="Portal do cliente com o orçamento e o botão de aprovação.">
+          <img data-p="3" src="img/agenda.webp" width="1440" height="900" decoding="async" alt="Agenda do sistema com as entregas distribuídas em dias úteis.">
+          <img data-p="4" src="img/dashboard.webp" width="1440" height="900" decoding="async" alt="Dashboard com o fluxo de recebimentos e os próximos prazos.">
+          <img data-p="5" src="img/relatorios.webp" width="1440" height="900" decoding="async" alt="Relatórios financeiros com o recebido por mês.">
+        </div>
+      </div>
+
+      <div class="hero-card" aria-live="off">
+        <div class="sim-palco">
+          <div class="sp" data-p="0">
+            <p class="sp-t">Briefing em 6 etapas</p>
+            <ul class="checks">
+              <li>Projeto: cliente, formato e resumo</li>
+              <li>Enquadramento: edital e fase</li>
+              <li>Serviços e valores</li>
+              <li>Briefing por serviço</li>
+              <li>Prazos e ativos</li>
+              <li>Cronograma e pagamento</li>
+            </ul>
+          </div>
+          <div class="sp" data-p="1">
+            <p class="sp-t">Orçamento gerado do próprio briefing</p>
+            <ul class="linhas">
+              <li><span>Identidade Visual e Logomarca</span><b>R$ 4.190,00</b></li>
+              <li><span>Book de Captação</span><b>R$ 3.000,00</b></li>
+              <li><span>Portfólio Artístico</span><b>R$ 3.000,00</b></li>
+              <li><span>Formulários e Credenciamento</span><b>R$ 1.400,00</b></li>
+              <li><span>Campanhas para Redes Sociais</span><b>R$ 300,00</b></li>
+            </ul>
+            <p class="sp-tot"><span>Total, validade de 15 dias</span><b>R$ 13.290,00</b></p>
+          </div>
+          <div class="sp" data-p="2">
+            <p class="sp-t">O cliente aprova pelo portal</p>
+            <div class="carimbo"><b>Orçamento aprovado</b><span>O mesmo número passa de BRF para OS e o cronograma começa.</span></div>
+            <p class="sp-l"><span>Entrada (50%) liberada para cobrança</span><b>R$ 6.645,00</b></p>
+          </div>
+          <div class="sp" data-p="3">
+            <p class="sp-t">Entregas em sequência, em dias úteis</p>
+            <div class="mini-gantt">
+              <div><span>Identidade visual</span><i style="--w:34%;--l:0%"></i></div>
+              <div><span>Book de captação</span><i style="--w:28%;--l:34%"></i></div>
+              <div><span>Portfólio</span><i style="--w:22%;--l:62%"></i></div>
+              <div><span>Formulários</span><i style="--w:16%;--l:84%"></i></div>
+            </div>
+            <p class="sp-l"><span>Entregas concluídas</span><b class="cont-ent">0 de 4</b></p>
+          </div>
+          <div class="sp" data-p="4">
+            <p class="sp-t">Recebimento confirmado</p>
+            <div class="carimbo ok"><b>Saldo (50%) recebido por Pix</b><span>A data fica gravada e alimenta a ordem de pagamento e os relatórios.</span></div>
+            <p class="sp-l"><span>Recebido</span><b class="cont-rec">R$ 6.645,00</b></p>
+          </div>
+          <div class="sp" data-p="5">
+            <p class="sp-t">Ordem de serviço concluída</p>
+            <div class="carimbo ok"><b>Tudo entregue e recebido</b><span>O resultado alimenta o funil comercial e o histórico do cliente.</span></div>
+            <p class="sp-l"><span>Taxa de conversão do período</span><b>78%</b></p>
+          </div>
+        </div>
+        <dl class="sim-kpis">
+          <div><dt>Valor total</dt><dd>R$ 13.290,00</dd></div>
+          <div><dt>Recebido</dt><dd id="sh-rec">R$ 0,00</dd></div>
+          <div><dt>Progresso</dt><dd id="sh-prog">0%</dd></div>
+        </dl>
+      </div>
+
+      <div class="sim-ctl">
+        <ol class="sim-trilho" id="sh-trilho">
+          <li><button type="button" data-p="0">Briefing</button></li>
+          <li><button type="button" data-p="1">Orçamento</button></li>
+          <li><button type="button" data-p="2">Aprovação</button></li>
+          <li><button type="button" data-p="3">Entregas</button></li>
+          <li><button type="button" data-p="4">Recebimento</button></li>
+          <li><button type="button" data-p="5">Concluída</button></li>
+        </ol>
+        <button class="sim-pausa" type="button" aria-pressed="false" aria-label="Pausar a simulação"><span aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VÍDEO ============ -->
+<section class="sec sec-branca" id="video" aria-labelledby="t-video">
+  <div class="wrap">
+    <h2 id="t-video">Veja o sistema em funcionamento</h2>
+    <p class="sec-lead">Em menos de um minuto: do painel ao briefing, do preço calculado ao cronograma, da agenda ao funil comercial. Tudo gravado no sistema real, com dados fictícios.</p>
+    <figure class="video" id="demo">
+      <div class="video-moldura">
+        <video id="demo-v" controls muted loop playsinline preload="metadata" poster="video/poster.webp" width="1280" height="800" aria-describedby="demo-txt">
+          <source src="video/demonstracao.mp4" type="video/mp4">
+          <source src="video/demonstracao.webm" type="video/webm">
+          Seu navegador não reproduz vídeo. O roteiro está descrito logo abaixo.
+        </video>
+      </div>
+      <figcaption>
+        <details class="video-roteiro" id="demo-txt"><summary>Roteiro do vídeo, em texto</summary>
+          <ol>
+            <li>Painel com valores a receber, recebidos, demandas em produção e próximos prazos.</li>
+            <li>Nova demanda: o briefing em seis etapas, com cliente, projeto e formato da ação.</li>
+            <li>Serviços e valores: o preço de cada serviço sai dos custos cadastrados e o sistema avisa se o valor está abaixo do ideal.</li>
+            <li>Cronograma e pagamento montados a partir do briefing, com entrada e saldo.</li>
+            <li>Ao salvar, a demanda entra no painel como um novo card.</li>
+            <li>Agenda com entregas em dias úteis, feriados e folgas.</li>
+            <li>Relatórios com recebimentos, funil comercial, taxa de conversão e ticket médio.</li>
+          </ol>
+        </details>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ O SISTEMA ============ -->
+<section class="sec sec-clara" id="sistema" aria-labelledby="t-sistema">
+  <div class="wrap">
+    <div class="duas">
+      <div class="duas-a">
+        <h2 id="t-sistema">Seu trabalho está em quantos lugares?</h2>
+        <p>Planilha de preços, conversa de WhatsApp, orçamento em um arquivo, contrato em outro, cobrança na memória. Cada pedaço é digitado de novo e a informação começa a divergir.</p>
+        <p>No sistema, cada demanda reúne tudo. O que você cadastra uma vez, como seus custos, seus serviços e seus clientes, é reaproveitado em todos os documentos e avisos dali em diante.</p>
+        <button class="link-seta link-btn" type="button" id="caos-rep">Ver de novo</button>
+      </div>
+      <div class="caos" id="caos" aria-label="Itens soltos que se reúnem em uma demanda">
+        <div class="caos-fundo" aria-hidden="true">
+          <img class="cf-1" src="img/dashboard.webp" width="1440" height="900" loading="lazy" alt="">
+          <img class="cf-2" src="img/contratos.webp" width="1440" height="900" loading="lazy" alt="">
+          <img class="cf-3" src="img/agenda.webp" width="1440" height="900" loading="lazy" alt="">
+        </div>
+        <ul class="caos-chips">
+          <li style="--x:-120px;--y:-70px;--r:-9deg">Planilha de preços</li>
+          <li style="--x:140px;--y:-40px;--r:7deg">Conversa do cliente</li>
+          <li style="--x:-90px;--y:60px;--r:5deg">Orçamento em Word</li>
+          <li style="--x:110px;--y:90px;--r:-6deg">Contrato em PDF</li>
+          <li style="--x:-150px;--y:10px;--r:8deg">Datas no calendário</li>
+          <li style="--x:160px;--y:20px;--r:-4deg">Cobrança de memória</li>
+          <li style="--x:-60px;--y:-110px;--r:4deg">Pasta de arquivos</li>
+          <li style="--x:70px;--y:-120px;--r:-7deg">Notas fiscais</li>
+        </ul>
+        <div class="caos-card" aria-hidden="true">
+          <div class="caos-card-top"><b>OS-0001</b><span>Festival Raízes 2026</span></div>
+          <div class="caos-card-corpo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conex" id="conex">
+      <h3>Cadastre uma vez. O sistema reaproveita em tudo.</h3>
+      <p class="conex-intro">Passe o mouse ou use o teclado sobre um cadastro para ver onde ele reaparece. A simulação percorre todos sozinha.</p>
+      <div class="conex-grade">
+        <ul class="conex-col conex-orig" aria-label="O que você cadastra">
+          <li><button type="button" data-k="perfil">Perfil profissional</button></li>
+          <li><button type="button" data-k="cal">Calendário de trabalho</button></li>
+          <li><button type="button" data-k="cus">Custos</button></li>
+          <li><button type="button" data-k="srv">Serviços</button></li>
+          <li><button type="button" data-k="lis">Listas do briefing</button></li>
+          <li><button type="button" data-k="cli">Clientes</button></li>
+        </ul>
+        <div class="conex-centro" id="cx-centro"><b>Demanda</b><span>o briefing da demanda recebe tudo</span></div>
+        <ul class="conex-col conex-dest" aria-label="O que o sistema entrega">
+          <li data-d="orc"><span>Orçamento</span></li>
+          <li data-d="cro"><span>Cronograma</span></li>
+          <li data-d="not"><span>Notificações</span></li>
+          <li data-d="con"><span>Contrato</span></li>
+          <li data-d="op"><span>Ordem de pagamento</span></li>
+          <li data-d="das"><span>Dashboard</span></li>
+          <li data-d="age"><span>Agenda</span></li>
+          <li data-d="rel"><span>Relatórios</span></li>
+          <li data-d="por"><span>Portal do cliente</span></li>
+        </ul>
+        <svg class="conex-svg" id="cx-svg" aria-hidden="true"></svg>
+      </div>
+      <p class="conex-legenda" id="cx-leg" aria-live="polite">Perfil profissional: cabeçalho do orçamento e da ordem de pagamento, dados da Contratada no contrato, chave Pix e link de emissão de nota fiscal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLUXO ============ -->
+<section class="sec sec-branca" id="fluxo" aria-labelledby="t-fluxo">
+  <div class="wrap">
+    <h2 id="t-fluxo">Cada demanda percorre um caminho com regras claras</h2>
+    <p class="sec-lead">Toda demanda tem fases e números próprios. Clique em uma fase para ver como ela começa, como termina e o que o sistema faz sozinho.</p>
+
+    <div class="ciclo" id="ciclo">
+      <ol class="ciclo-nos" role="tablist" aria-label="Fases da demanda">
+        <li><button role="tab" type="button" data-c="briefing" aria-selected="true"><b>Briefing</b><span>BRF-0001</span></button></li>
+        <li class="seta" aria-hidden="true"></li>
+        <li><button role="tab" type="button" data-c="proposta" aria-selected="false"><b>Orçamento enviado</b><span>BRF-0001</span></button></li>
+        <li class="seta" aria-hidden="true"></li>
+        <li><button role="tab" type="button" data-c="os" aria-selected="false"><b>Ordem de serviço</b><span>OS-0001</span></button></li>
+        <li class="seta" aria-hidden="true"></li>
+        <li><button role="tab" type="button" data-c="concluida" aria-selected="false"><b>Concluída</b><span>OS-0001</span></button></li>
+      </ol>
+      <ul class="ciclo-ramos" aria-label="Outros caminhos">
+        <li><button role="tab" type="button" data-c="recusada" aria-selected="false"><b>Recusada</b><span>volta como briefing</span></button></li>
+        <li><button role="tab" type="button" data-c="lixeira" aria-selected="false"><b>Lixeira</b><span>30 dias para restaurar</span></button></li>
+      </ul>
+      <div class="ciclo-det" id="ciclo-det" role="tabpanel" aria-live="polite">
+        <div><h3>Como começa</h3><p data-f="ini"></p></div>
+        <div><h3>Como termina</h3><p data-f="fim"></p></div>
+        <div><h3>O que o sistema faz sozinho</h3><p data-f="auto"></p></div>
+      </div>
+    </div>
+
+    <div class="funil" id="funil">
+      <div class="funil-txt">
+        <h3>O funil mostra no que seus orçamentos estão se transformando</h3>
+        <p>Enviados, aprovados, recusados e em aberto, com a variação em relação ao período anterior e os motivos de recusa. A taxa de conversão conta só os orçamentos já decididos.</p>
+        <dl class="funil-metricas">
+          <div><dt>Taxa de conversão</dt><dd><span data-n="78" data-suf="%">0</span></dd></div>
+          <div><dt>Ticket médio aprovado</dt><dd>R$ <span data-n="8091.43" data-dec="2">0</span></dd></div>
+          <div><dt>Tempo até decidir</dt><dd><span data-n="6.3" data-dec="1" data-suf=" dias">0</span></dd></div>
+        </dl>
+      </div>
+      <div class="funil-vis" role="img" aria-label="Funil com 12 orçamentos enviados, 9 decididos e 7 aprovados. Dois foram recusados e três seguem em aberto.">
+        <div class="fb fb-env"><span>Enviados</span><b data-n="12">0</b></div>
+        <div class="fb fb-dec"><span>Decididos</span><b data-n="9">0</b></div>
+        <div class="fb fb-apr"><span>Aprovados</span><b data-n="7">0</b></div>
+        <div class="funil-lado">
+          <p><span>Recusados</span><b data-n="2">0</b></p>
+          <p><span>Em aberto</span><b data-n="3">0</b></p>
+        </div>
+      </div>
+    </div>
+    <figure class="prancha prancha-larga" data-img="relatorios-fun">
+      <figcaption class="prancha-nome"><span>Relatórios, funil comercial</span><em>1440 × 900</em></figcaption>
+      <button class="prancha-btn" type="button" aria-label="Ampliar: Relatórios, funil comercial"><img src="img/relatorios-fun.webp" width="1440" height="900" loading="lazy" alt="Tela de relatórios do sistema, aba funil comercial, com taxa de conversão, ticket médio, funil do período e gráfico de enviados e aprovados por mês."></button>
+    </figure>
+
+    <div class="contas">
+      <h3>O preço e os prazos saem de contas, não de palpite</h3>
+      <div class="contas-grade">
+        <div class="calc" id="calc" role="group" aria-label="Simulação do preço de um serviço">
+          <div class="calc-topo">
+            <h4>Preço de um serviço</h4>
+            <button class="sim-pausa" type="button" aria-pressed="false" aria-label="Pausar a simulação de preço"><span aria-hidden="true"></span></button>
+          </div>
+          <p class="calc-sub">Serviço de 21 horas, com as mesmas regras do sistema. Mexa nos controles ou deixe rodar.</p>
+          <div class="calc-ctl">
+            <label>Meta mensal <output id="o-meta">R$ 6.000</output><input type="range" id="i-meta" min="3000" max="12000" step="500" value="6000"></label>
+            <label>Margem de lucro <output id="o-lucro">30%</output><input type="range" id="i-lucro" min="0" max="60" step="5" value="30"></label>
+            <label>Folga para negociação <output id="o-neg">10%</output><input type="range" id="i-neg" min="0" max="30" step="5" value="10"></label>
+            <label>Imposto da nota fiscal <output id="o-imp">6%</output><input type="range" id="i-imp" min="0" max="20" step="1" value="6"></label>
+          </div>
+          <table class="calc-tab">
+            <tbody>
+              <tr><th scope="row">Valor da hora mínima</th><td id="c-hora">R$ 50,00</td></tr>
+              <tr><th scope="row">Custo mínimo (21 h)</th><td id="c-min">R$ 1.050,00</td></tr>
+              <tr><th scope="row">Lucro</th><td id="c-lucro">R$ 450,00</td></tr>
+              <tr><th scope="row">Negociação</th><td id="c-neg">R$ 150,00</td></tr>
+              <tr><th scope="row">Imposto</th><td id="c-imp">R$ 105,32</td></tr>
+              <tr class="calc-fim"><th scope="row">Valor sugerido</th><td id="c-ideal">R$ 1.760,00</td></tr>
+            </tbody>
+          </table>
+          <p class="calc-nota">Hora mínima = meta ÷ (6 horas por dia × 20 dias úteis). Lucro = custo ÷ (1 − margem) − custo. O valor sugerido sobe para o próximo múltiplo de R$ 10.</p>
+        </div>
+
+        <div class="gantt" id="gantt" role="group" aria-label="Simulação do cronograma de uma demanda">
+          <div class="calc-topo">
+            <h4>Cronograma em dias úteis</h4>
+            <button class="sim-pausa" type="button" aria-pressed="false" aria-label="Pausar a simulação de cronograma"><span aria-hidden="true"></span></button>
+          </div>
+          <p class="calc-sub">As entregas são sequenciais. Fins de semana e feriados não contam, e cada entrega inclui 2 dias para aprovação.</p>
+          <div class="gantt-eixo" id="g-eixo" aria-hidden="true"></div>
+          <div class="gantt-linhas" id="g-linhas"></div>
+          <p class="calc-nota" id="g-nota">Duração = horas ÷ horas por dia (arredondado para cima) + dias de aprovação.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÓDULOS ============ -->
+<section class="sec sec-clara" id="modulos" aria-labelledby="t-mod">
+  <div class="wrap">
+    <h2 id="t-mod">Sete módulos que trabalham juntos</h2>
+    <p class="sec-lead">Escolha um módulo e percorra os recursos dele. A tela ao lado muda junto, e cada imagem é do sistema em funcionamento.</p>
+
+    <div class="mods" id="mods">
+      <div class="mods-abas" role="tablist" aria-label="Módulos do sistema">
+        <button role="tab" type="button" id="mt-0" aria-controls="mp-0" aria-selected="true"><b>Demandas</b><span>do briefing à OS</span></button>
+        <button role="tab" type="button" id="mt-1" aria-controls="mp-1" aria-selected="false" tabindex="-1"><b>Clientes e serviços</b><span>preço e custos</span></button>
+        <button role="tab" type="button" id="mt-2" aria-controls="mp-2" aria-selected="false" tabindex="-1"><b>Agenda</b><span>prazos e carga</span></button>
+        <button role="tab" type="button" id="mt-3" aria-controls="mp-3" aria-selected="false" tabindex="-1"><b>Relatórios</b><span>financeiro e funil</span></button>
+        <button role="tab" type="button" id="mt-4" aria-controls="mp-4" aria-selected="false" tabindex="-1"><b>Documentos</b><span>orçamento e contrato</span></button>
+        <button role="tab" type="button" id="mt-5" aria-controls="mp-5" aria-selected="false" tabindex="-1"><b>Equipe</b><span>pagamentos e contratos</span></button>
+        <button role="tab" type="button" id="mt-6" aria-controls="mp-6" aria-selected="false" tabindex="-1"><b>Ajustes</b><span>e-mail, backup, histórico</span></button>
+      </div>
+
+      <!-- Demandas -->
+      <div class="mods-painel" role="tabpanel" id="mp-0" aria-labelledby="mt-0">
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>7</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="dashboard" data-nome="Dashboard" data-med="1440 × 900" data-alt="Dashboard do sistema com indicadores a receber, recebido, em produção e briefings, gráfico de fluxo de recebimentos e próximos prazos.">
+              <h3>Dashboard</h3>
+              <ul><li>Quatro indicadores: a receber, recebido, em produção e briefings e propostas</li><li>Fluxo de recebimentos de 3, 6 ou 12 meses, com recebido, previsto e acumulado</li><li>Próximos prazos, da entrega mais urgente para a menos urgente</li></ul>
+            </article>
+            <article class="cartao" data-img="dashboard-2" data-nome="Dashboard, demandas" data-med="1440 × 900" data-alt="Dashboard rolado até a receita por cliente e os cards das demandas com filtros por fase.">
+              <h3>Cards e filtros por fase</h3>
+              <ul><li>Busca por número, cliente ou projeto enquanto você digita</li><li>Filtros de fase com a contagem de cada uma</li><li>Receita por cliente e por serviço, no período do gráfico</li></ul>
+            </article>
+            <article class="cartao" data-img="wizard-0" data-nome="Nova demanda" data-med="1440 × 900" data-alt="Formulário de nova demanda, etapa Projeto, com cliente, formato da ação e resumo técnico.">
+              <h3>Nova demanda em 6 etapas</h3>
+              <ul><li>Projeto, enquadramento, serviços, briefing por serviço, prazos e cronograma</li><li>O formato da ação define as sugestões de serviços</li><li>Modelos de briefing para começar de onde parou</li></ul>
+            </article>
+            <article class="cartao" data-img="wizard-2" data-nome="Serviços e valores" data-med="1440 × 900" data-alt="Etapa Serviços e valores da nova demanda, com sugestões de serviço e parecer de valor.">
+              <h3>Serviços com parecer de valor</h3>
+              <ul><li>A faixa de cor mostra se o valor cobre o custo mínimo, a margem ou o valor ideal</li><li>Itens descritos entram no escopo do orçamento</li><li>Desconto opcional, com motivo, como linha própria nos documentos</li></ul>
+            </article>
+            <article class="cartao" data-img="ficha-0" data-nome="Ficha da demanda" data-med="1440 × 900" data-alt="Ficha de uma ordem de serviço com valor total, recebido, a receber, progresso das entregas e próximos eventos.">
+              <h3>Ficha da demanda</h3>
+              <ul><li>Visão geral, entregas, pagamentos, arquivos, portal do cliente e chat em abas</li><li>Alertas do que falta para encerrar a OS</li><li>Atalhos de WhatsApp, e-mail e ligação para o cliente</li></ul>
+            </article>
+            <article class="cartao" data-img="ficha-1" data-nome="Entregas" data-med="1440 × 900" data-alt="Aba Entregas da ficha, com cada entrega, prazo, valor, horas e revisões.">
+              <h3>Entregas, horas e revisões</h3>
+              <ul><li>Cronômetro e lançamento manual de horas reais por entrega</li><li>Três rodadas de revisão incluídas, com cobrança extra a partir da quarta</li><li>Versões do orçamento: v1 congelada e v2 com o que mudou</li></ul>
+            </article>
+            <article class="cartao" data-img="notificacoes" data-nome="Notificações" data-med="1440 × 900" data-alt="Painel de notificações aberto sobre o dashboard, com avisos de entrada pendente, emitir nota fiscal e backup.">
+              <h3>Notificações com regra</h3>
+              <ul><li>Treze tipos de aviso: proposta perto do vencimento, entrega atrasada, solicitar pagamento, emitir nota fiscal e outros</li><li>Dispensar esconde o aviso, e ele volta se a condição mudar</li><li>Faixa Precisa de atenção no dashboard</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Dashboard</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/dashboard.webp" width="1440" height="900" alt=""></button>
+        </figure>
+      </div>
+
+      <!-- Clientes e serviços -->
+      <div class="mods-painel" role="tabpanel" id="mp-1" aria-labelledby="mt-1" hidden>
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>4</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="clientes" data-nome="Clientes" data-med="1440 × 900" data-alt="Lista de clientes com documento, e-mail, WhatsApp e quantidade de demandas.">
+              <h3>Cadastro de clientes</h3>
+              <ul><li>Só o nome é obrigatório; o restante qualifica as partes nos documentos</li><li>Alterar um cliente vale para todos os documentos gerados dali em diante</li><li>Cliente com demandas não pode ser excluído por engano</li></ul>
+            </article>
+            <article class="cartao" data-img="servicos" data-nome="Serviços" data-med="1440 × 900" data-alt="Catálogo de serviços com horas base, custo mínimo e valor ideal calculados.">
+              <h3>Catálogo e precificação</h3>
+              <ul><li>Horas base, custo mínimo e valor ideal calculados para cada serviço</li><li>Etapas por hora ou por peça, com multiplicador de técnica</li><li>Depois de 3 entregas com horas lançadas, o sistema sugere novas horas base</li></ul>
+            </article>
+            <article class="cartao" data-img="custos" data-nome="Custos" data-med="1440 × 900" data-alt="Perfil de custos com custos fixos mensais, horas por dia, dias úteis, meta mensal e margens.">
+              <h3>Perfil de custos</h3>
+              <ul><li>Meta mensal, horas por dia e dias úteis definem a hora mínima</li><li>Margens, imposto da nota, equipamentos, urgência e revisão extra</li><li>Mudar um valor atualiza o preço de todos os serviços</li></ul>
+            </article>
+            <article class="cartao" data-img="configuracoes" data-nome="Configurações" data-med="1440 × 900" data-alt="Configurações, aba Perfil profissional, com marca, nome civil, contato e endereço.">
+              <h3>Perfil e calendário de trabalho</h3>
+              <ul><li>Perfil profissional alimenta cabeçalho, contrato, chave Pix e nota fiscal</li><li>Feriados nacionais e do estado vêm de fonte automática</li><li>Folgas próprias, com período e repetição anual</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Clientes</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/clientes.webp" width="1440" height="900" alt="" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- Agenda -->
+      <div class="mods-painel" role="tabpanel" id="mp-2" aria-labelledby="mt-2" hidden>
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>3</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="agenda" data-nome="Agenda, calendário" data-med="1440 × 900" data-alt="Calendário de outubro com entregas previstas, concluídas e recebimentos.">
+              <h3>Calendário</h3>
+              <ul><li>Entregas pendentes no dia previsto, com marca para atrasadas e concluídas</li><li>Parcelas a receber na data prevista e recebidas na data confirmada</li><li>Feriados e folgas marcados com o nome</li></ul>
+            </article>
+            <article class="cartao" data-img="agenda-carga" data-nome="Agenda, carga de trabalho" data-med="1440 × 900" data-alt="Carga de trabalho por semana comparando horas planejadas e capacidade.">
+              <h3>Carga de trabalho por semana</h3>
+              <ul><li>Horas planejadas contra a capacidade da semana</li><li>Ocupação normal até 79%, atenção de 80% a 100% e sobrecarga acima de 100%</li><li>Opção de incluir propostas enviadas para simular a carga se o cliente aprovar</li></ul>
+            </article>
+            <article class="cartao" data-img="sistema-mobile-2" data-nome="Agenda no celular" data-med="390 × 844" data-alt="Agenda do sistema no celular, com calendário compacto e lista do dia." data-vert>
+              <h3>Mesmo sistema no celular</h3>
+              <ul><li>Barra inferior com Início, Agenda, Avisos, Clientes e Mais</li><li>Confirmar pagamento, concluir entrega e responder o cliente</li><li>Instalável como aplicativo no Android e no iPhone</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Agenda, calendário</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/agenda.webp" width="1440" height="900" alt="" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- Relatórios -->
+      <div class="mods-painel" role="tabpanel" id="mp-3" aria-labelledby="mt-3" hidden>
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>3</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="relatorios" data-nome="Relatórios, financeiro" data-med="1440 × 900" data-alt="Relatório financeiro com recebido no período, a receber, imposto estimado e gráfico por mês.">
+              <h3>Relatório financeiro</h3>
+              <ul><li>Recebimentos contados pela data em que o dinheiro entrou</li><li>Recebido, a receber, imposto estimado e recebimentos sem nota fiscal</li><li>Tabelas por recebimento, cliente e serviço, com horas</li></ul>
+            </article>
+            <article class="cartao" data-img="relatorios-fun" data-nome="Relatórios, funil comercial" data-med="1440 × 900" data-alt="Relatório de funil comercial com taxa de conversão, ticket médio e funil do período.">
+              <h3>Funil comercial</h3>
+              <ul><li>Conversão, ticket médio aprovado, tempo até decidir e valor em negociação</li><li>Variação em relação ao período anterior de mesma duração</li><li>Motivos de recusa e histórico por cliente</li></ul>
+            </article>
+            <article class="cartao" data-img="relatorios" data-nome="Excel completo" data-med="1440 × 900" data-alt="Relatórios com o botão de planilha Excel completa." data-pro>
+              <h3>Planilha Excel completa</h3>
+              <ul><li>Painel, prestação de contas, resumo mensal, livro-caixa e notas fiscais</li><li>A receber, clientes, serviços e horas, e equipe para dono e administrador</li><li>Estimativa de imposto que não substitui a declaração oficial nem o contador</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Relatórios, financeiro</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/relatorios.webp" width="1440" height="900" alt="" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- Documentos -->
+      <div class="mods-painel" role="tabpanel" id="mp-4" aria-labelledby="mt-4" hidden>
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>4</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="doc-orcamento" data-nome="Orçamento" data-med="794 × 1123" data-alt="Orçamento impresso com cliente, projeto, serviços e valores, cronograma de entregas, pagamento e condições." data-vert>
+              <h3>Orçamento</h3>
+              <ul><li>Cliente, projeto, serviços com escopo, cronograma, pagamento e validade de 15 dias</li><li>Pensado para até 2 páginas A4, em PDF pela impressão do navegador</li><li>Versões guardadas: reimprima a v1 mesmo depois de gerar a v2</li></ul>
+            </article>
+            <article class="cartao" data-img="doc-op" data-nome="Ordem de pagamento" data-med="794 × 1123" data-alt="Ordem de pagamento de uma parcela com dados do favorecido, valor e chave Pix." data-vert>
+              <h3>Ordem de pagamento</h3>
+              <ul><li>Uma página por parcela, numerada pela demanda e pela parcela</li><li>Chave Pix, QR Code e copia e cola com o valor da parcela</li><li>Mostra a data do recebimento quando já confirmado</li></ul>
+            </article>
+            <article class="cartao" data-img="contratos" data-nome="Contratos" data-med="1440 × 900" data-alt="Lista de demandas com o botão Gerar contrato em cada linha.">
+              <h3>Contrato por demanda</h3>
+              <ul><li>Preenchido com dados do cliente, do perfil, da demanda e do Anexo I</li><li>Assinatura eletrônica pelo portal, com certificado de nome, CPF, data, hora, IP e código do texto</li><li>Também aceita o PDF assinado no gov.br, para o cliente conferir</li></ul>
+            </article>
+            <article class="cartao" data-img="ficha-4" data-nome="Portal e documentos da demanda" data-med="1440 × 900" data-alt="Aba Portal do cliente da ficha, com link, liberações, contrato e briefing criativo.">
+              <h3>Liberações do portal</h3>
+              <ul><li>Você decide o que o cliente vê: contrato, envio de materiais, downloads e briefing</li><li>Envio de e-mail com layout da empresa, pelo Gmail dela</li><li>Briefing criativo: o cliente responde e o sistema monta o manual criativo</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Orçamento</span><em data-v-med>794 × 1123</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/doc-orcamento.webp" width="794" height="1640" alt="" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- Equipe -->
+      <div class="mods-painel" role="tabpanel" id="mp-5" aria-labelledby="mt-5" hidden>
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>3</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="equipe" data-nome="Funcionários" data-med="1440 × 900" data-alt="Página de funcionários com equipe ativa, folha mensal, pago no mês e a lista de pessoas.">
+              <h3>Cadastro e pagamentos</h3>
+              <ul><li>Equipe ativa, folha mensal e valor pago no mês</li><li>Demandas em que cada pessoa atua e comprovantes</li><li>Salário de uma competência registrado uma única vez</li></ul>
+            </article>
+            <article class="cartao" data-img="colab-lista" data-nome="Portal do funcionário" data-med="1440 × 900" data-alt="Portal do funcionário com as demandas em que a pessoa atua, sem valores." data-master>
+              <h3>Portal do funcionário</h3>
+              <ul><li>Acesso próprio, separado do sistema da empresa</li><li>Vê só as demandas em que atua, sem valores</li><li>Pode iniciar uma demanda, que nasce aguardando a sua aprovação</li></ul>
+            </article>
+            <article class="cartao" data-img="colab-detalhe" data-nome="Demanda no portal do funcionário" data-med="1440 × 900" data-alt="Detalhe de uma demanda no portal do funcionário, com entregas, etapas, prazos e o que falta do cliente." data-master>
+              <h3>Entregas, etapas e o que falta do cliente</h3>
+              <ul><li>Botão Lembrar cliente: o pedido chega à empresa pela conversa da demanda</li><li>Cotação de fornecedor com anexo e aprovação pela empresa</li><li>Contrato com assinatura eletrônica, pagamentos e recibos</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Funcionários</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/equipe.webp" width="1440" height="900" alt="" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- Ajustes -->
+      <div class="mods-painel" role="tabpanel" id="mp-6" aria-labelledby="mt-6" hidden>
+        <div class="cards" data-cards>
+          <p class="cards-cont">Recurso <span data-i>1</span> de <span data-t>4</span></p>
+          <div class="cards-lista">
+            <article class="cartao" data-img="configuracoes" data-nome="Configurações" data-med="1440 × 900" data-alt="Tela de configurações com abas de perfil, calendário, listas, modelos, portal do cliente e backup.">
+              <h3>Tudo configurável em um lugar</h3>
+              <ul><li>Perfil, calendário, listas do briefing, modelos e portal do cliente</li><li>Cada aba salva a cada alteração</li><li>Cláusulas próprias nos contratos da equipe</li></ul>
+            </article>
+            <article class="cartao" data-img="configuracoes" data-nome="Dados e backup" data-med="1440 × 900" data-alt="Configurações, onde ficam Dados e backup e o histórico de ações.">
+              <h3>Backup, lixeira e histórico</h3>
+              <ul><li>Backup em arquivo datado, validado antes de qualquer troca</li><li>Lixeira de 30 dias para demandas excluídas</li><li>Histórico de ações: quem criou, alterou ou excluiu, e quando</li></ul>
+            </article>
+            <article class="cartao" data-img="dashboard" data-nome="Modo simples" data-med="1440 × 900" data-alt="Dashboard do sistema com o menu lateral e a chave Modo simples no rodapé.">
+              <h3>Modo simples</h3>
+              <ul><li>Esconde as funções avançadas para quem quer só o essencial</li><li>Vale por pessoa e nenhum dado deixa de ser calculado</li><li>Desligar traz tudo de volta, com os mesmos dados</li></ul>
+            </article>
+            <article class="cartao" data-img="sistema-mobile" data-nome="Dashboard no celular" data-med="390 × 844" data-alt="Dashboard no celular com a faixa Precisa de atenção, indicadores e botão Nova demanda." data-vert>
+              <h3>Acessibilidade e conforto</h3>
+              <ul><li>Botões só com ícone mostram o nome ao passar o mouse e são lidos por leitores de tela</li><li>Contraste revisado, rótulos associados aos campos e áreas de toque de 24 px</li><li>Sem janelas do navegador: confirmações no próprio sistema</li></ul>
+            </article>
+          </div>
+          <div class="cards-ctl"><button type="button" data-ant aria-label="Recurso anterior">Anterior</button><button type="button" data-prox aria-label="Próximo recurso">Próximo</button></div>
+        </div>
+        <figure class="prancha" data-vista>
+          <figcaption class="prancha-nome"><span data-v-nome>Configurações</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/configuracoes.webp" width="1440" height="900" alt="" loading="lazy"></button>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTAIS E ACESSO ============ -->
+<section class="sec sec-branca" id="portais" aria-labelledby="t-por">
+  <div class="wrap">
+    <h2 id="t-por">Cliente, equipe e empresa no mesmo fluxo, cada um vendo o que deve</h2>
+    <p class="sec-lead">O cliente acompanha e aprova por um link próprio, sem cadastro. A equipe trabalha por um acesso separado. A empresa decide o que cada um enxerga.</p>
+
+    <div class="aprova" id="aprova">
+      <div class="aprova-txt">
+        <h3>Quando o cliente aprova, você fica sabendo na hora</h3>
+        <p>Acompanhe a simulação: o cliente abre o link da demanda, aprova uma entrega e o aviso chega ao sino do sistema, com a anotação pronta para concluir a entrega.</p>
+        <button class="sim-pausa sim-pausa-txt" type="button" aria-pressed="false"><span aria-hidden="true"></span><i>Pausar simulação</i></button>
+      </div>
+      <div class="aprova-palco" role="img" aria-label="Simulação: o cliente aprova uma entrega no portal e o sistema da empresa recebe um aviso no sino.">
+        <div class="disp disp-pc">
+          <div class="disp-barra"><i></i><i></i><i></i><span>Sistema da empresa</span><div class="sino" id="ap-sino"><em id="ap-cont">0</em></div></div>
+          <div class="disp-corpo">
+            <p class="d-t">Festival Raízes 2026</p>
+            <ul class="d-ent">
+              <li class="feito"><span>Identidade Visual e Logomarca</span><b>Concluída</b></li>
+              <li class="feito"><span>Book de Captação</span><b>Concluída</b></li>
+              <li id="ap-linha"><span>Portfólio Artístico</span><b id="ap-st-emp">Em produção</b></li>
+            </ul>
+            <div class="aviso-pop" id="ap-aviso"><b>Cliente aprovou a entrega</b><span>Portfólio Artístico, por Ana, 16/10 às 14:32. Anotação pronta para concluir.</span></div>
+          </div>
+        </div>
+        <div class="disp disp-cel">
+          <div class="disp-barra"><span>Portal do cliente</span></div>
+          <div class="disp-corpo">
+            <p class="d-t">Portfólio Artístico</p>
+            <p class="d-s" id="ap-st-cli">Aguardando sua aprovação</p>
+            <button class="d-btn" type="button" tabindex="-1" aria-hidden="true" id="ap-btn">Aprovar</button>
+            <div class="cursor" id="ap-cursor" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portal-duplo">
+      <div class="portal-bloco">
+        <h3>Portal do cliente</h3>
+        <p>Uma página privada por demanda. O cliente acompanha o projeto, aprova o orçamento e as entregas, paga com Pix, envia materiais, comenta e avalia. Custos, horas, margens e imposto nunca aparecem.</p>
+        <div class="abas-mini" role="tablist" aria-label="Telas do portal do cliente" id="pc-abas">
+          <button role="tab" type="button" aria-selected="true" data-img="portal-resumo" data-nome="Portal do cliente, resumo" data-med="1440 × 900">Resumo</button>
+          <button role="tab" type="button" aria-selected="false" tabindex="-1" data-img="portal-orcamento" data-nome="Portal do cliente, orçamento" data-med="1440 × 900">Orçamento</button>
+          <button role="tab" type="button" aria-selected="false" tabindex="-1" data-img="portal-entregas" data-nome="Portal do cliente, entregas" data-med="1440 × 900">Entregas</button>
+          <button role="tab" type="button" aria-selected="false" tabindex="-1" data-img="portal-pagamentos" data-nome="Portal do cliente, pagamentos" data-med="1440 × 900">Pagamentos</button>
+          <button role="tab" type="button" aria-selected="false" tabindex="-1" data-img="portal-briefing" data-nome="Portal do cliente, briefing" data-med="1440 × 900">Briefing</button>
+        </div>
+        <figure class="prancha" id="pc-vista">
+          <figcaption class="prancha-nome"><span data-v-nome>Portal do cliente, resumo</span><em data-v-med>1440 × 900</em></figcaption>
+          <button class="prancha-btn" type="button" aria-label="Ampliar a tela"><img data-v-img src="img/portal-resumo.webp" width="1440" height="900" alt="Portal do cliente, aba resumo, com o que falta do cliente, próxima entrega e pagamento." loading="lazy"></button>
+        </figure>
+      </div>
+      <figure class="prancha prancha-cel" data-img="portal-mobile">
+        <figcaption class="prancha-nome"><span>Portal no celular</span><em>390 × 844</em></figcaption>
+        <button class="prancha-btn" type="button" aria-label="Ampliar: Portal no celular"><img src="img/portal-mobile.webp" width="780" height="1688" loading="lazy" alt="Portal do cliente no celular, com resumo do projeto, itens que faltam do cliente e barra inferior de navegação."></button>
+      </figure>
+    </div>
+
+    <ul class="faixa-fatos">
+      <li><b>Link permanente e privado</b><span>Um único link por demanda, com validade que se renova a cada acesso e pode ser desativado quando quiser.</span></li>
+      <li><b>Cópia filtrada</b><span>O cliente recebe só o que você liberou. Valores internos nunca entram na cópia dele.</span></li>
+      <li><b>Assinatura do contrato</b><span>Nome completo, CPF e declaração de leitura, com registro de data, hora, rede e código do texto lido.</span></li>
+    </ul>
+
+    <div class="organo" id="organo">
+      <h3>Quem acessa o quê</h3>
+      <p class="organo-intro">Cinco papéis, de quem decide a quem só acompanha. Passe o mouse ou o foco em um papel para destacar o que ele faz.</p>
+      <div class="organo-arvore" role="group" aria-label="Organograma de acessos">
+        <div class="no no-emp"><b>Empresa</b><span>dados, equipe e plano próprios</span></div>
+        <div class="organo-linha" aria-hidden="true"></div>
+        <ul class="organo-niveis">
+          <li><button type="button" class="no no-dir" data-r="dono"><b>Dono</b><span>tudo</span></button></li>
+          <li><button type="button" class="no no-dir" data-r="adm"><b>Administrador</b><span>equipe e aprovações</span></button></li>
+          <li><button type="button" class="no no-eq" data-r="mem"><b>Membro</b><span>opera o dia a dia</span></button></li>
+          <li><button type="button" class="no no-nuc" data-r="col"><b>Colaborador</b><span>portal do funcionário</span></button></li>
+          <li><button type="button" class="no no-ext" data-r="cli"><b>Cliente</b><span>portal da demanda</span></button></li>
+        </ul>
+      </div>
+      <div class="legenda-org" aria-hidden="true"><span class="lg lg-dir">Direção</span><span class="lg lg-eq">Equipe</span><span class="lg lg-nuc">Acesso separado</span><span class="lg lg-ext">Externo</span></div>
+      <h3 class="tab-titulo">O que cada papel enxerga e faz</h3>
+      <div class="tab-rolagem">
+        <table class="matriz" id="matriz">
+          <caption class="sr">O que cada papel enxerga e faz</caption>
+          <thead><tr><th scope="col">Papel</th><th scope="col">Demandas e clientes</th><th scope="col">Valores e custos</th><th scope="col">Página Funcionários</th><th scope="col">Convidar pessoas</th><th scope="col">O que aprova</th></tr></thead>
+          <tbody>
+            <tr data-r="dono"><th scope="row">Dono</th><td>Todas</td><td>Sim</td><td>Sim</td><td>Qualquer papel</td><td>Demandas criadas por funcionários</td></tr>
+            <tr data-r="adm"><th scope="row">Administrador</th><td>Todas</td><td>Sim</td><td>Sim</td><td>Só membros</td><td>Demandas criadas por funcionários</td></tr>
+            <tr data-r="mem"><th scope="row">Membro</th><td>Todas</td><td>Sim</td><td>Não</td><td>Não</td><td>Não se aplica</td></tr>
+            <tr data-r="col"><th scope="row">Colaborador</th><td>Só as que atua</td><td>Não</td><td>Não</td><td>Não</td><td>Cria demandas, que aguardam aprovação</td></tr>
+            <tr data-r="cli"><th scope="row">Cliente</th><td>Só o projeto dele</td><td>Nunca custos, horas e margens</td><td>Não</td><td>Não</td><td>Orçamento e entregas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tab-dica" aria-hidden="true">Deslize para os lados para ver a tabela inteira.</p>
+    </div>
+
+    <div class="seg">
+      <h3>Proteções do sistema</h3>
+      <div class="tab-rolagem">
+        <table class="tab-simples">
+          <thead><tr><th scope="col">Proteção</th><th scope="col">Como funciona</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Código de acesso</th><td>Conferido só no servidor, comparado com um hash. Nunca viaja para o navegador.</td></tr>
+            <tr><th scope="row">Tentativas</th><td>Cinco falhas bloqueiam o endereço por 15 minutos.</td></tr>
+            <tr><th scope="row">Sessão</th><td>Assinada pelo servidor, válida por 12 horas e renovada pelo uso, com teto de 7 dias.</td></tr>
+            <tr><th scope="row">Duas abas</th><td>Se outra aba alterou o mesmo registro, o sistema combina os campos alterados em vez de sobrescrever.</td></tr>
+            <tr><th scope="row">Link do portal</th><td>Código aleatório de 256 bits, com hash guardado no servidor. A página não é indexada.</td></tr>
+            <tr><th scope="row">Privacidade</th><td>Aviso ao cliente com a ciência registrada. Portal desativado é apagado do servidor após 60 dias.</td></tr>
+            <tr><th scope="row">Recuperação</th><td>Lixeira de 30 dias, backup exportável e cópia automática antes de zerar o sistema.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tab-dica" aria-hidden="true">Deslize para os lados para ver a tabela inteira.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTADOS ============ -->
+<section class="sec sec-branca" id="resultados" aria-labelledby="t-res">
+  <div class="wrap">
+    <h2 id="t-res">Como fica a rotina de quem já usa</h2>
+    <p class="sec-lead">Menos retrabalho, prazos que se calculam sozinhos e o cliente sempre informado.</p>
+    <p class="res-aviso"><span>Exemplo ilustrativo</span> Depoimentos e números desta seção são fictícios e serão trocados por casos reais.</p>
+
+    <div class="res-topo">
+      <figure class="res-destaque">
+        <blockquote><p>Eu digitava o mesmo briefing em quatro lugares. Hoje cadastro uma vez, e o orçamento, o cronograma e o contrato já saem prontos.</p></blockquote>
+        <figcaption><b>Marina Duarte Souza</b><span>Designer, Estúdio Aurora</span></figcaption>
+      </figure>
+      <dl class="res-numeros">
+        <div><dt>Para montar e enviar um orçamento</dt><dd><span class="res-de">45 min</span><span class="res-seta" aria-hidden="true"></span><span class="res-para">8 min</span></dd></div>
+        <div><dt>Lugares onde cada demanda era registrada</dt><dd><span class="res-de">4</span><span class="res-seta" aria-hidden="true"></span><span class="res-para">1</span></dd></div>
+        <div><dt>Entregas com prazo em dias úteis, com feriados e folgas</dt><dd><span class="res-para">100%</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="res-citacoes">
+      <figure>
+        <blockquote><p>O cliente aprova pelo link e eu sou avisado na hora. Parei de perguntar por mensagem se ele tinha visto.</p></blockquote>
+        <figcaption><b>Rafael Menezes</b><span>Designer freelancer</span></figcaption>
+      </figure>
+      <figure>
+        <blockquote><p>Pelo funil eu vejo quais orçamentos viram contrato e por que os outros foram recusados. Isso mudou meu jeito de negociar.</p></blockquote>
+        <figcaption><b>Helena Prado</b><span>Produtora cultural</span></figcaption>
+      </figure>
+      <figure>
+        <blockquote><p>A equipe vê só as demandas em que atua, sem valores. Eu decido o que cada pessoa enxerga e aprovo o que ela cria.</p></blockquote>
+        <figcaption><b>Caio Andrade</b><span>Diretor de estúdio</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANOS ============ -->
+<section class="sec sec-clara" id="planos" aria-labelledby="t-planos">
+  <div class="wrap">
+    <h2 id="t-planos">Os recursos de cada plano</h2>
+    <p class="sec-lead">Cada plano inclui o anterior e acrescenta recursos. O servidor libera apenas o que o plano da empresa permite.</p>
+
+    <div class="tab-rolagem">
+      <table class="planos" id="planos-tab">
+        <caption class="sr">Recursos por plano</caption>
+        <thead>
+          <tr><th scope="col">Recurso</th><th scope="col" class="p-b">Básico</th><th scope="col" class="p-p">Pro</th><th scope="col" class="p-m">Master</th></tr>
+        </thead>
+        <tbody>
+          <tr class="lim"><th scope="row">Pessoas com acesso ao sistema</th><td>2</td><td>6</td><td>30</td></tr>
+          <tr class="lim"><th scope="row">Clientes cadastrados</th><td>100</td><td>1.000</td><td>Sem limite</td></tr>
+          <tr><th scope="row">Demandas, orçamentos e clientes</th><td class="s">Sim</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Catálogo de serviços e custos</th><td class="s">Sim</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Contratos com o cliente</th><td class="s">Sim</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Portal do cliente</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Assinatura eletrônica do contrato</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Equipe: cadastro, pagamentos e contratos</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Cláusulas próprias nos contratos da equipe</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Arquivos no Google Drive</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Briefing criativo</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Reuniões na agenda</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Relatórios em Excel</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Histórico de ações, quem fez o quê</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">E-mail com layout da empresa</th><td class="n">Não</td><td class="s">Sim</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Portal do funcionário</th><td class="n">Não</td><td class="n">Não</td><td class="s">Sim</td></tr>
+          <tr><th scope="row">Manual de marca (ART)</th><td class="n">Não</td><td class="n">Não</td><td class="s">Sim</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td></td><td><a class="btn btn-linha" href="#adquirir" data-plano="Básico">Testar o Básico</a></td><td><a class="btn btn-linha" href="#adquirir" data-plano="Pro">Testar o Pro</a></td><td><a class="btn btn-pri" href="#adquirir" data-plano="Master">Testar o Master</a></td></tr>
+        </tfoot>
+      </table>
+    </div>
+<p class="tab-dica" aria-hidden="true">Deslize para os lados para ver a tabela inteira.</p>
+
+    <div class="compara">
+      <h3>Veja a diferença na prática</h3>
+      <div class="tab-rolagem">
+        <table class="comp-tab">
+          <thead><tr><th scope="col">Na rotina</th><th scope="col">Planilhas e conversas soltas</th><th scope="col">Criativos - Sistema de gestão</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Preço do serviço</th><td>Digitado de memória ou copiado do último trabalho</td><td>Calculado a partir dos seus custos, da sua meta e das suas margens</td></tr>
+            <tr><th scope="row">Orçamento</th><td>Um arquivo novo a cada ajuste</td><td>Versões guardadas: v1 congelada, v2 com o que mudou</td></tr>
+            <tr><th scope="row">Prazo</th><td>Data estimada à mão</td><td>Cronograma em dias úteis, com feriados e folgas</td></tr>
+            <tr><th scope="row">Contrato</th><td>Redigido de novo a cada cliente</td><td>Preenchido com os dados do cliente e da demanda</td></tr>
+            <tr><th scope="row">Cobrança</th><td>Lembrar de cobrar</td><td>Aviso quando o gatilho da parcela é cumprido</td></tr>
+            <tr><th scope="row">Cliente acompanha</th><td>Pergunta por mensagem a cada dúvida</td><td>Portal com link próprio, aprovações e pagamento por Pix</td></tr>
+            <tr><th scope="row">Financeiro</th><td>Planilha separada, atualizada depois</td><td>Relatórios gerados dos recebimentos reais, com exportação para Excel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tab-dica" aria-hidden="true">Deslize para os lados para ver a tabela inteira.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FICHA TÉCNICA ============ -->
+<section class="sec sec-branca" id="ficha" aria-labelledby="t-ficha">
+  <div class="wrap">
+    <h2 id="t-ficha">Ficha técnica</h2>
+    <p class="sec-lead">Os dados de identificação do sistema e o histórico das últimas versões.</p>
+    <div class="tab-rolagem">
+      <table class="ficha-tab">
+        <caption class="sr">Ficha técnica do sistema</caption>
+        <tbody>
+          <tr><th scope="row">Título</th><td colspan="3">Criativos - Sistema de gestão</td></tr>
+          <tr><th scope="row">Autoria e design</th><td colspan="3">Josah Oliveira, Josah Criativos</td></tr>
+          <tr><th scope="row">Versão</th><td>38.2</td><th scope="row">Data da versão</th><td>16/10/2026</td></tr>
+          <tr><th scope="row">Classificação</th><td>Público</td><th scope="row">Planos</th><td>Básico, Pro e Master</td></tr>
+          <tr><th scope="row">Plataforma</th><td colspan="3">Navegador, com instalação como aplicativo no Android e no iPhone</td></tr>
+          <tr><th scope="row">Tecnologia</th><td colspan="3">Front-end estático em módulos JavaScript, API serverless na Vercel e banco Postgres (Neon)</td></tr>
+          <tr><th scope="row">Escopo</th><td colspan="3">Criação e entrega de criativos digitais em PDF, PNG e JPG. Gráfica, impressão, domínio, hospedagem e gestão de redes sociais ficam fora do escopo.</td></tr>
+          <tr><th scope="row">Verificação</th><td colspan="3">368 testes automatizados na versão 38.2: 54 unitários, 181 de API, 105 de ponta a ponta e 28 do pacote publicado, além da análise estática do código.</td></tr>
+          <tr><th scope="row">Contato</th><td colspan="3"><a href="https://wa.me/5571991448218" data-wa="contato">WhatsApp (71) 99144-8218</a> ou <a href="mailto:josahcriativos@gmail.com">josahcriativos@gmail.com</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+<p class="tab-dica" aria-hidden="true">Deslize para os lados para ver a tabela inteira.</p>
+
+    <div class="hist">
+      <h3>Histórico de alterações</h3>
+      <div class="tab-rolagem">
+        <table class="tab-simples hist-tab">
+          <thead><tr><th scope="col">Versão</th><th scope="col">O que mudou</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">38.2</th><td>Portal do funcionário refeito no layout do portal do cliente, com Lembrar cliente e cotação de fornecedor com aprovação. Exportação de cada relatório em planilha Excel. Balões de dica sem duplicação.</td></tr>
+            <tr><th scope="row">38.1</th><td>Menu Mais do celular só com telas disponíveis, ordem de pagamento igual no celular e no computador, cronograma de entregas do portal refeito e janelas da web em tela cheia.</td></tr>
+            <tr><th scope="row">38</th><td>Revisão geral de qualidade: sessão renovada pelo uso sem perda de alterações, limite no pagamento parcelado e testes de ataque, de rede instável e de injeção de HTML.</td></tr>
+            <tr><th scope="row">37</th><td>Modo simples, card da demanda com sanfona, gráficos novos em Relatórios e funil do período.</td></tr>
+            <tr><th scope="row">36</th><td>Portal do funcionário: demandas iniciadas por ele com aprovação da empresa, conversa padronizada, contrato, pagamentos e documentos.</td></tr>
+            <tr><th scope="row">35</th><td>E-mail com layout da empresa pelo Gmail e código de confirmação por e-mail na assinatura do contrato.</td></tr>
+            <tr><th scope="row">34</th><td>Histórico de ações e contrato assinado no gov.br anexado à demanda.</td></tr>
+            <tr><th scope="row">33</th><td>Planos Básico, Pro e Master e contratos de funcionários por vínculo.</td></tr>
+            <tr><th scope="row">32</th><td>Assinatura eletrônica do contrato do cliente pelo portal, com certificado imprimível.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tab-dica" aria-hidden="true">Deslize para os lados para ver a tabela inteira.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERGUNTAS ============ -->
+<section class="sec sec-clara" id="perguntas" aria-labelledby="t-perg">
+  <div class="wrap perg-grade">
+    <div>
+      <h2 id="t-perg">Respostas diretas para quem vai decidir</h2>
+      <p class="sec-lead">Não achou o que procurava? Escreva pelo botão Solicitar teste e a resposta vem direto para você, pelo WhatsApp.</p>
+    </div>
+    <div class="faq">
+      <details><summary>Para quem o sistema foi feito?</summary><p>Para quem cria e entrega criativos digitais, em arquivos PDF, PNG e JPG: designers, estúdios e produtoras. O sistema não trata de gráfica, impressão, hospedagem nem gestão de redes sociais.</p></details>
+      <details><summary>Preciso instalar alguma coisa?</summary><p>Não. O sistema funciona no navegador. No celular ele pode ser instalado como aplicativo: pelo Chrome, no Android, e pelo Safari, no iPhone.</p></details>
+      <details><summary>O cliente precisa criar conta?</summary><p>Não. Ele acessa pelo link próprio da demanda, sem cadastro, e vê apenas o que você liberou. Para enviar arquivos a uma pasta do Google Drive, o cliente entra com uma conta Google.</p></details>
+      <details><summary>A assinatura do contrato tem validade?</summary><p>É assinatura eletrônica simples, prevista na Lei 14.063/2020, válida entre as partes que aceitam esse meio. Ela não substitui a assinatura qualificada, de ICP-Brasil ou gov.br, quando a lei ou o contratante exigirem. O sistema também permite anexar o contrato assinado no gov.br.</p></details>
+      <details><summary>Posso usar o sistema para mais de uma empresa?</summary><p>Sim. O sistema é multiempresa: cada empresa tem seus dados, sua equipe e seu plano.</p></details>
+      <details><summary>Consigo levar meus dados embora?</summary><p>Sim. É possível exportar um backup datado com todos os dados e, a partir do plano Pro, baixar os relatórios em planilha Excel.</p></details>
+      <details><summary>O que acontece se a internet cair?</summary><p>O que você digitou fica na tela e é reenviado sozinho quando a conexão voltar. O sistema avisa quando algo ainda não foi salvo.</p></details>
+      <details><summary>Como faço para testar?</summary><p>Use o botão Solicitar teste. A conversa acontece pelo WhatsApp, com e-mail como alternativa. Nesta fase o objetivo é testar e dar retorno, não vender.</p></details>
+      <details><summary>Posso testar antes?</summary><p>Sim. Use o botão Solicitar teste. Quem testa conta o que funcionou e o que faltou, e esse retorno vira o relatório de teste do sistema.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ADQUIRIR ============ -->
+<section class="adq" id="adquirir" aria-labelledby="t-adq">
+  <div class="wrap adq-grade">
+    <div>
+      <h2 id="t-adq">Quer testar o sistema?</h2>
+      <p class="lead">Estamos em fase de testes. Escolha o plano que quer experimentar e fale pelo WhatsApp. A mensagem já sai pronta, e o que importa é o seu retorno sobre o que funcionou e o que faltou.</p>
+    </div>
+    <div class="adq-caixa">
+      <fieldset class="planos-esc">
+        <legend>Plano que quer testar</legend>
+        <label><input type="radio" name="plano" value="Básico"><span><b>Básico</b>Demandas, orçamentos, catálogo e contratos</span></label>
+        <label><input type="radio" name="plano" value="Pro" checked><span><b>Pro</b>Portal do cliente, equipe, e-mail e relatórios em Excel</span></label>
+        <label><input type="radio" name="plano" value="Master"><span><b>Master</b>Tudo do Pro, mais portal do funcionário</span></label>
+      </fieldset>
+      <div class="adq-acoes">
+        <a class="btn btn-pri btn-grande" id="teste-link" href="https://wa.me/5571991448218" data-wa="teste" target="_blank" rel="noopener">Solicitar teste pelo WhatsApp</a>
+      </div>
+      <p class="adq-nota">Quem testa conta o que funcionou e o que faltou, e esse retorno vira o relatório de teste do sistema. Prefere e-mail? <a id="adq-email" href="mailto:josahcriativos@gmail.com">josahcriativos@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap rodape-grade">
+    <div>
+      <p class="rodape-marca"><svg class="marca-ic" viewBox="0 0 64 64" width="24" height="24" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="17" fill="#1f5373"/><path d="M43 22.5A15 15 0 1 0 43 41.5" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="32" r="4.2" fill="#a9d1e8"/></svg>Criativos <span>Sistema de gestão</span></p>
+      <p>Versão 38.2. Por Josah Criativos.</p>
+    </div>
+    <ul>
+      <li><a href="#sistema">Sistema</a></li>
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#ficha">Ficha técnica</a></li>
+    </ul>
+    <div>
+      <p><a href="https://wa.me/5571991448218" data-wa="contato">WhatsApp (71) 99144-8218</a></p>
+      <p><a href="mailto:josahcriativos@gmail.com">josahcriativos@gmail.com</a></p>
+      <p class="rodape-leg"><a href="termos.html">Termos de uso</a> <a href="privacidade.html">Privacidade</a> <a href="teste.html">Política de teste</a></p>
+      <p class="rodape-nota">Todas as telas desta página são do sistema real, com dados fictícios.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ampliar tela -->
+<dialog class="amp" id="amp" aria-label="Tela ampliada">
+  <form method="dialog"><button class="amp-fechar" aria-label="Fechar a imagem ampliada">Fechar</button></form>
+  <p class="amp-nome" id="amp-nome"></p>
+  <div class="amp-corpo"><img id="amp-img" alt=""></div>
+</dialog>
+
+<!-- acessibilidade -->
+<div class="acess" id="acess">
+  <button class="acess-btn" type="button" aria-expanded="false" aria-controls="acess-painel"><span>Acessibilidade</span></button>
+  <div class="acess-painel" id="acess-painel" hidden>
+    <p class="acess-t">Ajustes de leitura</p>
+    <div class="acess-linha"><span>Tamanho do texto</span><div><button type="button" data-ac="menos" aria-label="Diminuir o texto">A-</button><button type="button" data-ac="mais" aria-label="Aumentar o texto">A+</button></div></div>
+    <label class="acess-chave"><input type="checkbox" data-ac="contraste"><span>Alto contraste</span></label>
+    <label class="acess-chave"><input type="checkbox" data-ac="pausa"><span>Pausar todas as animações</span></label>
+  </div>
+</div>
+
+<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+<script src="js/app.js" defer></script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer></script>
+<script src="js/vlibras.js" defer></script>
+</body>
+</html>
