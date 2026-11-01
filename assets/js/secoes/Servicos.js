@@ -1,6 +1,6 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
 import { ValorSuave } from "../nucleo/CicloDeQuadros.js";
-import { aplicarImagem, miniaturaDoTrabalho } from "../../dados/trabalhos.js";
+import { aplicarImagem } from "../../dados/trabalhos.js";
 
 /** Tempo que cada imagem da vitrine fica à mostra, em milissegundos. */
 const INTERVALO_VITRINE = 4200;
@@ -9,27 +9,24 @@ const INTERVALO_VITRINE = 4200;
  * Servicos
  * Os painéis ficam presos e se empilham; o de baixo recua de leve
  * (até 6%) enquanto o próximo sobe e o cobre. Cada painel tem uma vitrine
- * que alterna três trabalhos com esmaecimento, escolhidos pelo nome no
- * atributo `data-trabalhos` do HTML. A troca só acontece com a vitrine na tela.
+ * que alterna três imagens com esmaecimento, listadas no atributo
+ * `data-imagens` do HTML. A troca só acontece com a vitrine na tela.
  */
 export class Servicos {
   /**
    * @param {HTMLElement} raiz
    * @param {import("../nucleo/CicloDeQuadros.js").CicloDeQuadros} ciclo
-   * @param {Array<object>} trabalhos
    */
-  constructor(raiz, ciclo, trabalhos) {
+  constructor(raiz, ciclo) {
     this.paineis = Array.from(raiz.querySelectorAll(".servicos__painel"));
     this.recuos = this.paineis.map(() => new ValorSuave(0.16));
-    raiz.querySelectorAll(".servicos__vitrine").forEach((vitrine) => this.#montarVitrine(vitrine, trabalhos));
+    raiz.querySelectorAll(".servicos__vitrine").forEach((vitrine) => this.#montarVitrine(vitrine));
     ciclo.inscrever(() => this.#aoRolar());
   }
 
-  #montarVitrine(vitrine, trabalhos) {
+  #montarVitrine(vitrine) {
     const itens = [];
-    for (const nome of (vitrine.getAttribute("data-trabalhos") || "").split("|")) {
-      const trabalho = trabalhos.find((item) => item.nome === nome);
-      const endereco = trabalho ? miniaturaDoTrabalho(trabalho) : "";
+    for (const endereco of (vitrine.getAttribute("data-imagens") || "").split("|")) {
       if (!endereco) continue;
       const moldura = document.createElement("span");
       moldura.className = "servicos__vitrine-item";

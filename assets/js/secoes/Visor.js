@@ -127,7 +127,9 @@ export class Visor {
   }
 
   #midia(midia, nome, posicao) {
-    const figura = this.#elemento("figure", "visor__midia");
+    /* partes de uma mesma imagem longa (arquivos "parte-NN") ficam emendadas */
+    const parte = typeof midia === "string" && /\/parte-\d+\.\w+$/.test(midia);
+    const figura = this.#elemento("figure", parte ? "visor__midia visor__midia--parte" : "visor__midia");
     if (ehImagem(midia)) {
       const img = this.#elemento("img", "visor__midia-imagem");
       img.alt = `${nome}, imagem ${posicao + 1}`;

@@ -36,6 +36,10 @@ compartilhada entre seções, então mudar um estilo não afeta outra parte do s
 
 - Trocar ou incluir um trabalho: `assets/dados/trabalhos.js`. Use `destaque: true`
   no projeto que deve aparecer como estudo de caso.
+- Imagens do portfólio: os originais ficam fora do repositório (Google Drive).
+  `ferramentas/processar_imagens.py` gera a capa 4:3 e as páginas em WebP de cada
+  projeto em `assets/imagens/trabalhos/<projeto>/`.
+- Imagens das vitrines dos serviços: atributo `data-imagens` de cada painel no `index.html`.
 - Depoimentos (hoje com textos de exemplo): seção `depoimentos` no `index.html`.
 - Cores: variáveis `--cor-*` em `assets/css/base.css`.
 
