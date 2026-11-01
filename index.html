@@ -2611,21 +2611,17 @@
         display: none;
       }
       @media (min-width: 1021px) {
-        .hero > .wrap {
-          padding-left: max(var(--gutter), 112px);
-        }
         .ferramentas {
-          position: absolute;
+          position: relative;
           z-index: 3;
-          left: clamp(14px, 1.8vw, 32px);
-          top: clamp(28px, 4vw, 52px);
           display: flex;
           flex-direction: column;
           align-items: center;
           width: 52px;
           padding: 4px 0 10px;
-          background: var(--tinta);
+          background: var(--tinta-2);
           color: var(--giz);
+          border: 1px solid rgba(249, 247, 241, 0.12);
           border-radius: 6px;
           box-shadow: 4px 4px 0 var(--carimbo);
           user-select: none;
@@ -2734,6 +2730,325 @@
         }
         .fe-cores.trocado .fe-contorno {
           border-color: var(--cartaz);
+        }
+      }
+
+      /* ---------- hero: área de trabalho do editor ---------- */
+      .hero.he {
+        position: relative;
+        overflow: hidden;
+        padding: 0 0 clamp(52px, 6vw, 84px);
+        background: var(--tinta);
+        color: var(--giz);
+        --mesa: #33152e;
+        --linha-ui: rgba(249, 247, 241, 0.12);
+      }
+      .he-janela {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 1720px;
+        margin: 0 auto;
+        padding: 10px;
+      }
+      .he-canto,
+      .he-regua-x,
+      .he-regua-y,
+      .he-status,
+      .he-painel {
+        display: none;
+      }
+      .he-mesa {
+        min-width: 0;
+        background: var(--mesa);
+        padding: clamp(12px, 3vw, 40px);
+        border-radius: 4px;
+      }
+      .he-rotulo {
+        margin: 0 0 8px;
+        font-size: 0.8rem;
+        line-height: 1;
+        color: rgba(249, 247, 241, 0.6);
+      }
+      .he-prancheta {
+        container-type: inline-size;
+        color: var(--tinta);
+        padding: clamp(26px, 3.8vw, 56px) clamp(20px, 4vw, 60px);
+        box-shadow: 0 20px 44px -14px rgba(0, 0, 0, 0.6);
+        --foco: var(--tinta);
+      }
+      .he .hero-kicker {
+        margin-bottom: clamp(26px, 3.4vw, 44px);
+      }
+      /* título: duas linhas no celular, uma linha que ocupa a prancheta do tablet em diante */
+      .he .hero-title {
+        font-size: 15vw;
+        font-size: 23.5cqi;
+      }
+      .he .hero-title .l:nth-child(2) {
+        margin-left: 0.3em;
+      }
+      .he .hero-foot {
+        margin-top: clamp(28px, 4vw, 52px);
+      }
+      .he .hero-description {
+        font-size: clamp(1.12rem, 1rem + 0.45vw, 1.4rem);
+        max-width: 36em;
+      }
+      @container (min-width: 560px) {
+        .he .hero-title {
+          font-size: 12.6cqi;
+          white-space: nowrap;
+        }
+        .he .hero-title .l {
+          display: inline-block;
+        }
+        .he .hero-title .l:nth-child(2) {
+          margin-left: 0.22em;
+        }
+        .he .hero-foot {
+          grid-template-columns: minmax(0, 1fr) auto;
+        }
+      }
+
+      /* título selecionado: caixa e alças */
+      .he-sel {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+      }
+      .he-caixa {
+        position: absolute;
+        inset: -0.05em -14px -0.02em -14px;
+        border: 1.5px solid var(--tinta);
+        pointer-events: none;
+        animation: he-surge 0.45s ease 0.5s both;
+      }
+      .he-caixa i {
+        position: absolute;
+        width: 11px;
+        height: 11px;
+        background: var(--giz);
+        border: 1.5px solid var(--tinta);
+      }
+      .he-caixa .a1,
+      .he-caixa .a7,
+      .he-caixa .a8 {
+        left: -6px;
+      }
+      .he-caixa .a3,
+      .he-caixa .a4,
+      .he-caixa .a5 {
+        right: -6px;
+      }
+      .he-caixa .a2,
+      .he-caixa .a6 {
+        left: calc(50% - 5.5px);
+      }
+      .he-caixa .a1,
+      .he-caixa .a2,
+      .he-caixa .a3 {
+        top: -6px;
+      }
+      .he-caixa .a5,
+      .he-caixa .a6,
+      .he-caixa .a7 {
+        bottom: -6px;
+      }
+      .he-caixa .a4,
+      .he-caixa .a8 {
+        top: calc(50% - 5.5px);
+      }
+      .he-caixa b {
+        position: absolute;
+        left: -1.5px;
+        bottom: calc(100% + 7px);
+        padding: 3px 8px;
+        background: var(--tinta);
+        color: var(--giz);
+        font-family: var(--leitura);
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      @keyframes he-surge {
+        from {
+          opacity: 0;
+        }
+      }
+
+      @media (min-width: 1021px) {
+        .he-janela {
+          grid-template-columns: 52px 14px 18px minmax(0, 1fr);
+          grid-template-rows: 18px auto auto;
+          padding: 18px clamp(14px, 1.8vw, 28px) 0;
+        }
+        .ferramentas {
+          grid-column: 1;
+          grid-row: 1 / 4;
+          align-self: start;
+        }
+        .he-canto,
+        .he-regua-x,
+        .he-regua-y {
+          display: block;
+          background-color: var(--tinta-2);
+        }
+        .he-canto {
+          grid-column: 3;
+          grid-row: 1;
+          border-right: 1px solid var(--linha-ui);
+          border-bottom: 1px solid var(--linha-ui);
+        }
+        .he-regua-x {
+          grid-column: 4;
+          grid-row: 1;
+          position: relative;
+          overflow: hidden;
+          border-bottom: 1px solid var(--linha-ui);
+          background-image:
+            repeating-linear-gradient(90deg, rgba(249, 247, 241, 0.55) 0 1px, transparent 1px 100px),
+            repeating-linear-gradient(90deg, rgba(249, 247, 241, 0.32) 0 1px, transparent 1px 10px);
+          background-size:
+            100% 10px,
+            100% 5px;
+          background-position:
+            0 100%,
+            0 100%;
+          background-repeat: no-repeat;
+        }
+        .he-regua-x span {
+          position: absolute;
+          top: 1px;
+          margin-left: 3px;
+          font-family: var(--leitura);
+          font-size: 0.6rem;
+          line-height: 1;
+          color: rgba(249, 247, 241, 0.6);
+        }
+        .he-regua-y {
+          grid-column: 3;
+          grid-row: 2;
+          border-right: 1px solid var(--linha-ui);
+          background-image:
+            repeating-linear-gradient(180deg, rgba(249, 247, 241, 0.55) 0 1px, transparent 1px 100px),
+            repeating-linear-gradient(180deg, rgba(249, 247, 241, 0.32) 0 1px, transparent 1px 10px);
+          background-size:
+            10px 100%,
+            5px 100%;
+          background-position:
+            100% 0,
+            100% 0;
+          background-repeat: no-repeat;
+        }
+        .he-mesa {
+          grid-column: 4;
+          grid-row: 2;
+          border-radius: 0;
+          padding: 26px clamp(24px, 3.4vw, 56px) clamp(32px, 4vw, 56px);
+        }
+        .he-status {
+          grid-column: 3 / 5;
+          grid-row: 3;
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          margin: 0;
+          padding: 7px 4px 0;
+          font-size: 0.78rem;
+          line-height: 1.2;
+          color: rgba(249, 247, 241, 0.58);
+        }
+      }
+      @media (min-width: 1240px) {
+        .he-janela {
+          grid-template-columns: 52px 14px 18px minmax(0, 1fr) 16px 232px;
+        }
+        .he-painel {
+          display: block;
+          grid-column: 6;
+          grid-row: 1 / 4;
+          align-self: start;
+          background: var(--tinta-2);
+          border: 1px solid var(--linha-ui);
+          border-radius: 6px;
+          overflow: hidden;
+          font-size: 0.84rem;
+          line-height: 1.2;
+          color: rgba(249, 247, 241, 0.85);
+          user-select: none;
+        }
+        .hp-abas {
+          display: flex;
+          border-bottom: 1px solid var(--linha-ui);
+        }
+        .hp-abas span {
+          padding: 9px 12px 8px;
+          font-family: var(--display);
+          font-weight: 700;
+          font-size: 0.82rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: rgba(249, 247, 241, 0.5);
+        }
+        .hp-abas .on {
+          color: var(--giz);
+          box-shadow: inset 0 -2px 0 var(--cartaz);
+        }
+        .hp-camadas {
+          list-style: none;
+          margin: 0;
+          padding: 4px 0;
+        }
+        .hp-camadas li {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 7px 10px;
+          border-bottom: 1px solid rgba(249, 247, 241, 0.06);
+          white-space: nowrap;
+        }
+        .hp-camadas li.sel {
+          background: rgba(242, 224, 43, 0.16);
+          color: var(--giz);
+          box-shadow: inset 2px 0 0 var(--cartaz);
+        }
+        .hp-camadas li.oculta {
+          color: rgba(249, 247, 241, 0.4);
+        }
+        .hp-olho {
+          display: grid;
+          opacity: 0.75;
+        }
+        .hp-mini {
+          flex: none;
+          width: 24px;
+          height: 18px;
+          display: grid;
+          place-items: center;
+          border: 1px solid rgba(249, 247, 241, 0.3);
+          background: var(--giz);
+          color: var(--tinta);
+          font-family: var(--display);
+          font-weight: 900;
+          font-size: 0.75rem;
+        }
+        .hp-mini.hp-escuro {
+          background: var(--tinta);
+          box-shadow: inset 0 0 0 4px var(--giz);
+        }
+        .hp-mini.hp-regua {
+          background: repeating-linear-gradient(90deg, var(--tinta) 0 3px, var(--giz) 3px 6px) center / 100% 4px no-repeat,
+            var(--giz);
+        }
+        .hp-mini.hp-amarelo {
+          background: var(--cartaz);
+        }
+        .hp-rodape {
+          margin: 0;
+          padding: 8px 10px;
+          font-size: 0.74rem;
+          color: rgba(249, 247, 241, 0.5);
         }
       }
 
@@ -3364,12 +3679,15 @@
           target="_blank"
           rel="noopener noreferrer"
           >WhatsApp (71) 99144-8218</a
-        ><a href="mailto:josahcriativos@gmail.com">josahcriativos@gmail.com</a>
+        ><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=josahcriativos%40gmail.com" target="_blank" rel="noopener noreferrer">josahcriativos@gmail.com</a>
       </div>
     </div>
 
     <main id="conteudo">
-      <section class="papel-cartaz hero">
+      <!-- HERO: area de trabalho de editor grafico. Barra de ferramentas, reguas, prancheta amarela,
+           painel de camadas e barra de status. Reguas, painel e status sao decorativos (aria-hidden). -->
+      <section class="hero he">
+        <div class="he-janela">
         <!-- BARRA DE FERRAMENTAS (so no desktop): replica ilustrativa da barra lateral de um editor grafico.
              Para trocar um icone ou nome, edite o <span class="fe-bt"> correspondente. -->
         <div class="ferramentas" id="ferramentas" aria-hidden="true">
@@ -3397,24 +3715,49 @@
             <span class="fe-contorno"></span><span class="fe-preench"></span>
           </span>
         </div>
-        <div class="wrap">
-          <div class="selo" aria-hidden="true">
-            <svg viewBox="0 0 200 200"><use href="#selo" /></svg>
-          </div>
-          <p class="hero-kicker">Designer gráfico para projetos culturais</p>
-          <h1 class="hero-title" aria-label="Josah Criativos">
-            <span class="l" data-t="Josah" aria-hidden="true">Josah</span
-            ><span class="l" data-t="Criativos" aria-hidden="true">Criativos</span>
-          </h1>
-          <div class="hero-foot">
-            <p class="hero-description">
-              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
-              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
-            </p>
-            <div class="hero-actions">
-              <a href="#projetos" class="btn">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+          <span class="he-canto" aria-hidden="true"></span>
+          <div class="he-regua-x" aria-hidden="true"><span style="left:0px">0</span><span style="left:100px">100</span><span style="left:200px">200</span><span style="left:300px">300</span><span style="left:400px">400</span><span style="left:500px">500</span><span style="left:600px">600</span><span style="left:700px">700</span><span style="left:800px">800</span><span style="left:900px">900</span><span style="left:1000px">1000</span><span style="left:1100px">1100</span><span style="left:1200px">1200</span><span style="left:1300px">1300</span><span style="left:1400px">1400</span><span style="left:1500px">1500</span><span style="left:1600px">1600</span><span style="left:1700px">1700</span><span style="left:1800px">1800</span><span style="left:1900px">1900</span></div>
+          <div class="he-regua-y" aria-hidden="true"></div>
+          <div class="he-mesa">
+            <p class="he-rotulo" aria-hidden="true">01 &middot; Início</p>
+            <div class="he-prancheta papel-cartaz">
+              <p class="hero-kicker">Josah Oliveira &middot; designer gráfico para projetos culturais</p>
+              <div class="he-sel">
+                <h1 class="hero-title" aria-label="Criativos Digitais">
+                  <span class="l" data-t="Criativos" aria-hidden="true">Criativos</span
+                  ><span class="l" data-t="Digitais" aria-hidden="true">Digitais</span>
+                </h1>
+                <span class="he-caixa" aria-hidden="true"
+                  ><b>Texto</b><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i><i class="a5"></i
+                  ><i class="a6"></i><i class="a7"></i><i class="a8"></i
+                ></span>
+              </div>
+              <div class="hero-foot">
+                <p class="hero-description">
+                  Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do
+                  financiador, para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
+                </p>
+                <div class="hero-actions">
+                  <a href="#projetos" class="btn">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+                </div>
+              </div>
             </div>
           </div>
+          <p class="he-status" aria-hidden="true">
+            <span>100% &middot; 1920 &times; 1080 px &middot; RGB</span><span>Edital: conforme &#10003;</span>
+          </p>
+          <aside class="he-painel" aria-hidden="true">
+            <div class="hp-abas"><span class="on">Camadas</span><span>Propriedades</span></div>
+            <ul class="hp-camadas">
+              <li class="sel"><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini">T</span>Criativos Digitais</li>
+              <li><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini">&para;</span>Descrição</li>
+              <li><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini hp-escuro"></span>Botão &middot; Ver projetos</li>
+              <li class="oculta"><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="hp-mini hp-regua"></span>Régua de apoio</li>
+              <li class="oculta"><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="hp-mini hp-regua"></span>Marca do financiador</li>
+              <li><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini hp-amarelo"></span>Fundo &middot; cartaz</li>
+            </ul>
+            <p class="hp-rodape">6 camadas &middot; Prancheta 01</p>
+          </aside>
         </div>
         <div class="rasgo" aria-hidden="true"></div>
       </section>
@@ -4826,7 +5169,7 @@
             </li>
             <li>
               <span class="rot">E-mail</span
-              ><strong><a href="mailto:josahcriativos@gmail.com">josahcriativos@gmail.com</a></strong>
+              ><strong><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=josahcriativos%40gmail.com" target="_blank" rel="noopener noreferrer">josahcriativos@gmail.com</a></strong>
             </li>
             <li>
               <span class="rot">Acesse</span>
@@ -6564,7 +6907,7 @@
               el.target = "_blank";
               el.rel = "noopener noreferrer";
               if (acao === "@email") {
-                el.href = "mailto:josahcriativos@gmail.com";
+                el.href = "https://mail.google.com/mail/?view=cm&fs=1&to=josahcriativos%40gmail.com";
                 el.textContent = "Enviar e-mail";
               } else {
                 el.href =
