@@ -108,12 +108,16 @@
   opacity: 1;
 }
 
-.sobre__colagem--visivel .sobre__anotacao-papeis,
-.sobre__colagem--visivel /* ---------- texto ---------- */
+.sobre__colagem--visivel .sobre__anotacao-papeis {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- texto ---------- */
 .sobre__titulo {
   margin-bottom: var(--espaco-titulo);
   font-weight: 300;
-  font-size: 5.6vw;
+  font-size: 2.7rem;
   line-height: 0.98;
   letter-spacing: -0.05em;
 }
@@ -228,10 +232,6 @@
   .sobre__colagem {
     position: relative;
     top: auto;
-  }
-
-  .sobre__titulo {
-    font-size: 11vw;
   }
 
   .sobre__abertura {
