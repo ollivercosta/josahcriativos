@@ -17,6 +17,9 @@
           Voce sabia? . "BALAO" (textos: id="fm-<nome>", logo abaixo da faixa)
           Termos ...... "id=\"overlay-regras\""  (clausulas: lg-doc-0, 1, 2)
           Visualizador. "id=\"projectModal\""
+          Hero B ...... "HERO B" (versao alternativa; aparece com ?hero=b no link)
+          Chat ........ "CHAT TIRA-DUVIDAS" (perguntas e respostas: "BASE_CHAT")
+          Versoes ..... "VERSOES E INTERACOES" (?hero=b, ?mural=b, ?versoes)
           Scripts ..... "<script>" (menu, visualizador, termos, voce sabia, VLibras)
          ===================================================================== -->
     <meta charset="UTF-8" />
@@ -2682,6 +2685,891 @@
           padding-right: 0;
         }
       }
+
+      /* =====================================================================
+         v13: marca so com o nome, hero B, secao 2 em pilha, desenhos
+         interativos, chat tira-duvidas e seletor de versoes (?versoes).
+         ===================================================================== */
+
+      /* ---------- marca: só o nome ---------- */
+      .brand-name {
+        font-size: clamp(1.45rem, 1.2rem + 0.8vw, 1.8rem);
+        letter-spacing: 0.035em;
+      }
+      .brand:hover .brand-name {
+        color: var(--carimbo);
+      }
+
+      /* ---------- hero A: título reage ao ponteiro, selo carimba de novo ---------- */
+      .hero-title .l::before {
+        transform: translate(
+          calc(0.028em + var(--mx, 0) * 0.035em),
+          calc(0.022em + var(--my, 0) * 0.035em)
+        );
+        transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .selo {
+        cursor: pointer;
+        rotate: var(--giro, 0deg);
+      }
+      .selo-contato {
+        rotate: var(--giro, 0deg);
+      }
+
+      /* ---------- hero B ---------- */
+      .hero-b {
+        position: relative;
+        background: var(--tinta);
+        color: var(--giz);
+        padding: clamp(48px, 7vw, 96px) 0 clamp(96px, 11vw, 140px);
+        overflow: hidden;
+        isolation: isolate;
+        --foco: var(--cartaz);
+      }
+      .hero-b::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(242, 224, 43, 0.5) 1.1px, transparent 1.7px) 0 0 / 10px 10px;
+        -webkit-mask-image: linear-gradient(250deg, #000 0%, transparent 50%);
+        mask-image: linear-gradient(250deg, #000 0%, transparent 50%);
+        opacity: 0.22;
+      }
+      .hb-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        gap: clamp(32px, 6vw, 96px);
+        align-items: center;
+      }
+      .hb-titulo {
+        margin: 0 0 clamp(20px, 3vw, 36px);
+        font-family: var(--display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(3.2rem, 7.2vw, 7.4rem);
+        line-height: 0.86;
+        letter-spacing: -0.01em;
+      }
+      .hb-titulo em {
+        font-style: normal;
+        color: var(--cartaz);
+      }
+      .hero-b .hero-description {
+        color: rgba(249, 247, 241, 0.86);
+        margin-bottom: clamp(24px, 3vw, 40px);
+      }
+      .hb-duvida {
+        background: none;
+        border: 0;
+        border-bottom: 3px solid currentColor;
+        color: var(--giz);
+        cursor: pointer;
+        padding: 0 0 2px;
+      }
+      .hb-duvida:hover {
+        color: var(--cartaz);
+      }
+      .hb-cartaz {
+        position: relative;
+        max-width: 440px;
+        width: 100%;
+        justify-self: center;
+      }
+      .hb-cartaz svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        cursor: pointer;
+        transform: perspective(1000px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) rotate(-2.5deg);
+        transition: transform 0.25s ease-out;
+        filter: drop-shadow(0 22px 30px rgba(0, 0, 0, 0.45));
+      }
+      .hb-camada {
+        transition: transform 0.25s ease-out;
+      }
+      .hb-entra {
+        animation: hb-entra 0.75s cubic-bezier(0.2, 1.2, 0.4, 1) var(--d, 0s) both;
+      }
+      .hb-carimbo {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation-name: hb-carimba;
+      }
+      @keyframes hb-entra {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes hb-carimba {
+        0% {
+          opacity: 0;
+          transform: scale(2) rotate(-20deg);
+        }
+        60% {
+          opacity: 1;
+          transform: scale(0.92);
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .hb-dica {
+        margin: 18px 0 0;
+        text-align: center;
+        font-size: 0.92rem;
+        font-style: italic;
+        color: rgba(249, 247, 241, 0.62);
+      }
+      @media (hover: none) {
+        .hb-dica {
+          display: none;
+        }
+      }
+      @media (max-width: 860px) {
+        .hb-grid {
+          grid-template-columns: 1fr;
+        }
+        .hb-cartaz {
+          max-width: 320px;
+        }
+      }
+
+      /* ---------- seção 2, versão A: desenhos animados ---------- */
+      .peca-arte svg {
+        transform: perspective(800px) rotateX(var(--ty, 0deg)) rotateY(var(--tx, 0deg));
+        transition: transform 0.25s ease-out;
+      }
+      .js-anim .rg-logos > * {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        transition: transform 0.6s cubic-bezier(0.2, 1.5, 0.4, 1);
+      }
+      .js-anim .mural:not(.in) .rg-logos > :nth-child(1) {
+        transform: scale(1.45);
+      }
+      .js-anim .mural:not(.in) .rg-logos > :nth-child(2) {
+        transform: scale(0.6);
+      }
+      .js-anim .mural:not(.in) .rg-logos > :nth-child(3) {
+        transform: scale(1.3);
+      }
+      .js-anim .mural:not(.in) .rg-logos > :nth-child(4) {
+        transform: scale(0.7);
+      }
+      .js-anim .mural:not(.in) .rg-logos > :nth-child(5) {
+        transform: scale(1.25);
+      }
+      .rg-logos > :nth-child(2) {
+        transition-delay: 0.08s;
+      }
+      .rg-logos > :nth-child(3) {
+        transition-delay: 0.16s;
+      }
+      .rg-logos > :nth-child(4) {
+        transition-delay: 0.24s;
+      }
+      .rg-logos > :nth-child(5) {
+        transition-delay: 0.32s;
+      }
+      .peca:hover .rg-logos > * {
+        animation: rg-pula 0.5s ease both;
+      }
+      .peca:hover .rg-logos > :nth-child(2) {
+        animation-delay: 0.06s;
+      }
+      .peca:hover .rg-logos > :nth-child(3) {
+        animation-delay: 0.12s;
+      }
+      .peca:hover .rg-logos > :nth-child(4) {
+        animation-delay: 0.18s;
+      }
+      .peca:hover .rg-logos > :nth-child(5) {
+        animation-delay: 0.24s;
+      }
+      @keyframes rg-pula {
+        40% {
+          transform: translateY(-9px);
+        }
+      }
+      .js-anim .bk-linhas line {
+        stroke-dasharray: 160;
+        stroke-dashoffset: 160;
+        transition: stroke-dashoffset 0.7s ease;
+      }
+      .js-anim .mural.in .bk-linhas line {
+        stroke-dashoffset: 0;
+      }
+      .bk-linhas line:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+      .bk-linhas line:nth-child(3) {
+        transition-delay: 0.24s;
+      }
+      .bk-linhas line:nth-child(4) {
+        transition-delay: 0.36s;
+      }
+      .ed-marca {
+        transform-box: fill-box;
+        transform-origin: 0 50%;
+        transition: transform 0.6s cubic-bezier(0.6, 0, 0.2, 1);
+      }
+      .js-anim .mural:not(.in) .ed-marca {
+        transform: scaleX(0);
+      }
+      .peca:hover .carimbo-edital {
+        transform: scale(1.1) rotate(-6deg);
+        transition-delay: 0s;
+      }
+      .en-aba {
+        transform-box: fill-box;
+        transform-origin: 50% 0;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .en-carta,
+      .en-tags {
+        transition: transform 0.5s cubic-bezier(0.2, 1.3, 0.4, 1);
+      }
+      .peca:hover .en-aba {
+        transform: scaleY(-0.32);
+      }
+      .peca:hover .en-carta {
+        transform: translateY(-16px);
+        transition-delay: 0.12s;
+      }
+      .peca:hover .en-tags {
+        transform: translateY(-6px);
+        transition-delay: 0.2s;
+      }
+
+      /* entrada suave dos blocos ao rolar */
+      .js-anim .revela {
+        opacity: 0;
+        translate: 0 26px;
+        transition:
+          opacity 0.6s ease,
+          translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transition-delay: calc(var(--i, 0) * 90ms);
+      }
+      .js-anim .revela.in {
+        opacity: 1;
+        translate: none;
+      }
+      .tk-topo {
+        transform-origin: 100% 100%;
+        transition: transform 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+      }
+      .tk:hover .tk-topo {
+        transform: rotate(-3deg) translateY(-3px);
+      }
+
+      /* ---------- seção 2, versão B: pilha de papéis ---------- */
+      .mural.pilha .mural-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+          "pilha abas"
+          "pilha texto";
+        grid-template-rows: auto 1fr;
+        column-gap: clamp(32px, 6vw, 96px);
+        row-gap: 28px;
+        align-items: start;
+      }
+      .mural.pilha .peca {
+        display: contents;
+      }
+      .mural.pilha .peca-arte {
+        grid-area: pilha;
+        width: min(100%, 380px);
+        justify-self: center;
+        align-self: center;
+        cursor: pointer;
+        transition:
+          transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1),
+          filter 0.4s ease;
+      }
+      .mural.pilha .peca .peca-arte[data-pos="0"] {
+        z-index: 4;
+        transform: rotate(-1deg);
+        cursor: default;
+      }
+      .mural.pilha .peca .peca-arte[data-pos="1"] {
+        z-index: 3;
+        transform: rotate(5deg) translate(26px, 10px) scale(0.97);
+        filter: drop-shadow(0 8px 10px rgba(27, 2, 23, 0.22)) brightness(0.96);
+      }
+      .mural.pilha .peca .peca-arte[data-pos="2"] {
+        z-index: 2;
+        transform: rotate(-6deg) translate(-26px, 16px) scale(0.94);
+        filter: drop-shadow(0 6px 8px rgba(27, 2, 23, 0.2)) brightness(0.92);
+      }
+      .mural.pilha .peca .peca-arte[data-pos="3"] {
+        z-index: 1;
+        transform: rotate(9deg) translate(10px, 26px) scale(0.91);
+        filter: drop-shadow(0 4px 6px rgba(27, 2, 23, 0.18)) brightness(0.88);
+      }
+      .mural.pilha .peca-arte:not([data-pos="0"]) .fita {
+        opacity: 0;
+      }
+      .mural.pilha figcaption {
+        grid-area: texto;
+        display: none;
+      }
+      .mural.pilha figcaption.ativo {
+        display: block;
+        animation: hb-entra 0.45s ease both;
+      }
+      .mural.pilha .peca h3 {
+        margin-top: 0;
+        font-size: clamp(3rem, 5.4vw, 4.8rem);
+      }
+      .mural.pilha .peca p {
+        font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+      }
+      .pilha-abas {
+        grid-area: abas;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-self: end;
+      }
+      .pilha-aba {
+        position: relative;
+        overflow: hidden;
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 1.15rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        padding: 0.55em 0.95em 0.5em;
+        border: 2px solid var(--tinta);
+        border-radius: 3px;
+        background: transparent;
+        color: var(--tinta);
+        cursor: pointer;
+      }
+      .pilha-aba[aria-selected="true"] {
+        background: var(--tinta);
+        color: var(--cartaz);
+      }
+      .pilha-aba:not([aria-selected="true"]):hover {
+        background: var(--cartaz);
+      }
+      .pilha-aba .barra {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background: var(--carimbo);
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+      }
+      .pilha-aba[aria-selected="true"] .barra {
+        animation: pilha-tempo var(--tempo, 7s) linear both;
+      }
+      .mural.pilha.pausa .pilha-aba .barra {
+        animation-play-state: paused;
+      }
+      @keyframes pilha-tempo {
+        to {
+          transform: scaleX(1);
+        }
+      }
+      @media (max-width: 860px) {
+        .mural.pilha .mural-grid {
+          grid-template-columns: 1fr;
+          grid-template-areas: "abas" "pilha" "texto";
+          grid-template-rows: auto;
+        }
+        .mural.pilha .peca-arte {
+          width: min(78%, 320px);
+          margin: 10px 0 24px;
+        }
+      }
+
+      /* ---------- chat tira-dúvidas ---------- */
+      .chat {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 140;
+        font-family: var(--leitura);
+      }
+      .chat-botao {
+        position: relative;
+        width: 62px;
+        height: 62px;
+        display: grid;
+        place-items: center;
+        background: var(--cartaz);
+        color: var(--tinta);
+        border: 2px solid var(--tinta);
+        border-radius: 50%;
+        box-shadow: 4px 4px 0 var(--tinta);
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .chat-botao:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--tinta);
+      }
+      .chat-botao .chat-ic-fechar {
+        display: none;
+        font-size: 1.7rem;
+      }
+      .chat-botao[aria-expanded="true"] {
+        background: var(--tinta);
+        color: var(--cartaz);
+      }
+      .chat-botao[aria-expanded="true"] .chat-ic-abrir {
+        display: none;
+      }
+      .chat-botao[aria-expanded="true"] .chat-ic-fechar {
+        display: block;
+      }
+      .chat-botao::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--carimbo);
+        border: 2px solid var(--giz);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .chat-botao.tem-aviso::after {
+        opacity: 1;
+      }
+      .chat-convite {
+        position: absolute;
+        right: 0;
+        bottom: 78px;
+        width: max-content;
+        max-width: min(270px, calc(100vw - 40px));
+        display: flex;
+        align-items: flex-start;
+        gap: 4px;
+        background: var(--giz);
+        border: 2px solid var(--tinta);
+        border-radius: 6px;
+        box-shadow: 4px 4px 0 var(--tinta);
+        animation: hb-entra 0.4s ease both;
+      }
+      .chat-convite[hidden] {
+        display: none;
+      }
+      .chat-convite::after {
+        content: "";
+        position: absolute;
+        right: 22px;
+        bottom: -10px;
+        width: 16px;
+        height: 16px;
+        background: var(--giz);
+        border-right: 2px solid var(--tinta);
+        border-bottom: 2px solid var(--tinta);
+        transform: rotate(45deg);
+      }
+      .chat-convite-txt {
+        border: 0;
+        background: none;
+        text-align: left;
+        font: inherit;
+        font-size: 1rem;
+        line-height: 1.35;
+        color: var(--tinta);
+        padding: 12px 0 12px 14px;
+        cursor: pointer;
+      }
+      .chat-convite-x {
+        border: 0;
+        background: none;
+        color: var(--tinta);
+        padding: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .chat-painel {
+        position: absolute;
+        right: 0;
+        bottom: 78px;
+        width: min(390px, calc(100vw - 40px));
+        height: min(580px, calc(100vh - 130px));
+        height: min(580px, calc(100dvh - 130px));
+        display: flex;
+        flex-direction: column;
+        background: var(--jornal);
+        border: 2px solid var(--tinta);
+        border-radius: 8px;
+        box-shadow: 6px 6px 0 var(--tinta);
+        overflow: hidden;
+        transform-origin: 100% 100%;
+        animation: chat-abre 0.28s cubic-bezier(0.2, 1.1, 0.4, 1) both;
+      }
+      .chat-painel[hidden] {
+        display: none;
+      }
+      @keyframes chat-abre {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(12px);
+        }
+      }
+      .chat-topo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 10px 12px 14px;
+        background: var(--tinta);
+        color: var(--giz);
+        --foco: var(--cartaz);
+      }
+      .chat-avatar {
+        width: 40px;
+        height: 40px;
+        flex: none;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--cartaz);
+        color: var(--tinta);
+      }
+      .chat-avatar svg path {
+        fill: var(--tinta);
+      }
+      .chat-id {
+        flex: 1;
+        min-width: 0;
+      }
+      .chat-titulo {
+        margin: 0;
+        font-family: var(--display);
+        font-weight: 900;
+        font-size: 1.45rem;
+        line-height: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        outline: none;
+      }
+      .chat-sub {
+        margin: 3px 0 0;
+        font-size: 0.85rem;
+        line-height: 1.2;
+        color: rgba(249, 247, 241, 0.7);
+      }
+      .chat-icone {
+        flex: none;
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--giz);
+        cursor: pointer;
+        font-size: 1.3rem;
+      }
+      .chat-icone:hover {
+        background: rgba(249, 247, 241, 0.14);
+      }
+      .chat-log {
+        flex: 1;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 16px 14px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        scroll-behavior: smooth;
+      }
+      .chat-msg {
+        max-width: 88%;
+        margin: 0;
+        padding: 10px 13px;
+        font-size: 1rem;
+        line-height: 1.42;
+        border-radius: 10px;
+        white-space: pre-line;
+        animation: chat-msg 0.3s ease both;
+      }
+      .chat-msg.bot {
+        align-self: flex-start;
+        background: var(--giz);
+        border: 2px solid var(--tinta);
+        border-bottom-left-radius: 2px;
+      }
+      .chat-msg.eu {
+        align-self: flex-end;
+        background: var(--tinta);
+        color: var(--giz);
+        border-bottom-right-radius: 2px;
+      }
+      @keyframes chat-msg {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      .chat-digitando {
+        align-self: flex-start;
+        display: inline-flex;
+        gap: 5px;
+        padding: 14px 15px;
+        background: var(--giz);
+        border: 2px solid var(--tinta);
+        border-radius: 10px;
+        border-bottom-left-radius: 2px;
+      }
+      .chat-digitando span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--tinta);
+        animation: chat-ponto 1s infinite ease-in-out;
+      }
+      .chat-digitando span:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .chat-digitando span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      @keyframes chat-ponto {
+        0%,
+        80%,
+        100% {
+          opacity: 0.25;
+          transform: none;
+        }
+        40% {
+          opacity: 1;
+          transform: translateY(-4px);
+        }
+      }
+      .chat-opcoes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 7px;
+        margin: 4px 0 6px;
+        animation: chat-msg 0.3s ease both;
+      }
+      .chat-op {
+        font: inherit;
+        font-size: 0.95rem;
+        line-height: 1.25;
+        text-align: left;
+        padding: 8px 13px;
+        border: 2px solid var(--tinta);
+        border-radius: 999px;
+        background: var(--jornal);
+        color: var(--tinta);
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          background 0.15s ease,
+          transform 0.15s ease;
+      }
+      .chat-op:hover {
+        background: var(--cartaz);
+        transform: translateY(-1px);
+      }
+      .chat-op.acao {
+        background: var(--tinta);
+        color: var(--cartaz);
+      }
+      .chat-op.acao:hover {
+        background: var(--tinta-2);
+      }
+      .chat-op.volta {
+        border-style: dashed;
+      }
+      .chat-form {
+        display: flex;
+        gap: 8px;
+        padding: 10px 12px;
+        border-top: 2px solid var(--tinta);
+        background: var(--giz);
+      }
+      .chat-form input {
+        flex: 1;
+        min-width: 0;
+        font: inherit;
+        font-size: 1rem;
+        padding: 10px 12px;
+        border: 2px solid var(--linha);
+        border-radius: 6px;
+        background: #fff;
+        color: var(--tinta);
+      }
+      .chat-form input:focus {
+        border-color: var(--tinta);
+        outline: none;
+      }
+      .chat-enviar {
+        flex: none;
+        width: 46px;
+        border: 2px solid var(--tinta);
+        border-radius: 6px;
+        background: var(--cartaz);
+        color: var(--tinta);
+        font-size: 1.3rem;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+      .chat-wa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 9px 12px 11px;
+        font-size: 0.9rem;
+        background: var(--giz);
+        color: var(--texto-suave);
+        text-decoration: none;
+        border-top: 1px dashed var(--linha);
+      }
+      .chat-wa:hover {
+        color: var(--tinta);
+        text-decoration: underline;
+      }
+      .chat-wa .ph {
+        font-size: 1.15rem;
+      }
+      .chat-sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      @media (max-width: 600px) {
+        .chat {
+          right: 14px;
+          bottom: 14px;
+        }
+        .chat-botao {
+          width: 56px;
+          height: 56px;
+        }
+        .chat-painel {
+          position: fixed;
+          left: 10px;
+          right: 10px;
+          bottom: 82px;
+          width: auto;
+          height: min(560px, calc(100vh - 100px));
+          height: min(560px, calc(100dvh - 100px));
+        }
+        .chat-convite {
+          bottom: 70px;
+        }
+      }
+      @media print {
+        .chat {
+          display: none;
+        }
+      }
+
+      /* ---------- seletor de versões (só com ?versoes no link) ---------- */
+      .versoes {
+        position: fixed;
+        left: 14px;
+        bottom: 14px;
+        z-index: 150;
+        width: 230px;
+        padding: 12px 14px 10px;
+        background: var(--giz);
+        border: 2px solid var(--tinta);
+        border-radius: 6px;
+        box-shadow: 4px 4px 0 var(--carimbo);
+        font-size: 0.9rem;
+      }
+      .versoes b {
+        display: block;
+        font-family: var(--display);
+        font-weight: 900;
+        font-size: 1.15rem;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .versoes-linha {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .versoes-linha div {
+        display: flex;
+        gap: 4px;
+      }
+      .versoes button {
+        min-width: 34px;
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 1rem;
+        padding: 4px 8px;
+        border: 2px solid var(--tinta);
+        border-radius: 3px;
+        background: transparent;
+        color: var(--tinta);
+        cursor: pointer;
+      }
+      .versoes button[aria-pressed="true"] {
+        background: var(--tinta);
+        color: var(--cartaz);
+      }
+      .versoes small {
+        display: block;
+        color: var(--texto-suave);
+        line-height: 1.3;
+      }
+      .versoes-min {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        min-width: 0 !important;
+        border: 0 !important;
+        font-size: 1rem !important;
+      }
+      .versoes.min > :not(b):not(.versoes-min) {
+        display: none;
+      }
+      .versoes.min b {
+        margin: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hb-entra,
+        .hb-carimbo,
+        .chat-msg,
+        .chat-opcoes,
+        .chat-painel {
+          animation: none;
+        }
+        .pilha-aba .barra {
+          display: none;
+        }
+      }
     </style>
     <!-- ===== BLOCOS TECNICOS: NAO EDITAR. Fontes e icones embutidos em base64/SVG. ===== -->
     <style id="fontes-locais">
@@ -2835,21 +3723,6 @@
           </text>
           <path d="M78 132 l13 12 l31 -30" fill="none" stroke="currentColor" stroke-width="0" />
         </symbol>
-        <symbol id="selo-mini" viewBox="0 0 48 48">
-          <rect x="2" y="2" width="44" height="44" rx="4" fill="#1b0217" />
-          <text
-            x="24"
-            y="33"
-            text-anchor="middle"
-            font-family="'Big Shoulders Display',sans-serif"
-            font-weight="900"
-            font-size="28"
-            fill="#f2e02b"
-          >
-            JC
-          </text>
-          <rect x="6" y="38" width="36" height="3" fill="#d4361e" />
-        </symbol>
       </defs>
     </svg>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -2857,7 +3730,7 @@
       <div class="wrap">
         <nav class="nav" aria-label="Principal">
           <a href="#" class="brand" aria-label="Josah Criativos, início"
-            ><svg aria-hidden="true"><use href="#selo-mini" /></svg><span class="brand-name">Josah Criativos</span></a
+            ><span class="brand-name">Josah Criativos</span></a
           >
           <ul class="nav-links">
             <li><a href="#servicos" class="nav-link">Serviços</a></li>
@@ -2901,17 +3774,18 @@
     </div>
 
     <main id="conteudo">
-      <section class="papel-cartaz hero">
+      <!-- HERO A (padrao). Versao alternativa logo abaixo: "HERO B". Troca no link: ?hero=b -->
+      <section class="papel-cartaz hero" id="heroA">
         <div class="wrap">
-          <div class="selo" aria-hidden="true">
+          <div class="selo" aria-hidden="true" title="Clique para carimbar de novo">
             <svg viewBox="0 0 200 200"><use href="#selo" /></svg>
           </div>
           <p class="hero-kicker">Para quem escreve, executa e presta contas de projetos culturais</p>
-          <h1 class="hero-title" aria-label="Designer especializado em projetos culturais.">
-            <span class="l" data-t="Designer" aria-hidden="true">Designer</span
-            ><span class="l" data-t="especializado" aria-hidden="true">especializado</span
-            ><span class="l" data-t="em projetos" aria-hidden="true">em projetos</span
-            ><span class="l" data-t="culturais." aria-hidden="true">culturais.</span>
+          <h1 class="hero-title" aria-label="Seu projeto cultural, do edital ao palco.">
+            <span class="l" data-t="Seu projeto" aria-hidden="true">Seu projeto</span
+            ><span class="l" data-t="cultural," aria-hidden="true">cultural,</span
+            ><span class="l" data-t="do edital" aria-hidden="true">do edital</span
+            ><span class="l" data-t="ao palco." aria-hidden="true">ao palco.</span>
           </h1>
           <div class="hero-foot">
             <p class="hero-description">
@@ -2921,6 +3795,75 @@
             <div class="hero-actions">
               <a href="#projetos" class="btn">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
             </div>
+          </div>
+        </div>
+        <div class="rasgo" aria-hidden="true"></div>
+      </section>
+
+      <!-- HERO B (alternativo, escondido por padrao). Aparece com ?hero=b no link. -->
+      <section class="hero-b" id="heroB" hidden>
+        <div class="wrap hb-grid">
+          <div class="hb-texto">
+            <p class="hero-kicker">Designer gráfico para projetos culturais &middot; Salvador, BA</p>
+            <h1 class="hb-titulo">
+              Design que a banca <em>entende</em> e o público <em>lembra.</em>
+            </h1>
+            <p class="hero-description">
+              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
+              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
+            </p>
+            <div class="hero-actions">
+              <a href="#projetos" class="btn on-dark">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+              <button type="button" class="link-sub hb-duvida" data-chat-abrir>Tirar uma dúvida</button>
+            </div>
+          </div>
+          <div class="hb-cartaz" id="hbCartaz" aria-hidden="true">
+            <svg viewBox="0 0 400 520">
+              <rect x="10" y="10" width="380" height="500" fill="#f2e02b" stroke="#1b0217" stroke-width="3" />
+              <g class="hb-camada" data-prof="6">
+                <g class="hb-entra" style="--d: 0.15s">
+                  <circle cx="292" cy="150" r="92" fill="#d4361e" />
+                  <path d="M40 250 L132 70 L224 250Z" fill="#1b0217" />
+                  <circle cx="292" cy="150" r="40" fill="#f2e02b" />
+                </g>
+              </g>
+              <g class="hb-camada" data-prof="14">
+                <g class="hb-entra" style="--d: 0.35s">
+                  <text class="arte-disp" x="36" y="330" font-size="86" font-weight="900">Festival</text>
+                  <text class="arte-disp" x="36" y="392" font-size="58" font-weight="900" style="fill: #d4361e">de rua</text>
+                  <text class="arte-txt" x="38" y="420" font-size="15" font-style="italic">12 a 14 de novembro &middot; Salvador</text>
+                </g>
+              </g>
+              <g class="hb-camada" data-prof="4">
+                <g class="hb-entra" style="--d: 0.55s">
+                  <line x1="36" y1="444" x2="364" y2="444" stroke="#1b0217" stroke-width="2" />
+                  <text class="arte-disp" x="36" y="462" font-size="11" letter-spacing="1.5">Realização &middot; Apoio</text>
+                  <g fill="#1b0217" class="hb-regua">
+                    <circle cx="52" cy="486" r="13" />
+                    <rect x="80" y="473" width="26" height="26" />
+                    <path d="M126 499 L139 473 L152 499Z" />
+                    <rect x="170" y="473" width="5" height="26" />
+                    <rect x="179" y="473" width="5" height="26" />
+                    <rect x="188" y="473" width="5" height="26" />
+                    <circle cx="218" cy="486" r="10" fill="none" stroke="#1b0217" stroke-width="5" />
+                  </g>
+                </g>
+              </g>
+              <g class="hb-camada" data-prof="22">
+                <g class="hb-entra hb-carimbo" style="--d: 0.9s">
+                  <g transform="translate(312 440) rotate(-14)">
+                    <circle r="50" fill="none" stroke="#d4361e" stroke-width="5" />
+                    <circle r="41" fill="none" stroke="#d4361e" stroke-width="2" />
+                    <text y="-4" text-anchor="middle" font-family="'Big Shoulders Display'" font-weight="900" font-size="20" fill="#d4361e">CONFORME</text>
+                    <text y="16" text-anchor="middle" font-family="'Big Shoulders Display'" font-weight="800" font-size="13" fill="#d4361e">O EDITAL</text>
+                  </g>
+                </g>
+              </g>
+              <g class="hb-camada" data-prof="28">
+                <rect class="hb-fita" x="150" y="-4" width="104" height="30" fill="#f9f7f1" opacity="0.8" transform="rotate(-4 202 11)" />
+              </g>
+            </svg>
+            <p class="hb-dica">Passe o mouse pelo cartaz. Clique para carimbar.</p>
           </div>
         </div>
         <div class="rasgo" aria-hidden="true"></div>
@@ -2965,7 +3908,7 @@
                       <line x1="232" y1="167" x2="232" y2="176" />
                     </g>
                   </g>
-                  <g fill="#1b0217">
+                  <g fill="#1b0217" class="rg-logos">
                     <circle cx="38" cy="222" r="16" />
                     <rect x="66" y="206" width="32" height="32" />
                     <path d="M130 238 L146 206 L162 238Z" />
@@ -3008,7 +3951,7 @@
                   <text class="arte-txt" x="58" y="98" font-size="11.5" font-style="italic">
                     de captação do projeto
                   </text>
-                  <g stroke="#1b0217" stroke-width="3" opacity=".85">
+                  <g stroke="#1b0217" stroke-width="3" opacity=".85" class="bk-linhas">
                     <line x1="58" y1="128" x2="208" y2="128" />
                     <line x1="58" y1="144" x2="196" y2="144" />
                     <line x1="58" y1="160" x2="208" y2="160" />
@@ -3037,7 +3980,7 @@
                     <text x="24" y="74">4.1 A marca do financiador deve</text>
                     <text x="24" y="90">aparecer em todas as peças.</text>
                   </g>
-                  <rect x="20" y="106" width="206" height="46" fill="#f2e02b" />
+                  <rect class="ed-marca" x="20" y="106" width="206" height="46" fill="#f2e02b" />
                   <g class="arte-txt" font-size="11.5">
                     <text x="24" y="124">4.2 Mínimo de 10% da altura da</text>
                     <text x="24" y="140">peça para a régua de apoio.</text>
@@ -3088,14 +4031,16 @@
                 <span class="fita" aria-hidden="true"></span
                 ><svg viewBox="0 0 250 300" aria-hidden="true">
                   <rect x="14" y="30" width="222" height="250" fill="#cdb88e" stroke="#1b0217" stroke-width="2" />
-                  <path d="M14 30 L125 118 L236 30" fill="#b9a276" stroke="#1b0217" stroke-width="2" />
+                  <path class="en-aba" d="M14 30 L125 118 L236 30" fill="#b9a276" stroke="#1b0217" stroke-width="2" />
+                  <g class="en-carta">
                   <rect x="60" y="150" width="130" height="84" fill="#f9f7f1" stroke="#1b0217" stroke-width="2" />
                   <text class="arte-disp" x="125" y="184" font-size="30" text-anchor="middle">Entrega</text>
                   <text class="arte-txt" x="125" y="204" font-size="11.5" text-anchor="middle" font-style="italic">
                     padrão do financiador
                   </text>
                   <text class="arte-txt" x="125" y="222" font-size="11.5" text-anchor="middle">pasta 01_final</text>
-                  <g font-family="'Big Shoulders Display'" font-weight="800" font-size="15" text-anchor="middle">
+                  </g>
+                  <g class="en-tags" font-family="'Big Shoulders Display'" font-weight="800" font-size="15" text-anchor="middle">
                     <rect x="30" y="250" width="44" height="22" fill="#1b0217" />
                     <text x="52" y="266" fill="#f2e02b">PDF</text>
                     <rect x="82" y="250" width="44" height="22" fill="#1b0217" />
@@ -5132,14 +6077,87 @@
       </div>
     </div>
 
-    <a
-      href="https://wa.me/5571991448218"
-      class="whatsapp-float"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Contato via WhatsApp"
-      ><i class="ph ph-whatsapp-logo"></i
-    ></a>
+    <!-- CHAT TIRA-DUVIDAS: perguntas e respostas ficam no script "BASE DO CHAT" (procure por BASE_CHAT). -->
+    <div class="chat" id="chat">
+      <div class="chat-convite" id="chatConvite" hidden>
+        <button type="button" class="chat-convite-txt" data-chat-abrir>
+          Ficou com alguma dúvida? <strong>Posso ajudar.</strong>
+        </button>
+        <button type="button" class="chat-convite-x" id="chatConviteX" aria-label="Fechar aviso">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <section class="chat-painel" id="chatPainel" role="dialog" aria-labelledby="chatTitulo" hidden>
+        <header class="chat-topo">
+          <span class="chat-avatar" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5Z"
+                fill="currentColor"
+              />
+              <circle cx="8.5" cy="9.5" r="1.3" fill="#f2e02b" />
+              <circle cx="12" cy="9.5" r="1.3" fill="#f2e02b" />
+              <circle cx="15.5" cy="9.5" r="1.3" fill="#f2e02b" /></svg
+          ></span>
+          <div class="chat-id">
+            <p class="chat-titulo" id="chatTitulo" tabindex="-1">Tira-dúvidas</p>
+            <p class="chat-sub">Respostas automáticas sobre o trabalho</p>
+          </div>
+          <button type="button" class="chat-icone" id="chatReiniciar" aria-label="Recomeçar a conversa" title="Recomeçar">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path
+                d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button type="button" class="chat-icone" id="chatFechar" aria-label="Fechar o tira-dúvidas" title="Fechar">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </header>
+        <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-relevant="additions"></div>
+        <form class="chat-form" id="chatForm" autocomplete="off">
+          <label class="chat-sr" for="chatEntrada">Digite sua pergunta</label>
+          <input id="chatEntrada" type="text" maxlength="200" placeholder="Digite sua pergunta" enterkeyhint="send" />
+          <button type="submit" class="chat-enviar" aria-label="Enviar pergunta">
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </button>
+        </form>
+        <a
+          class="chat-wa"
+          href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20da%20Josah%20Criativos%20e%20gostaria%20de%20falar%20sobre%20um%20projeto."
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Prefere falar direto? Chame no WhatsApp</a
+        >
+      </section>
+      <button
+        type="button"
+        class="chat-botao"
+        id="chatBotao"
+        aria-expanded="false"
+        aria-controls="chatPainel"
+        aria-label="Abrir o tira-dúvidas"
+      >
+        <svg class="chat-ic-abrir" viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+          <path
+            d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <circle cx="8.5" cy="9.5" r="1.2" fill="currentColor" />
+          <circle cx="12" cy="9.5" r="1.2" fill="currentColor" />
+          <circle cx="15.5" cy="9.5" r="1.2" fill="currentColor" />
+        </svg>
+        <i class="ph ph-x chat-ic-fechar" aria-hidden="true"></i>
+      </button>
+    </div>
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
@@ -5846,6 +6864,909 @@
         balao.addEventListener("keydown", function (e) {
           if (e.key === "Escape") fechar();
         });
+      })();
+    </script>
+    <script>
+      /* =====================================================================
+         VERSOES E INTERACOES
+         - ?hero=b mostra o Hero B; ?mural=b mostra a secao 2 em pilha.
+         - ?versoes mostra o seletor para comparar (canto inferior esquerdo).
+         - Desenhos: titulo e selo do hero, cartaz do Hero B, pecas da secao 2
+           e entrada suave dos blocos ao rolar.
+         ===================================================================== */
+      (function () {
+        "use strict";
+        var raiz = document.documentElement;
+        var reduz = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var temMouse = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        var temIO = "IntersectionObserver" in window;
+        if (!reduz && temIO) raiz.classList.add("js-anim");
+
+        /* ---------- secao 2 em pilha ---------- */
+        var Pilha = (function () {
+          var mural = document.getElementById("mural");
+          var grade = mural ? mural.querySelector(".mural-grid") : null;
+          var montado = false,
+            idx = 0,
+            artes = [],
+            textos = [],
+            abas = null,
+            botoes = [],
+            io = null;
+
+          function ir(i, focar) {
+            var n = artes.length;
+            idx = ((i % n) + n) % n;
+            artes.forEach(function (a, k) {
+              a.setAttribute("data-pos", String((k - idx + n) % n));
+            });
+            textos.forEach(function (t, k) {
+              t.classList.toggle("ativo", k === idx);
+            });
+            botoes.forEach(function (b, k) {
+              var on = k === idx;
+              b.setAttribute("aria-selected", on ? "true" : "false");
+              b.tabIndex = on ? 0 : -1;
+              if (on && focar) b.focus();
+            });
+          }
+          function aoClicarArte(e) {
+            var k = artes.indexOf(e.currentTarget);
+            if (k > -1 && k !== idx) ir(k);
+          }
+          function aoFimBarra(e) {
+            if (e.animationName === "pilha-tempo") ir(idx + 1);
+          }
+          function pausa() {
+            mural.classList.add("pausa");
+          }
+          function segue() {
+            if (!mural.matches(":hover") && !mural.contains(document.activeElement)) mural.classList.remove("pausa");
+          }
+          function aoTeclar(e) {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault();
+              ir(idx + 1, true);
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault();
+              ir(idx - 1, true);
+            }
+          }
+          function montar() {
+            if (montado || !grade) return;
+            montado = true;
+            var pecas = Array.prototype.slice.call(grade.querySelectorAll(".peca"));
+            artes = pecas.map(function (p) {
+              return p.querySelector(".peca-arte");
+            });
+            textos = pecas.map(function (p) {
+              return p.querySelector("figcaption");
+            });
+            abas = document.createElement("div");
+            abas.className = "pilha-abas";
+            abas.setAttribute("role", "tablist");
+            abas.setAttribute("aria-label", "Como o trabalho se apresenta");
+            botoes = pecas.map(function (p, k) {
+              var b = document.createElement("button");
+              b.type = "button";
+              b.className = "pilha-aba";
+              b.id = "pilhaAba" + k;
+              b.setAttribute("role", "tab");
+              b.setAttribute("aria-controls", "pilhaTxt" + k);
+              b.innerHTML = p.querySelector("h3").textContent + '<span class="barra" aria-hidden="true"></span>';
+              b.addEventListener("click", function () {
+                ir(k);
+              });
+              textos[k].id = "pilhaTxt" + k;
+              textos[k].setAttribute("role", "tabpanel");
+              textos[k].setAttribute("aria-labelledby", b.id);
+              abas.appendChild(b);
+              return b;
+            });
+            abas.addEventListener("keydown", aoTeclar);
+            abas.addEventListener("animationend", aoFimBarra);
+            artes.forEach(function (a) {
+              a.addEventListener("click", aoClicarArte);
+            });
+            mural.addEventListener("mouseenter", pausa);
+            mural.addEventListener("mouseleave", segue);
+            mural.addEventListener("focusin", pausa);
+            mural.addEventListener("focusout", segue);
+            grade.appendChild(abas);
+            mural.classList.add("pilha");
+            if (temIO) {
+              io = new IntersectionObserver(function (en) {
+                en.forEach(function (x) {
+                  if (x.isIntersecting) segue();
+                  else pausa();
+                });
+              });
+              io.observe(mural);
+            }
+            ir(0);
+          }
+          function desmontar() {
+            if (!montado) return;
+            montado = false;
+            if (io) io.disconnect();
+            abas.remove();
+            artes.forEach(function (a) {
+              a.removeAttribute("data-pos");
+              a.removeEventListener("click", aoClicarArte);
+            });
+            textos.forEach(function (t) {
+              t.classList.remove("ativo");
+              t.removeAttribute("role");
+              t.removeAttribute("aria-labelledby");
+              t.removeAttribute("id");
+            });
+            mural.removeEventListener("mouseenter", pausa);
+            mural.removeEventListener("mouseleave", segue);
+            mural.removeEventListener("focusin", pausa);
+            mural.removeEventListener("focusout", segue);
+            mural.classList.remove("pilha", "pausa");
+          }
+          return {
+            montar: montar,
+            desmontar: desmontar,
+            ativo: function () {
+              return montado;
+            },
+            idx: function () {
+              return idx;
+            },
+          };
+        })();
+
+        /* ---------- versoes ---------- */
+        var heroA = document.getElementById("heroA"),
+          heroB = document.getElementById("heroB");
+        var qs = new URLSearchParams(location.search);
+        var estado = {
+          hero: qs.get("hero") === "b" ? "b" : "a",
+          mural: qs.get("mural") === "b" ? "b" : "a",
+        };
+        function aplicar() {
+          if (heroA && heroB) {
+            heroA.hidden = estado.hero === "b";
+            heroB.hidden = estado.hero !== "b";
+          }
+          if (estado.mural === "b") Pilha.montar();
+          else Pilha.desmontar();
+        }
+        aplicar();
+
+        if (qs.has("versoes")) {
+          var painel = document.createElement("div");
+          painel.className = "versoes";
+          painel.setAttribute("role", "region");
+          painel.setAttribute("aria-label", "Comparar versões");
+          painel.innerHTML =
+            '<b>Comparar versões</b><button type="button" class="versoes-min" aria-label="Minimizar">&minus;</button>' +
+            '<div class="versoes-linha"><span>Hero</span><div data-chave="hero"><button type="button" data-v="a">A</button><button type="button" data-v="b">B</button></div></div>' +
+            '<div class="versoes-linha"><span>Seção 2</span><div data-chave="mural"><button type="button" data-v="a">A</button><button type="button" data-v="b">B</button></div></div>' +
+            "<small>A é a versão atual. Este quadro só aparece com ?versoes no link.</small>";
+          document.body.appendChild(painel);
+          var marcar = function () {
+            painel.querySelectorAll("[data-chave]").forEach(function (g) {
+              var ch = g.getAttribute("data-chave");
+              g.querySelectorAll("button").forEach(function (b) {
+                b.setAttribute("aria-pressed", b.getAttribute("data-v") === estado[ch] ? "true" : "false");
+              });
+            });
+          };
+          painel.addEventListener("click", function (e) {
+            var b = e.target.closest("button");
+            if (!b) return;
+            if (b.classList.contains("versoes-min")) {
+              var min = painel.classList.toggle("min");
+              b.innerHTML = min ? "+" : "&minus;";
+              b.setAttribute("aria-label", min ? "Expandir" : "Minimizar");
+              return;
+            }
+            var ch = b.parentNode.getAttribute("data-chave");
+            if (!ch) return;
+            estado[ch] = b.getAttribute("data-v");
+            aplicar();
+            marcar();
+            var p = new URLSearchParams(location.search);
+            ["hero", "mural"].forEach(function (k) {
+              if (estado[k] === "b") p.set(k, "b");
+              else p.delete(k);
+            });
+            history.replaceState(null, "", "?" + p.toString().replace(/=(&|$)/g, "$1") + location.hash);
+            if (ch === "hero") window.scrollTo({ top: 0, behavior: reduz ? "auto" : "smooth" });
+          });
+          marcar();
+        }
+
+        /* ---------- hero A: titulo e selo ---------- */
+        var titulo = heroA ? heroA.querySelector(".hero-title") : null;
+        var selo = heroA ? heroA.querySelector(".selo") : null;
+        if (selo) {
+          selo.addEventListener("click", function () {
+            selo.style.animation = "none";
+            void selo.offsetWidth;
+            selo.style.animation = "carimbar 0.7s cubic-bezier(0.2, 1.5, 0.4, 1) both";
+          });
+        }
+        if (!reduz && temMouse && titulo) {
+          heroA.addEventListener("pointermove", function (e) {
+            var r = heroA.getBoundingClientRect();
+            titulo.style.setProperty("--mx", (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+            titulo.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+          });
+          heroA.addEventListener("pointerleave", function () {
+            titulo.style.setProperty("--mx", 0);
+            titulo.style.setProperty("--my", 0);
+          });
+        }
+        var seloContato = document.querySelector(".selo-contato");
+        if (!reduz) {
+          var pendente = false;
+          window.addEventListener(
+            "scroll",
+            function () {
+              if (pendente) return;
+              pendente = true;
+              requestAnimationFrame(function () {
+                pendente = false;
+                var y = window.scrollY || 0;
+                if (selo && y < window.innerHeight * 1.2) selo.style.setProperty("--giro", (y * 0.08).toFixed(1) + "deg");
+                if (seloContato) seloContato.style.setProperty("--giro", (y * 0.03).toFixed(1) + "deg");
+              });
+            },
+            { passive: true },
+          );
+        }
+
+        /* ---------- hero B: cartaz em camadas ---------- */
+        var cartaz = document.getElementById("hbCartaz");
+        if (cartaz && heroB) {
+          var svg = cartaz.querySelector("svg");
+          var camadas = Array.prototype.slice.call(cartaz.querySelectorAll(".hb-camada"));
+          var carimbo = cartaz.querySelector(".hb-carimbo");
+          svg.addEventListener("click", function () {
+            carimbo.style.animation = "none";
+            void carimbo.getBoundingClientRect();
+            carimbo.style.animation = "hb-carimba 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) both";
+          });
+          if (!reduz && temMouse) {
+            heroB.addEventListener("pointermove", function (e) {
+              var r = svg.getBoundingClientRect();
+              var nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 0.9)));
+              var ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height * 0.9)));
+              svg.style.setProperty("--rx", (nx * 9).toFixed(2) + "deg");
+              svg.style.setProperty("--ry", (-ny * 9).toFixed(2) + "deg");
+              camadas.forEach(function (c) {
+                var p = parseFloat(c.getAttribute("data-prof")) || 0;
+                c.style.transform = "translate(" + (nx * p * 0.7).toFixed(1) + "px," + (ny * p * 0.7).toFixed(1) + "px)";
+              });
+            });
+            heroB.addEventListener("pointerleave", function () {
+              svg.style.setProperty("--rx", "0deg");
+              svg.style.setProperty("--ry", "0deg");
+              camadas.forEach(function (c) {
+                c.style.transform = "";
+              });
+            });
+          }
+        }
+
+        /* ---------- secao 2: pecas inclinam com o ponteiro ---------- */
+        if (!reduz && temMouse) {
+          document.querySelectorAll("#mural .peca-arte").forEach(function (arte) {
+            var s = arte.querySelector("svg");
+            if (!s) return;
+            arte.addEventListener("pointermove", function (e) {
+              if (Pilha.ativo() && arte.getAttribute("data-pos") !== "0") return;
+              var r = arte.getBoundingClientRect();
+              var nx = ((e.clientX - r.left) / r.width) * 2 - 1,
+                ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+              s.style.setProperty("--tx", (nx * 8).toFixed(2) + "deg");
+              s.style.setProperty("--ty", (-ny * 8).toFixed(2) + "deg");
+            });
+            arte.addEventListener("pointerleave", function () {
+              s.style.setProperty("--tx", "0deg");
+              s.style.setProperty("--ty", "0deg");
+            });
+          });
+        }
+
+        /* ---------- entrada suave dos blocos ---------- */
+        if (raiz.classList.contains("js-anim")) {
+          var alvos = [];
+          document.querySelectorAll(".frente, .sobre-grid > *").forEach(function (el) {
+            alvos.push(el);
+          });
+          document.querySelectorAll(".ingressos .tk").forEach(function (el, i) {
+            el.style.setProperty("--i", i);
+            alvos.push(el);
+          });
+          var obs = new IntersectionObserver(
+            function (en) {
+              en.forEach(function (x) {
+                if (x.isIntersecting) {
+                  x.target.classList.add("in");
+                  obs.unobserve(x.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+          );
+          alvos.forEach(function (el) {
+            el.classList.add("revela");
+            obs.observe(el);
+          });
+        }
+      })();
+    </script>
+    <script>
+      /* =====================================================================
+         BASE_CHAT: perguntas e respostas do tira-duvidas.
+         Cada assunto tem:
+           rot  ... texto do botao (como a pergunta aparece para o visitante)
+           txt  ... lista de baloes de resposta (\n quebra a linha)
+           ops  ... proximos botoes. Nomes de outros assuntos ou acoes:
+                    @wa (WhatsApp), @wa_orcamento, @email, @termos,
+                    @ver:#id:Rotulo (rola ate a secao)
+           kw   ... palavras que a busca reconhece quando o visitante digita.
+                    "palavra:1" vale menos (palavras genericas). Sem acento.
+           frases . trechos que, se aparecerem na pergunta, apontam direto aqui.
+         Para criar um assunto: copie um bloco, troque o nome e ligue-o no
+         "ops" de outro assunto (por exemplo, no "inicio").
+         ===================================================================== */
+      var BASE_CHAT = {
+        inicio: {
+          txt: [
+            "Olá! Este é o tira-dúvidas do site da Josah Criativos.",
+            "Escolha um assunto abaixo ou digite a sua pergunta.",
+          ],
+          ops: ["servicos", "como_funciona", "orcamento", "prazos", "editais", "portfolio", "falar"],
+        },
+        menu: {
+          txt: ["Sobre o que mais você quer saber?"],
+          ops: ["servicos", "como_funciona", "orcamento", "prazos", "pagamento", "editais", "sobre", "falar"],
+        },
+        servicos: {
+          rot: "Quais serviços você faz?",
+          txt: [
+            "Trabalho em três frentes que se complementam:",
+            "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Criativos & Web: landing pages, formulários e campanhas para redes sociais.\n• Visual & Mídia: material de palco, vídeos, teasers e spots.",
+            "Qual delas interessa ao seu projeto?",
+          ],
+          ops: ["sv_apresentacao", "sv_web", "sv_midia", "impressao"],
+          kw: "servico:2 servicos:2 faz:1 fazem:1 oferece:2 trabalha:1 frentes:2 design:1 criar:1",
+          frases: ["o que voce faz", "que servicos", "quais servicos"],
+        },
+        sv_apresentacao: {
+          rot: "Marca, book e portfólio",
+          txt: [
+            "Identidade visual: uma marca pensada para o uso real do evento. Funciona em cor e em preto e branco, em tamanho pequeno e grande, e convive com os logos de apoiadores e patrocinadores.",
+            "Book de captação: transformo o projeto aprovado em um documento que o parecerista consegue avaliar em poucos minutos. Para patrocinadores, a versão comercial destaca cotas e retorno de marca.",
+            "Portfólio artístico: organizo a trajetória de artistas, coletivos e produtoras na ordem em que os editais perguntam.",
+          ],
+          ops: ["orcamento", "sv_web", "sv_midia"],
+          kw: "marca logo logomarca logotipo identidade visual book captacao portfolio parecerista patrocinador patrocinio cotas trajetoria apresentacao",
+          frases: ["identidade visual", "book de captacao"],
+        },
+        sv_web: {
+          rot: "Sites, formulários e redes",
+          txt: [
+            "Landing page: uma página com programação, local e inscrição ou venda de ingressos logo no início, funcionando bem no celular. As atualizações durante o projeto estão incluídas.",
+            "Formulários: inscrição para oficinas, convocatórias, cadastro de artistas e credenciamento de imprensa, feitos no Google Forms e configurados na sua conta.",
+            "Redes sociais: um modelo único para toda a programação, para a equipe trocar nome, data e line-up sem refazer a arte.",
+          ],
+          ops: ["orcamento", "sv_apresentacao", "sv_midia"],
+          kw: "site sites landing pagina web internet formulario formularios inscricao inscricoes credenciamento google forms redes sociais instagram campanha post posts ingresso ingressos",
+          frases: ["landing page", "redes sociais"],
+        },
+        sv_midia: {
+          rot: "Palco, vídeo e spots",
+          txt: [
+            "Material de palco e evento: saia de palco, banners, wind banners, credenciais, camisas, bags e papelaria, com a régua de apoio no padrão do financiador, em arquivo pronto para produção.",
+            "Vídeo: teasers de 30 a 60 segundos, pílulas de bastidores e registros curtos de apresentações.",
+            "Spots de 15 e 30 segundos para rádio e TV: você grava a chamada e eu edito com trilha e efeitos.",
+          ],
+          ops: ["orcamento", "impressao", "sv_apresentacao"],
+          kw: "palco banner banners saia wind credencial credenciais camisa camisas bag bags papelaria video videos teaser teasers edicao spot spots radio tv audio regua",
+          frases: ["material de palco", "wind banner"],
+        },
+        impressao: {
+          rot: "Você entrega impresso?",
+          txt: [
+            "Todos os serviços são entregues em formato digital. Crio a arte em arquivo pronto para produção, mas não faço impressão nem produção gráfica e não contrato nem intermedio gráficas ou fornecedores.",
+            "Essa contratação e os custos ficam com o cliente.",
+          ],
+          ops: ["servicos", "orcamento"],
+          kw: "impresso impressos impressao imprimir grafica graficas fornecedor fornecedores producao fisico",
+          frases: ["impressao", "imprimir", "impresso", "grafica"],
+        },
+        como_funciona: {
+          rot: "Como funciona o trabalho?",
+          txt: [
+            "São cinco etapas, e cada uma é combinada antes de ser executada:\n1. Briefing\n2. Proposta e orçamento\n3. Produção\n4. Revisão\n5. Entrega",
+            "Escopo, prazo e valores ficam definidos por escrito antes de qualquer produção.",
+          ],
+          ops: ["revisoes", "prazos", "pagamento", "definir"],
+          kw: "funciona etapas etapa processo passo passos briefing comecar inicio contratar contratacao",
+          frases: ["como funciona", "como contratar", "primeiro passo"],
+        },
+        revisoes: {
+          rot: "Quantas revisões tenho?",
+          txt: ["Cada entrega tem até 3 rodadas de revisão, dentro do que foi combinado na proposta."],
+          ops: ["prazos", "pagamento"],
+          kw: "revisao revisoes ajuste ajustes alteracao alteracoes mudanca mudar refazer rodadas correcao",
+        },
+        prazos: {
+          rot: "Qual é o prazo?",
+          txt: [
+            "Depois do briefing você recebe cronograma e prioridades. Entrego por etapa, começando pelo essencial do seu prazo.",
+            "O prazo começa a contar quando o briefing está concluído, a entrada paga e todo o seu material recebido.",
+          ],
+          ops: ["urgencia", "pagamento", "revisoes"],
+          kw: "prazo prazos tempo demora demorado dias semanas cronograma quando entrega leva",
+          frases: ["quanto tempo", "quando fica pronto"],
+        },
+        urgencia: {
+          rot: "Tenho urgência",
+          txt: [
+            "Dá para atender conforme a minha agenda. Primeiro avalio em que etapa o projeto está e proponho um plano focado no essencial.",
+            "Se o prazo não permitir criar tudo de uma vez, priorizo o indispensável e finalizo o restante na sequência. Entregas priorizadas podem ter condições diferenciadas, informadas antes do aceite da proposta.",
+          ],
+          ops: ["@wa", "prazos"],
+          kw: "urgente urgencia rapido rapida pressa amanha corrido apertado correria aprovado",
+          frases: ["pra ontem", "para ontem"],
+        },
+        pagamento: {
+          rot: "Pagamento e nota fiscal",
+          txt: [
+            "A parceria é formalizada com contrato de prestação de serviços. Em serviços únicos, vale a proposta aceita por escrito.",
+            "Como regra, o pagamento é 50% na entrada, que inicia o trabalho, e 50% na aprovação final. A proposta pode prever pagamento único, parcelamento ou saldo por entrega.",
+            "Emito Nota Fiscal de Serviços Avulsa a cada pagamento, válida para a prestação de contas.",
+          ],
+          ops: ["orcamento", "termos"],
+          kw: "pagamento pagamentos pagar pago pix parcela parcelas parcelamento parcelar entrada contrato nota fiscal nf recibo formalizacao cnpj",
+          frases: ["nota fiscal", "prestacao de contas"],
+        },
+        orcamento: {
+          rot: "Quanto custa?",
+          txt: [
+            "O valor depende das peças, do prazo e das exigências do edital, então não trabalho com tabela fixa.",
+            "Conte o seu projeto pelo WhatsApp e eu respondo com uma proposta por escrito, com escopo, prazo e valores.",
+          ],
+          ops: ["@wa_orcamento", "definir", "pagamento"],
+          kw: "preco precos valor valores custa custo custos orcamento orcamentos quanto tabela cobra cobrar investimento",
+          frases: ["quanto custa", "quanto cobra", "quanto fica"],
+        },
+        editais: {
+          rot: "Atende qualquer edital?",
+          txt: [
+            "Sim. Atendo projetos contemplados em qualquer mecanismo de fomento, seja municipal, estadual ou federal.",
+            "Minha especialidade é adequar a identidade visual do projeto às regras do edital conquistado, aplicando as exigências técnicas e de marca informadas no briefing.",
+          ],
+          ops: ["escrita", "definir", "orcamento"],
+          kw: "edital editais lei leis incentivo rouanet pnab aldir blanc paulo gustavo fomento financiador financiamento municipal estadual federal chamada chamamento regras exigencias",
+          frases: ["lei de incentivo", "lei rouanet", "aldir blanc", "paulo gustavo"],
+        },
+        escrita: {
+          rot: "Você escreve o projeto?",
+          txt: [
+            "Não escrevo o projeto, eu o visto. Atuo na direção de arte e no design estratégico: marca, páginas na web, campanhas e materiais de palco e evento, sempre em formato digital.",
+            "Para a elaboração e a gestão de projetos culturais, indico a Tabuleiro Produções, sem qualquer obrigação de contratação.",
+          ],
+          ops: ["editais", "servicos"],
+          kw: "escrever escreve escrita elaboracao elaborar redacao redigir texto textos gestao inscrever",
+          frases: ["escrever o projeto", "escreve projeto", "elaborar o projeto"],
+        },
+        definir: {
+          rot: "Não sei quais artes preciso",
+          txt: [
+            "Não tem problema. Você não precisa pedir uma arte específica: analiso o seu evento e monto o conjunto de peças ideal para ele.",
+            "Entram no escopo apenas as peças que você aceitar na proposta.",
+          ],
+          ops: ["orcamento", "servicos"],
+          kw: "definir ajuda ajudar sugerir sugestao pecas artes quais ecossistema duvida indicar",
+          frases: ["nao sei", "quais artes", "quais pecas", "o que eu preciso"],
+        },
+        portfolio: {
+          rot: "Ver trabalhos",
+          txt: ["Os projetos estão na seção Alguns trabalhos. Clique em um card para abrir as peças de cada projeto."],
+          ops: ["@ver:#projetos:Ir para os trabalhos", "sobre"],
+          kw: "portfolio trabalhos trabalho projetos:1 exemplos exemplo cases behance clientes feitos",
+          frases: ["ja fez", "trabalhos feitos", "ver projetos", "ver trabalhos", "seus trabalhos", "seus projetos"],
+        },
+        sobre: {
+          rot: "Quem é Josah?",
+          txt: [
+            "Josah Oliveira é designer gráfico em Salvador, Bahia, com mais de dez anos de experiência em identidades visuais e comunicação para projetos culturais e digitais.",
+            "Atua como Designer Pleno em parceria com a Tabuleiro Produções, e a trajetória cruza música, produção cultural e desenvolvimento de sistemas.",
+          ],
+          ops: ["portfolio", "@ver:#sobre:Ler mais no site"],
+          kw: "quem josah josa voce sobre experiencia designer historia trajetoria salvador bahia tabuleiro",
+          frases: ["quem e voce", "quem e josah"],
+        },
+        termos: {
+          rot: "Termos e reembolso",
+          txt: [
+            "Termos de Uso, Política de Privacidade e Política de Reembolso estão no rodapé do site. Posso abrir para você.",
+          ],
+          ops: ["@termos", "pagamento"],
+          kw: "termos termo politica privacidade reembolso reembolsar cancelamento cancelar devolucao desistir lgpd dados",
+        },
+        falar: {
+          rot: "Falar com Josah",
+          txt: ["Pode falar direto comigo:\nWhatsApp (71) 99144-8218\nE-mail josahcriativos@gmail.com"],
+          ops: ["@wa", "@email"],
+          kw: "falar contato contatos whatsapp zap wpp telefone celular email mail conversar atendimento humano pessoa atendente ligar",
+          frases: ["falar com", "falar direto"],
+        },
+      };
+    </script>
+    <script>
+      /* =====================================================================
+         CHAT TIRA-DUVIDAS: motor (normalmente nao precisa editar).
+         ===================================================================== */
+      (function () {
+        "use strict";
+        var BASE = window.BASE_CHAT || {};
+        var WA = "5571991448218";
+        var MSG_WA = "Olá, Josah! Vim pelo site da Josah Criativos e gostaria de falar sobre um projeto.";
+        var reduz = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        var botao = document.getElementById("chatBotao"),
+          painel = document.getElementById("chatPainel"),
+          log = document.getElementById("chatLog"),
+          form = document.getElementById("chatForm"),
+          entrada = document.getElementById("chatEntrada"),
+          titulo = document.getElementById("chatTitulo"),
+          convite = document.getElementById("chatConvite");
+        if (!botao || !painel) return;
+
+        var iniciado = false,
+          vez = 0,
+          ultimaPergunta = "";
+
+        function wa(texto) {
+          return "https://wa.me/" + WA + "?text=" + encodeURIComponent(texto);
+        }
+        function rolar() {
+          log.scrollTop = log.scrollHeight;
+        }
+        function bolha(texto, quem) {
+          var p = document.createElement("p");
+          p.className = "chat-msg " + quem;
+          p.textContent = texto;
+          log.appendChild(p);
+          rolar();
+        }
+        function limparOpcoes() {
+          log.querySelectorAll(".chat-opcoes").forEach(function (o) {
+            o.remove();
+          });
+        }
+
+        /* ----- opcoes ----- */
+        function criarOpcao(chave) {
+          var el;
+          if (chave.charAt(0) === "@") {
+            var partes = chave.split(":");
+            var acao = partes[0];
+            if (acao === "@wa" || acao === "@wa_orcamento" || acao === "@wa_pergunta" || acao === "@email") {
+              el = document.createElement("a");
+              el.className = "chat-op acao";
+              el.target = "_blank";
+              el.rel = "noopener noreferrer";
+              if (acao === "@email") {
+                el.href = "mailto:josahcriativos@gmail.com";
+                el.textContent = "Enviar e-mail";
+              } else {
+                el.href =
+                  acao === "@wa_orcamento"
+                    ? wa("Olá, Josah! Vim pelo site e gostaria de um orçamento para o meu projeto.")
+                    : acao === "@wa_pergunta"
+                      ? wa("Olá, Josah! Vim pelo site e tenho uma dúvida: " + ultimaPergunta)
+                      : wa(MSG_WA);
+                el.innerHTML = '<i class="ph ph-whatsapp-logo" aria-hidden="true"></i>';
+                el.appendChild(
+                  document.createTextNode(
+                    acao === "@wa_orcamento"
+                      ? "Pedir orçamento no WhatsApp"
+                      : acao === "@wa_pergunta"
+                        ? "Perguntar no WhatsApp"
+                        : "Chamar no WhatsApp",
+                  ),
+                );
+              }
+              return el;
+            }
+            el = document.createElement("button");
+            el.type = "button";
+            el.className = "chat-op";
+            if (acao === "@inicio") {
+              el.className += " volta";
+              el.textContent = "Voltar ao início";
+              el.addEventListener("click", function () {
+                escolher("menu", "Voltar ao início");
+              });
+            } else if (acao === "@termos") {
+              el.className += " acao";
+              el.textContent = "Abrir termos e políticas";
+              el.addEventListener("click", function () {
+                var b = document.querySelector('[data-open="overlay-regras"]');
+                fechar(false);
+                if (b) b.click();
+              });
+            } else if (acao === "@ver") {
+              var alvo = partes[1],
+                rotulo = partes.slice(2).join(":") || "Ver no site";
+              el.className += " acao";
+              el.textContent = rotulo;
+              el.addEventListener("click", function () {
+                var s = document.querySelector(alvo);
+                if (window.innerWidth <= 600) fechar(false);
+                if (s) s.scrollIntoView({ behavior: reduz ? "auto" : "smooth" });
+              });
+            }
+            return el;
+          }
+          var no = BASE[chave];
+          if (!no || !no.rot) return null;
+          el = document.createElement("button");
+          el.type = "button";
+          el.className = "chat-op";
+          el.textContent = no.rot;
+          el.addEventListener("click", function () {
+            escolher(chave, no.rot);
+          });
+          return el;
+        }
+        function opcoes(lista) {
+          var g = document.createElement("div");
+          g.className = "chat-opcoes";
+          lista.forEach(function (ch) {
+            var el = criarOpcao(ch);
+            if (el) g.appendChild(el);
+          });
+          log.appendChild(g);
+          rolar();
+        }
+
+        /* ----- respostas ----- */
+        function responder(txts, ops) {
+          var minha = ++vez;
+          var dig = document.createElement("div");
+          dig.className = "chat-digitando";
+          dig.setAttribute("aria-label", "digitando");
+          dig.innerHTML = "<span></span><span></span><span></span>";
+          var i = 0;
+          function proxima() {
+            if (minha !== vez) return;
+            if (i >= txts.length) {
+              dig.remove();
+              opcoes(ops);
+              return;
+            }
+            log.appendChild(dig);
+            rolar();
+            var t = txts[i];
+            setTimeout(
+              function () {
+                if (minha !== vez) return;
+                dig.remove();
+                bolha(t, "bot");
+                i++;
+                proxima();
+              },
+              reduz ? 0 : Math.min(1100, 380 + t.length * 6),
+            );
+          }
+          proxima();
+        }
+        function responderNo(chave, extra) {
+          var no = BASE[chave];
+          if (!no) return;
+          var ops = (extra || []).concat(no.ops || []).filter(function (v, k, a) {
+            return a.indexOf(v) === k && v !== chave;
+          });
+          if (chave !== "inicio" && chave !== "menu") ops.push("@inicio");
+          responder(no.txt, ops);
+        }
+        function escolher(chave, rotulo) {
+          limparOpcoes();
+          bolha(rotulo, "eu");
+          responderNo(chave);
+        }
+
+        /* ----- busca no texto digitado ----- */
+        var PARADAS = (
+          "a o e de da do das dos em no na nos nas um uma uns umas para pra pro por com sem que qual quais quando como " +
+          "onde voce voces vc vcs eu meu minha meus minhas seu sua seus suas isso esse essa este esta aqui la ja tem ter " +
+          "tenho ser sao foi vai pode posso poderia gostaria queria quero saber sobre mais muito tambem ou se sim me te " +
+          "lhe ao aos as os ola oi bom boa dia tarde noite tudo bem favor por obrigado"
+        ).split(" ");
+        var SAUDA = "oi ola opa eai e ai bom boa dia tarde noite tudo bem salve hey hello".split(" ");
+        var VALEU = "obrigado obrigada valeu brigado brigada grato grata agradeco".split(" ");
+        function norm(s) {
+          return s
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[̀-ͯ]/g, "")
+            .replace(/[^a-z0-9\s]/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+        var indice = Object.keys(BASE)
+          .filter(function (k) {
+            return BASE[k].kw || BASE[k].frases;
+          })
+          .map(function (k) {
+            var pal = (BASE[k].kw || "")
+              .split(/\s+/)
+              .filter(Boolean)
+              .map(function (w) {
+                var p = w.split(":");
+                return { w: norm(p[0]), peso: p[1] ? parseFloat(p[1]) : 3 };
+              });
+            return { id: k, pal: pal, frases: (BASE[k].frases || []).map(norm) };
+          });
+        function pontuar(item, toks, texto) {
+          var s = 0;
+          toks.forEach(function (t) {
+            var melhor = 0;
+            item.pal.forEach(function (k) {
+              var w = k.w,
+                v = 0;
+              if (t === w) v = k.peso;
+              else if (t.length >= 5 && w.length >= 5 && t.slice(0, 5) === w.slice(0, 5)) v = k.peso * 0.8;
+              else if (t.length >= 4 && w.length >= 4 && t.slice(0, 4) === w.slice(0, 4)) v = k.peso * 0.3;
+              if (v > melhor) melhor = v;
+            });
+            s += melhor;
+          });
+          item.frases.forEach(function (f) {
+            if ((" " + texto + " ").indexOf(" " + f + " ") > -1) s += 4;
+          });
+          return s;
+        }
+        function buscar(bruto) {
+          var texto = norm(bruto);
+          var todos = texto.split(" ").filter(Boolean);
+          if (!todos.length) return { tipo: "nada" };
+          if (
+            todos.every(function (t) {
+              return SAUDA.indexOf(t) > -1;
+            })
+          )
+            return { tipo: "sauda" };
+          if (
+            todos.some(function (t) {
+              return VALEU.indexOf(t) > -1;
+            }) &&
+            todos.length <= 4
+          )
+            return { tipo: "valeu" };
+          var toks = todos.filter(function (t) {
+            return t.length >= 2 && PARADAS.indexOf(t) === -1;
+          });
+          var rank = indice
+            .map(function (it) {
+              return { id: it.id, s: pontuar(it, toks, texto) };
+            })
+            .filter(function (r) {
+              return r.s > 0;
+            })
+            .sort(function (a, b) {
+              return b.s - a.s;
+            });
+          if (rank.length && rank[0].s >= 2.4) {
+            var extra = rank[1] && rank[1].s >= 2.4 ? [rank[1].id] : [];
+            return { tipo: "no", id: rank[0].id, extra: extra };
+          }
+          if (rank.length && rank[0].s >= 0.9) {
+            return {
+              tipo: "sugere",
+              ids: rank.slice(0, 3).map(function (r) {
+                return r.id;
+              }),
+            };
+          }
+          return { tipo: "nada" };
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var v = entrada.value.trim();
+          if (!v) return;
+          entrada.value = "";
+          limparOpcoes();
+          bolha(v, "eu");
+          ultimaPergunta = v;
+          var r = buscar(v);
+          if (r.tipo === "no") responderNo(r.id, r.extra);
+          else if (r.tipo === "sauda") responder(["Olá! Como posso ajudar?"], BASE.inicio.ops);
+          else if (r.tipo === "valeu")
+            responder(["Por nada! Se surgir outra dúvida, é só perguntar."], ["@wa", "@inicio"]);
+          else if (r.tipo === "sugere")
+            responder(["Não tenho certeza se entendi. Algum destes assuntos ajuda?"], r.ids.concat(["@wa_pergunta", "@inicio"]));
+          else
+            responder(
+              [
+                "Não encontrei uma resposta pronta para isso.",
+                "Que tal perguntar direto para Josah? A mensagem do WhatsApp já vai com a sua pergunta.",
+              ],
+              ["@wa_pergunta", "@inicio"],
+            );
+        });
+
+        /* ----- abrir e fechar ----- */
+        var CHAVE = "jc-chat-visto";
+        function lerVisto() {
+          try {
+            return sessionStorage.getItem(CHAVE) === "1";
+          } catch (e) {
+            return false;
+          }
+        }
+        function marcarVisto() {
+          try {
+            sessionStorage.setItem(CHAVE, "1");
+          } catch (e) {}
+        }
+        function abrir() {
+          painel.hidden = false;
+          botao.setAttribute("aria-expanded", "true");
+          botao.setAttribute("aria-label", "Fechar o tira-dúvidas");
+          botao.classList.remove("tem-aviso");
+          convite.hidden = true;
+          marcarVisto();
+          if (!iniciado) {
+            iniciado = true;
+            responderNo("inicio");
+          }
+          titulo.focus();
+        }
+        function fechar(focar) {
+          painel.hidden = true;
+          botao.setAttribute("aria-expanded", "false");
+          botao.setAttribute("aria-label", "Abrir o tira-dúvidas");
+          if (focar) botao.focus();
+        }
+        botao.addEventListener("click", function () {
+          if (painel.hidden) abrir();
+          else fechar(true);
+        });
+        document.getElementById("chatFechar").addEventListener("click", function () {
+          fechar(true);
+        });
+        document.getElementById("chatReiniciar").addEventListener("click", function () {
+          vez++;
+          log.innerHTML = "";
+          ultimaPergunta = "";
+          responderNo("inicio");
+        });
+        painel.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") fechar(true);
+        });
+        document.addEventListener("click", function (e) {
+          var a = e.target.closest("[data-chat-abrir]");
+          if (a) {
+            e.preventDefault();
+            abrir();
+          }
+        });
+        document.getElementById("chatConviteX").addEventListener("click", function () {
+          convite.hidden = true;
+          marcarVisto();
+        });
+        if (!lerVisto()) {
+          setTimeout(function () {
+            if (painel.hidden && !lerVisto()) {
+              convite.hidden = false;
+              botao.classList.add("tem-aviso");
+            }
+          }, 9000);
+        }
       })();
     </script>
     <!-- VLibras -->
