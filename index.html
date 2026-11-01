@@ -3489,13 +3489,309 @@
         }
       }
 
+      /* ---------- v14: opções sem desenhos ---------- */
+      .mural-grid[hidden],
+      .m-lista[hidden],
+      .m-frase[hidden],
+      .mf-item[hidden] {
+        display: none;
+      }
+
+      /* hero C: só tipografia, marca-texto e faixa de serviços */
+      .hero-c {
+        position: relative;
+        background: var(--jornal);
+        padding: clamp(48px, 7vw, 96px) 0 0;
+        overflow: hidden;
+      }
+      .hc-titulo {
+        margin: 0;
+        font-family: var(--display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(3.2rem, 9.4vw, 9.6rem);
+        line-height: 0.88;
+        letter-spacing: -0.012em;
+      }
+      .hc-titulo mark {
+        color: inherit;
+        padding: 0 0.05em;
+        margin: 0 -0.05em;
+        background: linear-gradient(var(--cartaz), var(--cartaz)) 0 86% / 0% 46% no-repeat;
+        animation: hc-marca 0.9s cubic-bezier(0.6, 0, 0.2, 1) 0.35s both;
+        transition: color 0.2s ease;
+      }
+      .hc-titulo mark + mark,
+      .hc-titulo mark:last-of-type {
+        animation-delay: 0.85s;
+      }
+      .hc-titulo mark:hover {
+        color: var(--carimbo);
+      }
+      @keyframes hc-marca {
+        to {
+          background-size: 100% 46%;
+        }
+      }
+      .hc-pe {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: clamp(24px, 5vw, 80px);
+        align-items: end;
+        margin-top: clamp(28px, 4vw, 56px);
+      }
+      .hc-duvida {
+        background: none;
+        border: 0;
+        border-bottom: 3px solid currentColor;
+        color: var(--tinta);
+        cursor: pointer;
+        padding: 0 0 2px;
+      }
+      .hc-faixa {
+        margin-top: clamp(48px, 6vw, 84px);
+        background: var(--tinta);
+        color: var(--cartaz);
+        padding: 15px 0 13px;
+        overflow: hidden;
+        transform: rotate(-1.2deg);
+        margin-left: -2%;
+        margin-right: -2%;
+      }
+      .hc-trilho {
+        display: flex;
+        width: max-content;
+        animation: hc-corre 46s linear infinite;
+      }
+      .hc-faixa:hover .hc-trilho {
+        animation-play-state: paused;
+      }
+      .hc-trilho span {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.8rem);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+        padding-right: 1.1em;
+      }
+      .hc-trilho span::after {
+        content: "\2736";
+        margin-left: 1.1em;
+        color: var(--carimbo);
+      }
+      @keyframes hc-corre {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* hero D: palavra que troca */
+      .hero-d {
+        position: relative;
+        background: var(--tinta);
+        color: var(--giz);
+        padding: clamp(56px, 8vw, 112px) 0 clamp(96px, 11vw, 140px);
+        overflow: hidden;
+        isolation: isolate;
+        --foco: var(--cartaz);
+      }
+      .hero-d::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(242, 224, 43, 0.5) 1.1px, transparent 1.7px) 0 0 / 10px 10px;
+        -webkit-mask-image: linear-gradient(115deg, #000 0%, transparent 45%);
+        mask-image: linear-gradient(115deg, #000 0%, transparent 45%);
+        opacity: 0.22;
+      }
+      .hd-titulo {
+        margin: 0;
+        font-family: var(--display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(3rem, 9.4vw, 10rem);
+        line-height: 0.88;
+        letter-spacing: -0.012em;
+      }
+      .hd-fixo,
+      .hd-troca {
+        display: block;
+      }
+      .hd-troca {
+        color: var(--cartaz);
+        min-height: 0.9em;
+      }
+      .hd-palavra {
+        display: inline-block;
+        transition:
+          transform 0.32s cubic-bezier(0.6, 0, 0.2, 1),
+          opacity 0.32s ease;
+      }
+      .hd-palavra.sai {
+        opacity: 0;
+        transform: translateY(0.3em);
+      }
+      .hd-pe {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: clamp(24px, 5vw, 80px);
+        align-items: end;
+        margin-top: clamp(32px, 5vw, 64px);
+      }
+      .hero-d .hero-description {
+        color: rgba(249, 247, 241, 0.86);
+      }
+
+      /* seção 2 C: lista numerada */
+      .m-lista {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-bottom: 2px solid var(--tinta);
+      }
+      .m-lista li {
+        position: relative;
+        isolation: isolate;
+        display: grid;
+        grid-template-columns: 84px minmax(0, 1fr) minmax(0, 1.3fr);
+        gap: clamp(16px, 3vw, 48px);
+        align-items: baseline;
+        padding: clamp(22px, 2.6vw, 36px) clamp(8px, 1.4vw, 18px);
+        border-top: 2px solid var(--tinta);
+      }
+      .m-lista li::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: var(--cartaz);
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        transition: transform 0.45s cubic-bezier(0.6, 0, 0.2, 1);
+      }
+      .m-lista li:hover::before {
+        transform: scaleX(1);
+      }
+      .ml-num {
+        font-family: var(--display);
+        font-weight: 900;
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        line-height: 1;
+        color: var(--carimbo);
+      }
+      .m-lista h3 {
+        margin: 0;
+        font-family: var(--display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(2.3rem, 4.6vw, 4.2rem);
+        line-height: 0.9;
+      }
+      .m-lista p {
+        margin: 0;
+        font-size: 1.12rem;
+        line-height: 1.5;
+        color: var(--texto-suave);
+        max-width: 34em;
+      }
+      @media (max-width: 760px) {
+        .m-lista li {
+          grid-template-columns: 52px minmax(0, 1fr);
+          row-gap: 8px;
+        }
+        .m-lista p {
+          grid-column: 2;
+        }
+      }
+
+      /* seção 2 D: frase com termos clicáveis */
+      .m-frase {
+        max-width: 1100px;
+      }
+      .mf-texto {
+        margin: 0;
+        font-size: clamp(1.8rem, 1.1rem + 2.6vw, 3.5rem);
+        line-height: 1.25;
+        font-weight: 450;
+        letter-spacing: -0.01em;
+      }
+      .mf-termo {
+        font: inherit;
+        font-family: var(--display);
+        font-weight: 900;
+        font-size: 1.04em;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        color: var(--tinta);
+        border: 0;
+        border-radius: 2px;
+        padding: 0.02em 0.12em;
+        cursor: pointer;
+        background: linear-gradient(var(--cartaz), var(--cartaz)) 0 92% / 100% 34% no-repeat;
+        transition:
+          background-size 0.3s ease,
+          color 0.2s ease;
+      }
+      .mf-termo:hover {
+        background-size: 100% 100%;
+      }
+      .mf-termo[aria-pressed="true"] {
+        background: var(--tinta);
+        color: var(--cartaz);
+      }
+      .mf-def {
+        margin-top: clamp(28px, 4vw, 52px);
+        padding-left: 22px;
+        border-left: 4px solid var(--carimbo);
+        max-width: 40em;
+        min-height: 7em;
+      }
+      .mf-item {
+        animation: hb-entra 0.4s ease both;
+      }
+      .mf-item h3 {
+        margin: 0 0 6px;
+        font-family: var(--display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+        line-height: 0.95;
+      }
+      .mf-item p {
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.5;
+        color: var(--texto-suave);
+      }
+      .mf-dica {
+        margin: 14px 0 0;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--texto-suave);
+      }
+      @media (max-width: 860px) {
+        .hc-pe,
+        .hd-pe {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hc-trilho {
+          animation: none;
+        }
+      }
+
       /* ---------- seletor de versões (só com ?versoes no link) ---------- */
       .versoes {
         position: fixed;
         left: 14px;
         bottom: 14px;
         z-index: 150;
-        width: 230px;
+        width: 262px;
         padding: 12px 14px 10px;
         background: var(--giz);
         border: 2px solid var(--tinta);
@@ -3869,6 +4165,58 @@
         <div class="rasgo" aria-hidden="true"></div>
       </section>
 
+      <!-- HERO C (alternativo, so tipografia). Aparece com ?hero=c no link. -->
+      <section class="hero-c" id="heroC" hidden>
+        <div class="wrap">
+          <p class="hero-kicker">Designer gráfico para projetos culturais &middot; Salvador, BA</p>
+          <h1 class="hc-titulo">
+            Design que a banca <mark>entende</mark> e o público <mark>lembra.</mark>
+          </h1>
+          <div class="hc-pe">
+            <p class="hero-description">
+              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
+              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
+            </p>
+            <div class="hero-actions">
+              <a href="#projetos" class="btn">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+              <button type="button" class="link-sub hc-duvida" data-chat-abrir>Tirar uma dúvida</button>
+            </div>
+          </div>
+        </div>
+        <div class="hc-faixa" aria-hidden="true">
+          <div class="hc-trilho">
+            <span>Identidade visual</span><span>Book de captação</span><span>Portfólio artístico</span
+            ><span>Landing pages</span><span>Formulários</span><span>Redes sociais</span><span>Material de palco</span
+            ><span>Teasers</span><span>Spots de rádio e TV</span><span>Identidade visual</span><span>Book de captação</span
+            ><span>Portfólio artístico</span><span>Landing pages</span><span>Formulários</span><span>Redes sociais</span
+            ><span>Material de palco</span><span>Teasers</span><span>Spots de rádio e TV</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO D (alternativo, palavra que troca). Aparece com ?hero=d no link. -->
+      <section class="hero-d" id="heroD" hidden>
+        <div class="wrap">
+          <p class="hero-kicker">Designer gráfico para projetos culturais &middot; Salvador, BA</p>
+          <h1 class="hd-titulo">
+            <span class="hd-fixo">Design para</span>
+            <span class="hd-troca" aria-hidden="true"><span class="hd-palavra" id="hdPalavra">a banca.</span></span>
+            <span class="chat-sr">a banca, o patrocinador, o público e o palco.</span>
+          </h1>
+          <div class="hd-pe">
+            <p class="hero-description">
+              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
+              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
+            </p>
+            <div class="hero-actions">
+              <a href="#projetos" class="btn on-dark">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+              <button type="button" class="link-sub hb-duvida" data-chat-abrir>Tirar uma dúvida</button>
+            </div>
+          </div>
+        </div>
+        <div class="rasgo" aria-hidden="true"></div>
+      </section>
+
       <section class="mural" id="mural" aria-label="Como o trabalho se apresenta">
         <div class="wrap">
           <div class="mural-grid">
@@ -4060,6 +4408,83 @@
                 </p>
               </figcaption>
             </figure>
+          </div>
+          <!-- SECAO 2, VERSAO C (lista, sem desenhos). Aparece com ?mural=c no link. -->
+          <ol class="m-lista" id="muralC" hidden>
+            <li>
+              <span class="ml-num" aria-hidden="true">01</span>
+              <h3>Régua</h3>
+              <p>
+                Logos de apoiadores e patrocinadores na mesma altura e com o mesmo espaço entre eles, na ordem e nas
+                proporções que o financiador exige.
+              </p>
+            </li>
+            <li>
+              <span class="ml-num" aria-hidden="true">02</span>
+              <h3>Book de captação</h3>
+              <p>
+                Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos, orçamento
+                e contrapartidas fáceis de localizar.
+              </p>
+            </li>
+            <li>
+              <span class="ml-num" aria-hidden="true">03</span>
+              <h3>Edital</h3>
+              <p>
+                Cada peça segue as normas do seu edital ou lei de incentivo, a partir das exigências informadas no
+                briefing.
+              </p>
+            </li>
+            <li>
+              <span class="ml-num" aria-hidden="true">04</span>
+              <h3>Entrega</h3>
+              <p>
+                Materiais nomeados e organizados no padrão do financiador informado no briefing, prontos para a
+                prestação de contas.
+              </p>
+            </li>
+          </ol>
+          <!-- SECAO 2, VERSAO D (frase com termos clicaveis). Aparece com ?mural=d no link. -->
+          <div class="m-frase" id="muralD" hidden>
+            <p class="mf-texto">
+              Cada peça sai com a <button type="button" class="mf-termo" data-mf="0" aria-pressed="true">régua</button>
+              de apoio certa, um <button type="button" class="mf-termo" data-mf="1" aria-pressed="false">book</button>
+              que a banca lê em minutos, as regras do
+              <button type="button" class="mf-termo" data-mf="2" aria-pressed="false">edital</button> aplicadas e a
+              <button type="button" class="mf-termo" data-mf="3" aria-pressed="false">entrega</button> no padrão do
+              financiador.
+            </p>
+            <div class="mf-def" aria-live="polite">
+              <div class="mf-item" data-mf="0">
+                <h3>Régua</h3>
+                <p>
+                  Logos de apoiadores e patrocinadores na mesma altura e com o mesmo espaço entre eles, na ordem e nas
+                  proporções que o financiador exige.
+                </p>
+              </div>
+              <div class="mf-item" data-mf="1" hidden>
+                <h3>Book de captação</h3>
+                <p>
+                  Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos,
+                  orçamento e contrapartidas fáceis de localizar.
+                </p>
+              </div>
+              <div class="mf-item" data-mf="2" hidden>
+                <h3>Edital</h3>
+                <p>
+                  Cada peça segue as normas do seu edital ou lei de incentivo, a partir das exigências informadas no
+                  briefing.
+                </p>
+              </div>
+              <div class="mf-item" data-mf="3" hidden>
+                <h3>Entrega</h3>
+                <p>
+                  Materiais nomeados e organizados no padrão do financiador informado no briefing, prontos para a
+                  prestação de contas.
+                </p>
+              </div>
+            </div>
+            <p class="mf-dica">Toque nas palavras destacadas.</p>
           </div>
           <p class="mural-nota">
             Peças ilustrativas com dados fictícios, só para mostrar como cada etapa se apresenta.
@@ -7019,22 +7444,37 @@
         })();
 
         /* ---------- versoes ---------- */
-        var heroA = document.getElementById("heroA"),
-          heroB = document.getElementById("heroB");
-        var qs = new URLSearchParams(location.search);
-        var estado = {
-          hero: qs.get("hero") === "b" ? "b" : "a",
-          mural: qs.get("mural") === "b" ? "b" : "a",
+        var heroA = document.getElementById("heroA");
+        var HEROS = {
+          a: heroA,
+          b: document.getElementById("heroB"),
+          c: document.getElementById("heroC"),
+          d: document.getElementById("heroD"),
         };
-        function aplicar() {
-          if (heroA && heroB) {
-            heroA.hidden = estado.hero === "b";
-            heroB.hidden = estado.hero !== "b";
-          }
-          if (estado.mural === "b") Pilha.montar();
-          else Pilha.desmontar();
+        var muralGrade = document.querySelector("#mural .mural-grid"),
+          muralNota = document.querySelector("#mural .mural-nota"),
+          muralC = document.getElementById("muralC"),
+          muralD = document.getElementById("muralD");
+        var VERSOES = ["a", "b", "c", "d"];
+        var qs = new URLSearchParams(location.search);
+        function ler(k) {
+          var v = (qs.get(k) || "a").toLowerCase();
+          return VERSOES.indexOf(v) > -1 ? v : "a";
         }
-        aplicar();
+        var estado = { hero: ler("hero"), mural: ler("mural") };
+        function aplicar() {
+          Object.keys(HEROS).forEach(function (k) {
+            if (HEROS[k]) HEROS[k].hidden = k !== estado.hero;
+          });
+          var m = estado.mural;
+          if (m === "b") Pilha.montar();
+          else Pilha.desmontar();
+          if (muralGrade) muralGrade.hidden = m === "c" || m === "d";
+          if (muralNota) muralNota.hidden = m === "c" || m === "d";
+          if (muralC) muralC.hidden = m !== "c";
+          if (muralD) muralD.hidden = m !== "d";
+          document.dispatchEvent(new CustomEvent("versao-hero", { detail: estado.hero }));
+        }
 
         if (qs.has("versoes")) {
           var painel = document.createElement("div");
@@ -7043,9 +7483,17 @@
           painel.setAttribute("aria-label", "Comparar versões");
           painel.innerHTML =
             '<b>Comparar versões</b><button type="button" class="versoes-min" aria-label="Minimizar">&minus;</button>' +
-            '<div class="versoes-linha"><span>Hero</span><div data-chave="hero"><button type="button" data-v="a">A</button><button type="button" data-v="b">B</button></div></div>' +
-            '<div class="versoes-linha"><span>Seção 2</span><div data-chave="mural"><button type="button" data-v="a">A</button><button type="button" data-v="b">B</button></div></div>' +
-            "<small>A é a versão atual. Este quadro só aparece com ?versoes no link.</small>";
+            '<div class="versoes-linha"><span>Hero</span><div data-chave="hero">' +
+            VERSOES.map(function (v) {
+              return '<button type="button" data-v="' + v + '">' + v.toUpperCase() + "</button>";
+            }).join("") +
+            "</div></div>" +
+            '<div class="versoes-linha"><span>Seção 2</span><div data-chave="mural">' +
+            VERSOES.map(function (v) {
+              return '<button type="button" data-v="' + v + '">' + v.toUpperCase() + "</button>";
+            }).join("") +
+            "</div></div>" +
+            "<small>A: atual. B: aprovada. C e D: sem desenhos. Este quadro só aparece com ?versoes no link.</small>";
           document.body.appendChild(painel);
           var marcar = function () {
             painel.querySelectorAll("[data-chave]").forEach(function (g) {
@@ -7071,7 +7519,7 @@
             marcar();
             var p = new URLSearchParams(location.search);
             ["hero", "mural"].forEach(function (k) {
-              if (estado[k] === "b") p.set(k, "b");
+              if (estado[k] !== "a") p.set(k, estado[k]);
               else p.delete(k);
             });
             history.replaceState(null, "", "?" + p.toString().replace(/=(&|$)/g, "$1") + location.hash);
@@ -7173,10 +7621,59 @@
           });
         }
 
+        /* ---------- hero D: palavra que troca ---------- */
+        var palavra = document.getElementById("hdPalavra");
+        var timerD = null;
+        function pararD() {
+          clearInterval(timerD);
+          timerD = null;
+        }
+        function iniciarD() {
+          if (!palavra || reduz || timerD) return;
+          var lista = ["a banca.", "o patrocinador.", "o parecerista.", "o público.", "o palco."],
+            k = 0;
+          timerD = setInterval(function () {
+            palavra.classList.add("sai");
+            setTimeout(function () {
+              k = (k + 1) % lista.length;
+              palavra.textContent = lista[k];
+              palavra.classList.remove("sai");
+            }, 320);
+          }, 2600);
+        }
+        document.addEventListener("versao-hero", function (e) {
+          if (e.detail === "d") iniciarD();
+          else pararD();
+        });
+
+        /* ---------- secao 2 D: termos clicaveis ---------- */
+        if (muralD) {
+          var termos = Array.prototype.slice.call(muralD.querySelectorAll(".mf-termo"));
+          var itens = Array.prototype.slice.call(muralD.querySelectorAll(".mf-item"));
+          termos.forEach(function (t) {
+            t.addEventListener("click", function () {
+              var id = t.getAttribute("data-mf");
+              termos.forEach(function (x) {
+                x.setAttribute("aria-pressed", x === t ? "true" : "false");
+              });
+              itens.forEach(function (it) {
+                it.hidden = it.getAttribute("data-mf") !== id;
+              });
+            });
+          });
+        }
+
+        /* ---------- secao 2 C: linhas entram ao rolar ---------- */
+        if (muralC && raiz.classList.contains("js-anim")) {
+          muralC.querySelectorAll("li").forEach(function (li, i) {
+            li.style.setProperty("--i", i);
+          });
+        }
+
         /* ---------- entrada suave dos blocos ---------- */
         if (raiz.classList.contains("js-anim")) {
           var alvos = [];
-          document.querySelectorAll(".frente, .sobre-grid > *").forEach(function (el) {
+          document.querySelectorAll(".frente, .sobre-grid > *, .m-lista li").forEach(function (el) {
             alvos.push(el);
           });
           document.querySelectorAll(".ingressos .tk").forEach(function (el, i) {
@@ -7199,6 +7696,8 @@
             obs.observe(el);
           });
         }
+
+        aplicar();
       })();
     </script>
     <script>
