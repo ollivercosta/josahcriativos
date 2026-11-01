@@ -8,7 +8,7 @@ const VISIVEIS_DE_INICIO = 6;
 /**
  * Trabalhos
  * Monta a seção a partir de `assets/dados/trabalhos.js`:
- *   destaques  os trabalhos com `destaque: true`, em formato de estudo de
+ *   destaque   o trabalho com `destaque: true`, em formato de estudo de
  *              caso (imagem grande, tipo, nome, resumo e ficha curta);
  *   grade      os demais, com filtros. Seis aparecem primeiro; "Ver mais"
  *              mostra o restante e só existe no filtro "Todos".

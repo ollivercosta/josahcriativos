@@ -35,7 +35,7 @@ compartilhada entre seções, então mudar um estilo não afeta outra parte do s
 ## Tarefas comuns
 
 - Trocar ou incluir um trabalho: `assets/dados/trabalhos.js`. Use `destaque: true`
-  nos três projetos que devem aparecer como estudo de caso.
+  no projeto que deve aparecer como estudo de caso.
 - Depoimentos (hoje com textos de exemplo): seção `depoimentos` no `index.html`.
 - Cores: variáveis `--cor-*` em `assets/css/base.css`.
 

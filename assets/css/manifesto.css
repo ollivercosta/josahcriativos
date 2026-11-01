@@ -5,11 +5,10 @@
    ========================================================================= */
 
 .manifesto {
-  padding: 22vh var(--margem) 24vh;
+  padding: var(--espaco-secao) var(--margem) 0;
 }
 
 .manifesto__texto {
-  max-width: 23ch;
   font-weight: 400;
   font-size: 5.2vw;
   line-height: 1.06;

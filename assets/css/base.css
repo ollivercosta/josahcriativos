@@ -34,6 +34,10 @@
   --curva-entra-sai: cubic-bezier(0.65, 0, 0.35, 1);
 
   --margem: 4.4vw;
+
+  /* espaçamento padrão: entre seções e entre um título de seção e o conteúdo */
+  --espaco-secao: clamp(88px, 13vh, 150px);
+  --espaco-titulo: clamp(40px, 7vh, 80px);
   --altura-cabecalho: 72px;
 }
 

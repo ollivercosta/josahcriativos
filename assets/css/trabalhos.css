@@ -6,7 +6,7 @@
    ========================================================================= */
 
 .trabalhos {
-  padding: 6vh 0 18vh;
+  padding: var(--espaco-secao) 0;
 }
 
 /* título e a barra que prolonga a linha de base dele até a margem */
@@ -15,7 +15,7 @@
   grid-template-columns: auto minmax(4vw, 1fr);
   align-items: last baseline;
   gap: 2vw;
-  padding: 0 var(--margem) 7vh;
+  padding: 0 var(--margem) var(--espaco-titulo);
 }
 
 .trabalhos__titulo-barra {
@@ -68,7 +68,7 @@
   display: grid;
   gap: 14vh;
   margin: 0;
-  padding: 0 var(--margem) 16vh;
+  padding: 0 var(--margem) var(--espaco-secao);
   list-style: none;
 }
 
@@ -561,7 +561,7 @@
 
   .trabalhos__destaques {
     gap: 80px;
-    padding-bottom: 96px;
+    padding-bottom: var(--espaco-secao);
   }
 
   .trabalhos__titulo {

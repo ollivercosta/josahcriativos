@@ -5,7 +5,7 @@
    ========================================================================= */
 
 .depoimentos {
-  padding: 16vh var(--margem);
+  padding: var(--espaco-secao) var(--margem);
   border-top: 1px solid var(--cor-tinta);
 }
 
@@ -46,7 +46,7 @@
   grid-template-columns: auto minmax(4vw, 1fr);
   align-items: last baseline;
   gap: 2vw;
-  margin-bottom: 7vh;
+  margin-bottom: var(--espaco-titulo);
 }
 
 .depoimentos__titulo-barra {
@@ -189,16 +189,6 @@
 .depoimentos__dado-valor {
   margin-top: 4px;
   font-weight: 700;
-}
-
-.depoimentos__aviso {
-  margin-top: 3vw;
-  font-stretch: 115%;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--cor-urucum);
 }
 
 @media (max-width: 860px) {

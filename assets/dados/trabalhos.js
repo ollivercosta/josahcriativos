@@ -4,7 +4,7 @@
  *
  *   nome       nome do projeto
  *   destaque   true para aparecer em destaque, em formato de estudo de caso
- *              (o ideal são três); os demais vão para a grade "Outros trabalhos"
+ *              (um projeto); os demais vão para a grade "Outros trabalhos"
  *   tipo       o que a peça é (ex.: "Book de captação", "Identidade visual").
  *              Aparece acima do nome na capa e na ficha. Vazio: usa a categoria.
  *   categoria  usada nos filtros: "Marca e apresentação", "Web e redes",
@@ -39,7 +39,6 @@ export const TRABALHOS = [
   },
   {
     nome: "Amazônia Motirô",
-    destaque: true,
     tipo: "",
     categoria: "Marca e apresentação",
     resumo: "Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.",
@@ -70,7 +69,6 @@ export const TRABALHOS = [
   },
   {
     nome: "Tabuleiro - Book",
-    destaque: true,
     tipo: "Book de captação",
     categoria: "Marca e apresentação",
     resumo:
