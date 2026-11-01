@@ -2818,10 +2818,37 @@
       }
       .he-caixa {
         position: absolute;
-        inset: -0.05em -14px -0.02em -14px;
+        z-index: 5;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
         border: 1.5px solid var(--tinta);
         pointer-events: none;
-        animation: he-surge 0.45s ease 0.5s both;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .he-caixa.on {
+        opacity: 1;
+      }
+      .he-caixa.sem-alcas i {
+        display: none;
+      }
+      .he-caixa.sem-alcas b {
+        bottom: auto;
+        top: 6px;
+        left: 6px;
+      }
+      .he-prancheta.fundo-off {
+        background: repeating-conic-gradient(#dcd9d2 0 25%, #f9f7f1 0 50%) 0 0 / 22px 22px;
+      }
+      .he-prancheta.fundo-off::before {
+        display: none;
+      }
+      .he.arrastando,
+      .he.arrastando * {
+        user-select: none;
+        -webkit-user-select: none;
       }
       .he-caixa i {
         position: absolute;
@@ -2871,10 +2898,138 @@
         line-height: 1.2;
         white-space: nowrap;
       }
-      @keyframes he-surge {
-        from {
-          opacity: 0;
-        }
+
+      /* objetos da prancheta */
+      .he-marca[hidden],
+      .he-regua-apoio[hidden] {
+        display: none;
+      }
+      .he-marca {
+        position: absolute;
+        z-index: 2;
+        top: clamp(18px, 2.4vw, 30px);
+        right: clamp(18px, 2.4vw, 30px);
+        width: 128px;
+        height: 76px;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        border: 2px dashed var(--tinta);
+        background: rgba(249, 247, 241, 0.55);
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 0.95rem;
+        line-height: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      .he-regua-apoio {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 1.25em;
+        width: max-content;
+        max-width: 100%;
+        margin-top: clamp(26px, 3vw, 40px);
+        padding-top: 12px;
+        border-top: 2px solid var(--tinta);
+      }
+      .hra-rot {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 0.85em;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .hra-logos {
+        display: flex;
+        align-items: center;
+        gap: 0.9em;
+      }
+      .hra-logos i {
+        width: 1.9em;
+        height: 1.9em;
+        background: var(--tinta);
+      }
+      .hra-logos .c {
+        border-radius: 50%;
+      }
+      .hra-logos .t {
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      }
+      .hra-logos .b {
+        background: repeating-linear-gradient(90deg, var(--tinta) 0 0.38em, transparent 0.38em 0.7em);
+      }
+      .hra-logos .o {
+        background: none;
+        border: 0.38em solid var(--tinta);
+        border-radius: 50%;
+      }
+      [data-obj] {
+        translate: var(--dx, 0) var(--dy, 0);
+      }
+      .he-prancheta[data-obj] {
+        translate: none;
+      }
+      .he.editavel .he-prancheta {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .he.editavel.selecao [data-obj]:not(.he-prancheta):hover {
+        outline: 1px solid rgba(27, 2, 23, 0.55);
+        outline-offset: 2px;
+      }
+      .he.editavel.selecao .he-caixa i {
+        pointer-events: auto;
+      }
+      .he.editavel.selecao .he-caixa .a1,
+      .he.editavel.selecao .he-caixa .a5 {
+        cursor: nwse-resize;
+      }
+      .he.editavel.selecao .he-caixa .a3,
+      .he.editavel.selecao .he-caixa .a7 {
+        cursor: nesw-resize;
+      }
+      .he.editavel.selecao .he-caixa .a2,
+      .he.editavel.selecao .he-caixa .a6 {
+        cursor: ns-resize;
+      }
+      .he.editavel.selecao .he-caixa .a4,
+      .he.editavel.selecao .he-caixa .a8 {
+        cursor: ew-resize;
+      }
+      .he.editavel .he-mesa,
+      .he.editavel .he-mesa *,
+      .he.editavel .he-regua-x,
+      .he.editavel .he-regua-y,
+      .he.editavel .he-canto {
+        cursor: var(--cursor-ferr, default);
+      }
+      .he.editavel.selecao .he-mesa .he-caixa .a1,
+      .he.editavel.selecao .he-mesa .he-caixa .a5 {
+        cursor: nwse-resize;
+      }
+      .he.editavel.selecao .he-mesa .he-caixa .a3,
+      .he.editavel.selecao .he-mesa .he-caixa .a7 {
+        cursor: nesw-resize;
+      }
+      .he.editavel.selecao .he-mesa .he-caixa .a2,
+      .he.editavel.selecao .he-mesa .he-caixa .a6 {
+        cursor: ns-resize;
+      }
+      .he.editavel.selecao .he-mesa .he-caixa .a4,
+      .he.editavel.selecao .he-mesa .he-caixa .a8 {
+        cursor: ew-resize;
+      }
+      .he-restaurar {
+        border: 0;
+        background: none;
+        padding: 0;
+        font: inherit;
+        color: var(--cartaz);
+        text-decoration: underline;
+        cursor: pointer;
       }
 
       @media (min-width: 1021px) {
@@ -3002,11 +3157,41 @@
         }
         .hp-camadas li {
           display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 7px 10px;
+          align-items: stretch;
           border-bottom: 1px solid rgba(249, 247, 241, 0.06);
           white-space: nowrap;
+        }
+        .hp-camadas button {
+          border: 0;
+          background: none;
+          color: inherit;
+          font: inherit;
+          cursor: pointer;
+        }
+        .hp-olho {
+          flex: none;
+          width: 32px;
+          display: grid;
+          place-items: center;
+        }
+        .hp-olho .o-nao,
+        .oculta .hp-olho .o-sim {
+          display: none;
+        }
+        .oculta .hp-olho .o-nao {
+          display: block;
+        }
+        .hp-nome {
+          flex: 1;
+          min-width: 0;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 7px 10px 7px 0;
+          text-align: left;
+        }
+        .hp-camadas li:hover {
+          background: rgba(249, 247, 241, 0.06);
         }
         .hp-camadas li.sel {
           background: rgba(242, 224, 43, 0.16);
@@ -3720,43 +3905,74 @@
           <div class="he-regua-y" aria-hidden="true"></div>
           <div class="he-mesa">
             <p class="he-rotulo" aria-hidden="true">01 &middot; Início</p>
-            <div class="he-prancheta papel-cartaz">
+            <!-- PRANCHETA: cada objeto tem data-obj igual ao data-camada do painel. -->
+            <div class="he-prancheta papel-cartaz" id="prancheta" data-obj="fundo">
+              <div class="he-marca" data-obj="marca" hidden>
+                <span>Marca do<br />financiador</span>
+              </div>
               <p class="hero-kicker">Josah Oliveira &middot; designer gráfico para projetos culturais</p>
-              <div class="he-sel">
+              <div class="he-sel" data-obj="titulo">
                 <h1 class="hero-title" aria-label="Criativos Digitais">
                   <span class="l" data-t="Criativos" aria-hidden="true">Criativos</span
                   ><span class="l" data-t="Digitais" aria-hidden="true">Digitais</span>
                 </h1>
-                <span class="he-caixa" aria-hidden="true"
-                  ><b>Texto</b><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i><i class="a5"></i
-                  ><i class="a6"></i><i class="a7"></i><i class="a8"></i
-                ></span>
               </div>
               <div class="hero-foot">
-                <p class="hero-description">
+                <p class="hero-description" data-obj="descricao">
                   Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do
                   financiador, para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
                 </p>
                 <div class="hero-actions">
-                  <a href="#projetos" class="btn">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+                  <a href="#projetos" class="btn" data-obj="botao"
+                    >Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i
+                  ></a>
                 </div>
               </div>
+              <div class="he-regua-apoio" data-obj="regua" hidden>
+                <span class="hra-rot">Realização &middot; Apoio</span>
+                <span class="hra-logos" aria-hidden="true"><i class="c"></i><i class="q"></i><i class="t"></i><i class="b"></i><i class="o"></i></span>
+              </div>
+              <span class="he-caixa" id="heCaixa" aria-hidden="true"
+                ><b id="heEtiqueta">Texto</b><i class="a1" data-a="nw"></i><i class="a2" data-a="n"></i
+                ><i class="a3" data-a="ne"></i><i class="a4" data-a="e"></i><i class="a5" data-a="se"></i
+                ><i class="a6" data-a="s"></i><i class="a7" data-a="sw"></i><i class="a8" data-a="w"></i
+              ></span>
             </div>
           </div>
-          <p class="he-status" aria-hidden="true">
-            <span>100% &middot; 1920 &times; 1080 px &middot; RGB</span><span>Edital: conforme &#10003;</span>
+          <p class="he-status">
+            <span aria-hidden="true" id="heStatus">100% &middot; 1920 &times; 1080 px &middot; RGB</span>
+            <button type="button" class="he-restaurar" id="heRestaurar" hidden>Restaurar prancheta</button>
+            <span aria-hidden="true">Edital: conforme &#10003;</span>
           </p>
-          <aside class="he-painel" aria-hidden="true">
-            <div class="hp-abas"><span class="on">Camadas</span><span>Propriedades</span></div>
-            <ul class="hp-camadas">
-              <li class="sel"><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini">T</span>Criativos Digitais</li>
-              <li><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini">&para;</span>Descrição</li>
-              <li><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini hp-escuro"></span>Botão &middot; Ver projetos</li>
-              <li class="oculta"><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="hp-mini hp-regua"></span>Régua de apoio</li>
-              <li class="oculta"><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="hp-mini hp-regua"></span>Marca do financiador</li>
-              <li><span class="hp-olho"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span class="hp-mini hp-amarelo"></span>Fundo &middot; cartaz</li>
+          <aside class="he-painel" aria-label="Camadas da prancheta">
+            <div class="hp-abas" aria-hidden="true"><span class="on">Camadas</span><span>Propriedades</span></div>
+            <ul class="hp-camadas" id="heCamadas">
+              <li data-camada="titulo">
+                <button type="button" class="hp-olho" aria-pressed="true" aria-label="Mostrar Criativos Digitais"><svg class="o-sim" viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><svg class="o-nao" viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button
+                ><button type="button" class="hp-nome" aria-pressed="false"><span class="hp-mini">T</span><span>Criativos Digitais</span></button>
+              </li>
+              <li data-camada="descricao">
+                <button type="button" class="hp-olho" aria-pressed="true" aria-label="Mostrar Descrição"><svg class="o-sim" viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><svg class="o-nao" viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button
+                ><button type="button" class="hp-nome" aria-pressed="false"><span class="hp-mini">&para;</span><span>Descrição</span></button>
+              </li>
+              <li data-camada="botao">
+                <button type="button" class="hp-olho" aria-pressed="true" aria-label="Mostrar Botão - Ver projetos"><svg class="o-sim" viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><svg class="o-nao" viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button
+                ><button type="button" class="hp-nome" aria-pressed="false"><span class="hp-mini hp-escuro"></span><span>Botão &middot; Ver projetos</span></button>
+              </li>
+              <li data-camada="regua" class="oculta">
+                <button type="button" class="hp-olho" aria-pressed="false" aria-label="Mostrar Régua de apoio"><svg class="o-sim" viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><svg class="o-nao" viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button
+                ><button type="button" class="hp-nome" aria-pressed="false"><span class="hp-mini hp-regua"></span><span>Régua de apoio</span></button>
+              </li>
+              <li data-camada="marca" class="oculta">
+                <button type="button" class="hp-olho" aria-pressed="false" aria-label="Mostrar Marca do financiador"><svg class="o-sim" viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><svg class="o-nao" viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button
+                ><button type="button" class="hp-nome" aria-pressed="false"><span class="hp-mini hp-regua"></span><span>Marca do financiador</span></button>
+              </li>
+              <li data-camada="fundo">
+                <button type="button" class="hp-olho" aria-pressed="true" aria-label="Mostrar Fundo - cartaz"><svg class="o-sim" viewBox="0 0 24 24" width="14" height="14"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><svg class="o-nao" viewBox="0 0 24 24" width="14" height="14"><path d="M3 3l18 18M10.6 5.6c.5-.1.9-.1 1.4-.1 6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.1 3.9M6.5 6.6C3.7 8.4 2 12 2 12s3.6 6.5 10 6.5c1.7 0 3.2-.4 4.5-1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button
+                ><button type="button" class="hp-nome" aria-pressed="false"><span class="hp-mini hp-amarelo"></span><span>Fundo &middot; cartaz</span></button>
+              </li>
             </ul>
-            <p class="hp-rodape">6 camadas &middot; Prancheta 01</p>
+            <p class="hp-rodape" aria-hidden="true">6 camadas &middot; Prancheta 01</p>
           </aside>
         </div>
         <div class="rasgo" aria-hidden="true"></div>
@@ -6597,22 +6813,310 @@
       })();
     </script>
     <script>
-      /* BARRA DE FERRAMENTAS: clique marca a ferramenta ativa; o quadro de cores troca preenchimento e contorno. */
+      /* =====================================================================
+         EDITOR DO HERO
+         - Barra de ferramentas: o clique escolhe a ferramenta e o ponteiro,
+           dentro do hero, ganha o icone dela.
+         - Painel de camadas: o clique seleciona o objeto na prancheta; o olho
+           mostra ou oculta a camada.
+         - Com Selecao (V ou A), no desktop: clicar seleciona, arrastar move e
+           as alcas redimensionam. "Restaurar prancheta" desfaz tudo.
+         ===================================================================== */
       (function () {
-        var barra = document.getElementById("ferramentas");
-        if (!barra) return;
-        barra.addEventListener("click", function (e) {
-          var bt = e.target.closest(".fe-bt");
-          if (bt) {
-            barra.querySelectorAll(".fe-bt.ativo").forEach(function (x) {
-              x.classList.remove("ativo");
-            });
-            bt.classList.add("ativo");
+        "use strict";
+        var he = document.querySelector(".hero.he"),
+          barra = document.getElementById("ferramentas"),
+          prancheta = document.getElementById("prancheta"),
+          caixa = document.getElementById("heCaixa"),
+          etiqueta = document.getElementById("heEtiqueta"),
+          lista = document.getElementById("heCamadas"),
+          status = document.getElementById("heStatus"),
+          restaurar = document.getElementById("heRestaurar");
+        if (!he || !prancheta || !caixa) return;
+        var mesa = he.querySelector(".he-mesa");
+        var titulo = prancheta.querySelector(".hero-title");
+        var NOMES = {
+          titulo: "Texto",
+          descricao: "Parágrafo",
+          botao: "Botão",
+          regua: "Régua de apoio",
+          marca: "Marca do financiador",
+          fundo: "Prancheta",
+        };
+        var objs = { fundo: prancheta };
+        prancheta.querySelectorAll("[data-obj]").forEach(function (el) {
+          objs[el.getAttribute("data-obj")] = el;
+        });
+        var VISIVEL_INICIAL = { regua: false, marca: false };
+        var statusOriginal = status ? status.textContent : "";
+        var atual = null,
+          bloqueioClique = 0;
+        var mq = window.matchMedia("(min-width: 1021px) and (hover: hover) and (pointer: fine)");
+
+        function editavel() {
+          return he.classList.contains("editavel") && he.classList.contains("selecao");
+        }
+        function rel(el) {
+          var p = prancheta.getBoundingClientRect(),
+            r = el.getBoundingClientRect();
+          return { x: r.left - p.left, y: r.top - p.top, w: r.width, h: r.height };
+        }
+        function visivel(k) {
+          return k === "fundo" ? true : !objs[k].hidden;
+        }
+
+        /* ----- caixa de selecao ----- */
+        function desenhar() {
+          if (!atual || !visivel(atual)) {
+            caixa.classList.remove("on");
+            if (status) status.textContent = statusOriginal;
             return;
           }
-          var cores = e.target.closest(".fe-cores");
-          if (cores) cores.classList.toggle("trocado");
+          var fundo = atual === "fundo";
+          var r = fundo ? { x: 0, y: 0, w: prancheta.clientWidth, h: prancheta.clientHeight } : rel(objs[atual]);
+          var pad = fundo ? 0 : 8;
+          caixa.style.left = r.x - pad + "px";
+          caixa.style.top = r.y - pad + "px";
+          caixa.style.width = r.w + pad * 2 + "px";
+          caixa.style.height = r.h + pad * 2 + "px";
+          caixa.classList.toggle("sem-alcas", fundo);
+          caixa.classList.add("on");
+          etiqueta.textContent = NOMES[atual];
+          if (status) status.textContent = NOMES[atual] + " · " + Math.round(r.w) + " × " + Math.round(r.h) + " px";
+        }
+        function selecionar(k) {
+          atual = k;
+          if (k && !visivel(k)) mostrar(k, true);
+          if (lista) {
+            lista.querySelectorAll("li[data-camada]").forEach(function (li) {
+              var on = li.getAttribute("data-camada") === k;
+              li.classList.toggle("sel", on);
+              li.querySelector(".hp-nome").setAttribute("aria-pressed", on ? "true" : "false");
+            });
+          }
+          desenhar();
+        }
+        function mostrar(k, on) {
+          if (k === "fundo") prancheta.classList.toggle("fundo-off", !on);
+          else objs[k].hidden = !on;
+          var li = lista && lista.querySelector('li[data-camada="' + k + '"]');
+          if (li) {
+            li.classList.toggle("oculta", !on);
+            var olho = li.querySelector(".hp-olho");
+            olho.setAttribute("aria-pressed", on ? "true" : "false");
+          }
+          alterado();
+          requestAnimationFrame(desenhar);
+        }
+        function alterado() {
+          if (restaurar) restaurar.hidden = false;
+        }
+
+        /* ----- painel de camadas ----- */
+        if (lista) {
+          lista.addEventListener("click", function (e) {
+            var li = e.target.closest("li[data-camada]");
+            if (!li) return;
+            var k = li.getAttribute("data-camada");
+            if (e.target.closest(".hp-olho")) {
+              var ligar = li.classList.contains("oculta");
+              if (k === "fundo") ligar = prancheta.classList.contains("fundo-off");
+              mostrar(k, ligar);
+              return;
+            }
+            selecionar(k);
+          });
+        }
+
+        /* ----- mover e redimensionar ----- */
+        function lerDesloc(el) {
+          return [parseFloat(el.getAttribute("data-dx")) || 0, parseFloat(el.getAttribute("data-dy")) || 0];
+        }
+        function desloc(el, x, y) {
+          el.setAttribute("data-dx", x);
+          el.setAttribute("data-dy", y);
+          el.style.setProperty("--dx", x + "px");
+          el.style.setProperty("--dy", y + "px");
+        }
+        function arrastar(e, ao) {
+          e.preventDefault();
+          var sx = e.clientX,
+            sy = e.clientY;
+          he.classList.add("arrastando");
+          function mv(ev) {
+            ao(ev.clientX - sx, ev.clientY - sy);
+          }
+          function up() {
+            window.removeEventListener("pointermove", mv);
+            window.removeEventListener("pointerup", up);
+            window.removeEventListener("pointercancel", up);
+            he.classList.remove("arrastando");
+          }
+          window.addEventListener("pointermove", mv);
+          window.addEventListener("pointerup", up);
+          window.addEventListener("pointercancel", up);
+        }
+        function mover(e, el) {
+          var d0 = lerDesloc(el),
+            andou = false;
+          arrastar(e, function (dx, dy) {
+            if (!andou && Math.abs(dx) + Math.abs(dy) < 5) return;
+            if (!andou) {
+              andou = true;
+              alterado();
+            }
+            bloqueioClique = Date.now();
+            desloc(el, d0[0] + dx, d0[1] + dy);
+            desenhar();
+          });
+        }
+        function redimensionar(e, dir) {
+          var k = atual,
+            el = objs[k];
+          if (!el || k === "fundo") return;
+          var r0 = rel(el),
+            d0 = lerDesloc(el);
+          var sxs = dir.indexOf("e") > -1 ? 1 : dir.indexOf("w") > -1 ? -1 : 0;
+          var sys = dir.indexOf("s") > -1 ? 1 : dir.indexOf("n") > -1 ? -1 : 0;
+          var alvo = k === "titulo" ? titulo : el;
+          var fonte0 = parseFloat(getComputedStyle(alvo).fontSize);
+          var limite = prancheta.clientWidth;
+          alterado();
+          arrastar(e, function (dx, dy) {
+            dx *= sxs;
+            dy *= sys;
+            if (k === "marca") {
+              if (sxs) el.style.width = Math.max(70, r0.w + dx) + "px";
+              if (sys) el.style.height = Math.max(44, r0.h + dy) + "px";
+            } else if (k === "descricao") {
+              if (!sxs) return;
+              var w = Math.max(180, Math.min(limite, r0.w + dx));
+              el.style.width = w + "px";
+              el.style.maxWidth = "none";
+            } else {
+              var f =
+                sxs && sys
+                  ? Math.max((r0.w + dx) / r0.w, (r0.h + dy) / r0.h)
+                  : sxs
+                    ? (r0.w + dx) / r0.w
+                    : (r0.h + dy) / r0.h;
+              f = Math.max(0.25, Math.min(f, limite / r0.w));
+              alvo.style.fontSize = fonte0 * f + "px";
+            }
+            var r = rel(el);
+            desloc(el, sxs < 0 ? d0[0] - (r.w - r0.w) : d0[0], sys < 0 ? d0[1] - (r.h - r0.h) : d0[1]);
+            desenhar();
+          });
+        }
+        prancheta.addEventListener("pointerdown", function (e) {
+          if (!editavel() || e.button !== 0) return;
+          var alca = e.target.closest(".he-caixa i");
+          if (alca) {
+            e.stopPropagation();
+            redimensionar(e, alca.getAttribute("data-a"));
+            return;
+          }
+          var obj = e.target.closest("[data-obj]");
+          if (!obj) return;
+          var k = obj.getAttribute("data-obj");
+          selecionar(k);
+          if (k !== "fundo") mover(e, obj);
         });
+        prancheta.addEventListener(
+          "click",
+          function (e) {
+            if (Date.now() - bloqueioClique < 350) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          },
+          true,
+        );
+        if (mesa) {
+          mesa.addEventListener("pointerdown", function (e) {
+            if (editavel() && !prancheta.contains(e.target)) selecionar(null);
+          });
+        }
+
+        /* ----- restaurar ----- */
+        if (restaurar) {
+          restaurar.addEventListener("click", function () {
+            Object.keys(objs).forEach(function (k) {
+              var el = objs[k];
+              if (k !== "fundo") {
+                el.removeAttribute("data-dx");
+                el.removeAttribute("data-dy");
+                el.style.removeProperty("--dx");
+                el.style.removeProperty("--dy");
+                el.style.removeProperty("width");
+                el.style.removeProperty("height");
+                el.style.removeProperty("max-width");
+                el.style.removeProperty("font-size");
+              }
+              mostrar(k, k in VISIVEL_INICIAL ? VISIVEL_INICIAL[k] : true);
+            });
+            titulo.style.removeProperty("font-size");
+            restaurar.hidden = true;
+            selecionar("titulo");
+          });
+        }
+
+        /* ----- ferramentas e ponteiro ----- */
+        var PONTA = {
+          V: [8, 5], A: [8, 5], P: [14, 4], T: [14, 14], M: [14, 14], L: [14, 14], B: [5, 21],
+          N: [6, 22], E: [8, 20], I: [7, 21], G: [14, 14], C: [14, 14], H: [14, 14], Z: [12, 12],
+        };
+        var RESERVA = { T: "text", H: "grab", Z: "zoom-in", V: "default", A: "default" };
+        function cursorDe(bt) {
+          var k = bt.getAttribute("data-atalho");
+          var miolo = bt.querySelector("svg").innerHTML;
+          var halo = miolo.replace(/currentColor/g, "#fff").replace(/stroke-width="([\d.]+)"/g, function (m, n) {
+            return 'stroke-width="' + (parseFloat(n) + 3) + '"';
+          });
+          var svg =
+            '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="-2 -2 28 28" color="#1b0217">' +
+            '<g stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">' + halo + "</g>" +
+            miolo + "</svg>";
+          var p = PONTA[k] || [14, 14];
+          return 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '") ' + p[0] + " " + p[1] + ", " + (RESERVA[k] || "crosshair");
+        }
+        function usarFerramenta(bt) {
+          if (!barra) return;
+          barra.querySelectorAll(".fe-bt.ativo").forEach(function (x) {
+            x.classList.remove("ativo");
+          });
+          bt.classList.add("ativo");
+          var k = bt.getAttribute("data-atalho");
+          he.classList.toggle("selecao", k === "V" || k === "A");
+          he.style.setProperty("--cursor-ferr", cursorDe(bt));
+        }
+        if (barra) {
+          barra.addEventListener("click", function (e) {
+            var bt = e.target.closest(".fe-bt");
+            if (bt) {
+              usarFerramenta(bt);
+              return;
+            }
+            var cores = e.target.closest(".fe-cores");
+            if (cores) cores.classList.toggle("trocado");
+          });
+          var ativa = barra.querySelector(".fe-bt.ativo");
+          if (ativa) usarFerramenta(ativa);
+        }
+
+        /* ----- inicio ----- */
+        function modo() {
+          he.classList.toggle("editavel", mq.matches);
+          desenhar();
+        }
+        if (mq.addEventListener) mq.addEventListener("change", modo);
+        window.addEventListener("resize", function () {
+          requestAnimationFrame(desenhar);
+        });
+        if ("ResizeObserver" in window) new ResizeObserver(desenhar).observe(prancheta);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(desenhar);
+        modo();
+        selecionar("titulo");
       })();
     </script>
     <script>
