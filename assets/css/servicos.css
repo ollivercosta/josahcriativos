@@ -1,0 +1,185 @@
+/* =========================================================================
+   COMO POSSO AJUDAR SEU PROJETO
+   Três painéis que se empilham ao rolar. O painel de baixo recua de leve
+   quando o próximo cobre a tela.
+   ========================================================================= */
+
+.servicos__cabeca {
+  padding: 14vh var(--margem) 6vh;
+}
+
+.servicos__titulo {
+  max-width: 11ch;
+  font-weight: 300;
+  font-size: 5.6vw;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.servicos__titulo-forte {
+  font-weight: 900;
+}
+
+.servicos__titulo-destaque {
+  font-style: normal;
+  font-weight: 900;
+  color: var(--cor-urucum);
+}
+
+.servicos__titulo-palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.08em 0.1em 0.04em;
+  margin: 0 -0.08em -0.1em -0.04em;
+}
+
+.servicos__titulo-miolo {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.2s var(--curva);
+  transition-delay: calc(var(--k, 0) * 60ms);
+}
+
+.servicos__titulo--visivel .servicos__titulo-miolo {
+  transform: none;
+}
+
+/* ---------- painéis ---------- */
+.servicos__pilha {
+  position: relative;
+}
+
+.servicos__painel {
+  position: sticky;
+  top: var(--altura-cabecalho);
+  min-height: calc(100vh - var(--altura-cabecalho));
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 5vw;
+  padding: 5vw var(--margem);
+  border-top: 1px solid var(--cor-tinta);
+  transform-origin: 50% 0;
+  transform: scale(var(--recuo, 1));
+  will-change: transform;
+}
+
+.servicos__painel--claro {
+  background: #fff;
+  color: var(--cor-tinta);
+}
+
+.servicos__painel--tinta {
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+.servicos__painel--urucum {
+  background: var(--cor-urucum);
+  color: #fff;
+  border-top-color: var(--cor-urucum);
+}
+
+.servicos__painel-nome {
+  margin-bottom: 2.4vw;
+  font-weight: 900;
+  font-size: 4.6vw;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.servicos__painel-descricao {
+  max-width: 22em;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  opacity: 0.78;
+}
+
+.servicos__lista {
+  align-self: center;
+}
+
+/* cada serviço desliza inteiro: nada muda de largura, então o texto não se reorganiza */
+.servicos__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 2.4vw;
+  padding: 2vw 0;
+  border-top: 1px solid currentColor;
+}
+
+.servicos__item:last-child {
+  border-bottom: 1px solid currentColor;
+}
+
+.servicos__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2.6vw;
+  width: 0.9vw;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s var(--curva);
+}
+
+.servicos__item-nome {
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  transition: transform 0.9s var(--curva);
+}
+
+.servicos__item-texto {
+  font-size: 1rem;
+  line-height: 1.55;
+  opacity: 0.8;
+  transition:
+    transform 0.9s var(--curva),
+    opacity 0.6s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .servicos__item:hover::before {
+    transform: scaleX(1);
+  }
+
+  .servicos__item:hover .servicos__item-nome {
+    transform: translateX(1.4vw);
+  }
+
+  .servicos__item:hover .servicos__item-texto {
+    transform: translateX(0.7vw);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 860px) {
+  .servicos__titulo {
+    font-size: 11vw;
+  }
+
+  .servicos__painel {
+    position: relative;
+    top: auto;
+    min-height: 0;
+    transform: none;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 56px var(--margem);
+  }
+
+  .servicos__painel-nome {
+    font-size: 12vw;
+  }
+
+  .servicos__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 18px 0;
+  }
+}

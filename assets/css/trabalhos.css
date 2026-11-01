@@ -1,0 +1,395 @@
+/* =========================================================================
+   ALGUNS TRABALHOS
+   Grade de capas. Ao passar o mouse, uma cortina de tinta sobe sobre a
+   capa com o tipo de peça, o nome e o resumo do projeto. Seis trabalhos
+   aparecem primeiro; "Ver mais" mostra o restante (só em "Todos").
+   ========================================================================= */
+
+.trabalhos {
+  padding: 6vh 0 18vh;
+}
+
+.trabalhos__cabeca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px;
+  padding: 0 var(--margem) 3.4vw;
+}
+
+/* ---------- título com palavras que sobem ---------- */
+.trabalhos__titulo {
+  font-weight: 900;
+  font-size: 8vw;
+  line-height: 0.84;
+  letter-spacing: -0.06em;
+}
+
+.trabalhos__titulo-destaque {
+  font-style: normal;
+  color: var(--cor-urucum);
+}
+
+/* a máscara tem folga dos dois lados para a última letra não ser cortada */
+.trabalhos__titulo-palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.08em 0.1em 0.04em;
+  margin: 0 -0.08em -0.1em -0.04em;
+}
+
+.trabalhos__titulo-miolo {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.2s var(--curva);
+  transition-delay: calc(var(--k, 0) * 60ms);
+}
+
+.trabalhos__titulo--visivel .trabalhos__titulo-miolo {
+  transform: none;
+}
+
+/* ---------- filtros ---------- */
+.trabalhos__filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 22px;
+  padding-bottom: 1vw;
+}
+
+.trabalhos__filtro {
+  position: relative;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font-stretch: 115%;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cor-tinta-suave);
+  cursor: pointer;
+  transition: color 0.5s ease;
+}
+
+.trabalhos__filtro::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.7s var(--curva);
+}
+
+.trabalhos__filtro:hover,
+.trabalhos__filtro[aria-pressed="true"] {
+  color: var(--cor-urucum);
+}
+
+.trabalhos__filtro[aria-pressed="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- grade ---------- */
+.trabalhos__grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3.4vw 2vw;
+  margin: 0;
+  padding: 3vw var(--margem) 0;
+  list-style: none;
+  border-top: 1px solid var(--cor-tinta);
+  transition: opacity 0.45s var(--curva-suave);
+}
+
+.trabalhos__grade--trocando {
+  opacity: 0;
+}
+
+.trabalhos__item {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.9s var(--curva-suave),
+    transform 1.1s var(--curva);
+  transition-delay: calc(var(--ordem, 0) * 90ms);
+}
+
+.trabalhos__item--visivel {
+  opacity: 1;
+  transform: none;
+}
+
+.trabalhos__item[hidden] {
+  display: none;
+}
+
+.trabalhos__abrir {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.trabalhos__capa {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--cor-cinza-claro);
+}
+
+.trabalhos__imagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  transition:
+    transform 1.4s var(--curva),
+    filter 1s ease;
+}
+
+.trabalhos__capa--video {
+  display: grid;
+  place-items: center;
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+.trabalhos__video-aviso {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  font-stretch: 115%;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.trabalhos__video-icone {
+  width: 54px;
+  height: 54px;
+  fill: currentColor;
+}
+
+/* cortina com o resumo */
+.trabalhos__resumo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 1.8vw;
+  background: rgba(22, 19, 15, 0.92);
+  color: #fff;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s var(--curva);
+}
+
+.trabalhos__resumo-tipo {
+  display: block;
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease 0.1s,
+    transform 0.9s var(--curva) 0.1s;
+}
+
+.trabalhos__resumo-corpo {
+  display: block;
+  align-self: end;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease 0.18s,
+    transform 0.9s var(--curva) 0.18s;
+}
+
+.trabalhos__resumo-nome {
+  display: block;
+  font-weight: 900;
+  font-size: 2vw;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.trabalhos__resumo-texto {
+  margin-top: 12px;
+  max-width: 30em;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.trabalhos__resumo-acao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  font-stretch: 115%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.26s;
+}
+
+.trabalhos__resumo-seta {
+  width: 18px;
+  height: 18px;
+  fill: var(--cor-urucum);
+  transition: transform 0.8s var(--curva);
+}
+
+/* legenda sob a capa */
+.trabalhos__legenda {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.trabalhos__legenda-tipo {
+  font-stretch: 115%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-urucum);
+}
+
+.trabalhos__legenda-nome {
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trabalhos__abrir:hover .trabalhos__imagem,
+  .trabalhos__abrir:focus-visible .trabalhos__imagem {
+    transform: scale(1.1);
+  }
+
+  .trabalhos__abrir:hover .trabalhos__resumo,
+  .trabalhos__abrir:focus-visible .trabalhos__resumo {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .trabalhos__abrir:hover .trabalhos__resumo-tipo,
+  .trabalhos__abrir:hover .trabalhos__resumo-corpo,
+  .trabalhos__abrir:focus-visible .trabalhos__resumo-tipo,
+  .trabalhos__abrir:focus-visible .trabalhos__resumo-corpo {
+    opacity: 1;
+    transform: none;
+  }
+
+  .trabalhos__abrir:hover .trabalhos__resumo-acao,
+  .trabalhos__abrir:focus-visible .trabalhos__resumo-acao {
+    opacity: 1;
+  }
+
+  .trabalhos__abrir:hover .trabalhos__resumo-seta {
+    transform: translateX(4px) rotate(-45deg);
+  }
+}
+
+/* ---------- ver mais ---------- */
+.trabalhos__mais {
+  display: flex;
+  justify-content: center;
+  padding: 6vh var(--margem) 0;
+}
+
+.trabalhos__mais[hidden] {
+  display: none;
+}
+
+.trabalhos__mais-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 0 6px;
+  border: 0;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition:
+    background-size 0.8s var(--curva),
+    color 0.5s ease;
+}
+
+.trabalhos__mais-botao:hover {
+  color: var(--cor-urucum);
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+
+.trabalhos__mais-icone {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: transform 0.8s var(--curva);
+}
+
+.trabalhos__mais-botao[aria-expanded="true"] .trabalhos__mais-icone {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 860px) {
+  .trabalhos__cabeca {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trabalhos__titulo {
+    font-size: 17vw;
+  }
+
+  .trabalhos__filtros {
+    justify-content: flex-start;
+  }
+
+  .trabalhos__grade {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    padding-top: 28px;
+  }
+
+  .trabalhos__resumo {
+    display: none;
+  }
+}
+
+@media (min-width: 861px) and (max-width: 1100px) {
+  .trabalhos__grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trabalhos__resumo-nome {
+    font-size: 2.8vw;
+  }
+}

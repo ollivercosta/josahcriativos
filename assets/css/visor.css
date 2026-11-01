@@ -1,0 +1,338 @@
+/* =========================================================================
+   VISOR DE PROJETO
+   Mini ficha de design (tipo, cliente, ponto de partida, decisões e peças)
+   ao lado das imagens do trabalho.
+   ========================================================================= */
+
+.visor {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--cor-fundo);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.6s var(--curva-suave),
+    visibility 0s 0.6s;
+}
+
+.visor--aberto {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s var(--curva-suave);
+}
+
+.visor__barra {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  height: 66px;
+  padding: 0 var(--margem);
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+.visor__voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  border: 0;
+  background: none;
+  font-stretch: 115%;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.visor__voltar:hover {
+  color: var(--cor-urucum);
+}
+
+.visor__navegacao {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.visor__anterior,
+.visor__posterior,
+.visor__fechar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+.visor__anterior:hover,
+.visor__posterior:hover {
+  background: var(--cor-cinza-claro);
+}
+
+.visor__fechar {
+  margin-left: 8px;
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+.visor__fechar:hover {
+  background: var(--cor-urucum);
+}
+
+.visor__icone-voltar,
+.visor__icone-anterior,
+.visor__icone-posterior,
+.visor__icone-fechar {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.visor__corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(28px, 5vw, 88px);
+  padding: clamp(36px, 5vw, 76px) var(--margem) clamp(64px, 8vw, 120px);
+}
+
+.visor__corpo--entrando {
+  animation: visor-sobe 0.8s var(--curva) both;
+}
+
+.visor__ficha {
+  position: sticky;
+  top: calc(66px + 32px);
+  align-self: start;
+}
+
+.visor__tipo {
+  margin-bottom: 14px;
+  font-stretch: 115%;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-urucum);
+}
+
+.visor__titulo {
+  margin-bottom: 30px;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 4.6vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.visor__meta {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 18px;
+  margin-bottom: 28px;
+  padding: 16px 0;
+  border-block: 1px solid var(--cor-linha);
+  font-size: 0.95rem;
+}
+
+.visor__meta[hidden] {
+  display: none;
+}
+
+.visor__meta-rotulo {
+  color: var(--cor-tinta-suave);
+}
+
+.visor__meta-valor {
+  font-weight: 600;
+}
+
+.visor__bloco {
+  margin-bottom: 26px;
+}
+
+.visor__bloco-titulo {
+  margin-bottom: 8px;
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-tinta-suave);
+}
+
+.visor__bloco-texto {
+  line-height: 1.6;
+}
+
+.visor__pecas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.visor__peca {
+  padding: 5px 12px;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 999px;
+  font-size: 0.88rem;
+}
+
+.visor__texto--preencher {
+  color: var(--cor-tinta-suave);
+  font-style: italic;
+}
+
+.visor__midias {
+  display: grid;
+  gap: clamp(20px, 2.6vw, 36px);
+}
+
+.visor__midia-imagem {
+  width: 100%;
+  height: auto;
+  background: var(--cor-cinza-claro);
+}
+
+.visor__video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+.visor__video-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cor-tinta);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+.visor__video-botao:hover {
+  background: var(--cor-urucum);
+  color: #fff;
+}
+
+.visor__video-icone {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.visor__video-aviso {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.visor__video-quadro {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.visor__seguinte {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: clamp(28px, 4vw, 52px);
+  padding: 26px 0;
+  border: 0;
+  border-top: 1px solid var(--cor-tinta);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.visor__seguinte-rotulo {
+  display: block;
+  margin-bottom: 6px;
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-tinta-suave);
+}
+
+.visor__seguinte-nome {
+  font-weight: 900;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  transition: color 0.5s ease;
+}
+
+.visor__seguinte-seta {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+  transition:
+    transform 0.8s var(--curva),
+    fill 0.4s ease;
+}
+
+.visor__seguinte:hover .visor__seguinte-nome {
+  color: var(--cor-urucum);
+}
+
+.visor__seguinte:hover .visor__seguinte-seta {
+  transform: translateX(8px);
+  fill: var(--cor-urucum);
+}
+
+@keyframes visor-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@media (max-width: 860px) {
+  .visor__corpo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .visor__ficha {
+    position: static;
+  }
+}

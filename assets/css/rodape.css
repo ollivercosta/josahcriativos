@@ -1,0 +1,57 @@
+/* =========================================================================
+   RODAPÉ
+   Direitos, acesso aos termos e o nome em escala de cartaz.
+   ========================================================================= */
+
+.rodape {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 0 0;
+}
+
+.rodape__linha {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding: 0 var(--margem);
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cor-tinta-suave);
+}
+
+.rodape__termos {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.rodape__termos:hover {
+  color: var(--cor-urucum);
+}
+
+.rodape__nome {
+  display: block;
+  margin: 3vw 0 -3vw;
+  padding-left: 2vw;
+  font-weight: 900;
+  font-size: 15.6vw;
+  line-height: 0.8;
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+}
+
+.rodape__nome-destaque {
+  font-style: normal;
+  color: var(--cor-urucum);
+}
