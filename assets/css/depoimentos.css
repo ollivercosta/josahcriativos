@@ -10,7 +10,6 @@
 }
 
 .depoimentos__titulo {
-  margin-bottom: 7vh;
   font-weight: 300;
   font-size: 5.6vw;
   line-height: 0.98;
@@ -39,6 +38,27 @@
 
 .depoimentos__titulo--visivel .depoimentos__titulo-miolo {
   transform: none;
+}
+
+/* título e a barra que prolonga a linha de base dele até a margem */
+.depoimentos__titulo-linha {
+  display: grid;
+  grid-template-columns: auto minmax(4vw, 1fr);
+  align-items: last baseline;
+  gap: 2vw;
+  margin-bottom: 7vh;
+}
+
+.depoimentos__titulo-barra {
+  height: max(5px, 0.6vw);
+  background: var(--cor-tinta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s var(--curva) 0.35s;
+}
+
+.depoimentos__titulo--visivel + .depoimentos__titulo-barra {
+  transform: scaleX(1);
 }
 
 .depoimentos__grade {
@@ -159,7 +179,7 @@
 
 .depoimentos__dado-rotulo {
   font-stretch: 115%;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -174,7 +194,7 @@
 .depoimentos__aviso {
   margin-top: 3vw;
   font-stretch: 115%;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -182,6 +202,10 @@
 }
 
 @media (max-width: 860px) {
+  .depoimentos__titulo-barra {
+    display: none;
+  }
+
   .depoimentos__titulo {
     font-size: 11vw;
   }

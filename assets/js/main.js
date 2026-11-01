@@ -11,7 +11,6 @@ import { GestorDeSobreposicoes } from "./nucleo/GestorDeSobreposicoes.js";
 import { RevelaPalavras } from "./nucleo/RevelaPalavras.js";
 import { RolagemSuave } from "./nucleo/RolagemSuave.js";
 import { VLibras } from "./nucleo/VLibras.js";
-import { Apresentacao } from "./secoes/Apresentacao.js";
 import { Cabecalho } from "./secoes/Cabecalho.js";
 import { Chat } from "./secoes/Chat.js";
 import { Contato } from "./secoes/Contato.js";
@@ -34,6 +33,7 @@ const TITULOS_REVELADOS = [
   ".trabalhos__titulo",
   ".servicos__titulo",
   ".fomento__titulo",
+  ".processo__titulo",
   ".sobre__titulo",
   ".depoimentos__titulo",
   ".faq__titulo",
@@ -64,9 +64,8 @@ class Site {
       this.secoes.visor.abrir(indice, lista),
     );
     this.secoes.servicos = new Servicos($(".servicos"), this.ciclo);
-    this.secoes.apresentacao = new Apresentacao($(".apresentacao"), this.ciclo);
     this.secoes.fomento = new Fomento($(".fomento"));
-    this.secoes.processo = new Processo($(".processo"), this.ciclo);
+    this.secoes.processo = new Processo($(".processo"));
     this.secoes.sobre = new Sobre($(".sobre"));
     this.secoes.depoimentos = new Depoimentos($(".depoimentos"));
     this.secoes.faq = new Faq($(".faq"));

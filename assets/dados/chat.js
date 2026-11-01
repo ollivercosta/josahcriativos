@@ -15,7 +15,7 @@
 export const BASE_CHAT = {
   inicio: {
     txt: [
-      "Olá! Este é o tira-dúvidas do site da Josah Criativos.",
+      "Olá! Este é o tira-dúvidas do site de Josah Oliveira.",
       "Escolha um assunto abaixo ou digite a sua pergunta.",
     ],
     ops: ["servicos", "como_funciona", "orcamento", "prazos", "editais", "portfolio", "falar"],
@@ -28,7 +28,7 @@ export const BASE_CHAT = {
     rot: "Quais serviços você faz?",
     txt: [
       "Trabalho em três frentes que se complementam:",
-      "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Criativos & Web: landing pages, formulários e campanhas para redes sociais.\n• Visual & Mídia: material de palco, vídeos, teasers e spots.",
+      "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Criativos e web: landing pages, formulários e campanhas para redes sociais.\n• Visual e mídia: material de palco, vídeos, teasers e spots.",
       "Qual delas interessa ao seu projeto?",
     ],
     ops: ["sv_apresentacao", "sv_web", "sv_midia", "impressao"],

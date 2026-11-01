@@ -4,8 +4,25 @@
    quando o próximo cobre a tela.
    ========================================================================= */
 
+/* título e a barra que prolonga a linha de base dele até a margem */
 .servicos__cabeca {
+  display: grid;
+  grid-template-columns: auto minmax(4vw, 1fr);
+  align-items: last baseline;
+  gap: 2vw;
   padding: 14vh var(--margem) 6vh;
+}
+
+.servicos__titulo-barra {
+  height: max(5px, 0.6vw);
+  background: var(--cor-tinta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s var(--curva) 0.35s;
+}
+
+.servicos__titulo--visivel + .servicos__titulo-barra {
+  transform: scaleX(1);
 }
 
 .servicos__titulo {
@@ -160,6 +177,10 @@
 }
 
 @media (max-width: 860px) {
+  .servicos__titulo-barra {
+    display: none;
+  }
+
   .servicos__titulo {
     font-size: 11vw;
   }

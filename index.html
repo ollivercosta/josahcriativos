@@ -21,8 +21,8 @@
     <!-- Compartilhamento (Open Graph / X) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="Josah Criativos" />
-    <meta property="og:title" content="Josah Criativos | Designer gráfico para projetos culturais" />
+    <meta property="og:site_name" content="Josah Oliveira" />
+    <meta property="og:title" content="Josah Oliveira | Designer gráfico" />
     <meta
       property="og:description"
       content="Josah Oliveira, designer gráfico em Salvador, Bahia. Identidade visual, peças gráficas, páginas e vídeos para projetos culturais e outros clientes."
@@ -33,15 +33,17 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Josah Oliveira, designer gráfico" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Josah Criativos | Designer gráfico para projetos culturais" />
+    <meta name="twitter:title" content="Josah Oliveira | Designer gráfico" />
     <meta
       name="twitter:description"
       content="Josah Oliveira, designer gráfico em Salvador, Bahia. Identidade visual, peças gráficas, páginas e vídeos para projetos culturais e outros clientes."
     />
     <meta name="twitter:image" content="https://josahcriativos.com.br/og-image.png" />
 
-    <!-- Ícone do site -->
+    <!-- Ícones do site -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Dados estruturados (Google) -->
     <script type="application/ld+json">
@@ -52,7 +54,7 @@
             "@type": "WebSite",
             "@id": "https://josahcriativos.com.br/#website",
             "url": "https://josahcriativos.com.br/",
-            "name": "Josah Criativos",
+            "name": "Josah Oliveira",
             "inLanguage": "pt-BR",
             "publisher": {
               "@id": "https://josahcriativos.com.br/#negocio"
@@ -61,7 +63,7 @@
           {
             "@type": "ProfessionalService",
             "@id": "https://josahcriativos.com.br/#negocio",
-            "name": "Josah Criativos",
+            "name": "Josah Oliveira",
             "url": "https://josahcriativos.com.br/",
             "image": "https://josahcriativos.com.br/og-image.png",
             "description": "Josah Oliveira, designer gráfico em Salvador, Bahia. Identidade visual, peças gráficas, páginas e vídeos para projetos culturais e outros clientes.",
@@ -192,7 +194,6 @@
     <link rel="stylesheet" href="/assets/css/trabalhos.css" />
     <link rel="stylesheet" href="/assets/css/visor.css" />
     <link rel="stylesheet" href="/assets/css/servicos.css" />
-    <link rel="stylesheet" href="/assets/css/apresentacao.css" />
     <link rel="stylesheet" href="/assets/css/fomento.css" />
     <link rel="stylesheet" href="/assets/css/processo.css" />
     <link rel="stylesheet" href="/assets/css/sobre.css" />
@@ -304,8 +305,7 @@
 
           <p class="hero__rotulo-servicos" aria-hidden="true">Serviços</p>
           <p class="hero__texto">
-            Identidade visual, peças gráficas, páginas e vídeos para projetos culturais e para quem quer ser visto,
-            entendido e lembrado.
+            Identidade visual, peças gráficas, páginas e vídeos para quem quer ser visto, entendido e lembrado.
           </p>
           <a class="hero__botao" href="#projetos">
             Ver trabalhos
@@ -331,23 +331,19 @@
         </div>
       </section>
 
-      <!-- MANIFESTO: a frase se acende conforme a leitura -->
-      <section class="manifesto" aria-label="Manifesto">
-        <p class="manifesto__texto" data-fortes="compreendido,clareza">
-          Um projeto cultural só chega longe quando é compreendido: por quem o avalia, por quem o apoia e por quem vai
-          participar. Eu ajudo o seu projeto a ser visto com clareza em cada um desses momentos, em três frentes que se
-          complementam.
-        </p>
-      </section>
-
-      <!-- ALGUNS TRABALHOS: a grade é montada por assets/js/secoes/Trabalhos.js
-           a partir de assets/dados/trabalhos.js -->
+      <!-- ALGUNS TRABALHOS: destaques e grade montados por assets/js/secoes/Trabalhos.js
+           a partir de assets/dados/trabalhos.js (destaque: true marca os projetos em destaque) -->
       <section class="trabalhos" id="projetos" aria-labelledby="trabalhos-titulo">
         <div class="trabalhos__cabeca">
           <h2 class="trabalhos__titulo" id="trabalhos-titulo">
             Alguns <em class="trabalhos__titulo-destaque">trabalhos.</em>
           </h2>
-          <div class="trabalhos__filtros" role="group" aria-label="Filtrar trabalhos"></div>
+          <span class="trabalhos__titulo-barra" aria-hidden="true"></span>
+        </div>
+        <ul class="trabalhos__destaques"></ul>
+        <div class="trabalhos__outros">
+          <h3 class="trabalhos__outros-titulo">Outros trabalhos</h3>
+          <div class="trabalhos__filtros" role="group" aria-label="Filtrar outros trabalhos"></div>
         </div>
         <ul class="trabalhos__grade"></ul>
         <div class="trabalhos__mais" hidden>
@@ -362,13 +358,23 @@
         </div>
       </section>
 
-      <!-- COMO POSSO AJUDAR SEU PROJETO: painéis que se empilham -->
+      <!-- MANIFESTO: a frase se acende conforme a leitura -->
+      <section class="manifesto" aria-label="Manifesto">
+        <p class="manifesto__texto" data-fortes="compreendido,clareza">
+          Um projeto cultural só chega longe quando é compreendido: por quem o avalia, por quem o apoia e por quem vai
+          participar. Eu ajudo o seu projeto a ser visto com clareza em cada um desses momentos, em três frentes que se
+          complementam.
+        </p>
+      </section>
+
+      <!-- COMO POSSO AJUDAR SEU PROJETO: painéis que se empilham (o único trecho com rolagem presa) -->
       <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
         <div class="servicos__cabeca">
           <h2 class="servicos__titulo" id="servicos-titulo">
             Como posso <b class="servicos__titulo-forte">ajudar</b> seu
             <em class="servicos__titulo-destaque">projeto</em>
           </h2>
+          <span class="servicos__titulo-barra" aria-hidden="true"></span>
         </div>
         <div class="servicos__pilha">
           <article class="servicos__painel servicos__painel--claro">
@@ -380,89 +386,82 @@
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Identidade Visual &amp; Logomarca</dt>
+                <dt class="servicos__item-nome">Identidade visual e logomarca</dt>
                 <dd class="servicos__item-texto">
-                  Uma marca pensada para o uso real do evento: funciona em cor e em preto e branco, em tamanho pequeno e
-                  grande, e convive com os logos de apoiadores e patrocinadores. Você recebe os arquivos nos formatos de
-                  uso.
+                  Uma marca pensada para o uso real do evento: funciona em cor e em preto e branco, em qualquer tamanho,
+                  e convive com os logos de apoiadores e patrocinadores.
                 </dd>
               </div>
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Book de Captação</dt>
+                <dt class="servicos__item-nome">Book de captação</dt>
                 <dd class="servicos__item-texto">
-                  Transformo o projeto aprovado em um documento que o parecerista consegue avaliar em poucos minutos.
-                  Para patrocinadores, a versão comercial destaca cotas e retorno de marca.
+                  O projeto aprovado vira um documento que o parecerista avalia em poucos minutos, com versão comercial
+                  para patrocinadores.
                 </dd>
               </div>
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Portfólio Artístico</dt>
+                <dt class="servicos__item-nome">Portfólio artístico</dt>
                 <dd class="servicos__item-texto">
-                  Organizo a trajetória de artistas, coletivos, grupos e produtoras na ordem em que os editais
-                  perguntam: quem é, o que já fez, com quem e com que resultado.
+                  A trajetória de artistas, coletivos e produtoras organizada na ordem em que os editais perguntam.
                 </dd>
               </div>
             </dl>
           </article>
           <article class="servicos__painel servicos__painel--tinta">
             <div class="servicos__painel-cabeca">
-              <h3 class="servicos__painel-nome">Criativos &amp; Web</h3>
+              <h3 class="servicos__painel-nome">Criativos e web</h3>
               <p class="servicos__painel-descricao">
                 Comunicação online, fluxo de inscrições e relacionamento com o público do evento.
               </p>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Landing Pages Culturais</dt>
+                <dt class="servicos__item-nome">Landing pages culturais</dt>
                 <dd class="servicos__item-texto">
-                  Uma página com programação, local e inscrição ou venda de ingressos logo no início, funcionando bem no
-                  celular. As atualizações durante o período do projeto estão incluídas. Depois dele, a manutenção é um
-                  serviço contratado à parte.
+                  Programação, local e inscrição ou ingressos logo no início, funcionando bem no celular.
                 </dd>
               </div>
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Formulários &amp; Credenciamento</dt>
+                <dt class="servicos__item-nome">Formulários e credenciamento</dt>
                 <dd class="servicos__item-texto">
-                  Formulários de inscrição para oficinas, convocatórias, cadastro de artistas e credenciamento de
-                  imprensa, feitos no Google Forms e configurados na conta do cliente. As respostas chegam direto a
-                  você, sem intermediário, e o formulário pede só o que o regulamento exige.
+                  Inscrições, convocatórias e credenciamento de imprensa no Google Forms, configurados na sua conta e
+                  pedindo só o que o regulamento exige.
                 </dd>
               </div>
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Campanhas para Redes Sociais</dt>
+                <dt class="servicos__item-nome">Campanhas para redes sociais</dt>
                 <dd class="servicos__item-texto">
-                  Um modelo único para toda a programação, para que a equipe troque nome, data e line-up sem refazer a
-                  arte e a campanha mantenha a mesma cara do primeiro ao último post.
+                  Um modelo único para toda a programação: a equipe troca nome, data e line-up sem refazer a arte.
                 </dd>
               </div>
             </dl>
           </article>
           <article class="servicos__painel servicos__painel--urucum">
             <div class="servicos__painel-cabeca">
-              <h3 class="servicos__painel-nome">Visual &amp; Mídia</h3>
+              <h3 class="servicos__painel-nome">Visual e mídia</h3>
               <p class="servicos__painel-descricao">
                 Artes digitais para espaços de eventos, palco e canais de difusão do seu projeto.
               </p>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Artes Digitais &amp; Material de Palco</dt>
+                <dt class="servicos__item-nome">Artes digitais e material de palco</dt>
                 <dd class="servicos__item-texto">
-                  Saia de palco, banners, wind banners, credenciais, camisas, bags, squeezers e papelaria com a mesma
-                  linguagem visual e a régua de apoio no padrão do financiador, em arquivo digital pronto para produção.
+                  Saia de palco, banners, credenciais, camisas e papelaria na mesma linguagem, com a régua de apoio no
+                  padrão do financiador.
                 </dd>
               </div>
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Edição de Vídeo &amp; Teasers</dt>
+                <dt class="servicos__item-nome">Edição de vídeo e teasers</dt>
                 <dd class="servicos__item-texto">
-                  Teasers de 30 a 60 segundos, pílulas de bastidores e registros curtos de apresentações, para que em um
-                  minuto o público entenda o que é o evento, quando e onde.
+                  Teasers de 30 a 60 segundos e registros curtos para o público entender o evento em um minuto.
                 </dd>
               </div>
               <div class="servicos__item">
-                <dt class="servicos__item-nome">Spots para Rádio &amp; TV</dt>
+                <dt class="servicos__item-nome">Spots para rádio e TV</dt>
                 <dd class="servicos__item-texto">
-                  Spots de 15 e 30 segundos para rádio e TV. O cliente grava a chamada e eu edito a gravação com trilha
-                  de fundo e efeitos, deixando o áudio dentro das exigências do projeto e do veículo..
+                  Spots de 15 e 30 segundos: você grava a chamada e eu edito com trilha e efeitos, dentro das exigências
+                  do veículo.
                 </dd>
               </div>
             </dl>
@@ -470,115 +469,18 @@
         </div>
       </section>
 
-      <!-- COMO O TRABALHO SE APRESENTA: rolagem vira avanço horizontal -->
-      <section class="apresentacao" aria-label="Como o trabalho se apresenta">
-        <div class="apresentacao__palco">
-          <p class="apresentacao__rotulo">Como o trabalho se apresenta</p>
-          <div class="apresentacao__trilho">
-            <article class="apresentacao__cena apresentacao__cena--urucum">
-              <div class="apresentacao__cena-texto">
-                <h3 class="apresentacao__palavra">Régua</h3>
-                <p class="apresentacao__descricao">
-                  Logos de apoiadores e patrocinadores na mesma altura e com o mesmo espaço entre eles, na ordem e nas
-                  proporções que o financiador exige.
-                </p>
-              </div>
-              <ul class="apresentacao__pontos">
-                <li class="apresentacao__ponto" style="--n: 0">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">mesma altura</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 1">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">mesmo espaço entre os logos</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 2">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">ordem e proporção do financiador</span>
-                </li>
-              </ul>
-            </article>
-            <article class="apresentacao__cena">
-              <div class="apresentacao__cena-texto">
-                <h3 class="apresentacao__palavra">Book de captação</h3>
-                <p class="apresentacao__descricao">
-                  Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos,
-                  orçamento e contrapartidas fáceis de localizar.
-                </p>
-              </div>
-              <ul class="apresentacao__pontos">
-                <li class="apresentacao__ponto" style="--n: 0">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">sumário</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 1">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">hierarquia de títulos</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 2">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">orçamento e contrapartidas</span>
-                </li>
-              </ul>
-            </article>
-            <article class="apresentacao__cena apresentacao__cena--urucum">
-              <div class="apresentacao__cena-texto">
-                <h3 class="apresentacao__palavra">Edital</h3>
-                <p class="apresentacao__descricao">
-                  Cada peça segue as normas do seu edital ou lei de incentivo, a partir das exigências informadas no
-                  briefing.
-                </p>
-              </div>
-              <ul class="apresentacao__pontos">
-                <li class="apresentacao__ponto" style="--n: 0">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">normas do edital</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 1">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">regras da lei de incentivo</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 2">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">exigências do briefing</span>
-                </li>
-              </ul>
-            </article>
-            <article class="apresentacao__cena">
-              <div class="apresentacao__cena-texto">
-                <h3 class="apresentacao__palavra">Entrega</h3>
-                <p class="apresentacao__descricao">
-                  Materiais nomeados e organizados no padrão do financiador informado no briefing, prontos para a
-                  prestação de contas.
-                </p>
-              </div>
-              <ul class="apresentacao__pontos">
-                <li class="apresentacao__ponto" style="--n: 0">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">arquivos nomeados</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 1">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">padrão do financiador</span>
-                </li>
-                <li class="apresentacao__ponto" style="--n: 2">
-                  <span class="apresentacao__ponto-marca" aria-hidden="true"></span>
-                  <span class="apresentacao__ponto-texto">pronto para a prestação de contas</span>
-                </li>
-              </ul>
-            </article>
-          </div>
-          <div class="apresentacao__barra" aria-hidden="true">
-            <span class="apresentacao__barra-progresso"></span>
-          </div>
-        </div>
-      </section>
-
       <!-- ORIGENS DE RECURSO: cada selo abre o balão "Você sabia?" -->
       <section class="fomento" aria-labelledby="fomento-titulo">
-        <h2 class="fomento__titulo" id="fomento-titulo">
-          Origens de recurso <b class="fomento__titulo-forte">dos projetos que atendo</b>
-        </h2>
+        <div class="fomento__lado">
+          <h2 class="fomento__titulo" id="fomento-titulo">
+            Origens de recurso <b class="fomento__titulo-forte">dos projetos que atendo</b>
+          </h2>
+          <p class="fomento__lede">
+            Cada fonte de recurso tem regras de marca e de entrega. Aplico as exigências informadas no briefing: régua
+            de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a
+            prestação de contas.
+          </p>
+        </div>
         <div class="fomento__conteudo">
           <ul class="fomento__trilho">
             <li class="fomento__item">
@@ -1342,17 +1244,17 @@
         </div>
       </section>
 
-      <!-- DO PRIMEIRO CONTATO À ENTREGA: uma etapa por vez -->
+      <!-- DO PRIMEIRO CONTATO À ENTREGA: as etapas entram uma a uma, sem prender a rolagem -->
       <section class="processo" id="processo" aria-labelledby="processo-titulo">
         <div class="processo__palco">
           <div class="processo__abertura">
-            <h2 class="processo__titulo" id="processo-titulo">
-              Do primeiro contato <b class="processo__titulo-forte">à entrega</b>
-            </h2>
-            <p class="processo__lede">
-              Escolher o serviço é só o começo. Do primeiro contato à entrega, cada etapa é combinada antes de ser
-              executada, e escopo, prazo e valores ficam definidos antes de qualquer produção.
-            </p>
+            <div class="processo__titulo-linha">
+              <h2 class="processo__titulo" id="processo-titulo">
+                Do primeiro contato <b class="processo__titulo-forte">à entrega</b>
+              </h2>
+              <span class="processo__titulo-barra" aria-hidden="true"></span>
+            </div>
+            <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
           </div>
           <div class="processo__centro">
             <div class="processo__etapa">
@@ -1365,15 +1267,15 @@
             <div class="processo__etapa processo__etapa--urucum">
               <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Proposta e orçamento</span></h3>
               <p class="processo__etapa-texto">
-                Escopo, prazo e valores por escrito, aceitos antes de qualquer produção. Como regra, 50% de entrada
-                inicia o trabalho.
+                Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.
               </p>
             </div>
             <div class="processo__etapa">
               <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Produção</span></h3>
               <p class="processo__etapa-texto">
                 Criação das peças a partir do briefing e das regras de marca informadas. Entrego por etapa, começando
-                pelo que o seu prazo mais exige.
+                pelo que o seu prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do
+                material recebido.
               </p>
             </div>
             <div class="processo__etapa processo__etapa--urucum">
@@ -1388,14 +1290,6 @@
                 Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.
               </p>
             </div>
-          </div>
-          <div class="processo__linha" aria-hidden="true">
-            <span class="processo__linha-progresso"></span>
-            <span class="processo__marco">Briefing</span>
-            <span class="processo__marco">Proposta e orçamento</span>
-            <span class="processo__marco">Produção</span>
-            <span class="processo__marco">Revisão</span>
-            <span class="processo__marco">Entrega</span>
           </div>
         </div>
       </section>
@@ -1423,38 +1317,27 @@
           <figcaption class="sobre__anotacao-papeis">
             <span class="sobre__anotacao-principal">Designer gráfico</span>
             <span class="sobre__anotacao-linha">Músico</span>
-            <span class="sobre__anotacao-linha">Dev</span>
           </figcaption>
-          <span class="sobre__anotacao-nome">
-            <span class="sobre__anotacao-principal">Josah Oliveira</span>
-            <span class="sobre__anotacao-linha">Música, viajar, acampar e estudar programação</span>
-          </span>
         </figure>
         <div class="sobre__texto">
           <h2 class="sobre__titulo" id="sobre-titulo">Quem dá <b class="sobre__titulo-forte">vida</b> a isso</h2>
           <p class="sobre__abertura">
-            Sou Josah Oliveira, designer gráfico com mais de dez anos de experiência no desenvolvimento de identidades
-            visuais, sistemas visuais e soluções de comunicação para projetos culturais e digitais.
+            Sou Josah Oliveira, designer gráfico. Desenvolvo identidades visuais, sistemas visuais e soluções de
+            comunicação para projetos culturais e digitais.
           </p>
           <p class="sobre__paragrafo">
-            Atuo como Designer Pleno em parceria com a
+            Atuo em parceria com a
             <a class="sobre__parceira" href="https://tabuleiroproducoes.com.br/"><strong>Tabuleiro Produções</strong></a
-            >, produtora cultural especializada em elaboração de projetos, captação de recursos e projetos
-            socioculturais, onde desenvolvo linguagens gráficas, identidades visuais e direção estética para campanhas e
-            iniciativas criativas.
-          </p>
-          <p class="sobre__trajetoria">
-            Minha trajetória cruza <span class="sobre__trajetoria-destaque">música</span>,
-            <span class="sobre__trajetoria-destaque">produção cultural</span> e
-            <span class="sobre__trajetoria-destaque">desenvolvimento de sistemas</span>.
+            >, produtora cultural especializada em elaboração de projetos e captação de recursos, criando linguagens
+            gráficas, identidades visuais e direção estética para campanhas e iniciativas criativas.
           </p>
           <p class="sobre__citacao">
-            Essa vivência de dentro do universo cultural, não como fornecedor externo, muda o jeito como um briefing de
-            projeto vira solução visual:
+            Minha trajetória passa pela <span class="sobre__citacao-trajetoria">música</span> e pela
+            <span class="sobre__citacao-trajetoria">produção cultural</span>. Viver esse universo por dentro, e não como
+            fornecedor externo, muda o jeito como um briefing vira solução visual:
             <em class="sobre__citacao-destaque"
               >menos sobre estética isolada, mais sobre estruturar informação e narrativa</em
-            >
-            a serviço da proposta de cada iniciativa.
+            >.
           </p>
           <div class="sobre__clientes">
             <p class="sobre__clientes-rotulo">Trabalhos recentes para</p>
@@ -1470,9 +1353,12 @@
 
       <!-- DEPOIMENTOS: TEXTOS DE EXEMPLO. Trocar pelos reais (nome, projeto, serviço e fomento). -->
       <section class="depoimentos" id="depoimentos" aria-labelledby="depoimentos-titulo">
-        <h2 class="depoimentos__titulo" id="depoimentos-titulo">
-          Quem já trabalhou <b class="depoimentos__titulo-forte">comigo</b>
-        </h2>
+        <div class="depoimentos__titulo-linha">
+          <h2 class="depoimentos__titulo" id="depoimentos-titulo">
+            Quem já trabalhou <b class="depoimentos__titulo-forte">comigo</b>
+          </h2>
+          <span class="depoimentos__titulo-barra" aria-hidden="true"></span>
+        </div>
         <div class="depoimentos__grade">
           <ul class="depoimentos__nomes" role="tablist" aria-label="Depoimentos">
             <li class="depoimentos__nome-item">
@@ -1595,27 +1481,11 @@
         <div class="faq__lado">
           <h2 class="faq__titulo" id="faq-titulo">Antes de <em class="faq__titulo-destaque">começar.</em></h2>
           <p class="faq__lede">
-            Respostas diretas sobre contratação, pagamento, prazos e entrega. Os detalhes completos estão nos Termos de
-            Uso, na Política de Privacidade e na Política de Reembolso, disponíveis no rodapé desta página.
+            Respostas diretas sobre contratação e entrega. O restante está nos
+            <button type="button" class="faq__termos" data-abrir="termos">termos e políticas</button>.
           </p>
         </div>
         <div class="faq__lista">
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto"
-                >Você atende projetos contemplados em qualquer edital ou lei de incentivo?</span
-              >
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                Sim. Atendo projetos contemplados em qualquer mecanismo de fomento, seja ele municipal, estadual ou
-                federal. Minha especialidade é adequar a identidade visual do seu projeto às regras do edital
-                conquistado. Aplico as exigências técnicas e de marca informadas no briefing, para que a sua entrega
-                transmita profissionalismo, seja qual for a fonte do recurso.
-              </p>
-            </div>
-          </details>
           <details class="faq__item" name="faq">
             <summary class="faq__pergunta">
               <span class="faq__pergunta-texto">Você faz a elaboração escrita do projeto?</span>
@@ -1678,20 +1548,6 @@
           </details>
           <details class="faq__item" name="faq">
             <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto">Como funcionam o prazo e a entrega dos materiais?</span>
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                Depois do briefing, você recebe cronograma e prioridades. Entrego por etapa, começando pelo essencial do
-                seu prazo, e cada entrega tem direito a 3 rodadas de revisão. O prazo começa a contar quando o briefing
-                está concluído, a entrada paga e todo o seu material recebido. Os arquivos em alta resolução são
-                liberados após a compensação do pagamento.
-              </p>
-            </div>
-          </details>
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
               <span class="faq__pergunta-texto">Você entrega os materiais impressos?</span>
               <span class="faq__sinal" aria-hidden="true"></span>
             </summary>
@@ -1741,8 +1597,7 @@
         </a>
         <div class="contato__pe">
           <p class="contato__lede">
-            Conte o que o projeto precisa e qual é o prazo. Respondo com um cronograma e com as peças que fazem sentido,
-            aplicando as exigências do edital informadas no briefing.
+            Conte o que o projeto precisa e qual é o prazo. Respondo com um cronograma e as peças que fazem sentido.
           </p>
           <ul class="contato__canais">
             <li class="contato__canal">
@@ -1768,18 +1623,6 @@
             <li class="contato__canal">
               <small class="contato__canal-rotulo">Acesse</small>
               <span class="contato__redes">
-                <a
-                  class="contato__rede"
-                  href="https://github.com/ollivercosta"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  title="GitHub"
-                  ><svg class="contato__rede-icone" viewBox="0 0 256 256" aria-hidden="true" focusable="false">
-                    <path
-                      d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
-                    /></svg
-                ></a>
                 <a
                   class="contato__rede"
                   href="https://www.behance.net/josafoliveira1"
@@ -1814,7 +1657,7 @@
     <footer class="rodape">
       <div class="rodape__linha">
         <span class="rodape__direitos">
-          &copy; <span class="rodape__ano">2026</span> Josah Criativos. Todos os direitos reservados.
+          &copy; <span class="rodape__ano">2026</span> Josah Oliveira. Todos os direitos reservados.
         </span>
         <button type="button" class="rodape__termos" data-abrir="termos">
           Termos de Uso, Política de Privacidade e Política de Reembolso
@@ -1983,7 +1826,7 @@
               <span class="termos__data">Última atualização: 4 de outubro de 2026.</span>
               <p class="termos__paragrafo">
                 Este documento reúne duas coisas: as regras para navegar neste site e as condições gerais para contratar
-                serviços de design com a Josah Criativos, nome de atuação de Josafá Oliveira Costa (pessoa física). Ele
+                serviços de design com Josah Oliveira, nome de atuação de Josafá Oliveira Costa (pessoa física). Ele
                 existe para que as duas partes saibam, desde o início, o que esperar uma da outra. Navegar pelo site
                 significa estar ciente destas regras. Contratar um serviço exige aceite expresso, feito por escrito na
                 proposta ou no contrato.
@@ -1991,7 +1834,7 @@
 
               <strong class="termos__secao-titulo">1. Definições</strong>
               <p class="termos__paragrafo">
-                Neste texto, "Josah Criativos" é quem presta o serviço. "Cliente" é a pessoa ou organização que solicita
+                Neste texto, "Josah Oliveira" é quem presta o serviço. "Cliente" é a pessoa ou organização que solicita
                 ou contrata. "Proposta" é o documento com escopo, prazo e valores. "Material do cliente" é tudo o que o
                 cliente envia para o trabalho (textos, logomarcas, fotos, áudios, regulamentos de edital). "Entregáveis"
                 são os arquivos finais combinados na proposta. "Entrega" é cada item ou lote de peças da proposta com
@@ -2018,8 +1861,8 @@
 
               <strong class="termos__secao-titulo">4. Propriedade intelectual do site</strong>
               <p class="termos__paragrafo">
-                Textos, layout, identidade visual, código e demais elementos originais do site pertencem à Josah
-                Criativos e são protegidos pela Lei de Direitos Autorais (Lei 9.610/1998) e, no caso de marcas, pela Lei
+                Textos, layout, identidade visual, código e demais elementos originais do site pertencem a Josah
+                Oliveira e são protegidos pela Lei de Direitos Autorais (Lei 9.610/1998) e, no caso de marcas, pela Lei
                 de Propriedade Industrial (Lei 9.279/1996). Você pode visualizar o conteúdo para conhecer o trabalho e
                 avaliar uma contratação. Copiar, reproduzir, adaptar ou republicar qualquer parte, no todo ou em parte,
                 depende de autorização prévia e escrita.
@@ -2037,16 +1880,15 @@
               <strong class="termos__secao-titulo">6. Links e serviços de terceiros</strong>
               <p class="termos__paragrafo">
                 O site pode direcionar você para WhatsApp, redes sociais e outros endereços. Esses ambientes têm regras
-                e políticas próprias, sobre as quais a Josah Criativos não tem controle. Recomendamos ler as condições
-                de cada um antes de usá-los.
+                e políticas próprias, sobre as quais Josah Oliveira não tem controle. Recomendamos ler as condições de
+                cada um antes de usá-los.
               </p>
 
               <strong class="termos__secao-titulo">7. Canais oficiais de comunicação</strong>
               <p class="termos__paragrafo">
                 Os canais oficiais são o WhatsApp (71) 99144-8218 e o e-mail josahcriativos@gmail.com. Combinados feitos
-                por outros meios, ou com terceiros que não representem a Josah Criativos, não geram obrigação.
-                Aprovações, mudanças de escopo e decisões importantes devem ficar registradas por escrito em um desses
-                canais.
+                por outros meios, ou com terceiros que não representem Josah Oliveira, não geram obrigação. Aprovações,
+                mudanças de escopo e decisões importantes devem ficar registradas por escrito em um desses canais.
               </p>
 
               <strong class="termos__secao-titulo">8. Como funciona a contratação</strong>
@@ -2064,12 +1906,12 @@
                 Como regra, o trabalho começa com 50% do valor total e o saldo é pago na aprovação final. Se a proposta
                 trouxer condição diversa (pagamento único, parcelamento, saldo por entrega ou vínculo a financiador),
                 vale a proposta. Os arquivos em alta só são liberados após a compensação do valor correspondente. A
-                Josah Criativos emite Nota Fiscal de Serviços Avulsa pela SEFAZ Salvador a cada pagamento, para
-                prestação de contas. Em caso de atraso, incidem multa de 2% e juros de 1% ao mês, e a entrega dos
-                arquivos finais fica suspensa até a regularização. O dever de pagar não depende de aprovação do projeto,
-                liberação de recursos ou prestação de contas perante financiador, salvo previsão expressa na proposta.
-                Havendo terceiro pagador, o cliente responde pelo pagamento, salvo se esse terceiro assinar a proposta
-                como responsável.
+                Josah Oliveira emite Nota Fiscal de Serviços Avulsa pela SEFAZ Salvador a cada pagamento, para prestação
+                de contas. Em caso de atraso, incidem multa de 2% e juros de 1% ao mês, e a entrega dos arquivos finais
+                fica suspensa até a regularização. O dever de pagar não depende de aprovação do projeto, liberação de
+                recursos ou prestação de contas perante financiador, salvo previsão expressa na proposta. Havendo
+                terceiro pagador, o cliente responde pelo pagamento, salvo se esse terceiro assinar a proposta como
+                responsável.
               </p>
 
               <strong class="termos__secao-titulo">10. Prazos</strong>
@@ -2085,16 +1927,15 @@
               <p class="termos__paragrafo">
                 O cliente declara ter direito de usar tudo o que envia: textos, marcas, logomarcas de patrocinadores e
                 apoiadores, fotos, músicas, vozes e imagens de pessoas. Responde também por reclamações de terceiros
-                relativas a esse material, mantendo a Josah Criativos indene.
+                relativas a esse material, mantendo Josah Oliveira indene.
               </p>
               <p class="termos__paragrafo">
                 Autorizações de uso de imagem, incluindo de crianças e adolescentes, são de responsabilidade do cliente.
               </p>
               <p class="termos__paragrafo">
                 Exigências de editais, leis de incentivo e patrocinadores (manuais de marca, posição de logos, textos
-                obrigatórios) devem ser informadas no briefing. A Josah Criativos as aplica conforme o que for
-                informado. Exigências apresentadas depois, ou alteradas no meio do projeto, geram ajustes cobrados à
-                parte.
+                obrigatórios) devem ser informadas no briefing. Josah Oliveira as aplica conforme o que for informado.
+                Exigências apresentadas depois, ou alteradas no meio do projeto, geram ajustes cobrados à parte.
               </p>
               <p class="termos__paragrafo">
                 Nomes, datas, valores, ortografia e demais informações são conferidos pelo cliente antes da aprovação.
@@ -2119,7 +1960,7 @@
                 por link de nuvem, e-mail ou outro meio combinado. Os entregáveis finais saem nos formatos de uso (PDF,
                 PNG, JPG), ou nos indicados na proposta. Arquivos abertos e editáveis só são entregues se previstos na
                 proposta ou contratados à parte. Os arquivos do projeto são mantidos por 12 meses após a entrega final.
-                Depois desse período, a Josah Criativos pode não ter mais cópia disponível.
+                Depois desse período, Josah Oliveira pode não ter mais cópia disponível.
               </p>
 
               <strong class="termos__secao-titulo">14. Direitos autorais e uso do trabalho</strong>
@@ -2130,13 +1971,13 @@
                 ocorre a cessão total e definitiva dos direitos patrimoniais sobre os entregáveis finais. Se a proposta
                 vincular o pagamento à validação da prestação de contas do projeto, essa validação marca o vencimento do
                 saldo, e a cessão só ocorre após o pagamento. Havendo inadimplemento após o encerramento do projeto, ou
-                rejeição da prestação de contas que impeça o pagamento por motivo que não seja falha técnica da Josah
-                Criativos, e persistindo a mora por 5 dias úteis após notificação, a licença é revogada e o uso das
-                peças passa a infringir direitos autorais.
+                rejeição da prestação de contas que impeça o pagamento por motivo que não seja falha técnica de Josah
+                Oliveira, e persistindo a mora por 5 dias úteis após notificação, a licença é revogada e o uso das peças
+                passa a infringir direitos autorais.
               </p>
               <p class="termos__paragrafo">
-                Estudos, rascunhos, alternativas não escolhidas e arquivos abertos não previstos permanecem com a Josah
-                Criativos, assim como os direitos morais de autoria. A cessão não autoriza revenda ou sublicenciamento
+                Estudos, rascunhos, alternativas não escolhidas e arquivos abertos não previstos permanecem com Josah
+                Oliveira, assim como os direitos morais de autoria. A cessão não autoriza revenda ou sublicenciamento
                 como obra autônoma. Fontes, bancos de imagens, trilhas e outros recursos de terceiros seguem as licenças
                 de cada fornecedor, e usos que exijam licença ampliada podem ter custo extra.
               </p>
@@ -2145,14 +1986,14 @@
                 direitos de terceiros.
               </p>
               <p class="termos__paragrafo">
-                Após o lançamento público do projeto, a Josah Criativos pode exibir o trabalho e citar o cliente em seu
+                Após o lançamento público do projeto, Josah Oliveira pode exibir o trabalho e citar o cliente em seu
                 portfólio, site e redes profissionais, sem expor valores ou informações confidenciais. Esse direito
                 subsiste à licença e à cessão.
               </p>
 
               <strong class="termos__secao-titulo">15. Particularidades de cada tipo de serviço</strong>
               <p class="termos__paragrafo">
-                Impressos e material de palco: a Josah Criativos cria e entrega apenas a arte, em arquivo digital pronto
+                Impressos e material de palco: Josah Oliveira cria e entrega apenas a arte, em arquivo digital pronto
                 para produção. Impressão, produção gráfica, contratação e acompanhamento de gráficas e fornecedores, e
                 seus custos, são de responsabilidade do cliente. As cores podem variar entre tela e impressão, e o
                 cliente confere o arquivo final e a prova da gráfica antes de mandar produzir.
@@ -2167,17 +2008,17 @@
                 Proteção de Dados.
               </p>
               <p class="termos__paragrafo">
-                Campanhas para redes sociais: incluem apenas a criação das peças. A Josah Criativos não faz agendamento,
+                Campanhas para redes sociais: incluem apenas a criação das peças. Josah Oliveira não faz agendamento,
                 publicação, postagem nem gestão de perfis, que ficam a cargo do cliente.
               </p>
 
               <strong class="termos__secao-titulo">16. Limites da atuação e transparência</strong>
               <p class="termos__paragrafo">
-                A Josah Criativos atua em direção de arte e design. Não elabora nem gerencia projetos culturais e não
+                Josah Oliveira atua em direção de arte e design. Não elabora nem gerencia projetos culturais e não
                 garante aprovação em editais, captação de recursos, venda de ingressos ou resultados de engajamento.
                 Josafá Oliveira Costa também atua como Designer Pleno na Tabuleiro Produções, e a indicação da produtora
                 para elaboração e gestão de projetos é feita sem qualquer obrigação de contratação. A responsabilidade
-                indenizatória total da Josah Criativos fica limitada ao valor recebido pelo serviço que originou o dano,
+                indenizatória total de Josah Oliveira fica limitada ao valor recebido pelo serviço que originou o dano,
                 sem alcançar dolo ou culpa grave e, quando o cliente for consumidor, apenas na medida permitida em lei.
               </p>
 
@@ -2219,15 +2060,15 @@
             <div class="termos__texto">
               <span class="termos__data">Última atualização: 4 de outubro de 2026.</span>
               <p class="termos__paragrafo">
-                Esta política explica quais dados pessoais a Josah Criativos trata, por que trata, com quem os
-                compartilha e como você pode controlá-los. Ela segue a Lei Geral de Proteção de Dados Pessoais (Lei
-                13.709/2018) e o Marco Civil da Internet (Lei 12.965/2014). Dado pessoal é qualquer informação que
-                identifique ou possa identificar uma pessoa, como nome, telefone, e-mail, CPF ou endereço IP.
+                Esta política explica quais dados pessoais Josah Oliveira trata, por que trata, com quem os compartilha
+                e como você pode controlá-los. Ela segue a Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018) e o
+                Marco Civil da Internet (Lei 12.965/2014). Dado pessoal é qualquer informação que identifique ou possa
+                identificar uma pessoa, como nome, telefone, e-mail, CPF ou endereço IP.
               </p>
 
               <strong class="termos__secao-titulo">1. Quem é responsável pelos dados</strong>
               <p class="termos__paragrafo">
-                O controlador é Josafá Oliveira Costa, atuando como Josah Criativos. O contato para qualquer assunto de
+                O controlador é Josafá Oliveira Costa, atuando como Josah Oliveira. O contato para qualquer assunto de
                 privacidade, incluindo o papel de encarregado, é josahcriativos@gmail.com.
               </p>
 
@@ -2251,8 +2092,8 @@
                 autorização para isso.
               </p>
               <p class="termos__paragrafo">
-                Pagamento: a Josah Criativos não armazena dados de cartão. Em transferências e Pix, o comprovante traz
-                nome e dados bancários do pagador.
+                Pagamento: Josah Oliveira não armazena dados de cartão. Em transferências e Pix, o comprovante traz nome
+                e dados bancários do pagador.
               </p>
               <p class="termos__paragrafo">
                 Não solicitamos dados pessoais sensíveis (como saúde, religião ou origem racial) e pedimos que você
@@ -2291,7 +2132,7 @@
                 Apenas na medida necessária, com: contador ou serviço de contabilidade; banco ou plataforma de
                 pagamento; a SEFAZ Salvador, para emissão de Nota Fiscal; serviços de nuvem usados para armazenar e
                 entregar arquivos; WhatsApp e provedores de e-mail; e autoridades, quando houver exigência legal. A
-                Josah Criativos não contrata gráficas nem fornecedores de produção em nome do cliente, e por isso os
+                Josah Oliveira não contrata gráficas nem fornecedores de produção em nome do cliente, e por isso os
                 dados não são compartilhados com eles. As fontes e os ícones do site são servidos pelo próprio site. O
                 site também carrega recursos hospedados por terceiros, como o plugin de acessibilidade em Libras
                 (VLibras, do governo federal) e imagens de projetos hospedadas em serviços externos, o que faz esses
@@ -2348,7 +2189,7 @@
 
               <strong class="termos__secao-titulo">10. Links externos</strong>
               <p class="termos__paragrafo">
-                Esta política vale apenas para este site e para o atendimento da Josah Criativos. Ao acessar páginas de
+                Esta política vale apenas para este site e para o atendimento de Josah Oliveira. Ao acessar páginas de
                 terceiros, como redes sociais, vale a política de privacidade de cada uma.
               </p>
 
@@ -2376,7 +2217,7 @@
             <div class="termos__texto">
               <span class="termos__data">Última atualização: 4 de outubro de 2026.</span>
               <p class="termos__paragrafo">
-                Os serviços da Josah Criativos são criados sob medida, a partir do briefing de cada cliente, e entregues
+                Os serviços de Josah Oliveira são criados sob medida, a partir do briefing de cada cliente, e entregues
                 em formato digital. Por isso, o trabalho depende de tempo de criação que não pode ser "devolvido" depois
                 de feito. Esta política explica como funcionam pagamento, entrega, correções, cancelamento e reembolso,
                 de forma proporcional ao que já foi realizado.
@@ -2385,9 +2226,9 @@
               <strong class="termos__secao-titulo">1. Natureza e entrega do serviço</strong>
               <p class="termos__paragrafo">
                 Não há produto físico. Todos os serviços são prestados e entregues de forma digital, por link de nuvem,
-                e-mail ou outro meio combinado, em etapas definidas no cronograma. A Josah Criativos não realiza
-                impressão nem produção gráfica e não contrata nem intermedia gráficas ou fornecedores. Essa contratação
-                e seus custos ficam a cargo do cliente.
+                e-mail ou outro meio combinado, em etapas definidas no cronograma. Josah Oliveira não realiza impressão
+                nem produção gráfica e não contrata nem intermedia gráficas ou fornecedores. Essa contratação e seus
+                custos ficam a cargo do cliente.
               </p>
 
               <strong class="termos__secao-titulo">2. Pagamento e liberação dos arquivos</strong>
@@ -2443,11 +2284,11 @@
                 própria atividade são regidas pelo contrato e pelas regras dos itens anteriores.
               </p>
 
-              <strong class="termos__secao-titulo">6. Cancelamento por parte da Josah Criativos</strong>
+              <strong class="termos__secao-titulo">6. Cancelamento por parte de Josah Oliveira</strong>
               <p class="termos__paragrafo">
-                Se o projeto não puder ser concluído por motivo que dependa da Josah Criativos ou por força maior, será
-                devolvido o valor correspondente à parte que não foi entregue. Se houver atraso por culpa da Josah
-                Criativos superior a 15 dias corridos do prazo da proposta, mantido 5 dias úteis após notificação, o
+                Se o projeto não puder ser concluído por motivo que dependa de Josah Oliveira ou por força maior, será
+                devolvido o valor correspondente à parte que não foi entregue. Se houver atraso por culpa de Josah
+                Oliveira superior a 15 dias corridos do prazo da proposta, mantido 5 dias úteis após notificação, o
                 cliente pode cancelar, com devolução proporcional à parte não entregue.
               </p>
 
@@ -2564,7 +2405,7 @@
         </form>
         <a
           class="chat__whatsapp"
-          href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20da%20Josah%20Criativos%20e%20gostaria%20de%20falar%20sobre%20um%20projeto."
+          href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20de%20Josah%20Oliveira%20e%20gostaria%20de%20falar%20sobre%20um%20projeto."
           target="_blank"
           rel="noopener noreferrer"
         >

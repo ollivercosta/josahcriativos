@@ -78,18 +78,6 @@
     transform 1.2s var(--curva) 1.5s;
 }
 
-.sobre__anotacao-nome {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 18px);
-  text-align: right;
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 1s ease 1.7s,
-    transform 1.2s var(--curva) 1.7s;
-}
-
 .sobre__anotacao-principal {
   display: block;
   font-stretch: 115%;
@@ -121,12 +109,7 @@
 }
 
 .sobre__colagem--visivel .sobre__anotacao-papeis,
-.sobre__colagem--visivel .sobre__anotacao-nome {
-  opacity: 1;
-  transform: none;
-}
-
-/* ---------- texto ---------- */
+.sobre__colagem--visivel /* ---------- texto ---------- */
 .sobre__titulo {
   margin-bottom: 4vw;
   font-weight: 300;
@@ -179,17 +162,6 @@
   text-underline-offset: 4px;
 }
 
-.sobre__trajetoria {
-  margin-bottom: 22px;
-  font-size: 1.15rem;
-  line-height: 1.65;
-}
-
-.sobre__trajetoria-destaque {
-  font-weight: 800;
-  color: var(--cor-urucum);
-}
-
 .sobre__citacao {
   margin-bottom: 22px;
   padding-top: 22px;
@@ -197,6 +169,11 @@
   font-size: 1.3rem;
   line-height: 1.45;
   letter-spacing: -0.02em;
+}
+
+.sobre__citacao-trajetoria {
+  font-weight: 800;
+  color: var(--cor-urucum);
 }
 
 .sobre__citacao-destaque {
@@ -210,7 +187,7 @@
 
 .sobre__clientes-rotulo {
   font-stretch: 115%;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;

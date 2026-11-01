@@ -5,10 +5,36 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     }
-  ]
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "publico",
+  "images": {
+    "sizes": [640, 1080, 1920],
+    "formats": ["image/avif", "image/webp"],
+    "minimumCacheTTL": 2678400,
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "blogger.googleusercontent.com"
+      },
+      {
+        "protocol": "https",
+        "hostname": "mir-s3-cdn-cf.behance.net"
+      }
+    ]
+  }
 }

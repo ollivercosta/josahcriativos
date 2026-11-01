@@ -1,20 +1,33 @@
 /* =========================================================================
    ALGUNS TRABALHOS
-   Grade de capas. Ao passar o mouse, uma cortina de tinta sobe sobre a
-   capa com o tipo de peça, o nome e o resumo do projeto. Seis trabalhos
-   aparecem primeiro; "Ver mais" mostra o restante (só em "Todos").
+   Três projetos em destaque, em formato de estudo de caso, e a grade com
+   os demais. Na grade, uma cortina de tinta sobe sobre a capa com o tipo,
+   o nome e o resumo. Seis aparecem primeiro; "Ver mais" mostra o restante.
    ========================================================================= */
 
 .trabalhos {
   padding: 6vh 0 18vh;
 }
 
+/* título e a barra que prolonga a linha de base dele até a margem */
 .trabalhos__cabeca {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 24px;
-  padding: 0 var(--margem) 3.4vw;
+  grid-template-columns: auto minmax(4vw, 1fr);
+  align-items: last baseline;
+  gap: 2vw;
+  padding: 0 var(--margem) 7vh;
+}
+
+.trabalhos__titulo-barra {
+  height: max(5px, 0.6vw);
+  background: var(--cor-tinta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s var(--curva) 0.35s;
+}
+
+.trabalhos__titulo--visivel + .trabalhos__titulo-barra {
+  transform: scaleX(1);
 }
 
 /* ---------- título com palavras que sobem ---------- */
@@ -50,6 +63,174 @@
   transform: none;
 }
 
+/* ---------- destaques: estudo de caso ---------- */
+.trabalhos__destaques {
+  display: grid;
+  gap: 14vh;
+  margin: 0;
+  padding: 0 var(--margem) 16vh;
+  list-style: none;
+}
+
+.trabalhos__destaque {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  align-items: end;
+  gap: 4vw;
+}
+
+.trabalhos__destaque--invertido {
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+}
+
+.trabalhos__destaque--invertido .trabalhos__destaque-capa {
+  order: 2;
+}
+
+.trabalhos__destaque-capa {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border: 0;
+  background: var(--cor-cinza-claro);
+  cursor: pointer;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.6s var(--curva-entra-sai);
+}
+
+.trabalhos__destaque-imagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.14);
+  transition: transform 2s var(--curva);
+}
+
+.trabalhos__destaque-texto {
+  padding-bottom: 0.4vw;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1s var(--curva-suave) 0.5s,
+    transform 1.3s var(--curva) 0.5s;
+}
+
+.trabalhos__destaque--visivel .trabalhos__destaque-capa {
+  clip-path: inset(0 0 0 0);
+}
+
+.trabalhos__destaque--visivel .trabalhos__destaque-imagem {
+  transform: scale(1.02);
+}
+
+.trabalhos__destaque--visivel .trabalhos__destaque-texto {
+  opacity: 1;
+  transform: none;
+}
+
+.trabalhos__destaque-tipo {
+  margin-bottom: 14px;
+  font-stretch: 115%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cor-urucum);
+}
+
+.trabalhos__destaque-nome {
+  font-weight: 900;
+  font-size: 3.6vw;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.trabalhos__destaque-resumo {
+  margin-top: 20px;
+  max-width: 28em;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--cor-tinta-suave);
+}
+
+.trabalhos__destaque-ficha {
+  margin-top: 26px;
+  border-top: 1px solid var(--cor-tinta);
+}
+
+.trabalhos__destaque-linha {
+  display: grid;
+  grid-template-columns: 6.5em minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cor-linha-forte);
+  font-size: 0.95rem;
+}
+
+.trabalhos__destaque-rotulo {
+  color: var(--cor-tinta-suave);
+}
+
+.trabalhos__destaque-valor {
+  font-weight: 600;
+}
+
+.trabalhos__destaque-abrir {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 14px 22px 14px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cor-tinta);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.5s ease;
+}
+
+.trabalhos__destaque-seta {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transition: transform 0.8s var(--curva);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trabalhos__destaque-capa:hover .trabalhos__destaque-imagem {
+    transform: scale(1.07);
+  }
+
+  .trabalhos__destaque-abrir:hover {
+    background: var(--cor-urucum);
+  }
+
+  .trabalhos__destaque-abrir:hover .trabalhos__destaque-seta {
+    transform: translateX(5px);
+  }
+}
+
+/* ---------- outros trabalhos ---------- */
+.trabalhos__outros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px 32px;
+  margin: 0 var(--margem);
+  padding: 22px 0 0;
+  border-top: 1px solid var(--cor-tinta);
+}
+
+.trabalhos__outros-titulo {
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
+}
+
 /* ---------- filtros ---------- */
 .trabalhos__filtros {
   display: flex;
@@ -65,7 +246,7 @@
   border: 0;
   background: none;
   font-stretch: 115%;
-  font-size: 0.64rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -105,7 +286,6 @@
   margin: 0;
   padding: 3vw var(--margem) 0;
   list-style: none;
-  border-top: 1px solid var(--cor-tinta);
   transition: opacity 0.45s var(--curva-suave);
 }
 
@@ -171,7 +351,7 @@
   justify-items: center;
   gap: 10px;
   font-stretch: 115%;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -200,7 +380,7 @@
 .trabalhos__resumo-tipo {
   display: block;
   font-stretch: 115%;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -249,7 +429,7 @@
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   font-stretch: 115%;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -273,7 +453,7 @@
 
 .trabalhos__legenda-tipo {
   font-stretch: 115%;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -361,8 +541,27 @@
 }
 
 @media (max-width: 860px) {
-  .trabalhos__cabeca {
+  .trabalhos__titulo-barra {
+    display: none;
+  }
+
+  .trabalhos__destaque,
+  .trabalhos__destaque--invertido {
     grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+
+  .trabalhos__destaque--invertido .trabalhos__destaque-capa {
+    order: 0;
+  }
+
+  .trabalhos__destaque-nome {
+    font-size: 10vw;
+  }
+
+  .trabalhos__destaques {
+    gap: 80px;
+    padding-bottom: 96px;
   }
 
   .trabalhos__titulo {

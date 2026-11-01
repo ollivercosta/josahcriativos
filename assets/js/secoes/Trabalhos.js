@@ -1,16 +1,17 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
 import { icone } from "../nucleo/Icones.js";
-import { capaDoTrabalho } from "../../dados/trabalhos.js";
+import { aplicarImagem, capaDoTrabalho } from "../../dados/trabalhos.js";
 
 const TODOS = "Todos";
 const VISIVEIS_DE_INICIO = 6;
 
 /**
  * Trabalhos
- * Monta a grade de capas a partir de `assets/dados/trabalhos.js`.
- * Seis trabalhos aparecem primeiro; "Ver mais" mostra o restante e só
- * existe no filtro "Todos". Os filtros trocam a grade com um esmaecer
- * curto, e as capas entram em sequência.
+ * Monta a seção a partir de `assets/dados/trabalhos.js`:
+ *   destaques  os trabalhos com `destaque: true`, em formato de estudo de
+ *              caso (imagem grande, tipo, nome, resumo e ficha curta);
+ *   grade      os demais, com filtros. Seis aparecem primeiro; "Ver mais"
+ *              mostra o restante e só existe no filtro "Todos".
  */
 export class Trabalhos {
   /**
@@ -22,15 +23,19 @@ export class Trabalhos {
     this.raiz = raiz;
     this.trabalhos = trabalhos;
     this.abrirFicha = abrirFicha;
+    this.listaDestaques = raiz.querySelector(".trabalhos__destaques");
+    this.outros = raiz.querySelector(".trabalhos__outros");
     this.grade = raiz.querySelector(".trabalhos__grade");
     this.filtros = raiz.querySelector(".trabalhos__filtros");
     this.areaMais = raiz.querySelector(".trabalhos__mais");
     this.botaoMais = raiz.querySelector(".trabalhos__mais-botao");
     this.rotuloMais = raiz.querySelector(".trabalhos__mais-rotulo");
     this.itens = [];
+    this.destaques = [];
     this.filtroAtual = TODOS;
     this.expandido = false;
 
+    this.#montarDestaques();
     this.#montarGrade();
     this.#montarFiltros();
     this.botaoMais.addEventListener("click", () => this.#alternarMais());
@@ -38,13 +43,89 @@ export class Trabalhos {
     this.#observarEntrada();
   }
 
-  /** Índices dos trabalhos visíveis agora, na ordem da grade. */
+  /** Índices dos trabalhos visíveis agora: destaques e grade, na ordem da página. */
   get visiveis() {
-    return this.itens.filter((item) => !item.hidden).map((item) => Number(item.dataset.indice));
+    const grade = this.itens.filter((item) => !item.hidden).map((item) => Number(item.dataset.indice));
+    return [...this.destaques, ...grade];
+  }
+
+  #montarDestaques() {
+    this.trabalhos.forEach((trabalho, indice) => {
+      if (!trabalho.destaque) return;
+      this.destaques.push(indice);
+      const lado = this.destaques.length % 2 === 0 ? " trabalhos__destaque--invertido" : "";
+      const item = document.createElement("li");
+      item.className = `trabalhos__destaque${lado}`;
+      item.innerHTML = `
+        <button type="button" class="trabalhos__destaque-capa">
+          <img class="trabalhos__destaque-imagem" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+        </button>
+        <div class="trabalhos__destaque-texto">
+          <p class="trabalhos__destaque-tipo"></p>
+          <h3 class="trabalhos__destaque-nome"></h3>
+          <p class="trabalhos__destaque-resumo"></p>
+          <dl class="trabalhos__destaque-ficha"></dl>
+          <button type="button" class="trabalhos__destaque-abrir">
+            Ver projeto ${icone("arrow-right", "trabalhos__destaque-seta")}
+          </button>
+        </div>`;
+      const capa = item.querySelector(".trabalhos__destaque-capa");
+      capa.setAttribute("aria-label", `Abrir a ficha de ${trabalho.nome}`);
+      const imagem = capaDoTrabalho(trabalho);
+      const img = item.querySelector(".trabalhos__destaque-imagem");
+      if (imagem) aplicarImagem(img, imagem, "(max-width: 860px) 100vw, 58vw");
+      else img.remove();
+      item.querySelector(".trabalhos__destaque-tipo").textContent = trabalho.tipo || trabalho.categoria;
+      item.querySelector(".trabalhos__destaque-nome").textContent = trabalho.nome;
+      item.querySelector(".trabalhos__destaque-resumo").textContent = trabalho.resumo || "";
+      const ficha = item.querySelector(".trabalhos__destaque-ficha");
+      for (const [rotulo, valor] of [
+        ["Cliente", trabalho.cliente],
+        ["Ano", trabalho.ano],
+        ["Peças", (trabalho.pecas || []).join(", ")],
+      ]) {
+        if (!valor) continue;
+        const linha = document.createElement("div");
+        linha.className = "trabalhos__destaque-linha";
+        const termo = document.createElement("dt");
+        termo.className = "trabalhos__destaque-rotulo";
+        termo.textContent = rotulo;
+        const descricao = document.createElement("dd");
+        descricao.className = "trabalhos__destaque-valor";
+        descricao.textContent = valor;
+        linha.append(termo, descricao);
+        ficha.append(linha);
+      }
+      if (!ficha.children.length) ficha.remove();
+      const abrir = () => this.abrirFicha(indice, this.visiveis);
+      capa.addEventListener("click", abrir);
+      item.querySelector(".trabalhos__destaque-abrir").addEventListener("click", abrir);
+      this.listaDestaques.append(item);
+      this.#observarDestaque(item);
+    });
+  }
+
+  /** Cada destaque se revela ao entrar na tela: a imagem abre de baixo para cima. */
+  #observarDestaque(item) {
+    const mostrar = () => item.classList.add("trabalhos__destaque--visivel");
+    if (Ambiente.reduzMovimento || !("IntersectionObserver" in window)) {
+      mostrar();
+      return;
+    }
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        if (!entradas.some((entrada) => entrada.isIntersecting)) return;
+        observador.disconnect();
+        mostrar();
+      },
+      { threshold: 0.2 },
+    );
+    observador.observe(item);
   }
 
   #montarGrade() {
     this.trabalhos.forEach((trabalho, indice) => {
+      if (trabalho.destaque) return;
       const item = document.createElement("li");
       item.className = "trabalhos__item";
       item.dataset.indice = String(indice);
@@ -70,11 +151,11 @@ export class Trabalhos {
       capa.className = "trabalhos__capa";
       const img = document.createElement("img");
       img.className = "trabalhos__imagem";
-      img.src = imagem;
       img.alt = "";
       img.loading = "lazy";
       img.decoding = "async";
       img.referrerPolicy = "no-referrer";
+      aplicarImagem(img, imagem, "(max-width: 860px) 100vw, (max-width: 1100px) 46vw, 30vw");
       capa.append(img);
     } else {
       capa.className = "trabalhos__capa trabalhos__capa--video";
@@ -115,7 +196,8 @@ export class Trabalhos {
   }
 
   #montarFiltros() {
-    const categorias = [TODOS, ...new Set(this.trabalhos.map((trabalho) => trabalho.categoria))];
+    const restantes = this.trabalhos.filter((trabalho) => !trabalho.destaque);
+    const categorias = [TODOS, ...new Set(restantes.map((trabalho) => trabalho.categoria))];
     for (const categoria of categorias) {
       const botao = document.createElement("button");
       botao.type = "button";
@@ -143,7 +225,7 @@ export class Trabalhos {
       this.#aplicar(true);
     } else {
       this.#aplicar(false);
-      window.dispatchEvent(new CustomEvent("rolar-para", { detail: this.raiz }));
+      window.dispatchEvent(new CustomEvent("rolar-para", { detail: this.outros }));
     }
   }
 
