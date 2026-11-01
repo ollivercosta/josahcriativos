@@ -1,0 +1,36 @@
+/* =========================================================================
+   MANIFESTO
+   A frase se escreve conforme a leitura avança: cada palavra sai do cinza
+   para a tinta, e as palavras-chave chegam em urucum.
+   ========================================================================= */
+
+.manifesto {
+  padding: 22vh var(--margem) 24vh;
+}
+
+.manifesto__texto {
+  max-width: 23ch;
+  font-weight: 400;
+  font-size: 5.2vw;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.manifesto__palavra {
+  color: var(--cor-tinta-apagada);
+  transition: color 0.7s var(--curva-suave);
+}
+
+.manifesto__palavra--lida {
+  color: var(--cor-tinta);
+}
+
+.manifesto__palavra--forte.manifesto__palavra--lida {
+  color: var(--cor-urucum);
+}
+
+@media (max-width: 860px) {
+  .manifesto__texto {
+    font-size: 9vw;
+  }
+}

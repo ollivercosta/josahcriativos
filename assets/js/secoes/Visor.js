@@ -1,0 +1,184 @@
+import { ehImagem } from "../../dados/trabalhos.js";
+
+/**
+ * Visor
+ * Janela com a mini ficha de design de um trabalho e as suas imagens ou
+ * vídeos. Navega entre os trabalhos visíveis na grade (setas do teclado,
+ * botões e "Próximo trabalho").
+ */
+export class Visor {
+  /**
+   * @param {HTMLElement} raiz
+   * @param {Array<object>} trabalhos
+   * @param {import("../nucleo/GestorDeSobreposicoes.js").GestorDeSobreposicoes} gestor
+   */
+  constructor(raiz, trabalhos, gestor) {
+    this.raiz = raiz;
+    this.trabalhos = trabalhos;
+    this.gestor = gestor;
+    this.lista = trabalhos.map((_, indice) => indice);
+    this.atual = 0;
+    this.campos = {
+      corpo: raiz.querySelector(".visor__corpo"),
+      tipo: raiz.querySelector(".visor__tipo"),
+      titulo: raiz.querySelector(".visor__titulo"),
+      meta: raiz.querySelector(".visor__meta"),
+      blocos: raiz.querySelector(".visor__blocos"),
+      midias: raiz.querySelector(".visor__midias"),
+      proximoNome: raiz.querySelector(".visor__seguinte-nome"),
+    };
+
+    gestor.registrar("visor", raiz, {
+      classeAberta: "visor--aberto",
+      foco: () => raiz.querySelector(".visor__fechar"),
+    });
+    raiz.querySelector(".visor__anterior").addEventListener("click", () => this.#passo(-1));
+    raiz.querySelector(".visor__posterior").addEventListener("click", () => this.#passo(1));
+    raiz.querySelector(".visor__seguinte").addEventListener("click", () => this.#passo(1));
+    document.addEventListener("keydown", (evento) => {
+      if (!gestor.estaAberta("visor")) return;
+      if (evento.key === "ArrowRight") this.#passo(1);
+      if (evento.key === "ArrowLeft") this.#passo(-1);
+    });
+  }
+
+  /**
+   * @param {number} indice trabalho a mostrar
+   * @param {number[]} lista trabalhos navegáveis (os visíveis na grade)
+   */
+  abrir(indice, lista) {
+    this.lista = lista && lista.includes(indice) ? lista : this.trabalhos.map((_, i) => i);
+    this.#mostrar(indice);
+    this.gestor.abrir("visor");
+  }
+
+  #passo(direcao) {
+    const posicao = Math.max(0, this.lista.indexOf(this.atual));
+    const proxima = (posicao + direcao + this.lista.length) % this.lista.length;
+    this.#mostrar(this.lista[proxima]);
+  }
+
+  #mostrar(indice) {
+    const trabalho = this.trabalhos[indice];
+    this.atual = indice;
+    const { corpo, tipo, titulo, meta, blocos, midias, proximoNome } = this.campos;
+
+    tipo.textContent = trabalho.tipo || trabalho.categoria;
+    titulo.textContent = trabalho.nome;
+
+    meta.replaceChildren();
+    for (const [rotulo, valor] of [
+      ["Categoria", trabalho.categoria],
+      ["Cliente", trabalho.cliente],
+      ["Ano", trabalho.ano],
+      ["Área", trabalho.area],
+    ]) {
+      if (!valor) continue;
+      meta.append(
+        this.#elemento("dt", "visor__meta-rotulo", rotulo),
+        this.#elemento("dd", this.#classeTexto("visor__meta-valor", valor), valor),
+      );
+    }
+    meta.hidden = meta.children.length === 0;
+
+    blocos.replaceChildren();
+    for (const [rotulo, valor] of [
+      ["Ponto de partida", trabalho.partida],
+      ["Decisões de design", trabalho.decisoes],
+    ]) {
+      if (!valor) continue;
+      const bloco = this.#elemento("section", "visor__bloco");
+      bloco.append(
+        this.#elemento("h3", "visor__bloco-titulo", rotulo),
+        this.#elemento("p", this.#classeTexto("visor__bloco-texto", valor), valor),
+      );
+      blocos.append(bloco);
+    }
+    if (trabalho.pecas?.length) {
+      const bloco = this.#elemento("section", "visor__bloco");
+      const lista = this.#elemento("ul", "visor__pecas");
+      for (const peca of trabalho.pecas)
+        lista.append(this.#elemento("li", this.#classeTexto("visor__peca", peca), peca));
+      bloco.append(this.#elemento("h3", "visor__bloco-titulo", "Peças entregues"), lista);
+      blocos.append(bloco);
+    }
+
+    midias.replaceChildren(...(trabalho.midias || []).map((midia, k) => this.#midia(midia, trabalho.nome, k)));
+
+    const posicao = Math.max(0, this.lista.indexOf(indice));
+    proximoNome.textContent = this.trabalhos[this.lista[(posicao + 1) % this.lista.length]].nome;
+
+    this.raiz.scrollTop = 0;
+    corpo.classList.remove("visor__corpo--entrando");
+    void corpo.offsetWidth;
+    corpo.classList.add("visor__corpo--entrando");
+  }
+
+  /** Campos ainda não preenchidos (entre colchetes) aparecem em itálico. */
+  #classeTexto(classe, valor) {
+    return /^\s*\[/.test(valor) ? `${classe} visor__texto--preencher` : classe;
+  }
+
+  #elemento(tag, classe, texto) {
+    const elemento = document.createElement(tag);
+    elemento.className = classe;
+    if (texto !== undefined) elemento.textContent = texto;
+    return elemento;
+  }
+
+  #midia(midia, nome, posicao) {
+    const figura = this.#elemento("figure", "visor__midia");
+    if (ehImagem(midia)) {
+      const img = this.#elemento("img", "visor__midia-imagem");
+      img.src = midia;
+      img.alt = `${nome}, imagem ${posicao + 1}`;
+      img.loading = posicao ? "lazy" : "eager";
+      img.referrerPolicy = "no-referrer";
+      figura.append(img);
+      return figura;
+    }
+    figura.append(this.#video(typeof midia === "string" ? midia : midia.video || "", midia, nome));
+    return figura;
+  }
+
+  /** Vídeos externos só carregam depois do clique (privacidade e peso). */
+  #video(url, midia, nome) {
+    const caixa = this.#elemento("div", "visor__video");
+    if (midia && midia.ratio) caixa.style.aspectRatio = midia.ratio;
+    const youtube = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+    const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    const drive = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+    if (!youtube && !vimeo && !drive) {
+      const video = this.#elemento("video", "visor__video-quadro");
+      video.src = url;
+      video.controls = true;
+      video.preload = "metadata";
+      if (midia && midia.poster) video.poster = midia.poster;
+      caixa.append(video);
+      return caixa;
+    }
+    const endereco = youtube
+      ? `https://www.youtube-nocookie.com/embed/${youtube[1]}?autoplay=1&rel=0`
+      : vimeo
+        ? `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1`
+        : `https://drive.google.com/file/d/${drive[1]}/preview`;
+    const origem = youtube ? "YouTube" : vimeo ? "Vimeo" : "Google Drive";
+    const botao = this.#elemento("button", "visor__video-botao");
+    botao.type = "button";
+    botao.innerHTML =
+      '<svg class="visor__video-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Reproduzir vídeo';
+    botao.addEventListener("click", () => {
+      const quadro = this.#elemento("iframe", "visor__video-quadro");
+      quadro.src = endereco;
+      quadro.title = `Vídeo: ${nome}`;
+      quadro.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      quadro.allowFullscreen = true;
+      caixa.replaceChildren(quadro);
+    });
+    caixa.append(
+      botao,
+      this.#elemento("small", "visor__video-aviso", `O vídeo carrega do ${origem} depois do clique.`),
+    );
+    return caixa;
+  }
+}

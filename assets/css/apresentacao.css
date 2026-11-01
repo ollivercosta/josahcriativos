@@ -1,0 +1,204 @@
+/* =========================================================================
+   COMO O TRABALHO SE APRESENTA
+   A seção fica presa e as quatro cenas passam na horizontal. Cada cena
+   tem a palavra, o texto original e três pontos-chave que entram em
+   sequência quando ela chega ao centro.
+   ========================================================================= */
+
+.apresentacao {
+  position: relative;
+  height: 400vh;
+}
+
+.apresentacao__palco {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.apresentacao__rotulo {
+  position: absolute;
+  z-index: 2;
+  left: var(--margem);
+  top: calc(var(--altura-cabecalho) + 3vh);
+  font-stretch: 115%;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.apresentacao__trilho {
+  display: flex;
+  width: 400vw;
+  height: 100%;
+  transform: translate3d(calc(var(--avanco, 0) * -300vw), 0, 0);
+  will-change: transform;
+}
+
+.apresentacao__cena {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 6vw;
+  padding: calc(var(--altura-cabecalho) + 6vh) var(--margem) 10vh;
+}
+
+.apresentacao__palavra {
+  font-weight: 900;
+  font-size: 8.4vw;
+  line-height: 0.86;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.apresentacao__cena--urucum .apresentacao__palavra {
+  color: var(--cor-urucum);
+}
+
+.apresentacao__descricao {
+  margin-top: 2.4vw;
+  max-width: 25em;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+/* pontos-chave: régua fina que se desenha, texto que sobe */
+.apresentacao__pontos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--cor-linha-forte);
+}
+
+.apresentacao__ponto {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.4vw minmax(0, 1fr);
+  align-items: baseline;
+  padding: 1.7vw 0;
+  overflow: hidden;
+}
+
+.apresentacao__ponto::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--cor-tinta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s var(--curva);
+  transition-delay: calc(var(--n, 0) * 140ms);
+}
+
+.apresentacao__ponto-marca {
+  width: 1.3vw;
+  height: 2px;
+  background: var(--cor-urucum);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s var(--curva);
+  transition-delay: calc(var(--n, 0) * 140ms + 250ms);
+}
+
+.apresentacao__ponto-texto {
+  font-weight: 300;
+  font-size: 2.5vw;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  opacity: 0;
+  transform: translateY(60%);
+  transition:
+    opacity 0.9s var(--curva-suave),
+    transform 1.1s var(--curva);
+  transition-delay: calc(var(--n, 0) * 140ms + 150ms);
+}
+
+.apresentacao__cena--ativa .apresentacao__ponto::before,
+.apresentacao__cena--ativa .apresentacao__ponto-marca {
+  transform: scaleX(1);
+}
+
+.apresentacao__cena--ativa .apresentacao__ponto-texto {
+  opacity: 1;
+  transform: none;
+}
+
+/* barra de avanço */
+.apresentacao__barra {
+  position: absolute;
+  left: var(--margem);
+  right: var(--margem);
+  bottom: 5vh;
+  height: 1px;
+  background: var(--cor-linha-forte);
+}
+
+.apresentacao__barra-progresso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 3px;
+  background: var(--cor-urucum);
+  transform-origin: left;
+  transform: scaleX(var(--avanco, 0));
+}
+
+@media (max-width: 860px) {
+  .apresentacao {
+    height: auto;
+  }
+
+  .apresentacao__palco {
+    position: relative;
+    height: auto;
+  }
+
+  .apresentacao__rotulo {
+    position: static;
+    padding: 60px var(--margem) 0;
+  }
+
+  .apresentacao__trilho {
+    display: block;
+    width: auto;
+    transform: none;
+  }
+
+  .apresentacao__cena {
+    width: auto;
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding: 40px var(--margem);
+  }
+
+  .apresentacao__palavra {
+    font-size: 15vw;
+  }
+
+  .apresentacao__ponto {
+    grid-template-columns: 28px minmax(0, 1fr);
+    padding: 14px 0;
+  }
+
+  .apresentacao__ponto-marca {
+    width: 16px;
+  }
+
+  .apresentacao__ponto-texto {
+    font-size: 1.5rem;
+  }
+
+  .apresentacao__barra {
+    display: none;
+  }
+}

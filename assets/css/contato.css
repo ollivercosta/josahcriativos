@@ -1,0 +1,233 @@
+/* =========================================================================
+   VAMOS APRESENTAR O SEU PROJETO PARA O MUNDO?
+   Faixa urucum (a mesma cor dos títulos). O círculo magnético segue o
+   cursor e traz o retrato em low-poly: o corpo fica dentro do círculo e a
+   cabeça passa para fora dele.
+   ========================================================================= */
+
+.contato {
+  position: relative;
+  overflow: hidden;
+  padding: 18vh var(--margem) 9vh;
+  background: var(--cor-urucum);
+  color: #fff;
+}
+
+.contato__titulo {
+  max-width: 13ch;
+  font-weight: 300;
+  font-size: 7.4vw;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+}
+
+.contato__titulo-forte {
+  font-weight: 900;
+}
+
+.contato__titulo-palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.08em 0.1em 0.04em;
+  margin: 0 -0.08em -0.1em -0.04em;
+}
+
+.contato__titulo-miolo {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.2s var(--curva);
+  transition-delay: calc(var(--k, 0) * 60ms);
+}
+
+.contato__titulo--visivel .contato__titulo-miolo {
+  transform: none;
+}
+
+/* ---------- círculo magnético com o personagem ---------- */
+.contato__ima {
+  position: absolute;
+  right: 9vw;
+  top: 26vh;
+  width: 16vw;
+  aspect-ratio: 1;
+  display: block;
+  color: var(--cor-tinta);
+  text-decoration: none;
+  transform: translate3d(var(--ima-x, 0px), var(--ima-y, 0px), 0);
+  transition: transform 0.9s var(--curva);
+}
+
+.contato__ima-circulo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--cor-tinta);
+  transition: transform 0.9s var(--curva);
+}
+
+/* corpo: recortado pelo círculo */
+.contato__ima-janela {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  transform: translateZ(0);
+}
+
+.contato__personagem-corpo,
+.contato__personagem-cabeca {
+  position: absolute;
+  left: -12.5%;
+  bottom: -2%;
+  width: 125%;
+  max-width: none;
+  height: auto;
+  transition: transform 1s var(--curva);
+}
+
+/* cabeça: a mesma imagem, mostrando só a parte de cima, por fora do círculo */
+.contato__personagem-cabeca {
+  clip-path: inset(0 0 62% 0);
+  pointer-events: none;
+}
+
+.contato__ima-rotulo {
+  position: absolute;
+  left: 50%;
+  bottom: -1.1vw;
+  translate: -50% 0;
+  padding: 0.9vw 1.6vw;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cor-tinta);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transform: translate3d(calc(var(--ima-x, 0px) * 0.25), calc(var(--ima-y, 0px) * 0.25), 0);
+  transition:
+    transform 0.9s var(--curva),
+    background 0.5s ease,
+    color 0.5s ease;
+}
+
+.contato__ima:hover .contato__ima-circulo {
+  transform: scale(1.04);
+}
+
+.contato__ima:hover .contato__personagem-corpo,
+.contato__ima:hover .contato__personagem-cabeca {
+  transform: translateY(-4%);
+}
+
+.contato__ima:hover .contato__ima-rotulo {
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+/* ---------- rodapé da faixa: texto e canais ---------- */
+.contato__pe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 5vw;
+  align-items: end;
+  margin-top: 12vh;
+}
+
+.contato__lede {
+  max-width: 30em;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  opacity: 0.88;
+}
+
+.contato__canais {
+  display: grid;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contato__canal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.contato__canal-rotulo {
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.contato__canal-link {
+  padding-bottom: 4px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.8s var(--curva);
+}
+
+.contato__canal-link:hover {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+
+.contato__redes {
+  display: flex;
+  gap: 22px;
+}
+
+.contato__rede {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  text-decoration: none;
+  transition: transform 0.8s var(--curva);
+}
+
+.contato__rede:hover {
+  transform: translateY(-4px);
+}
+
+.contato__rede-icone {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+@media (max-width: 860px) {
+  .contato__titulo {
+    font-size: 12vw;
+  }
+
+  .contato__ima {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 46vw;
+    margin: 22vw 0 0 6vw;
+  }
+
+  .contato__ima-rotulo {
+    bottom: -14px;
+    padding: 10px 18px;
+  }
+
+  .contato__pe {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 72px;
+  }
+
+  .contato__canal {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,200 @@
+/* =========================================================================
+   QUEM JÁ TRABALHOU COMIGO
+   Um depoimento em destaque, com os dados do projeto ao lado; os outros
+   são escolhidos pelo nome. A troca é um cruzamento suave, sem salto.
+   ========================================================================= */
+
+.depoimentos {
+  padding: 16vh var(--margem);
+  border-top: 1px solid var(--cor-tinta);
+}
+
+.depoimentos__titulo {
+  margin-bottom: 7vh;
+  font-weight: 300;
+  font-size: 5.6vw;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.depoimentos__titulo-forte {
+  font-weight: 900;
+  color: var(--cor-urucum);
+}
+
+.depoimentos__titulo-palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.08em 0.1em 0.04em;
+  margin: 0 -0.08em -0.1em -0.04em;
+}
+
+.depoimentos__titulo-miolo {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.2s var(--curva);
+  transition-delay: calc(var(--k, 0) * 60ms);
+}
+
+.depoimentos__titulo--visivel .depoimentos__titulo-miolo {
+  transform: none;
+}
+
+.depoimentos__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: 5vw;
+}
+
+.depoimentos__nomes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.depoimentos__nome-item {
+  border-top: 1px solid var(--cor-linha-forte);
+}
+
+.depoimentos__nome-item:first-child {
+  border-top: 0;
+}
+
+.depoimentos__aba {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 14px 0 14px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--cor-tinta-suave);
+  cursor: pointer;
+  transition: color 0.5s ease;
+}
+
+.depoimentos__aba::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  background: var(--cor-urucum);
+  transform: scaleY(0);
+  transition: transform 0.8s var(--curva);
+}
+
+.depoimentos__aba-conteudo {
+  display: block;
+  transition: transform 0.9s var(--curva);
+}
+
+.depoimentos__aba-nome {
+  display: block;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.depoimentos__aba[aria-selected="true"] {
+  color: var(--cor-tinta);
+}
+
+.depoimentos__aba[aria-selected="true"]::before {
+  transform: scaleY(1);
+}
+
+.depoimentos__aba[aria-selected="true"] .depoimentos__aba-conteudo {
+  transform: translateX(16px);
+}
+
+/* todos os depoimentos ocupam a mesma célula: a troca é por opacidade */
+.depoimentos__palco {
+  display: grid;
+}
+
+.depoimentos__item {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s var(--curva-suave),
+    transform 1s var(--curva),
+    visibility 0s 0.7s;
+}
+
+.depoimentos__item--ativo {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.9s var(--curva-suave) 0.15s,
+    transform 1.1s var(--curva) 0.15s;
+}
+
+.depoimentos__citacao {
+  margin-bottom: 3vw;
+  font-weight: 300;
+  font-size: 3.4vw;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.depoimentos__citacao::before {
+  content: "\201C";
+  color: var(--cor-urucum);
+  font-weight: 900;
+}
+
+.depoimentos__dados {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2vw;
+  padding-top: 18px;
+  border-top: 1px solid var(--cor-tinta);
+}
+
+.depoimentos__dado-rotulo {
+  font-stretch: 115%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cor-tinta-suave);
+}
+
+.depoimentos__dado-valor {
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.depoimentos__aviso {
+  margin-top: 3vw;
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-urucum);
+}
+
+@media (max-width: 860px) {
+  .depoimentos__titulo {
+    font-size: 11vw;
+  }
+
+  .depoimentos__grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .depoimentos__citacao {
+    font-size: 7vw;
+  }
+
+  .depoimentos__dados {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

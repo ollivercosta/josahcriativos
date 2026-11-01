@@ -1,0 +1,190 @@
+/* =========================================================================
+   DO PRIMEIRO CONTATO À ENTREGA
+   Seção escura e presa: uma etapa por vez ocupa o centro, e a linha do
+   tempo embaixo acompanha o avanço. O texto de abertura fica colado ao
+   título, como subtítulo.
+   ========================================================================= */
+
+.processo {
+  position: relative;
+  height: 500vh;
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+.processo__palco {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: calc(var(--altura-cabecalho) + 4vh) var(--margem) 5vh;
+}
+
+.processo__abertura {
+  display: grid;
+  gap: 14px;
+  max-width: 46em;
+}
+
+.processo__titulo {
+  font-weight: 300;
+  font-size: 3vw;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.processo__titulo-forte {
+  font-weight: 900;
+  color: var(--cor-urucum);
+}
+
+.processo__lede {
+  max-width: 40em;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.processo__centro {
+  position: relative;
+}
+
+.processo__etapa {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 2vw;
+  pointer-events: none;
+}
+
+.processo__etapa-nome {
+  overflow: hidden;
+  padding: 0.06em 0.06em 0.14em 0;
+  font-weight: 900;
+  font-size: 9vw;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.processo__etapa-miolo {
+  display: block;
+  transform: translateY(140%);
+  transition: transform 1.2s var(--curva);
+}
+
+.processo__etapa--urucum .processo__etapa-nome {
+  color: var(--cor-urucum);
+}
+
+.processo__etapa-texto {
+  justify-self: end;
+  max-width: 24em;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s var(--curva-suave),
+    transform 1.1s var(--curva);
+}
+
+.processo__etapa--ativa .processo__etapa-miolo {
+  transform: none;
+}
+
+.processo__etapa--ativa .processo__etapa-texto {
+  opacity: 0.85;
+  transform: none;
+  transition-delay: 0.2s;
+}
+
+.processo__etapa--passada .processo__etapa-miolo {
+  transform: translateY(-140%);
+}
+
+/* linha do tempo */
+.processo__linha {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.processo__linha-progresso {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  height: 3px;
+  width: 100%;
+  background: var(--cor-urucum);
+  transform-origin: left;
+  transform: scaleX(var(--avanco, 0));
+}
+
+.processo__marco {
+  padding-top: 14px;
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.7s ease;
+}
+
+.processo__marco--feito {
+  color: #fff;
+}
+
+@media (max-width: 860px) {
+  .processo {
+    height: auto;
+  }
+
+  .processo__palco {
+    position: relative;
+    height: auto;
+    display: block;
+    padding: 80px var(--margem);
+  }
+
+  .processo__titulo {
+    font-size: 9vw;
+  }
+
+  .processo__centro {
+    display: grid;
+    gap: 36px;
+    margin-top: 48px;
+  }
+
+  .processo__etapa {
+    position: static;
+    transform: none;
+    gap: 8px;
+  }
+
+  .processo__etapa-nome {
+    font-size: 12vw;
+  }
+
+  .processo__etapa-miolo,
+  .processo__etapa-texto {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .processo__etapa-texto {
+    justify-self: start;
+  }
+
+  .processo__linha {
+    display: none;
+  }
+}

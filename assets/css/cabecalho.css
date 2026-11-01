@@ -1,0 +1,184 @@
+/* =========================================================================
+   CABEÇALHO FIXO E MENU DO CELULAR
+   O cabeçalho entra depois do hero; o menu do celular abre por cortina.
+   ========================================================================= */
+
+.cabecalho {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 120;
+  height: var(--altura-cabecalho);
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  transform: translateY(-101%);
+  transition:
+    transform 0.9s var(--curva),
+    background 0.6s ease,
+    color 0.6s ease;
+}
+
+.cabecalho--visivel {
+  transform: none;
+}
+
+.cabecalho--menu-aberto {
+  background: transparent;
+  color: #fff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.cabecalho__faixa {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--margem);
+}
+
+.cabecalho__marca {
+  display: grid;
+  line-height: 1.15;
+  text-decoration: none;
+  font-stretch: 115%;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.cabecalho__marca-nome {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.cabecalho__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 36px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-stretch: 115%;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.cabecalho__link {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+.cabecalho__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.7s var(--curva);
+}
+
+.cabecalho__link:hover::after,
+.cabecalho__link--ativo::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.cabecalho__link--ativo {
+  color: var(--cor-urucum);
+}
+
+.cabecalho__menu-botao {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  place-items: center;
+}
+
+.cabecalho__menu-icone {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.cabecalho__progresso {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--cor-tinta);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progresso, 0));
+}
+
+/* ---------- menu do celular ---------- */
+.menu-movel {
+  position: fixed;
+  inset: 0;
+  z-index: 119;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--altura-cabecalho) + 24px) var(--margem) 32px;
+  background: var(--cor-urucum);
+  color: #fff;
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 0.9s var(--curva-entra-sai),
+    visibility 0s 0.9s;
+}
+
+.menu-movel--aberto {
+  clip-path: inset(0 0 0 0);
+  visibility: visible;
+  transition: clip-path 0.9s var(--curva-entra-sai);
+}
+
+.menu-movel__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-movel__link {
+  display: block;
+  padding: 4px 0;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 13vw, 4rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  text-decoration: none;
+}
+
+.menu-movel__rodape {
+  display: grid;
+  gap: 6px;
+}
+
+.menu-movel__contato {
+  text-decoration: none;
+}
+
+@media (max-width: 860px) {
+  .cabecalho__nav {
+    display: none;
+  }
+
+  .cabecalho__menu-botao {
+    display: grid;
+  }
+}

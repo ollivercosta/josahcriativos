@@ -1,0 +1,263 @@
+/* =========================================================================
+   QUEM DÁ VIDA A ISSO
+   Colagem: bloco urucum, retrato recortado e linhas de composição. As
+   anotações ficam fora do bloco, sobre o branco, para leitura plena.
+   ========================================================================= */
+
+.sobre {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 5vw;
+  align-items: start;
+  padding: 18vh var(--margem);
+}
+
+.sobre__colagem {
+  position: sticky;
+  top: calc(var(--altura-cabecalho) + 4vh);
+  aspect-ratio: 1;
+}
+
+.sobre__bloco {
+  position: absolute;
+  right: 0;
+  top: 6%;
+  width: 44%;
+  height: 58%;
+  background: var(--cor-urucum);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.4s var(--curva-entra-sai) 0.2s;
+}
+
+.sobre__foto {
+  position: absolute;
+  left: 0;
+  right: 4%;
+  bottom: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.6s var(--curva-entra-sai) 0.35s;
+}
+
+.sobre__foto-imagem {
+  width: 100%;
+  height: auto;
+}
+
+.sobre__linhas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.6s ease 1.2s;
+}
+
+.sobre__linha {
+  fill: none;
+  stroke: var(--cor-tinta);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.sobre__ponto {
+  fill: var(--cor-tinta);
+}
+
+/* anotações: à esquerda do bloco e abaixo da foto, sobre o branco */
+.sobre__anotacao-papeis {
+  position: absolute;
+  right: 47%;
+  top: 7%;
+  text-align: right;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 1s ease 1.5s,
+    transform 1.2s var(--curva) 1.5s;
+}
+
+.sobre__anotacao-nome {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 18px);
+  text-align: right;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 1s ease 1.7s,
+    transform 1.2s var(--curva) 1.7s;
+}
+
+.sobre__anotacao-principal {
+  display: block;
+  font-stretch: 115%;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+.sobre__anotacao-linha {
+  display: block;
+  font-stretch: 115%;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  line-height: 1.8;
+  text-transform: uppercase;
+  color: var(--cor-tinta-suave);
+}
+
+.sobre__colagem--visivel .sobre__bloco,
+.sobre__colagem--visivel .sobre__foto {
+  clip-path: inset(0 0 0 0);
+}
+
+.sobre__colagem--visivel .sobre__linhas {
+  opacity: 1;
+}
+
+.sobre__colagem--visivel .sobre__anotacao-papeis,
+.sobre__colagem--visivel .sobre__anotacao-nome {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- texto ---------- */
+.sobre__titulo {
+  margin-bottom: 4vw;
+  font-weight: 300;
+  font-size: 5.6vw;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.sobre__titulo-forte {
+  font-weight: 900;
+  color: var(--cor-urucum);
+}
+
+.sobre__titulo-palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.08em 0.1em 0.04em;
+  margin: 0 -0.08em -0.1em -0.04em;
+}
+
+.sobre__titulo-miolo {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.2s var(--curva);
+  transition-delay: calc(var(--k, 0) * 60ms);
+}
+
+.sobre__titulo--visivel .sobre__titulo-miolo {
+  transform: none;
+}
+
+.sobre__abertura {
+  margin-bottom: 22px;
+  font-size: 1.85rem;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.sobre__paragrafo {
+  margin-bottom: 22px;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.sobre__parceira {
+  font-weight: 800;
+  text-decoration-color: var(--cor-urucum);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.sobre__trajetoria {
+  margin-bottom: 22px;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.sobre__trajetoria-destaque {
+  font-weight: 800;
+  color: var(--cor-urucum);
+}
+
+.sobre__citacao {
+  margin-bottom: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--cor-tinta);
+  font-size: 1.3rem;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+
+.sobre__citacao-destaque {
+  font-style: normal;
+  font-weight: 800;
+}
+
+.sobre__clientes {
+  margin-top: 6vh;
+}
+
+.sobre__clientes-rotulo {
+  font-stretch: 115%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.sobre__clientes-lista {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sobre__cliente {
+  padding: 10px 0;
+  border-top: 1px solid var(--cor-linha-forte);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.sobre__cliente-nome {
+  display: inline-block;
+  transition:
+    transform 0.9s var(--curva),
+    color 0.5s ease;
+}
+
+.sobre__cliente:hover .sobre__cliente-nome {
+  transform: translateX(1.2vw);
+  color: var(--cor-urucum);
+}
+
+@media (max-width: 860px) {
+  .sobre {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 72px;
+  }
+
+  .sobre__colagem {
+    position: relative;
+    top: auto;
+  }
+
+  .sobre__titulo {
+    font-size: 11vw;
+  }
+
+  .sobre__abertura {
+    font-size: 1.5rem;
+  }
+}
