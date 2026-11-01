@@ -2,7 +2,7 @@ import { Ambiente } from "../nucleo/Ambiente.js";
 
 /**
  * Contato
- * O círculo com o personagem é atraído pelo cursor quando ele chega perto
+ * O círculo com o retrato é atraído pelo cursor quando ele chega perto
  * (efeito ímã) e volta ao lugar quando o cursor sai da faixa.
  */
 export class Contato {

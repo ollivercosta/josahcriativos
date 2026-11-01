@@ -304,6 +304,21 @@ export function aplicarImagem(img, endereco, tamanhos) {
   );
 }
 
+/**
+ * Imagem que representa o trabalho em miniatura: a capa ou, num vídeo do
+ * YouTube, a imagem de prévia do próprio vídeo.
+ */
+export function miniaturaDoTrabalho(trabalho) {
+  const capa = capaDoTrabalho(trabalho);
+  if (capa) return capa;
+  for (const midia of trabalho.midias || []) {
+    const endereco = typeof midia === "string" ? midia : midia.video || "";
+    const youtube = endereco.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+    if (youtube) return `https://i.ytimg.com/vi/${youtube[1]}/hqdefault.jpg`;
+  }
+  return "";
+}
+
 /** Primeira imagem do trabalho, para a capa da grade. */
 export function capaDoTrabalho(trabalho) {
   for (const midia of trabalho.midias || []) {

@@ -2,7 +2,7 @@
    VAMOS APRESENTAR O SEU PROJETO PARA O MUNDO?
    Faixa vermelho em duas partes:
      topo    chamada (título e texto) à esquerda e o círculo com o
-             personagem à direita, os dois centrados na mesma altura;
+             retrato à direita, os dois centrados na mesma altura;
      canais  WhatsApp, e-mail e redes em três colunas iguais, alinhadas
              pelo topo, sob uma linha que atravessa a faixa.
    ========================================================================= */
@@ -58,7 +58,7 @@
   opacity: 0.9;
 }
 
-/* ---------- círculo magnético com o personagem ---------- */
+/* ---------- círculo magnético com o retrato ---------- */
 .contato__ima {
   position: relative;
   justify-self: center;
@@ -88,8 +88,8 @@
   transform: translateZ(0);
 }
 
-.contato__personagem-corpo,
-.contato__personagem-cabeca {
+.contato__retrato-corpo,
+.contato__retrato-cabeca {
   position: absolute;
   left: -12.5%;
   bottom: -2%;
@@ -100,7 +100,7 @@
 }
 
 /* cabeça: a mesma imagem, mostrando só a parte de cima, por fora do círculo */
-.contato__personagem-cabeca {
+.contato__retrato-cabeca {
   clip-path: inset(0 0 62% 0);
   pointer-events: none;
 }
@@ -129,8 +129,8 @@
   transform: scale(1.04);
 }
 
-.contato__ima:hover .contato__personagem-corpo,
-.contato__ima:hover .contato__personagem-cabeca {
+.contato__ima:hover .contato__retrato-corpo,
+.contato__ima:hover .contato__retrato-cabeca {
   transform: translateY(-4%);
 }
 
