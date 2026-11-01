@@ -112,6 +112,75 @@
   opacity: 0.78;
 }
 
+/* ---------- vitrine: três trabalhos sobrepostos ---------- */
+.servicos__vitrine {
+  position: relative;
+  max-width: 34vw;
+  height: 21vw;
+  margin-top: 3.4vw;
+}
+
+.servicos__vitrine-item {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  transition:
+    transform 1.1s var(--curva),
+    filter 0.8s ease,
+    opacity 0.8s ease;
+}
+
+.servicos__vitrine-item--esquerda {
+  left: 0;
+  top: 0;
+  width: 54%;
+  opacity: 0.6;
+  filter: blur(2px);
+}
+
+.servicos__vitrine-item--direita {
+  right: 0;
+  top: 8%;
+  width: 54%;
+  opacity: 0.6;
+  filter: blur(2px);
+}
+
+.servicos__vitrine-item--frente {
+  z-index: 2;
+  left: 17%;
+  top: 22%;
+  width: 66%;
+  box-shadow: 0 30px 60px -24px rgba(22, 19, 15, 0.55);
+}
+
+.servicos__vitrine-imagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .servicos__painel:hover .servicos__vitrine-item--esquerda {
+    transform: translate(-4%, -4%) rotate(-3deg);
+    opacity: 0.85;
+    filter: blur(0);
+  }
+
+  .servicos__painel:hover .servicos__vitrine-item--direita {
+    transform: translate(4%, -4%) rotate(3deg);
+    opacity: 0.85;
+    filter: blur(0);
+  }
+
+  .servicos__painel:hover .servicos__vitrine-item--frente {
+    transform: translateY(-3%);
+  }
+}
+
 .servicos__lista {
   align-self: center;
 }
@@ -195,6 +264,12 @@
 
   .servicos__painel-nome {
     font-size: 12vw;
+  }
+
+  .servicos__vitrine {
+    max-width: none;
+    height: 62vw;
+    margin-top: 32px;
   }
 
   .servicos__item {

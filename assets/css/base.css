@@ -17,7 +17,7 @@
   /* paleta: branco, tinta e vermelho (três cores) */
   --cor-fundo: #ffffff;
   --cor-tinta: #16130f;
-  --cor-vermelho: #9b111e;
+  --cor-vermelho: #a3171f;
 
   /* variações de opacidade da tinta (não são cores novas) */
   --cor-tinta-suave: rgba(22, 19, 15, 0.62);

@@ -110,7 +110,7 @@
 .visor__corpo {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  gap: clamp(28px, 5vw, 88px);
+  gap: clamp(28px, 2vw, 88px);
   padding: clamp(36px, 5vw, 76px) var(--margem) clamp(64px, 8vw, 120px);
 }
 

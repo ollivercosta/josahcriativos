@@ -137,7 +137,7 @@
 /* título: fino, apoiado na palavra */
 .hero__design {
   position: absolute;
-  left: 21.5%;
+  left: 20.7%;
   top: 31.5%;
   margin: 0;
   transform: translateZ(50px);
@@ -243,7 +243,7 @@
 }
 
 .hero__servicos:hover .hero__servico {
-  color: rgba(155, 17, 30, 0.55);
+  color: rgba(163, 23, 31, 0.55);
 }
 
 .hero__servicos:hover .hero__servico:hover {
