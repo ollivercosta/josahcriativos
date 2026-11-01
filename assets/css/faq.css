@@ -54,6 +54,23 @@
   color: var(--cor-tinta-suave);
 }
 
+.faq__termos {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--cor-tinta);
+  text-decoration: underline;
+  text-decoration-color: var(--cor-urucum);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.faq__termos:hover {
+  color: var(--cor-urucum);
+}
+
 .faq__lista {
   border-top: 1px solid var(--cor-tinta);
 }

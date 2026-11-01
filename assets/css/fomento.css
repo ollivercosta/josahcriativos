@@ -11,6 +11,19 @@
   padding: 16vh var(--margem) 18vh;
 }
 
+.fomento__lado {
+  display: grid;
+  align-content: start;
+  gap: 26px;
+}
+
+.fomento__lede {
+  max-width: 30em;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--cor-tinta-suave);
+}
+
 .fomento__titulo {
   font-weight: 300;
   font-size: 3.6vw;
@@ -111,7 +124,7 @@
 .fomento__balao-rotulo {
   margin-bottom: 8px;
   font-stretch: 115%;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;

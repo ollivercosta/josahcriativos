@@ -3,6 +3,8 @@
  * Um objeto por trabalho, na ordem em que aparecem na grade.
  *
  *   nome       nome do projeto
+ *   destaque   true para aparecer em destaque, em formato de estudo de caso
+ *              (o ideal são três); os demais vão para a grade "Outros trabalhos"
  *   tipo       o que a peça é (ex.: "Book de captação", "Identidade visual").
  *              Aparece acima do nome na capa e na ficha. Vazio: usa a categoria.
  *   categoria  usada nos filtros: "Marca e apresentação", "Web e redes",
@@ -20,6 +22,7 @@
 export const TRABALHOS = [
   {
     nome: "Olha o Cabelo dela",
+    destaque: true,
     tipo: "",
     categoria: "Marca e apresentação",
     resumo: "Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.",
@@ -36,6 +39,7 @@ export const TRABALHOS = [
   },
   {
     nome: "Amazônia Motirô",
+    destaque: true,
     tipo: "",
     categoria: "Marca e apresentação",
     resumo: "Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.",
@@ -66,6 +70,7 @@ export const TRABALHOS = [
   },
   {
     nome: "Tabuleiro - Book",
+    destaque: true,
     tipo: "Book de captação",
     categoria: "Marca e apresentação",
     resumo:
@@ -263,6 +268,42 @@ const VIDEO = /youtu\.?be|vimeo\.com|drive\.google|\.(mp4|webm|ogv|mov|m4v)(\?|$
 /** A mídia é uma imagem (e não um vídeo)? */
 export function ehImagem(midia) {
   return typeof midia === "string" && !VIDEO.test(midia);
+}
+
+/** Larguras geradas pela otimização de imagens da Vercel (as mesmas de vercel.json). */
+const LARGURAS = [640, 1080, 1920];
+
+/** No ar, as imagens passam pelo otimizador da Vercel (AVIF/WebP no tamanho certo). */
+function otimizacaoDisponivel() {
+  const host = window.location.hostname;
+  return host.endsWith(".vercel.app") || host.endsWith("josahcriativos.com.br");
+}
+
+/**
+ * Preenche src, srcset e sizes de uma imagem. Se o otimizador falhar, a
+ * imagem volta ao endereço original.
+ * @param {HTMLImageElement} img
+ * @param {string} endereco
+ * @param {string} tamanhos valor do atributo sizes
+ */
+export function aplicarImagem(img, endereco, tamanhos) {
+  if (!otimizacaoDisponivel()) {
+    img.src = endereco;
+    return;
+  }
+  const otimizada = (largura) => `/_vercel/image?url=${encodeURIComponent(endereco)}&w=${largura}&q=75`;
+  img.sizes = tamanhos;
+  img.srcset = LARGURAS.map((largura) => `${otimizada(largura)} ${largura}w`).join(", ");
+  img.src = otimizada(1080);
+  img.addEventListener(
+    "error",
+    () => {
+      img.removeAttribute("srcset");
+      img.removeAttribute("sizes");
+      img.src = endereco;
+    },
+    { once: true },
+  );
 }
 
 /** Primeira imagem do trabalho, para a capa da grade. */

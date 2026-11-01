@@ -1,4 +1,4 @@
-import { ehImagem } from "../../dados/trabalhos.js";
+import { aplicarImagem, ehImagem } from "../../dados/trabalhos.js";
 
 /**
  * Visor
@@ -130,10 +130,10 @@ export class Visor {
     const figura = this.#elemento("figure", "visor__midia");
     if (ehImagem(midia)) {
       const img = this.#elemento("img", "visor__midia-imagem");
-      img.src = midia;
       img.alt = `${nome}, imagem ${posicao + 1}`;
       img.loading = posicao ? "lazy" : "eager";
       img.referrerPolicy = "no-referrer";
+      aplicarImagem(img, midia, "(max-width: 860px) 100vw, 64vw");
       figura.append(img);
       return figura;
     }

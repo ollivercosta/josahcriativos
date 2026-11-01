@@ -48,7 +48,7 @@
   border: 0;
   background: none;
   font-stretch: 115%;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -127,7 +127,7 @@
 .visor__tipo {
   margin-bottom: 14px;
   font-stretch: 115%;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -171,7 +171,7 @@
 .visor__bloco-titulo {
   margin-bottom: 8px;
   font-stretch: 115%;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -287,7 +287,7 @@
   display: block;
   margin-bottom: 6px;
   font-stretch: 115%;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
