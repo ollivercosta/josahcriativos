@@ -10,7 +10,7 @@
   grid-template-columns: auto minmax(4vw, 1fr);
   align-items: last baseline;
   gap: 2vw;
-  padding: 14vh var(--margem) 6vh;
+  padding: var(--espaco-secao) var(--margem) var(--espaco-titulo);
 }
 
 .servicos__titulo-barra {

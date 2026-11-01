@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
   gap: 5vw;
-  padding: 16vh var(--margem) 18vh;
+  padding: var(--espaco-secao) var(--margem);
 }
 
 .fomento__lado {

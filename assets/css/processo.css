@@ -11,13 +11,13 @@
 }
 
 .processo__palco {
-  padding: 16vh var(--margem) 18vh;
+  padding: var(--espaco-secao) var(--margem);
 }
 
 .processo__abertura {
   display: grid;
   gap: 18px;
-  margin-bottom: 9vh;
+  margin-bottom: var(--espaco-titulo);
 }
 
 /* título e a barra que prolonga a linha de base dele até a margem */
@@ -77,40 +77,51 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
-/* ---------- etapas ---------- */
+/* ---------- etapas: duas colunas espelhadas com a linha do tempo no meio ---------- */
 .processo__centro {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  position: relative;
+}
+
+.processo__centro::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .processo__etapa {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: baseline;
-  gap: 4vw;
-  padding: 3.2vw 0;
+  column-gap: 6vw;
+  padding: 2.2vw 0;
 }
 
+/* marca na linha do tempo, à altura do nome da etapa */
 .processo__etapa::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.25);
+  left: calc(50% - 0.7vw);
+  top: calc(2.2vw + 1.3vw);
+  width: 1.4vw;
+  height: 2px;
+  background: var(--cor-urucum);
   transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.4s var(--curva);
+  transition: transform 1s var(--curva) 0.2s;
 }
 
 .processo__etapa-nome {
   overflow: hidden;
   padding: 0.04em 0.06em 0.12em 0;
+  text-align: right;
   font-weight: 900;
-  font-size: 4.6vw;
-  line-height: 0.92;
-  letter-spacing: -0.055em;
+  font-size: 3.2vw;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
 }
 
@@ -125,7 +136,8 @@
 }
 
 .processo__etapa-texto {
-  max-width: 26em;
+  max-width: 30em;
+  text-align: left;
   font-size: 1.1rem;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.82);
@@ -155,20 +167,31 @@
   }
 
   .processo__palco {
-    padding: 80px var(--margem);
+    padding: var(--espaco-secao) var(--margem);
   }
 
   .processo__titulo {
     font-size: 11vw;
   }
 
+  .processo__centro::before {
+    left: 0;
+  }
+
   .processo__etapa {
     grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-    padding: 26px 0;
+    row-gap: 10px;
+    padding: 22px 0 22px 24px;
+  }
+
+  .processo__etapa::before {
+    left: -7px;
+    top: 34px;
+    width: 14px;
   }
 
   .processo__etapa-nome {
+    text-align: left;
     font-size: 9vw;
   }
 }

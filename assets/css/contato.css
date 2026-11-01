@@ -1,22 +1,28 @@
 /* =========================================================================
    VAMOS APRESENTAR O SEU PROJETO PARA O MUNDO?
-   Faixa urucum (a mesma cor dos títulos). O círculo magnético segue o
-   cursor e traz o retrato em low-poly: o corpo fica dentro do círculo e a
-   cabeça passa para fora dele.
+   Faixa urucum em duas partes:
+     topo    chamada (título e texto) à esquerda e o círculo com o
+             personagem à direita, os dois centrados na mesma altura;
+     canais  WhatsApp, e-mail e redes em três colunas iguais, alinhadas
+             pelo topo, sob uma linha que atravessa a faixa.
    ========================================================================= */
 
 .contato {
-  position: relative;
-  overflow: hidden;
-  padding: 18vh var(--margem) 9vh;
+  padding: var(--espaco-secao) var(--margem);
   background: var(--cor-urucum);
   color: #fff;
 }
 
+.contato__topo {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  align-items: center;
+  gap: 5vw;
+}
+
 .contato__titulo {
-  max-width: 13ch;
   font-weight: 300;
-  font-size: 7.4vw;
+  font-size: 6.4vw;
   line-height: 0.94;
   letter-spacing: -0.055em;
 }
@@ -44,15 +50,22 @@
   transform: none;
 }
 
+.contato__lede {
+  max-width: 30em;
+  margin-top: 32px;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
 /* ---------- círculo magnético com o personagem ---------- */
 .contato__ima {
-  position: absolute;
-  right: 9vw;
-  top: 26vh;
-  width: 16vw;
-  aspect-ratio: 1;
+  position: relative;
+  justify-self: center;
   display: block;
-  color: var(--cor-tinta);
+  width: min(100%, 17vw);
+  aspect-ratio: 1;
+  margin-top: 4vw;
   text-decoration: none;
   transform: translate3d(var(--ima-x, 0px), var(--ima-y, 0px), 0);
   transition: transform 0.9s var(--curva);
@@ -126,35 +139,22 @@
   color: #fff;
 }
 
-/* ---------- rodapé da faixa: texto e canais ---------- */
-.contato__pe {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 5vw;
-  align-items: end;
-  margin-top: 12vh;
-}
-
-.contato__lede {
-  max-width: 30em;
-  font-size: 1.1rem;
-  line-height: 1.55;
-  opacity: 0.88;
-}
-
+/* ---------- canais: três colunas alinhadas pelo topo ---------- */
 .contato__canais {
   display: grid;
-  gap: 22px;
-  margin: 0;
-  padding: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5vw;
+  margin: var(--espaco-titulo) 0 0;
+  padding: 28px 0 0;
   list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
 }
 
 .contato__canal {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 12px;
 }
 
 .contato__canal-rotulo {
@@ -169,8 +169,10 @@
 .contato__canal-link {
   padding-bottom: 4px;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  letter-spacing: -0.02em;
   text-decoration: none;
+  overflow-wrap: anywhere;
   background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
   transition: background-size 0.8s var(--curva);
 }
@@ -182,7 +184,8 @@
 
 .contato__redes {
   display: flex;
-  gap: 22px;
+  gap: 14px;
+  margin-left: -6px;
 }
 
 .contato__rede {
@@ -205,14 +208,17 @@
 }
 
 @media (max-width: 860px) {
+  .contato__topo {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
   .contato__titulo {
     font-size: 12vw;
   }
 
   .contato__ima {
-    position: relative;
-    right: auto;
-    top: auto;
+    justify-self: start;
     width: 46vw;
     margin: 22vw 0 0 6vw;
   }
@@ -222,12 +228,8 @@
     padding: 10px 18px;
   }
 
-  .contato__pe {
+  .contato__canais {
     grid-template-columns: minmax(0, 1fr);
-    margin-top: 72px;
-  }
-
-  .contato__canal {
-    flex-wrap: wrap;
+    gap: 28px;
   }
 }

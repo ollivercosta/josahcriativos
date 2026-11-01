@@ -9,7 +9,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 5vw;
   align-items: start;
-  padding: 18vh var(--margem);
+  padding: var(--espaco-secao) var(--margem);
 }
 
 .sobre__colagem {
@@ -111,7 +111,7 @@
 .sobre__colagem--visivel .sobre__anotacao-papeis,
 .sobre__colagem--visivel /* ---------- texto ---------- */
 .sobre__titulo {
-  margin-bottom: 4vw;
+  margin-bottom: var(--espaco-titulo);
   font-weight: 300;
   font-size: 5.6vw;
   line-height: 0.98;
