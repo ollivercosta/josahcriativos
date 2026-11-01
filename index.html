@@ -2606,6 +2606,137 @@
         color: var(--carimbo);
       }
 
+      /* ---------- hero: barra de ferramentas (só desktop) ---------- */
+      .ferramentas {
+        display: none;
+      }
+      @media (min-width: 1021px) {
+        .hero > .wrap {
+          padding-left: max(var(--gutter), 112px);
+        }
+        .ferramentas {
+          position: absolute;
+          z-index: 3;
+          left: clamp(14px, 1.8vw, 32px);
+          top: clamp(28px, 4vw, 52px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 52px;
+          padding: 4px 0 10px;
+          background: var(--tinta);
+          color: var(--giz);
+          border-radius: 6px;
+          box-shadow: 4px 4px 0 var(--carimbo);
+          user-select: none;
+        }
+        .fe-pega {
+          display: flex;
+          gap: 3px;
+          padding: 4px 0 8px;
+          opacity: 0.45;
+        }
+        .fe-pega i {
+          width: 14px;
+          height: 4px;
+          background: radial-gradient(circle, currentColor 1px, transparent 1.4px) 0 0 / 4px 4px;
+        }
+        .fe-bt {
+          position: relative;
+          width: 38px;
+          height: 34px;
+          display: grid;
+          place-items: center;
+          border-radius: 4px;
+          cursor: pointer;
+          transition:
+            background 0.12s ease,
+            color 0.12s ease;
+        }
+        .fe-bt:hover {
+          background: rgba(249, 247, 241, 0.12);
+        }
+        .fe-bt.ativo {
+          background: rgba(249, 247, 241, 0.2);
+          color: var(--cartaz);
+        }
+        .fe-bt.mais::after {
+          content: "";
+          position: absolute;
+          right: 3px;
+          bottom: 3px;
+          border: 2.5px solid transparent;
+          border-right-color: currentColor;
+          border-bottom-color: currentColor;
+          opacity: 0.65;
+        }
+        .fe-bt::before,
+        .fe-cores::before {
+          content: attr(data-nome) "  (" attr(data-atalho) ")";
+          position: absolute;
+          left: calc(100% + 14px);
+          top: 50%;
+          transform: translateY(-50%);
+          padding: 4px 9px;
+          background: var(--giz);
+          color: var(--tinta);
+          border: 2px solid var(--tinta);
+          border-radius: 3px;
+          font-family: var(--leitura);
+          font-size: 0.85rem;
+          font-weight: 600;
+          line-height: 1.2;
+          white-space: pre;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity 0.12s ease;
+        }
+        .fe-bt:hover::before,
+        .fe-cores:hover::before {
+          opacity: 1;
+          transition-delay: 0.35s;
+        }
+        .fe-sep {
+          width: 30px;
+          height: 1px;
+          margin: 6px 0;
+          background: rgba(249, 247, 241, 0.22);
+        }
+        .fe-cores {
+          position: relative;
+          width: 38px;
+          height: 38px;
+          margin-top: 4px;
+          cursor: pointer;
+        }
+        .fe-preench,
+        .fe-contorno {
+          position: absolute;
+          width: 22px;
+          height: 22px;
+          border-radius: 2px;
+        }
+        .fe-preench {
+          left: 3px;
+          top: 3px;
+          background: var(--cartaz);
+          border: 1.5px solid var(--giz);
+        }
+        .fe-contorno {
+          right: 3px;
+          bottom: 3px;
+          border: 5px solid var(--carimbo);
+          outline: 1.5px solid var(--giz);
+          outline-offset: -1px;
+        }
+        .fe-cores.trocado .fe-preench {
+          background: var(--carimbo);
+        }
+        .fe-cores.trocado .fe-contorno {
+          border-color: var(--cartaz);
+        }
+      }
+
       /* entrada suave dos blocos ao rolar */
       .js-anim .revela {
         opacity: 0;
@@ -3239,6 +3370,33 @@
 
     <main id="conteudo">
       <section class="papel-cartaz hero">
+        <!-- BARRA DE FERRAMENTAS (so no desktop): replica ilustrativa da barra lateral de um editor grafico.
+             Para trocar um icone ou nome, edite o <span class="fe-bt"> correspondente. -->
+        <div class="ferramentas" id="ferramentas" aria-hidden="true">
+          <span class="fe-pega"><i></i><i></i></span>
+          <span class="fe-bt ativo" data-nome="Seleção" data-atalho="V"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 3l13 7.6-5.7 1.5 3.4 6.1-2.4 1.3-3.4-6.2L6 17.6z" fill="currentColor"/></svg></span>
+          <span class="fe-bt" data-nome="Seleção direta" data-atalho="A"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 3l13 7.6-5.7 1.5 3.4 6.1-2.4 1.3-3.4-6.2L6 17.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span class="fe-sep"></span>
+          <span class="fe-bt mais" data-nome="Caneta" data-atalho="P"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2.5l6 9.5-3.5 7.5h-5L6 12z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 2.5v8" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M9 21.5h6" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          <span class="fe-bt mais" data-nome="Texto" data-atalho="T"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 5h14M12 5v14M9 19h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <span class="fe-bt mais" data-nome="Retângulo" data-atalho="M"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="4" y="5.5" width="16" height="13" rx="0.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+          <span class="fe-bt" data-nome="Elipse" data-atalho="L"><svg viewBox="0 0 24 24" width="20" height="20"><ellipse cx="12" cy="12" rx="8.5" ry="7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+          <span class="fe-sep"></span>
+          <span class="fe-bt mais" data-nome="Pincel" data-atalho="B"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M20.5 3.5l-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10.5 12.5c-2.6-.4-4.6 1.2-4.6 3.6 0 1.5-1 2.6-2.6 3 3.1 1.2 7.9.5 8.4-2.8.2-1.4-.3-2.7-1.2-3.8z" fill="currentColor"/></svg></span>
+          <span class="fe-bt" data-nome="Lápis" data-atalho="N"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 20l1.2-4.3L16 4.9l3.1 3.1L8.3 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 7l3 3" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          <span class="fe-bt mais" data-nome="Borracha" data-atalho="E"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M3.5 15.5l8-8 6 6-6 6h-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7.5 11.5l6 6M11.5 19.5h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <span class="fe-sep"></span>
+          <span class="fe-bt" data-nome="Conta-gotas" data-atalho="I"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M16.5 3.6a2.2 2.2 0 0 1 3.1 3.1l-2.1 2.1-3.1-3.1z" fill="currentColor"/><path d="M14 6.1l3.1 3.1M15.2 7.6l-9 9-.7 2.6 2.6-.7 9-9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+          <span class="fe-bt mais" data-nome="Preenchimento" data-atalho="G"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4.5 11.5l7-7 7 7-7 7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4.5 11.5h14l-7 7z" fill="currentColor" opacity=".55"/><path d="M20.3 14.5c0 1.4 1.2 2.1 1.2 3.2a1.2 1.2 0 0 1-2.4 0c0-1.1 1.2-1.8 1.2-3.2z" fill="currentColor"/></svg></span>
+          <span class="fe-bt" data-nome="Tesoura" data-atalho="C"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="6.5" cy="6.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="6.5" cy="17.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.6 8.1L20 17.5M8.6 15.9L20 6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <span class="fe-sep"></span>
+          <span class="fe-bt" data-nome="Mão" data-atalho="H"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 13.5V6a1.5 1.5 0 0 1 3 0v5M11 10.5V4.5a1.5 1.5 0 0 1 3 0v6M14 10.5V6a1.5 1.5 0 0 1 3 0v8.5c0 3.8-2.4 6.5-5.8 6.5-2.4 0-3.9-1.1-5.3-3.3l-2-3.3a1.5 1.5 0 0 1 2.5-1.7L8 14.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="fe-bt" data-nome="Zoom" data-atalho="Z"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+          <span class="fe-sep"></span>
+          <span class="fe-cores" data-nome="Preenchimento e contorno" data-atalho="X">
+            <span class="fe-contorno"></span><span class="fe-preench"></span>
+          </span>
+        </div>
         <div class="wrap">
           <div class="selo" aria-hidden="true">
             <svg viewBox="0 0 200 200"><use href="#selo" /></svg>
@@ -6092,6 +6250,25 @@
         document.getElementById("fmFechar").addEventListener("click", fechar);
         balao.addEventListener("keydown", function (e) {
           if (e.key === "Escape") fechar();
+        });
+      })();
+    </script>
+    <script>
+      /* BARRA DE FERRAMENTAS: clique marca a ferramenta ativa; o quadro de cores troca preenchimento e contorno. */
+      (function () {
+        var barra = document.getElementById("ferramentas");
+        if (!barra) return;
+        barra.addEventListener("click", function (e) {
+          var bt = e.target.closest(".fe-bt");
+          if (bt) {
+            barra.querySelectorAll(".fe-bt.ativo").forEach(function (x) {
+              x.classList.remove("ativo");
+            });
+            bt.classList.add("ativo");
+            return;
+          }
+          var cores = e.target.closest(".fe-cores");
+          if (cores) cores.classList.toggle("trocado");
         });
       })();
     </script>
