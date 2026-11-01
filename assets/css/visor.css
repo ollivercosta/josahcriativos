@@ -57,7 +57,7 @@
 }
 
 .visor__voltar:hover {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .visor__navegacao {
@@ -95,7 +95,7 @@
 }
 
 .visor__fechar:hover {
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
 }
 
 .visor__icone-voltar,
@@ -118,10 +118,15 @@
   animation: visor-sobe 0.8s var(--curva) both;
 }
 
+/* todas as informações do projeto num único cartão vermelho */
 .visor__ficha {
   position: sticky;
   top: calc(66px + 32px);
   align-self: start;
+  padding: clamp(24px, 2.6vw, 40px);
+  border-radius: 16px;
+  background: var(--cor-vermelho);
+  color: #fff;
 }
 
 .visor__tipo {
@@ -131,7 +136,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .visor__titulo {
@@ -148,7 +153,7 @@
   gap: 8px 18px;
   margin-bottom: 28px;
   padding: 16px 0;
-  border-block: 1px solid var(--cor-linha);
+  border-block: 1px solid rgba(255, 255, 255, 0.35);
   font-size: 0.95rem;
 }
 
@@ -157,7 +162,7 @@
 }
 
 .visor__meta-rotulo {
-  color: var(--cor-tinta-suave);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .visor__meta-valor {
@@ -168,6 +173,10 @@
   margin-bottom: 26px;
 }
 
+.visor__bloco:last-child {
+  margin-bottom: 0;
+}
+
 .visor__bloco-titulo {
   margin-bottom: 8px;
   font-stretch: 115%;
@@ -175,7 +184,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--cor-tinta-suave);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .visor__bloco-texto {
@@ -193,13 +202,13 @@
 
 .visor__peca {
   padding: 5px 12px;
-  border: 1px solid var(--cor-linha-forte);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 999px;
   font-size: 0.88rem;
 }
 
 .visor__texto--preencher {
-  color: var(--cor-tinta-suave);
+  color: rgba(255, 255, 255, 0.72);
   font-style: italic;
 }
 
@@ -211,6 +220,7 @@
 .visor__midia-imagem {
   width: 100%;
   height: auto;
+  border-radius: 16px;
   background: var(--cor-cinza-claro);
 }
 
@@ -240,7 +250,7 @@
 }
 
 .visor__video-botao:hover {
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   color: #fff;
 }
 
@@ -312,12 +322,12 @@
 }
 
 .visor__seguinte:hover .visor__seguinte-nome {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .visor__seguinte:hover .visor__seguinte-seta {
   transform: translateX(8px);
-  fill: var(--cor-urucum);
+  fill: var(--cor-vermelho);
 }
 
 @keyframes visor-sobe {

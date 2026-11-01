@@ -29,7 +29,7 @@ assets/
 
 Cada elemento tem a sua própria classe, com o nome da seção como prefixo
 (`servicos__painel-nome`, `contato__ima-rotulo`). Variações usam `--`
-(`servicos__painel--urucum`, `processo__etapa--ativa`). Nenhuma classe é
+(`servicos__painel--vermelho`, `processo__etapa--ativa`). Nenhuma classe é
 compartilhada entre seções, então mudar um estilo não afeta outra parte do site.
 
 ## Tarefas comuns

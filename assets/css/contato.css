@@ -1,6 +1,6 @@
 /* =========================================================================
    VAMOS APRESENTAR O SEU PROJETO PARA O MUNDO?
-   Faixa urucum em duas partes:
+   Faixa vermelho em duas partes:
      topo    chamada (título e texto) à esquerda e o círculo com o
              personagem à direita, os dois centrados na mesma altura;
      canais  WhatsApp, e-mail e redes em três colunas iguais, alinhadas
@@ -9,7 +9,7 @@
 
 .contato {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   color: #fff;
 }
 

@@ -26,7 +26,6 @@
 }
 
 .servicos__titulo {
-  max-width: 11ch;
   font-weight: 300;
   font-size: 5.6vw;
   line-height: 0.98;
@@ -40,7 +39,7 @@
 .servicos__titulo-destaque {
   font-style: normal;
   font-weight: 900;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .servicos__titulo-palavra {
@@ -91,10 +90,10 @@
   color: #fff;
 }
 
-.servicos__painel--urucum {
-  background: var(--cor-urucum);
+.servicos__painel--vermelho {
+  background: var(--cor-vermelho);
   color: #fff;
-  border-top-color: var(--cor-urucum);
+  border-top-color: var(--cor-vermelho);
 }
 
 .servicos__painel-nome {

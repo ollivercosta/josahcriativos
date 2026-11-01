@@ -1,7 +1,7 @@
 /* =========================================================================
    MANIFESTO
    A frase se escreve conforme a leitura avança: cada palavra sai do cinza
-   para a tinta, e as palavras-chave chegam em urucum.
+   para a tinta, e as palavras-chave chegam em vermelho.
    ========================================================================= */
 
 .manifesto {
@@ -25,7 +25,7 @@
 }
 
 .manifesto__palavra--forte.manifesto__palavra--lida {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 @media (max-width: 860px) {

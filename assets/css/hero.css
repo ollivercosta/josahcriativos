@@ -130,8 +130,8 @@
   color: var(--cor-tinta);
 }
 
-.hero__letra--urucum {
-  color: var(--cor-urucum);
+.hero__letra--vermelho {
+  color: var(--cor-vermelho);
 }
 
 /* título: fino, apoiado na palavra */
@@ -227,7 +227,7 @@
   line-height: 1.04;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
   white-space: nowrap;
 }
 
@@ -243,11 +243,11 @@
 }
 
 .hero__servicos:hover .hero__servico {
-  color: rgba(200, 54, 31, 0.55);
+  color: rgba(155, 17, 30, 0.55);
 }
 
 .hero__servicos:hover .hero__servico:hover {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
   transform: translateY(-0.14em) translateZ(40px) scale(1.06);
   text-shadow: 0.03em 0.12em 0.18em rgba(22, 19, 15, 0.18);
 }
@@ -292,7 +292,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
   animation: hero-aparece 1.2s ease 1.2s both;
 }
 
@@ -322,7 +322,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.75s var(--curva);

@@ -63,7 +63,7 @@
 }
 
 .termos__fechar:hover {
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
 }
 
 .termos__fechar-icone {
@@ -87,7 +87,7 @@
 }
 
 .termos__titulo-destaque {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .termos__subtitulo {
@@ -171,7 +171,7 @@
 .termos__indice-link:hover,
 .termos__indice-link--atual {
   color: var(--cor-tinta);
-  border-left-color: var(--cor-urucum);
+  border-left-color: var(--cor-vermelho);
 }
 
 .termos__principal {
@@ -207,7 +207,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .termos__paragrafo,

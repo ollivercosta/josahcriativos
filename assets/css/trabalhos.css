@@ -40,7 +40,7 @@
 
 .trabalhos__titulo-destaque {
   font-style: normal;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 /* a máscara tem folga dos dois lados para a última letra não ser cortada */
@@ -94,9 +94,10 @@
   aspect-ratio: 4 / 3;
   padding: 0;
   border: 0;
+  border-radius: 16px;
   background: var(--cor-cinza-claro);
   cursor: pointer;
-  clip-path: inset(100% 0 0 0);
+  clip-path: inset(100% 0 0 0 round 16px);
   transition: clip-path 1.6s var(--curva-entra-sai);
 }
 
@@ -118,7 +119,7 @@
 }
 
 .trabalhos__destaque--visivel .trabalhos__destaque-capa {
-  clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0 round 16px);
 }
 
 .trabalhos__destaque--visivel .trabalhos__destaque-imagem {
@@ -137,7 +138,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .trabalhos__destaque-nome {
@@ -205,7 +206,7 @@
   }
 
   .trabalhos__destaque-abrir:hover {
-    background: var(--cor-urucum);
+    background: var(--cor-vermelho);
   }
 
   .trabalhos__destaque-abrir:hover .trabalhos__destaque-seta {
@@ -270,7 +271,7 @@
 
 .trabalhos__filtro:hover,
 .trabalhos__filtro[aria-pressed="true"] {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .trabalhos__filtro[aria-pressed="true"]::after {
@@ -324,6 +325,7 @@
 .trabalhos__capa {
   position: relative;
   display: block;
+  border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 4 / 3;
   background: var(--cor-cinza-claro);
@@ -440,7 +442,7 @@
 .trabalhos__resumo-seta {
   width: 18px;
   height: 18px;
-  fill: var(--cor-urucum);
+  fill: var(--cor-vermelho);
   transition: transform 0.8s var(--curva);
 }
 
@@ -457,7 +459,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .trabalhos__legenda-nome {
@@ -524,7 +526,7 @@
 }
 
 .trabalhos__mais-botao:hover {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
   background-size: 0% 1px;
   background-position: 100% 100%;
 }

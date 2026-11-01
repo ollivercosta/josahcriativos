@@ -33,7 +33,7 @@
 
 .fomento__titulo-forte {
   font-weight: 900;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .fomento__titulo-palavra {
@@ -114,7 +114,7 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
 }
 
 .fomento__balao[hidden] {
@@ -128,7 +128,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .fomento__dado[hidden] {
@@ -152,7 +152,7 @@
 .fomento__referencia-link {
   font-weight: 600;
   color: var(--cor-tinta);
-  text-decoration-color: var(--cor-urucum);
+  text-decoration-color: var(--cor-vermelho);
   text-underline-offset: 3px;
 }
 

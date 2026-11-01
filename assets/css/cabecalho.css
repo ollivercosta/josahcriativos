@@ -93,7 +93,7 @@
 }
 
 .cabecalho__link--ativo {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .cabecalho__menu-botao {
@@ -133,7 +133,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: calc(var(--altura-cabecalho) + 24px) var(--margem) 32px;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   color: #fff;
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
