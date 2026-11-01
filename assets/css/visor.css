@@ -224,6 +224,28 @@
   background: var(--cor-cinza-claro);
 }
 
+/* partes de uma mesma peça: sem espaço entre elas e cantos só nas pontas */
+.visor__midia--parte + .visor__midia--parte {
+  margin-top: calc(-1 * clamp(20px, 2.6vw, 36px));
+}
+
+.visor__midia--parte .visor__midia-imagem {
+  border-radius: 0;
+}
+
+.visor__midia--parte:not(.visor__midia--parte + .visor__midia--parte) .visor__midia-imagem {
+  border-radius: 16px 16px 0 0;
+}
+
+.visor__midia--parte:not(:has(+ .visor__midia--parte)) .visor__midia-imagem {
+  border-radius: 0 0 16px 16px;
+}
+
+.visor__midia--parte:not(.visor__midia--parte + .visor__midia--parte):not(:has(+ .visor__midia--parte))
+  .visor__midia-imagem {
+  border-radius: 16px;
+}
+
 .visor__video {
   position: relative;
   aspect-ratio: 16 / 9;

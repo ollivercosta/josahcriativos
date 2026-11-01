@@ -61,7 +61,7 @@ class Site {
     this.secoes.trabalhos = new Trabalhos($(".trabalhos"), TRABALHOS, (indice, lista) =>
       this.secoes.visor.abrir(indice, lista),
     );
-    this.secoes.servicos = new Servicos($(".servicos"), this.ciclo, TRABALHOS);
+    this.secoes.servicos = new Servicos($(".servicos"), this.ciclo);
     this.secoes.processo = new Processo($(".processo"));
     this.secoes.sobre = new Sobre($(".sobre"));
     this.secoes.depoimentos = new Depoimentos($(".depoimentos"));
