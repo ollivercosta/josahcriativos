@@ -37,7 +37,7 @@
 }
 
 .rodape__termos:hover {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .rodape__nome {
@@ -53,5 +53,5 @@
 
 .rodape__nome-destaque {
   font-style: normal;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }

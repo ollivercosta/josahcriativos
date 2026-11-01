@@ -18,7 +18,7 @@
 
 .depoimentos__titulo-forte {
   font-weight: 900;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .depoimentos__titulo-palavra {
@@ -101,7 +101,7 @@
   top: 14px;
   bottom: 14px;
   width: 3px;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   transform: scaleY(0);
   transition: transform 0.8s var(--curva);
 }
@@ -165,7 +165,7 @@
 
 .depoimentos__citacao::before {
   content: "\201C";
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
   font-weight: 900;
 }
 

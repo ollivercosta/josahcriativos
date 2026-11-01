@@ -2,7 +2,7 @@ import { Ambiente } from "../nucleo/Ambiente.js";
 
 /**
  * Sobre ("Quem dá vida a isso")
- * A colagem se monta quando entra na tela: o bloco urucum desce, o
+ * A colagem se monta quando entra na tela: o bloco vermelho desce, o
  * retrato sobe, as linhas e as anotações aparecem por último.
  */
 export class Sobre {

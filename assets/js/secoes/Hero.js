@@ -2,7 +2,7 @@ import { Ambiente } from "../nucleo/Ambiente.js";
 
 /**
  * Hero
- * Monta "CULTURA" letra a letra (CUL em tinta, TURA em urucum), alinha a
+ * Monta "CULTURA" letra a letra (CUL em tinta, TURA em vermelho), alinha a
  * haste à letra T, faz as letras reagirem ao mouse e inclina o plano em
  * 3D com o mouse e a rolagem, sempre com interpolação suave.
  */
@@ -28,7 +28,7 @@ export class Hero {
   #montarPalavra() {
     Array.from("Cultura").forEach((letra, indice) => {
       const span = document.createElement("span");
-      span.className = indice < 3 ? "hero__letra hero__letra--tinta" : "hero__letra hero__letra--urucum";
+      span.className = indice < 3 ? "hero__letra hero__letra--tinta" : "hero__letra hero__letra--vermelho";
       span.style.setProperty("--i", String(indice));
       span.textContent = letra;
       this.cultura.append(span);

@@ -1,7 +1,7 @@
 /**
  * Manifesto
  * Divide a frase em palavras e acende cada uma conforme a leitura avança.
- * As palavras listadas em `data-fortes` acendem em urucum.
+ * As palavras listadas em `data-fortes` acendem em vermelho.
  */
 export class Manifesto {
   /**

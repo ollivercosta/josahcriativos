@@ -31,7 +31,7 @@
 
 .chat__botao:hover {
   transform: scale(1.06);
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
 }
 
 .chat__botao::after {
@@ -43,7 +43,7 @@
   height: 14px;
   border: 2px solid #fff;
   border-radius: 50%;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   transform: scale(0);
   transition: transform 0.8s var(--curva);
 }
@@ -152,7 +152,7 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
 }
 
 .chat__avatar-icone {
@@ -305,8 +305,8 @@
 }
 
 .chat__opcao--acao:hover {
-  background: var(--cor-urucum);
-  border-color: var(--cor-urucum);
+  background: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
 }
 
 .chat__opcao--volta {
@@ -368,7 +368,7 @@
 }
 
 .chat__enviar:hover {
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
 }
 
 .chat__enviar-icone {

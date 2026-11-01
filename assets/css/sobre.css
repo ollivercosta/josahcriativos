@@ -1,6 +1,6 @@
 /* =========================================================================
    QUEM DÁ VIDA A ISSO
-   Colagem: bloco urucum, retrato recortado e linhas de composição. As
+   Colagem: bloco vermelho, retrato recortado e linhas de composição. As
    anotações ficam fora do bloco, sobre o branco, para leitura plena.
    ========================================================================= */
 
@@ -24,7 +24,7 @@
   top: 6%;
   width: 44%;
   height: 58%;
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1.4s var(--curva-entra-sai) 0.2s;
 }
@@ -120,7 +120,7 @@
 
 .sobre__titulo-forte {
   font-weight: 900;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .sobre__titulo-palavra {
@@ -157,7 +157,7 @@
 
 .sobre__parceira {
   font-weight: 800;
-  text-decoration-color: var(--cor-urucum);
+  text-decoration-color: var(--cor-vermelho);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
@@ -173,7 +173,7 @@
 
 .sobre__citacao-trajetoria {
   font-weight: 800;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .sobre__citacao-destaque {
@@ -216,7 +216,7 @@
 
 .sobre__cliente:hover .sobre__cliente-nome {
   transform: translateX(1.2vw);
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 @media (max-width: 860px) {

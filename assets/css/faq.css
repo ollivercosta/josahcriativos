@@ -27,7 +27,7 @@
 
 .faq__titulo-destaque {
   font-style: normal;
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .faq__titulo-palavra {
@@ -61,14 +61,14 @@
   font: inherit;
   color: var(--cor-tinta);
   text-decoration: underline;
-  text-decoration-color: var(--cor-urucum);
+  text-decoration-color: var(--cor-vermelho);
   text-underline-offset: 3px;
   cursor: pointer;
   transition: color 0.4s ease;
 }
 
 .faq__termos:hover {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .faq__lista {
@@ -99,7 +99,7 @@
 }
 
 .faq__pergunta:hover {
-  color: var(--cor-urucum);
+  color: var(--cor-vermelho);
 }
 
 .faq__sinal {

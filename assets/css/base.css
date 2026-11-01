@@ -14,10 +14,10 @@
 }
 
 :root {
-  /* paleta Urucum: três cores */
+  /* paleta: branco, tinta e vermelho (três cores) */
   --cor-fundo: #ffffff;
   --cor-tinta: #16130f;
-  --cor-urucum: #c8361f;
+  --cor-vermelho: #9b111e;
 
   /* variações de opacidade da tinta (não são cores novas) */
   --cor-tinta-suave: rgba(22, 19, 15, 0.62);
@@ -114,12 +114,12 @@ dd {
 }
 
 ::selection {
-  background: var(--cor-urucum);
+  background: var(--cor-vermelho);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--cor-urucum);
+  outline: 2px solid var(--cor-vermelho);
   outline-offset: 3px;
 }
 
