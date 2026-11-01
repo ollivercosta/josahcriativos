@@ -17,9 +17,8 @@
           Voce sabia? . "BALAO" (textos: id="fm-<nome>", logo abaixo da faixa)
           Termos ...... "id=\"overlay-regras\""  (clausulas: lg-doc-0, 1, 2)
           Visualizador. "id=\"projectModal\""
-          Hero B ...... "HERO B" (versao alternativa; aparece com ?hero=b no link)
           Chat ........ "CHAT TIRA-DUVIDAS" (perguntas e respostas: "BASE_CHAT")
-          Versoes ..... "VERSOES E INTERACOES" (?hero=b, ?mural=b, ?versoes)
+          Animacoes ... "ENTRADA DOS BLOCOS" (blocos surgem ao rolar)
           Scripts ..... "<script>" (menu, visualizador, termos, voce sabia, VLibras)
          ===================================================================== -->
     <meta charset="UTF-8" />
@@ -767,7 +766,7 @@
         z-index: 1;
       }
 
-      /* ---------- mural: Régua, Book de captação, Edital, Entrega ---------- */
+      /* ---------- mural: Régua, Book de captação, Edital, Entrega (só texto) ---------- */
       .mural {
         padding: clamp(40px, 6vw, 80px) 0 clamp(64px, 8vw, 110px);
         position: relative;
@@ -781,40 +780,24 @@
       .peca {
         position: relative;
         margin: 0;
+        padding-top: 18px;
+        border-top: 2px solid var(--tinta);
       }
-      .peca:nth-child(2) {
-        margin-top: 36px;
+      .peca h3 {
+        font-family: var(--display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(2.3rem, 3.2vw, 3rem);
+        line-height: 0.9;
+        margin: 0 0 10px;
+        letter-spacing: 0.005em;
       }
-      .peca:nth-child(4) {
-        margin-top: 24px;
-      }
-      .peca-arte {
-        position: relative;
-        aspect-ratio: 5 / 6;
-        filter: drop-shadow(0 12px 14px rgba(27, 2, 23, 0.28));
-        transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-      .peca:nth-child(1) .peca-arte {
-        transform: rotate(-2.2deg);
-      }
-      .peca:nth-child(2) .peca-arte {
-        transform: rotate(1.6deg);
-      }
-      .peca:nth-child(3) .peca-arte {
-        transform: rotate(-1.2deg);
-      }
-      .peca:nth-child(4) .peca-arte {
-        transform: rotate(2.1deg);
-      }
-      .peca:hover .peca-arte,
-      .peca:focus-within .peca-arte {
-        transform: rotate(0deg) translateY(-6px);
-      }
-      .peca-arte svg,
-      .peca-arte .folha {
-        width: 100%;
-        height: 100%;
-        display: block;
+      .peca p {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.45;
+        color: var(--texto-suave);
+        max-width: 24em;
       }
       .fita {
         position: absolute;
@@ -828,68 +811,6 @@
         mix-blend-mode: multiply;
         transform: rotate(-4deg);
         clip-path: polygon(0 8%, 4% 0, 8% 10%, 12% 0, 100% 0, 96% 50%, 100% 100%, 8% 100%, 4% 92%, 0 100%, 3% 50%);
-      }
-      .peca:nth-child(even) .fita {
-        transform: rotate(5deg);
-        left: 38%;
-      }
-      .peca h3 {
-        font-family: var(--display);
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: clamp(2.3rem, 3.2vw, 3rem);
-        line-height: 0.9;
-        margin: 22px 0 8px;
-        letter-spacing: 0.005em;
-      }
-      .peca p {
-        margin: 0;
-        font-size: 1.05rem;
-        line-height: 1.45;
-        color: var(--texto-suave);
-        max-width: 24em;
-      }
-      .mural-nota {
-        margin: 40px 0 0;
-        font-size: 0.95rem;
-        font-style: italic;
-        color: var(--texto-suave);
-      }
-      /* detalhes animados das peças */
-      .carimbo-edital {
-        transform-origin: 50% 50%;
-        transform: scale(1.8) rotate(-24deg);
-        opacity: 0;
-        transition:
-          transform 0.55s cubic-bezier(0.2, 1.5, 0.4, 1) 0.2s,
-          opacity 0.2s ease 0.2s;
-      }
-      .mural.in .carimbo-edital {
-        transform: scale(1) rotate(-12deg);
-        opacity: 0.95;
-      }
-      .folha-1,
-      .folha-2 {
-        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-        transform-origin: 50% 100%;
-      }
-      .peca:hover .folha-1,
-      .mural.in .folha-1 {
-        transform: rotate(-5deg) translate(-8px, 2px);
-      }
-      .peca:hover .folha-2,
-      .mural.in .folha-2 {
-        transform: rotate(4deg) translate(8px, 0);
-      }
-      .arte-txt {
-        font-family: var(--leitura);
-        fill: var(--tinta);
-      }
-      .arte-disp {
-        font-family: var(--display);
-        fill: var(--tinta);
-        font-weight: 800;
-        text-transform: uppercase;
       }
 
       /* ---------- especialidades ---------- */
@@ -2036,13 +1957,7 @@
       @media (max-width: 1020px) {
         .mural-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        .peca:nth-child(2),
-        .peca:nth-child(4) {
-          margin-top: 0;
-        }
-        .peca:nth-child(even) {
-          margin-top: 28px;
+          row-gap: 40px;
         }
         .ingressos {
           grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2152,12 +2067,7 @@
         }
         .mural-grid {
           grid-template-columns: 1fr;
-        }
-        .peca:nth-child(even) {
-          margin-top: 0;
-        }
-        .peca-arte {
-          max-width: 340px;
+          row-gap: 32px;
         }
         .ingressos {
           grid-template-columns: 1fr;
@@ -2602,10 +2512,6 @@
           transition-duration: 0.001ms !important;
           transition-delay: 0s !important;
         }
-        .carimbo-edital {
-          transform: rotate(-12deg);
-          opacity: 0.95;
-        }
         .pf-chapter {
           opacity: 1;
           transform: none;
@@ -2687,8 +2593,8 @@
       }
 
       /* =====================================================================
-         v13: marca so com o nome, hero B, secao 2 em pilha, desenhos
-         interativos, chat tira-duvidas e seletor de versoes (?versoes).
+         ACRESCIMOS: marca so com o nome, entrada dos blocos ao rolar
+         e chat tira-duvidas.
          ===================================================================== */
 
       /* ---------- marca: só o nome ---------- */
@@ -2698,256 +2604,6 @@
       }
       .brand:hover .brand-name {
         color: var(--carimbo);
-      }
-
-      /* ---------- hero A: título reage ao ponteiro, selo carimba de novo ---------- */
-      .hero-title .l::before {
-        transform: translate(
-          calc(0.028em + var(--mx, 0) * 0.035em),
-          calc(0.022em + var(--my, 0) * 0.035em)
-        );
-        transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-      .selo {
-        cursor: pointer;
-        rotate: var(--giro, 0deg);
-      }
-      .selo-contato {
-        rotate: var(--giro, 0deg);
-      }
-
-      /* ---------- hero B ---------- */
-      .hero-b {
-        position: relative;
-        background: var(--tinta);
-        color: var(--giz);
-        padding: clamp(48px, 7vw, 96px) 0 clamp(96px, 11vw, 140px);
-        overflow: hidden;
-        isolation: isolate;
-        --foco: var(--cartaz);
-      }
-      .hero-b::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        background: radial-gradient(circle, rgba(242, 224, 43, 0.5) 1.1px, transparent 1.7px) 0 0 / 10px 10px;
-        -webkit-mask-image: linear-gradient(250deg, #000 0%, transparent 50%);
-        mask-image: linear-gradient(250deg, #000 0%, transparent 50%);
-        opacity: 0.22;
-      }
-      .hb-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-        gap: clamp(32px, 6vw, 96px);
-        align-items: center;
-      }
-      .hb-titulo {
-        margin: 0 0 clamp(20px, 3vw, 36px);
-        font-family: var(--display);
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: clamp(3.2rem, 7.2vw, 7.4rem);
-        line-height: 0.86;
-        letter-spacing: -0.01em;
-      }
-      .hb-titulo em {
-        font-style: normal;
-        color: var(--cartaz);
-      }
-      .hero-b .hero-description {
-        color: rgba(249, 247, 241, 0.86);
-        margin-bottom: clamp(24px, 3vw, 40px);
-      }
-      .hb-duvida {
-        background: none;
-        border: 0;
-        border-bottom: 3px solid currentColor;
-        color: var(--giz);
-        cursor: pointer;
-        padding: 0 0 2px;
-      }
-      .hb-duvida:hover {
-        color: var(--cartaz);
-      }
-      .hb-cartaz {
-        position: relative;
-        max-width: 440px;
-        width: 100%;
-        justify-self: center;
-      }
-      .hb-cartaz svg {
-        display: block;
-        width: 100%;
-        height: auto;
-        overflow: visible;
-        cursor: pointer;
-        transform: perspective(1000px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) rotate(-2.5deg);
-        transition: transform 0.25s ease-out;
-        filter: drop-shadow(0 22px 30px rgba(0, 0, 0, 0.45));
-      }
-      .hb-camada {
-        transition: transform 0.25s ease-out;
-      }
-      .hb-entra {
-        animation: hb-entra 0.75s cubic-bezier(0.2, 1.2, 0.4, 1) var(--d, 0s) both;
-      }
-      .hb-carimbo {
-        transform-box: fill-box;
-        transform-origin: 50% 50%;
-        animation-name: hb-carimba;
-      }
-      @keyframes hb-entra {
-        from {
-          opacity: 0;
-          transform: translateY(28px);
-        }
-        to {
-          opacity: 1;
-          transform: none;
-        }
-      }
-      @keyframes hb-carimba {
-        0% {
-          opacity: 0;
-          transform: scale(2) rotate(-20deg);
-        }
-        60% {
-          opacity: 1;
-          transform: scale(0.92);
-        }
-        100% {
-          opacity: 1;
-          transform: none;
-        }
-      }
-      .hb-dica {
-        margin: 18px 0 0;
-        text-align: center;
-        font-size: 0.92rem;
-        font-style: italic;
-        color: rgba(249, 247, 241, 0.62);
-      }
-      @media (hover: none) {
-        .hb-dica {
-          display: none;
-        }
-      }
-      @media (max-width: 860px) {
-        .hb-grid {
-          grid-template-columns: 1fr;
-        }
-        .hb-cartaz {
-          max-width: 320px;
-        }
-      }
-
-      /* ---------- seção 2, versão A: desenhos animados ---------- */
-      .peca-arte svg {
-        transform: perspective(800px) rotateX(var(--ty, 0deg)) rotateY(var(--tx, 0deg));
-        transition: transform 0.25s ease-out;
-      }
-      .js-anim .rg-logos > * {
-        transform-box: fill-box;
-        transform-origin: 50% 100%;
-        transition: transform 0.6s cubic-bezier(0.2, 1.5, 0.4, 1);
-      }
-      .js-anim .mural:not(.in) .rg-logos > :nth-child(1) {
-        transform: scale(1.45);
-      }
-      .js-anim .mural:not(.in) .rg-logos > :nth-child(2) {
-        transform: scale(0.6);
-      }
-      .js-anim .mural:not(.in) .rg-logos > :nth-child(3) {
-        transform: scale(1.3);
-      }
-      .js-anim .mural:not(.in) .rg-logos > :nth-child(4) {
-        transform: scale(0.7);
-      }
-      .js-anim .mural:not(.in) .rg-logos > :nth-child(5) {
-        transform: scale(1.25);
-      }
-      .rg-logos > :nth-child(2) {
-        transition-delay: 0.08s;
-      }
-      .rg-logos > :nth-child(3) {
-        transition-delay: 0.16s;
-      }
-      .rg-logos > :nth-child(4) {
-        transition-delay: 0.24s;
-      }
-      .rg-logos > :nth-child(5) {
-        transition-delay: 0.32s;
-      }
-      .peca:hover .rg-logos > * {
-        animation: rg-pula 0.5s ease both;
-      }
-      .peca:hover .rg-logos > :nth-child(2) {
-        animation-delay: 0.06s;
-      }
-      .peca:hover .rg-logos > :nth-child(3) {
-        animation-delay: 0.12s;
-      }
-      .peca:hover .rg-logos > :nth-child(4) {
-        animation-delay: 0.18s;
-      }
-      .peca:hover .rg-logos > :nth-child(5) {
-        animation-delay: 0.24s;
-      }
-      @keyframes rg-pula {
-        40% {
-          transform: translateY(-9px);
-        }
-      }
-      .js-anim .bk-linhas line {
-        stroke-dasharray: 160;
-        stroke-dashoffset: 160;
-        transition: stroke-dashoffset 0.7s ease;
-      }
-      .js-anim .mural.in .bk-linhas line {
-        stroke-dashoffset: 0;
-      }
-      .bk-linhas line:nth-child(2) {
-        transition-delay: 0.12s;
-      }
-      .bk-linhas line:nth-child(3) {
-        transition-delay: 0.24s;
-      }
-      .bk-linhas line:nth-child(4) {
-        transition-delay: 0.36s;
-      }
-      .ed-marca {
-        transform-box: fill-box;
-        transform-origin: 0 50%;
-        transition: transform 0.6s cubic-bezier(0.6, 0, 0.2, 1);
-      }
-      .js-anim .mural:not(.in) .ed-marca {
-        transform: scaleX(0);
-      }
-      .peca:hover .carimbo-edital {
-        transform: scale(1.1) rotate(-6deg);
-        transition-delay: 0s;
-      }
-      .en-aba {
-        transform-box: fill-box;
-        transform-origin: 50% 0;
-        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-      .en-carta,
-      .en-tags {
-        transition: transform 0.5s cubic-bezier(0.2, 1.3, 0.4, 1);
-      }
-      .peca:hover .en-aba {
-        transform: scaleY(-0.32);
-      }
-      .peca:hover .en-carta {
-        transform: translateY(-16px);
-        transition-delay: 0.12s;
-      }
-      .peca:hover .en-tags {
-        transform: translateY(-6px);
-        transition-delay: 0.2s;
       }
 
       /* entrada suave dos blocos ao rolar */
@@ -2969,130 +2625,6 @@
       }
       .tk:hover .tk-topo {
         transform: rotate(-3deg) translateY(-3px);
-      }
-
-      /* ---------- seção 2, versão B: pilha de papéis ---------- */
-      .mural.pilha .mural-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        grid-template-areas:
-          "pilha abas"
-          "pilha texto";
-        grid-template-rows: auto 1fr;
-        column-gap: clamp(32px, 6vw, 96px);
-        row-gap: 28px;
-        align-items: start;
-      }
-      .mural.pilha .peca {
-        display: contents;
-      }
-      .mural.pilha .peca-arte {
-        grid-area: pilha;
-        width: min(100%, 380px);
-        justify-self: center;
-        align-self: center;
-        cursor: pointer;
-        transition:
-          transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1),
-          filter 0.4s ease;
-      }
-      .mural.pilha .peca .peca-arte[data-pos="0"] {
-        z-index: 4;
-        transform: rotate(-1deg);
-        cursor: default;
-      }
-      .mural.pilha .peca .peca-arte[data-pos="1"] {
-        z-index: 3;
-        transform: rotate(5deg) translate(26px, 10px) scale(0.97);
-        filter: drop-shadow(0 8px 10px rgba(27, 2, 23, 0.22)) brightness(0.96);
-      }
-      .mural.pilha .peca .peca-arte[data-pos="2"] {
-        z-index: 2;
-        transform: rotate(-6deg) translate(-26px, 16px) scale(0.94);
-        filter: drop-shadow(0 6px 8px rgba(27, 2, 23, 0.2)) brightness(0.92);
-      }
-      .mural.pilha .peca .peca-arte[data-pos="3"] {
-        z-index: 1;
-        transform: rotate(9deg) translate(10px, 26px) scale(0.91);
-        filter: drop-shadow(0 4px 6px rgba(27, 2, 23, 0.18)) brightness(0.88);
-      }
-      .mural.pilha .peca-arte:not([data-pos="0"]) .fita {
-        opacity: 0;
-      }
-      .mural.pilha figcaption {
-        grid-area: texto;
-        display: none;
-      }
-      .mural.pilha figcaption.ativo {
-        display: block;
-        animation: hb-entra 0.45s ease both;
-      }
-      .mural.pilha .peca h3 {
-        margin-top: 0;
-        font-size: clamp(3rem, 5.4vw, 4.8rem);
-      }
-      .mural.pilha .peca p {
-        font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
-      }
-      .pilha-abas {
-        grid-area: abas;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-self: end;
-      }
-      .pilha-aba {
-        position: relative;
-        overflow: hidden;
-        font-family: var(--display);
-        font-weight: 800;
-        font-size: 1.15rem;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        padding: 0.55em 0.95em 0.5em;
-        border: 2px solid var(--tinta);
-        border-radius: 3px;
-        background: transparent;
-        color: var(--tinta);
-        cursor: pointer;
-      }
-      .pilha-aba[aria-selected="true"] {
-        background: var(--tinta);
-        color: var(--cartaz);
-      }
-      .pilha-aba:not([aria-selected="true"]):hover {
-        background: var(--cartaz);
-      }
-      .pilha-aba .barra {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 3px;
-        width: 100%;
-        background: var(--carimbo);
-        transform-origin: 0 50%;
-        transform: scaleX(0);
-      }
-      .pilha-aba[aria-selected="true"] .barra {
-        animation: pilha-tempo var(--tempo, 7s) linear both;
-      }
-      .mural.pilha.pausa .pilha-aba .barra {
-        animation-play-state: paused;
-      }
-      @keyframes pilha-tempo {
-        to {
-          transform: scaleX(1);
-        }
-      }
-      @media (max-width: 860px) {
-        .mural.pilha .mural-grid {
-          grid-template-columns: 1fr;
-          grid-template-areas: "abas" "pilha" "texto";
-          grid-template-rows: auto;
-        }
-        .mural.pilha .peca-arte {
-          width: min(78%, 320px);
-          margin: 10px 0 24px;
-        }
       }
 
       /* ---------- chat tira-dúvidas ---------- */
@@ -3166,7 +2698,7 @@
         border: 2px solid var(--tinta);
         border-radius: 6px;
         box-shadow: 4px 4px 0 var(--tinta);
-        animation: hb-entra 0.4s ease both;
+        animation: chat-surge 0.4s ease both;
       }
       .chat-convite[hidden] {
         display: none;
@@ -3221,6 +2753,12 @@
       }
       .chat-painel[hidden] {
         display: none;
+      }
+      @keyframes chat-surge {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
       }
       @keyframes chat-abre {
         from {
@@ -3489,381 +3027,11 @@
         }
       }
 
-      /* ---------- v14: opções sem desenhos ---------- */
-      .mural-grid[hidden],
-      .m-lista[hidden],
-      .m-frase[hidden],
-      .mf-item[hidden] {
-        display: none;
-      }
-
-      /* hero C: só tipografia, marca-texto e faixa de serviços */
-      .hero-c {
-        position: relative;
-        background: var(--jornal);
-        padding: clamp(48px, 7vw, 96px) 0 0;
-        overflow: hidden;
-      }
-      .hc-titulo {
-        margin: 0;
-        font-family: var(--display);
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: clamp(3.2rem, 9.4vw, 9.6rem);
-        line-height: 0.88;
-        letter-spacing: -0.012em;
-      }
-      .hc-titulo mark {
-        color: inherit;
-        padding: 0 0.05em;
-        margin: 0 -0.05em;
-        background: linear-gradient(var(--cartaz), var(--cartaz)) 0 86% / 0% 46% no-repeat;
-        animation: hc-marca 0.9s cubic-bezier(0.6, 0, 0.2, 1) 0.35s both;
-        transition: color 0.2s ease;
-      }
-      .hc-titulo mark + mark,
-      .hc-titulo mark:last-of-type {
-        animation-delay: 0.85s;
-      }
-      .hc-titulo mark:hover {
-        color: var(--carimbo);
-      }
-      @keyframes hc-marca {
-        to {
-          background-size: 100% 46%;
-        }
-      }
-      .hc-pe {
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-        gap: clamp(24px, 5vw, 80px);
-        align-items: end;
-        margin-top: clamp(28px, 4vw, 56px);
-      }
-      .hc-duvida {
-        background: none;
-        border: 0;
-        border-bottom: 3px solid currentColor;
-        color: var(--tinta);
-        cursor: pointer;
-        padding: 0 0 2px;
-      }
-      .hc-faixa {
-        margin-top: clamp(48px, 6vw, 84px);
-        background: var(--tinta);
-        color: var(--cartaz);
-        padding: 15px 0 13px;
-        overflow: hidden;
-        transform: rotate(-1.2deg);
-        margin-left: -2%;
-        margin-right: -2%;
-      }
-      .hc-trilho {
-        display: flex;
-        width: max-content;
-        animation: hc-corre 46s linear infinite;
-      }
-      .hc-faixa:hover .hc-trilho {
-        animation-play-state: paused;
-      }
-      .hc-trilho span {
-        font-family: var(--display);
-        font-weight: 800;
-        font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.8rem);
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        white-space: nowrap;
-        padding-right: 1.1em;
-      }
-      .hc-trilho span::after {
-        content: "\2736";
-        margin-left: 1.1em;
-        color: var(--carimbo);
-      }
-      @keyframes hc-corre {
-        to {
-          transform: translateX(-50%);
-        }
-      }
-
-      /* hero D: palavra que troca */
-      .hero-d {
-        position: relative;
-        background: var(--tinta);
-        color: var(--giz);
-        padding: clamp(56px, 8vw, 112px) 0 clamp(96px, 11vw, 140px);
-        overflow: hidden;
-        isolation: isolate;
-        --foco: var(--cartaz);
-      }
-      .hero-d::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        background: radial-gradient(circle, rgba(242, 224, 43, 0.5) 1.1px, transparent 1.7px) 0 0 / 10px 10px;
-        -webkit-mask-image: linear-gradient(115deg, #000 0%, transparent 45%);
-        mask-image: linear-gradient(115deg, #000 0%, transparent 45%);
-        opacity: 0.22;
-      }
-      .hd-titulo {
-        margin: 0;
-        font-family: var(--display);
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: clamp(3rem, 9.4vw, 10rem);
-        line-height: 0.88;
-        letter-spacing: -0.012em;
-      }
-      .hd-fixo,
-      .hd-troca {
-        display: block;
-      }
-      .hd-troca {
-        color: var(--cartaz);
-        min-height: 0.9em;
-      }
-      .hd-palavra {
-        display: inline-block;
-        transition:
-          transform 0.32s cubic-bezier(0.6, 0, 0.2, 1),
-          opacity 0.32s ease;
-      }
-      .hd-palavra.sai {
-        opacity: 0;
-        transform: translateY(0.3em);
-      }
-      .hd-pe {
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-        gap: clamp(24px, 5vw, 80px);
-        align-items: end;
-        margin-top: clamp(32px, 5vw, 64px);
-      }
-      .hero-d .hero-description {
-        color: rgba(249, 247, 241, 0.86);
-      }
-
-      /* seção 2 C: lista numerada */
-      .m-lista {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        border-bottom: 2px solid var(--tinta);
-      }
-      .m-lista li {
-        position: relative;
-        isolation: isolate;
-        display: grid;
-        grid-template-columns: 84px minmax(0, 1fr) minmax(0, 1.3fr);
-        gap: clamp(16px, 3vw, 48px);
-        align-items: baseline;
-        padding: clamp(22px, 2.6vw, 36px) clamp(8px, 1.4vw, 18px);
-        border-top: 2px solid var(--tinta);
-      }
-      .m-lista li::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background: var(--cartaz);
-        transform: scaleX(0);
-        transform-origin: 0 50%;
-        transition: transform 0.45s cubic-bezier(0.6, 0, 0.2, 1);
-      }
-      .m-lista li:hover::before {
-        transform: scaleX(1);
-      }
-      .ml-num {
-        font-family: var(--display);
-        font-weight: 900;
-        font-size: clamp(2rem, 3vw, 2.8rem);
-        line-height: 1;
-        color: var(--carimbo);
-      }
-      .m-lista h3 {
-        margin: 0;
-        font-family: var(--display);
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: clamp(2.3rem, 4.6vw, 4.2rem);
-        line-height: 0.9;
-      }
-      .m-lista p {
-        margin: 0;
-        font-size: 1.12rem;
-        line-height: 1.5;
-        color: var(--texto-suave);
-        max-width: 34em;
-      }
-      @media (max-width: 760px) {
-        .m-lista li {
-          grid-template-columns: 52px minmax(0, 1fr);
-          row-gap: 8px;
-        }
-        .m-lista p {
-          grid-column: 2;
-        }
-      }
-
-      /* seção 2 D: frase com termos clicáveis */
-      .m-frase {
-        max-width: 1100px;
-      }
-      .mf-texto {
-        margin: 0;
-        font-size: clamp(1.8rem, 1.1rem + 2.6vw, 3.5rem);
-        line-height: 1.25;
-        font-weight: 450;
-        letter-spacing: -0.01em;
-      }
-      .mf-termo {
-        font: inherit;
-        font-family: var(--display);
-        font-weight: 900;
-        font-size: 1.04em;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-        line-height: 1;
-        color: var(--tinta);
-        border: 0;
-        border-radius: 2px;
-        padding: 0.02em 0.12em;
-        cursor: pointer;
-        background: linear-gradient(var(--cartaz), var(--cartaz)) 0 92% / 100% 34% no-repeat;
-        transition:
-          background-size 0.3s ease,
-          color 0.2s ease;
-      }
-      .mf-termo:hover {
-        background-size: 100% 100%;
-      }
-      .mf-termo[aria-pressed="true"] {
-        background: var(--tinta);
-        color: var(--cartaz);
-      }
-      .mf-def {
-        margin-top: clamp(28px, 4vw, 52px);
-        padding-left: 22px;
-        border-left: 4px solid var(--carimbo);
-        max-width: 40em;
-        min-height: 7em;
-      }
-      .mf-item {
-        animation: hb-entra 0.4s ease both;
-      }
-      .mf-item h3 {
-        margin: 0 0 6px;
-        font-family: var(--display);
-        font-weight: 900;
-        text-transform: uppercase;
-        font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-        line-height: 0.95;
-      }
-      .mf-item p {
-        margin: 0;
-        font-size: 1.15rem;
-        line-height: 1.5;
-        color: var(--texto-suave);
-      }
-      .mf-dica {
-        margin: 14px 0 0;
-        font-size: 0.95rem;
-        font-style: italic;
-        color: var(--texto-suave);
-      }
-      @media (max-width: 860px) {
-        .hc-pe,
-        .hd-pe {
-          grid-template-columns: 1fr;
-        }
-      }
       @media (prefers-reduced-motion: reduce) {
-        .hc-trilho {
-          animation: none;
-        }
-      }
-
-      /* ---------- seletor de versões (só com ?versoes no link) ---------- */
-      .versoes {
-        position: fixed;
-        left: 14px;
-        bottom: 14px;
-        z-index: 150;
-        width: 262px;
-        padding: 12px 14px 10px;
-        background: var(--giz);
-        border: 2px solid var(--tinta);
-        border-radius: 6px;
-        box-shadow: 4px 4px 0 var(--carimbo);
-        font-size: 0.9rem;
-      }
-      .versoes b {
-        display: block;
-        font-family: var(--display);
-        font-weight: 900;
-        font-size: 1.15rem;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-      }
-      .versoes-linha {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-      .versoes-linha div {
-        display: flex;
-        gap: 4px;
-      }
-      .versoes button {
-        min-width: 34px;
-        font-family: var(--display);
-        font-weight: 800;
-        font-size: 1rem;
-        padding: 4px 8px;
-        border: 2px solid var(--tinta);
-        border-radius: 3px;
-        background: transparent;
-        color: var(--tinta);
-        cursor: pointer;
-      }
-      .versoes button[aria-pressed="true"] {
-        background: var(--tinta);
-        color: var(--cartaz);
-      }
-      .versoes small {
-        display: block;
-        color: var(--texto-suave);
-        line-height: 1.3;
-      }
-      .versoes-min {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        min-width: 0 !important;
-        border: 0 !important;
-        font-size: 1rem !important;
-      }
-      .versoes.min > :not(b):not(.versoes-min) {
-        display: none;
-      }
-      .versoes.min b {
-        margin: 0;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .hb-entra,
-        .hb-carimbo,
         .chat-msg,
         .chat-opcoes,
         .chat-painel {
           animation: none;
-        }
-        .pilha-aba .barra {
-          display: none;
         }
       }
     </style>
@@ -4070,18 +3238,15 @@
     </div>
 
     <main id="conteudo">
-      <!-- HERO A (padrao). Versao alternativa logo abaixo: "HERO B". Troca no link: ?hero=b -->
-      <section class="papel-cartaz hero" id="heroA">
+      <section class="papel-cartaz hero">
         <div class="wrap">
-          <div class="selo" aria-hidden="true" title="Clique para carimbar de novo">
+          <div class="selo" aria-hidden="true">
             <svg viewBox="0 0 200 200"><use href="#selo" /></svg>
           </div>
-          <p class="hero-kicker">Para quem escreve, executa e presta contas de projetos culturais</p>
-          <h1 class="hero-title" aria-label="Seu projeto cultural, do edital ao palco.">
-            <span class="l" data-t="Seu projeto" aria-hidden="true">Seu projeto</span
-            ><span class="l" data-t="cultural," aria-hidden="true">cultural,</span
-            ><span class="l" data-t="do edital" aria-hidden="true">do edital</span
-            ><span class="l" data-t="ao palco." aria-hidden="true">ao palco.</span>
+          <p class="hero-kicker">Designer gráfico para projetos culturais</p>
+          <h1 class="hero-title" aria-label="Josah Criativos">
+            <span class="l" data-t="Josah" aria-hidden="true">Josah</span
+            ><span class="l" data-t="Criativos" aria-hidden="true">Criativos</span>
           </h1>
           <div class="hero-foot">
             <p class="hero-description">
@@ -4096,399 +3261,38 @@
         <div class="rasgo" aria-hidden="true"></div>
       </section>
 
-      <!-- HERO B (alternativo, escondido por padrao). Aparece com ?hero=b no link. -->
-      <section class="hero-b" id="heroB" hidden>
-        <div class="wrap hb-grid">
-          <div class="hb-texto">
-            <p class="hero-kicker">Designer gráfico para projetos culturais &middot; Salvador, BA</p>
-            <h1 class="hb-titulo">
-              Design que a banca <em>entende</em> e o público <em>lembra.</em>
-            </h1>
-            <p class="hero-description">
-              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
-              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
-            </p>
-            <div class="hero-actions">
-              <a href="#projetos" class="btn on-dark">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
-              <button type="button" class="link-sub hb-duvida" data-chat-abrir>Tirar uma dúvida</button>
-            </div>
-          </div>
-          <div class="hb-cartaz" id="hbCartaz" aria-hidden="true">
-            <svg viewBox="0 0 400 520">
-              <rect x="10" y="10" width="380" height="500" fill="#f2e02b" stroke="#1b0217" stroke-width="3" />
-              <g class="hb-camada" data-prof="6">
-                <g class="hb-entra" style="--d: 0.15s">
-                  <circle cx="292" cy="150" r="92" fill="#d4361e" />
-                  <path d="M40 250 L132 70 L224 250Z" fill="#1b0217" />
-                  <circle cx="292" cy="150" r="40" fill="#f2e02b" />
-                </g>
-              </g>
-              <g class="hb-camada" data-prof="14">
-                <g class="hb-entra" style="--d: 0.35s">
-                  <text class="arte-disp" x="36" y="330" font-size="86" font-weight="900">Festival</text>
-                  <text class="arte-disp" x="36" y="392" font-size="58" font-weight="900" style="fill: #d4361e">de rua</text>
-                  <text class="arte-txt" x="38" y="420" font-size="15" font-style="italic">12 a 14 de novembro &middot; Salvador</text>
-                </g>
-              </g>
-              <g class="hb-camada" data-prof="4">
-                <g class="hb-entra" style="--d: 0.55s">
-                  <line x1="36" y1="444" x2="364" y2="444" stroke="#1b0217" stroke-width="2" />
-                  <text class="arte-disp" x="36" y="462" font-size="11" letter-spacing="1.5">Realização &middot; Apoio</text>
-                  <g fill="#1b0217" class="hb-regua">
-                    <circle cx="52" cy="486" r="13" />
-                    <rect x="80" y="473" width="26" height="26" />
-                    <path d="M126 499 L139 473 L152 499Z" />
-                    <rect x="170" y="473" width="5" height="26" />
-                    <rect x="179" y="473" width="5" height="26" />
-                    <rect x="188" y="473" width="5" height="26" />
-                    <circle cx="218" cy="486" r="10" fill="none" stroke="#1b0217" stroke-width="5" />
-                  </g>
-                </g>
-              </g>
-              <g class="hb-camada" data-prof="22">
-                <g class="hb-entra hb-carimbo" style="--d: 0.9s">
-                  <g transform="translate(312 440) rotate(-14)">
-                    <circle r="50" fill="none" stroke="#d4361e" stroke-width="5" />
-                    <circle r="41" fill="none" stroke="#d4361e" stroke-width="2" />
-                    <text y="-4" text-anchor="middle" font-family="'Big Shoulders Display'" font-weight="900" font-size="20" fill="#d4361e">CONFORME</text>
-                    <text y="16" text-anchor="middle" font-family="'Big Shoulders Display'" font-weight="800" font-size="13" fill="#d4361e">O EDITAL</text>
-                  </g>
-                </g>
-              </g>
-              <g class="hb-camada" data-prof="28">
-                <rect class="hb-fita" x="150" y="-4" width="104" height="30" fill="#f9f7f1" opacity="0.8" transform="rotate(-4 202 11)" />
-              </g>
-            </svg>
-            <p class="hb-dica">Passe o mouse pelo cartaz. Clique para carimbar.</p>
-          </div>
-        </div>
-        <div class="rasgo" aria-hidden="true"></div>
-      </section>
-
-      <!-- HERO C (alternativo, so tipografia). Aparece com ?hero=c no link. -->
-      <section class="hero-c" id="heroC" hidden>
-        <div class="wrap">
-          <p class="hero-kicker">Designer gráfico para projetos culturais &middot; Salvador, BA</p>
-          <h1 class="hc-titulo">
-            Design que a banca <mark>entende</mark> e o público <mark>lembra.</mark>
-          </h1>
-          <div class="hc-pe">
-            <p class="hero-description">
-              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
-              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
-            </p>
-            <div class="hero-actions">
-              <a href="#projetos" class="btn">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
-              <button type="button" class="link-sub hc-duvida" data-chat-abrir>Tirar uma dúvida</button>
-            </div>
-          </div>
-        </div>
-        <div class="hc-faixa" aria-hidden="true">
-          <div class="hc-trilho">
-            <span>Identidade visual</span><span>Book de captação</span><span>Portfólio artístico</span
-            ><span>Landing pages</span><span>Formulários</span><span>Redes sociais</span><span>Material de palco</span
-            ><span>Teasers</span><span>Spots de rádio e TV</span><span>Identidade visual</span><span>Book de captação</span
-            ><span>Portfólio artístico</span><span>Landing pages</span><span>Formulários</span><span>Redes sociais</span
-            ><span>Material de palco</span><span>Teasers</span><span>Spots de rádio e TV</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- HERO D (alternativo, palavra que troca). Aparece com ?hero=d no link. -->
-      <section class="hero-d" id="heroD" hidden>
-        <div class="wrap">
-          <p class="hero-kicker">Designer gráfico para projetos culturais &middot; Salvador, BA</p>
-          <h1 class="hd-titulo">
-            <span class="hd-fixo">Design para</span>
-            <span class="hd-troca" aria-hidden="true"><span class="hd-palavra" id="hdPalavra">a banca.</span></span>
-            <span class="chat-sr">a banca, o patrocinador, o público e o palco.</span>
-          </h1>
-          <div class="hd-pe">
-            <p class="hero-description">
-              Marca, book de captação, páginas e artes de evento seguindo as regras do edital e o padrão do financiador,
-              para que o projeto seja entendido por quem avalia, por quem apoia e por quem participa.
-            </p>
-            <div class="hero-actions">
-              <a href="#projetos" class="btn on-dark">Ver projetos <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
-              <button type="button" class="link-sub hb-duvida" data-chat-abrir>Tirar uma dúvida</button>
-            </div>
-          </div>
-        </div>
-        <div class="rasgo" aria-hidden="true"></div>
-      </section>
-
       <section class="mural" id="mural" aria-label="Como o trabalho se apresenta">
         <div class="wrap">
           <div class="mural-grid">
-            <figure class="peca">
-              <div class="peca-arte">
-                <span class="fita" aria-hidden="true"></span
-                ><svg viewBox="0 0 250 300" aria-hidden="true">
-                  <rect width="250" height="300" fill="#f9f7f1" />
-                  <rect x="0" y="0" width="250" height="300" fill="none" stroke="#1b0217" stroke-width="2" />
-                  <text class="arte-disp" x="18" y="40" font-size="22">Apoio e realização</text>
-                  <text class="arte-txt" x="18" y="60" font-size="11" font-style="italic">
-                    Régua de logomarcas, rodapé de peça
-                  </text>
-                  <g stroke="#1b0217" stroke-width="1">
-                    <line x1="18" y1="176" x2="232" y2="176" />
-                    <g>
-                      <line x1="18" y1="167" x2="18" y2="176" />
-                      <line x1="28" y1="171" x2="28" y2="176" />
-                      <line x1="39" y1="171" x2="39" y2="176" />
-                      <line x1="50" y1="171" x2="50" y2="176" />
-                      <line x1="60" y1="171" x2="60" y2="176" />
-                      <line x1="71" y1="167" x2="71" y2="176" />
-                      <line x1="82" y1="171" x2="82" y2="176" />
-                      <line x1="92" y1="171" x2="92" y2="176" />
-                      <line x1="103" y1="171" x2="103" y2="176" />
-                      <line x1="114" y1="171" x2="114" y2="176" />
-                      <line x1="125" y1="167" x2="125" y2="176" />
-                      <line x1="135" y1="171" x2="135" y2="176" />
-                      <line x1="146" y1="171" x2="146" y2="176" />
-                      <line x1="157" y1="171" x2="157" y2="176" />
-                      <line x1="167" y1="171" x2="167" y2="176" />
-                      <line x1="178" y1="167" x2="178" y2="176" />
-                      <line x1="189" y1="171" x2="189" y2="176" />
-                      <line x1="199" y1="171" x2="199" y2="176" />
-                      <line x1="210" y1="171" x2="210" y2="176" />
-                      <line x1="221" y1="171" x2="221" y2="176" />
-                      <line x1="232" y1="167" x2="232" y2="176" />
-                    </g>
-                  </g>
-                  <g fill="#1b0217" class="rg-logos">
-                    <circle cx="38" cy="222" r="16" />
-                    <rect x="66" y="206" width="32" height="32" />
-                    <path d="M130 238 L146 206 L162 238Z" />
-                    <g>
-                      <rect x="174" y="206" width="6" height="32" />
-                      <rect x="184" y="206" width="6" height="32" />
-                      <rect x="194" y="206" width="6" height="32" />
-                    </g>
-                    <circle cx="222" cy="222" r="12" fill="none" stroke="#1b0217" stroke-width="5" />
-                  </g>
-                  <line x1="18" y1="258" x2="232" y2="258" stroke="#d4361e" stroke-width="2" />
-                  <text class="arte-txt" x="18" y="278" font-size="11" fill="#d4361e" style="fill: #d4361e">
-                    altura única, espaço mínimo igual
-                  </text>
-                  <rect x="18" y="86" width="214" height="62" fill="#f2e02b" />
-                  <text class="arte-disp" x="28" y="125" font-size="38">Mesmo peso</text>
-                </svg>
-              </div>
-              <figcaption>
-                <h3>Régua</h3>
-                <p>
-                  Logos de apoiadores e patrocinadores na mesma altura e com o mesmo espaço entre eles, na ordem e nas
-                  proporções que o financiador exige.
-                </p>
-              </figcaption>
-            </figure>
-            <figure class="peca">
-              <div class="peca-arte">
-                <span class="fita" aria-hidden="true"></span
-                ><svg viewBox="0 0 250 300" aria-hidden="true">
-                  <g class="folha-1">
-                    <rect x="14" y="14" width="212" height="270" fill="#dedbd0" stroke="#1b0217" stroke-width="2" />
-                  </g>
-                  <g class="folha-2">
-                    <rect x="26" y="10" width="212" height="270" fill="#cdb88e" stroke="#1b0217" stroke-width="2" />
-                  </g>
-                  <rect x="20" y="20" width="212" height="270" fill="#f9f7f1" stroke="#1b0217" stroke-width="2" />
-                  <rect x="20" y="20" width="22" height="270" fill="#1b0217" />
-                  <text class="arte-disp" x="58" y="76" font-size="46" font-weight="900">Book</text>
-                  <text class="arte-txt" x="58" y="98" font-size="11.5" font-style="italic">
-                    de captação do projeto
-                  </text>
-                  <g stroke="#1b0217" stroke-width="3" opacity=".85" class="bk-linhas">
-                    <line x1="58" y1="128" x2="208" y2="128" />
-                    <line x1="58" y1="144" x2="196" y2="144" />
-                    <line x1="58" y1="160" x2="208" y2="160" />
-                    <line x1="58" y1="176" x2="170" y2="176" />
-                  </g>
-                  <rect x="58" y="196" width="150" height="54" fill="#f2e02b" />
-                  <text class="arte-disp" x="68" y="232" font-size="24">Sumário claro</text>
-                  <text class="arte-txt" x="58" y="272" font-size="11">lido em 2 minutos pela banca</text>
-                </svg>
-              </div>
-              <figcaption>
-                <h3>Book de captação</h3>
-                <p>
-                  Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos,
-                  orçamento e contrapartidas fáceis de localizar.
-                </p>
-              </figcaption>
-            </figure>
-            <figure class="peca">
-              <div class="peca-arte">
-                <span class="fita" aria-hidden="true"></span
-                ><svg viewBox="0 0 250 300" aria-hidden="true">
-                  <rect x="8" y="8" width="234" height="284" fill="#f9f7f1" stroke="#1b0217" stroke-width="2" />
-                  <text class="arte-disp" x="24" y="44" font-size="22">Edital, anexo IV</text>
-                  <g class="arte-txt" font-size="11.5">
-                    <text x="24" y="74">4.1 A marca do financiador deve</text>
-                    <text x="24" y="90">aparecer em todas as peças.</text>
-                  </g>
-                  <rect class="ed-marca" x="20" y="106" width="206" height="46" fill="#f2e02b" />
-                  <g class="arte-txt" font-size="11.5">
-                    <text x="24" y="124">4.2 Mínimo de 10% da altura da</text>
-                    <text x="24" y="140">peça para a régua de apoio.</text>
-                  </g>
-                  <g class="arte-txt" font-size="11.5">
-                    <text x="24" y="176">4.3 Contrapartida social descrita</text>
-                    <text x="24" y="192">no plano de divulgação.</text>
-                    <text x="24" y="224">4.4 Entrega em formato aberto.</text>
-                  </g>
-                  <g class="carimbo-edital" style="transform-box: fill-box">
-                    <g transform="translate(182 262)">
-                      <circle r="34" fill="none" stroke="#d4361e" stroke-width="4" />
-                      <circle r="28" fill="none" stroke="#d4361e" stroke-width="1.5" />
-                      <text
-                        y="-2"
-                        text-anchor="middle"
-                        font-family="'Big Shoulders Display'"
-                        font-weight="900"
-                        font-size="14"
-                        fill="#d4361e"
-                      >
-                        CONFORME
-                      </text>
-                      <text
-                        y="13"
-                        text-anchor="middle"
-                        font-family="'Big Shoulders Display'"
-                        font-weight="800"
-                        font-size="10"
-                        fill="#d4361e"
-                      >
-                        ITEM 4
-                      </text>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <figcaption>
-                <h3>Edital</h3>
-                <p>
-                  Cada peça segue as normas do seu edital ou lei de incentivo, a partir das exigências informadas no
-                  briefing.
-                </p>
-              </figcaption>
-            </figure>
-            <figure class="peca">
-              <div class="peca-arte">
-                <span class="fita" aria-hidden="true"></span
-                ><svg viewBox="0 0 250 300" aria-hidden="true">
-                  <rect x="14" y="30" width="222" height="250" fill="#cdb88e" stroke="#1b0217" stroke-width="2" />
-                  <path class="en-aba" d="M14 30 L125 118 L236 30" fill="#b9a276" stroke="#1b0217" stroke-width="2" />
-                  <g class="en-carta">
-                  <rect x="60" y="150" width="130" height="84" fill="#f9f7f1" stroke="#1b0217" stroke-width="2" />
-                  <text class="arte-disp" x="125" y="184" font-size="30" text-anchor="middle">Entrega</text>
-                  <text class="arte-txt" x="125" y="204" font-size="11.5" text-anchor="middle" font-style="italic">
-                    padrão do financiador
-                  </text>
-                  <text class="arte-txt" x="125" y="222" font-size="11.5" text-anchor="middle">pasta 01_final</text>
-                  </g>
-                  <g class="en-tags" font-family="'Big Shoulders Display'" font-weight="800" font-size="15" text-anchor="middle">
-                    <rect x="30" y="250" width="44" height="22" fill="#1b0217" />
-                    <text x="52" y="266" fill="#f2e02b">PDF</text>
-                    <rect x="82" y="250" width="44" height="22" fill="#1b0217" />
-                    <text x="104" y="266" fill="#f2e02b">PNG</text>
-                    <rect x="134" y="250" width="44" height="22" fill="#1b0217" />
-                    <text x="156" y="266" fill="#f2e02b">MP4</text>
-                    <rect x="186" y="250" width="44" height="22" fill="#d4361e" />
-                    <text x="208" y="266" fill="#f9f7f1">AI</text>
-                  </g>
-                </svg>
-              </div>
-              <figcaption>
-                <h3>Entrega</h3>
-                <p>
-                  Materiais nomeados e organizados no padrão do financiador informado no briefing, prontos para a
-                  prestação de contas.
-                </p>
-              </figcaption>
-            </figure>
-          </div>
-          <!-- SECAO 2, VERSAO C (lista, sem desenhos). Aparece com ?mural=c no link. -->
-          <ol class="m-lista" id="muralC" hidden>
-            <li>
-              <span class="ml-num" aria-hidden="true">01</span>
+            <div class="peca">
               <h3>Régua</h3>
               <p>
                 Logos de apoiadores e patrocinadores na mesma altura e com o mesmo espaço entre eles, na ordem e nas
                 proporções que o financiador exige.
               </p>
-            </li>
-            <li>
-              <span class="ml-num" aria-hidden="true">02</span>
+            </div>
+            <div class="peca">
               <h3>Book de captação</h3>
               <p>
-                Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos, orçamento
-                e contrapartidas fáceis de localizar.
+                Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos, orçamento e
+                contrapartidas fáceis de localizar.
               </p>
-            </li>
-            <li>
-              <span class="ml-num" aria-hidden="true">03</span>
+            </div>
+            <div class="peca">
               <h3>Edital</h3>
               <p>
                 Cada peça segue as normas do seu edital ou lei de incentivo, a partir das exigências informadas no
                 briefing.
               </p>
-            </li>
-            <li>
-              <span class="ml-num" aria-hidden="true">04</span>
+            </div>
+            <div class="peca">
               <h3>Entrega</h3>
               <p>
                 Materiais nomeados e organizados no padrão do financiador informado no briefing, prontos para a
                 prestação de contas.
               </p>
-            </li>
-          </ol>
-          <!-- SECAO 2, VERSAO D (frase com termos clicaveis). Aparece com ?mural=d no link. -->
-          <div class="m-frase" id="muralD" hidden>
-            <p class="mf-texto">
-              Cada peça sai com a <button type="button" class="mf-termo" data-mf="0" aria-pressed="true">régua</button>
-              de apoio certa, um <button type="button" class="mf-termo" data-mf="1" aria-pressed="false">book</button>
-              que a banca lê em minutos, as regras do
-              <button type="button" class="mf-termo" data-mf="2" aria-pressed="false">edital</button> aplicadas e a
-              <button type="button" class="mf-termo" data-mf="3" aria-pressed="false">entrega</button> no padrão do
-              financiador.
-            </p>
-            <div class="mf-def" aria-live="polite">
-              <div class="mf-item" data-mf="0">
-                <h3>Régua</h3>
-                <p>
-                  Logos de apoiadores e patrocinadores na mesma altura e com o mesmo espaço entre eles, na ordem e nas
-                  proporções que o financiador exige.
-                </p>
-              </div>
-              <div class="mf-item" data-mf="1" hidden>
-                <h3>Book de captação</h3>
-                <p>
-                  Documento organizado para a leitura de bancas e pareceristas: sumário, hierarquia de títulos,
-                  orçamento e contrapartidas fáceis de localizar.
-                </p>
-              </div>
-              <div class="mf-item" data-mf="2" hidden>
-                <h3>Edital</h3>
-                <p>
-                  Cada peça segue as normas do seu edital ou lei de incentivo, a partir das exigências informadas no
-                  briefing.
-                </p>
-              </div>
-              <div class="mf-item" data-mf="3" hidden>
-                <h3>Entrega</h3>
-                <p>
-                  Materiais nomeados e organizados no padrão do financiador informado no briefing, prontos para a
-                  prestação de contas.
-                </p>
-              </div>
             </div>
-            <p class="mf-dica">Toque nas palavras destacadas.</p>
           </div>
-          <p class="mural-nota">
-            Peças ilustrativas com dados fictícios, só para mostrar como cada etapa se apresenta.
-          </p>
           <div class="fomento" aria-label="Origens de recurso dos projetos que atendo">
             <p class="fomento-rot">Origens de recurso dos projetos que atendo</p>
             <div class="fm-faixa" id="fmFaixa">
@@ -7293,411 +6097,37 @@
     </script>
     <script>
       /* =====================================================================
-         VERSOES E INTERACOES
-         - ?hero=b mostra o Hero B; ?mural=b mostra a secao 2 em pilha.
-         - ?versoes mostra o seletor para comparar (canto inferior esquerdo).
-         - Desenhos: titulo e selo do hero, cartaz do Hero B, pecas da secao 2
-           e entrada suave dos blocos ao rolar.
+         ENTRADA DOS BLOCOS: servicos, etapas do processo, sobre e a secao 2
+         surgem suavemente ao rolar. Desligado para quem reduz movimento.
          ===================================================================== */
       (function () {
         "use strict";
-        var raiz = document.documentElement;
         var reduz = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        var temMouse = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        var temIO = "IntersectionObserver" in window;
-        if (!reduz && temIO) raiz.classList.add("js-anim");
-
-        /* ---------- secao 2 em pilha ---------- */
-        var Pilha = (function () {
-          var mural = document.getElementById("mural");
-          var grade = mural ? mural.querySelector(".mural-grid") : null;
-          var montado = false,
-            idx = 0,
-            artes = [],
-            textos = [],
-            abas = null,
-            botoes = [],
-            io = null;
-
-          function ir(i, focar) {
-            var n = artes.length;
-            idx = ((i % n) + n) % n;
-            artes.forEach(function (a, k) {
-              a.setAttribute("data-pos", String((k - idx + n) % n));
-            });
-            textos.forEach(function (t, k) {
-              t.classList.toggle("ativo", k === idx);
-            });
-            botoes.forEach(function (b, k) {
-              var on = k === idx;
-              b.setAttribute("aria-selected", on ? "true" : "false");
-              b.tabIndex = on ? 0 : -1;
-              if (on && focar) b.focus();
-            });
-          }
-          function aoClicarArte(e) {
-            var k = artes.indexOf(e.currentTarget);
-            if (k > -1 && k !== idx) ir(k);
-          }
-          function aoFimBarra(e) {
-            if (e.animationName === "pilha-tempo") ir(idx + 1);
-          }
-          function pausa() {
-            mural.classList.add("pausa");
-          }
-          function segue() {
-            if (!mural.matches(":hover") && !mural.contains(document.activeElement)) mural.classList.remove("pausa");
-          }
-          function aoTeclar(e) {
-            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-              e.preventDefault();
-              ir(idx + 1, true);
-            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-              e.preventDefault();
-              ir(idx - 1, true);
-            }
-          }
-          function montar() {
-            if (montado || !grade) return;
-            montado = true;
-            var pecas = Array.prototype.slice.call(grade.querySelectorAll(".peca"));
-            artes = pecas.map(function (p) {
-              return p.querySelector(".peca-arte");
-            });
-            textos = pecas.map(function (p) {
-              return p.querySelector("figcaption");
-            });
-            abas = document.createElement("div");
-            abas.className = "pilha-abas";
-            abas.setAttribute("role", "tablist");
-            abas.setAttribute("aria-label", "Como o trabalho se apresenta");
-            botoes = pecas.map(function (p, k) {
-              var b = document.createElement("button");
-              b.type = "button";
-              b.className = "pilha-aba";
-              b.id = "pilhaAba" + k;
-              b.setAttribute("role", "tab");
-              b.setAttribute("aria-controls", "pilhaTxt" + k);
-              b.innerHTML = p.querySelector("h3").textContent + '<span class="barra" aria-hidden="true"></span>';
-              b.addEventListener("click", function () {
-                ir(k);
-              });
-              textos[k].id = "pilhaTxt" + k;
-              textos[k].setAttribute("role", "tabpanel");
-              textos[k].setAttribute("aria-labelledby", b.id);
-              abas.appendChild(b);
-              return b;
-            });
-            abas.addEventListener("keydown", aoTeclar);
-            abas.addEventListener("animationend", aoFimBarra);
-            artes.forEach(function (a) {
-              a.addEventListener("click", aoClicarArte);
-            });
-            mural.addEventListener("mouseenter", pausa);
-            mural.addEventListener("mouseleave", segue);
-            mural.addEventListener("focusin", pausa);
-            mural.addEventListener("focusout", segue);
-            grade.appendChild(abas);
-            mural.classList.add("pilha");
-            if (temIO) {
-              io = new IntersectionObserver(function (en) {
-                en.forEach(function (x) {
-                  if (x.isIntersecting) segue();
-                  else pausa();
-                });
-              });
-              io.observe(mural);
-            }
-            ir(0);
-          }
-          function desmontar() {
-            if (!montado) return;
-            montado = false;
-            if (io) io.disconnect();
-            abas.remove();
-            artes.forEach(function (a) {
-              a.removeAttribute("data-pos");
-              a.removeEventListener("click", aoClicarArte);
-            });
-            textos.forEach(function (t) {
-              t.classList.remove("ativo");
-              t.removeAttribute("role");
-              t.removeAttribute("aria-labelledby");
-              t.removeAttribute("id");
-            });
-            mural.removeEventListener("mouseenter", pausa);
-            mural.removeEventListener("mouseleave", segue);
-            mural.removeEventListener("focusin", pausa);
-            mural.removeEventListener("focusout", segue);
-            mural.classList.remove("pilha", "pausa");
-          }
-          return {
-            montar: montar,
-            desmontar: desmontar,
-            ativo: function () {
-              return montado;
-            },
-            idx: function () {
-              return idx;
-            },
-          };
-        })();
-
-        /* ---------- versoes ---------- */
-        var heroA = document.getElementById("heroA");
-        var HEROS = {
-          a: heroA,
-          b: document.getElementById("heroB"),
-          c: document.getElementById("heroC"),
-          d: document.getElementById("heroD"),
-        };
-        var muralGrade = document.querySelector("#mural .mural-grid"),
-          muralNota = document.querySelector("#mural .mural-nota"),
-          muralC = document.getElementById("muralC"),
-          muralD = document.getElementById("muralD");
-        var VERSOES = ["a", "b", "c", "d"];
-        var qs = new URLSearchParams(location.search);
-        function ler(k) {
-          var v = (qs.get(k) || "a").toLowerCase();
-          return VERSOES.indexOf(v) > -1 ? v : "a";
-        }
-        var estado = { hero: ler("hero"), mural: ler("mural") };
-        function aplicar() {
-          Object.keys(HEROS).forEach(function (k) {
-            if (HEROS[k]) HEROS[k].hidden = k !== estado.hero;
-          });
-          var m = estado.mural;
-          if (m === "b") Pilha.montar();
-          else Pilha.desmontar();
-          if (muralGrade) muralGrade.hidden = m === "c" || m === "d";
-          if (muralNota) muralNota.hidden = m === "c" || m === "d";
-          if (muralC) muralC.hidden = m !== "c";
-          if (muralD) muralD.hidden = m !== "d";
-          document.dispatchEvent(new CustomEvent("versao-hero", { detail: estado.hero }));
-        }
-
-        if (qs.has("versoes")) {
-          var painel = document.createElement("div");
-          painel.className = "versoes";
-          painel.setAttribute("role", "region");
-          painel.setAttribute("aria-label", "Comparar versões");
-          painel.innerHTML =
-            '<b>Comparar versões</b><button type="button" class="versoes-min" aria-label="Minimizar">&minus;</button>' +
-            '<div class="versoes-linha"><span>Hero</span><div data-chave="hero">' +
-            VERSOES.map(function (v) {
-              return '<button type="button" data-v="' + v + '">' + v.toUpperCase() + "</button>";
-            }).join("") +
-            "</div></div>" +
-            '<div class="versoes-linha"><span>Seção 2</span><div data-chave="mural">' +
-            VERSOES.map(function (v) {
-              return '<button type="button" data-v="' + v + '">' + v.toUpperCase() + "</button>";
-            }).join("") +
-            "</div></div>" +
-            "<small>A: atual. B: aprovada. C e D: sem desenhos. Este quadro só aparece com ?versoes no link.</small>";
-          document.body.appendChild(painel);
-          var marcar = function () {
-            painel.querySelectorAll("[data-chave]").forEach(function (g) {
-              var ch = g.getAttribute("data-chave");
-              g.querySelectorAll("button").forEach(function (b) {
-                b.setAttribute("aria-pressed", b.getAttribute("data-v") === estado[ch] ? "true" : "false");
-              });
-            });
-          };
-          painel.addEventListener("click", function (e) {
-            var b = e.target.closest("button");
-            if (!b) return;
-            if (b.classList.contains("versoes-min")) {
-              var min = painel.classList.toggle("min");
-              b.innerHTML = min ? "+" : "&minus;";
-              b.setAttribute("aria-label", min ? "Expandir" : "Minimizar");
-              return;
-            }
-            var ch = b.parentNode.getAttribute("data-chave");
-            if (!ch) return;
-            estado[ch] = b.getAttribute("data-v");
-            aplicar();
-            marcar();
-            var p = new URLSearchParams(location.search);
-            ["hero", "mural"].forEach(function (k) {
-              if (estado[k] !== "a") p.set(k, estado[k]);
-              else p.delete(k);
-            });
-            history.replaceState(null, "", "?" + p.toString().replace(/=(&|$)/g, "$1") + location.hash);
-            if (ch === "hero") window.scrollTo({ top: 0, behavior: reduz ? "auto" : "smooth" });
-          });
-          marcar();
-        }
-
-        /* ---------- hero A: titulo e selo ---------- */
-        var titulo = heroA ? heroA.querySelector(".hero-title") : null;
-        var selo = heroA ? heroA.querySelector(".selo") : null;
-        if (selo) {
-          selo.addEventListener("click", function () {
-            selo.style.animation = "none";
-            void selo.offsetWidth;
-            selo.style.animation = "carimbar 0.7s cubic-bezier(0.2, 1.5, 0.4, 1) both";
-          });
-        }
-        if (!reduz && temMouse && titulo) {
-          heroA.addEventListener("pointermove", function (e) {
-            var r = heroA.getBoundingClientRect();
-            titulo.style.setProperty("--mx", (((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
-            titulo.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
-          });
-          heroA.addEventListener("pointerleave", function () {
-            titulo.style.setProperty("--mx", 0);
-            titulo.style.setProperty("--my", 0);
-          });
-        }
-        var seloContato = document.querySelector(".selo-contato");
-        if (!reduz) {
-          var pendente = false;
-          window.addEventListener(
-            "scroll",
-            function () {
-              if (pendente) return;
-              pendente = true;
-              requestAnimationFrame(function () {
-                pendente = false;
-                var y = window.scrollY || 0;
-                if (selo && y < window.innerHeight * 1.2) selo.style.setProperty("--giro", (y * 0.08).toFixed(1) + "deg");
-                if (seloContato) seloContato.style.setProperty("--giro", (y * 0.03).toFixed(1) + "deg");
-              });
-            },
-            { passive: true },
-          );
-        }
-
-        /* ---------- hero B: cartaz em camadas ---------- */
-        var cartaz = document.getElementById("hbCartaz");
-        if (cartaz && heroB) {
-          var svg = cartaz.querySelector("svg");
-          var camadas = Array.prototype.slice.call(cartaz.querySelectorAll(".hb-camada"));
-          var carimbo = cartaz.querySelector(".hb-carimbo");
-          svg.addEventListener("click", function () {
-            carimbo.style.animation = "none";
-            void carimbo.getBoundingClientRect();
-            carimbo.style.animation = "hb-carimba 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) both";
-          });
-          if (!reduz && temMouse) {
-            heroB.addEventListener("pointermove", function (e) {
-              var r = svg.getBoundingClientRect();
-              var nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 0.9)));
-              var ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height * 0.9)));
-              svg.style.setProperty("--rx", (nx * 9).toFixed(2) + "deg");
-              svg.style.setProperty("--ry", (-ny * 9).toFixed(2) + "deg");
-              camadas.forEach(function (c) {
-                var p = parseFloat(c.getAttribute("data-prof")) || 0;
-                c.style.transform = "translate(" + (nx * p * 0.7).toFixed(1) + "px," + (ny * p * 0.7).toFixed(1) + "px)";
-              });
-            });
-            heroB.addEventListener("pointerleave", function () {
-              svg.style.setProperty("--rx", "0deg");
-              svg.style.setProperty("--ry", "0deg");
-              camadas.forEach(function (c) {
-                c.style.transform = "";
-              });
-            });
-          }
-        }
-
-        /* ---------- secao 2: pecas inclinam com o ponteiro ---------- */
-        if (!reduz && temMouse) {
-          document.querySelectorAll("#mural .peca-arte").forEach(function (arte) {
-            var s = arte.querySelector("svg");
-            if (!s) return;
-            arte.addEventListener("pointermove", function (e) {
-              if (Pilha.ativo() && arte.getAttribute("data-pos") !== "0") return;
-              var r = arte.getBoundingClientRect();
-              var nx = ((e.clientX - r.left) / r.width) * 2 - 1,
-                ny = ((e.clientY - r.top) / r.height) * 2 - 1;
-              s.style.setProperty("--tx", (nx * 8).toFixed(2) + "deg");
-              s.style.setProperty("--ty", (-ny * 8).toFixed(2) + "deg");
-            });
-            arte.addEventListener("pointerleave", function () {
-              s.style.setProperty("--tx", "0deg");
-              s.style.setProperty("--ty", "0deg");
-            });
-          });
-        }
-
-        /* ---------- hero D: palavra que troca ---------- */
-        var palavra = document.getElementById("hdPalavra");
-        var timerD = null;
-        function pararD() {
-          clearInterval(timerD);
-          timerD = null;
-        }
-        function iniciarD() {
-          if (!palavra || reduz || timerD) return;
-          var lista = ["a banca.", "o patrocinador.", "o parecerista.", "o público.", "o palco."],
-            k = 0;
-          timerD = setInterval(function () {
-            palavra.classList.add("sai");
-            setTimeout(function () {
-              k = (k + 1) % lista.length;
-              palavra.textContent = lista[k];
-              palavra.classList.remove("sai");
-            }, 320);
-          }, 2600);
-        }
-        document.addEventListener("versao-hero", function (e) {
-          if (e.detail === "d") iniciarD();
-          else pararD();
+        if (reduz || !("IntersectionObserver" in window)) return;
+        document.documentElement.classList.add("js-anim");
+        var alvos = [];
+        document.querySelectorAll(".frente, .sobre-grid > *").forEach(function (el) {
+          alvos.push(el);
         });
-
-        /* ---------- secao 2 D: termos clicaveis ---------- */
-        if (muralD) {
-          var termos = Array.prototype.slice.call(muralD.querySelectorAll(".mf-termo"));
-          var itens = Array.prototype.slice.call(muralD.querySelectorAll(".mf-item"));
-          termos.forEach(function (t) {
-            t.addEventListener("click", function () {
-              var id = t.getAttribute("data-mf");
-              termos.forEach(function (x) {
-                x.setAttribute("aria-pressed", x === t ? "true" : "false");
-              });
-              itens.forEach(function (it) {
-                it.hidden = it.getAttribute("data-mf") !== id;
-              });
+        document.querySelectorAll(".mural-grid .peca, .ingressos .tk").forEach(function (el, i, lista) {
+          el.style.setProperty("--i", Array.prototype.indexOf.call(el.parentNode.children, el));
+          alvos.push(el);
+        });
+        var obs = new IntersectionObserver(
+          function (en) {
+            en.forEach(function (x) {
+              if (x.isIntersecting) {
+                x.target.classList.add("in");
+                obs.unobserve(x.target);
+              }
             });
-          });
-        }
-
-        /* ---------- secao 2 C: linhas entram ao rolar ---------- */
-        if (muralC && raiz.classList.contains("js-anim")) {
-          muralC.querySelectorAll("li").forEach(function (li, i) {
-            li.style.setProperty("--i", i);
-          });
-        }
-
-        /* ---------- entrada suave dos blocos ---------- */
-        if (raiz.classList.contains("js-anim")) {
-          var alvos = [];
-          document.querySelectorAll(".frente, .sobre-grid > *, .m-lista li").forEach(function (el) {
-            alvos.push(el);
-          });
-          document.querySelectorAll(".ingressos .tk").forEach(function (el, i) {
-            el.style.setProperty("--i", i);
-            alvos.push(el);
-          });
-          var obs = new IntersectionObserver(
-            function (en) {
-              en.forEach(function (x) {
-                if (x.isIntersecting) {
-                  x.target.classList.add("in");
-                  obs.unobserve(x.target);
-                }
-              });
-            },
-            { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
-          );
-          alvos.forEach(function (el) {
-            el.classList.add("revela");
-            obs.observe(el);
-          });
-        }
-
-        aplicar();
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+        );
+        alvos.forEach(function (el) {
+          el.classList.add("revela");
+          obs.observe(el);
+        });
       })();
     </script>
     <script>
