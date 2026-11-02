@@ -70,6 +70,7 @@ export class Visor {
     for (const [rotulo, valor] of [
       ["Categoria", trabalho.categoria],
       ["Cliente", trabalho.cliente],
+      ["Artista", trabalho.artista],
       ["Ano", trabalho.ano],
       ["Área", trabalho.area],
     ]) {

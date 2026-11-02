@@ -66,7 +66,72 @@
 /* ---------- destaques: estudo de caso ---------- */
 /* vitrine em rodízio: todos os destaques ocupam a mesma célula e só o ativo aparece */
 .trabalhos__vitrine {
+  position: relative;
   padding: 0 var(--margem) var(--espaco-secao);
+}
+
+/* controles no alto da coluna de texto, alinhados ao topo da imagem.
+   A posição repete a grade do destaque: margem + coluna da imagem (7/11) + espaço entre colunas. */
+.trabalhos__controles {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: calc(var(--margem) + (100% - 2 * var(--margem) - 4vw) * 7 / 11 + 4vw);
+  display: flex;
+  gap: 8px;
+}
+
+.trabalhos__controles[hidden] {
+  display: none;
+}
+
+.trabalhos__controle-anterior,
+.trabalhos__controle-pausa,
+.trabalhos__controle-proximo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--cor-tinta);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--cor-tinta);
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.trabalhos__controle-anterior:hover,
+.trabalhos__controle-pausa:hover,
+.trabalhos__controle-proximo:hover {
+  background: var(--cor-tinta);
+  color: #fff;
+}
+
+.trabalhos__controle-icone-anterior,
+.trabalhos__controle-icone-proximo {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.trabalhos__controle-icone-pausa,
+.trabalhos__controle-icone-retomar {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.trabalhos__controle-icone-retomar,
+.trabalhos__controle-pausa[aria-pressed="true"] .trabalhos__controle-icone-pausa {
+  display: none;
+}
+
+.trabalhos__controle-pausa[aria-pressed="true"] .trabalhos__controle-icone-retomar {
+  display: block;
 }
 
 .trabalhos__destaques {
@@ -87,6 +152,15 @@
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
   align-items: end;
   gap: 4vw;
+}
+
+/* os três ocupam a mesma célula; sem isto, o mais curto descia a imagem */
+.trabalhos__destaque {
+  align-content: start;
+}
+
+.trabalhos__destaque-capa {
+  align-self: start;
 }
 
 .trabalhos__destaque--ativo {
@@ -118,6 +192,8 @@
 }
 
 .trabalhos__destaque-texto {
+  /* reserva o alto da coluna para os controles do rodízio */
+  padding-top: 68px;
   padding-bottom: 0.4vw;
   opacity: 0;
   transform: translateY(28px);
@@ -570,6 +646,10 @@
     font-size: 10vw;
   }
 
+  .trabalhos__destaque-texto {
+    padding-top: 0;
+  }
+
   .trabalhos__titulo {
     font-size: 17vw;
   }
@@ -579,9 +659,33 @@
   }
 
   .trabalhos__grade {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 14px;
     padding-top: 28px;
+  }
+
+  .trabalhos__legenda-tipo {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .trabalhos__legenda-nome {
+    font-size: 0.95rem;
+  }
+
+  .trabalhos__controles {
+    top: 12px;
+    left: auto;
+    right: calc(var(--margem) + 12px);
+  }
+
+  .trabalhos__controle-anterior,
+  .trabalhos__controle-pausa,
+  .trabalhos__controle-proximo {
+    width: 40px;
+    height: 40px;
+    border-color: transparent;
+    box-shadow: 0 6px 18px -8px rgba(22, 19, 15, 0.45);
   }
 
   .trabalhos__resumo {

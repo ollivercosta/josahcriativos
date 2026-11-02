@@ -84,6 +84,7 @@ export class Trabalhos {
       const ficha = item.querySelector(".trabalhos__destaque-ficha");
       for (const [rotulo, valor] of [
         ["Cliente", trabalho.cliente],
+        ["Artista", trabalho.artista],
         ["Ano", trabalho.ano],
         ["Peças", (trabalho.pecas || []).join(", ")],
       ]) {
@@ -113,7 +114,9 @@ export class Trabalhos {
   /**
    * Rodízio dos destaques: um projeto por vez, trocando com esmaecimento
    * lento a cada TEMPO_DESTAQUE segundos. O tempo só corre com o destaque
-   * na tela e sem o mouse ou o foco do teclado sobre ele.
+   * na tela, sem o mouse ou o foco do teclado sobre ele e sem a pausa do
+   * botão. Os controles (anterior, pausar, próximo) ficam no alto da coluna
+   * de texto, alinhados ao topo da imagem.
    */
   #montarRodizio() {
     const itens = this.itensDestaque;
@@ -130,16 +133,43 @@ export class Trabalhos {
       });
     };
     mostrar(0);
-    if (itens.length < 2 || Ambiente.reduzMovimento) return;
+    if (itens.length < 2) return;
 
     const pausas = new Set();
     const pausar = (motivo, ligar) => {
       if (ligar) pausas.add(motivo);
       else pausas.delete(motivo);
     };
+    let decorrido = 0;
+
+    /* controles: anterior, pausar ou retomar, próximo */
+    const controles = this.raiz.querySelector(".trabalhos__controles");
+    const botaoPausa = controles.querySelector(".trabalhos__controle-pausa");
+    controles.hidden = false;
+    controles.querySelector(".trabalhos__controle-anterior").addEventListener("click", () => {
+      decorrido = 0;
+      mostrar((atual - 1 + itens.length) % itens.length);
+    });
+    controles.querySelector(".trabalhos__controle-proximo").addEventListener("click", () => {
+      decorrido = 0;
+      mostrar((atual + 1) % itens.length);
+    });
+    const definirPausa = (pausado) => {
+      pausar("usuario", pausado);
+      botaoPausa.setAttribute("aria-pressed", pausado ? "true" : "false");
+      botaoPausa.setAttribute("aria-label", pausado ? "Retomar a troca automática" : "Pausar a troca automática");
+    };
+    botaoPausa.addEventListener("click", () => definirPausa(!pausas.has("usuario")));
+    if (Ambiente.reduzMovimento) {
+      definirPausa(true);
+      return;
+    }
     this.vitrine.addEventListener("pointerenter", () => pausar("mouse", true));
     this.vitrine.addEventListener("pointerleave", () => pausar("mouse", false));
-    this.vitrine.addEventListener("focusin", () => pausar("foco", true));
+    /* o foco só pausa quando vem do teclado (clicar num controle não deve prender o rodízio) */
+    this.vitrine.addEventListener("focusin", (evento) => {
+      if (evento.target.matches(":focus-visible")) pausar("foco", true);
+    });
     this.vitrine.addEventListener("focusout", () => pausar("foco", false));
     if ("IntersectionObserver" in window) {
       pausar("fora", true);
@@ -150,7 +180,6 @@ export class Trabalhos {
 
     /* relógio que só avança enquanto nada pede pausa */
     const passo = 200;
-    let decorrido = 0;
     window.setInterval(() => {
       if (pausas.size) return;
       decorrido += passo;
