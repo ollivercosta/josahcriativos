@@ -11,6 +11,7 @@
  *              "Vídeo e mídia" ou "Outros"
  *   resumo     duas ou três linhas sobre o projeto, mostradas ao passar o
  *              mouse na capa
+ *   artista    opcional: artista ou grupo do projeto, quando o cliente é a produtora
  *   cliente, ano, area, partida (ponto de partida), decisoes (decisões de
  *   design), pecas (lista): campos da mini ficha de design. Texto entre
  *   colchetes aparece em itálico, como campo a preencher.
@@ -28,7 +29,8 @@ export const TRABALHOS = [
     tipo: "Book de captação",
     categoria: "Marca e apresentação",
     resumo: "Book de captação do Afrotour de Itana Rosa, projeto de circulação internacional entre Brasil e África.",
-    cliente: "Tabuleiro Produções / Itana Rosa",
+    cliente: "Tabuleiro Produções",
+    artista: "Itana Rosa",
     ano: "2026",
     area: "Cultural",
     partida: "",
@@ -196,15 +198,28 @@ export const TRABALHOS = [
   {
     nome: "Antropofagia Mapping",
     destaque: true,
-    tipo: "Identidade visual e campanha",
+    tipo: "Book de captação",
     categoria: "Marca e apresentação",
-    resumo: "Identidade do festival aplicada a camisetas, ecobags, mobiliário urbano e campanha nas redes.",
-    cliente: "",
-    ano: "",
+    resumo:
+      "Book de captação de um projeto pensado a partir da preservação da natureza e da cultura, com grafismos que atravessam todas as peças.",
+    cliente: "Tabuleiro Produções",
+    artista: "VJ Lobo",
+    ano: "2025",
     area: "",
     partida: "",
     decisoes: "",
-    pecas: [],
+    pecas: [
+      "Identidade visual",
+      "Book de captação",
+      "Camisa",
+      "Ecobag",
+      "Squeezer",
+      "Papelaria",
+      "Faixa",
+      "Wind banner",
+      "Redes sociais",
+      "Backdrop",
+    ],
     capa: "/assets/imagens/trabalhos/antropofagia-mapping/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/antropofagia-mapping/parte-01.webp",
@@ -216,13 +231,13 @@ export const TRABALHOS = [
     destaque: true,
     tipo: "Site",
     categoria: "Web e redes",
-    resumo: "Site da produtora com serviços, cursos, central de editais e números de atuação.",
-    cliente: "",
-    ano: "",
+    resumo: "Site que apresenta a Tabuleiro Produções e seus serviços com leitura fluida e navegação equilibrada.",
+    cliente: "Tabuleiro Produções",
+    ano: "2024",
     area: "",
     partida: "",
     decisoes: "",
-    pecas: [],
+    pecas: ["Identidade visual", "Site"],
     capa: "/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/tabuleiro-producoes/parte-01.webp",

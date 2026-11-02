@@ -236,7 +236,8 @@
   }
 
   .servicos__painel-nome {
-    font-size: 12vw;
+    font-size: 10vw;
+    overflow-wrap: break-word;
   }
 
   .servicos__item {
