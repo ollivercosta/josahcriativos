@@ -3,8 +3,8 @@
  * Um objeto por trabalho, na ordem em que aparecem na grade.
  *
  *   nome       nome do projeto
- *   destaque   true para aparecer em destaque, em formato de estudo de caso
- *              (um projeto); os demais vão para a grade "Outros trabalhos"
+ *   destaque   true para entrar no rodízio de destaques, em formato de estudo
+ *              de caso; os demais vão para a grade "Outros trabalhos"
  *   tipo       o que a peça é (ex.: "Book de captação", "Identidade visual").
  *              Aparece acima do nome na capa e na ficha. Vazio: usa a categoria.
  *   categoria  usada nos filtros: "Marca e apresentação", "Web e redes",
@@ -28,13 +28,12 @@ export const TRABALHOS = [
     tipo: "Book de captação",
     categoria: "Marca e apresentação",
     resumo: "Book de captação do Afrotour de Itana Rosa, projeto de circulação internacional entre Brasil e África.",
-    cliente: "[Cliente]",
-    ano: "[Ano]",
+    cliente: "Tabuleiro Produções / Itana Rosa",
+    ano: "2026",
     area: "Cultural",
-    partida:
-      "[Em duas ou três linhas: o que o projeto precisava comunicar e quais regras de marca do financiador havia.]",
-    decisoes: "[Conceito, tipografia, cor e como a marca convive com a régua de apoio.]",
-    pecas: ["[Identidade visual]", "[Posts]", "[Saia de palco]", "[Credencial]"],
+    partida: "",
+    decisoes: "",
+    pecas: ["Identidade visual", "Book de captação"],
     capa: "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-01.webp",
@@ -196,6 +195,7 @@ export const TRABALHOS = [
   },
   {
     nome: "Antropofagia Mapping",
+    destaque: true,
     tipo: "Identidade visual e campanha",
     categoria: "Marca e apresentação",
     resumo: "Identidade do festival aplicada a camisetas, ecobags, mobiliário urbano e campanha nas redes.",
@@ -213,6 +213,7 @@ export const TRABALHOS = [
   },
   {
     nome: "Tabuleiro Produções",
+    destaque: true,
     tipo: "Site",
     categoria: "Web e redes",
     resumo: "Site da produtora com serviços, cursos, central de editais e números de atuação.",
@@ -326,10 +327,7 @@ export const TRABALHOS = [
     decisoes: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/ong-acuba/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/ong-acuba/parte-01.webp",
-      "/assets/imagens/trabalhos/ong-acuba/parte-02.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/ong-acuba/parte-01.webp", "/assets/imagens/trabalhos/ong-acuba/parte-02.webp"],
   },
   {
     nome: "ACUBA - Edição",

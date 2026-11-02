@@ -4,11 +4,13 @@ import { aplicarImagem, capaDoTrabalho } from "../../dados/trabalhos.js";
 
 const TODOS = "Todos";
 const VISIVEIS_DE_INICIO = 6;
+/** Tempo de cada projeto em destaque, em segundos (o mesmo da linha de progresso no CSS). */
+const TEMPO_DESTAQUE = 9;
 
 /**
  * Trabalhos
  * Monta a seção a partir de `assets/dados/trabalhos.js`:
- *   destaque   o trabalho com `destaque: true`, em formato de estudo de
+ *   destaques  os trabalhos com `destaque: true`, em rodízio, em formato de estudo de
  *              caso (imagem grande, tipo, nome, resumo e ficha curta);
  *   grade      os demais, com filtros. Seis aparecem primeiro; "Ver mais"
  *              mostra o restante e só existe no filtro "Todos".
@@ -23,7 +25,10 @@ export class Trabalhos {
     this.raiz = raiz;
     this.trabalhos = trabalhos;
     this.abrirFicha = abrirFicha;
+    this.vitrine = raiz.querySelector(".trabalhos__vitrine");
     this.listaDestaques = raiz.querySelector(".trabalhos__destaques");
+    this.seletor = raiz.querySelector(".trabalhos__seletor");
+    this.itensDestaque = [];
     this.outros = raiz.querySelector(".trabalhos__outros");
     this.grade = raiz.querySelector(".trabalhos__grade");
     this.filtros = raiz.querySelector(".trabalhos__filtros");
@@ -53,9 +58,8 @@ export class Trabalhos {
     this.trabalhos.forEach((trabalho, indice) => {
       if (!trabalho.destaque) return;
       this.destaques.push(indice);
-      const lado = this.destaques.length % 2 === 0 ? " trabalhos__destaque--invertido" : "";
       const item = document.createElement("li");
-      item.className = `trabalhos__destaque${lado}`;
+      item.className = "trabalhos__destaque";
       item.innerHTML = `
         <button type="button" class="trabalhos__destaque-capa">
           <img class="trabalhos__destaque-imagem" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
@@ -101,8 +105,73 @@ export class Trabalhos {
       capa.addEventListener("click", abrir);
       item.querySelector(".trabalhos__destaque-abrir").addEventListener("click", abrir);
       this.listaDestaques.append(item);
+      this.itensDestaque.push(item);
       this.#observarDestaque(item);
     });
+    this.#montarRodizio();
+  }
+
+  /**
+   * Rodízio dos destaques: um projeto por vez, trocando com esmaecimento
+   * lento. O tempo é a própria animação da linha de progresso (CSS); quando
+   * ela termina, entra o próximo. Pausa com o mouse em cima, com o foco
+   * dentro e quando o destaque sai da tela.
+   */
+  #montarRodizio() {
+    const itens = this.itensDestaque;
+    if (!itens.length) return;
+    this.vitrine.style.setProperty("--tempo-destaque", `${TEMPO_DESTAQUE}s`);
+    const botoes = itens.map((item, posicao) => {
+      const botao = document.createElement("button");
+      botao.type = "button";
+      botao.className = "trabalhos__seletor-item";
+      botao.innerHTML =
+        '<span class="trabalhos__seletor-nome"></span><span class="trabalhos__seletor-linha"><span class="trabalhos__seletor-progresso"></span></span>';
+      botao.querySelector(".trabalhos__seletor-nome").textContent = this.trabalhos[this.destaques[posicao]].nome;
+      botao.addEventListener("click", () => mostrar(posicao));
+      botao.querySelector(".trabalhos__seletor-progresso").addEventListener("animationend", () => {
+        mostrar((posicao + 1) % itens.length);
+      });
+      this.seletor.append(botao);
+      return botao;
+    });
+    const mostrar = (posicao) => {
+      itens.forEach((item, k) => {
+        const ativo = k === posicao;
+        item.classList.toggle("trabalhos__destaque--ativo", ativo);
+        item.setAttribute("aria-hidden", ativo ? "false" : "true");
+        item.inert = !ativo;
+        botoes[k].setAttribute("aria-pressed", ativo ? "true" : "false");
+      });
+    };
+    mostrar(0);
+    if (itens.length < 2) {
+      this.seletor.hidden = true;
+      return;
+    }
+    if (Ambiente.reduzMovimento) {
+      this.vitrine.classList.add("trabalhos__vitrine--parada");
+      return;
+    }
+    const pausas = new Set();
+    const pausar = (motivo, ligar) => {
+      if (ligar) pausas.add(motivo);
+      else pausas.delete(motivo);
+      this.vitrine.classList.toggle("trabalhos__vitrine--pausada", pausas.size > 0);
+    };
+    this.vitrine.addEventListener("pointerenter", () => pausar("mouse", true));
+    this.vitrine.addEventListener("pointerleave", () => pausar("mouse", false));
+    this.vitrine.addEventListener("focusin", () => pausar("foco", true));
+    this.vitrine.addEventListener("focusout", () => pausar("foco", false));
+    if ("IntersectionObserver" in window) {
+      pausar("fora", true);
+      new IntersectionObserver(
+        (entradas) => {
+          pausar("fora", !entradas.some((entrada) => entrada.isIntersecting));
+        },
+        { threshold: 0.3 },
+      ).observe(this.vitrine);
+    }
   }
 
   /** Cada destaque se revela ao entrar na tela: a imagem abre de baixo para cima. */

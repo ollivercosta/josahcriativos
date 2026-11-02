@@ -28,7 +28,7 @@ export const BASE_CHAT = {
     rot: "Quais serviços você faz?",
     txt: [
       "Trabalho em três frentes que se complementam:",
-      "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Criativos e web: landing pages, formulários e campanhas para redes sociais.\n• Visual e mídia: material de palco, vídeos, teasers e spots.",
+      "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Digital: landing pages, formulários e campanhas para redes sociais.\n• Visual e mídia: material de palco, vídeos, teasers e spots.",
       "Qual delas interessa ao seu projeto?",
     ],
     ops: ["sv_apresentacao", "sv_web", "sv_midia", "impressao"],
