@@ -20,10 +20,11 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--cor-tinta);
+  background: #960018;
   color: #fff;
-  box-shadow: 0 14px 32px -14px rgba(22, 19, 15, 0.7);
+  box-shadow: 0 14px 32px -14px rgba(150, 0, 24, 0.7);
   cursor: pointer;
+  isolation: isolate;
   transition:
     transform 0.8s var(--curva),
     background 0.5s ease;
@@ -31,7 +32,26 @@
 
 .chat__botao:hover {
   transform: scale(1.06);
-  background: var(--cor-vermelho);
+  background: var(--cor-tinta);
+}
+
+/* pulso: um anel da mesma cor que se expande e some, em ritmo calmo */
+.chat__botao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: #960018;
+  animation: chat-pulso 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  pointer-events: none;
+}
+
+/* com o painel aberto, ou ao passar o mouse, o pulso para */
+.chat__botao[aria-expanded="true"]::before,
+.chat__botao:hover::before {
+  animation: none;
+  opacity: 0;
 }
 
 .chat__botao::after {
@@ -398,6 +418,19 @@
   width: 16px;
   height: 16px;
   fill: currentColor;
+}
+
+@keyframes chat-pulso {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+
+  70%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
 }
 
 @keyframes chat-abre {

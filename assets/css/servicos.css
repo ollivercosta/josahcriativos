@@ -83,14 +83,13 @@
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   gap: 5vw;
   padding: 5vw var(--margem);
-  border-top: 1px solid var(--cor-tinta);
   transform-origin: 50% 0;
   transform: scale(var(--recuo, 1));
   will-change: transform;
 }
 
 .servicos__painel--claro {
-  background: #fff;
+  background: #fdfdfd;
   color: var(--cor-tinta);
 }
 
@@ -102,7 +101,6 @@
 .servicos__painel--vermelho {
   background: var(--cor-vermelho);
   color: #fff;
-  border-top-color: var(--cor-vermelho);
 }
 
 .servicos__painel-nome {
