@@ -125,7 +125,7 @@
   align-self: start;
   padding: clamp(24px, 2.6vw, 40px);
   border-radius: 16px;
-  background: var(--cor-vermelho);
+  background: var(--cor-tinta);
   color: #fff;
   /* o título se mede pela largura do cartão, não da tela */
   container-type: inline-size;
