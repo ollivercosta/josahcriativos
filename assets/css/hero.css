@@ -121,7 +121,7 @@
 .hero__letra {
   display: inline-block;
   transform: translateY(var(--sobe, 0em)) rotate(var(--gira, 0deg));
-  transition: transform 0.9s var(--curva);
+  will-change: transform;
   animation: hero-entra-eixo 1.5s var(--curva) both;
   animation-delay: calc(0.2s + var(--i) * 0.065s);
 }

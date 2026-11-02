@@ -304,7 +304,7 @@
 
           <p class="hero__rotulo-servicos" aria-hidden="true">Serviços</p>
           <p class="hero__texto">
-            Transformo a proposta do seu projeto em uma linguagem visual clara, do edital ao palco.
+            Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
           </p>
           <a class="hero__botao" href="#projetos">
             Ver trabalhos
@@ -339,7 +339,10 @@
           </h2>
           <span class="trabalhos__titulo-barra" aria-hidden="true"></span>
         </div>
-        <ul class="trabalhos__destaques"></ul>
+        <div class="trabalhos__vitrine">
+          <ul class="trabalhos__destaques"></ul>
+          <div class="trabalhos__seletor" role="group" aria-label="Projetos em destaque"></div>
+        </div>
         <div class="trabalhos__outros">
           <h3 class="trabalhos__outros-titulo">Outros trabalhos</h3>
           <div class="trabalhos__filtros" role="group" aria-label="Filtrar outros trabalhos"></div>
@@ -359,8 +362,8 @@
 
       <!-- MANIFESTO: a frase se acende conforme a leitura e abre os serviços -->
       <section class="manifesto" aria-label="Manifesto">
-        <p class="manifesto__texto" data-fortes="compreendido,clareza">
-          Um projeto cultural só chega longe quando é compreendido. Eu ajudo o seu a ser visto com clareza.
+        <p class="manifesto__texto" data-fortes="compreendido">
+          Um projeto cultural só chega longe quando é compreendido por quem avalia, por quem apoia e por quem participa.
         </p>
       </section>
 
@@ -385,11 +388,14 @@
               <p class="servicos__painel-descricao">
                 Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.
               </p>
-              <div
-                class="servicos__vitrine"
-                data-imagens="/assets/imagens/vitrine/capa-logos.webp|/assets/imagens/vitrine/capa-book.webp|/assets/imagens/trabalhos/nanda-sabores-e-afetos/capa.webp"
-                aria-hidden="true"
-              ></div>
+              <div class="servicos__publico">
+                <p class="servicos__publico-rotulo">Pensado para</p>
+                <ul class="servicos__publico-lista">
+                  <li class="servicos__publico-item">Bancas e pareceristas</li>
+                  <li class="servicos__publico-item">Patrocinadores</li>
+                  <li class="servicos__publico-item">Proponentes</li>
+                </ul>
+              </div>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
@@ -416,15 +422,18 @@
           </article>
           <article class="servicos__painel servicos__painel--tinta">
             <div class="servicos__painel-cabeca">
-              <h3 class="servicos__painel-nome">Criativos e web</h3>
+              <h3 class="servicos__painel-nome">Digital</h3>
               <p class="servicos__painel-descricao">
                 Comunicação online, fluxo de inscrições e relacionamento com o público do evento.
               </p>
-              <div
-                class="servicos__vitrine"
-                data-imagens="/assets/imagens/vitrine/capa-sites.webp|/assets/imagens/trabalhos/elas-nas-telas/capa.webp|/assets/imagens/trabalhos/duda-filmes/capa.webp"
-                aria-hidden="true"
-              ></div>
+              <div class="servicos__publico">
+                <p class="servicos__publico-rotulo">Pensado para</p>
+                <ul class="servicos__publico-lista">
+                  <li class="servicos__publico-item">Público do evento</li>
+                  <li class="servicos__publico-item">Inscritos e participantes</li>
+                  <li class="servicos__publico-item">Imprensa</li>
+                </ul>
+              </div>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
@@ -454,11 +463,14 @@
               <p class="servicos__painel-descricao">
                 Artes digitais para espaços de eventos, palco e canais de difusão do seu projeto.
               </p>
-              <div
-                class="servicos__vitrine"
-                data-imagens="https://i.ytimg.com/vi/YrjKU3QbIhI/hqdefault.jpg|/assets/imagens/trabalhos/antropofagia-mapping/capa.webp|/assets/imagens/trabalhos/forro-zevixe/capa.webp"
-                aria-hidden="true"
-              ></div>
+              <div class="servicos__publico">
+                <p class="servicos__publico-rotulo">Pensado para</p>
+                <ul class="servicos__publico-lista">
+                  <li class="servicos__publico-item">Palco e espaço do evento</li>
+                  <li class="servicos__publico-item">Telas e redes</li>
+                  <li class="servicos__publico-item">Rádio e TV</li>
+                </ul>
+              </div>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
@@ -558,7 +570,6 @@
           <svg class="sobre__linhas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <line class="sobre__linha" x1="-6" y1="31" x2="106" y2="31" />
             <line class="sobre__linha" x1="58" y1="-6" x2="58" y2="106" />
-            <rect class="sobre__linha" x="38" y="44" width="21" height="11" />
             <line class="sobre__linha" x1="59" y1="50" x2="96" y2="74" />
             <circle class="sobre__ponto" cx="58" cy="31" r="0.9" />
           </svg>
@@ -583,7 +594,7 @@
           <p class="sobre__citacao">
             Minha trajetória passa pela <span class="sobre__citacao-trajetoria">música</span> e pela
             <span class="sobre__citacao-trajetoria">produção cultural</span>. Viver esse universo por dentro, e não como
-            fornecedor externo, muda o jeito como um briefing vira solução visual:
+            espectador, muda o jeito como um briefing vira solução visual:
             <em class="sobre__citacao-destaque"
               >menos sobre estética isolada, mais sobre estruturar informação e narrativa</em
             >.

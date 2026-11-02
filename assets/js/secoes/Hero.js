@@ -49,24 +49,68 @@ export class Hero {
     this.haste.style.height = `${fim}px`;
   }
 
-  /** Cada letra sobe um pouco e gira de leve conforme a distância do mouse. */
+  /**
+   * Cada letra sobe um pouco e gira de leve conforme a distância do mouse.
+   * Os centros das letras são medidos uma vez (ao entrar no hero e ao
+   * redimensionar), e não a cada movimento: medir a letra já deslocada
+   * criava uma realimentação que tremia. O movimento é interpolado quadro
+   * a quadro, sem transição de CSS que reinicie no meio do caminho.
+   */
   #letrasReagemAoMouse() {
-    this.raiz.addEventListener("pointermove", (evento) => {
-      for (const letra of this.letras) {
+    const estados = this.letras.map(() => ({ sobe: 0, gira: 0, alvoSobe: 0, alvoGira: 0 }));
+    let centros = [];
+    let rodando = false;
+
+    const medir = () => {
+      centros = this.letras.map((letra) => {
         const caixa = letra.getBoundingClientRect();
-        const dx = evento.clientX - (caixa.left + caixa.width / 2);
-        const dy = evento.clientY - (caixa.top + caixa.height / 2);
-        const distancia = Math.hypot(dx, dy);
-        const forca = Math.max(0, 1 - distancia / (caixa.width * 1.6));
-        letra.style.setProperty("--sobe", `${(-0.06 * forca).toFixed(3)}em`);
-        letra.style.setProperty("--gira", `${((dx > 0 ? -1 : 1) * 2.5 * forca).toFixed(2)}deg`);
-      }
+        return { x: caixa.left + caixa.width / 2, y: caixa.top + caixa.height / 2, largura: caixa.width };
+      });
+    };
+    const quadro = () => {
+      let emMovimento = false;
+      this.letras.forEach((letra, indice) => {
+        const estado = estados[indice];
+        estado.sobe += (estado.alvoSobe - estado.sobe) * 0.1;
+        estado.gira += (estado.alvoGira - estado.gira) * 0.1;
+        if (Math.abs(estado.alvoSobe - estado.sobe) > 0.0002 || Math.abs(estado.alvoGira - estado.gira) > 0.01) {
+          emMovimento = true;
+        }
+        letra.style.setProperty("--sobe", `${estado.sobe.toFixed(4)}em`);
+        letra.style.setProperty("--gira", `${estado.gira.toFixed(3)}deg`);
+      });
+      if (emMovimento) window.requestAnimationFrame(quadro);
+      else rodando = false;
+    };
+    const animar = () => {
+      if (rodando) return;
+      rodando = true;
+      window.requestAnimationFrame(quadro);
+    };
+
+    this.raiz.addEventListener("pointerenter", medir);
+    window.addEventListener("resize", medir);
+    window.addEventListener("scroll", () => (centros = []), { passive: true });
+    this.raiz.addEventListener("pointermove", (evento) => {
+      if (!centros.length) medir();
+      centros.forEach((centro, indice) => {
+        const dx = evento.clientX - centro.x;
+        const dy = evento.clientY - centro.y;
+        const forca = Math.max(0, 1 - Math.hypot(dx, dy) / (centro.largura * 1.6));
+        const suave = forca * forca * (3 - 2 * forca);
+        estados[indice].alvoSobe = -0.06 * suave;
+        /* o giro varia de forma contínua com a posição: sem salto ao cruzar o centro da letra */
+        const lado = Math.max(-1, Math.min(1, dx / (centro.largura * 0.6)));
+        estados[indice].alvoGira = -lado * 2.5 * suave;
+      });
+      animar();
     });
     this.raiz.addEventListener("pointerleave", () => {
-      for (const letra of this.letras) {
-        letra.style.setProperty("--sobe", "0em");
-        letra.style.setProperty("--gira", "0deg");
-      }
+      estados.forEach((estado) => {
+        estado.alvoSobe = 0;
+        estado.alvoGira = 0;
+      });
+      animar();
     });
   }
 

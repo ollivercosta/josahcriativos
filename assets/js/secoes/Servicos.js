@@ -1,16 +1,10 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
 import { ValorSuave } from "../nucleo/CicloDeQuadros.js";
-import { aplicarImagem } from "../../dados/trabalhos.js";
-
-/** Tempo que cada imagem da vitrine fica à mostra, em milissegundos. */
-const INTERVALO_VITRINE = 4200;
 
 /**
  * Servicos
  * Os painéis ficam presos e se empilham; o de baixo recua de leve
- * (até 6%) enquanto o próximo sobe e o cobre. Cada painel tem uma vitrine
- * que alterna três imagens com esmaecimento, listadas no atributo
- * `data-imagens` do HTML. A troca só acontece com a vitrine na tela.
+ * (até 6%) enquanto o próximo sobe e o cobre.
  */
 export class Servicos {
   /**
@@ -20,46 +14,7 @@ export class Servicos {
   constructor(raiz, ciclo) {
     this.paineis = Array.from(raiz.querySelectorAll(".servicos__painel"));
     this.recuos = this.paineis.map(() => new ValorSuave(0.16));
-    raiz.querySelectorAll(".servicos__vitrine").forEach((vitrine) => this.#montarVitrine(vitrine));
     ciclo.inscrever(() => this.#aoRolar());
-  }
-
-  #montarVitrine(vitrine) {
-    const itens = [];
-    for (const endereco of (vitrine.getAttribute("data-imagens") || "").split("|")) {
-      if (!endereco) continue;
-      const moldura = document.createElement("span");
-      moldura.className = "servicos__vitrine-item";
-      const img = document.createElement("img");
-      img.className = "servicos__vitrine-imagem";
-      img.alt = "";
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.referrerPolicy = "no-referrer";
-      aplicarImagem(img, endereco, "(max-width: 860px) 92vw, 34vw");
-      moldura.append(img);
-      vitrine.append(moldura);
-      itens.push(moldura);
-    }
-    if (!itens.length) return;
-    itens[0].classList.add("servicos__vitrine-item--ativa");
-    if (itens.length < 2 || Ambiente.reduzMovimento || !("IntersectionObserver" in window)) return;
-
-    let atual = 0;
-    let relogio = null;
-    const avancar = () => {
-      itens[atual].classList.remove("servicos__vitrine-item--ativa");
-      atual = (atual + 1) % itens.length;
-      itens[atual].classList.add("servicos__vitrine-item--ativa");
-    };
-    new IntersectionObserver((entradas) => {
-      const visivel = entradas.some((entrada) => entrada.isIntersecting);
-      if (visivel && !relogio) relogio = window.setInterval(avancar, INTERVALO_VITRINE);
-      if (!visivel && relogio) {
-        window.clearInterval(relogio);
-        relogio = null;
-      }
-    }).observe(vitrine);
   }
 
   #aoRolar() {
