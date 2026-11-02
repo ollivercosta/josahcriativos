@@ -4,7 +4,7 @@ import { aplicarImagem, capaDoTrabalho } from "../../dados/trabalhos.js";
 
 const TODOS = "Todos";
 const VISIVEIS_DE_INICIO = 6;
-/** Tempo de cada projeto em destaque, em segundos (o mesmo da linha de progresso no CSS). */
+/** Tempo de cada projeto em destaque, em segundos. */
 const TEMPO_DESTAQUE = 9;
 
 /**
@@ -27,7 +27,6 @@ export class Trabalhos {
     this.abrirFicha = abrirFicha;
     this.vitrine = raiz.querySelector(".trabalhos__vitrine");
     this.listaDestaques = raiz.querySelector(".trabalhos__destaques");
-    this.seletor = raiz.querySelector(".trabalhos__seletor");
     this.itensDestaque = [];
     this.outros = raiz.querySelector(".trabalhos__outros");
     this.grade = raiz.querySelector(".trabalhos__grade");
@@ -113,51 +112,30 @@ export class Trabalhos {
 
   /**
    * Rodízio dos destaques: um projeto por vez, trocando com esmaecimento
-   * lento. O tempo é a própria animação da linha de progresso (CSS); quando
-   * ela termina, entra o próximo. Pausa com o mouse em cima, com o foco
-   * dentro e quando o destaque sai da tela.
+   * lento a cada TEMPO_DESTAQUE segundos. O tempo só corre com o destaque
+   * na tela e sem o mouse ou o foco do teclado sobre ele.
    */
   #montarRodizio() {
     const itens = this.itensDestaque;
     if (!itens.length) return;
     this.vitrine.style.setProperty("--tempo-destaque", `${TEMPO_DESTAQUE}s`);
-    const botoes = itens.map((item, posicao) => {
-      const botao = document.createElement("button");
-      botao.type = "button";
-      botao.className = "trabalhos__seletor-item";
-      botao.innerHTML =
-        '<span class="trabalhos__seletor-nome"></span><span class="trabalhos__seletor-linha"><span class="trabalhos__seletor-progresso"></span></span>';
-      botao.querySelector(".trabalhos__seletor-nome").textContent = this.trabalhos[this.destaques[posicao]].nome;
-      botao.addEventListener("click", () => mostrar(posicao));
-      botao.querySelector(".trabalhos__seletor-progresso").addEventListener("animationend", () => {
-        mostrar((posicao + 1) % itens.length);
-      });
-      this.seletor.append(botao);
-      return botao;
-    });
+    let atual = 0;
     const mostrar = (posicao) => {
+      atual = posicao;
       itens.forEach((item, k) => {
         const ativo = k === posicao;
         item.classList.toggle("trabalhos__destaque--ativo", ativo);
         item.setAttribute("aria-hidden", ativo ? "false" : "true");
         item.inert = !ativo;
-        botoes[k].setAttribute("aria-pressed", ativo ? "true" : "false");
       });
     };
     mostrar(0);
-    if (itens.length < 2) {
-      this.seletor.hidden = true;
-      return;
-    }
-    if (Ambiente.reduzMovimento) {
-      this.vitrine.classList.add("trabalhos__vitrine--parada");
-      return;
-    }
+    if (itens.length < 2 || Ambiente.reduzMovimento) return;
+
     const pausas = new Set();
     const pausar = (motivo, ligar) => {
       if (ligar) pausas.add(motivo);
       else pausas.delete(motivo);
-      this.vitrine.classList.toggle("trabalhos__vitrine--pausada", pausas.size > 0);
     };
     this.vitrine.addEventListener("pointerenter", () => pausar("mouse", true));
     this.vitrine.addEventListener("pointerleave", () => pausar("mouse", false));
@@ -165,13 +143,21 @@ export class Trabalhos {
     this.vitrine.addEventListener("focusout", () => pausar("foco", false));
     if ("IntersectionObserver" in window) {
       pausar("fora", true);
-      new IntersectionObserver(
-        (entradas) => {
-          pausar("fora", !entradas.some((entrada) => entrada.isIntersecting));
-        },
-        { threshold: 0.3 },
-      ).observe(this.vitrine);
+      new IntersectionObserver((entradas) => pausar("fora", !entradas.some((entrada) => entrada.isIntersecting)), {
+        threshold: 0.3,
+      }).observe(this.vitrine);
     }
+
+    /* relógio que só avança enquanto nada pede pausa */
+    const passo = 200;
+    let decorrido = 0;
+    window.setInterval(() => {
+      if (pausas.size) return;
+      decorrido += passo;
+      if (decorrido < TEMPO_DESTAQUE * 1000) return;
+      decorrido = 0;
+      mostrar((atual + 1) % itens.length);
+    }, passo);
   }
 
   /** Cada destaque se revela ao entrar na tela: a imagem abre de baixo para cima. */
