@@ -32,7 +32,7 @@
   max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-columns: 350px minmax(0, 1fr);
   overflow: hidden;
   background: #fff;
   box-shadow: 0 40px 90px -40px rgba(22, 19, 15, 0.6);
