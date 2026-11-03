@@ -224,6 +224,7 @@ export const TRABALHOS = [
     midias: [
       "/assets/imagens/trabalhos/antropofagia-mapping/parte-01.webp",
       "/assets/imagens/trabalhos/antropofagia-mapping/parte-02.webp",
+      "/assets/imagens/trabalhos/antropofagia-mapping/parte-03.webp",
     ],
   },
   {

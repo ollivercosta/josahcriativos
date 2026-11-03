@@ -8,6 +8,8 @@ import os, sys, json, subprocess, glob
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
 DESTINO = sys.argv[1]
+# opcional: só os projetos indicados, separados por vírgula (ex.: antropofagia-mapping)
+SO = set(sys.argv[2].split(",")) if len(sys.argv) > 2 else None
 LARG, ALT_MAX = 1400, 2100
 MAPA = {
   "olha-o-cabelo-dela": "arq/BOOK - OLHA O CABELO DELA – AFROTOUR (2).png",
@@ -27,7 +29,6 @@ MAPA = {
   "amazonia-motiro": "arq/Ópera  Contemporânea Amazônia Motirô (2).pdf",
   "orquestra-jovem-do-reconcavo": "arq/ORQUESTRA JOVEM DO RECÔNCAVO – PLANO ANUAL (1).pdf",
 }
-VITRINE = {"capa-logos": "arq/CAPA LOGOS.png", "capa-book": "arq/CAPA BOOK.png", "capa-sites": "arq/CAPA SITES.png"}
 
 def capa(im, saida, topo=True):
     w, h = im.size
@@ -40,6 +41,8 @@ def capa(im, saida, topo=True):
 
 resultado = {}
 for slug, origem in MAPA.items():
+    if SO and slug not in SO:
+        continue
     pasta = f"{DESTINO}/trabalhos/{slug}"; os.makedirs(pasta, exist_ok=True)
     for f in glob.glob(pasta + "/*"): os.remove(f)
     paginas = []
@@ -63,7 +66,4 @@ for slug, origem in MAPA.items():
     resultado[slug] = paginas
     tam = sum(os.path.getsize(f) for f in glob.glob(pasta + "/*"))
     print(f"{slug}: {len(paginas)} partes, {tam // 1024} KB")
-os.makedirs(f"{DESTINO}/vitrine", exist_ok=True)
-for nome, origem in VITRINE.items():
-    capa(Image.open(origem).convert("RGB"), f"{DESTINO}/vitrine/{nome}.webp")
 json.dump(resultado, open("paginas.json", "w"), indent=1)
