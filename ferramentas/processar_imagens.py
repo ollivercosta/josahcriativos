@@ -16,7 +16,6 @@ MAPA = {
   "tabuleiro-book": "arq/BOOK TABULEIRO PRODUÇÕES EMPRESAS (3).png",
   "nanda-sabores-e-afetos": "arq/DIVERSOS MATERIAIS -NANDA.png",
   "forro-zevixe": "arq/PORTFOLIO FZV - 2024 (1).png",
-  "caminho-do-bem": "arq/PORTFÓLIO CAMINHO DO BEM.png",
   "antropofagia-mapping": "arq/PROJETO ANMA.png",
   "ong-acuba": "arq/SITE ACUBA.png",
   "duda-filmes": "arq/SITE DUDA FILMES.png",
@@ -27,7 +26,7 @@ MAPA = {
   "trombone-criativo": "arq/SITE TROMBONE CRIATIVO.png",
   "rider-tecnico": "rider.img",
   "amazonia-motiro": "arq/Ópera  Contemporânea Amazônia Motirô (2).pdf",
-  "orquestra-jovem-do-reconcavo": "arq/ORQUESTRA JOVEM DO RECÔNCAVO – PLANO ANUAL (1).pdf",
+  "orquestra-jovem-do-reconcavo": "arq/ORQUESTRA JOVEM DO RECÔNCAVO – PLANO ANUAL.png",
 }
 
 def capa(im, saida, topo=True):

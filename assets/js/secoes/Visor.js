@@ -1,6 +1,12 @@
 import { aplicarImagem, ehImagem } from "../../dados/trabalhos.js";
 
 /**
+ * Rótulo acima do nome nos cartões. Os cartões apresentam as peças feitas
+ * para o projeto, e não o projeto inteiro; por isso o rótulo é "Projeto".
+ */
+const ROTULO_CARTAO = "Projeto";
+
+/**
  * Visor
  * Janela com a mini ficha de design de um trabalho e as suas imagens ou
  * vídeos. Navega entre os trabalhos visíveis na grade (setas do teclado,
@@ -63,7 +69,7 @@ export class Visor {
     this.atual = indice;
     const { corpo, tipo, titulo, meta, blocos, midias, proximoNome } = this.campos;
 
-    tipo.textContent = trabalho.tipo || trabalho.categoria;
+    tipo.textContent = ROTULO_CARTAO;
     titulo.textContent = trabalho.nome;
 
     meta.replaceChildren();

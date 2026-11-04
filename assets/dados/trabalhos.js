@@ -5,8 +5,8 @@
  *   nome       nome do projeto
  *   destaque   true para entrar no rodízio de destaques, em formato de estudo
  *              de caso; os demais vão para a grade "Outros trabalhos"
- *   tipo       o que a peça é (ex.: "Book de captação", "Identidade visual").
- *              Aparece acima do nome na capa e na ficha. Vazio: usa a categoria.
+ *   tipo       o que a peça é (ex.: "Book de captação", "Identidade visual"),
+ *              Fica como referência: os cartões mostram o rótulo "Projeto".
  *   categoria  usada nos filtros: "Marca e apresentação", "Web e redes",
  *              "Vídeo e mídia" ou "Outros"
  *   resumo     duas ou três linhas sobre o projeto, mostradas ao passar o
@@ -97,48 +97,9 @@ export const TRABALHOS = [
     pecas: [],
     capa: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp",
     midias: [
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-01.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-02.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-03.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-04.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-05.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-06.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-07.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-08.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-09.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-10.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-11.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-12.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-13.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-14.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-15.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-16.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-17.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-18.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-19.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-20.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-21.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-22.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-23.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-24.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/pagina-25.webp",
-    ],
-  },
-  {
-    nome: "Caminho do Bem",
-    tipo: "Portfólio institucional",
-    categoria: "Marca e apresentação",
-    resumo: "Portfólio do projeto social, com apresentação, missão, propósito, projetos e registros.",
-    cliente: "",
-    ano: "",
-    area: "",
-    partida: "",
-    decisoes: "",
-    pecas: [],
-    capa: "/assets/imagens/trabalhos/caminho-do-bem/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/caminho-do-bem/parte-01.webp",
-      "/assets/imagens/trabalhos/caminho-do-bem/parte-02.webp",
+      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-01.webp",
+      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-02.webp",
+      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-03.webp",
     ],
   },
   {

@@ -158,9 +158,9 @@
 .depoimentos__citacao {
   margin-bottom: 3vw;
   font-weight: 300;
-  font-size: 3.4vw;
-  line-height: 1.1;
-  letter-spacing: -0.045em;
+  font-size: clamp(1.5rem, 2.3vw, 2.6rem);
+  line-height: 1.22;
+  letter-spacing: -0.03em;
 }
 
 .depoimentos__citacao::before {
@@ -205,7 +205,7 @@
   }
 
   .depoimentos__citacao {
-    font-size: 7vw;
+    font-size: 1.35rem;
   }
 
   .depoimentos__dados {
