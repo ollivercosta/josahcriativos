@@ -6,6 +6,9 @@ import { aplicarImagem, capaDoTrabalho, ehImagem, listaDePecas } from "../../dad
  */
 const ROTULO_CARTAO = "Projeto";
 
+/** Valor mostrado na ficha técnica quando o dado ainda não foi informado. */
+const FALTA_INFORMAR = "A informar";
+
 /**
  * Visor
  * Janela com a mini ficha de design de um trabalho e as suas imagens ou
@@ -83,22 +86,20 @@ export class Visor {
     titulo.textContent = trabalho.nome;
 
     meta.replaceChildren();
-    for (const [rotulo, valor] of [
+    for (const [rotulo, informado] of [
       ["Categoria", trabalho.categoria],
       ["Cliente", trabalho.cliente],
-      ["Realização", trabalho.realizacao],
-      ["Artista", trabalho.artista],
+      ["Proponente", trabalho.proponente],
       ["Local", trabalho.local],
       ["Ano", trabalho.ano],
-      ["Área", trabalho.area],
     ]) {
-      if (!valor) continue;
+      /* a ficha técnica tem sempre as mesmas linhas, em todos os projetos */
+      const valor = informado || FALTA_INFORMAR;
       meta.append(
         this.#elemento("dt", "visor__meta-rotulo", rotulo),
         this.#elemento("dd", this.#classeTexto("visor__meta-valor", valor), valor),
       );
     }
-    meta.hidden = meta.children.length === 0;
 
     blocos.replaceChildren();
     /* o desafio abre a ficha, logo abaixo do nome, em destaque */
@@ -200,7 +201,7 @@ export class Visor {
 
   /** Campos ainda não preenchidos (entre colchetes) aparecem em itálico. */
   #classeTexto(classe, valor) {
-    return /^\s*\[/.test(valor) ? `${classe} visor__texto--preencher` : classe;
+    return valor === FALTA_INFORMAR || /^\s*\[/.test(valor) ? `${classe} visor__texto--preencher` : classe;
   }
 
   #elemento(tag, classe, texto) {

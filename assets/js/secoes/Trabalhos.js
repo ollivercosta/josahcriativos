@@ -90,7 +90,7 @@ export class Trabalhos {
       const ficha = item.querySelector(".trabalhos__destaque-ficha");
       for (const [rotulo, valor] of [
         ["Cliente", trabalho.cliente],
-        ["Artista", trabalho.artista],
+        ["Proponente", trabalho.proponente],
         ["Ano", trabalho.ano],
         ["Peças", listaDePecas(trabalho).join(", ")],
       ]) {
