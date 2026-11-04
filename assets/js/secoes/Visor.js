@@ -26,6 +26,7 @@ export class Visor {
     this.atual = 0;
     this.campos = {
       corpo: raiz.querySelector(".visor__corpo"),
+      ficha: raiz.querySelector(".visor__ficha"),
       tipo: raiz.querySelector(".visor__tipo"),
       titulo: raiz.querySelector(".visor__titulo"),
       meta: raiz.querySelector(".visor__meta"),
@@ -33,6 +34,12 @@ export class Visor {
       midias: raiz.querySelector(".visor__midias"),
       proximoNome: raiz.querySelector(".visor__seguinte-nome"),
     };
+
+    /* ficha mais alta que a tela: fixa pela base, para as peças do fim
+       continuarem alcançáveis durante a rolagem */
+    const ajustar = () => this.#ajustarFicha();
+    if ("ResizeObserver" in window) new ResizeObserver(ajustar).observe(this.campos.ficha);
+    window.addEventListener("resize", ajustar, { passive: true });
 
     gestor.registrar("visor", raiz, {
       classeAberta: "visor--aberto",
@@ -90,8 +97,8 @@ export class Visor {
 
     blocos.replaceChildren();
     for (const [rotulo, valor] of [
-      ["Ponto de partida", trabalho.partida],
-      ["Decisões de design", trabalho.decisoes],
+      ["O projeto", trabalho.sobre],
+      ["A proposta", trabalho.proposta],
     ]) {
       if (!valor) continue;
       const bloco = this.#elemento("section", "visor__bloco");
@@ -106,7 +113,7 @@ export class Visor {
       const lista = this.#elemento("ul", "visor__pecas");
       for (const peca of trabalho.pecas)
         lista.append(this.#elemento("li", this.#classeTexto("visor__peca", peca), peca));
-      bloco.append(this.#elemento("h3", "visor__bloco-titulo", "Peças entregues"), lista);
+      bloco.append(this.#elemento("h3", "visor__bloco-titulo", "Peças produzidas"), lista);
       blocos.append(bloco);
     }
 
@@ -119,6 +126,13 @@ export class Visor {
     corpo.classList.remove("visor__corpo--entrando");
     void corpo.offsetWidth;
     corpo.classList.add("visor__corpo--entrando");
+  }
+
+  #ajustarFicha() {
+    const { ficha } = this.campos;
+    const topo = 66 + 32;
+    const sobra = window.innerHeight - ficha.offsetHeight - 32;
+    ficha.style.setProperty("--ficha-topo", `${Math.min(topo, sobra)}px`);
   }
 
   /** Campos ainda não preenchidos (entre colchetes) aparecem em itálico. */

@@ -12,9 +12,11 @@
  *   resumo     duas ou três linhas sobre o projeto, mostradas ao passar o
  *              mouse na capa
  *   artista    opcional: artista ou grupo do projeto, quando o cliente é a produtora
- *   cliente, ano, area, partida (ponto de partida), decisoes (decisões de
- *   design), pecas (lista): campos da mini ficha de design. Texto entre
- *   colchetes aparece em itálico, como campo a preencher.
+ *   sobre      o que é o projeto (bloco "O projeto" da ficha)
+ *   proposta   o que foi pedido e como foi resolvido (bloco "A proposta")
+ *   pecas      lista das peças produzidas, as mesmas que aparecem nas imagens
+ *   cliente, ano, area: ficha técnica no fim. Texto entre colchetes aparece
+ *   em itálico, como campo a preencher.
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
  *   midias     imagens (endereço) ou vídeos (YouTube, Vimeo, Google Drive)
  *
@@ -33,8 +35,8 @@ export const TRABALHOS = [
     artista: "Itana Rosa",
     ano: "2026",
     area: "Cultural",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: ["Identidade visual", "Book de captação"],
     capa: "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp",
     midias: [
@@ -51,8 +53,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/amazonia-motiro/capa.webp",
     midias: [
@@ -92,9 +94,21 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
-    pecas: [],
+    sobre:
+      "O Plano Anual 2027 da Orquestra Jovem do Recôncavo tem como finalidade manter, ampliar e consolidar as ações de formação musical, prática artística, aperfeiçoamento técnico e difusão cultural.",
+    proposta:
+      "Criar uma linguagem visual para o plano anual que traduzisse a energia de uma orquestra jovem, com blocos geométricos de cor e os próprios instrumentos em cena, e desdobrá-la nas peças de que o projeto precisa: o book de captação que apresenta o plano a patrocinadores, os materiais usados por alunos e equipe, a chamada pública de bolsas e a campanha de inscrições nas redes, com a régua de realizadores e patrocinadores aplicada em cada formato.",
+    pecas: [
+      "Book de captação",
+      "Camisas",
+      "Ecobag",
+      "Squeeze",
+      "Papelaria",
+      "Banner",
+      "Formulário de inscrição",
+      "Régua",
+      "Redes sociais",
+    ],
     capa: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-01.webp",
@@ -111,8 +125,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/tabuleiro-book/capa.webp",
     midias: [
@@ -128,8 +142,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/forro-zevixe/capa.webp",
     midias: [
@@ -146,8 +160,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/nanda-sabores-e-afetos/capa.webp",
     midias: [
@@ -167,10 +181,13 @@ export const TRABALHOS = [
     artista: "VJ Lobo",
     ano: "2025",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre:
+      "O Festival Antropofagia Mapping (ANMA) nasce como um manifesto vivo: uma experiência coletiva que integra arte, tecnologia e educação libertadora, enraizada na ancestralidade e voltada para o futuro.",
+    proposta:
+      "Construir a identidade visual do festival a partir da ideia de devorar para recriar, com grafismos que unem o ancestral e o digital, e desdobrá-la num sistema de peças coerente: o book de captação para patrocinadores, os materiais vestidos e levados pelo público, a sinalização do evento e a campanha nas redes, todos com a régua de apoiadores aplicada.",
     pecas: [
       "Identidade visual",
+      "Plano de mídia",
       "Book de captação",
       "Camisa",
       "Ecobag",
@@ -197,8 +214,8 @@ export const TRABALHOS = [
     cliente: "Tabuleiro Produções",
     ano: "2024",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: ["Identidade visual", "Site"],
     capa: "/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp",
     midias: [
@@ -214,8 +231,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/trombone-criativo/capa.webp",
     midias: [
@@ -231,8 +248,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/duda-filmes/capa.webp",
     midias: [
@@ -248,8 +265,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/festival-de-roteiro/capa.webp",
     midias: [
@@ -265,8 +282,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/elas-nas-telas/capa.webp",
     midias: [
@@ -283,8 +300,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/festival-periferia-no-ar/capa.webp",
     midias: [
@@ -300,8 +317,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/ong-acuba/capa.webp",
     midias: ["/assets/imagens/trabalhos/ong-acuba/parte-01.webp", "/assets/imagens/trabalhos/ong-acuba/parte-02.webp"],
@@ -314,8 +331,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     midias: ["https://www.youtube.com/watch?v=YrjKU3QbIhI"],
   },
@@ -327,8 +344,8 @@ export const TRABALHOS = [
     cliente: "",
     ano: "",
     area: "",
-    partida: "",
-    decisoes: "",
+    sobre: "",
+    proposta: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/rider-tecnico/capa.webp",
     midias: ["/assets/imagens/trabalhos/rider-tecnico/parte-01.webp"],

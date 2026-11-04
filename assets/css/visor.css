@@ -119,15 +119,13 @@
 }
 
 /* todas as informações do projeto num único cartão vermelho */
+/* ficha sem cartão: o texto fica direto na tela, na coluna estreita ao lado das imagens */
 .visor__ficha {
   position: sticky;
-  top: calc(66px + 32px);
+  top: var(--ficha-topo, calc(66px + 32px));
   align-self: start;
-  padding: clamp(24px, 2.6vw, 40px);
-  border-radius: 16px;
-  background: var(--cor-tinta);
-  color: #fff;
-  /* o título se mede pela largura do cartão, não da tela */
+  color: var(--cor-tinta);
+  /* o título se mede pela largura da coluna, não da tela */
   container-type: inline-size;
 }
 
@@ -138,11 +136,11 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--cor-vermelho);
 }
 
 .visor__titulo {
-  margin-bottom: 30px;
+  margin-bottom: 28px;
   font-weight: 900;
   font-size: clamp(2rem, 13cqi, 4.6rem);
   line-height: 0.92;
@@ -150,35 +148,11 @@
   overflow-wrap: break-word;
 }
 
-.visor__meta {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 8px 18px;
-  margin-bottom: 28px;
-  padding: 16px 0;
-  border-block: 1px solid rgba(255, 255, 255, 0.35);
-  font-size: 0.95rem;
-}
-
-.visor__meta[hidden] {
-  display: none;
-}
-
-/* sem blocos depois da ficha técnica, ela fecha o cartão sem espaço sobrando */
-.visor__ficha:has(.visor__blocos:empty) .visor__meta {
-  margin-bottom: 0;
-}
-
-.visor__meta-rotulo {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.visor__meta-valor {
-  font-weight: 600;
-}
-
+/* o projeto, a proposta e as peças, nesta ordem */
 .visor__bloco {
+  padding-top: 18px;
   margin-bottom: 26px;
+  border-top: 1px solid var(--cor-tinta);
 }
 
 .visor__bloco:last-child {
@@ -186,17 +160,22 @@
 }
 
 .visor__bloco-titulo {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--cor-tinta-suave);
 }
 
+/* coluna estreita: texto justificado com hifenização, para não abrir buracos entre palavras */
 .visor__bloco-texto {
+  font-size: 1rem;
   line-height: 1.6;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .visor__pecas {
@@ -210,13 +189,36 @@
 
 .visor__peca {
   padding: 5px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--cor-linha-forte);
   border-radius: 999px;
   font-size: 0.88rem;
 }
 
+/* ficha técnica no fim, discreta */
+.visor__meta {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 18px;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cor-linha);
+  font-size: 0.88rem;
+}
+
+.visor__meta[hidden] {
+  display: none;
+}
+
+.visor__meta-rotulo {
+  color: var(--cor-tinta-suave);
+}
+
+.visor__meta-valor {
+  font-weight: 600;
+}
+
 .visor__texto--preencher {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--cor-tinta-suave);
   font-style: italic;
 }
 
