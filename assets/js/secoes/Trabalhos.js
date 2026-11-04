@@ -1,6 +1,6 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
 import { icone } from "../nucleo/Icones.js";
-import { aplicarImagem, capaDoTrabalho } from "../../dados/trabalhos.js";
+import { aplicarImagem, capaDoTrabalho, listaDePecas } from "../../dados/trabalhos.js";
 
 /**
  * Rótulo acima do nome nos cartões. Os cartões apresentam as peças feitas
@@ -92,7 +92,7 @@ export class Trabalhos {
         ["Cliente", trabalho.cliente],
         ["Artista", trabalho.artista],
         ["Ano", trabalho.ano],
-        ["Peças", (trabalho.pecas || []).join(", ")],
+        ["Peças", listaDePecas(trabalho).join(", ")],
       ]) {
         if (!valor) continue;
         const linha = document.createElement("div");
