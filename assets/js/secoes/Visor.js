@@ -1,4 +1,4 @@
-import { aplicarImagem, ehImagem } from "../../dados/trabalhos.js";
+import { aplicarImagem, capaDoTrabalho, ehImagem, listaDePecas } from "../../dados/trabalhos.js";
 
 /**
  * Rótulo acima do nome nos cartões. Os cartões apresentam as peças feitas
@@ -32,6 +32,9 @@ export class Visor {
       meta: raiz.querySelector(".visor__meta"),
       blocos: raiz.querySelector(".visor__blocos"),
       midias: raiz.querySelector(".visor__midias"),
+      relacionados: raiz.querySelector(".visor__relacionados"),
+      relacionadosTitulo: raiz.querySelector(".visor__relacionados-titulo"),
+      relacionadosLista: raiz.querySelector(".visor__relacionados-lista"),
       proximoNome: raiz.querySelector(".visor__seguinte-nome"),
     };
 
@@ -83,7 +86,9 @@ export class Visor {
     for (const [rotulo, valor] of [
       ["Categoria", trabalho.categoria],
       ["Cliente", trabalho.cliente],
+      ["Realização", trabalho.realizacao],
       ["Artista", trabalho.artista],
+      ["Local", trabalho.local],
       ["Ano", trabalho.ano],
       ["Área", trabalho.area],
     ]) {
@@ -96,6 +101,8 @@ export class Visor {
     meta.hidden = meta.children.length === 0;
 
     blocos.replaceChildren();
+    /* o desafio abre a ficha, logo abaixo do nome, em destaque */
+    if (trabalho.desafio) blocos.append(this.#elemento("p", "visor__desafio", trabalho.desafio));
     for (const [rotulo, valor] of [
       ["O projeto", trabalho.sobre],
       ["A proposta", trabalho.proposta],
@@ -108,15 +115,18 @@ export class Visor {
       );
       blocos.append(bloco);
     }
-    if (trabalho.pecas?.length) {
-      const bloco = this.#elemento("section", "visor__bloco");
-      const lista = this.#elemento("ul", "visor__pecas");
-      for (const peca of trabalho.pecas)
-        lista.append(this.#elemento("li", this.#classeTexto("visor__peca", peca), peca));
-      bloco.append(this.#elemento("h3", "visor__bloco-titulo", "Peças produzidas"), lista);
+    const pecas = this.#pecas(trabalho);
+    if (pecas) blocos.append(pecas);
+    if (trabalho.regua) {
+      const bloco = this.#elemento("section", "visor__bloco visor__bloco--regua");
+      bloco.append(
+        this.#elemento("h3", "visor__bloco-titulo", "Régua de marcas"),
+        this.#elemento("p", "visor__regua-texto", trabalho.regua),
+      );
       blocos.append(bloco);
     }
 
+    this.#relacionados(trabalho, indice);
     midias.replaceChildren(...(trabalho.midias || []).map((midia, k) => this.#midia(midia, trabalho.nome, k)));
 
     const posicao = Math.max(0, this.lista.indexOf(indice));
@@ -126,6 +136,59 @@ export class Visor {
     corpo.classList.remove("visor__corpo--entrando");
     void corpo.offsetWidth;
     corpo.classList.add("visor__corpo--entrando");
+  }
+
+  /** Peças em uma lista simples ou agrupadas pelas frentes de Serviços. */
+  #pecas(trabalho) {
+    if (!listaDePecas(trabalho).length) return null;
+    const bloco = this.#elemento("section", "visor__bloco");
+    bloco.append(this.#elemento("h3", "visor__bloco-titulo", "Peças produzidas"));
+    const grupos = Array.isArray(trabalho.pecas) ? [["", trabalho.pecas]] : Object.entries(trabalho.pecas);
+    for (const [frente, itens] of grupos) {
+      if (!itens.length) continue;
+      const grupo = this.#elemento("div", "visor__frente");
+      if (frente) grupo.append(this.#elemento("p", "visor__frente-nome", frente));
+      const lista = this.#elemento("ul", "visor__pecas");
+      for (const peca of itens) lista.append(this.#elemento("li", this.#classeTexto("visor__peca", peca), peca));
+      grupo.append(lista);
+      bloco.append(grupo);
+    }
+    return bloco;
+  }
+
+  /** Outros projetos do mesmo cliente, abaixo das imagens. */
+  #relacionados(trabalho, indice) {
+    const { relacionados, relacionadosTitulo, relacionadosLista } = this.campos;
+    const outros = trabalho.cliente
+      ? this.trabalhos
+          .map((item, i) => [item, i])
+          .filter(([item, i]) => i !== indice && item.cliente === trabalho.cliente)
+          .slice(0, 3)
+      : [];
+    relacionados.hidden = outros.length === 0;
+    relacionadosLista.replaceChildren();
+    if (!outros.length) return;
+    relacionadosTitulo.textContent = `Mais com a ${trabalho.cliente}`;
+    for (const [item, i] of outros) {
+      const linha = this.#elemento("li", "visor__relacionado");
+      const botao = this.#elemento("button", "visor__relacionado-botao");
+      botao.type = "button";
+      const capa = capaDoTrabalho(item);
+      if (capa) {
+        const img = this.#elemento("img", "visor__relacionado-capa");
+        img.src = capa;
+        img.alt = "";
+        img.loading = "lazy";
+        botao.append(img);
+      }
+      botao.append(this.#elemento("span", "visor__relacionado-nome", item.nome));
+      botao.addEventListener("click", () => {
+        if (!this.lista.includes(i)) this.lista = this.trabalhos.map((_, k) => k);
+        this.#mostrar(i);
+      });
+      linha.append(botao);
+      relacionadosLista.append(linha);
+    }
   }
 
   #ajustarFicha() {

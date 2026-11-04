@@ -14,7 +14,13 @@
  *   artista    opcional: artista ou grupo do projeto, quando o cliente é a produtora
  *   sobre      o que é o projeto (bloco "O projeto" da ficha)
  *   proposta   o que foi pedido e como foi resolvido (bloco "A proposta")
- *   pecas      lista das peças produzidas, as mesmas que aparecem nas imagens
+ *   desafio    opcional: uma frase com o desafio próprio do projeto, em destaque
+ *   pecas      peças produzidas, as mesmas que aparecem nas imagens; uma lista
+ *              simples ou agrupadas pelas frentes de Serviços:
+ *              { "Apresentação": [...], "Digital": [...], "Visual e mídia": [...] }
+ *   regua      opcional: como as marcas de realização, apoio e patrocínio
+ *              foram aplicadas (bloco "Régua de marcas")
+ *   realizacao, local: opcionais, entram na ficha técnica
  *   cliente, ano, area: ficha técnica no fim. Texto entre colchetes aparece
  *   em itálico, como campo a preencher.
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
@@ -91,24 +97,23 @@ export const TRABALHOS = [
     categoria: "Marca e apresentação",
     resumo:
       "Book de captação do plano anual da orquestra, com proposta, impacto, contrapartidas e cotas para patrocinadores.",
-    cliente: "",
+    cliente: "Tabuleiro Produções",
     ano: "",
     area: "",
+    realizacao: "Maestro Vinicius Freitas",
+    local: "São Félix e Cachoeira (BA)",
+    desafio:
+      "Unir a tradição das orquestras aos avanços da cultura, principalmente a acessibilidade, numa linguagem que chegue aos jovens do Recôncavo.",
     sobre:
       "O Plano Anual 2027 da Orquestra Jovem do Recôncavo tem como finalidade manter, ampliar e consolidar as ações de formação musical, prática artística, aperfeiçoamento técnico e difusão cultural.",
     proposta:
-      "Criar uma linguagem visual para o plano anual que traduzisse a energia de uma orquestra jovem, com blocos geométricos de cor e os próprios instrumentos em cena, e desdobrá-la nas peças de que o projeto precisa: o book de captação que apresenta o plano a patrocinadores, os materiais usados por alunos e equipe, a chamada pública de bolsas e a campanha de inscrições nas redes, com a régua de realizadores e patrocinadores aplicada em cada formato.",
-    pecas: [
-      "Book de captação",
-      "Camisas",
-      "Ecobag",
-      "Squeeze",
-      "Papelaria",
-      "Banner",
-      "Formulário de inscrição",
-      "Régua",
-      "Redes sociais",
-    ],
+      "As cores quentes da logomarca da orquestra formam a base da identidade, equilibradas por tons frios. Blocos geométricos e os próprios instrumentos em cena trazem o tradicional para uma linguagem atual, aplicada do book de captação para patrocinadores à campanha de inscrições nas redes.",
+    regua: "Realização, apoio e patrocínio, com Fazcultura e Governo da Bahia, numa régua aplicada a cada peça.",
+    pecas: {
+      Apresentação: ["Identidade visual", "Book de captação"],
+      Digital: ["Formulário de inscrição", "Redes sociais"],
+      "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Banner"],
+    },
     capa: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-01.webp",
@@ -122,7 +127,7 @@ export const TRABALHOS = [
     categoria: "Marca e apresentação",
     resumo:
       "Book de captação da Tabuleiro Produções para empresas: trajetória, projetos, resultados e formas de parceria.",
-    cliente: "",
+    cliente: "Tabuleiro Produções",
     ano: "",
     area: "",
     sobre: "",
@@ -181,23 +186,19 @@ export const TRABALHOS = [
     artista: "VJ Lobo",
     ano: "2025",
     area: "",
+    local: "Belém (PA)",
+    desafio:
+      "Dar forma visual à antropofagia como conceito cultural: devorar referências para criar algo próprio, a partir da cultura de Belém e da Amazônia.",
     sobre:
       "O Festival Antropofagia Mapping (ANMA) nasce como um manifesto vivo: uma experiência coletiva que integra arte, tecnologia e educação libertadora, enraizada na ancestralidade e voltada para o futuro.",
     proposta:
-      "Construir a identidade visual do festival a partir da ideia de devorar para recriar, com grafismos que unem o ancestral e o digital, e desdobrá-la num sistema de peças coerente: o book de captação para patrocinadores, os materiais vestidos e levados pelo público, a sinalização do evento e a campanha nas redes, todos com a régua de apoiadores aplicada.",
-    pecas: [
-      "Identidade visual",
-      "Plano de mídia",
-      "Book de captação",
-      "Camisa",
-      "Ecobag",
-      "Squeezer",
-      "Papelaria",
-      "Faixa",
-      "Wind banner",
-      "Redes sociais",
-      "Backdrop",
-    ],
+      "A identidade parte da antropofagia e da cultura local. Natureza, mistério e sobreposição estão na própria logomarca, com traços de grafismos que a conectam à ancestralidade. Dela saem o plano de mídia, o book de captação, os materiais do evento e a campanha nas redes.",
+    regua: "Realização, apoio e patrocínio numa régua única, aplicada a cada peça conforme as regras de cada marca.",
+    pecas: {
+      Apresentação: ["Identidade visual", "Plano de mídia", "Book de captação"],
+      Digital: ["Redes sociais"],
+      "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Faixa", "Wind banner", "Backdrop"],
+    },
     capa: "/assets/imagens/trabalhos/antropofagia-mapping/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/antropofagia-mapping/parte-01.webp",
@@ -355,6 +356,12 @@ export const TRABALHOS = [
 const VIDEO = /youtu\.?be|vimeo\.com|drive\.google|\.(mp4|webm|ogv|mov|m4v)(\?|$)/i;
 
 /** A mídia é uma imagem (e não um vídeo)? */
+/** Todas as peças de um trabalho numa lista só, agrupadas ou não. */
+export function listaDePecas(trabalho) {
+  const pecas = trabalho.pecas || [];
+  return Array.isArray(pecas) ? pecas : Object.values(pecas).flat();
+}
+
 export function ehImagem(midia) {
   return typeof midia === "string" && !VIDEO.test(midia);
 }

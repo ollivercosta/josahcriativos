@@ -140,7 +140,7 @@
 }
 
 .visor__titulo {
-  margin-bottom: 28px;
+  margin-bottom: 22px;
   font-weight: 900;
   font-size: clamp(2rem, 13cqi, 4.6rem);
   line-height: 0.92;
@@ -150,8 +150,8 @@
 
 /* o projeto, a proposta e as peças, nesta ordem */
 .visor__bloco {
-  padding-top: 18px;
-  margin-bottom: 26px;
+  padding-top: 14px;
+  margin-bottom: 20px;
   border-top: 1px solid var(--cor-tinta);
 }
 
@@ -160,7 +160,7 @@
 }
 
 .visor__bloco-titulo {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
@@ -181,17 +181,59 @@
 .visor__pecas {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .visor__peca {
-  padding: 5px 12px;
+  padding: 3px 10px;
   border: 1px solid var(--cor-linha-forte);
   border-radius: 999px;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
+}
+
+/* o desafio do projeto, logo abaixo do nome */
+.visor__desafio {
+  margin-bottom: 22px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+/* peças agrupadas pelas frentes de Serviços */
+.visor__frente {
+  display: grid;
+  grid-template-columns: 6.6em minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.visor__frente:last-child {
+  margin-bottom: 0;
+}
+
+.visor__frente-nome {
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+/* régua de marcas: marcada em vermelho, por ser o ponto que o fomento confere */
+.visor__bloco--regua {
+  border-top-color: var(--cor-vermelho);
+}
+
+.visor__regua-texto {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 /* ficha técnica no fim, discreta */
@@ -199,8 +241,8 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 6px 18px;
-  margin-top: 26px;
-  padding-top: 16px;
+  margin-top: 20px;
+  padding-top: 14px;
   border-top: 1px solid var(--cor-linha);
   font-size: 0.88rem;
 }
@@ -310,6 +352,68 @@
   border: 0;
 }
 
+/* outros projetos do mesmo cliente, depois das imagens */
+.visor__relacionados {
+  margin-top: clamp(48px, 6vw, 88px);
+}
+
+.visor__relacionados[hidden] {
+  display: none;
+}
+
+.visor__relacionados-titulo {
+  margin-bottom: 20px;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.visor__relacionados-lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.visor__relacionado-botao {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.visor__relacionado-capa {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.9s var(--curva);
+}
+
+.visor__relacionado-nome {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+
+.visor__relacionado-botao:hover .visor__relacionado-capa {
+  transform: translateY(-4px);
+}
+
+.visor__relacionado-botao:focus-visible {
+  outline: 2px solid var(--cor-vermelho);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
 .visor__seguinte {
   display: flex;
   justify-content: space-between;
@@ -370,6 +474,17 @@
 }
 
 @media (max-width: 860px) {
+  .visor__relacionados-lista {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .visor__relacionado-botao {
+    grid-template-columns: 40% minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+  }
+
   .visor__corpo {
     grid-template-columns: minmax(0, 1fr);
   }
