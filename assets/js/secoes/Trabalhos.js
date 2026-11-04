@@ -2,6 +2,12 @@ import { Ambiente } from "../nucleo/Ambiente.js";
 import { icone } from "../nucleo/Icones.js";
 import { aplicarImagem, capaDoTrabalho } from "../../dados/trabalhos.js";
 
+/**
+ * Rótulo acima do nome nos cartões. Os cartões apresentam as peças feitas
+ * para o projeto, e não o projeto inteiro; por isso o rótulo é "Projeto".
+ */
+const ROTULO_CARTAO = "Projeto";
+
 const TODOS = "Todos";
 const VISIVEIS_DE_INICIO = 6;
 /** Tempo de cada projeto em destaque, em segundos. */
@@ -78,7 +84,7 @@ export class Trabalhos {
       const img = item.querySelector(".trabalhos__destaque-imagem");
       if (imagem) aplicarImagem(img, imagem, "(max-width: 860px) 100vw, 58vw");
       else img.remove();
-      item.querySelector(".trabalhos__destaque-tipo").textContent = trabalho.tipo || trabalho.categoria;
+      item.querySelector(".trabalhos__destaque-tipo").textContent = ROTULO_CARTAO;
       item.querySelector(".trabalhos__destaque-nome").textContent = trabalho.nome;
       item.querySelector(".trabalhos__destaque-resumo").textContent = trabalho.resumo || "";
       const ficha = item.querySelector(".trabalhos__destaque-ficha");
@@ -259,7 +265,7 @@ export class Trabalhos {
         <span class="trabalhos__resumo-texto"></span>
       </span>
       <span class="trabalhos__resumo-acao">Ver ficha do projeto ${icone("arrow-right", "trabalhos__resumo-seta")}</span>`;
-    resumo.querySelector(".trabalhos__resumo-tipo").textContent = trabalho.tipo || trabalho.categoria;
+    resumo.querySelector(".trabalhos__resumo-tipo").textContent = ROTULO_CARTAO;
     resumo.querySelector(".trabalhos__resumo-nome").textContent = trabalho.nome;
     resumo.querySelector(".trabalhos__resumo-texto").textContent = trabalho.resumo || "";
     capa.append(resumo);
@@ -271,7 +277,7 @@ export class Trabalhos {
     legenda.className = "trabalhos__legenda";
     const tipo = document.createElement("span");
     tipo.className = "trabalhos__legenda-tipo";
-    tipo.textContent = trabalho.tipo || trabalho.categoria;
+    tipo.textContent = ROTULO_CARTAO;
     const nome = document.createElement("strong");
     nome.className = "trabalhos__legenda-nome";
     nome.textContent = trabalho.nome;
