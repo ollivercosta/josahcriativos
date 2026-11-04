@@ -11,17 +11,16 @@
  *              "Vídeo e mídia" ou "Outros"
  *   resumo     duas ou três linhas sobre o projeto, mostradas ao passar o
  *              mouse na capa
- *   artista    opcional: artista ou grupo do projeto, quando o cliente é a produtora
  *   sobre      o que é o projeto (bloco "O projeto" da ficha)
  *   proposta   o que foi pedido e como foi resolvido (bloco "A proposta")
  *   desafio    opcional: uma frase com o desafio próprio do projeto, em destaque
  *   pecas      peças produzidas, as mesmas que aparecem nas imagens; uma lista
  *              simples ou agrupadas pelas frentes de Serviços:
  *              { "Apresentação": [...], "Digital": [...], "Visual e mídia": [...] }
- *   regua      opcional: como as marcas de realização, apoio e patrocínio
- *              foram aplicadas (bloco "Régua de marcas")
- *   realizacao, local: opcionais, entram na ficha técnica
- *   cliente, ano, area: ficha técnica no fim. Texto entre colchetes aparece
+ *   regua      onde as marcas de realização, apoio e patrocínio foram aplicadas
+ *              no projeto (bloco "Régua de marcas")
+ *   cliente, proponente, local, ano: ficha técnica no fim, sempre com as
+ *   mesmas linhas em todos os projetos (vazio aparece como "A informar"). Texto entre colchetes aparece
  *   em itálico, como campo a preencher.
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
  *   midias     imagens (endereço) ou vídeos (YouTube, Vimeo, Google Drive)
@@ -38,9 +37,9 @@ export const TRABALHOS = [
     categoria: "Marca e apresentação",
     resumo: "Book de captação do Afrotour de Itana Rosa, projeto de circulação internacional entre Brasil e África.",
     cliente: "Tabuleiro Produções",
-    artista: "Itana Rosa",
+    proponente: "Itana Rosa",
+    local: "",
     ano: "2026",
-    area: "Cultural",
     sobre: "",
     proposta: "",
     pecas: ["Identidade visual", "Book de captação"],
@@ -57,8 +56,9 @@ export const TRABALHOS = [
     resumo:
       "Book de captação da ópera contemporânea, com o espetáculo, a circulação, as cotas e as contrapartidas para patrocinadores.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -98,17 +98,17 @@ export const TRABALHOS = [
     resumo:
       "Book de captação do plano anual da orquestra, com proposta, impacto, contrapartidas e cotas para patrocinadores.",
     cliente: "Tabuleiro Produções",
-    ano: "",
-    area: "",
-    realizacao: "Maestro Vinicius Freitas",
+    proponente: "ONG Caminho do Bem",
     local: "São Félix e Cachoeira (BA)",
+    ano: "2026",
     desafio:
       "Unir a tradição das orquestras aos avanços da cultura, principalmente a acessibilidade, numa linguagem que chegue aos jovens do Recôncavo.",
     sobre:
-      "O Plano Anual 2027 da Orquestra Jovem do Recôncavo tem como finalidade manter, ampliar e consolidar as ações de formação musical, prática artística, aperfeiçoamento técnico e difusão cultural.",
+      "Conduzido pelo maestro Vinicius Freitas, o Plano Anual 2027 da Orquestra Jovem do Recôncavo tem como finalidade manter, ampliar e consolidar as ações de formação musical, prática artística, aperfeiçoamento técnico e difusão cultural.",
     proposta:
       "As cores quentes da logomarca da orquestra formam a base da identidade, equilibradas por tons frios. Blocos geométricos e os próprios instrumentos em cena trazem o tradicional para uma linguagem atual, aplicada do book de captação para patrocinadores à campanha de inscrições nas redes.",
-    regua: "Realização, apoio e patrocínio, com Fazcultura e Governo da Bahia, numa régua aplicada a cada peça.",
+    regua:
+      "Realização, apoio e patrocínio, com o Fazcultura e o Governo da Bahia, aplicados nas costas das camisas, na ecobag, no squeeze, na papelaria e no banner, e no card final de cada carrossel da campanha de inscrições.",
     pecas: {
       Apresentação: ["Identidade visual", "Book de captação"],
       Digital: ["Formulário de inscrição", "Redes sociais"],
@@ -128,8 +128,9 @@ export const TRABALHOS = [
     resumo:
       "Book de captação da Tabuleiro Produções para empresas: trajetória, projetos, resultados e formas de parceria.",
     cliente: "Tabuleiro Produções",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -145,8 +146,9 @@ export const TRABALHOS = [
     categoria: "Marca e apresentação",
     resumo: "Portfólio da banda com trajetória, ficha técnica, clipping e registros de shows.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -163,8 +165,9 @@ export const TRABALHOS = [
     categoria: "Marca e apresentação",
     resumo: "Identidade visual da confeitaria aplicada a cardápios, embalagens, cartão de visita e redes sociais.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -183,21 +186,21 @@ export const TRABALHOS = [
     resumo:
       "Book de captação de um projeto pensado a partir da preservação da natureza e da cultura, com grafismos que atravessam todas as peças.",
     cliente: "Tabuleiro Produções",
-    artista: "VJ Lobo",
-    ano: "2025",
-    area: "",
+    proponente: "VJ Lobo",
     local: "Belém (PA)",
+    ano: "2025",
     desafio:
       "Dar forma visual à antropofagia como conceito cultural: devorar referências para criar algo próprio, a partir da cultura de Belém e da Amazônia.",
     sobre:
       "O Festival Antropofagia Mapping (ANMA) nasce como um manifesto vivo: uma experiência coletiva que integra arte, tecnologia e educação libertadora, enraizada na ancestralidade e voltada para o futuro.",
     proposta:
       "A identidade parte da antropofagia e da cultura local. Natureza, mistério e sobreposição estão na própria logomarca, com traços de grafismos que a conectam à ancestralidade. Dela saem o plano de mídia, o book de captação, os materiais do evento e a campanha nas redes.",
-    regua: "Realização, apoio e patrocínio numa régua única, aplicada a cada peça conforme as regras de cada marca.",
+    regua:
+      "Apoio, patrocínio e realização, com a Lei Rouanet e o Ministério da Cultura, aplicados nas costas das camisas, na ecobag, no wind banner, na faixa e na testeira de ônibus. No backdrop, as marcas ganham um painel próprio, pensado para as fotos do evento.",
     pecas: {
       Apresentação: ["Identidade visual", "Plano de mídia", "Book de captação"],
       Digital: ["Redes sociais"],
-      "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Faixa", "Wind banner", "Backdrop"],
+      "Visual e mídia": ["Camisas", "Ecobag", "Backdrop", "Wind banner", "Testeira de ônibus", "Faixa"],
     },
     capa: "/assets/imagens/trabalhos/antropofagia-mapping/capa.webp",
     midias: [
@@ -213,8 +216,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Site que apresenta a Tabuleiro Produções e seus serviços com leitura fluida e navegação equilibrada.",
     cliente: "Tabuleiro Produções",
+    proponente: "",
+    local: "",
     ano: "2024",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: ["Identidade visual", "Site"],
@@ -230,8 +234,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Página de venda do método de improvisação para trombone.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -247,8 +252,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Site da produtora audiovisual, com projetos, apresentação e contato.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -264,8 +270,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Site do Festival de Roteiro Audiovisual da Amazônia, com apresentação, laboratórios e inscrições.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -281,8 +288,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Site da mostra de cinema feito por mulheres, com edições, filmes premiados e inscrições.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -299,8 +307,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Site do festival de hip-hop com modalidades, entrevistas, inscrição e perguntas frequentes.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -316,8 +325,9 @@ export const TRABALHOS = [
     categoria: "Web e redes",
     resumo: "Site da ONG de arte e cultura urbana, com projetos, eventos e formas de apoio.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -331,7 +341,6 @@ export const TRABALHOS = [
     resumo: "Edição de vídeo para a ONG Acuba.",
     cliente: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
@@ -343,8 +352,9 @@ export const TRABALHOS = [
     categoria: "Outros",
     resumo: "Rider técnico e de palco da banda Xote Debochado.",
     cliente: "",
+    proponente: "",
+    local: "",
     ano: "",
-    area: "",
     sobre: "",
     proposta: "",
     pecas: [],
