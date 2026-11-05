@@ -42,13 +42,13 @@ export const TRABALHOS = [
     local: "Salvador (BA)",
     ano: "2026",
     desafio:
-      "Um projeto ainda sem patrocínio precisava de um book que fizesse uma empresa enxergar, antes do primeiro show, o valor de colocar a marca ao lado dele.",
+      "O Afrotour precisava de um book que fizesse uma empresa enxergar, antes do primeiro show, o valor de colocar a marca ao lado dele.",
     sobre:
       "Liderado pela cantora baiana Itana Rosa, o Afrotour é um projeto internacional de intercâmbio cultural entre o Brasil e o continente africano, com shows, formação artística e produção audiovisual. Ele nasce da canção autoral “Olha o cabelo dela”, que trata a estética negra como pertencimento, autoestima, ancestralidade e resistência. Para viajar, o projeto precisa de patrocínio, e o primeiro passo era apresentá-lo a quem pode investir.",
     proposta:
-      "Escolhi o cabelo crespo como fio condutor do book. Ele aparece como protagonista em vários momentos, às vezes como uma silhueta que ocupa a página inteira, às vezes como moldura para o texto e para a própria artista. O preto, o amarelo e o marrom, junto com búzios, folhas e o agogô, fazem a ponte entre a Bahia e a África. A tipografia pesada leva o mesmo recado da canção: a identidade como marca de força e coragem.",
+      "O cabelo crespo, tema do projeto, virou o fio condutor do book. Ele aparece como protagonista em vários momentos, às vezes como uma silhueta que ocupa a página inteira, às vezes como moldura para o texto e para a própria artista. O preto, o amarelo e o marrom, junto com búzios, folhas e o agogô, fazem a ponte entre a Bahia e a África. A tipografia pesada leva o mesmo recado da canção: a identidade como marca de força e coragem.",
     resultado:
-      "O book está pronto e é hoje o material com que a Tabuleiro apresenta o Afrotour a possíveis patrocinadores. Ele termina com um convite direto para que a empresa interessada converse com a produção. O projeto aguarda patrocínio para começar a circular.",
+      "O book está pronto e é hoje o material com que a Tabuleiro apresenta o Afrotour a possíveis patrocinadores. Ele termina com um convite direto para que a empresa interessada converse com a produção. O projeto aguarda patrocínio para começar a circular. As imagens desta página são uma representação do book, com as cores, a tipografia e as imagens do material oficial. As demais informações do book foram preservadas.",
     regua:
       "Como o projeto ainda busca patrocínio, a régua de marcas ainda não existe. Por enquanto, o book fecha com a assinatura da Tabuleiro e o contato direto da produção.",
     pecas: { Apresentação: ["Book de captação"] },
