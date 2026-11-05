@@ -39,16 +39,24 @@ export const TRABALHOS = [
     resumo: "Book de captação do Afrotour de Itana Rosa, projeto de circulação internacional entre Brasil e África.",
     cliente: "Tabuleiro Produções",
     proponente: "Itana Rosa",
-    local: "",
+    local: "Salvador (BA)",
     ano: "2026",
-    sobre: "",
-    proposta: "",
-    resultado: "",
-    pecas: ["Identidade visual", "Book de captação"],
+    desafio:
+      "Um projeto ainda sem patrocínio precisava de um book que fizesse uma empresa enxergar, antes do primeiro show, o valor de colocar a marca ao lado dele.",
+    sobre:
+      "Liderado pela cantora baiana Itana Rosa, o Afrotour é um projeto internacional de intercâmbio cultural entre o Brasil e o continente africano, com shows, formação artística e produção audiovisual. Ele nasce da canção autoral “Olha o cabelo dela”, que trata a estética negra como pertencimento, autoestima, ancestralidade e resistência. Para viajar, o projeto precisa de patrocínio, e o primeiro passo era apresentá-lo a quem pode investir.",
+    proposta:
+      "Escolhi o cabelo crespo como fio condutor do book. Ele aparece como protagonista em vários momentos, às vezes como uma silhueta que ocupa a página inteira, às vezes como moldura para o texto e para a própria artista. O preto, o amarelo e o marrom, junto com búzios, folhas e o agogô, fazem a ponte entre a Bahia e a África. A tipografia pesada leva o mesmo recado da canção: a identidade como marca de força e coragem.",
+    resultado:
+      "O book está pronto e é hoje o material com que a Tabuleiro apresenta o Afrotour a possíveis patrocinadores. Ele termina com um convite direto para que a empresa interessada converse com a produção. O projeto aguarda patrocínio para começar a circular.",
+    regua:
+      "Como o projeto ainda busca patrocínio, a régua de marcas ainda não existe. Por enquanto, o book fecha com a assinatura da Tabuleiro e o contato direto da produção.",
+    pecas: { Apresentação: ["Book de captação"] },
     capa: "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-01.webp",
       "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-02.webp",
+      "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-03.webp",
     ],
   },
   {
@@ -111,7 +119,7 @@ export const TRABALHOS = [
     proposta:
       "Comecei pela marca que a orquestra já tinha. Tirei dela as cores quentes e equilibrei com azuis, para que o plano transmitisse seriedade a um patrocinador sem perder a energia de uma orquestra jovem. Os instrumentos viraram protagonistas das peças, recortados em blocos geométricos que lembram a tradição sem deixá-la pesada. Com essa base pronta, desenhei o book de captação, os materiais de alunos e equipe e a campanha de inscrições.",
     resultado:
-      "O projeto conta hoje com patrocínio da TAG, pelo Fazcultura, do Governo da Bahia. Nas redes, a mesma linguagem abriu inscrições para aulas gratuitas de violão e bateria, voltadas a jovens de 10 a 15 anos em São Félix. No depoimento que deixou aqui, o maestro conta que não imaginava ver a comunicação visual da orquestra ganhar esse impulso.",
+      "O projeto conta hoje com patrocínio da TAG, pelo Fazcultura, do Governo da Bahia. Nas redes, a mesma linguagem abriu inscrições para aulas gratuitas de violão e bateria, voltadas a jovens de 10 a 15 anos em São Félix.",
     regua:
       "Realização, apoio e patrocínio, com o Fazcultura e o Governo da Bahia, aplicados nas costas das camisas, na ecobag, no squeeze, na papelaria e no banner, e no card final de cada carrossel da campanha de inscrições.",
     pecas: {
