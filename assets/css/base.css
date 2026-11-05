@@ -140,6 +140,18 @@ dd {
   top: 12px;
 }
 
+/* celular: uma margem lateral, um respiro entre seções e um tamanho de
+   título para todas as seções (o hero mantém a escala própria) */
+@media (max-width: 860px) {
+  :root {
+    --margem: 20px;
+    --espaco-secao: 72px;
+    --espaco-titulo: 28px;
+    --titulo-celular: 2.6rem;
+    --toque: 44px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

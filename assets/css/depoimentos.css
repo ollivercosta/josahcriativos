@@ -134,6 +134,12 @@
   opacity: 0.22;
 }
 
+@keyframes depoimento-tempo-linha {
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes depoimento-tempo {
   to {
     transform: scaleY(1);
@@ -231,15 +237,65 @@
   }
 
   .depoimentos__titulo {
-    font-size: 11vw;
+    font-size: var(--titulo-celular);
   }
 
   .depoimentos__grade {
     grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  /* os nomes viram duas abas lado a lado, com a barra de tempo embaixo */
+  .depoimentos__nomes {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .depoimentos__nome-item {
+    border-top: 0;
+  }
+
+  .depoimentos__aba {
+    height: 100%;
+    padding: 0 0 12px;
+    font-size: 0.85rem;
+  }
+
+  .depoimentos__aba::before,
+  .depoimentos__aba::after {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 3px;
+    transform-origin: left;
+  }
+
+  .depoimentos__aba::before {
+    transform: scaleX(0);
+  }
+
+  .depoimentos__aba[aria-selected="true"]::before {
+    transform: scaleX(1);
+  }
+
+  .depoimentos__aba::after {
+    transform: scaleX(0);
+  }
+
+  .depoimentos__aba--contando::after {
+    animation-name: depoimento-tempo-linha;
+  }
+
+  .depoimentos__aba[aria-selected="true"] .depoimentos__aba-conteudo {
+    transform: none;
   }
 
   .depoimentos__citacao {
-    font-size: 1.35rem;
+    font-size: 1.15rem;
   }
 
   .depoimentos__dados {

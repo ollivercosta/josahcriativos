@@ -76,6 +76,7 @@
 
 .hero__menu-botao {
   display: none;
+  min-height: var(--toque, 44px);
   border: 0;
   background: none;
   padding: 0;
@@ -373,7 +374,7 @@
   .hero {
     height: auto;
     perspective: none;
-    padding: 112px 6vw 40px;
+    padding: 112px var(--margem) 48px;
   }
 
   .hero__plano {

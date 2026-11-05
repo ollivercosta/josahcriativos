@@ -148,6 +148,6 @@
   }
 
   .faq__titulo {
-    font-size: 13vw;
+    font-size: var(--titulo-celular);
   }
 }
