@@ -51,6 +51,8 @@ for (const caminho of [
   "favicon-48.png",
   "apple-touch-icon.png",
   "og-image.png",
+  /* protótipos de direção visual, só para avaliação; não são linkados pelo site */
+  "prototipos",
 ]) {
   await cp(caminho, `${SAIDA}/${caminho}`, { recursive: true });
 }
