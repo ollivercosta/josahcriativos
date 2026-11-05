@@ -1,26 +1,30 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
 import { capaDoTrabalho, ehImagem } from "../../dados/trabalhos.js";
-import { TEMAS } from "../../dados/temas.js";
 
 const TODOS = "Todos";
 /** Quantas imagens de cada trabalho entram na prancha. */
 const IMAGENS_NA_PRANCHA = 8;
-/** Velocidade da prancha descendo, em milissegundos por pixel (mínimo de 9 s). */
+/** Velocidade da prancha deslizando, em milissegundos por pixel (mínimo de 9 s). */
 const RITMO_DA_PRANCHA = 14;
 /** Depois de um gesto do visitante, a rolagem não troca o projeto por este tempo. */
 const RESPEITO_AO_GESTO = 1200;
+/** Inclinação máxima da folha seguindo o cursor, em graus. */
+const INCLINACAO = 4;
 
 /**
  * Trabalhos
- * Lista de trabalhos à esquerda e, ao lado, a prancha completa do projeto em
- * foco, descendo devagar de ponta a ponta (as peças aparecem inteiras, sem
- * corte). Enquanto a seção está no centro da tela, o site veste a
- * identidade do projeto em foco (paleta em `assets/dados/temas.js`, gerada
- * por ferramentas/gerar_temas.py); ao sair, volta à identidade do Josah.
+ * Lista de trabalhos à esquerda e, à direita, uma mesa clara de ponta a ponta
+ * da tela. Sobre ela, a prancha do projeto em foco é uma folha longa e
+ * inteira, que desliza devagar mostrando todas as peças, sem corte.
+ *
+ * Trocar de projeto: a folha anterior se levanta e sai; a nova chega
+ * inclinada, como uma folha posta sobre a mesa, e se acomoda. Parada, a
+ * folha inclina de leve com o cursor e uma luz corre pela superfície.
  *
  * Projeto em foco: o que o mouse aponta, o que recebe foco do teclado ou,
- * rolando, o que passa pelo centro da tela. Clique abre a ficha (no toque,
- * o primeiro toque põe em foco e o segundo abre).
+ * rolando, o que passa pelo centro da tela. A etiqueta sobre a mesa traz
+ * o resumo e o acesso à ficha. Clique abre a ficha (no toque, o primeiro
+ * toque põe em foco e o segundo abre).
  */
 export class Trabalhos {
   /**
@@ -35,16 +39,17 @@ export class Trabalhos {
     this.lista = raiz.querySelector(".trabalhos__lista");
     this.filtros = raiz.querySelector(".trabalhos__filtros");
     this.corpo = raiz.querySelector(".trabalhos__corpo");
-    this.moldura = raiz.querySelector(".trabalhos__moldura");
-    this.resumo = raiz.querySelector(".trabalhos__resumo");
-    this.botaoFicha = raiz.querySelector(".trabalhos__abrir-ficha");
-    this.html = document.documentElement;
+    this.palco = raiz.querySelector(".trabalhos__palco");
+    this.mesa = raiz.querySelector(".trabalhos__mesa");
+    this.resumo = raiz.querySelector(".trabalhos__etiqueta-resumo");
+    this.etiqueta = raiz.querySelector(".trabalhos__etiqueta");
     this.itens = [];
     this.pranchas = new Map();
     this.ativo = -1;
     this.dentro = false;
     this.ultimoGesto = 0;
     this.filtroAtual = TODOS;
+    this.inclinacao = { x: 0, y: 0, alvoX: 0, alvoY: 0 };
 
     /* destaques primeiro, depois os demais, na ordem dos dados */
     this.ordem = [
@@ -53,11 +58,14 @@ export class Trabalhos {
     ];
     this.#montarLista();
     this.#montarFiltros();
-    this.botaoFicha.addEventListener("click", () => this.abrirFicha(this.ativo, this.visiveis));
+    raiz
+      .querySelector(".trabalhos__etiqueta-botao")
+      .addEventListener("click", () => this.abrirFicha(this.ativo, this.visiveis));
     this.#observarSecao();
+    this.#seguirCursor();
     window.addEventListener("scroll", () => this.#aoRolar(), { passive: true });
     this.#ativar(this.ordem[0], false);
-    if (!Ambiente.reduzMovimento) window.requestAnimationFrame((agora) => this.#descer(agora));
+    if (!Ambiente.reduzMovimento) window.requestAnimationFrame((agora) => this.#animar(agora));
   }
 
   /** Índices dos trabalhos visíveis agora, na ordem da lista. */
@@ -79,12 +87,8 @@ export class Trabalhos {
       nome.append(this.#elemento("span", "trabalhos__item-ponto"), trabalho.nome);
       if (trabalho.destaque) nome.append(this.#elemento("span", "trabalhos__item-selo", "Destaque"));
       const info = [trabalho.categoria, trabalho.ano].filter(Boolean).join("   ");
-      botao.append(
-        nome,
-        this.#elemento("span", "trabalhos__item-info", info),
-        this.#elemento("span", "trabalhos__item-acao", "Toque para abrir a ficha"),
-      );
 
+      botao.append(nome, this.#elemento("span", "trabalhos__item-info", info));
       botao.addEventListener("pointerenter", (evento) => {
         if (evento.pointerType === "mouse") this.#ativar(indice, true);
       });
@@ -135,20 +139,33 @@ export class Trabalhos {
     window.setTimeout(aplicar, 450);
   }
 
-  /** Põe um trabalho em foco: marca na lista, mostra a prancha e veste o tema. */
+  /** Põe um trabalho em foco: abre o item na lista e troca a folha na mesa. */
   #ativar(indice, doVisitante) {
     if (doVisitante) this.ultimoGesto = performance.now();
     if (indice === this.ativo) return;
+    const anterior = this.pranchas.get(this.ativo);
     this.ativo = indice;
     for (const item of this.itens) {
       item.classList.toggle("trabalhos__item--ativo", Number(item.dataset.indice) === indice);
     }
+    /* a folha anterior se levanta e sai; a nova é posta sobre a mesa */
+    if (anterior) {
+      anterior.raiz.classList.remove("trabalhos__prancha--ativa");
+      anterior.raiz.classList.add("trabalhos__prancha--saindo");
+      window.setTimeout(() => anterior.raiz.classList.remove("trabalhos__prancha--saindo"), 900);
+    }
     const prancha = this.#prancha(indice);
-    for (const [chave, outra] of this.pranchas)
-      outra.raiz.classList.toggle("trabalhos__prancha--ativa", chave === indice);
-    prancha.inicio = performance.now();
-    this.resumo.textContent = this.trabalhos[indice].resumo || "";
-    if (this.dentro) this.#vestir(indice);
+    prancha.raiz.classList.remove("trabalhos__prancha--saindo");
+    void prancha.raiz.offsetWidth;
+    prancha.raiz.classList.add("trabalhos__prancha--ativa");
+    prancha.inicio = performance.now() + 900;
+    /* a etiqueta troca o resumo com um esmaecimento curto */
+    this.etiqueta.classList.add("trabalhos__etiqueta--trocando");
+    window.clearTimeout(this.trocaEtiqueta);
+    this.trocaEtiqueta = window.setTimeout(() => {
+      this.resumo.textContent = this.trabalhos[indice].resumo || "";
+      this.etiqueta.classList.remove("trabalhos__etiqueta--trocando");
+    }, 300);
   }
 
   /** A prancha de cada trabalho só é montada (e as imagens só carregam) na primeira vez em foco. */
@@ -156,69 +173,65 @@ export class Trabalhos {
     if (this.pranchas.has(indice)) return this.pranchas.get(indice);
     const trabalho = this.trabalhos[indice];
     const raiz = this.#elemento("div", "trabalhos__prancha");
-    const rolo = this.#elemento("div", "trabalhos__prancha-rolo");
+    const folha = this.#elemento("div", "trabalhos__folha");
     const imagens = (trabalho.midias || []).filter(ehImagem).slice(0, IMAGENS_NA_PRANCHA);
     const capa = capaDoTrabalho(trabalho);
     if (!imagens.length && capa) imagens.push(capa);
     if (imagens.length) {
       imagens.forEach((endereco, k) => {
-        const img = this.#elemento("img", "trabalhos__prancha-imagem");
+        const img = this.#elemento("img", "trabalhos__folha-imagem");
         img.alt = "";
         img.decoding = "async";
         if (k > 1) img.loading = "lazy";
         img.referrerPolicy = "no-referrer";
         img.src = endereco;
-        rolo.append(img);
+        folha.append(img);
       });
     } else {
-      rolo.classList.add("trabalhos__prancha-rolo--video");
-      rolo.append(this.#elemento("span", "trabalhos__prancha-aviso", "Vídeo. Abra a ficha para assistir."));
+      folha.classList.add("trabalhos__folha--video");
+      folha.append(this.#elemento("span", "trabalhos__folha-aviso", "Vídeo. Abra a ficha para assistir."));
     }
-    raiz.append(rolo);
-    this.moldura.append(raiz);
-    const prancha = { raiz, rolo, inicio: performance.now() };
+    raiz.append(folha, this.#elemento("span", "trabalhos__luz"));
+    this.mesa.append(raiz);
+    const prancha = { raiz, folha, inicio: performance.now() };
     this.pranchas.set(indice, prancha);
     return prancha;
   }
 
-  /** Paleta do trabalho, pela pasta das imagens dele. */
-  #tema(indice) {
-    const pasta = capaDoTrabalho(this.trabalhos[indice]).match(/\/trabalhos\/([^/]+)\//);
-    return pasta ? TEMAS[pasta[1]] : null;
-  }
-
-  #vestir(indice) {
-    const tema = indice === null ? null : this.#tema(indice);
-    if (!tema) {
-      delete this.html.dataset.temaTrabalho;
+  /** A seção só anima enquanto a lista ocupa o centro da tela. */
+  #observarSecao() {
+    if (!("IntersectionObserver" in window)) {
+      this.dentro = true;
       return;
     }
-    this.html.style.setProperty("--tema-fundo", tema.fundo);
-    this.html.style.setProperty("--tema-texto", tema.texto);
-    this.html.style.setProperty("--tema-destaque", tema.destaque);
-    this.html.dataset.temaTrabalho = "";
-  }
-
-  /** O tema só vale enquanto a lista ocupa o centro da tela. */
-  #observarSecao() {
-    if (!("IntersectionObserver" in window)) return;
     new IntersectionObserver(
       ([entrada]) => {
         this.dentro = entrada.isIntersecting;
-        this.#vestir(this.dentro ? this.ativo : null);
       },
-      { rootMargin: "-45% 0px -45% 0px" },
+      { rootMargin: "-40% 0px -40% 0px" },
     ).observe(this.corpo);
+  }
+
+  /** A folha inclina de leve na direção do cursor; a luz acompanha. */
+  #seguirCursor() {
+    if (!Ambiente.ponteiroFino || Ambiente.reduzMovimento) return;
+    this.palco.addEventListener("pointermove", (evento) => {
+      const caixa = this.palco.getBoundingClientRect();
+      this.inclinacao.alvoX = (evento.clientX - caixa.left) / caixa.width - 0.5;
+      this.inclinacao.alvoY = (evento.clientY - caixa.top) / caixa.height - 0.5;
+    });
+    this.palco.addEventListener("pointerleave", () => {
+      this.inclinacao.alvoX = 0;
+      this.inclinacao.alvoY = 0;
+    });
   }
 
   /** Rolando, o trabalho que passa pelo centro da tela entra em foco. */
   #aoRolar() {
     if (!this.dentro || performance.now() - this.ultimoGesto < RESPEITO_AO_GESTO) return;
-    /* no celular a prancha fica presa no alto: o centro é o da parte visível da lista */
-    const palco = this.moldura.parentElement.getBoundingClientRect();
-    const meio = Ambiente.telaEstreita
-      ? palco.bottom + (window.innerHeight - palco.bottom) * 0.3
-      : window.innerHeight / 2;
+    /* no celular a mesa fica presa no alto: o centro é o da parte visível da lista */
+    const palco = this.palco.getBoundingClientRect();
+    const meio = Ambiente.telaEstreita ? palco.bottom + 12 : window.innerHeight / 2;
     let melhor = null;
     let distancia = Infinity;
     for (const item of this.itens) {
@@ -233,20 +246,28 @@ export class Trabalhos {
     if (melhor !== null) this.#ativar(melhor, false);
   }
 
-  /** A prancha em foco desce até o fim e volta, devagar, mostrando todas as peças. */
-  #descer(agora) {
+  /** A folha em foco desliza até o fim e volta, devagar; a inclinação segue o cursor com inércia. */
+  #animar(agora) {
     const prancha = this.pranchas.get(this.ativo);
+    const inc = this.inclinacao;
+    inc.x += (inc.alvoX - inc.x) * 0.06;
+    inc.y += (inc.alvoY - inc.y) * 0.06;
     if (prancha && this.dentro) {
-      const curso = prancha.rolo.offsetHeight - this.moldura.offsetHeight;
-      if (curso > 0) {
+      const curso = prancha.folha.offsetHeight - this.mesa.offsetHeight * 0.92;
+      let deslocamento = 0;
+      if (curso > 0 && agora > prancha.inicio) {
         const duracao = Math.max(9000, curso * RITMO_DA_PRANCHA);
         const fase = ((agora - prancha.inicio) % (duracao * 2)) / duracao;
         const v = fase < 1 ? fase : 2 - fase;
-        const suave = v < 0.5 ? 2 * v * v : 1 - Math.pow(-2 * v + 2, 2) / 2;
-        prancha.rolo.style.transform = `translate3d(0, ${(-curso * suave).toFixed(1)}px, 0)`;
+        deslocamento = -curso * (v < 0.5 ? 2 * v * v : 1 - Math.pow(-2 * v + 2, 2) / 2);
       }
+      prancha.folha.style.setProperty("--desliza", `${deslocamento.toFixed(1)}px`);
+      prancha.raiz.style.setProperty("--inclina-x", `${(-inc.y * INCLINACAO).toFixed(2)}deg`);
+      prancha.raiz.style.setProperty("--inclina-y", `${(inc.x * INCLINACAO).toFixed(2)}deg`);
+      prancha.raiz.style.setProperty("--luz-x", `${((inc.x + 0.5) * 100).toFixed(1)}%`);
+      prancha.raiz.style.setProperty("--luz-y", `${((inc.y + 0.5) * 100).toFixed(1)}%`);
     }
-    window.requestAnimationFrame((t) => this.#descer(t));
+    window.requestAnimationFrame((t) => this.#animar(t));
   }
 
   #elemento(tag, classe, texto) {
