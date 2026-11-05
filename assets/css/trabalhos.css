@@ -1,9 +1,9 @@
 /* =========================================================================
    ALGUNS TRABALHOS
-   Lista de trabalhos e, ao lado, a prancha completa do projeto em foco,
-   descendo devagar. Enquanto a lista está no centro da tela, o site veste
-   a identidade do projeto em foco: as variáveis de cor da seção e do
-   cabeçalho passam a apontar para a paleta dele (--tema-*).
+   Lista de trabalhos e, à direita, uma mesa clara de ponta a ponta da
+   tela. Sobre ela, a prancha do projeto em foco é uma folha longa e
+   inteira, que desliza devagar. Ao trocar de projeto, a folha anterior se
+   levanta e a nova é posta sobre a mesa; parada, inclina com o cursor.
    ========================================================================= */
 
 .trabalhos {
@@ -64,56 +64,6 @@
   transform: none;
 }
 
-/* ---------- o tema do projeto em foco ---------- */
-html,
-body {
-  transition: background-color 1.4s ease;
-}
-
-html[data-tema-trabalho],
-html[data-tema-trabalho] body {
-  background-color: var(--tema-fundo);
-}
-
-html[data-tema-trabalho] .trabalhos,
-html[data-tema-trabalho] .cabecalho {
-  --cor-fundo: var(--tema-fundo);
-  --cor-tinta: var(--tema-texto);
-  --cor-vermelho: var(--tema-destaque);
-  --cor-tinta-suave: color-mix(in srgb, var(--tema-texto) 62%, transparent);
-  --cor-linha: color-mix(in srgb, var(--tema-texto) 16%, transparent);
-  --cor-linha-forte: color-mix(in srgb, var(--tema-texto) 32%, transparent);
-  color: var(--tema-texto);
-}
-
-html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
-  background: color-mix(in srgb, var(--tema-fundo) 92%, transparent);
-}
-
-.trabalhos {
-  color: var(--cor-tinta);
-  transition: color 1.4s ease;
-}
-
-.trabalhos__titulo,
-.trabalhos__titulo-destaque,
-.trabalhos__filtro,
-.trabalhos__item-nome,
-.trabalhos__item-info,
-.trabalhos__item-selo,
-.trabalhos__resumo,
-.trabalhos__abrir-ficha {
-  transition-property: color, background-color, border-color, opacity, transform, font-stretch;
-  transition-duration: 1.4s, 1.4s, 1.4s, 0.6s, 0.9s, 0.9s;
-  transition-timing-function: ease, ease, ease, ease, var(--curva), var(--curva);
-}
-
-.trabalhos__titulo-barra {
-  transition:
-    transform 1.4s var(--curva) 0.35s,
-    background-color 1.4s ease;
-}
-
 /* ---------- filtros ---------- */
 .trabalhos__filtros {
   display: flex;
@@ -122,7 +72,6 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   margin: 0 var(--margem);
   padding-bottom: 18px;
   border-bottom: 1px solid var(--cor-tinta);
-  transition: border-color 1.4s ease;
 }
 
 .trabalhos__filtro {
@@ -149,9 +98,7 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   background: var(--cor-vermelho);
   transform: scaleX(0);
   transform-origin: left;
-  transition:
-    transform 0.8s var(--curva),
-    background-color 1.4s ease;
+  transition: transform 0.8s var(--curva);
 }
 
 .trabalhos__filtro:hover,
@@ -163,17 +110,17 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   transform: scaleX(1);
 }
 
-/* ---------- lista e palco ---------- */
+/* ---------- lista ---------- */
 .trabalhos__corpo {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: 4vw;
-  padding: 0 var(--margem);
+  padding-left: var(--margem);
 }
 
 .trabalhos__lista {
   margin: 0;
-  padding: 0;
+  padding: 0 0 18vh;
   list-style: none;
   transition: opacity 0.45s var(--curva-suave);
 }
@@ -184,7 +131,6 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
 
 .trabalhos__item {
   border-bottom: 1px solid var(--cor-linha-forte);
-  transition: border-color 1.4s ease;
 }
 
 .trabalhos__item[hidden] {
@@ -193,7 +139,6 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
 
 .trabalhos__item-botao {
   display: grid;
-  gap: 6px;
   width: 100%;
   padding: 20px 0;
   border: 0;
@@ -213,6 +158,9 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   line-height: 1.1;
   letter-spacing: -0.035em;
   opacity: 0.42;
+  transition:
+    opacity 0.6s ease,
+    font-stretch 0.9s var(--curva);
 }
 
 .trabalhos__item-ponto {
@@ -225,8 +173,7 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   transform: scale(0);
   transition:
     transform 0.7s var(--curva),
-    margin-right 0.9s var(--curva),
-    background-color 1.4s ease;
+    margin-right 0.9s var(--curva);
 }
 
 .trabalhos__item-selo {
@@ -240,17 +187,14 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
 }
 
 .trabalhos__item-info {
+  margin-top: 6px;
   font-stretch: 115%;
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   white-space: pre;
-  opacity: 0.6;
-}
-
-.trabalhos__item-acao {
-  display: none;
+  color: var(--cor-tinta-suave);
 }
 
 .trabalhos__item--ativo .trabalhos__item-nome {
@@ -263,57 +207,93 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   transform: scale(1);
 }
 
-/* a prancha fica presa ao lado enquanto a lista corre */
+/* ---------- a mesa: de ponta a ponta da tela, à direita ---------- */
 .trabalhos__palco {
   position: sticky;
-  top: calc(var(--altura-cabecalho) + 24px);
+  top: 0;
   align-self: start;
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: 20px;
-  height: calc(100vh - var(--altura-cabecalho) - 64px);
-  margin-top: 20px;
-}
-
-.trabalhos__moldura {
-  position: relative;
+  height: 100vh;
   overflow: hidden;
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--cor-tinta) 8%, transparent);
+  background: var(--cor-cinza-claro);
+  perspective: 1800px;
 }
 
-.trabalhos__prancha {
+.trabalhos__mesa {
   position: absolute;
   inset: 0;
+}
+
+/* a folha: a prancha inteira, com o peso de papel sobre a mesa */
+.trabalhos__prancha {
+  position: absolute;
+  top: calc(var(--altura-cabecalho) + 4vh);
+  left: 12%;
+  right: 12%;
+  transform-style: preserve-3d;
+  transform-origin: 50% 30%;
   opacity: 0;
-  transition: opacity 1.1s ease;
+  visibility: hidden;
+  transform: translate3d(0, 14vh, 0) rotateX(14deg) scale(0.96);
+  transition:
+    opacity 0.9s var(--curva-suave),
+    transform 1.3s var(--curva),
+    visibility 0s 1.3s;
 }
 
 .trabalhos__prancha--ativa {
   opacity: 1;
+  visibility: visible;
+  transform: rotateX(var(--inclina-x, 0deg)) rotateY(var(--inclina-y, 0deg));
+  transition:
+    opacity 0.9s var(--curva-suave) 0.15s,
+    transform 1.3s var(--curva) 0.15s,
+    visibility 0s;
 }
 
-.trabalhos__prancha-rolo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+.trabalhos__prancha--saindo {
+  opacity: 0;
+  visibility: visible;
+  transform: translate3d(0, -10vh, 0) rotateX(-8deg) scale(0.97);
+  transition:
+    opacity 0.7s ease,
+    transform 0.9s var(--curva-entra-sai),
+    visibility 0s 0.9s;
+}
+
+.trabalhos__folha {
+  border-radius: 3px;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgba(22, 19, 15, 0.12),
+    0 24px 48px -24px rgba(22, 19, 15, 0.45),
+    0 60px 90px -60px rgba(22, 19, 15, 0.35);
+  transform: translate3d(0, var(--desliza, 0px), 0);
   will-change: transform;
 }
 
-.trabalhos__prancha-rolo--video {
-  bottom: 0;
+.trabalhos__folha--video {
   display: grid;
   place-items: center;
+  aspect-ratio: 4 / 3;
+  background: var(--cor-tinta);
+  color: #fff;
 }
 
-.trabalhos__prancha-imagem {
+.trabalhos__folha-imagem {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.trabalhos__prancha-aviso {
+.trabalhos__folha-imagem:first-child {
+  border-radius: 3px 3px 0 0;
+}
+
+.trabalhos__folha-imagem:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
+.trabalhos__folha-aviso {
   font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
@@ -321,38 +301,68 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   text-transform: uppercase;
 }
 
-.trabalhos__legenda {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 24px;
+/* a luz que corre pela superfície, seguindo a inclinação */
+.trabalhos__luz {
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 50% at var(--luz-x, 50%) var(--luz-y, 30%),
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0) 70%
+  );
+  mix-blend-mode: soft-light;
 }
 
-.trabalhos__resumo {
-  max-width: 34em;
-  font-size: 1rem;
+/* a etiqueta sobre a mesa: o resumo e o acesso à ficha, como a legenda de uma obra */
+.trabalhos__etiqueta {
+  position: absolute;
+  left: 12%;
+  bottom: 28px;
+  z-index: 2;
+  display: grid;
+  gap: 14px;
+  max-width: min(420px, 76%);
+  padding: 18px 20px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgba(22, 19, 15, 0.1),
+    0 18px 36px -22px rgba(22, 19, 15, 0.4);
+  transition:
+    opacity 0.3s ease,
+    transform 0.6s var(--curva);
+}
+
+.trabalhos__etiqueta--trocando {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.trabalhos__etiqueta-resumo {
+  font-size: 0.92rem;
   line-height: 1.5;
   color: var(--cor-tinta-suave);
 }
 
-.trabalhos__abrir-ficha {
+.trabalhos__etiqueta-botao {
+  justify-self: start;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  min-height: 48px;
-  padding: 0 22px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
+  gap: 10px;
+  min-height: var(--toque, 44px);
+  padding: 0;
+  border: 0;
   background: none;
-  color: var(--cor-tinta);
+  color: var(--cor-vermelho);
   font: inherit;
-  font-weight: 600;
-  font-size: 0.92rem;
-  white-space: nowrap;
+  font-weight: 700;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
-.trabalhos__abrir-icone {
+.trabalhos__etiqueta-icone {
   width: 18px;
   height: 18px;
   fill: currentColor;
@@ -364,12 +374,7 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
     opacity: 1;
   }
 
-  .trabalhos__abrir-ficha:hover {
-    background: var(--cor-tinta);
-    color: var(--cor-fundo);
-  }
-
-  .trabalhos__abrir-ficha:hover .trabalhos__abrir-icone {
+  .trabalhos__etiqueta-botao:hover .trabalhos__etiqueta-icone {
     transform: translateX(4px);
   }
 }
@@ -406,38 +411,51 @@ html[data-tema-trabalho] .cabecalho:not(.cabecalho--menu-aberto) {
   .trabalhos__corpo {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
+    padding: 0;
   }
 
-  /* no celular, a prancha fica presa no alto e a lista corre por baixo */
+  .trabalhos__lista {
+    padding: 0 var(--margem) 8vh;
+  }
+
+  /* no celular, a mesa fica presa no alto e a lista corre por baixo */
   .trabalhos__palco {
     order: -1;
     z-index: 2;
     top: var(--altura-cabecalho);
     height: 50vh;
-    grid-template-rows: minmax(0, 1fr);
-    margin: 0 calc(-1 * var(--margem));
-    padding: 12px var(--margem);
-    background: var(--cor-fundo);
-    transition: background-color 1.4s ease;
   }
 
-  .trabalhos__legenda {
-    display: none;
+  .trabalhos__prancha {
+    top: 16px;
+    left: 14%;
+    right: 14%;
   }
 
   .trabalhos__item-nome {
     font-size: 1.3rem;
   }
 
-  .trabalhos__item--ativo .trabalhos__item-acao {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--cor-vermelho);
+  .trabalhos__etiqueta {
+    left: var(--margem);
+    right: var(--margem);
+    bottom: 12px;
+    max-width: none;
+    gap: 2px;
+    padding: 10px 14px;
+  }
+
+  .trabalhos__etiqueta-resumo {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.82rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trabalhos__prancha-rolo {
+  .trabalhos__folha {
     transform: none !important;
   }
 }
