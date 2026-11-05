@@ -13,7 +13,6 @@ SO = set(sys.argv[2].split(",")) if len(sys.argv) > 2 else None
 LARG, ALT_MAX = 1400, 2100
 MAPA = {
   "olha-o-cabelo-dela": "arq/BOOK - OLHA O CABELO DELA – AFROTOUR (2).png",
-  "tabuleiro-book": "arq/BOOK TABULEIRO PRODUÇÕES EMPRESAS (3).png",
   "nanda-sabores-e-afetos": "arq/DIVERSOS MATERIAIS -NANDA.png",
   "forro-zevixe": "arq/PORTFOLIO FZV - 2024 (1).png",
   "antropofagia-mapping": "arq/PROJETO ANMA.png",
@@ -21,7 +20,7 @@ MAPA = {
   "duda-filmes": "arq/SITE DUDA FILMES.png",
   "elas-nas-telas": "arq/SITE ELAS NAS TELAS.png",
   "festival-de-roteiro": "arq/SITE FERA.png",
-  "tabuleiro-producoes": "arq/SITE OFICIAL TABULEIRO.png",
+  "tabuleiro-producoes": "arq/Tabuleiro Producoes.png",
   "festival-periferia-no-ar": "arq/SITE PERIFERIA NO AR.png",
   "trombone-criativo": "arq/SITE TROMBONE CRIATIVO.png",
   "rider-tecnico": "rider.img",

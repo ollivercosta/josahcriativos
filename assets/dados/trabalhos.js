@@ -122,25 +122,6 @@ export const TRABALHOS = [
     ],
   },
   {
-    nome: "Tabuleiro - Book",
-    tipo: "Book de captação",
-    categoria: "Marca e apresentação",
-    resumo:
-      "Book de captação da Tabuleiro Produções para empresas: trajetória, projetos, resultados e formas de parceria.",
-    cliente: "Tabuleiro Produções",
-    proponente: "",
-    local: "",
-    ano: "",
-    sobre: "",
-    proposta: "",
-    pecas: [],
-    capa: "/assets/imagens/trabalhos/tabuleiro-book/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/tabuleiro-book/parte-01.webp",
-      "/assets/imagens/trabalhos/tabuleiro-book/parte-02.webp",
-    ],
-  },
-  {
     nome: "Forró Zevixe",
     tipo: "Portfólio artístico",
     categoria: "Marca e apresentação",
@@ -212,20 +193,32 @@ export const TRABALHOS = [
   {
     nome: "Tabuleiro Produções",
     destaque: true,
-    tipo: "Site",
-    categoria: "Web e redes",
-    resumo: "Site que apresenta a Tabuleiro Produções e seus serviços com leitura fluida e navegação equilibrada.",
+    tipo: "Identidade visual",
+    categoria: "Marca e apresentação",
+    resumo:
+      "Os criativos da produtora com a mesma assinatura visual: portfólios de serviços, books de captação, sites, curso, livros e redes sociais.",
     cliente: "Tabuleiro Produções",
-    proponente: "",
-    local: "",
-    ano: "2024",
-    sobre: "",
-    proposta: "",
-    pecas: ["Identidade visual", "Site"],
+    proponente: "Carine Araújo",
+    local: "Brasil",
+    ano: "2023 a 2026",
+    desafio:
+      "Dar à produtora uma linguagem que apresente, com a mesma assinatura, serviços e projetos muito diferentes, de festivais e orquestras a cursos e livros.",
+    sobre:
+      "A Tabuleiro Produções existe há 17 anos no mercado de produção cultural e reúne mais de 20 anos de conhecimento e trabalho em gestão cultural de sua diretora, Carine Araújo.",
+    proposta:
+      "Desenvolver modelos de criativos que atendam às necessidades de cada frente da produtora: portfólios de serviços para artistas e para empresas e ONGs, books de captação dos projetos de clientes, sites, curso, livros e redes sociais. A base visual da marca se repete em todos eles, enquanto cada projeto mantém a própria identidade.",
+    regua:
+      "Aqui a Tabuleiro é quem assina. A marca entra na régua dos projetos que produz ou apoia, como o ANMA e a Orquestra Jovem do Recôncavo, ao lado de patrocinadores e do poder público, e por isso precisa funcionar pequena, em cor e sobre fundos claros ou escuros.",
+    pecas: {
+      Apresentação: ["Identidade visual", "Portfólio de serviços", "Books de captação"],
+      Digital: ["Sites", "Curso online", "Redes sociais"],
+      "Visual e mídia": ["Selo", "Edição de vídeo", "Diagramação de livros"],
+    },
     capa: "/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/tabuleiro-producoes/parte-01.webp",
       "/assets/imagens/trabalhos/tabuleiro-producoes/parte-02.webp",
+      "/assets/imagens/trabalhos/tabuleiro-producoes/parte-03.webp",
     ],
   },
   {
