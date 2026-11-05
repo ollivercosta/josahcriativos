@@ -214,13 +214,13 @@
   }
 
   .contato__titulo {
-    font-size: 12vw;
+    font-size: var(--titulo-celular);
   }
 
   .contato__ima {
     justify-self: start;
-    width: 46vw;
-    margin: 22vw 0 0 6vw;
+    width: 40vw;
+    margin: 40px 0 0;
   }
 
   .contato__ima-rotulo {
@@ -230,6 +230,17 @@
 
   .contato__canais {
     grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .contato__canal {
+    gap: 4px;
+  }
+
+  .contato__canal-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--toque);
   }
 }

@@ -176,13 +176,13 @@
   }
 
   .processo__titulo {
-    font-size: 11vw;
+    font-size: var(--titulo-celular);
   }
 
   .processo__centro {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 36px;
-    padding-left: 24px;
+    row-gap: 28px;
+    padding-left: 20px;
   }
 
   .processo__centro::before {
@@ -197,6 +197,14 @@
 
   .processo__etapa-nome {
     padding-left: 0;
-    font-size: 9vw;
+    font-size: 1.5rem;
+  }
+
+  .processo__etapa {
+    gap: 8px;
+  }
+
+  .processo__etapa-texto {
+    font-size: 1rem;
   }
 }

@@ -223,7 +223,13 @@
   }
 
   .servicos__titulo {
-    font-size: 11vw;
+    font-size: var(--titulo-celular);
+  }
+
+  /* celular: cada frente mostra nome, descrição e serviços; o público fica
+     só no computador */
+  .servicos__publico {
+    display: none;
   }
 
   .servicos__painel {
@@ -232,17 +238,17 @@
     min-height: 0;
     transform: none;
     grid-template-columns: minmax(0, 1fr);
-    padding: 56px var(--margem);
+    padding: 48px var(--margem);
   }
 
   .servicos__painel-nome {
-    font-size: 10vw;
+    font-size: 2rem;
     overflow-wrap: break-word;
   }
 
   .servicos__item {
     grid-template-columns: minmax(0, 1fr);
     gap: 6px;
-    padding: 18px 0;
+    padding: 16px 0;
   }
 }

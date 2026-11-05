@@ -643,7 +643,13 @@
   }
 
   .trabalhos__destaque-nome {
-    font-size: 10vw;
+    font-size: 2rem;
+  }
+
+  /* no celular o destaque mostra imagem, nome, resumo e o botão;
+     a ficha completa fica na página do projeto */
+  .trabalhos__destaque-ficha {
+    display: none;
   }
 
   .trabalhos__destaque-texto {
@@ -651,17 +657,39 @@
   }
 
   .trabalhos__titulo {
-    font-size: 17vw;
+    font-size: var(--titulo-celular);
   }
 
+  /* filtros numa linha só, rolando para o lado */
   .trabalhos__filtros {
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    gap: 20px;
+    width: calc(100% + 2 * var(--margem));
+    margin: 0 calc(-1 * var(--margem));
+    padding: 0 var(--margem);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .trabalhos__filtros::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trabalhos__filtro {
+    flex: none;
+    min-height: var(--toque);
+    white-space: nowrap;
+  }
+
+  .trabalhos__mais-botao {
+    min-height: var(--toque);
   }
 
   .trabalhos__grade {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 14px;
-    padding-top: 28px;
+    gap: 24px 12px;
+    padding-top: 20px;
   }
 
   .trabalhos__legenda-tipo {
@@ -682,8 +710,8 @@
   .trabalhos__controle-anterior,
   .trabalhos__controle-pausa,
   .trabalhos__controle-proximo {
-    width: 40px;
-    height: 40px;
+    width: var(--toque);
+    height: var(--toque);
     border-color: transparent;
     box-shadow: 0 6px 18px -8px rgba(22, 19, 15, 0.45);
   }
