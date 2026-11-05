@@ -35,11 +35,13 @@ compartilhada entre seções, então mudar um estilo não afeta outra parte do s
 ## Tarefas comuns
 
 - Trocar ou incluir um trabalho: `assets/dados/trabalhos.js`. Use `destaque: true`
-  nos projetos que entram no rodízio de destaques.
+  nos projetos que aparecem primeiro na lista, com o selo "Destaque".
 - Imagens do portfólio: os originais ficam fora do repositório (Google Drive).
   `ferramentas/processar_imagens.py` gera a capa 4:3 e as páginas em WebP de cada
-  projeto em `assets/imagens/trabalhos/<projeto>/`.
-- Depoimentos (hoje com textos de exemplo): seção `depoimentos` no `index.html`.
+  projeto em `assets/imagens/trabalhos/<projeto>/`. Depois dele, rode
+  `ferramentas/gerar_temas.py`: ele tira da arte a paleta que o site veste quando
+  o projeto está em foco na lista (`assets/dados/temas.js`).
+- Depoimentos: seção `depoimentos` no `index.html`.
 - Cores: variáveis `--cor-*` em `assets/css/base.css`.
 
 Formatação: `npx prettier@3.3.3 --write .` (configuração em `.prettierrc`).
