@@ -103,7 +103,41 @@
   width: 3px;
   background: var(--cor-vermelho);
   transform: scaleY(0);
-  transition: transform 0.8s var(--curva);
+  transition:
+    transform 0.8s var(--curva),
+    opacity 0.8s ease;
+}
+
+/* troca automática: a barra vermelha da aba ativa se completa em 20 s */
+.depoimentos__aba::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  background: var(--cor-vermelho);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.depoimentos__aba--contando::after {
+  animation: depoimento-tempo var(--tempo-depoimento, 20s) linear forwards;
+}
+
+.depoimentos--pausado .depoimentos__aba--contando::after {
+  animation-play-state: paused;
+}
+
+/* com a troca automática ligada, a barra fixa vira o trilho */
+.depoimentos--automatico .depoimentos__aba[aria-selected="true"]::before {
+  opacity: 0.22;
+}
+
+@keyframes depoimento-tempo {
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .depoimentos__aba-conteudo {

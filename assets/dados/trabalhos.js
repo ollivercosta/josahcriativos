@@ -12,7 +12,8 @@
  *   resumo     duas ou três linhas sobre o projeto, mostradas ao passar o
  *              mouse na capa
  *   sobre      o que é o projeto (bloco "O projeto" da ficha)
- *   proposta   o que foi pedido e como foi resolvido (bloco "A proposta")
+ *   proposta   o que eu fiz e por quê, em primeira pessoa (bloco "A proposta")
+ *   resultado  o que a entrega tornou possível, com fatos (bloco "O resultado")
  *   desafio    opcional: uma frase com o desafio próprio do projeto, em destaque
  *   pecas      peças produzidas, as mesmas que aparecem nas imagens; uma lista
  *              simples ou agrupadas pelas frentes de Serviços:
@@ -42,6 +43,7 @@ export const TRABALHOS = [
     ano: "2026",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: ["Identidade visual", "Book de captação"],
     capa: "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp",
     midias: [
@@ -61,6 +63,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/amazonia-motiro/capa.webp",
     midias: [
@@ -102,11 +105,13 @@ export const TRABALHOS = [
     local: "São Félix e Cachoeira (BA)",
     ano: "2026",
     desafio:
-      "Unir a tradição das orquestras aos avanços da cultura, principalmente a acessibilidade, numa linguagem que chegue aos jovens do Recôncavo.",
+      "A orquestra precisava apresentar o plano anual a patrocinadores e, ao mesmo tempo, chamar jovens do Recôncavo para as aulas.",
     sobre:
-      "Conduzido pelo maestro Vinicius Freitas, o Plano Anual 2027 da Orquestra Jovem do Recôncavo tem como finalidade manter, ampliar e consolidar as ações de formação musical, prática artística, aperfeiçoamento técnico e difusão cultural.",
+      "Conduzida pelo maestro Vinicius Freitas, a Orquestra Jovem do Recôncavo forma músicos em São Félix e Cachoeira. O Plano Anual 2027 quer manter e ampliar essa formação, com prática artística, aperfeiçoamento técnico e apresentações. Para sair do papel, o plano dependia de duas coisas: patrocínio e alunos inscritos. E cada um desses públicos pedia uma conversa diferente.",
     proposta:
-      "As cores quentes da logomarca da orquestra formam a base da identidade, equilibradas por tons frios. Blocos geométricos e os próprios instrumentos em cena trazem o tradicional para uma linguagem atual, aplicada do book de captação para patrocinadores à campanha de inscrições nas redes.",
+      "Comecei pela marca que a orquestra já tinha. Tirei dela as cores quentes e equilibrei com azuis, para que o plano transmitisse seriedade a um patrocinador sem perder a energia de uma orquestra jovem. Os instrumentos viraram protagonistas das peças, recortados em blocos geométricos que lembram a tradição sem deixá-la pesada. Com essa base pronta, desenhei o book de captação, os materiais de alunos e equipe e a campanha de inscrições.",
+    resultado:
+      "O projeto conta hoje com patrocínio da TAG, pelo Fazcultura, do Governo da Bahia. Nas redes, a mesma linguagem abriu inscrições para aulas gratuitas de violão e bateria, voltadas a jovens de 10 a 15 anos em São Félix. No depoimento que deixou aqui, o maestro conta que não imaginava ver a comunicação visual da orquestra ganhar esse impulso.",
     regua:
       "Realização, apoio e patrocínio, com o Fazcultura e o Governo da Bahia, aplicados nas costas das camisas, na ecobag, no squeeze, na papelaria e no banner, e no card final de cada carrossel da campanha de inscrições.",
     pecas: {
@@ -132,6 +137,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/forro-zevixe/capa.webp",
     midias: [
@@ -151,6 +157,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/nanda-sabores-e-afetos/capa.webp",
     midias: [
@@ -171,11 +178,13 @@ export const TRABALHOS = [
     local: "Belém (PA)",
     ano: "2025",
     desafio:
-      "Dar forma visual à antropofagia como conceito cultural: devorar referências para criar algo próprio, a partir da cultura de Belém e da Amazônia.",
+      "Um festival de arte, tecnologia e educação em Belém precisava de uma marca que falasse de ancestralidade sem parecer antiga.",
     sobre:
-      "O Festival Antropofagia Mapping (ANMA) nasce como um manifesto vivo: uma experiência coletiva que integra arte, tecnologia e educação libertadora, enraizada na ancestralidade e voltada para o futuro.",
+      "O Festival Antropofagia Mapping nasce como um manifesto vivo, uma experiência coletiva que junta arte, tecnologia e educação libertadora em Belém, no Pará. A base é a antropofagia cultural, a ideia de devorar referências para criar algo próprio. Proposto pelo VJ Lobo e produzido pela Tabuleiro, o festival precisava de uma identidade para buscar patrocínio e, depois, ocupar a praça.",
     proposta:
-      "A identidade parte da antropofagia e da cultura local. Natureza, mistério e sobreposição estão na própria logomarca, com traços de grafismos que a conectam à ancestralidade. Dela saem o plano de mídia, o book de captação, os materiais do evento e a campanha nas redes.",
+      "A logomarca foi o ponto de partida de tudo. Ela sobrepõe camadas, como a própria floresta, e carrega traços de grafismos que ligam o festival à ancestralidade e à cultura de Belém. O fundo verde escuro e as cores em neon vêm do mapping, a arte de projetar luz sobre superfícies. Dessa marca saíram primeiro o plano de mídia e o book para patrocinadores e, mais tarde, tudo o que o público veste, carrega e vê no evento.",
+    resultado:
+      "O festival aconteceu nos dias 9 e 10 de janeiro de 2026, na Praça Dom Pedro II, com patrocínio do Banco da Amazônia, do Banco do Brasil, da Caixa e dos Correios. A marca acompanhou o evento inteiro, do backdrop de fotos à testeira de ônibus, e seguiu nas redes com a programação, o júri e os artistas selecionados.",
     regua:
       "Apoio, patrocínio e realização, com a Lei Rouanet e o Ministério da Cultura, aplicados nas costas das camisas, na ecobag, no wind banner, na faixa e na testeira de ônibus. No backdrop, as marcas ganham um painel próprio, pensado para as fotos do evento.",
     pecas: {
@@ -202,11 +211,13 @@ export const TRABALHOS = [
     local: "Brasil",
     ano: "2023 a 2026",
     desafio:
-      "Dar à produtora uma linguagem que apresente, com a mesma assinatura, serviços e projetos muito diferentes, de festivais e orquestras a cursos e livros.",
+      "Uma produtora que atende artistas, empresas e ONGs precisava de uma presença visual que coubesse em todos esses projetos.",
     sobre:
-      "A Tabuleiro Produções existe há 17 anos no mercado de produção cultural e reúne mais de 20 anos de conhecimento e trabalho em gestão cultural de sua diretora, Carine Araújo.",
+      "A Tabuleiro Produções está há 17 anos no mercado de produção cultural e reúne mais de 20 anos de trabalho em gestão cultural da sua diretora, Carine Araújo. O escritório elabora projetos, faz a gestão e capta recursos. Por isso conversa todos os dias com públicos muito diferentes: artistas que querem ser contratados, empresas que avaliam um patrocínio, editais que pedem clareza.",
     proposta:
-      "Desenvolver modelos de criativos que atendam às necessidades de cada frente da produtora: portfólios de serviços para artistas e para empresas e ONGs, books de captação dos projetos de clientes, sites, curso, livros e redes sociais. A base visual da marca se repete em todos eles, enquanto cada projeto mantém a própria identidade.",
+      "Desde 2023 cuido da comunicação visual da Tabuleiro. Em vez de começar cada peça do zero, montei modelos que partem da marca e se ajustam a cada necessidade. Assim nasceram um portfólio de serviços para artistas e outro para empresas e ONGs, os books de captação dos projetos de clientes, os sites, um curso online e a preparação de livros para os formatos digital e impresso.",
+    resultado:
+      "Hoje a mesma base atende frentes bem diferentes. Na estante de books já estão projetos como a Orquestra Jovem do Recôncavo, a ópera Amazônia Motirô e o Festival de Percussão 2 de Julho, ao lado do curso Cultura On e de dois livros. Cada projeto mantém a identidade própria, e a Tabuleiro continua reconhecível em todos eles.",
     regua:
       "Aqui a Tabuleiro é quem assina. A marca entra na régua dos projetos que produz ou apoia, como o ANMA e a Orquestra Jovem do Recôncavo, ao lado de patrocinadores e do poder público, e por isso precisa funcionar pequena, em cor e sobre fundos claros ou escuros.",
     pecas: {
@@ -232,6 +243,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/trombone-criativo/capa.webp",
     midias: [
@@ -250,6 +262,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/duda-filmes/capa.webp",
     midias: [
@@ -268,6 +281,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/festival-de-roteiro/capa.webp",
     midias: [
@@ -286,6 +300,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/elas-nas-telas/capa.webp",
     midias: [
@@ -305,6 +320,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/festival-periferia-no-ar/capa.webp",
     midias: [
@@ -323,6 +339,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/ong-acuba/capa.webp",
     midias: ["/assets/imagens/trabalhos/ong-acuba/parte-01.webp", "/assets/imagens/trabalhos/ong-acuba/parte-02.webp"],
@@ -336,6 +353,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     midias: ["https://www.youtube.com/watch?v=YrjKU3QbIhI"],
   },
@@ -350,6 +368,7 @@ export const TRABALHOS = [
     ano: "",
     sobre: "",
     proposta: "",
+    resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/rider-tecnico/capa.webp",
     midias: ["/assets/imagens/trabalhos/rider-tecnico/parte-01.webp"],

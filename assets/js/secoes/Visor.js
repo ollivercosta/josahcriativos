@@ -107,6 +107,7 @@ export class Visor {
     for (const [rotulo, valor] of [
       ["O projeto", trabalho.sobre],
       ["A proposta", trabalho.proposta],
+      ["O resultado", trabalho.resultado],
     ]) {
       if (!valor) continue;
       const bloco = this.#elemento("section", "visor__bloco");
