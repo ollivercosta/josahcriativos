@@ -176,10 +176,10 @@
   aspect-ratio: 4 / 3;
   padding: 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 24px;
   background: var(--cor-cinza-claro);
   cursor: pointer;
-  clip-path: inset(100% 0 0 0 round 16px);
+  clip-path: inset(100% 0 0 0 round 24px);
   transition: clip-path 1.6s var(--curva-entra-sai);
 }
 
@@ -203,7 +203,7 @@
 }
 
 .trabalhos__destaque--visivel .trabalhos__destaque-capa {
-  clip-path: inset(0 0 0 0 round 16px);
+  clip-path: inset(0 0 0 0 round 24px);
 }
 
 .trabalhos__destaque--visivel .trabalhos__destaque-imagem {
@@ -415,7 +415,7 @@
 .trabalhos__capa {
   position: relative;
   display: block;
-  border-radius: 16px;
+  border-radius: 24px;
   overflow: hidden;
   aspect-ratio: 4 / 3;
   background: var(--cor-cinza-claro);
@@ -690,6 +690,11 @@
 
   .trabalhos__resumo {
     display: none;
+  }
+
+  /* cartões menores: o mesmo arredondado, proporcional ao tamanho */
+  .trabalhos__capa {
+    border-radius: 16px;
   }
 }
 
