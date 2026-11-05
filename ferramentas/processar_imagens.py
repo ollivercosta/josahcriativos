@@ -12,7 +12,7 @@ DESTINO = sys.argv[1]
 SO = set(sys.argv[2].split(",")) if len(sys.argv) > 2 else None
 LARG, ALT_MAX = 1400, 2100
 MAPA = {
-  "olha-o-cabelo-dela": "arq/BOOK - OLHA O CABELO DELA – AFROTOUR (2).png",
+  "olha-o-cabelo-dela": "arq/Olha o Cabelo dela.png",
   "nanda-sabores-e-afetos": "arq/DIVERSOS MATERIAIS -NANDA.png",
   "forro-zevixe": "arq/PORTFOLIO FZV - 2024 (1).png",
   "antropofagia-mapping": "arq/PROJETO ANMA.png",
