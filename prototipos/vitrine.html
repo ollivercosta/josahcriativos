@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo: vitrine em faixas</title>
+<style>
+@font-face{font-family:"Archivo";src:url("/assets/fontes/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:block}
+:root{--tinta:#16130f;--vermelho:#a3171f;--suave:rgba(22,19,15,.62);--linha:rgba(22,19,15,.28);--margem:4.4vw;--curva:cubic-bezier(.16,1,.3,1);--curva-faixa:cubic-bezier(.77,0,.18,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;color:var(--tinta);font-family:"Archivo",sans-serif;-webkit-font-smoothing:antialiased}
+.cab{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;height:72px;padding:0 var(--margem);background:rgba(255,255,255,.9);backdrop-filter:blur(14px)}
+.cab-marca{font-weight:800;font-size:.86rem;letter-spacing:.22em;text-transform:uppercase;line-height:1.2}
+.cab-marca small{display:block;font-weight:500;font-size:.66rem;letter-spacing:.2em}
+.cab-nav{display:flex;gap:32px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+.cab-nav b{font-weight:500;color:var(--vermelho)}
+.antes{height:40vh}
+.titulo-linha{display:grid;grid-template-columns:auto minmax(4vw,1fr);align-items:last baseline;gap:2vw;padding:0 var(--margem) 5vh}
+.titulo{font-weight:900;font-size:8vw;line-height:.84;letter-spacing:-.06em}
+.titulo em{font-style:normal;color:var(--vermelho)}
+.barra{height:max(5px,.6vw);background:var(--tinta)}
+.filtros{display:flex;gap:26px;margin:0 var(--margem);padding-bottom:18px;border-bottom:1px solid var(--tinta);font-stretch:115%;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.filtros span{color:var(--suave);padding-bottom:6px}.filtros span.on{color:var(--tinta);box-shadow:0 2px 0 var(--vermelho)}
+.corpo{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:4vw;padding-left:var(--margem)}
+.lista{list-style:none;padding-bottom:30vh}
+.item{border-bottom:1px solid var(--linha)}
+.item-botao{display:grid;gap:6px;width:100%;padding:20px 0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.item-nome{display:flex;align-items:center;white-space:nowrap;font-weight:700;font-size:1.9vw;line-height:1.1;letter-spacing:-.035em;opacity:.42;transition:opacity .6s ease,font-stretch .9s var(--curva)}
+.item-ponto{flex:none;width:7px;height:7px;border-radius:50%;background:var(--vermelho);margin-right:0;transform:scale(0);transition:transform .7s var(--curva),margin-right .9s var(--curva)}
+.item-selo{margin-left:12px;font-stretch:115%;font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vermelho)}
+.item-info{font-stretch:115%;font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:pre;color:var(--suave)}
+.item.ativo .item-nome{opacity:1;font-stretch:118%}
+.item.ativo .item-ponto{margin-right:12px;transform:scale(1)}
+
+/* a vitrine: a metade direita é a própria peça, de ponta a ponta */
+.vitrine{position:sticky;top:0;align-self:start;height:100vh;overflow:hidden;background:#0e0c0a;cursor:none}
+.peca{position:absolute;inset:0}
+.peca-rolo{position:absolute;left:0;right:0;top:0;will-change:transform}
+.peca-rolo img{display:block;width:100%;height:auto}
+/* a entrada em faixas: a nova peça sobe em cascata e se junta inteira */
+.faixas{position:absolute;inset:0;z-index:3;pointer-events:none}
+.faixa{position:absolute;top:0;bottom:0;overflow:hidden;transform:translate3d(0,100%,0)}
+.faixa img{position:absolute;top:0;display:block;height:auto}
+.faixas.vai .faixa{transform:none;transition:transform 1.1s var(--curva-faixa);transition-delay:calc(var(--i)*70ms)}
+.peca-sai{transition:transform 1.3s var(--curva-faixa),filter 1.3s ease;transform:scale(.94);filter:brightness(.45)}
+/* legenda sobre a peça e o cursor que convida a abrir */
+.legenda{position:absolute;left:28px;right:28px;bottom:24px;z-index:4;display:flex;justify-content:space-between;align-items:end;gap:24px;color:#fff;pointer-events:none}
+.legenda-resumo{max-width:30em;font-size:.95rem;line-height:1.5;text-shadow:0 1px 18px rgba(0,0,0,.55);transition:opacity .4s ease}
+.legenda-conta{font-stretch:115%;font-size:.7rem;font-weight:700;letter-spacing:.2em;white-space:nowrap}
+.sombra{position:absolute;inset:auto 0 0;height:38%;z-index:2;background:linear-gradient(transparent,rgba(0,0,0,.55));pointer-events:none}
+.cursor{position:fixed;left:0;top:0;z-index:30;display:grid;place-items:center;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:var(--vermelho);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-align:center;line-height:1.3;pointer-events:none;transform:translate3d(var(--cx,-200px),var(--cy,-200px),0) scale(var(--cs,0));transition:transform .5s var(--curva)}
+.depois{height:80vh;display:grid;place-items:center;color:var(--suave);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase}
+@media (max-width:860px){
+  :root{--margem:20px}
+  .cab-nav{display:none}
+  .titulo{font-size:2.6rem}.barra{display:none}
+  .filtros{margin:0;padding:0 20px 10px;overflow-x:auto;white-space:nowrap}
+  .corpo{grid-template-columns:1fr;gap:0;padding:0}
+  .vitrine{order:-1;top:72px;height:56vh;z-index:5;cursor:auto}
+  .lista{padding:0 20px 10vh}
+  .item-nome{font-size:1.3rem}
+  .legenda{left:16px;right:16px;bottom:14px}
+  .legenda-resumo{font-size:.82rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .cursor{display:none}
+}
+</style>
+</head>
+<body>
+<header class="cab"><span class="cab-marca">Josah Oliveira<small>Designer gráfico</small></span><nav class="cab-nav"><b>Trabalhos</b><span>Serviços</span><span>Processo</span><span>Sobre</span><span>FAQ</span><span>Contato</span></nav></header>
+<div class="antes"></div>
+<div class="titulo-linha"><h2 class="titulo">Alguns <em>trabalhos.</em></h2><span class="barra"></span></div>
+<p class="filtros"><span class="on">Todos</span><span>Marca e apresentação</span><span>Web e redes</span><span>Vídeo e mídia</span><span>Outros</span></p>
+<div class="corpo">
+  <ol class="lista" id="lista"></ol>
+  <div class="vitrine" id="vitrine">
+    <div class="sombra"></div>
+    <div class="legenda"><p class="legenda-resumo" id="resumo"></p><span class="legenda-conta" id="conta"></span></div>
+  </div>
+</div>
+<div class="depois">fim do trecho do protótipo</div>
+<div class="cursor" id="cursor">Ver<br>ficha</div>
+<script>
+const T=[{"nome": "Olha o Cabelo dela", "destaque": true, "categoria": "Marca e apresentação", "ano": "2026", "cliente": "Tabuleiro Produções", "resumo": "Book de captação do Afrotour de Itana Rosa, projeto de circulação internacional entre Brasil e África.", "capa": "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp", "midias": ["/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-01.webp", "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-02.webp", "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-03.webp"]}, {"nome": "Antropofagia Mapping", "destaque": true, "categoria": "Marca e apresentação", "ano": "2025", "cliente": "Tabuleiro Produções", "resumo": "Book de captação de um projeto pensado a partir da preservação da natureza e da cultura, com grafismos que atravessam todas as peças.", "capa": "/assets/imagens/trabalhos/antropofagia-mapping/capa.webp", "midias": ["/assets/imagens/trabalhos/antropofagia-mapping/parte-01.webp", "/assets/imagens/trabalhos/antropofagia-mapping/parte-02.webp", "/assets/imagens/trabalhos/antropofagia-mapping/parte-03.webp"]}, {"nome": "Tabuleiro Produções", "destaque": true, "categoria": "Marca e apresentação", "ano": "2023 a 2026", "cliente": "Tabuleiro Produções", "resumo": "Os criativos da produtora com a mesma assinatura visual: portfólios de serviços, books de captação, sites, curso, livros e redes sociais.", "capa": "/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp", "midias": ["/assets/imagens/trabalhos/tabuleiro-producoes/parte-01.webp", "/assets/imagens/trabalhos/tabuleiro-producoes/parte-02.webp", "/assets/imagens/trabalhos/tabuleiro-producoes/parte-03.webp"]}, {"nome": "Amazônia Motirô", "destaque": false, "categoria": "Marca e apresentação", "ano": "", "cliente": "", "resumo": "Book de captação da ópera contemporânea, com o espetáculo, a circulação, as cotas e as contrapartidas para patrocinadores.", "capa": "/assets/imagens/trabalhos/amazonia-motiro/capa.webp", "midias": ["/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-02.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-03.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-04.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-05.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-06.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-07.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-08.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-09.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-10.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-11.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-12.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-13.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-14.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-15.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-16.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-17.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-18.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-19.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-20.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-21.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-22.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-23.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-24.webp", "/assets/imagens/trabalhos/amazonia-motiro/pagina-25.webp"]}, {"nome": "Orquestra Jovem do Recôncavo", "destaque": false, "categoria": "Marca e apresentação", "ano": "2026", "cliente": "Tabuleiro Produções", "resumo": "Book de captação do plano anual da orquestra, com proposta, impacto, contrapartidas e cotas para patrocinadores.", "capa": "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp", "midias": ["/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-01.webp", "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-02.webp", "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-03.webp"]}, {"nome": "Forró Zevixe", "destaque": false, "categoria": "Marca e apresentação", "ano": "", "cliente": "", "resumo": "Portfólio da banda com trajetória, ficha técnica, clipping e registros de shows.", "capa": "/assets/imagens/trabalhos/forro-zevixe/capa.webp", "midias": ["/assets/imagens/trabalhos/forro-zevixe/parte-01.webp", "/assets/imagens/trabalhos/forro-zevixe/parte-02.webp", "/assets/imagens/trabalhos/forro-zevixe/parte-03.webp"]}, {"nome": "Nanda Sabores e Afetos", "destaque": false, "categoria": "Marca e apresentação", "ano": "", "cliente": "", "resumo": "Identidade visual da confeitaria aplicada a cardápios, embalagens, cartão de visita e redes sociais.", "capa": "/assets/imagens/trabalhos/nanda-sabores-e-afetos/capa.webp", "midias": ["/assets/imagens/trabalhos/nanda-sabores-e-afetos/parte-01.webp", "/assets/imagens/trabalhos/nanda-sabores-e-afetos/parte-02.webp", "/assets/imagens/trabalhos/nanda-sabores-e-afetos/parte-03.webp"]}, {"nome": "Trombone Criativo", "destaque": false, "categoria": "Web e redes", "ano": "", "cliente": "", "resumo": "Página de venda do método de improvisação para trombone.", "capa": "/assets/imagens/trabalhos/trombone-criativo/capa.webp", "midias": ["/assets/imagens/trabalhos/trombone-criativo/parte-01.webp", "/assets/imagens/trabalhos/trombone-criativo/parte-02.webp"]}, {"nome": "Duda Filmes", "destaque": false, "categoria": "Web e redes", "ano": "", "cliente": "", "resumo": "Site da produtora audiovisual, com projetos, apresentação e contato.", "capa": "/assets/imagens/trabalhos/duda-filmes/capa.webp", "midias": ["/assets/imagens/trabalhos/duda-filmes/parte-01.webp", "/assets/imagens/trabalhos/duda-filmes/parte-02.webp"]}, {"nome": "Festival de Roteiro", "destaque": false, "categoria": "Web e redes", "ano": "", "cliente": "", "resumo": "Site do Festival de Roteiro Audiovisual da Amazônia, com apresentação, laboratórios e inscrições.", "capa": "/assets/imagens/trabalhos/festival-de-roteiro/capa.webp", "midias": ["/assets/imagens/trabalhos/festival-de-roteiro/parte-01.webp", "/assets/imagens/trabalhos/festival-de-roteiro/parte-02.webp"]}, {"nome": "Elas nas Telas", "destaque": false, "categoria": "Web e redes", "ano": "", "cliente": "", "resumo": "Site da mostra de cinema feito por mulheres, com edições, filmes premiados e inscrições.", "capa": "/assets/imagens/trabalhos/elas-nas-telas/capa.webp", "midias": ["/assets/imagens/trabalhos/elas-nas-telas/parte-01.webp", "/assets/imagens/trabalhos/elas-nas-telas/parte-02.webp", "/assets/imagens/trabalhos/elas-nas-telas/parte-03.webp"]}, {"nome": "Festival Periferia no ar", "destaque": false, "categoria": "Web e redes", "ano": "", "cliente": "", "resumo": "Site do festival de hip-hop com modalidades, entrevistas, inscrição e perguntas frequentes.", "capa": "/assets/imagens/trabalhos/festival-periferia-no-ar/capa.webp", "midias": ["/assets/imagens/trabalhos/festival-periferia-no-ar/parte-01.webp", "/assets/imagens/trabalhos/festival-periferia-no-ar/parte-02.webp"]}, {"nome": "Ong Acuba", "destaque": false, "categoria": "Web e redes", "ano": "", "cliente": "", "resumo": "Site da ONG de arte e cultura urbana, com projetos, eventos e formas de apoio.", "capa": "/assets/imagens/trabalhos/ong-acuba/capa.webp", "midias": ["/assets/imagens/trabalhos/ong-acuba/parte-01.webp", "/assets/imagens/trabalhos/ong-acuba/parte-02.webp"]}, {"nome": "Rider Técnico", "destaque": false, "categoria": "Outros", "ano": "", "cliente": "", "resumo": "Rider técnico e de palco da banda Xote Debochado.", "capa": "/assets/imagens/trabalhos/rider-tecnico/capa.webp", "midias": ["/assets/imagens/trabalhos/rider-tecnico/parte-01.webp"]}];
+const FAIXAS=7, fino=matchMedia('(hover: hover) and (pointer: fine)').matches, estreita=()=>matchMedia('(max-width: 860px)').matches;
+const lista=document.getElementById('lista'),vitrine=document.getElementById('vitrine'),resumo=document.getElementById('resumo'),conta=document.getElementById('conta');
+const itens=T.map((t,i)=>{const li=document.createElement('li');li.className='item';
+  li.innerHTML=`<button class="item-botao" type="button"><span class="item-nome"><span class="item-ponto"></span>${t.nome}${t.destaque?'<span class="item-selo">Destaque</span>':''}</span><span class="item-info">${[t.categoria,t.ano].filter(Boolean).join('   ')}</span></button>`;
+  li.querySelector('button').addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')ativar(i,true)});lista.append(li);return li});
+let ativo=-1,atual=null,gesto=0,dentro=false;
+function montar(t){const p=document.createElement('div');p.className='peca';const r=document.createElement('div');r.className='peca-rolo';
+  const ims=(t.midias.length?t.midias.slice(0,8):[t.capa]);for(const m of ims){const im=document.createElement('img');im.src=m;im.alt='';r.append(im)}p.append(r);return {p,r,ini:performance.now()+1200,primeira:ims[0]}}
+function ativar(i,doUsuario){
+  if(doUsuario)gesto=performance.now();if(i===ativo)return;ativo=i;
+  itens.forEach((li,k)=>li.classList.toggle('ativo',k===i));
+  const t=T[i];const nova=montar(t);
+  /* a peça anterior recua e escurece; a nova sobe em faixas por cima */
+  const velha=atual;if(velha){velha.p.classList.add('peca-sai');setTimeout(()=>velha.p.remove(),1400)}
+  const fx=document.createElement('div');fx.className='faixas';const W=vitrine.offsetWidth;
+  for(let k=0;k<FAIXAS;k++){const f=document.createElement('div');f.className='faixa';f.style.setProperty('--i',k);f.style.left=(k*100/FAIXAS)+'%';f.style.width=(100/FAIXAS+.2)+'%';
+    const im=document.createElement('img');im.src=nova.primeira;im.style.width=W+'px';im.style.left=(-k*W/FAIXAS)+'px';f.append(im);fx.append(f)}
+  vitrine.insertBefore(fx,vitrine.querySelector('.sombra'));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>fx.classList.add('vai')));
+  setTimeout(()=>{vitrine.insertBefore(nova.p,fx);setTimeout(()=>fx.remove(),60)},1100+FAIXAS*70);
+  atual=nova;resumo.style.opacity=0;setTimeout(()=>{resumo.textContent=t.resumo||'';resumo.style.opacity=1},350);
+  conta.textContent=String(i+1).padStart(2,'0')+' de '+T.length;
+}
+/* a peça desce devagar de ponta a ponta, mostrando todas as peças inteiras */
+function descer(agora){if(atual&&atual.p.isConnected){const H=atual.r.offsetHeight-vitrine.offsetHeight;if(H>0&&agora>atual.ini){const d=Math.max(9000,H*14);const f=((agora-atual.ini)%(d*2))/d;const v=f<1?f:2-f;const e=v<.5?2*v*v:1-Math.pow(-2*v+2,2)/2;atual.r.style.transform=`translate3d(0,${-H*e}px,0)`}}requestAnimationFrame(descer)}
+requestAnimationFrame(descer);
+/* rolando, o projeto no centro da área visível entra em foco */
+const corpo=document.querySelector('.corpo');
+new IntersectionObserver(([e])=>{dentro=e.isIntersecting},{rootMargin:'-40% 0px -40% 0px'}).observe(corpo);
+addEventListener('scroll',()=>{if(!dentro||performance.now()-gesto<1200)return;const v=vitrine.getBoundingClientRect();const meio=estreita()?v.bottom+(innerHeight-v.bottom)*.35:innerHeight/2;
+  let m=0,d=1e9;itens.forEach((li,k)=>{const b=li.getBoundingClientRect();const x=Math.abs(b.top+b.height/2-meio);if(x<d){d=x;m=k}});ativar(m,false)},{passive:true});
+/* cursor que convida a abrir a ficha */
+const cursor=document.getElementById('cursor');
+if(fino){vitrine.addEventListener('pointermove',e=>{cursor.style.setProperty('--cx',e.clientX+'px');cursor.style.setProperty('--cy',e.clientY+'px');cursor.style.setProperty('--cs',1)});vitrine.addEventListener('pointerleave',()=>cursor.style.setProperty('--cs',0))}
+ativar(0,false);
+</script>
+</body>
+</html>
