@@ -1,0 +1,373 @@
+/* =========================================================================
+   TEMA: ESTÚDIO NOTURNO
+   Uma camada sobre os estilos das seções que troca a atmosfera inteira do
+   site: fundo de tinta quente, texto em papel, laranja de sinalização como
+   única cor de destaque. Três vozes tipográficas:
+     Syne         títulos, em escala contida (nada de letras gigantes)
+     Manrope      textos
+     Martian Mono rótulos, menus, botões, filtros e etiquetas
+   As capas dos trabalhos são as únicas peças coloridas: sobre o escuro, elas
+   acendem como numa galeria à noite.
+   ========================================================================= */
+
+@font-face {
+  font-family: "Syne";
+  src: url("/assets/fontes/syne.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/assets/fontes/manrope.woff2") format("woff2");
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Martian Mono";
+  src: url("/assets/fontes/martian-mono.woff2") format("woff2");
+  font-weight: 300 700;
+  font-stretch: 75% 112.5%;
+  font-display: swap;
+}
+
+:root {
+  --cor-fundo: #121113;
+  --cor-tinta: #efe8dc;
+  --cor-vermelho: #ff5b2e;
+  --cor-tinta-suave: rgba(239, 232, 220, 0.62);
+  --cor-tinta-apagada: rgba(239, 232, 220, 0.16);
+  --cor-linha: rgba(239, 232, 220, 0.12);
+  --cor-linha-forte: rgba(239, 232, 220, 0.28);
+  --cor-cinza-claro: #1c1b1e;
+  --fonte: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --fonte-titulo: "Syne", "Manrope", sans-serif;
+  --fonte-rotulo: "Martian Mono", ui-monospace, monospace;
+  --cor-superficie: #1c1b1e;
+  --titulo-celular: 2.1rem;
+}
+
+html,
+body {
+  background: var(--cor-fundo);
+  color: var(--cor-tinta);
+}
+
+body {
+  font-family: var(--fonte);
+}
+
+::selection {
+  background: var(--cor-vermelho);
+  color: #121113;
+}
+
+/* ---------- títulos: Syne, em escala contida ---------- */
+.hero__titulo,
+.trabalhos__titulo,
+.faq__titulo,
+.contato__titulo,
+.citacoes__titulo,
+.servicos__titulo,
+.processo__titulo,
+.sobre__titulo,
+.depoimentos__titulo,
+.projeto__titulo,
+.trabalhos__nome,
+.manifesto__texto {
+  font-family: var(--fonte-titulo) !important;
+  font-stretch: 100% !important;
+}
+
+.hero__titulo {
+  font-size: clamp(2.6rem, 4.6vw, 4.6rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.03em !important;
+  text-transform: uppercase;
+}
+
+.trabalhos__titulo,
+.faq__titulo,
+.contato__titulo,
+.servicos__titulo,
+.processo__titulo,
+.sobre__titulo,
+.depoimentos__titulo {
+  font-size: clamp(2rem, 3.4vw, 3.4rem) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase;
+}
+
+.hero__titulo-destaque,
+.trabalhos__titulo-destaque,
+.faq__titulo-destaque,
+.contato__titulo-forte {
+  color: var(--cor-vermelho) !important;
+}
+
+/* as barras longas ao lado dos títulos viram um fio fino */
+.trabalhos__titulo-barra {
+  height: 1px !important;
+  background: var(--cor-linha-forte) !important;
+}
+
+.manifesto__texto {
+  font-weight: 600 !important;
+  font-size: clamp(1.6rem, 3vw, 3rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ---------- rótulos: Martian Mono, pequenos e espaçados ---------- */
+.hero__rotulo,
+.hero__marca,
+.hero__menu,
+.hero__menu-botao,
+.hero__servicos,
+.hero__botao,
+.hero__assinatura,
+.trabalhos__filtro,
+.trabalhos__info,
+.citacoes__titulo,
+[class*="cabecalho__"],
+[class*="menu-movel__"],
+[class*="rotulo"],
+[class*="__botao"],
+[class*="__selo"],
+[class*="__categoria"] {
+  font-family: var(--fonte-rotulo) !important;
+  font-stretch: 100% !important;
+  letter-spacing: 0.04em !important;
+}
+
+.hero__marca-nome {
+  font-family: var(--fonte-titulo) !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* ---------- hero ---------- */
+.hero__conteudo {
+  gap: 22px;
+}
+
+.hero__rotulo {
+  color: var(--cor-vermelho);
+}
+
+.hero__texto {
+  font-size: clamp(1.05rem, 1.25vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--cor-tinta-suave);
+}
+
+.hero__botao,
+.trabalhos__botao {
+  background: var(--cor-vermelho) !important;
+  color: #121113 !important;
+  border-radius: 0 !important;
+}
+
+.hero__botao:hover {
+  background: var(--cor-tinta) !important;
+}
+
+.hero__assinatura-nome {
+  color: var(--cor-tinta);
+}
+
+.hero__servicos {
+  border-top-color: var(--cor-linha-forte);
+  color: var(--cor-tinta-suave);
+  font-weight: 400 !important;
+}
+
+/* folhas sobre a mesa escura: sombra mais funda e um fio de luz na borda */
+.hero__folha::before {
+  box-shadow:
+    0 0 0 1px rgba(239, 232, 220, 0.06),
+    0 10px 22px -8px rgba(0, 0, 0, 0.7) !important;
+}
+
+.hero__folha::after {
+  box-shadow: 0 40px 70px -20px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* ---------- trabalhos ---------- */
+.trabalhos__filtros {
+  border-bottom-color: var(--cor-linha-forte) !important;
+}
+
+.trabalhos__parede {
+  background: var(--cor-superficie) !important;
+  border: 1px solid var(--cor-linha);
+}
+
+.trabalhos__quadro::before {
+  box-shadow:
+    0 0 0 1px rgba(239, 232, 220, 0.06),
+    0 10px 20px -8px rgba(0, 0, 0, 0.7) !important;
+}
+
+.trabalhos__quadro::after {
+  box-shadow: 0 34px 60px -18px rgba(0, 0, 0, 0.9) !important;
+}
+
+.trabalhos__etiqueta {
+  border-left-color: var(--cor-linha-forte) !important;
+}
+
+.trabalhos__nome {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.trabalhos__info {
+  font-weight: 400 !important;
+  font-size: 0.56rem !important;
+}
+
+/* ---------- manifesto: a faixa vira laranja ---------- */
+.manifesto {
+  --cor-tinta: #121113 !important;
+  --cor-tinta-apagada: rgba(18, 17, 19, 0.22) !important;
+  --cor-vermelho: #121113 !important;
+  background: var(--cor-vermelho-faixa, #ff5b2e) !important;
+  color: #121113 !important;
+}
+
+.manifesto__botao {
+  background: #121113 !important;
+  color: #ff5b2e !important;
+  border-radius: 0 !important;
+}
+
+.manifesto__linha {
+  background: rgba(18, 17, 19, 0.4) !important;
+}
+
+/* ---------- cabeçalho fixo e menu ---------- */
+.cabecalho {
+  background: rgba(18, 17, 19, 0.82) !important;
+  color: var(--cor-tinta);
+  backdrop-filter: blur(14px);
+}
+
+.menu-movel {
+  background: var(--cor-fundo) !important;
+  color: var(--cor-tinta) !important;
+}
+
+/* ---------- chat: o botão segue a cor de destaque ---------- */
+.chat__botao,
+.chat__lancador,
+[class*="chat__abrir"] {
+  background: var(--cor-vermelho) !important;
+  color: #121113 !important;
+}
+
+/* ---------- superfícies claras que viram escuras ---------- */
+.termos,
+.visor {
+  --cor-fundo: #121113;
+}
+
+.contato,
+.rodape,
+.faq,
+.citacoes {
+  color: var(--cor-tinta);
+}
+
+@media (max-width: 860px) {
+  .hero__titulo {
+    font-size: min(10.5vw, 7vh) !important;
+  }
+}
+
+/* ---------- contato e rodapé ---------- */
+.contato__ima-rotulo {
+  color: #121113 !important;
+}
+
+/* o nome do rodapé deixa de ser gigante: uma assinatura em Syne */
+.rodape__nome {
+  font-family: var(--fonte-titulo) !important;
+  font-weight: 700 !important;
+  font-size: 8vw !important;
+  letter-spacing: -0.03em !important;
+  text-transform: uppercase;
+  margin: 4vw 0 0 !important;
+  padding: 0 var(--margem) 3vw !important;
+  line-height: 0.9 !important;
+}
+
+/* ---------- página do projeto ---------- */
+.projeto__barra {
+  background: rgba(18, 17, 19, 0.88) !important;
+  color: var(--cor-tinta);
+  backdrop-filter: blur(14px);
+}
+
+.projeto__vizinho:hover,
+.projeto__vizinho:focus-visible {
+  color: #121113 !important;
+}
+
+/* a Syne é larga: o nome do projeto ganha um tamanho que cabe na coluna */
+.projeto__titulo {
+  font-weight: 700 !important;
+  font-size: min(2.3rem, 11.5cqi) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.02em !important;
+  overflow-wrap: normal !important;
+}
+
+.projeto__video {
+  background: var(--cor-superficie) !important;
+}
+
+/* ---------- Como funciona ---------- */
+/* os três painéis de serviços: escuro, superfície e laranja */
+.servicos__painel--claro {
+  background: var(--cor-superficie) !important;
+  color: var(--cor-tinta) !important;
+}
+
+.servicos__painel--tinta {
+  background: #0c0b0d !important;
+  color: var(--cor-tinta) !important;
+}
+
+.servicos__painel--vermelho {
+  --cor-tinta: #121113;
+  --cor-tinta-suave: rgba(18, 17, 19, 0.7);
+  --cor-linha-forte: rgba(18, 17, 19, 0.3);
+  --cor-vermelho: #121113;
+  background: #ff5b2e !important;
+  color: #121113 !important;
+}
+
+.servicos__painel-nome {
+  font-family: var(--fonte-titulo) !important;
+  font-size: clamp(2rem, 3.4vw, 3.4rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* o processo deixa de ser uma faixa clara invertida: segue o fundo do tema */
+.processo {
+  background: var(--cor-superficie) !important;
+  color: var(--cor-tinta) !important;
+}
+
+.processo__titulo-barra,
+.depoimentos__titulo-barra,
+[class*="__titulo-barra"] {
+  height: 1px !important;
+  background: var(--cor-linha-forte) !important;
+}
