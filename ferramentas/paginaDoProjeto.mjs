@@ -191,16 +191,13 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
 
     <main id="conteudo">
       <article class="projeto__corpo${texto.length ? "" : " projeto__corpo--sem-texto"}" data-imagens='${escapar(JSON.stringify(imagensDoTrabalho))}'>
-        <!-- ESQUERDA: o nome, o desafio, a ficha e o convite para conversar -->
+        <!-- ESQUERDA: o nome, o desafio e a ficha -->
         <aside class="projeto__ficha">
           <p class="projeto__categoria">${escapar(trabalho.categoria || "Projeto")}</p>
           <h1 class="projeto__titulo">${escapar(trabalho.nome)}</h1>
           ${trabalho.desafio ? `<p class="projeto__desafio">${escapar(trabalho.desafio)}</p>` : trabalho.resumo ? `<p class="projeto__desafio">${escapar(trabalho.resumo)}</p>` : ""}
           <div class="projeto__ficha-dados">
             ${ficha}
-          </div>
-          <div class="projeto__convite">
-            <p class="projeto__convite-texto">Tem um projeto que precisa de uma linguagem assim?</p>
           </div>
         </aside>
 
