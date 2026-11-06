@@ -1,8 +1,8 @@
 /**
  * Página de um trabalho
  * Gera o HTML de /trabalhos/<nome-do-trabalho> a partir de assets/dados/trabalhos.js.
- * A estrutura é a mesma para todos: à esquerda o nome, a ficha e o convite para
- * conversar; no centro as imagens; à direita o texto, com um menu para cada parte.
+ * A estrutura é a mesma para todos: à esquerda o nome, o desafio e a ficha; no
+ * centro as imagens; à direita o texto, com um menu de ícones para cada parte.
  * Embaixo, a mesma tela final (contato) e o mesmo rodapé da página inicial.
  *
  * O cabeçalho do documento, a tela final, o rodapé e os termos são copiados do
