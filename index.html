@@ -342,20 +342,14 @@
         <div class="trabalhos__filtros" role="group" aria-label="Filtrar trabalhos"></div>
         <div class="trabalhos__corpo">
           <ol class="trabalhos__lista" aria-label="Lista de trabalhos"></ol>
-          <div class="trabalhos__palco">
-            <div class="trabalhos__mesa" aria-hidden="true"></div>
-            <div class="trabalhos__etiqueta">
-              <p class="trabalhos__etiqueta-resumo" aria-live="polite"></p>
-              <button type="button" class="trabalhos__etiqueta-botao">
-                Ver ficha do projeto
-                <svg class="trabalhos__etiqueta-icone" viewBox="0 0 256 256" aria-hidden="true" focusable="false">
-                  <path
-                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
+          <button type="button" class="trabalhos__vitrine" aria-label="Abrir a ficha do projeto">
+            <span class="trabalhos__sombra" aria-hidden="true"></span>
+            <span class="trabalhos__legenda" aria-hidden="true">
+              <span class="trabalhos__legenda-resumo"></span>
+              <span class="trabalhos__legenda-conta"></span>
+            </span>
+          </button>
+          <span class="trabalhos__cursor" aria-hidden="true">Ver<br />ficha</span>
         </div>
       </section>
 
