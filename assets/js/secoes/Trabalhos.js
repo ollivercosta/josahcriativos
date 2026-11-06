@@ -8,10 +8,8 @@ const IMAGENS_NA_PECA = 8;
 const RITMO_DA_PECA = 14;
 /** Depois de um gesto do visitante, a rolagem não troca o projeto por este tempo. */
 const RESPEITO_AO_GESTO = 1200;
-/** Faixas da entrada e o intervalo entre elas. */
-const FAIXAS = 7;
-const INTERVALO_DAS_FAIXAS = 70;
-const DURACAO_DA_FAIXA = 1100;
+/** Duração da entrada de uma peça nova (o círculo que se abre), em milissegundos. */
+const DURACAO_DA_ENTRADA = 1200;
 /** Tempo máximo esperando as imagens numa rede muito lenta; depois disso a troca acontece. */
 const ESPERA_MAXIMA = 8000;
 
@@ -21,8 +19,8 @@ const ESPERA_MAXIMA = 8000;
  * foco ocupa a metade da tela de ponta a ponta, sem moldura, e desce devagar
  * mostrando todas as peças inteiras.
  *
- * Trocar de projeto: a peça anterior recua e escurece; a nova sobe em faixas
- * verticais, em cascata, e se junta inteira. A troca só começa quando as
+ * Trocar de projeto: a peça anterior recua e escurece; a nova surge num
+ * círculo que se abre a partir do nome do projeto na lista e toma a vitrine. A troca só começa quando as
  * imagens da nova peça estão baixadas e decodificadas (enquanto isso, a
  * anterior continua na tela), e os projetos vizinhos na lista são baixados
  * com antecedência. Trocas pedidas em sequência rápida valem só pela última.
@@ -237,68 +235,51 @@ export class Trabalhos {
     else window.setTimeout(baixar, 400);
   }
 
-  /** A peça anterior recua e escurece; a nova sobe em faixas e se junta inteira. */
+  /**
+   * A peça anterior recua e escurece; a nova surge num círculo que se abre a
+   * partir do nome do projeto na lista e cresce até tomar a vitrine inteira.
+   * É a própria imagem, já decodificada, revelada por uma máscara.
+   */
   #entrar(peca) {
     const anterior = this.emCena;
     this.emCena = peca;
-    peca.rolo.style.transform = "";
     if (anterior === peca) return;
+    peca.rolo.style.transform = "";
+    peca.raiz.classList.remove("trabalhos__peca--saindo", "trabalhos__peca--aberta");
     if (Ambiente.reduzMovimento || !peca.imagens.length) {
       if (anterior) anterior.raiz.remove();
+      peca.raiz.classList.add("trabalhos__peca--aberta");
       this.vitrine.insertBefore(peca.raiz, this.sombra);
       peca.inicio = performance.now();
       return;
     }
-    /* a anterior recua e escurece, e só sai quando a nova já assumiu o lugar */
-    if (anterior) anterior.raiz.classList.add("trabalhos__peca--saindo");
-    /* cada faixa é desenhada das imagens já decodificadas, empilhadas até cobrir a altura
-       inteira: ela nasce completa, sem pintar aos pedaços */
-    const largura = this.vitrine.offsetWidth;
-    const altura = this.vitrine.offsetHeight;
-    const densidade = Math.min(2, window.devicePixelRatio || 1);
-    const larguraFaixa = largura / FAIXAS;
-    const faixas = this.#elemento("span", "trabalhos__faixas");
-    for (let k = 0; k < FAIXAS; k++) {
-      const faixa = this.#elemento("span", "trabalhos__faixa");
-      faixa.style.setProperty("--ordem", String(k));
-      faixa.style.left = `${k * larguraFaixa}px`;
-      faixa.style.width = `${larguraFaixa + 1}px`;
-      const tela = this.#elemento("canvas", "trabalhos__faixa-tela");
-      tela.width = Math.ceil((larguraFaixa + 1) * densidade);
-      tela.height = Math.ceil(altura * densidade);
-      const contexto = tela.getContext("2d");
-      contexto.scale(densidade, densidade);
-      let topo = 0;
-      for (const img of peca.imagens) {
-        if (topo >= altura || !img.naturalWidth) break;
-        const alto = (img.naturalHeight * largura) / img.naturalWidth;
-        contexto.drawImage(img, -k * larguraFaixa, topo, largura, alto);
-        topo += alto;
-      }
-      faixa.append(tela);
-      faixas.append(faixa);
+    /* o círculo nasce na altura do nome em foco, na borda da vitrine voltada para a lista */
+    const vitrine = this.vitrine.getBoundingClientRect();
+    const item = this.itens.find((li) => Number(li.dataset.indice) === this.ativo);
+    let origemX = "0%";
+    let origemY = "50%";
+    if (Ambiente.telaEstreita) {
+      origemX = "50%";
+      origemY = "100%";
+    } else if (item) {
+      const caixa = item.getBoundingClientRect();
+      const y = Math.min(Math.max(caixa.top + caixa.height / 2 - vitrine.top, 0), vitrine.height);
+      origemY = `${((y / vitrine.height) * 100).toFixed(1)}%`;
     }
-    this.vitrine.insertBefore(faixas, this.sombra);
-    window.requestAnimationFrame(() =>
-      window.requestAnimationFrame(() => faixas.classList.add("trabalhos__faixas--subindo")),
-    );
-    /* quando a última faixa assenta, a peça inteira assume o lugar delas */
-    window.setTimeout(
-      () => {
-        if (this.emCena === peca) {
-          this.vitrine.insertBefore(peca.raiz, faixas);
-          peca.inicio = performance.now() + 600;
-        }
-        window.setTimeout(() => {
-          faixas.remove();
-          if (anterior && this.emCena !== anterior) {
-            anterior.raiz.remove();
-            anterior.raiz.classList.remove("trabalhos__peca--saindo");
-          }
-        }, 80);
-      },
-      DURACAO_DA_FAIXA + FAIXAS * INTERVALO_DAS_FAIXAS,
-    );
+    peca.raiz.style.setProperty("--origem-x", origemX);
+    peca.raiz.style.setProperty("--origem-y", origemY);
+    this.vitrine.insertBefore(peca.raiz, this.sombra);
+    void peca.raiz.offsetWidth;
+    peca.raiz.classList.add("trabalhos__peca--aberta");
+    peca.inicio = performance.now() + DURACAO_DA_ENTRADA;
+    if (anterior) {
+      anterior.raiz.classList.add("trabalhos__peca--saindo");
+      window.setTimeout(() => {
+        if (this.emCena === anterior) return;
+        anterior.raiz.remove();
+        anterior.raiz.classList.remove("trabalhos__peca--saindo");
+      }, DURACAO_DA_ENTRADA + 100);
+    }
   }
 
   /** A vitrine só anima enquanto a lista ocupa o centro da tela. */
