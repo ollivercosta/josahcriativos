@@ -115,6 +115,8 @@ export class Projeto {
   #mostrar(posicao) {
     this.atual = posicao;
     this.foto.src = this.imagens[posicao];
+    /* cada imagem começa do alto: ela rola dentro da janela, inteira */
+    this.ampliada.scrollTop = 0;
     this.foto.alt = `Imagem ${posicao + 1} de ${this.imagens.length}`;
     const varias = this.imagens.length > 1;
     this.ampliada.querySelector(".ampliada__anterior").hidden = !varias;
