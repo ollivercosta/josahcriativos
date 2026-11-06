@@ -1,14 +1,14 @@
 /* =========================================================================
    ALGUNS TRABALHOS
-   As capas são folhas impressas empilhadas sobre uma mesa. A da frente
-   aparece inteira e colorida; atrás dela, três folhas levemente tortas
-   mostram que há mais trabalho embaixo. Trocar de projeto joga a folha da
-   frente para fora da mesa e ela volta por baixo da pilha. Ao lado, a ficha
-   do projeto em foco; embaixo, as capas em miniatura, lado a lado.
+   Uma parede de exposição: todas as capas à vista, inteiras, em 4:3. Os
+   destaques ficam maiores, na primeira fileira; os demais, em fileiras de
+   cinco. Cada capa tem embaixo uma etiqueta de museu (nome, tipo e ano), e
+   um clique abre a página do projeto.
 
-   Fluidez: tudo o que se move anima só transform e opacity (as duas
-   propriedades que o navegador compõe sem redesenhar). O tom das folhas de
-   trás é um véu por cima (opacity), não um filtro.
+   Ao passar o mouse, o quadro cresce um pouco sem empurrar os vizinhos
+   (scale não mexe no layout), a sombra se aprofunda e o fio da etiqueta fica
+   vermelho. Tudo curto e sem texto se movendo, para não cansar quem passa o
+   mouse por vários projetos seguidos. Só transform e opacity animam.
    ========================================================================= */
 
 .trabalhos {
@@ -115,337 +115,152 @@
   transform: scaleX(1);
 }
 
-/* ---------- corpo: a mesa à esquerda, a ficha à direita ---------- */
-.trabalhos__corpo {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: clamp(28px, 4vw, 64px);
-  align-items: center;
+/* ---------- a parede ---------- */
+.trabalhos__parede {
   margin: clamp(28px, 4vh, 44px) var(--margem) 0;
-}
-
-.trabalhos__mesa {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: calc(100vh - var(--altura-cabecalho) - 190px);
-  min-height: 300px;
-  overflow: hidden;
-  /* as folhas empilham entre si, sem passar por cima do resto da página */
-  isolation: isolate;
+  padding: clamp(36px, 4vw, 64px) clamp(28px, 3.4vw, 56px) clamp(28px, 3vw, 48px);
   background: var(--cor-cinza-claro);
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
-/* ---------- a folha: a capa inteira, 4:3, com sombra de papel ---------- */
-.trabalhos__folha {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  width: 66%;
-  aspect-ratio: 4 / 3;
+.trabalhos__fileira {
+  display: grid;
+  gap: clamp(28px, 2.6vw, 44px) clamp(20px, 2vw, 32px);
   margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trabalhos__fileira--destaques {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trabalhos__fileira--demais {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: clamp(40px, 4vw, 64px);
+}
+
+/* ---------- a peça: capa e etiqueta ---------- */
+.trabalhos__peca {
+  display: grid;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.9s var(--curva),
+    transform 0.9s var(--curva);
+  transition-delay: calc(var(--ordem, 0) * 60ms);
+}
+
+.trabalhos__parede--visivel .trabalhos__peca {
+  opacity: 1;
+  transform: none;
+}
+
+/* filtrando, as peças não mudam de lugar: as de fora da categoria se apagam */
+.trabalhos__parede--visivel .trabalhos__peca--apagada,
+.trabalhos__peca--apagada {
+  opacity: 0.18;
+  pointer-events: none;
+  transition-delay: 0ms;
+}
+
+.trabalhos__quadro {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
   background: #fff;
+  transition: transform 0.45s var(--curva);
+  will-change: transform;
+}
+
+/* duas sombras em camadas próprias: no hover só a opacidade da funda muda */
+.trabalhos__quadro::before,
+.trabalhos__quadro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.trabalhos__quadro::before {
   box-shadow:
     0 1px 1px rgba(22, 19, 15, 0.08),
-    0 6px 12px -4px rgba(22, 19, 15, 0.16),
-    0 26px 48px -18px rgba(22, 19, 15, 0.38);
-  transform: translate3d(-50%, -50%, 0);
-  transition:
-    transform 1s var(--curva),
-    opacity 0.7s var(--curva);
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-tap-highlight-color: transparent;
+    0 8px 16px -8px rgba(22, 19, 15, 0.22);
 }
 
-.trabalhos__folha-imagem {
+.trabalhos__quadro::after {
+  box-shadow:
+    0 2px 2px rgba(22, 19, 15, 0.06),
+    0 28px 46px -18px rgba(22, 19, 15, 0.4);
+  opacity: 0;
+  transition: opacity 0.45s var(--curva);
+}
+
+.trabalhos__imagem {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  pointer-events: none;
-  -webkit-user-drag: none;
 }
 
-/* véu que apaga um pouco as folhas de trás */
-.trabalhos__folha::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--cor-cinza-claro);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s var(--curva);
-}
-
-.trabalhos__folha--atras::after {
-  opacity: 0.38;
-}
-
-.trabalhos__folha--frente {
-  cursor: grab;
-}
-
-.trabalhos__folha--frente:focus-visible {
-  outline: 2px solid var(--cor-tinta);
-  outline-offset: 4px;
-}
-
-.trabalhos__folha--fora {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* enquanto o dedo ou o mouse arrasta, a folha segue sem atraso */
-.trabalhos__folha--arrastando {
-  cursor: grabbing;
-  transition: none;
-}
-
-/* ---------- ficha do projeto em foco ---------- */
-.trabalhos__ficha {
+/* etiqueta de museu */
+.trabalhos__etiqueta {
   display: grid;
-  gap: 24px;
-  align-content: center;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 2px solid var(--cor-tinta);
+  transition: border-color 0.3s;
 }
 
-/* o texto reserva a altura do projeto mais longo (medida em Trabalhos.js):
-   o botão e as setas ficam sempre no mesmo lugar */
-.trabalhos__ficha-texto {
-  display: grid;
-  align-content: start;
-  gap: 18px;
-}
-
-.trabalhos__troca {
-  transition:
-    opacity 0.35s var(--curva),
-    transform 0.6s var(--curva);
-}
-
-.trabalhos__ficha--trocando .trabalhos__troca {
-  opacity: 0;
-  transform: translate3d(0, 8px, 0);
-}
-
-.trabalhos__categoria {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 14px;
-  font-stretch: 115%;
-  font-size: 0.66rem;
+.trabalhos__nome {
   font-weight: 700;
-  letter-spacing: 0.2em;
+  font-size: 1rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.trabalhos__fileira--destaques .trabalhos__nome {
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+}
+
+.trabalhos__info {
+  font-stretch: 112%;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--cor-tinta-suave);
 }
 
 .trabalhos__selo {
+  margin-left: 6px;
+  font-weight: 700;
   color: var(--cor-vermelho);
 }
 
-.trabalhos__nome {
-  font-weight: 800;
-  font-size: clamp(1.9rem, 2.9vw, 3rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+.trabalhos__peca:focus-visible {
+  outline: none;
 }
 
-.trabalhos__resumo {
-  font-size: 1rem;
-  line-height: 1.55;
-  color: var(--cor-tinta-suave);
-}
-
-.trabalhos__dados {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 22px;
-  font-size: 0.85rem;
-}
-
-.trabalhos__dado {
-  white-space: nowrap;
-}
-
-.trabalhos__dado-rotulo {
-  margin-right: 8px;
-  font-stretch: 115%;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--cor-tinta-suave);
-}
-
-.trabalhos__acoes {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.trabalhos__botao {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 22px;
-  border-radius: 999px;
-  background: var(--cor-tinta);
-  color: #fff;
-  font-stretch: 112%;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.4s var(--curva);
-}
-
-.trabalhos__botao-seta {
-  transition: transform 0.5s var(--curva);
-}
-
-.trabalhos__seta {
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  padding: 0;
-  border: 1px solid var(--cor-linha-forte);
-  border-radius: 50%;
-  background: none;
-  color: var(--cor-tinta);
-  cursor: pointer;
-  transition: border-color 0.3s;
-}
-
-.trabalhos__seta-icone {
-  width: 16px;
-  height: 16px;
-}
-
-/* ---------- índice: as capas em miniatura, lado a lado ---------- */
-.trabalhos__indice {
-  display: grid;
-  grid-template-columns: repeat(var(--quantas, 13), minmax(0, 1fr));
-  gap: 6px;
-  margin: 24px var(--margem) 0;
-  padding: 0;
-  list-style: none;
-}
-
-.trabalhos__indice-item {
-  position: relative;
-}
-
-.trabalhos__indice-item:hover {
-  z-index: 3;
-}
-
-.trabalhos__indice-item[hidden] {
-  display: none;
-}
-
-.trabalhos__miniatura {
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  background: var(--cor-cinza-claro);
-  cursor: pointer;
-}
-
-/* a versão em cores fica por cima e só aparece no projeto em foco */
-.trabalhos__miniatura-imagem {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.trabalhos__miniatura-imagem--cinza {
-  filter: grayscale(1);
-  opacity: 0.55;
-}
-
-.trabalhos__miniatura-imagem--cor {
-  opacity: 0;
-  transition: opacity 0.5s var(--curva);
-}
-
-.trabalhos__miniatura--ativa .trabalhos__miniatura-imagem--cor {
-  opacity: 1;
-}
-
-.trabalhos__miniatura::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: var(--cor-vermelho);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.7s var(--curva);
-}
-
-.trabalhos__miniatura--ativa::after {
-  transform: scaleX(1);
-}
-
-.trabalhos__miniatura:focus-visible {
+.trabalhos__peca:focus-visible .trabalhos__quadro {
   outline: 2px solid var(--cor-tinta);
-  outline-offset: 2px;
-}
-
-/* o nome aparece sobre a miniatura apontada */
-.trabalhos__miniatura-nome {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 8px);
-  z-index: 2;
-  padding: 6px 10px;
-  background: var(--cor-tinta);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(-50%, 4px, 0);
-  transition:
-    opacity 0.25s,
-    transform 0.4s var(--curva);
+  outline-offset: 4px;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .trabalhos__botao:hover {
-    background: var(--cor-vermelho);
+  .trabalhos__peca:hover .trabalhos__quadro {
+    transform: scale(1.03);
   }
 
-  .trabalhos__botao:hover .trabalhos__botao-seta {
-    transform: translateX(4px);
-  }
-
-  .trabalhos__seta:hover {
-    border-color: var(--cor-tinta);
-  }
-
-  .trabalhos__miniatura:hover .trabalhos__miniatura-imagem--cor {
+  .trabalhos__peca:hover .trabalhos__quadro::after {
     opacity: 1;
   }
 
-  .trabalhos__indice-item:hover .trabalhos__miniatura-nome {
-    opacity: 1;
-    transform: translate3d(-50%, 0, 0);
+  .trabalhos__peca:hover .trabalhos__etiqueta {
+    border-color: var(--cor-vermelho);
   }
 }
 
@@ -478,58 +293,30 @@
     white-space: nowrap;
   }
 
-  .trabalhos__corpo {
+  .trabalhos__parede {
+    margin: 24px 0 0;
+    padding: 28px var(--margem);
+  }
+
+  .trabalhos__fileira--destaques {
     grid-template-columns: minmax(0, 1fr);
-    gap: 22px;
-    margin: 0;
+    gap: 32px;
   }
 
-  .trabalhos__mesa {
-    aspect-ratio: 5 / 4;
-    max-height: none;
-    min-height: 0;
+  .trabalhos__fileira--demais {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+    margin-top: 40px;
   }
 
-  .trabalhos__folha {
-    width: 78%;
-  }
-
-  .trabalhos__ficha {
-    padding: 0 var(--margem);
-  }
-
-  .trabalhos__acoes {
-    flex-wrap: wrap;
-  }
-
-  .trabalhos__seta {
-    width: var(--toque, 44px);
-    height: var(--toque, 44px);
-  }
-
-  /* miniaturas numa fila que corre para o lado */
-  .trabalhos__indice {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: 76px;
-    margin: 22px 0 0;
-    padding: 0 var(--margem) 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .trabalhos__indice::-webkit-scrollbar {
-    display: none;
-  }
-
-  .trabalhos__miniatura-nome {
-    display: none;
+  .trabalhos__nome {
+    font-size: 0.92rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trabalhos__folha,
-  .trabalhos__troca {
+  .trabalhos__peca,
+  .trabalhos__quadro {
     transition: none;
   }
 }
