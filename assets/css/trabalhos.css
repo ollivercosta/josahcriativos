@@ -1,9 +1,14 @@
 /* =========================================================================
    ALGUNS TRABALHOS
-   Lista de trabalhos e, à direita, a vitrine: a peça do projeto em foco
-   ocupa a metade da tela de ponta a ponta e desce devagar, inteira. Ao
-   trocar de projeto, a anterior recua e a nova surge num círculo que se
-   abre a partir do nome em foco.
+   As capas são folhas impressas empilhadas sobre uma mesa. A da frente
+   aparece inteira e colorida; atrás dela, três folhas levemente tortas
+   mostram que há mais trabalho embaixo. Trocar de projeto joga a folha da
+   frente para fora da mesa e ela volta por baixo da pilha. Ao lado, a ficha
+   do projeto em foco; embaixo, as capas em miniatura, lado a lado.
+
+   Fluidez: tudo o que se move anima só transform e opacity (as duas
+   propriedades que o navegador compõe sem redesenhar). O tom das folhas de
+   trás é um véu por cima (opacity), não um filtro.
    ========================================================================= */
 
 .trabalhos {
@@ -110,253 +115,324 @@
   transform: scaleX(1);
 }
 
-/* ---------- lista ---------- */
+/* ---------- corpo: a mesa à esquerda, a ficha à direita ---------- */
 .trabalhos__corpo {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 4vw;
-  padding-left: var(--margem);
-}
-
-.trabalhos__lista {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  transition: opacity 0.45s var(--curva-suave);
-}
-
-.trabalhos__lista--trocando {
-  opacity: 0;
-}
-
-.trabalhos__item {
-  border-bottom: 1px solid var(--cor-linha-forte);
-}
-
-.trabalhos__item[hidden] {
-  display: none;
-}
-
-.trabalhos__item-botao {
-  display: grid;
-  width: 100%;
-  padding: 20px 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.trabalhos__item-nome {
-  display: flex;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(28px, 4vw, 64px);
   align-items: center;
+  margin: clamp(28px, 4vh, 44px) var(--margem) 0;
+}
+
+.trabalhos__mesa {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: calc(100vh - var(--altura-cabecalho) - 190px);
+  min-height: 300px;
   overflow: hidden;
-  white-space: nowrap;
-  font-weight: 700;
-  font-size: 1.9vw;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-  opacity: 0.42;
-  transition:
-    opacity 0.6s ease,
-    font-stretch 0.9s var(--curva);
+  background: var(--cor-cinza-claro);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.trabalhos__item-ponto {
-  flex: none;
-  width: 7px;
-  height: 7px;
-  margin-right: 0;
-  border-radius: 50%;
-  background: var(--cor-vermelho);
-  transform: scale(0);
+/* ---------- a folha: a capa inteira, 4:3, com sombra de papel ---------- */
+.trabalhos__folha {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 66%;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  background: #fff;
+  box-shadow:
+    0 1px 1px rgba(22, 19, 15, 0.08),
+    0 6px 12px -4px rgba(22, 19, 15, 0.16),
+    0 26px 48px -18px rgba(22, 19, 15, 0.38);
+  transform: translate3d(-50%, -50%, 0);
   transition:
-    transform 0.7s var(--curva),
-    margin-right 0.9s var(--curva);
+    transform 1s var(--curva),
+    opacity 0.7s var(--curva);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.trabalhos__item-selo {
-  margin-left: 12px;
+.trabalhos__folha-imagem {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* véu que apaga um pouco as folhas de trás */
+.trabalhos__folha::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cor-cinza-claro);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s var(--curva);
+}
+
+.trabalhos__folha--atras::after {
+  opacity: 0.38;
+}
+
+.trabalhos__folha--frente {
+  cursor: grab;
+}
+
+.trabalhos__folha--frente:focus-visible {
+  outline: 2px solid var(--cor-tinta);
+  outline-offset: 4px;
+}
+
+.trabalhos__folha--fora {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* enquanto o dedo ou o mouse arrasta, a folha segue sem atraso */
+.trabalhos__folha--arrastando {
+  cursor: grabbing;
+  transition: none;
+}
+
+/* ---------- ficha do projeto em foco ---------- */
+.trabalhos__ficha {
+  display: grid;
+  gap: 18px;
+  align-content: center;
+}
+
+.trabalhos__troca {
+  transition:
+    opacity 0.35s var(--curva),
+    transform 0.6s var(--curva);
+}
+
+.trabalhos__ficha--trocando .trabalhos__troca {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+}
+
+.trabalhos__categoria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
   font-stretch: 115%;
-  font-size: 0.6rem;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--cor-vermelho);
-}
-
-.trabalhos__item-info {
-  margin-top: 6px;
-  font-stretch: 115%;
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  white-space: pre;
   color: var(--cor-tinta-suave);
 }
 
-.trabalhos__item--ativo .trabalhos__item-nome {
-  opacity: 1;
-  font-stretch: 118%;
+.trabalhos__selo {
+  color: var(--cor-vermelho);
 }
 
-.trabalhos__item--ativo .trabalhos__item-ponto {
-  margin-right: 12px;
-  transform: scale(1);
+.trabalhos__nome {
+  font-weight: 800;
+  font-size: clamp(1.9rem, 2.9vw, 3rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
-/* ---------- a vitrine: a metade direita é a própria peça, de ponta a ponta ---------- */
-/* a vitrine termina junto com a última linha da lista: ela acompanha a altura
-   da lista, até o limite da tela, e fica presa enquanto a lista corre (num
-   filtro com poucos trabalhos, não fica menor que 60% da tela) */
-.trabalhos__vitrine {
-  position: sticky;
-  top: 0;
-  align-self: stretch;
-  display: block;
-  height: auto;
-  min-height: 60vh;
-  max-height: 100vh;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  background: #0e0c0a;
-  color: #fff;
-  text-align: left;
-  cursor: pointer;
+.trabalhos__resumo {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--cor-tinta-suave);
 }
 
-/* a peça nova surge num círculo que se abre a partir do nome em foco */
-.trabalhos__peca {
-  position: absolute;
-  inset: 0;
-  clip-path: circle(0% at var(--origem-x, 0%) var(--origem-y, 50%));
-  transform: scale(1.06);
-  transition:
-    clip-path 1.2s var(--curva-entra-sai),
-    transform 1.6s var(--curva),
-    filter 1.2s ease;
-}
-
-.trabalhos__peca--aberta {
-  clip-path: circle(150% at var(--origem-x, 0%) var(--origem-y, 50%));
-  transform: none;
-}
-
-.trabalhos__peca--saindo {
-  transform: scale(0.95);
-  filter: brightness(0.4);
-}
-
-.trabalhos__peca-rolo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  will-change: transform;
-}
-
-.trabalhos__peca-rolo--video {
-  bottom: 0;
-  display: grid;
-  place-items: center;
-}
-
-.trabalhos__peca-imagem {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.trabalhos__peca-aviso {
-  font-stretch: 115%;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-/* legenda sobre a parte de baixo da peça, com uma sombra para a leitura */
-.trabalhos__sombra {
-  position: absolute;
-  inset: auto 0 0;
-  z-index: 2;
-  height: 38%;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
-  pointer-events: none;
-}
-
-.trabalhos__legenda {
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  bottom: 24px;
-  z-index: 3;
+.trabalhos__dados {
   display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 24px;
-  pointer-events: none;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 0.85rem;
 }
 
-.trabalhos__legenda-resumo {
-  max-width: 30em;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.6);
-  transition: opacity 0.4s ease;
-}
-
-.trabalhos__legenda-resumo--trocando {
-  opacity: 0;
-}
-
-.trabalhos__legenda-conta {
-  font-stretch: 115%;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+.trabalhos__dado {
   white-space: nowrap;
 }
 
-/* sobre a vitrine, o cursor vira um convite para abrir a ficha */
-.trabalhos__cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 30;
-  display: grid;
-  place-items: center;
-  width: 96px;
-  height: 96px;
-  margin: -48px 0 0 -48px;
-  border-radius: 50%;
-  background: var(--cor-vermelho);
-  color: #fff;
-  font-size: 0.68rem;
+.trabalhos__dado-rotulo {
+  margin-right: 8px;
+  font-stretch: 115%;
+  font-size: 0.6rem;
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.16em;
-  text-align: center;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  pointer-events: none;
-  transform: translate3d(var(--cursor-x, -200px), var(--cursor-y, -200px), 0) scale(0);
+  color: var(--cor-tinta-suave);
+}
+
+.trabalhos__acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.trabalhos__botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: var(--cor-tinta);
+  color: #fff;
+  font-stretch: 112%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.4s var(--curva);
+}
+
+.trabalhos__botao-seta {
   transition: transform 0.5s var(--curva);
 }
 
-.trabalhos__cursor--visivel {
-  transform: translate3d(var(--cursor-x, -200px), var(--cursor-y, -200px), 0) scale(1);
+.trabalhos__seta {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 50%;
+  background: none;
+  color: var(--cor-tinta);
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.trabalhos__seta-icone {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- índice: as capas em miniatura, lado a lado ---------- */
+.trabalhos__indice {
+  display: grid;
+  grid-template-columns: repeat(var(--quantas, 13), minmax(0, 1fr));
+  gap: 6px;
+  margin: 24px var(--margem) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trabalhos__indice-item {
+  position: relative;
+}
+
+.trabalhos__indice-item[hidden] {
+  display: none;
+}
+
+.trabalhos__miniatura {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--cor-cinza-claro);
+  cursor: pointer;
+}
+
+/* a versão em cores fica por cima e só aparece no projeto em foco */
+.trabalhos__miniatura-imagem {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trabalhos__miniatura-imagem--cinza {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+.trabalhos__miniatura-imagem--cor {
+  opacity: 0;
+  transition: opacity 0.5s var(--curva);
+}
+
+.trabalhos__miniatura--ativa .trabalhos__miniatura-imagem--cor {
+  opacity: 1;
+}
+
+.trabalhos__miniatura::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--cor-vermelho);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--curva);
+}
+
+.trabalhos__miniatura--ativa::after {
+  transform: scaleX(1);
+}
+
+.trabalhos__miniatura:focus-visible {
+  outline: 2px solid var(--cor-tinta);
+  outline-offset: 2px;
+}
+
+/* o nome aparece sobre a miniatura apontada */
+.trabalhos__miniatura-nome {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  z-index: 2;
+  padding: 6px 10px;
+  background: var(--cor-tinta);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-50%, 4px, 0);
+  transition:
+    opacity 0.25s,
+    transform 0.4s var(--curva);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .trabalhos__item-botao:hover .trabalhos__item-nome {
+  .trabalhos__botao:hover {
+    background: var(--cor-vermelho);
+  }
+
+  .trabalhos__botao:hover .trabalhos__botao-seta {
+    transform: translateX(4px);
+  }
+
+  .trabalhos__seta:hover {
+    border-color: var(--cor-tinta);
+  }
+
+  .trabalhos__miniatura:hover .trabalhos__miniatura-imagem--cor {
     opacity: 1;
   }
 
-  .trabalhos__vitrine {
-    cursor: none;
+  .trabalhos__indice-item:hover .trabalhos__miniatura-nome {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -391,50 +467,56 @@
 
   .trabalhos__corpo {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    padding: 0;
+    gap: 22px;
+    margin: 0;
   }
 
-  .trabalhos__lista {
-    padding: 0 var(--margem) 8vh;
-  }
-
-  /* no celular, a vitrine fica presa no alto e a lista corre por baixo */
-  .trabalhos__vitrine {
-    order: -1;
-    z-index: 2;
-    top: var(--altura-cabecalho);
-    align-self: start;
-    height: 56vh;
-    min-height: 0;
+  .trabalhos__mesa {
+    aspect-ratio: 5 / 4;
     max-height: none;
+    min-height: 0;
   }
 
-  .trabalhos__legenda {
-    left: var(--margem);
-    right: var(--margem);
-    bottom: 14px;
+  .trabalhos__folha {
+    width: 78%;
   }
 
-  .trabalhos__legenda-resumo {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: 0.82rem;
+  .trabalhos__ficha {
+    padding: 0 var(--margem);
   }
 
-  .trabalhos__cursor {
+  .trabalhos__acoes {
+    flex-wrap: wrap;
+  }
+
+  .trabalhos__seta {
+    width: var(--toque, 44px);
+    height: var(--toque, 44px);
+  }
+
+  /* miniaturas numa fila que corre para o lado */
+  .trabalhos__indice {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 76px;
+    margin: 22px 0 0;
+    padding: 0 var(--margem) 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .trabalhos__indice::-webkit-scrollbar {
     display: none;
   }
 
-  .trabalhos__item-nome {
-    font-size: 1.3rem;
+  .trabalhos__miniatura-nome {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trabalhos__peca-rolo {
-    transform: none !important;
+  .trabalhos__folha,
+  .trabalhos__troca {
+    transition: none;
   }
 }

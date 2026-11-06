@@ -329,8 +329,8 @@
         </div>
       </section>
 
-      <!-- ALGUNS TRABALHOS: destaques e grade montados por assets/js/secoes/Trabalhos.js
-           a partir de assets/dados/trabalhos.js (destaque: true marca os projetos em destaque) -->
+      <!-- ALGUNS TRABALHOS: a pilha de capas, a ficha e as miniaturas são montadas por
+           assets/js/secoes/Trabalhos.js a partir de assets/dados/trabalhos.js -->
       <section class="trabalhos" id="projetos" aria-labelledby="trabalhos-titulo">
         <div class="trabalhos__cabeca">
           <h2 class="trabalhos__titulo" id="trabalhos-titulo">
@@ -340,16 +340,30 @@
         </div>
         <div class="trabalhos__filtros" role="group" aria-label="Filtrar trabalhos"></div>
         <div class="trabalhos__corpo">
-          <ol class="trabalhos__lista" aria-label="Lista de trabalhos"></ol>
-          <button type="button" class="trabalhos__vitrine" aria-label="Abrir a ficha do projeto">
-            <span class="trabalhos__sombra" aria-hidden="true"></span>
-            <span class="trabalhos__legenda" aria-hidden="true">
-              <span class="trabalhos__legenda-resumo"></span>
-              <span class="trabalhos__legenda-conta"></span>
-            </span>
-          </button>
-          <span class="trabalhos__cursor" aria-hidden="true">Ver<br />ficha</span>
+          <div class="trabalhos__mesa" role="group" aria-roledescription="pilha" aria-label="Capas dos trabalhos"></div>
+          <div class="trabalhos__ficha" aria-live="polite">
+            <p class="trabalhos__categoria trabalhos__troca"></p>
+            <h3 class="trabalhos__nome trabalhos__troca"></h3>
+            <p class="trabalhos__resumo trabalhos__troca"></p>
+            <p class="trabalhos__dados trabalhos__troca"></p>
+            <div class="trabalhos__acoes">
+              <a class="trabalhos__botao" href="/#projetos">
+                Ver o projeto <span class="trabalhos__botao-seta" aria-hidden="true">&rarr;</span>
+              </a>
+              <button class="trabalhos__seta" type="button" data-passo="-1" aria-label="Trabalho anterior">
+                <svg class="trabalhos__seta-icone" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M10 3 5 8l5 5" />
+                </svg>
+              </button>
+              <button class="trabalhos__seta" type="button" data-passo="1" aria-label="Próximo trabalho">
+                <svg class="trabalhos__seta-icone" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="m6 3 5 5-5 5" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
+        <ul class="trabalhos__indice" aria-label="Todos os trabalhos"></ul>
       </section>
 
       <!-- MANIFESTO: a frase se acende conforme a leitura e leva ao Como funciona -->
