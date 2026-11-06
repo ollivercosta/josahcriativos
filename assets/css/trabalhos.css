@@ -2,10 +2,11 @@
    ALGUNS TRABALHOS
    Uma parede de exposição: todas as capas à vista, inteiras, em 4:3. Os
    destaques ficam maiores, na primeira fileira; os demais, em fileiras de
-   cinco. Cada capa tem embaixo uma etiqueta de museu (nome, tipo e ano), e
+   cinco. Cada fileira entra quando chega à tela, um quadro depois do
+   outro. Cada capa tem embaixo uma etiqueta de museu (nome, tipo e ano), e
    um clique abre a página do projeto.
 
-   Ao passar o mouse, o quadro cresce um pouco sem empurrar os vizinhos
+   Ao passar o mouse, o quadro sobe e cresce um pouco sem empurrar os vizinhos
    (scale não mexe no layout), a sombra se aprofunda e o fio da etiqueta fica
    vermelho. Tudo curto e sem texto se movendo, para não cansar quem passa o
    mouse por vários projetos seguidos. Só transform e opacity animam.
@@ -150,16 +151,16 @@
   transition:
     opacity 0.9s var(--curva),
     transform 0.9s var(--curva);
-  transition-delay: calc(var(--ordem, 0) * 60ms);
+  transition-delay: var(--atraso, 0ms);
 }
 
-.trabalhos__parede--visivel .trabalhos__peca {
+.trabalhos__peca--visivel {
   opacity: 1;
   transform: none;
 }
 
 /* filtrando, as peças não mudam de lugar: as de fora da categoria se apagam */
-.trabalhos__parede--visivel .trabalhos__peca--apagada,
+.trabalhos__peca--visivel.trabalhos__peca--apagada,
 .trabalhos__peca--apagada {
   opacity: 0.18;
   pointer-events: none;
@@ -252,7 +253,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .trabalhos__peca:hover .trabalhos__quadro {
-    transform: scale(1.03);
+    transform: translate3d(0, -8px, 0) scale(1.03);
   }
 
   .trabalhos__peca:hover .trabalhos__quadro::after {
