@@ -189,7 +189,7 @@
     <link rel="preload" href="/assets/fontes/archivo.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="/assets/css/cabecalho.css" />
-    <link rel="stylesheet" href="/assets/css/cortina.css" />
+    <link rel="stylesheet" href="/assets/css/hero.css" />
     <link rel="stylesheet" href="/assets/css/manifesto.css" />
     <link rel="stylesheet" href="/assets/css/trabalhos.css" />
     <link rel="stylesheet" href="/assets/css/visor.css" />
@@ -277,58 +277,56 @@
     </div>
 
     <main id="conteudo">
-      <!-- CORTINA: o hero. A cena 3D vem de assets/js/cena/CenaDaCortina.js, carregada por
-           assets/js/secoes/Cortina.js depois que a página aparece -->
-      <section class="cortina" id="topo" aria-label="Design e cultura" data-cena="/assets/js/cena/CenaDaCortina.js">
-        <div class="cortina__palco" aria-hidden="true">
-          <div class="cortina__penumbra"></div>
-          <canvas class="cortina__tela"></canvas>
-          <div class="cortina__grao"></div>
-          <div class="cortina__vinheta"></div>
-        </div>
-
-        <header class="cortina__cabecalho">
-          <a class="cortina__marca" href="#topo"><b class="cortina__marca-nome">Josah Oliveira</b>Designer gráfico</a>
-          <button type="button" class="cortina__menu-botao" aria-label="Abrir menu">Menu</button>
-          <ul class="cortina__menu">
-            <li class="cortina__menu-item"><a class="cortina__menu-link" href="#projetos">Trabalhos</a></li>
-            <li class="cortina__menu-item"><a class="cortina__menu-link" href="#servicos">Serviços</a></li>
-            <li class="cortina__menu-item"><a class="cortina__menu-link" href="#sobre">Sobre</a></li>
-            <li class="cortina__menu-item"><a class="cortina__menu-link" href="#contato">Contato</a></li>
+      <!-- HERO: "design e CULTURA" -->
+      <section class="hero" id="topo" aria-label="Design e cultura">
+        <header class="hero__cabecalho">
+          <a class="hero__marca" href="#topo"><b class="hero__marca-nome">Josah Oliveira</b>Designer gráfico</a>
+          <button type="button" class="hero__menu-botao" aria-label="Abrir menu">Menu</button>
+          <ul class="hero__menu">
+            <li class="hero__menu-item"><a class="hero__menu-link" href="#projetos">Trabalhos</a></li>
+            <li class="hero__menu-item"><a class="hero__menu-link" href="#servicos">Serviços</a></li>
+            <li class="hero__menu-item"><a class="hero__menu-link" href="#sobre">Sobre</a></li>
+            <li class="hero__menu-item"><a class="hero__menu-link" href="#contato">Contato</a></li>
           </ul>
         </header>
 
-        <p class="cortina__rotulo">Comunicação para projetos culturais</p>
-        <h1 class="cortina__titulo">Design e cultura</h1>
+        <div class="hero__plano">
+          <span class="hero__barra-base" aria-hidden="true"></span>
+          <span class="hero__barra-topo" aria-hidden="true"></span>
+          <span class="hero__barra-haste" aria-hidden="true"></span>
+          <span class="hero__barra-larga" aria-hidden="true">
+            <span class="hero__assinatura">por <b class="hero__assinatura-nome">Josah Oliveira</b></span>
+          </span>
 
-        <div class="cortina__base">
-          <p class="cortina__texto">
+          <p class="hero__rotulo-topo">Comunicação para projetos culturais</p>
+          <h1 class="hero__design" aria-label="Design e cultura.">design e</h1>
+          <p class="hero__cultura" aria-hidden="true"></p>
+
+          <p class="hero__rotulo-servicos" aria-hidden="true">Serviços</p>
+          <p class="hero__texto">
             Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
           </p>
-          <a class="cortina__botao" href="#projetos">
+          <a class="hero__botao" href="#projetos">
             Ver trabalhos
-            <svg class="cortina__botao-seta" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="hero__botao-seta" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M4 12h15M13 6l6 6-6 6"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="1.6"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
             </svg>
           </a>
-          <div class="cortina__ficha">
-            <ul class="cortina__servicos" aria-label="Serviços">
-              <li class="cortina__servico">Identidade visual</li>
-              <li class="cortina__servico">Book de captação</li>
-              <li class="cortina__servico">Landing pages</li>
-              <li class="cortina__servico">Redes sociais</li>
-              <li class="cortina__servico">Material de palco</li>
-              <li class="cortina__servico">Vídeo e spots</li>
-            </ul>
-            <p class="cortina__assinatura">por <b class="cortina__assinatura-nome">Josah Oliveira</b></p>
-          </div>
+          <ul class="hero__servicos" aria-label="Serviços">
+            <li class="hero__servico" style="--i: 0">Identidade visual</li>
+            <li class="hero__servico" style="--i: 1">Book de captação</li>
+            <li class="hero__servico" style="--i: 2">Landing pages</li>
+            <li class="hero__servico" style="--i: 3">Redes sociais</li>
+            <li class="hero__servico" style="--i: 4">Material de palco</li>
+            <li class="hero__servico" style="--i: 5">Vídeo e spots</li>
+          </ul>
         </div>
       </section>
 

@@ -14,9 +14,9 @@ import { VLibras } from "./nucleo/VLibras.js";
 import { Cabecalho } from "./secoes/Cabecalho.js";
 import { Chat } from "./secoes/Chat.js";
 import { Contato } from "./secoes/Contato.js";
-import { Cortina } from "./secoes/Cortina.js";
 import { Depoimentos } from "./secoes/Depoimentos.js";
 import { Faq } from "./secoes/Faq.js";
+import { Hero } from "./secoes/Hero.js";
 import { Manifesto } from "./secoes/Manifesto.js";
 import { Processo } from "./secoes/Processo.js";
 import { Servicos } from "./secoes/Servicos.js";
@@ -54,7 +54,7 @@ class Site {
       if (titulo) new RevelaPalavras(titulo, seletor.slice(1));
     }
 
-    this.secoes.cortina = new Cortina($(".cortina"), this.ciclo);
+    this.secoes.hero = new Hero($(".hero"));
     this.secoes.cabecalho = new Cabecalho($(".cabecalho"), $(".menu-movel"), this.ciclo, this.gestor);
     this.secoes.manifesto = new Manifesto($(".manifesto"), this.ciclo);
     this.secoes.visor = new Visor($(".visor"), TRABALHOS, this.gestor);

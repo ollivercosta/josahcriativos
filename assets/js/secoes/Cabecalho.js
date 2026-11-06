@@ -1,8 +1,8 @@
 /**
  * Cabecalho
- * O cabeçalho fixo entra depois da cortina, mostra o progresso da leitura e
+ * O cabeçalho fixo entra depois do hero, mostra o progresso da leitura e
  * marca o link da seção visível. Também controla o menu do celular, que
- * pode ser aberto pelo botão do cabeçalho ou pelo botão "Menu" da cortina.
+ * pode ser aberto pelo botão do cabeçalho ou pelo botão "Menu" do hero.
  */
 export class Cabecalho {
   /**
@@ -43,7 +43,7 @@ export class Cabecalho {
 
   #ligarMenu() {
     this.botaoMenu.addEventListener("click", () => this.alternarMenu(!this.menuAberto));
-    document.querySelector(".cortina__menu-botao")?.addEventListener("click", () => this.alternarMenu(true));
+    document.querySelector(".hero__menu-botao")?.addEventListener("click", () => this.alternarMenu(true));
     this.menu.addEventListener("click", (evento) => {
       if (evento.target.closest("a")) this.alternarMenu(false);
     });
