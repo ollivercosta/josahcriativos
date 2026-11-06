@@ -9,35 +9,35 @@ import { capaDoTrabalho } from "../../dados/trabalhos.js";
  *   fundo       profundidade: quanto a folha acompanha o mouse (0 a 1)
  */
 const MESA_LARGA = [
-  { x: 64, y: 41, largura: 24, giro: -4, fundo: 1 },
-  { x: 86, y: 34, largura: 21, giro: 5, fundo: 0.8 },
-  { x: 75, y: 73, largura: 22, giro: 2, fundo: 0.9 },
-  { x: 54, y: 79, largura: 14, giro: -7, fundo: 0.6 },
-  { x: 96, y: 67, largura: 14, giro: -3, fundo: 0.5 },
-  { x: 56, y: 17, largura: 12, giro: 8, fundo: 0.45 },
-  { x: 98, y: 15, largura: 11, giro: -9, fundo: 0.35 },
-  { x: 89, y: 93, largura: 13, giro: 6, fundo: 0.55 },
-  { x: 52, y: 51, largura: 10, giro: 10, fundo: 0.3 },
-  { x: 65, y: 96, largura: 12, giro: -5, fundo: 0.4 },
-  { x: 74, y: 19, largura: 11, giro: 4, fundo: 0.4 },
-  { x: 51, y: 101, largura: 11, giro: 7, fundo: 0.35 },
-  { x: 100, y: 44, largura: 11, giro: -6, fundo: 0.3 },
+  { x: 64, y: 46, largura: 24, giro: -4, fundo: 1 },
+  { x: 85, y: 40, largura: 21, giro: 5, fundo: 0.8 },
+  { x: 76, y: 73, largura: 22, giro: 2, fundo: 0.9 },
+  { x: 57, y: 75, largura: 14, giro: -7, fundo: 0.6 },
+  { x: 94, y: 69, largura: 14, giro: -3, fundo: 0.5 },
+  { x: 58, y: 26, largura: 12, giro: 8, fundo: 0.45 },
+  { x: 95, y: 24, largura: 11, giro: -9, fundo: 0.35 },
+  { x: 88, y: 92, largura: 13, giro: 6, fundo: 0.55 },
+  { x: 53, y: 54, largura: 10, giro: 10, fundo: 0.3 },
+  { x: 66, y: 93, largura: 12, giro: -5, fundo: 0.4 },
+  { x: 75, y: 22, largura: 11, giro: 4, fundo: 0.4 },
+  { x: 55, y: 96, largura: 11, giro: 7, fundo: 0.35 },
+  { x: 97, y: 47, largura: 11, giro: -6, fundo: 0.3 },
 ];
 
 const MESA_ESTREITA = [
-  { x: 33, y: 76, largura: 48, giro: -4, fundo: 1 },
-  { x: 76, y: 72, largura: 44, giro: 5, fundo: 0.8 },
-  { x: 58, y: 90, largura: 46, giro: 2, fundo: 0.9 },
-  { x: 8, y: 92, largura: 30, giro: -8, fundo: 0.6 },
-  { x: 96, y: 90, largura: 28, giro: 6, fundo: 0.5 },
-  { x: 26, y: 101, largura: 26, giro: 7, fundo: 0.45 },
-  { x: 84, y: 102, largura: 24, giro: -6, fundo: 0.35 },
-  { x: 52, y: 68, largura: 20, giro: 9, fundo: 0.55 },
-  { x: 6, y: 71, largura: 22, giro: -10, fundo: 0.3 },
-  { x: 98, y: 77, largura: 20, giro: -4, fundo: 0.4 },
-  { x: 46, y: 104, largura: 22, giro: 4, fundo: 0.4 },
-  { x: 66, y: 106, largura: 20, giro: -7, fundo: 0.35 },
-  { x: 16, y: 106, largura: 20, giro: 5, fundo: 0.3 },
+  { x: 35, y: 77, largura: 48, giro: -4, fundo: 1 },
+  { x: 72, y: 73, largura: 44, giro: 5, fundo: 0.8 },
+  { x: 58, y: 89, largura: 46, giro: 2, fundo: 0.9 },
+  { x: 12, y: 90, largura: 30, giro: -8, fundo: 0.6 },
+  { x: 92, y: 88, largura: 28, giro: 6, fundo: 0.5 },
+  { x: 28, y: 100, largura: 26, giro: 7, fundo: 0.45 },
+  { x: 82, y: 100, largura: 24, giro: -6, fundo: 0.35 },
+  { x: 52, y: 69, largura: 20, giro: 9, fundo: 0.55 },
+  { x: 10, y: 72, largura: 22, giro: -10, fundo: 0.3 },
+  { x: 94, y: 76, largura: 20, giro: -4, fundo: 0.4 },
+  { x: 46, y: 102, largura: 22, giro: 4, fundo: 0.4 },
+  { x: 66, y: 104, largura: 20, giro: -7, fundo: 0.35 },
+  { x: 18, y: 104, largura: 20, giro: 5, fundo: 0.3 },
 ];
 
 /** A folha pousa quando o topo do seu quadro chega a esta altura da tela (fração). */
@@ -72,6 +72,7 @@ export class Hero {
   constructor(raiz, trabalhos, parede) {
     this.raiz = raiz;
     this.mesa = raiz.querySelector(".hero__mesa");
+    this.cabecalho = raiz.querySelector(".hero__cabecalho");
     this.parede = parede;
     this.trabalhos = trabalhos;
     this.mouse = { alvoX: 0, alvoY: 0, x: 0, y: 0 };
@@ -138,6 +139,8 @@ export class Hero {
     const altura = window.innerHeight;
     const rolagem = window.scrollY;
     const poses = Ambiente.telaEstreita ? MESA_ESTREITA : MESA_LARGA;
+    /* nenhuma folha sobe acima desta linha: o menu do hero fica sempre livre */
+    const teto = this.cabecalho.offsetTop + this.cabecalho.offsetHeight + 28;
     let continuar = false;
 
     /* o mouse é seguido com atraso, para o movimento ser macio */
@@ -169,10 +172,13 @@ export class Hero {
       const voo = this.parado ? (rolagem > 0 ? 1 : 0) : limitar(rolagem / Math.max(pouso, 1), 0, 1);
       const v = suavizar(voo);
 
+      const escalaNaMesa = ((pose.largura / 100) * largura) / alvo.width;
+      /* metade da altura da folha na mesa, com folga para o giro */
+      const meiaAltura = ((alvo.height * escalaNaMesa) / 2) * 1.12;
       const naMesa = {
         x: (pose.x / 100) * largura + this.mouse.x * pose.fundo * 18,
-        y: (pose.y / 100) * altura + this.mouse.y * pose.fundo * 12,
-        escala: ((pose.largura / 100) * largura) / alvo.width,
+        y: Math.max((pose.y / 100) * altura, teto + meiaAltura) + this.mouse.y * pose.fundo * 12,
+        escala: escalaNaMesa,
       };
       const x = misturar(naMesa.x, alvo.left + alvo.width / 2, v);
       const y = misturar(naMesa.y, alvo.top + alvo.height / 2, v);
