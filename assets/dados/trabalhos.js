@@ -428,3 +428,23 @@ export function capaDoTrabalho(trabalho) {
   }
   return "";
 }
+
+/** Nome do trabalho em forma de endereço: "Olha o Cabelo dela" vira "olha-o-cabelo-dela". */
+export function slugDoTrabalho(trabalho) {
+  return trabalho.nome
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** Endereço da página do trabalho, gerada pelo build (ferramentas/paginaDoProjeto.mjs). */
+export function enderecoDoTrabalho(trabalho) {
+  return `/trabalhos/${slugDoTrabalho(trabalho)}`;
+}
+
+/** A ordem do site: os destaques primeiro, depois os demais, na ordem do arquivo. */
+export function ordemDosTrabalhos(trabalhos = TRABALHOS) {
+  return [...trabalhos.filter((t) => t.destaque), ...trabalhos.filter((t) => !t.destaque)];
+}
