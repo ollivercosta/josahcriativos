@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo: pilha de pranchas</title>
+<style>
+  @font-face {
+    font-family: "Archivo";
+    src: url("/assets/fontes/archivo.woff2") format("woff2");
+    font-weight: 100 900;
+    font-stretch: 62% 125%;
+    font-display: block;
+  }
+
+  :root {
+    --tinta: #16130f;
+    --vermelho: #a3171f;
+    --mesa: #f3f2ef;
+    --suave: rgba(22, 19, 15, 0.62);
+    --linha: rgba(22, 19, 15, 0.14);
+    --margem: 4.4vw;
+    --curva: cubic-bezier(0.16, 1, 0.3, 1);
+    --curva-sai: cubic-bezier(0.55, 0, 0.75, 0.2);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #fff; color: var(--tinta); font-family: "Archivo", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  .pilha {
+    padding: clamp(72px, 10vh, 110px) var(--margem) 56px;
+  }
+
+  .pilha__topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .pilha__rotulo {
+    font-stretch: 115%;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--vermelho);
+  }
+
+  .pilha__titulo {
+    margin-top: 10px;
+    font-weight: 800;
+    font-size: clamp(2rem, 3.6vw, 3.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+
+  /* corpo: a mesa com a pilha à esquerda, a ficha do trabalho à direita */
+  .pilha__corpo {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: center;
+  }
+
+  .pilha__mesa {
+    position: relative;
+    background: var(--mesa);
+    aspect-ratio: 16 / 10;
+    max-height: calc(100vh - 290px);
+    width: 100%;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  /* cada prancha é a capa inteira, em 4:3, como uma folha impressa */
+  .pilha__prancha {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    width: 66%;
+    aspect-ratio: 4 / 3;
+    transform: translate(-50%, -50%) translate(var(--x, 0), var(--y, 0)) rotate(var(--giro, 0deg)) scale(var(--escala, 1));
+    transition: transform 0.9s var(--curva), opacity 0.6s var(--curva), filter 0.6s var(--curva);
+    box-shadow:
+      0 1px 1px rgba(22, 19, 15, 0.08),
+      0 6px 12px -4px rgba(22, 19, 15, 0.16),
+      0 26px 48px -18px rgba(22, 19, 15, 0.38);
+    background: #fff;
+    will-change: transform;
+  }
+
+  .pilha__prancha img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #fff;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .pilha__prancha--atras { filter: grayscale(1) brightness(0.96); }
+  .pilha__prancha--fora { opacity: 0; }
+  .pilha__prancha--frente { cursor: pointer; }
+
+  /* a prancha que sai é jogada para fora da mesa */
+  .pilha__prancha--saindo {
+    transition: transform 0.7s var(--curva-sai), opacity 0.7s var(--curva-sai);
+  }
+
+  .pilha__dica {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    font-stretch: 115%;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--suave);
+    pointer-events: none;
+  }
+
+  /* ficha do trabalho em foco */
+  .pilha__ficha {
+    display: grid;
+    gap: 18px;
+    align-content: center;
+  }
+
+  .pilha__troca {
+    transition: opacity 0.3s var(--curva), transform 0.5s var(--curva);
+  }
+
+  .pilha__ficha.trocando .pilha__troca {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .pilha__categoria {
+    font-stretch: 115%;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--suave);
+  }
+
+  .pilha__nome {
+    font-weight: 800;
+    font-size: clamp(1.9rem, 2.9vw, 3rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .pilha__resumo {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--suave);
+  }
+
+  .pilha__dados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    font-size: 0.85rem;
+  }
+
+  .pilha__dados span b {
+    font-stretch: 115%;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--suave);
+    margin-right: 8px;
+  }
+
+  .pilha__acoes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .pilha__botao {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: var(--tinta);
+    color: #fff;
+    font-stretch: 112%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.4s var(--curva);
+  }
+
+  .pilha__botao:hover { background: var(--vermelho); }
+
+  .pilha__seta {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--linha);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .pilha__seta:hover { border-color: var(--tinta); }
+  .pilha__seta svg { width: 16px; height: 16px; }
+
+  /* índice: as capas em miniatura, lado a lado, com o nome ao passar */
+  .pilha__indice {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 26px;
+    list-style: none;
+  }
+
+  .pilha__miniatura {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--mesa);
+    outline-offset: 2px;
+  }
+
+  .pilha__miniatura img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition: filter 0.5s var(--curva), opacity 0.5s var(--curva);
+  }
+
+  .pilha__miniatura:hover img,
+  .pilha__miniatura.ativa img {
+    filter: none;
+    opacity: 1;
+  }
+
+  .pilha__miniatura::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--vermelho);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--curva);
+  }
+
+  .pilha__miniatura.ativa::after { transform: scaleX(1); }
+
+  .pilha__miniatura-nome {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translate(-50%, 4px);
+    padding: 6px 10px;
+    background: var(--tinta);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.4s var(--curva);
+  }
+
+  .pilha__indice li { position: relative; }
+  .pilha__indice li:hover .pilha__miniatura-nome { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 860px) {
+    .pilha { padding-top: 56px; }
+    .pilha__topo { margin-bottom: 18px; }
+    .pilha__corpo { grid-template-columns: 1fr; gap: 22px; }
+    .pilha__mesa { aspect-ratio: 5 / 4; max-height: none; margin: 0 calc(var(--margem) * -1); width: auto; }
+    .pilha__prancha { width: 78%; }
+    .pilha__acoes { flex-wrap: wrap; }
+    .pilha__indice {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: 72px;
+      overflow-x: auto;
+      margin: 22px calc(var(--margem) * -1) 0;
+      padding: 0 var(--margem) 6px;
+      scrollbar-width: none;
+    }
+    .pilha__miniatura-nome { display: none; }
+  }
+</style>
+</head>
+<body>
+  <section class="pilha" id="projetos" aria-labelledby="pilha-titulo">
+    <header class="pilha__topo">
+      <div>
+        <p class="pilha__rotulo">Trabalhos</p>
+        <h2 class="pilha__titulo" id="pilha-titulo">Projetos sobre a mesa</h2>
+      </div>
+    </header>
+
+    <div class="pilha__corpo">
+      <div class="pilha__mesa" aria-roledescription="carrossel" aria-label="Capas dos trabalhos">
+      </div>
+
+      <div class="pilha__ficha" aria-live="polite">
+        <p class="pilha__categoria pilha__troca"></p>
+        <h3 class="pilha__nome pilha__troca"></h3>
+        <p class="pilha__resumo pilha__troca"></p>
+        <p class="pilha__dados pilha__troca"></p>
+        <div class="pilha__acoes">
+          <a class="pilha__botao" href="#">Ver o projeto <span aria-hidden="true">&rarr;</span></a>
+          <button class="pilha__seta" type="button" data-passo="-1" aria-label="Trabalho anterior">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3 5 8l5 5"/></svg>
+          </button>
+          <button class="pilha__seta" type="button" data-passo="1" aria-label="Próximo trabalho">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 3 5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="pilha__indice"></ul>
+  </section>
+
+<script type="module">
+  const TRABALHOS = [{"nome":"Olha o Cabelo dela","categoria":"Marca e apresentação","tipo":"Book de captação","ano":"2026","cliente":"Tabuleiro Produções","local":"Salvador (BA)","resumo":"Book de captação do Afrotour de Itana Rosa, projeto de circulação internacional entre Brasil e África.","capa":"/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp","endereco":"/trabalhos/olha-o-cabelo-dela"},{"nome":"Antropofagia Mapping","categoria":"Marca e apresentação","tipo":"Book de captação","ano":"2025","cliente":"Tabuleiro Produções","local":"Belém (PA)","resumo":"Book de captação de um projeto pensado a partir da preservação da natureza e da cultura, com grafismos que atravessam todas as peças.","capa":"/assets/imagens/trabalhos/antropofagia-mapping/capa.webp","endereco":"/trabalhos/antropofagia-mapping"},{"nome":"Tabuleiro Produções","categoria":"Marca e apresentação","tipo":"Identidade visual","ano":"2023 a 2026","cliente":"Tabuleiro Produções","local":"Brasil","resumo":"Os criativos da produtora com a mesma assinatura visual: portfólios de serviços, books de captação, sites, curso, livros e redes sociais.","capa":"/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp","endereco":"/trabalhos/tabuleiro-producoes"},{"nome":"Amazônia Motirô","categoria":"Marca e apresentação","tipo":"Book de captação","ano":"","cliente":"","local":"","resumo":"Book de captação da ópera contemporânea, com o espetáculo, a circulação, as cotas e as contrapartidas para patrocinadores.","capa":"/assets/imagens/trabalhos/amazonia-motiro/capa.webp","endereco":"/trabalhos/amazonia-motiro"},{"nome":"Orquestra Jovem do Recôncavo","categoria":"Marca e apresentação","tipo":"Book de captação","ano":"2026","cliente":"Tabuleiro Produções","local":"São Félix e Cachoeira (BA)","resumo":"Book de captação do plano anual da orquestra, com proposta, impacto, contrapartidas e cotas para patrocinadores.","capa":"/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp","endereco":"/trabalhos/orquestra-jovem-do-reconcavo"},{"nome":"Forró Zevixe","categoria":"Marca e apresentação","tipo":"Portfólio artístico","ano":"","cliente":"","local":"","resumo":"Portfólio da banda com trajetória, ficha técnica, clipping e registros de shows.","capa":"/assets/imagens/trabalhos/forro-zevixe/capa.webp","endereco":"/trabalhos/forro-zevixe"},{"nome":"Nanda Sabores e Afetos","categoria":"Marca e apresentação","tipo":"Identidade visual","ano":"","cliente":"","local":"","resumo":"Identidade visual da confeitaria aplicada a cardápios, embalagens, cartão de visita e redes sociais.","capa":"/assets/imagens/trabalhos/nanda-sabores-e-afetos/capa.webp","endereco":"/trabalhos/nanda-sabores-e-afetos"},{"nome":"Trombone Criativo","categoria":"Web e redes","tipo":"Landing page","ano":"","cliente":"","local":"","resumo":"Página de venda do método de improvisação para trombone.","capa":"/assets/imagens/trabalhos/trombone-criativo/capa.webp","endereco":"/trabalhos/trombone-criativo"},{"nome":"Duda Filmes","categoria":"Web e redes","tipo":"Site","ano":"","cliente":"","local":"","resumo":"Site da produtora audiovisual, com projetos, apresentação e contato.","capa":"/assets/imagens/trabalhos/duda-filmes/capa.webp","endereco":"/trabalhos/duda-filmes"},{"nome":"Festival de Roteiro","categoria":"Web e redes","tipo":"Site","ano":"","cliente":"","local":"","resumo":"Site do Festival de Roteiro Audiovisual da Amazônia, com apresentação, laboratórios e inscrições.","capa":"/assets/imagens/trabalhos/festival-de-roteiro/capa.webp","endereco":"/trabalhos/festival-de-roteiro"},{"nome":"Elas nas Telas","categoria":"Web e redes","tipo":"Site","ano":"","cliente":"","local":"","resumo":"Site da mostra de cinema feito por mulheres, com edições, filmes premiados e inscrições.","capa":"/assets/imagens/trabalhos/elas-nas-telas/capa.webp","endereco":"/trabalhos/elas-nas-telas"},{"nome":"Festival Periferia no ar","categoria":"Web e redes","tipo":"Site","ano":"","cliente":"","local":"","resumo":"Site do festival de hip-hop com modalidades, entrevistas, inscrição e perguntas frequentes.","capa":"/assets/imagens/trabalhos/festival-periferia-no-ar/capa.webp","endereco":"/trabalhos/festival-periferia-no-ar"},{"nome":"Ong Acuba","categoria":"Web e redes","tipo":"Site","ano":"","cliente":"","local":"","resumo":"Site da ONG de arte e cultura urbana, com projetos, eventos e formas de apoio.","capa":"/assets/imagens/trabalhos/ong-acuba/capa.webp","endereco":"/trabalhos/ong-acuba"}];
+
+  /*
+   * Posição de cada prancha conforme a distância até a da frente:
+   * 0 é a da frente, 1 a 3 ficam atrás, levemente tortas, como folhas
+   * empilhadas à mão; as demais ficam escondidas no fundo da pilha.
+   */
+  const POSES = [
+    { x: "0%", y: "0%", giro: 0, escala: 1 },
+    { x: "3.5%", y: "-2.5%", giro: 3.2, escala: 0.97 },
+    { x: "-4%", y: "-3%", giro: -4.1, escala: 0.95 },
+    { x: "1.5%", y: "-4.5%", giro: 1.4, escala: 0.93 },
+  ];
+
+  class PilhaDeProjetos {
+    constructor(secao, trabalhos) {
+      this.secao = secao;
+      this.trabalhos = trabalhos;
+      this.mesa = secao.querySelector(".pilha__mesa");
+      this.ficha = secao.querySelector(".pilha__ficha");
+      this.atual = 0;
+      this.criarPranchas();
+      this.criarIndice();
+      this.ligarControles();
+      this.arrumar();
+      this.escreverFicha(false);
+    }
+
+    criarPranchas() {
+      this.pranchas = this.trabalhos.map((t) => {
+        const el = document.createElement("a");
+        el.className = "pilha__prancha";
+        el.href = t.endereco;
+        el.setAttribute("aria-label", `Abrir ${t.nome}`);
+        el.draggable = false;
+        el.innerHTML = `<img src="${t.capa}" alt="" draggable="false">`;
+        this.mesa.append(el);
+        return el;
+      });
+    }
+
+    criarIndice() {
+      const lista = this.secao.querySelector(".pilha__indice");
+      this.miniaturas = this.trabalhos.map((t, i) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<button class="pilha__miniatura" type="button" aria-label="${t.nome}"><img src="${t.capa}" alt="" loading="lazy"></button><span class="pilha__miniatura-nome" aria-hidden="true">${t.nome}</span>`;
+        const botao = li.firstElementChild;
+        botao.addEventListener("click", () => this.irPara(i));
+        lista.append(li);
+        return botao;
+      });
+    }
+
+    ligarControles() {
+      this.secao.querySelectorAll("[data-passo]").forEach((b) =>
+        b.addEventListener("click", () => this.passar(Number(b.dataset.passo)))
+      );
+      this.secao.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") this.passar(1);
+        if (e.key === "ArrowLeft") this.passar(-1);
+      });
+
+      /* arrastar a prancha da frente: solta longe o bastante e ela sai */
+      let inicio = null, arrastou = false;
+      this.mesa.addEventListener("pointerdown", (e) => {
+        inicio = { x: e.clientX, y: e.clientY };
+        arrastou = false;
+      });
+      window.addEventListener("pointermove", (e) => {
+        if (!inicio) return;
+        const dx = e.clientX - inicio.x;
+        if (Math.abs(dx) > 6) arrastou = true;
+        if (!arrastou) return;
+        const frente = this.pranchas[this.atual];
+        frente.style.transition = "none";
+        frente.style.setProperty("--x", `${dx}px`);
+        frente.style.setProperty("--giro", `${dx / 30}deg`);
+      });
+      window.addEventListener("pointerup", (e) => {
+        if (!inicio) return;
+        const dx = e.clientX - inicio.x;
+        inicio = null;
+        const frente = this.pranchas[this.atual];
+        frente.style.transition = "";
+        if (arrastou && Math.abs(dx) > 80) this.passar(dx < 0 ? 1 : -1, dx < 0 ? -1 : 1);
+        else this.arrumar();
+      });
+      this.mesa.addEventListener("click", (e) => {
+        if (arrastou) return e.preventDefault();
+        const prancha = e.target.closest(".pilha__prancha");
+        if (prancha && !prancha.classList.contains("pilha__prancha--frente")) {
+          e.preventDefault();
+          this.irPara(this.pranchas.indexOf(prancha));
+        }
+      }, true);
+    }
+
+    passar(passo, lado = -passo) {
+      const total = this.trabalhos.length;
+      this.irPara((this.atual + passo + total) % total, lado);
+    }
+
+    irPara(indice, lado = indice > this.atual ? -1 : 1) {
+      if (indice === this.atual) return;
+      const saindo = this.pranchas[this.atual];
+      this.atual = indice;
+
+      /* a prancha que estava na frente é jogada para o lado e volta ao fundo */
+      saindo.classList.add("pilha__prancha--saindo");
+      saindo.style.setProperty("--x", `${lado * 120}%`);
+      saindo.style.setProperty("--y", "6%");
+      saindo.style.setProperty("--giro", `${lado * 14}deg`);
+      saindo.style.zIndex = 50;
+      setTimeout(() => {
+        saindo.classList.remove("pilha__prancha--saindo");
+        this.arrumar();
+      }, 520);
+      this.arrumar(saindo);
+      this.escreverFicha(true);
+    }
+
+    arrumar(excecao) {
+      const total = this.trabalhos.length;
+      this.pranchas.forEach((el, i) => {
+        if (el === excecao) return;
+        const distancia = (i - this.atual + total) % total;
+        const pose = POSES[Math.min(distancia, POSES.length - 1)];
+        el.style.zIndex = total - distancia;
+        el.style.setProperty("--x", pose.x);
+        el.style.setProperty("--y", pose.y);
+        el.style.setProperty("--giro", `${pose.giro}deg`);
+        el.style.setProperty("--escala", pose.escala);
+        el.classList.toggle("pilha__prancha--frente", distancia === 0);
+        el.classList.toggle("pilha__prancha--atras", distancia > 0);
+        el.classList.toggle("pilha__prancha--fora", distancia >= POSES.length);
+        el.tabIndex = distancia === 0 ? 0 : -1;
+      });
+      this.miniaturas.forEach((m, i) => m.classList.toggle("ativa", i === this.atual));
+    }
+
+    escreverFicha(animar) {
+      const t = this.trabalhos[this.atual];
+      const escrever = () => {
+        this.ficha.querySelector(".pilha__categoria").textContent = `${t.categoria}, ${t.tipo}`;
+        this.ficha.querySelector(".pilha__nome").textContent = t.nome;
+        this.ficha.querySelector(".pilha__resumo").textContent = t.resumo;
+        const dados = [["Cliente", t.cliente], ["Local", t.local], ["Ano", t.ano]].filter(([, v]) => v);
+        this.ficha.querySelector(".pilha__dados").innerHTML = dados.map(([r, v]) => `<span><b>${r}</b>${v}</span>`).join("");
+        this.ficha.querySelector(".pilha__botao").href = t.endereco;
+        this.ficha.classList.remove("trocando");
+      };
+      if (!animar) return escrever();
+      clearTimeout(this.espera);
+      this.ficha.classList.add("trocando");
+      this.espera = setTimeout(escrever, 200);
+    }
+  }
+
+  new PilhaDeProjetos(document.querySelector(".pilha"), TRABALHOS);
+</script>
+</body>
+</html>
