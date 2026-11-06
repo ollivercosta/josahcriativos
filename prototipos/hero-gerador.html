@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero: o gerador</title>
+<style>
+@font-face{font-family:"Archivo";src:url("/assets/fontes/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:block}
+:root{--tinta:#16130f;--vermelho:#a3171f;--margem:4.4vw;--curva:cubic-bezier(.16,1,.3,1);
+  --a:#a3171f;--b:#f2c14e;--c:#16130f;--papel:#fbf7f0;--wd:100;--wg:900;--gira:0deg}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;color:var(--tinta);font-family:"Archivo",sans-serif;-webkit-font-smoothing:antialiased}
+.hero{min-height:100vh;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:3vw;padding:0 var(--margem)}
+.cab{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;height:84px}
+.marca{font-weight:800;font-size:.86rem;letter-spacing:.22em;text-transform:uppercase;line-height:1.25}
+.marca small{display:block;font-weight:500;font-size:.66rem;letter-spacing:.2em}
+.nav{display:flex;gap:30px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+.lado{align-self:center;display:grid;gap:26px;padding-bottom:6vh}
+.rotulo{font-stretch:115%;font-size:.72rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--vermelho)}
+.titulo{font-size:5.4vw;line-height:.88;letter-spacing:-.055em}
+.titulo span{font-weight:200}.titulo b{font-weight:900;color:var(--vermelho)}
+.texto{font-size:1.12rem;line-height:1.5;max-width:26em}
+/* o campo: o visitante escreve o nome do projeto e vê a linguagem nascer */
+.campo{display:grid;gap:10px}
+.campo label{font-stretch:115%;font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(22,19,15,.6)}
+.campo input{width:100%;padding:14px 0 12px;border:0;border-bottom:2px solid var(--tinta);background:none;font:inherit;font-size:1.7rem;font-weight:700;letter-spacing:-.03em;color:var(--tinta);outline:none}
+.campo input:focus{border-color:var(--vermelho)}
+.tipos{display:flex;flex-wrap:wrap;gap:8px}
+.tipo{padding:8px 14px;border:1px solid rgba(22,19,15,.3);border-radius:999px;background:none;font:inherit;font-size:.82rem;cursor:pointer;transition:background .4s,color .4s,border-color .4s}
+.tipo[aria-pressed=true]{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.acoes{display:flex;align-items:center;gap:20px}
+.botao{display:inline-flex;gap:12px;padding:15px 24px;border-radius:999px;background:var(--tinta);color:#fff;font-weight:600;text-decoration:none}
+.por{font-size:.8rem;color:rgba(22,19,15,.6)}.por b{color:var(--tinta)}
+.servicos{list-style:none;display:flex;flex-wrap:wrap;gap:4px 18px;font-stretch:115%;font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.servicos li:first-child{color:var(--vermelho);font-weight:700}
+/* as peças: a mesma identidade aplicada em formatos diferentes, ao vivo */
+.pecas{position:relative;align-self:stretch;min-height:640px;perspective:1600px}
+.peca{position:absolute;background:var(--papel);box-shadow:0 2px 4px rgba(22,19,15,.08),0 30px 60px -30px rgba(22,19,15,.45);overflow:hidden;
+  transition:background .9s ease,transform 1.2s var(--curva);transform:translate3d(var(--px,0),var(--py,0),0) rotate(var(--r,0deg))}
+.peca *{transition:color .9s ease,background .9s ease,transform 1.2s var(--curva)}
+.nome{position:relative;z-index:2;font-weight:var(--wg);font-variation-settings:"wdth" var(--wd);line-height:.86;letter-spacing:-.04em;text-transform:uppercase;overflow-wrap:normal;hyphens:none}
+.forma{position:absolute;pointer-events:none}
+/* cartaz */
+.cartaz{left:6%;top:6%;width:46%;aspect-ratio:2/3;background:var(--a);--r:-3deg;color:var(--papel)}
+.cartaz .forma{right:-18%;top:-10%;width:90%;aspect-ratio:1;border-radius:50%;background:var(--b);transform:rotate(var(--gira))}
+.cartaz .faixa{position:absolute;left:0;right:0;top:44%;height:7%;background:var(--c);transform:rotate(var(--gira))}
+.cartaz .nome{position:absolute;left:7%;right:7%;bottom:16%;font-size:clamp(28px,3.4vw,58px)}
+.cartaz small{position:absolute;left:7%;bottom:6%;font-stretch:115%;font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+/* post */
+.post{right:4%;top:14%;width:40%;aspect-ratio:1;--r:4deg;background:var(--papel)}
+.post .forma{left:-20%;bottom:-30%;width:90%;aspect-ratio:1;border-radius:50%;background:var(--a)}
+.post .nome{position:absolute;left:8%;right:8%;top:10%;font-size:clamp(20px,2.3vw,40px);color:var(--a)}
+.post .selo{position:absolute;right:8%;bottom:8%;padding:6px 10px;background:var(--c);color:var(--papel);font-stretch:115%;font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+/* credencial */
+.credencial{left:60%;top:60%;width:24%;aspect-ratio:3/4.4;--r:-8deg;background:var(--c);color:var(--papel)}
+.credencial .forma{left:0;right:0;top:0;height:36%;background:var(--b)}
+.credencial .furo{position:absolute;left:50%;top:5%;width:22%;height:4%;margin-left:-11%;border-radius:999px;background:var(--papel)}
+.credencial .nome{position:absolute;left:10%;right:10%;top:44%;font-size:clamp(14px,1.3vw,22px)}
+.credencial small{position:absolute;left:10%;bottom:8%;font-stretch:115%;font-size:.5rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+/* régua de marcas */
+.regua{left:6%;bottom:2%;width:40%;height:11%;--r:2deg;display:flex;align-items:center;gap:10%;padding:0 6%}
+.regua i{flex:1;height:34%;border-radius:3px;background:var(--c);opacity:.85}
+.regua i:first-child{background:var(--a)}
+.legenda{position:absolute;right:2%;top:2%;font-stretch:115%;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(22,19,15,.55);text-align:right;line-height:1.7}
+.depois{height:50vh;display:grid;place-items:center;color:rgba(22,19,15,.6);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase}
+@media (max-width:860px){
+  :root{--margem:20px}
+  .nav{display:none}
+  .hero{grid-template-columns:1fr}
+  .titulo{font-size:12vw}
+  .pecas{min-height:118vw;order:2}
+  .lado{padding-bottom:0}
+  .cartaz .nome{font-size:7vw}.post .nome{font-size:5vw}.credencial .nome{font-size:3.4vw}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <header class="cab"><p class="marca">Josah Oliveira<small>Designer gráfico</small></p><nav class="nav"><span>Trabalhos</span><span>Serviços</span><span>Sobre</span><span>Contato</span></nav></header>
+  <div class="lado">
+    <p class="rotulo">Comunicação para projetos culturais</p>
+    <h1 class="titulo"><span>design e </span><b>cultura</b></h1>
+    <p class="texto">Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.</p>
+    <div class="campo">
+      <label for="nome">Experimente com o nome do seu projeto</label>
+      <input id="nome" type="text" maxlength="34" autocomplete="off" value="">
+      <div class="tipos" id="tipos"></div>
+    </div>
+    <div class="acoes"><a class="botao" href="#">Ver trabalhos &rarr;</a><p class="por">por <b>Josah Oliveira</b></p></div>
+    <ul class="servicos"><li>Serviços</li><li>Identidade visual</li><li>Book de captação</li><li>Landing pages</li><li>Redes sociais</li><li>Material de palco</li><li>Vídeo e spots</li></ul>
+  </div>
+  <div class="pecas" id="pecas" aria-hidden="true">
+    <div class="peca cartaz"><span class="forma"></span><span class="faixa"></span><p class="nome"></p><small>Cartaz</small></div>
+    <div class="peca post"><span class="forma"></span><p class="nome"></p><span class="selo">Inscrições abertas</span></div>
+    <div class="peca credencial"><span class="forma"></span><span class="furo"></span><p class="nome"></p><small>Credencial</small></div>
+    <div class="peca regua"><i></i><i></i><i></i><i></i></div>
+    <p class="legenda">Uma linguagem<br>aplicada a cada peça</p>
+  </div>
+</section>
+<div class="depois">a seção de trabalhos começa aqui</div>
+<script>
+/* cada tipo de projeto puxa uma família de cores; o nome define a forma da letra e o giro
+   das formas. Um mesmo nome sempre gera a mesma linguagem */
+const TIPOS={Festival:[['#a3171f','#f2c14e','#16130f','#fbf7f0'],['#0b3d2e','#e8743b','#f3e9d2','#f3e9d2']],
+  Orquestra:[['#0d344f','#d8850c','#f4efe6','#f4efe6'],['#2b1d4f','#e9b44c','#f6f1e7','#f6f1e7']],
+  Mostra:[['#16130f','#e23b6a','#f7f2ea','#f7f2ea'],['#3d2b1f','#f2a93b','#fbf6ee','#fbf6ee']],
+  Teatro:[['#5b0f14','#e7c36a','#140f0c','#f8f1e4'],['#1d3b39','#e05a47','#f6efe2','#f6efe2']]};
+const tipos=document.getElementById('tipos'),entrada=document.getElementById('nome'),raiz=document.documentElement;
+let tipo='Festival';
+for(const t of Object.keys(TIPOS)){const b=document.createElement('button');b.type='button';b.className='tipo';b.textContent=t;b.setAttribute('aria-pressed',t===tipo);b.onclick=()=>{tipo=t;[...tipos.children].forEach(x=>x.setAttribute('aria-pressed',x===b));aplicar()};tipos.append(b)}
+const hash=s=>[...s].reduce((h,c)=>(h*31+c.charCodeAt(0))>>>0,7);
+function aplicar(){
+  const nome=(entrada.value.trim()||'Seu projeto');const h=hash(nome.toLowerCase());
+  const [a,b,c,papel]=TIPOS[tipo][h%2];
+  raiz.style.setProperty('--a',a);raiz.style.setProperty('--b',b);raiz.style.setProperty('--c',c);raiz.style.setProperty('--papel',papel);
+  raiz.style.setProperty('--wd',62+(h>>3)%60);raiz.style.setProperty('--wg',[700,800,900][(h>>5)%3]);raiz.style.setProperty('--gira',((h>>7)%30-15)+'deg');
+  document.querySelectorAll('.nome').forEach(n=>{n.textContent=nome;n.style.fontSize='';
+    /* o nome sempre cabe na peça: diminui o corpo até nenhuma palavra passar da borda */
+    requestAnimationFrame(()=>{let t=parseFloat(getComputedStyle(n).fontSize);let i=0;while(n.scrollWidth>n.clientWidth+1&&i++<30){t*=.93;n.style.fontSize=t+'px'}})});
+}
+entrada.addEventListener('input',()=>{parou=true;aplicar()});entrada.addEventListener('focus',()=>{parou=true});
+/* sem ninguém digitando, o campo escreve exemplos sozinho */
+const EXEMPLOS=[['Festival Maré Alta','Festival'],['Orquestra do Sertão','Orquestra'],['Mostra Olhar Negro','Mostra'],['Teatro de Rua','Teatro']];
+let parou=false,ex=0;
+async function demo(){while(!parou){const [n,t]=EXEMPLOS[ex++%EXEMPLOS.length];tipo=t;[...tipos.children].forEach(x=>x.setAttribute('aria-pressed',x.textContent===t));
+  entrada.value='';for(const ch of n){if(parou)return;entrada.value+=ch;aplicar();await new Promise(r=>setTimeout(r,70))}
+  await new Promise(r=>setTimeout(r,2600));}}
+aplicar();document.fonts.load('900 20px Archivo').then(demo);
+/* as peças respondem ao cursor em camadas */
+const pecas=[...document.querySelectorAll('.peca')];
+addEventListener('pointermove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;pecas.forEach((p,i)=>{const f=(i+1)*6;p.style.setProperty('--px',(-x*f)+'px');p.style.setProperty('--py',(-y*f)+'px')})});
+</script>
+</body>
+</html>
