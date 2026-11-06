@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero A: vitrine de abertura</title>
+<style>
+@font-face{font-family:"Archivo";src:url("/assets/fontes/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:block}
+:root{--tinta:#16130f;--vermelho:#a3171f;--suave:rgba(22,19,15,.62);--margem:4.4vw;--curva:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;color:var(--tinta);font-family:"Archivo",sans-serif;-webkit-font-smoothing:antialiased}
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:100vh}
+.lado{display:grid;grid-template-rows:auto 1fr auto;padding:28px 4vw 40px var(--margem)}
+.marca{font-weight:800;font-size:.86rem;letter-spacing:.22em;text-transform:uppercase;line-height:1.25}
+.marca small{display:block;font-weight:500;font-size:.66rem;letter-spacing:.2em}
+.miolo{align-self:center;display:grid;gap:30px}
+.rotulo{font-stretch:115%;font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--vermelho)}
+.titulo{font-size:8.4vw;line-height:.82;letter-spacing:-.06em}
+.titulo span{display:block;font-weight:250}
+.titulo b{display:block;font-weight:900;color:var(--vermelho)}
+.texto{max-width:24em;font-size:1.2rem;line-height:1.5}
+.acoes{display:flex;align-items:center;gap:22px}
+.botao{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;border-radius:999px;background:var(--tinta);color:#fff;font-weight:600;text-decoration:none}
+.por{font-size:.8rem;color:var(--suave)}.por b{color:var(--tinta)}
+.servicos{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:6px 26px;padding-top:18px;border-top:1px solid var(--tinta);list-style:none;font-stretch:115%;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.servicos li:first-child{grid-column:1/-1;color:var(--vermelho);font-weight:700;margin-bottom:4px}
+.vitrine{position:relative;overflow:hidden;background:#0e0c0a;color:#fff}
+.vitrine img{position:absolute;top:0;left:0;width:100%;height:auto}
+.nav{position:absolute;top:28px;right:var(--margem);z-index:3;display:flex;gap:30px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;mix-blend-mode:difference}
+.sombra{position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.leg{position:absolute;left:28px;right:28px;bottom:26px;display:flex;justify-content:space-between;align-items:end;font-size:.92rem}
+.leg small{display:block;font-stretch:115%;font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:6px;opacity:.8}
+.leg strong{font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
+.leg span{font-stretch:115%;font-size:.68rem;font-weight:700;letter-spacing:.2em}
+@media (max-width:860px){
+  :root{--margem:20px}
+  .hero{grid-template-columns:1fr}
+  .vitrine{order:-1;height:58vh}
+  .nav{display:none}
+  .lado{padding:24px 20px 36px}
+  .titulo{font-size:17vw}
+  .miolo{gap:22px;margin-top:8px}
+  .servicos{grid-template-columns:repeat(2,auto)}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="lado">
+    <p class="marca">Josah Oliveira<small>Designer gráfico</small></p>
+    <div class="miolo">
+      <p class="rotulo">Comunicação para projetos culturais</p>
+      <h1 class="titulo"><span>design e</span><b>cultura</b></h1>
+      <p class="texto">Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.</p>
+      <div class="acoes"><a class="botao" href="#">Ver trabalhos &rarr;</a><p class="por">por <b>Josah Oliveira</b></p></div>
+    </div>
+    <ul class="servicos"><li>Serviços</li><li>Identidade visual</li><li>Book de captação</li><li>Landing pages</li><li>Redes sociais</li><li>Material de palco</li><li>Vídeo e spots</li></ul>
+  </div>
+  <div class="vitrine">
+    <img src="/assets/imagens/trabalhos/antropofagia-mapping/parte-01.webp" alt="">
+    <nav class="nav"><span>Trabalhos</span><span>Serviços</span><span>Sobre</span><span>Contato</span></nav>
+    <span class="sombra"></span>
+    <div class="leg"><p><small>Em cena</small><strong>Antropofagia Mapping</strong></p><span>01 de 03</span></div>
+  </div>
+</section>
+</body>
+</html>
