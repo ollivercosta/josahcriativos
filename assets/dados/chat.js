@@ -5,7 +5,7 @@
      txt  ... lista de baloes de resposta (\n quebra a linha)
      ops  ... proximos botoes. Nomes de outros assuntos ou acoes:
               @wa (WhatsApp), @wa_orcamento, @email, @termos,
-              @ver:#id:Rotulo (rola ate a secao)
+              @ver:/endereco#id:Rotulo (rola ate a secao, ou abre a pagina se ela for outra)
      kw   ... palavras que a busca reconhece quando o visitante digita.
               "palavra:1" vale menos (palavras genericas). Sem acento.
      frases . trechos que, se aparecerem na pergunta, apontam direto aqui.
@@ -168,7 +168,7 @@ export const BASE_CHAT = {
   portfolio: {
     rot: "Ver trabalhos",
     txt: ["Os projetos estão na seção Alguns trabalhos. Clique em um card para abrir as peças de cada projeto."],
-    ops: ["@ver:#projetos:Ir para os trabalhos", "sobre"],
+    ops: ["@ver:/#projetos:Ir para os trabalhos", "sobre"],
     kw: "portfolio trabalhos trabalho projetos:1 exemplos exemplo cases behance clientes feitos",
     frases: ["ja fez", "trabalhos feitos", "ver projetos", "ver trabalhos", "seus trabalhos", "seus projetos"],
   },
@@ -178,7 +178,7 @@ export const BASE_CHAT = {
       "Josah Oliveira é designer gráfico em Salvador, Bahia, com mais de dez anos de experiência em identidades visuais e comunicação para projetos culturais e digitais.",
       "Atua como Designer Pleno em parceria com a Tabuleiro Produções, e a trajetória cruza música, produção cultural e desenvolvimento de sistemas.",
     ],
-    ops: ["portfolio", "@ver:#sobre:Ler mais no site"],
+    ops: ["portfolio", "@ver:/sobre:Ler mais no site"],
     kw: "quem josah josa voce sobre experiencia designer historia trajetoria salvador bahia tabuleiro",
     frases: ["quem e voce", "quem e josah"],
   },

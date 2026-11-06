@@ -1,0 +1,61 @@
+<!--
+  SOBRE (/sobre)
+  Só o conteúdo da página. O build (ferramentas/build.mjs) junta com o cabeçalho,
+  a tela final de contato e o rodapé do index.html.
+-->
+      <!-- QUEM DÁ VIDA A ISSO: colagem com o retrato -->
+      <section class="sobre" id="sobre" aria-labelledby="sobre-titulo">
+        <figure class="sobre__colagem">
+          <span class="sobre__bloco" aria-hidden="true"></span>
+          <div class="sobre__foto">
+            <img
+              class="sobre__foto-imagem"
+              src="/assets/imagens/retrato-pb.webp"
+              alt="Foto de Josah Oliveira"
+              width="1334"
+              height="1050"
+            />
+          </div>
+          <svg class="sobre__linhas" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <line class="sobre__linha" x1="-6" y1="31" x2="106" y2="31" />
+            <line class="sobre__linha" x1="58" y1="-6" x2="58" y2="106" />
+            <line class="sobre__linha" x1="59" y1="50" x2="96" y2="74" />
+            <circle class="sobre__ponto" cx="58" cy="31" r="0.9" />
+          </svg>
+          <figcaption class="sobre__anotacao-papeis">
+            <span class="sobre__anotacao-principal">Designer gráfico</span>
+            <span class="sobre__anotacao-linha">Músico</span>
+            <span class="sobre__anotacao-linha">Dev</span>
+          </figcaption>
+        </figure>
+        <div class="sobre__texto">
+          <h2 class="sobre__titulo" id="sobre-titulo">Quem dá <b class="sobre__titulo-forte">vida</b> a isso</h2>
+          <p class="sobre__abertura">
+            Sou Josah Oliveira, designer gráfico. Desenvolvo identidades visuais, sistemas visuais e soluções de
+            comunicação para projetos culturais e digitais.
+          </p>
+          <p class="sobre__paragrafo">
+            Atuo em parceria com a
+            <a class="sobre__parceira" href="https://tabuleiroproducoes.com.br/"><strong>Tabuleiro Produções</strong></a
+            >, produtora cultural especializada em elaboração de projetos e captação de recursos, criando linguagens
+            gráficas, identidades visuais e direção estética para campanhas e iniciativas criativas.
+          </p>
+          <p class="sobre__citacao">
+            Minha trajetória passa pela <span class="sobre__citacao-trajetoria">música</span> e pela
+            <span class="sobre__citacao-trajetoria">produção cultural</span>. Viver esse universo por dentro, e não como
+            espectador, muda o jeito como um briefing vira solução visual:
+            <em class="sobre__citacao-destaque"
+              >menos sobre estética isolada, mais sobre estruturar informação e narrativa</em
+            >.
+          </p>
+          <div class="sobre__clientes">
+            <p class="sobre__clientes-rotulo">Trabalhos recentes para</p>
+            <ul class="sobre__clientes-lista">
+              <li class="sobre__cliente"><span class="sobre__cliente-nome">Orquestra Jovem do Recôncavo</span></li>
+              <li class="sobre__cliente"><span class="sobre__cliente-nome">ONG Acuba</span></li>
+              <li class="sobre__cliente"><span class="sobre__cliente-nome">Tabuleiro Produções</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
