@@ -120,7 +120,7 @@
 
 .trabalhos__lista {
   margin: 0;
-  padding: 0 0 18vh;
+  padding: 0;
   list-style: none;
   transition: opacity 0.45s var(--curva-suave);
 }
@@ -208,12 +208,17 @@
 }
 
 /* ---------- a vitrine: a metade direita é a própria peça, de ponta a ponta ---------- */
+/* a vitrine termina junto com a última linha da lista: ela acompanha a altura
+   da lista, até o limite da tela, e fica presa enquanto a lista corre (num
+   filtro com poucos trabalhos, não fica menor que 60% da tela) */
 .trabalhos__vitrine {
   position: sticky;
   top: 0;
-  align-self: start;
+  align-self: stretch;
   display: block;
-  height: 100vh;
+  height: auto;
+  min-height: 60vh;
+  max-height: 100vh;
   overflow: hidden;
   padding: 0;
   border: 0;
@@ -399,7 +404,10 @@
     order: -1;
     z-index: 2;
     top: var(--altura-cabecalho);
+    align-self: start;
     height: 56vh;
+    min-height: 0;
+    max-height: none;
   }
 
   .trabalhos__legenda {
