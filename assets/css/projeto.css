@@ -111,7 +111,7 @@
   flex-direction: column;
 }
 
-/* ---------- esquerda: nome, desafio, ficha e convite ---------- */
+/* ---------- esquerda: nome, desafio e ficha ---------- */
 .projeto__ficha {
   overflow: auto;
   scrollbar-width: none;
@@ -176,18 +176,6 @@
 .projeto__ficha-valor--falta {
   color: var(--cor-tinta-suave);
   font-style: italic;
-}
-
-.projeto__convite {
-  margin-top: auto;
-  padding-top: 8px;
-}
-
-.projeto__convite-texto {
-  margin: 0 0 14px;
-  font-size: 0.92rem;
-  line-height: 1.4;
-  color: var(--cor-tinta-suave);
 }
 
 /* ---------- centro: as imagens ---------- */
