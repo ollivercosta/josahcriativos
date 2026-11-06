@@ -113,6 +113,7 @@
 
 /* ---------- esquerda: nome, desafio e ficha ---------- */
 .projeto__ficha {
+  container-type: inline-size;
   overflow: auto;
   scrollbar-width: none;
   animation: projeto-entra 0.9s var(--curva) both;
@@ -130,10 +131,12 @@
 
 .projeto__titulo {
   margin: 0 0 22px;
-  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  /* a palavra mais longa do nome (Antropofagia) cabe inteira na coluna */
+  font-size: min(clamp(2rem, 3.2vw, 3.4rem), 14.5cqi);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.04em;
+  overflow-wrap: break-word;
 }
 
 .projeto__desafio {
