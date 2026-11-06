@@ -11,7 +11,6 @@
 import { ehImagem, enderecoDoTrabalho, listaDePecas } from "../assets/dados/trabalhos.js";
 
 const SITE = "https://josahcriativos.com.br";
-const WHATSAPP = "5571991448218";
 const FALTA_INFORMAR = "A informar";
 
 /** Desenhos pequenos dos itens do menu da direita (16 px, traço). */
@@ -97,6 +96,7 @@ function pecas(trabalho) {
     if (!itens.length) continue;
     html += `<div class="projeto__frente">`;
     if (frente) html += `<p class="projeto__frente-nome">${escapar(frente)}</p>`;
+    /* as peças lado a lado, e não uma embaixo da outra */
     html += `<ul class="projeto__pecas">${itens.map((peca) => `<li class="projeto__peca">${escapar(peca)}</li>`).join("")}</ul></div>`;
   }
   if (trabalho.regua) {
@@ -105,15 +105,14 @@ function pecas(trabalho) {
   return html;
 }
 
-/** As imagens do centro. As partes de uma mesma imagem longa ("parte-NN") ficam emendadas. */
+/** As imagens do centro, sempre inteiras. */
 function imagens(trabalho) {
   let posicao = -1;
   return (trabalho.midias || [])
     .map((midia) => {
       if (ehImagem(midia)) {
         posicao += 1;
-        const parte = /\/parte-\d+\.\w+$/.test(midia);
-        return `<figure class="projeto__midia${parte ? " projeto__midia--parte" : ""}">
+        return `<figure class="projeto__midia">
             <button type="button" class="projeto__ampliar" data-ampliar="${posicao}" aria-label="Ver a imagem ${posicao + 1} em tela inteira">
               <img class="projeto__imagem" src="${escapar(midia)}" alt="${escapar(trabalho.nome)}, imagem ${posicao + 1}" ${posicao ? 'loading="lazy"' : 'fetchpriority="high"'} decoding="async" />
             </button>
@@ -140,16 +139,13 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
   ]
     .map(([rotulo, valor]) => {
       const informado = valor || FALTA_INFORMAR;
-      return `<div class="projeto__ficha-linha"><dt class="projeto__ficha-rotulo">${rotulo}</dt><dd class="projeto__ficha-valor${valor ? "" : " projeto__ficha-valor--falta"}">${escapar(informado)}</dd></div>`;
+      return `<p class="projeto__ficha-linha"><span class="projeto__ficha-rotulo">${rotulo}</span> <span class="projeto__ficha-valor${valor ? "" : " projeto__ficha-valor--falta"}">${escapar(informado)}</span></p>`;
     })
     .join("\n            ");
-  const conversa = encodeURIComponent(
-    `Olá, Josah! Vi o projeto ${trabalho.nome} no seu site e quero conversar sobre um projeto meu.`,
-  );
   const menu = texto
     .map(
       (parte, k) =>
-        `<li class="projeto__menu-item"><a class="projeto__menu-link${k ? "" : " projeto__menu-link--ativo"}" href="#${parte.id}" data-parte="${parte.id}"><svg class="projeto__menu-icone" viewBox="0 0 24 24" aria-hidden="true">${ICONES[parte.id]}</svg>${parte.menu}</a></li>`,
+        `<li class="projeto__menu-item"><a class="projeto__menu-link${k ? "" : " projeto__menu-link--ativo"}" href="#${parte.id}" data-parte="${parte.id}" title="${parte.menu}"><svg class="projeto__menu-icone" viewBox="0 0 24 24" aria-hidden="true">${ICONES[parte.id]}</svg><span class="projeto__menu-nome">${parte.menu}</span></a></li>`,
     )
     .join("\n              ");
   const blocos = texto
@@ -200,12 +196,11 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
           <p class="projeto__categoria">${escapar(trabalho.categoria || "Projeto")}</p>
           <h1 class="projeto__titulo">${escapar(trabalho.nome)}</h1>
           ${trabalho.desafio ? `<p class="projeto__desafio">${escapar(trabalho.desafio)}</p>` : trabalho.resumo ? `<p class="projeto__desafio">${escapar(trabalho.resumo)}</p>` : ""}
-          <dl class="projeto__ficha-dados">
+          <div class="projeto__ficha-dados">
             ${ficha}
-          </dl>
+          </div>
           <div class="projeto__convite">
             <p class="projeto__convite-texto">Tem um projeto que precisa de uma linguagem assim?</p>
-            <a class="projeto__conversar" href="https://wa.me/${WHATSAPP}?text=${conversa}" target="_blank" rel="noopener">Vamos conversar <span aria-hidden="true">&rarr;</span></a>
           </div>
         </aside>
 

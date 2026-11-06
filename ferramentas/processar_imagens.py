@@ -1,8 +1,7 @@
 """Gera as imagens do portfólio a partir dos originais do Drive.
 capa.webp     recorte 4:3 (1200x900) para grade, destaque e vitrines
 pagina-NN.webp  cada página de um PDF, em 1400px de largura
-parte-NN.webp   uma imagem longa em 1400px de largura, dividida em partes de até 2100px de altura
-                (o visor mostra as partes emendadas)
+imagem.webp     a imagem longa inteira, em 1400px de largura, sem cortes
 """
 import os, sys, json, subprocess, glob
 from PIL import Image
@@ -10,7 +9,7 @@ Image.MAX_IMAGE_PIXELS = None
 DESTINO = sys.argv[1]
 # opcional: só os projetos indicados, separados por vírgula (ex.: antropofagia-mapping)
 SO = set(sys.argv[2].split(",")) if len(sys.argv) > 2 else None
-LARG, ALT_MAX = 1400, 2100
+LARG = 1400
 MAPA = {
   "olha-o-cabelo-dela": "arq/Olha o Cabelo dela.png",
   "nanda-sabores-e-afetos": "arq/DIVERSOS MATERIAIS -NANDA.png",
@@ -56,12 +55,9 @@ for slug, origem in MAPA.items():
         capa(im, f"{pasta}/capa.webp")
         w, h = im.size
         if w > LARG: im = im.resize((LARG, round(h * LARG / w)), Image.LANCZOS)
-        w, h = im.size
-        partes = max(1, -(-h // ALT_MAX)); alt = -(-h // partes)
-        for k in range(partes):
-            nome = f"parte-{k + 1:02d}.webp"
-            im.crop((0, k * alt, w, min(h, (k + 1) * alt))).save(f"{pasta}/{nome}", quality=80, method=6); paginas.append(nome)
+        # a peça vai inteira: nunca é cortada em partes
+        im.save(f"{pasta}/imagem.webp", quality=82, method=6); paginas.append("imagem.webp")
     resultado[slug] = paginas
     tam = sum(os.path.getsize(f) for f in glob.glob(pasta + "/*"))
-    print(f"{slug}: {len(paginas)} partes, {tam // 1024} KB")
+    print(f"{slug}: {len(paginas)} imagens, {tam // 1024} KB")
 json.dump(resultado, open("paginas.json", "w"), indent=1)
