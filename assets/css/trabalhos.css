@@ -131,6 +131,8 @@
   max-height: calc(100vh - var(--altura-cabecalho) - 190px);
   min-height: 300px;
   overflow: hidden;
+  /* as folhas empilham entre si, sem passar por cima do resto da página */
+  isolation: isolate;
   background: var(--cor-cinza-claro);
   touch-action: pan-y;
   user-select: none;
@@ -206,8 +208,16 @@
 /* ---------- ficha do projeto em foco ---------- */
 .trabalhos__ficha {
   display: grid;
-  gap: 18px;
+  gap: 24px;
   align-content: center;
+}
+
+/* o texto reserva a altura do projeto mais longo (medida em Trabalhos.js):
+   o botão e as setas ficam sempre no mesmo lugar */
+.trabalhos__ficha-texto {
+  display: grid;
+  align-content: start;
+  gap: 18px;
 }
 
 .trabalhos__troca {
@@ -275,7 +285,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 6px;
 }
 
 .trabalhos__botao {
@@ -330,6 +339,10 @@
 
 .trabalhos__indice-item {
   position: relative;
+}
+
+.trabalhos__indice-item:hover {
+  z-index: 3;
 }
 
 .trabalhos__indice-item[hidden] {

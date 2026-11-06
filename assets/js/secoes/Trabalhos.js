@@ -19,8 +19,10 @@ const POSES = [
 /** Quanto é preciso arrastar (px) ou a velocidade do gesto (px/ms) para jogar a folha. */
 const ARRASTO_MINIMO = 70;
 const VELOCIDADE_MINIMA = 0.45;
-/** Atraso entre uma folha e a seguinte quando a pilha se acomoda, em ms. */
-const CASCATA = 45;
+/** Saída da folha jogada pelas setas, pelo teclado ou pelas miniaturas: ela acelera para fora da mesa. */
+const SAIDA = { duracao: 700, curva: "cubic-bezier(0.55, 0, 0.75, 0.2)" };
+/** Solta depois de arrastar, a folha continua o gesto e desacelera (duração conforme a força). */
+const CURVA_DO_GESTO = "cubic-bezier(0.2, 0.75, 0.35, 1)";
 
 /**
  * Trabalhos
@@ -75,6 +77,7 @@ export class Trabalhos {
     this.#ligarArrasto();
     this.#arrumar(false);
     this.#escreverFicha(false);
+    this.#reservarAlturaDaFicha();
     this.#decodificarCapas();
   }
 
@@ -263,73 +266,47 @@ export class Trabalhos {
   }
 
   /**
-   * Põe um trabalho em cima da pilha. As folhas que estavam por cima dele são
-   * jogadas para fora, uma depois da outra, e voltam por baixo.
+   * Põe um trabalho em cima da pilha. É sempre o mesmo movimento: a folha da
+   * frente é jogada para fora da mesa e volta por baixo da pilha, enquanto a
+   * escolhida sobe para a frente.
    */
   #irPara(indice, jogada) {
     if (indice === this.ativo || !this.visiveis.includes(indice)) return;
-    const de = this.visiveis.indexOf(this.ativo);
-    const para = this.visiveis.indexOf(indice);
-    const total = this.visiveis.length;
-    const lado = jogada?.lado ?? (para > de ? -1 : 1);
-
-    /* as folhas que estão acima do escolhido, da de cima para baixo */
-    const avancando = (para - de + total) % total;
-    const voltando = (de - para + total) % total;
-    const acima = [];
-    if (avancando <= voltando) {
-      for (let k = 0; k < avancando; k++) acima.push(this.visiveis[(de + k) % total]);
-    }
+    const anterior = this.ativo;
+    const lado = jogada?.lado ?? (this.visiveis.indexOf(indice) > this.visiveis.indexOf(anterior) ? -1 : 1);
     this.ativo = indice;
-
     if (Ambiente.reduzMovimento) {
       this.#arrumar(false);
       this.#escreverFicha(false);
       return;
     }
-    /* indo para trás na ordem, a folha escolhida é puxada de baixo da pilha */
-    acima.slice(0, 3).forEach((jogado, ordem) => this.#jogar(jogado, lado, jogada?.velocidade ?? 0, ordem));
-    if (!acima.length) this.#trazerDeFora(indice, -lado);
+    this.#jogar(anterior, lado, jogada?.velocidade);
     this.#arrumar(true);
     this.#escreverFicha(true);
   }
 
-  /** Joga uma folha para fora da mesa e a devolve por baixo da pilha. */
-  #jogar(indice, lado, velocidade, ordem) {
+  /** Joga a folha para fora da mesa e, já fora de vista, a devolve por baixo da pilha. */
+  #jogar(indice, lado, velocidade) {
     const folha = this.folhas.get(indice);
     window.clearTimeout(this.saindo.get(indice));
-    /* quanto mais forte o gesto, mais rápida a saída (entre 380 e 650 ms) */
-    const duracao = Math.round(650 - Math.min(velocidade, 2.5) * 108);
-    const atraso = ordem * 70;
-    folha.style.zIndex = String(100 - ordem);
-    folha.style.transition = `transform ${duracao}ms cubic-bezier(0.2, 0.75, 0.35, 1) ${atraso}ms`;
-    folha.style.transform = this.#transformacao(
-      `${lado * 135}%`,
-      `${4 + ordem * 3}%`,
-      lado * (12 + ordem * 3),
-      0.98,
-    );
+    let duracao = SAIDA.duracao;
+    let curva = SAIDA.curva;
+    if (velocidade !== undefined) {
+      /* quanto mais forte o gesto, mais rápida a saída (entre 380 e 650 ms) */
+      duracao = Math.round(650 - Math.min(velocidade, 2.5) * 108);
+      curva = CURVA_DO_GESTO;
+    }
+    folha.style.zIndex = "100";
+    folha.style.transition = `transform ${duracao}ms ${curva}`;
+    folha.style.transform = this.#transformacao(`${lado * 120}%`, "6%", lado * 14, 1);
     this.saindo.set(
       indice,
       window.setTimeout(() => {
         this.saindo.delete(indice);
         folha.style.transition = "";
         this.#arrumar(true);
-      }, duracao + atraso),
+      }, Math.round(duracao * 0.75)),
     );
-  }
-
-  /** Voltando na ordem, a folha escolhida entra de fora da mesa, pelo lado de onde foi jogada. */
-  #trazerDeFora(indice, lado) {
-    const folha = this.folhas.get(indice);
-    window.clearTimeout(this.saindo.get(indice));
-    this.saindo.delete(indice);
-    folha.style.transition = "none";
-    folha.style.zIndex = String(this.visiveis.length + 1);
-    folha.style.transform = this.#transformacao(`${lado * 135}%`, "4%", lado * 12, 0.98);
-    folha.classList.remove("trabalhos__folha--fora");
-    void folha.offsetWidth;
-    folha.style.transition = "";
   }
 
   /** Acomoda a pilha: cada folha vai para a pose da sua distância até a da frente. */
@@ -349,7 +326,6 @@ export class Trabalhos {
       if (this.saindo.has(indice)) continue;
       const pose = POSES[Math.min(distancia, POSES.length - 1)];
       folha.style.zIndex = String(total - distancia);
-      folha.style.transitionDelay = animar ? `${Math.min(distancia, POSES.length) * CASCATA}ms` : "0ms";
       if (!animar) folha.style.transition = "none";
       folha.style.transform = this.#transformacao(`${pose.x}%`, `${pose.y}%`, pose.giro, pose.escala);
       if (!animar) {
@@ -390,26 +366,9 @@ export class Trabalhos {
   #escreverFicha(animar) {
     const trabalho = this.trabalhos[this.ativo];
     const escrever = () => {
-      const { categoria, nome, resumo, dados, botao } = this.campos;
-      categoria.replaceChildren(this.#elemento("span", "trabalhos__categoria-texto", [trabalho.categoria, trabalho.tipo].filter(Boolean).join(", ")));
-      if (trabalho.destaque) categoria.append(this.#elemento("span", "trabalhos__selo", "Destaque"));
-      nome.textContent = trabalho.nome;
-      resumo.textContent = trabalho.resumo || "";
-      dados.replaceChildren(
-        ...[
-          ["Cliente", trabalho.cliente],
-          ["Local", trabalho.local],
-          ["Ano", trabalho.ano],
-        ]
-          .filter(([, valor]) => valor)
-          .map(([rotulo, valor]) => {
-            const dado = this.#elemento("span", "trabalhos__dado");
-            dado.append(this.#elemento("span", "trabalhos__dado-rotulo", rotulo), valor);
-            return dado;
-          }),
-      );
-      botao.href = enderecoDoTrabalho(trabalho);
-      botao.setAttribute("aria-label", `Ver o projeto ${trabalho.nome}`);
+      this.#preencher(this.campos, trabalho);
+      this.campos.botao.href = enderecoDoTrabalho(trabalho);
+      this.campos.botao.setAttribute("aria-label", `Ver o projeto ${trabalho.nome}`);
       this.ficha.classList.remove("trabalhos__ficha--trocando");
     };
     window.clearTimeout(this.esperaDaFicha);
@@ -419,6 +378,75 @@ export class Trabalhos {
     }
     this.ficha.classList.add("trabalhos__ficha--trocando");
     this.esperaDaFicha = window.setTimeout(escrever, 220);
+  }
+
+  /** Escreve categoria, nome, resumo e dados de um trabalho nos campos dados. */
+  #preencher({ categoria, nome, resumo, dados }, trabalho) {
+    categoria.replaceChildren(
+      this.#elemento("span", "trabalhos__categoria-texto", [trabalho.categoria, trabalho.tipo].filter(Boolean).join(", ")),
+    );
+    if (trabalho.destaque) categoria.append(this.#elemento("span", "trabalhos__selo", "Destaque"));
+    nome.textContent = trabalho.nome;
+    resumo.textContent = trabalho.resumo || "";
+    dados.replaceChildren(
+      ...[
+        ["Cliente", trabalho.cliente],
+        ["Local", trabalho.local],
+        ["Ano", trabalho.ano],
+      ]
+        .filter(([, valor]) => valor)
+        .map(([rotulo, valor]) => {
+          const dado = this.#elemento("span", "trabalhos__dado");
+          dado.append(this.#elemento("span", "trabalhos__dado-rotulo", rotulo), valor);
+          return dado;
+        }),
+    );
+  }
+
+  /**
+   * O texto da ficha reserva a altura do trabalho que ocupa mais linhas, para
+   * o botão e as setas não mudarem de lugar quando o projeto troca. A medida
+   * é feita numa cópia invisível do texto, com a largura real, e refeita
+   * quando a largura da tela muda.
+   */
+  #reservarAlturaDaFicha() {
+    const texto = this.ficha.querySelector(".trabalhos__ficha-texto");
+    const medir = () => {
+      const copia = texto.cloneNode(true);
+      copia.removeAttribute("aria-live");
+      copia.setAttribute("aria-hidden", "true");
+      Object.assign(copia.style, {
+        position: "absolute",
+        visibility: "hidden",
+        pointerEvents: "none",
+        minHeight: "0",
+        width: `${texto.getBoundingClientRect().width}px`,
+      });
+      this.ficha.append(copia);
+      const campos = {
+        categoria: copia.querySelector(".trabalhos__categoria"),
+        nome: copia.querySelector(".trabalhos__nome"),
+        resumo: copia.querySelector(".trabalhos__resumo"),
+        dados: copia.querySelector(".trabalhos__dados"),
+      };
+      let maior = 0;
+      for (const indice of this.ordem) {
+        this.#preencher(campos, this.trabalhos[indice]);
+        maior = Math.max(maior, copia.getBoundingClientRect().height);
+      }
+      copia.remove();
+      texto.style.minHeight = `${Math.ceil(maior)}px`;
+    };
+    medir();
+    document.fonts?.ready.then(medir);
+    let largura = window.innerWidth;
+    let espera = 0;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth === largura) return;
+      largura = window.innerWidth;
+      window.clearTimeout(espera);
+      espera = window.setTimeout(medir, 150);
+    });
   }
 
   #elemento(tag, classe, texto) {
