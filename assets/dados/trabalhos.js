@@ -8,7 +8,7 @@
  *   tipo       o que a peça é (ex.: "Book de captação", "Identidade visual"),
  *              Fica como referência: os cartões mostram o rótulo "Projeto".
  *   categoria  usada nos filtros: "Marca e apresentação", "Web e redes",
- *              "Vídeo e mídia" ou "Outros"
+ *              ou outra que surgir (os filtros se montam sozinhos)
  *   resumo     duas ou três linhas sobre o projeto, mostradas ao passar o
  *              mouse na capa
  *   sobre      o que é o projeto (bloco "O projeto" da ficha)
@@ -351,35 +351,6 @@ export const TRABALHOS = [
     pecas: [],
     capa: "/assets/imagens/trabalhos/ong-acuba/capa.webp",
     midias: ["/assets/imagens/trabalhos/ong-acuba/parte-01.webp", "/assets/imagens/trabalhos/ong-acuba/parte-02.webp"],
-  },
-  {
-    nome: "ACUBA - Edição",
-    tipo: "Edição de vídeo",
-    categoria: "Vídeo e mídia",
-    resumo: "Edição de vídeo para a ONG Acuba.",
-    cliente: "",
-    ano: "",
-    sobre: "",
-    proposta: "",
-    resultado: "",
-    pecas: [],
-    midias: ["https://www.youtube.com/watch?v=YrjKU3QbIhI"],
-  },
-  {
-    nome: "Rider Técnico",
-    tipo: "Rider técnico",
-    categoria: "Outros",
-    resumo: "Rider técnico e de palco da banda Xote Debochado.",
-    cliente: "",
-    proponente: "",
-    local: "",
-    ano: "",
-    sobre: "",
-    proposta: "",
-    resultado: "",
-    pecas: [],
-    capa: "/assets/imagens/trabalhos/rider-tecnico/capa.webp",
-    midias: ["/assets/imagens/trabalhos/rider-tecnico/parte-01.webp"],
   },
 ];
 
