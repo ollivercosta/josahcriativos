@@ -4,8 +4,16 @@
    para a tinta, e as palavras-chave chegam em vermelho.
    ========================================================================= */
 
+/* a deixa ganha uma faixa própria, em tinta: a frase acende em creme e o
+   vermelho fica um tom mais claro, para manter o contraste sobre o escuro */
 .manifesto {
-  padding: var(--espaco-secao) var(--margem) 0;
+  --cor-tinta: #f3eee6;
+  --cor-tinta-apagada: rgba(243, 238, 230, 0.16);
+  --cor-vermelho: #e2453b;
+  margin-top: var(--espaco-secao);
+  padding: var(--espaco-secao) var(--margem);
+  background: #16130f;
+  color: var(--cor-tinta);
 }
 
 .manifesto__texto {
@@ -34,19 +42,31 @@
   }
 }
 
-/* a deixa: depois da frase, o caminho para entender como o trabalho acontece */
+/* a deixa: uma linha corre da margem até o botão, que fecha a faixa à direita */
+.manifesto__acao {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: var(--espaco-titulo);
+}
+
+.manifesto__linha {
+  flex: 1;
+  height: 1px;
+  background: rgba(243, 238, 230, 0.28);
+}
+
 .manifesto__botao {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  margin-top: var(--espaco-titulo);
-  padding: 16px 26px;
-  border: 1px solid var(--cor-tinta);
+  gap: 16px;
+  padding: 20px 34px;
   border-radius: 999px;
-  color: var(--cor-tinta);
+  background: var(--cor-tinta);
+  color: #16130f;
   text-decoration: none;
   font-stretch: 115%;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -57,8 +77,8 @@
 
 .manifesto__botao:hover,
 .manifesto__botao:focus-visible {
-  background: var(--cor-tinta);
-  color: var(--cor-fundo);
+  background: var(--cor-vermelho);
+  color: #fff;
 }
 
 .manifesto__botao-seta {
@@ -66,11 +86,16 @@
 }
 
 .manifesto__botao:hover .manifesto__botao-seta {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 @media (max-width: 860px) {
+  .manifesto__acao {
+    gap: 18px;
+  }
+
   .manifesto__botao {
     min-height: var(--toque, 44px);
+    padding: 16px 24px;
   }
 }
