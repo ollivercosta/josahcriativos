@@ -10,7 +10,7 @@ const TODOS = "Todos";
  * Cada peça é um link para a página do projeto (/trabalhos/<nome>), com a
  * capa e uma etiqueta de museu: nome, tipo, ano e o selo de destaque.
  *
- * Quando a parede entra na tela, as peças aparecem uma depois da outra.
+ * Cada fileira aparece quando chega à tela, um quadro depois do outro.
  * Os filtros de categoria não mudam nada de lugar: as peças de fora da
  * categoria se apagam, para o visitante não perder a referência.
  */
@@ -40,12 +40,11 @@ export class Trabalhos {
   }
 
   #montarParede() {
-    this.ordem.forEach((trabalho, posicao) => {
+    this.ordem.forEach((trabalho) => {
       const item = this.#elemento("li", "trabalhos__item");
       const peca = this.#elemento("a", "trabalhos__peca");
       peca.href = enderecoDoTrabalho(trabalho);
       peca.dataset.categoria = trabalho.categoria;
-      peca.style.setProperty("--ordem", String(posicao));
 
       const quadro = this.#elemento("span", "trabalhos__quadro");
       const imagem = this.#elemento("img", "trabalhos__imagem");
@@ -92,22 +91,36 @@ export class Trabalhos {
     }
   }
 
-  /** As peças aparecem quando a parede entra na tela (de uma vez, se o visitante pediu menos movimento). */
+  /**
+   * Cada peça aparece quando chega à tela. As que chegam juntas (uma fileira
+   * inteira, em geral) entram uma depois da outra, da esquerda para a direita.
+   * Com menos movimento pedido no sistema, tudo já aparece no lugar.
+   */
   #observarEntrada() {
-    const mostrar = () => this.parede.classList.add("trabalhos__parede--visivel");
+    const mostrar = (peca, atraso = 0) => {
+      peca.style.setProperty("--atraso", `${atraso}ms`);
+      peca.classList.add("trabalhos__peca--visivel");
+    };
     if (Ambiente.reduzMovimento || !("IntersectionObserver" in window)) {
-      mostrar();
+      this.pecas.forEach((peca) => mostrar(peca));
       return;
     }
     const observador = new IntersectionObserver(
-      ([entrada]) => {
-        if (!entrada.isIntersecting) return;
-        mostrar();
-        observador.disconnect();
+      (entradas) => {
+        const chegando = entradas
+          .filter((entrada) => entrada.isIntersecting)
+          .map((entrada) => entrada.target)
+          .sort((a, b) => this.pecas.indexOf(a) - this.pecas.indexOf(b));
+        chegando.forEach((peca, ordem) => {
+          mostrar(peca, ordem * 90);
+          observador.unobserve(peca);
+          /* depois de entrar, o atraso sai para não atrasar o hover nem os filtros */
+          window.setTimeout(() => peca.style.removeProperty("--atraso"), ordem * 90 + 950);
+        });
       },
-      { threshold: 0.08 },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.2 },
     );
-    observador.observe(this.parede);
+    this.pecas.forEach((peca) => observador.observe(peca));
   }
 
   #elemento(tag, classe, texto) {
