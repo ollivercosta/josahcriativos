@@ -276,7 +276,8 @@
     </div>
 
     <main id="conteudo">
-      <!-- HERO: "design e CULTURA" -->
+      <!-- HERO: a mesa. As folhas (capas dos trabalhos) são montadas por assets/js/secoes/Hero.js
+           e, rolando, pousam nos quadros da parede de trabalhos -->
       <section class="hero" id="topo" aria-label="Design e cultura">
         <header class="hero__cabecalho">
           <a class="hero__marca" href="#topo"><b class="hero__marca-nome">Josah Oliveira</b>Designer gráfico</a>
@@ -289,44 +290,42 @@
           </ul>
         </header>
 
-        <div class="hero__plano">
-          <span class="hero__barra-base" aria-hidden="true"></span>
-          <span class="hero__barra-topo" aria-hidden="true"></span>
-          <span class="hero__barra-haste" aria-hidden="true"></span>
-          <span class="hero__barra-larga" aria-hidden="true">
-            <span class="hero__assinatura">por <b class="hero__assinatura-nome">Josah Oliveira</b></span>
-          </span>
-
-          <p class="hero__rotulo-topo">Comunicação para projetos culturais</p>
-          <h1 class="hero__design" aria-label="Design e cultura.">design e</h1>
-          <p class="hero__cultura" aria-hidden="true"></p>
-
-          <p class="hero__rotulo-servicos" aria-hidden="true">Serviços</p>
+        <div class="hero__conteudo">
+          <p class="hero__rotulo">Comunicação para projetos culturais</p>
+          <h1 class="hero__titulo">
+            <span class="hero__titulo-linha">Design</span>
+            <span class="hero__titulo-linha">e <em class="hero__titulo-destaque">cultura.</em></span>
+          </h1>
           <p class="hero__texto">
             Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
           </p>
-          <a class="hero__botao" href="#projetos">
-            Ver trabalhos
-            <svg class="hero__botao-seta" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M4 12h15M13 6l6 6-6 6"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
+          <div class="hero__acao">
+            <a class="hero__botao" href="#projetos">
+              Ver trabalhos
+              <svg class="hero__botao-seta" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 12h15M13 6l6 6-6 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <p class="hero__assinatura">por <b class="hero__assinatura-nome">Josah Oliveira</b></p>
+          </div>
           <ul class="hero__servicos" aria-label="Serviços">
-            <li class="hero__servico" style="--i: 0">Identidade visual</li>
-            <li class="hero__servico" style="--i: 1">Book de captação</li>
-            <li class="hero__servico" style="--i: 2">Landing pages</li>
-            <li class="hero__servico" style="--i: 3">Redes sociais</li>
-            <li class="hero__servico" style="--i: 4">Material de palco</li>
-            <li class="hero__servico" style="--i: 5">Vídeo e spots</li>
+            <li class="hero__servico">Identidade visual</li>
+            <li class="hero__servico">Book de captação</li>
+            <li class="hero__servico">Landing pages</li>
+            <li class="hero__servico">Redes sociais</li>
+            <li class="hero__servico">Material de palco</li>
+            <li class="hero__servico">Vídeo e spots</li>
           </ul>
         </div>
+
+        <div class="hero__mesa" aria-hidden="true"></div>
       </section>
 
       <!-- ALGUNS TRABALHOS: a parede de exposição é montada por assets/js/secoes/Trabalhos.js

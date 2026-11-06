@@ -213,7 +213,20 @@
   gap: 4px;
   padding-left: 12px;
   border-left: 2px solid var(--cor-tinta);
-  transition: border-color 0.3s;
+  transition:
+    border-color 0.3s,
+    opacity 0.5s var(--curva),
+    transform 0.6s var(--curva);
+}
+
+/* à espera da folha que vem do hero: o quadro fica vazio e a etiqueta, escondida */
+.trabalhos__peca--esperando .trabalhos__quadro {
+  visibility: hidden;
+}
+
+.trabalhos__peca--esperando .trabalhos__etiqueta {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
 }
 
 .trabalhos__nome {

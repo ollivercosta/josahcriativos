@@ -59,12 +59,17 @@ class Site {
       const elemento = $(seletor);
       return elemento ? criar(elemento) : null;
     };
-    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     this.secoes.cabecalho = new Cabecalho($(".cabecalho"), $(".menu-movel"), this.ciclo, this.gestor);
     this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz, this.ciclo));
     this.secoes.visor = se(".visor", (raiz) => new Visor(raiz, TRABALHOS, this.gestor));
     /* cada trabalho tem a sua página (/trabalhos/<nome>), gerada no build: as capas são links para ela */
-    this.secoes.trabalhos = se(".trabalhos", (raiz) => new Trabalhos(raiz, TRABALHOS));
+    this.secoes.trabalhos = se(
+      ".trabalhos",
+      (raiz) => new Trabalhos(raiz, TRABALHOS, { entradaPropria: !$(".hero") }),
+    );
+    /* as folhas do hero pousam nos quadros da parede de trabalhos */
+    const parede = this.secoes.trabalhos;
+    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz, parede?.trabalhosEmOrdem ?? [], parede));
     this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz, this.ciclo));
     this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
