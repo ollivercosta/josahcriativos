@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero: paisagem de papel recortado</title>
+<style>
+@font-face{font-family:"Archivo";src:url("/assets/fontes/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:block}
+:root{--tinta:#1b1512;--vermelho:#a3171f;--fundo:#ece3d3;--frente:#f7f1e6;--margem:4.4vw;--curva:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--fundo)}
+body{font-family:"Archivo",sans-serif;color:var(--tinta);-webkit-font-smoothing:antialiased}
+
+/* a paisagem fica presa enquanto a câmera atravessa as camadas */
+.paisagem{position:relative;height:240vh}
+.paisagem__cena{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--fundo)}
+/* o papel do fundo tem a mesma textura dos outros */
+.paisagem__cena::before{content:"";position:absolute;inset:0;background-image:var(--textura);opacity:.5;mix-blend-mode:multiply}
+/* a luz da janela: mais clara no alto à esquerda */
+.paisagem__luz{position:absolute;inset:0;z-index:20;pointer-events:none;mix-blend-mode:soft-light;
+  background:radial-gradient(ellipse 90% 80% at 18% 8%,rgba(255,250,240,.55),rgba(255,250,240,0) 60%),linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(40,20,10,.18))}
+
+/* cada camada: o papel (canvas) e a sombra dele, que se afasta quando a camada sobe */
+.camada{position:absolute;left:-10vw;right:-10vw;top:0;bottom:0;will-change:transform;pointer-events:none}
+.camada__papel,.camada__sombra{position:absolute;left:0;top:0;width:100%;height:100%;will-change:transform}
+.camada__sombra{opacity:var(--sombra,.5)}
+
+/* o que é HTML: fica sobre as camadas e anda com elas */
+.paisagem__cab{position:absolute;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:flex-start;padding:26px var(--margem);opacity:var(--interface,1)}
+.paisagem__marca{color:var(--tinta);text-decoration:none;font-stretch:125%;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;line-height:1.6}
+.paisagem__marca b{display:block;font-weight:700;font-size:.74rem}
+.paisagem__menu{display:flex;gap:34px;list-style:none}
+.paisagem__menu a{color:var(--tinta);text-decoration:none;font-stretch:125%;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* o céu: o texto e o botão moram no alto, onde a paisagem respira */
+.ceu{position:absolute;z-index:30;left:var(--margem);top:calc(72px + 8vh);width:min(30em,34vw);opacity:var(--interface,1);transform:translateY(calc(var(--ceu-sobe,0) * -1px))}
+.ceu__rotulo{font-stretch:125%;font-weight:700;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--vermelho);margin-bottom:22px}
+.ceu__texto{font-size:clamp(1.05rem,1.45vw,1.4rem);line-height:1.45;letter-spacing:-.01em;margin-bottom:28px}
+.ceu__botao{display:inline-flex;align-items:center;gap:14px;padding:16px 26px;border-radius:999px;background:var(--tinta);color:var(--frente);text-decoration:none;font-stretch:125%;font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;
+  box-shadow:0 1px 1px rgba(40,20,10,.25),0 10px 22px -10px rgba(40,20,10,.55);transition:transform .6s var(--curva),box-shadow .6s var(--curva)}
+.ceu__botao:hover{transform:translateY(-3px);box-shadow:0 2px 2px rgba(40,20,10,.2),0 18px 30px -12px rgba(40,20,10,.6)}
+.ceu__botao svg{width:16px;height:16px;transition:transform .6s var(--curva)}
+.ceu__botao:hover svg{transform:translateX(4px)}
+/* o chão: a faixa de papel da frente, com os serviços e a assinatura */
+.chao{position:absolute;z-index:12;left:0;right:0;bottom:0;padding:0 var(--margem) 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:4vw;will-change:transform}
+.chao__servicos{list-style:none;display:flex;flex-wrap:wrap;gap:6px 22px;font-stretch:125%;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(27,21,18,.7)}
+.chao__por{flex:none;font-size:.8rem;color:rgba(27,21,18,.62)}.chao__por b{color:var(--tinta)}
+
+/* no fim da travessia, a cabeça dos trabalhos aparece no papel do fundo */
+.paisagem__proxima{position:absolute;z-index:25;left:var(--margem);top:calc(72px + 10vh);opacity:var(--proxima,0);transform:translateY(calc((1 - var(--proxima,0)) * 30px))}
+.paisagem__proxima p{font-size:clamp(2.6rem,6.4vw,6.4rem);font-weight:300;letter-spacing:-.045em;line-height:.9}
+.paisagem__proxima em{font-style:normal;font-weight:900;color:var(--vermelho)}
+
+.trabalhos{position:relative;background:var(--fundo);padding:0 var(--margem) 20vh}
+.trabalhos::before{content:"";position:absolute;inset:0;background-image:var(--textura);opacity:.5;mix-blend-mode:multiply;pointer-events:none}
+.lista{position:relative;list-style:none;border-top:1px solid rgba(27,21,18,.14)}
+.lista li{display:flex;justify-content:space-between;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(27,21,18,.14);font-size:clamp(1.3rem,2.6vw,2.4rem);font-weight:300;letter-spacing:-.03em}
+.lista small{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(27,21,18,.55)}
+
+@media (max-width:860px){
+  :root{--margem:20px}
+  .paisagem__menu{display:none}
+  .ceu{width:auto;right:var(--margem);top:calc(64px + 4vh)}
+  .ceu__texto{font-size:1rem;margin-bottom:18px}
+  .chao{flex-direction:column;align-items:flex-start;gap:10px;padding-bottom:18px}
+  .chao__servicos{gap:4px 14px;font-size:.58rem}
+}
+</style>
+</head>
+<body>
+<section class="paisagem" aria-label="Design e cultura">
+  <div class="paisagem__cena" id="cena">
+    <header class="paisagem__cab">
+      <a class="paisagem__marca" href="#"><b>Josah Oliveira</b>Designer gráfico</a>
+      <ul class="paisagem__menu"><li><a href="#trabalhos">Trabalhos</a></li><li><a href="#">Serviços</a></li><li><a href="#">Sobre</a></li><li><a href="#">Contato</a></li></ul>
+    </header>
+    <div class="ceu">
+      <p class="ceu__rotulo">Comunicação para projetos culturais</p>
+      <h1 class="sr">Design e cultura</h1>
+      <p class="ceu__texto">Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.</p>
+      <a class="ceu__botao" href="#trabalhos">Ver trabalhos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="paisagem__proxima" aria-hidden="true"><p>Alguns <em>trabalhos.</em></p></div>
+
+    <div class="chao" id="chao">
+      <ul class="chao__servicos" aria-label="Serviços"><li>Identidade visual</li><li>Book de captação</li><li>Landing pages</li><li>Redes sociais</li><li>Material de palco</li><li>Vídeo e spots</li></ul>
+      <p class="chao__por">por <b>Josah Oliveira</b></p>
+    </div>
+    <div class="paisagem__luz" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="trabalhos" id="trabalhos">
+  <ol class="lista">
+    <li>Olha o Cabelo dela <small>Marca e apresentação</small></li>
+    <li>Antropofagia Mapping <small>Marca e apresentação</small></li>
+    <li>Tabuleiro Produções <small>Marca e apresentação</small></li>
+    <li>Amazônia Motirô <small>Marca e apresentação</small></li>
+    <li>Orquestra Jovem do Recôncavo <small>Marca e apresentação</small></li>
+  </ol>
+</section>
+
+<script>
+/* A paisagem é feita só de papel e letras: o contorno de cima de cada folha é o desenho
+   das próprias palavras. Cada folha é pintada uma vez num canvas (cor, fibra e a sombra
+   que ela projeta); depois, só se movem camadas. Nada é recalculado a cada quadro. */
+const faixa = (v, a, b) => Math.min(1, Math.max(0, (v - a) / (b - a)));
+const entraSai = (v) => (v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2);
+
+/** A fibra do papel, pintada uma vez e reaproveitada em todas as folhas. */
+function fibra(tamanho = 320) {
+  const cv = document.createElement("canvas"); cv.width = cv.height = tamanho;
+  const c = cv.getContext("2d"), dados = c.createImageData(tamanho, tamanho), d = dados.data;
+  for (let i = 0; i < d.length; i += 4) { const v = 128 + (Math.random() - 0.5) * 70; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+  c.putImageData(dados, 0, 0);
+  /* fibras longas, como no papel de algodão */
+  for (let i = 0; i < 180; i++) {
+    c.strokeStyle = `rgba(${Math.random() < 0.5 ? "255,255,255" : "0,0,0"},${0.05 + Math.random() * 0.08})`; c.lineWidth = 0.6;
+    c.beginPath(); const x = Math.random() * tamanho, y = Math.random() * tamanho, a = Math.random() * Math.PI;
+    c.moveTo(x, y); c.quadraticCurveTo(x + Math.cos(a) * 14, y + Math.sin(a) * 14 + 4, x + Math.cos(a) * 30, y + Math.sin(a) * 30); c.stroke();
+  }
+  return cv;
+}
+
+/** Uma folha: a palavra de pé sobre o corpo do papel, recortada como uma silhueta. */
+class Folha {
+  constructor(cena, def, textura) {
+    this.def = def;
+    this.el = document.createElement("div"); this.el.className = "camada"; this.el.style.zIndex = def.z;
+    this.sombra = document.createElement("canvas"); this.sombra.className = "camada__sombra";
+    this.papel = document.createElement("canvas"); this.papel.className = "camada__papel";
+    this.el.append(this.sombra, this.papel);
+    cena.insertBefore(this.el, cena.querySelector(".chao"));
+    this.textura = textura;
+  }
+
+  /* desenha a silhueta (a palavra mais o corpo da folha) num contexto, na escala da tela */
+  #silhueta(c, W, H, borda) {
+    const { palavra, corpo, base, x, alinha, largura, peso, espaco } = this.def(W, H);
+    c.beginPath();
+    /* a borda de cima do corpo não é reta: é o corte à mão, levemente irregular */
+    c.moveTo(-50, H + 50); c.lineTo(-50, base);
+    for (let px = -50; px <= W + 50; px += 24) c.lineTo(px, base + borda[Math.floor((px + 50) / 24) % borda.length]);
+    c.lineTo(W + 50, H + 50); c.closePath(); c.fill();
+    if (palavra) {
+      c.font = `${peso} ${corpo}px Archivo`; c.fontStretch = largura; c.letterSpacing = `${espaco}px`;
+      c.textAlign = alinha; c.textBaseline = "alphabetic";
+      c.fillText(palavra, x, base + corpo * 0.06);
+    }
+  }
+
+  pintar(W, H, dpr) {
+    const borda = Array.from({ length: 200 }, (_, i) => Math.sin(i * 1.7) * 1.2 + (Math.random() - 0.5) * 1.6);
+    for (const cv of [this.papel, this.sombra]) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+    const def = this.def(W, H);
+    /* o papel */
+    const c = this.papel.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.fillStyle = def.cor; this.#silhueta(c, W, H, borda);
+    c.globalCompositeOperation = "source-atop";
+    c.globalAlpha = def.fibra ?? 0.12; c.fillStyle = c.createPattern(this.textura, "repeat"); c.fillRect(0, 0, W, H);
+    c.globalAlpha = 1; c.globalCompositeOperation = "source-over";
+    /* a sombra: a mesma silhueta, desfocada; ela anda separada do papel */
+    const s = this.sombra.getContext("2d"); s.setTransform(dpr, 0, 0, dpr, 0, 0);
+    s.shadowColor = "rgba(45,22,10,.9)"; s.shadowBlur = 26 * dpr; s.shadowOffsetX = 10000 * dpr; s.fillStyle = "#000";
+    s.translate(-10000, 0); this.#silhueta(s, W, H, borda);
+  }
+
+  /* p: travessia (0 a 1); olhar: o cursor de -1 a 1; t: tempo, para a folha respirar */
+  mover(p, olharX, olharY, t, H) {
+    const d = this.def.profundidade, i = this.def.z;
+    /* a câmera desce e avança: as folhas de perto saem primeiro e crescem mais */
+    const desce = entraSai(faixa(p, this.def.sai[0], this.def.sai[1]));
+    const y = desce * H * (0.55 + d * 0.9) + Math.sin(t * 0.6 + i) * d * 2.5;
+    const x = olharX * d * -26 + Math.sin(t * 0.4 + i * 2) * d * 1.5;
+    const escala = 1 + desce * d * 0.35;
+    this.el.style.transform = `translate3d(${x.toFixed(2)}px,${(y + olharY * d * -12).toFixed(2)}px,0) scale(${escala.toFixed(4)})`;
+    /* a sombra: mais longe e mais fraca quanto mais a folha se descola da de baixo */
+    const afasta = 1 + desce * 2.2;
+    this.sombra.style.transform = `translate3d(${(6 * d * afasta + olharX * d * 8).toFixed(2)}px,${(10 * d * afasta).toFixed(2)}px,0)`;
+    this.el.style.setProperty("--sombra", (0.55 - desce * 0.25).toFixed(3));
+  }
+}
+
+class Paisagem {
+  constructor(cena) {
+    this.cena = cena; this.secao = cena.closest(".paisagem");
+    this.chao = cena.querySelector(".chao");
+    const textura = fibra();
+    document.documentElement.style.setProperty("--textura", `url(${textura.toDataURL()})`);
+    const estreita = () => innerWidth < 861;
+    /* as folhas, do fundo para a frente: a palavra, o tamanho, onde pisa e a cor */
+    /* do fundo para a frente: a mais distante é a mais clara, como numa paisagem com névoa */
+    const folha = (def, extra) => new Folha(cena, Object.assign(def, extra), textura);
+    this.folhas = [
+      folha((W, H) => ({ palavra: "DESIGN E", corpo: estreita() ? W * 0.24 : W * 0.17, base: H * (estreita() ? 0.62 : 0.6), x: W * (estreita() ? 0.9 : 0.93), alinha: "right", largura: "extra-condensed", peso: 900, espaco: -1, cor: "#dccdb6", fibra: 0.16 }), { profundidade: 0.2, z: 2, sai: [0.2, 0.95] }),
+      folha((W, H) => ({ palavra: "CULTURA", corpo: estreita() ? W * 0.27 : W * 0.25, base: H * (estreita() ? 0.76 : 0.84), x: W * (estreita() ? 0.1 : 0.07), alinha: "left", largura: "extra-condensed", peso: 900, espaco: -2, cor: "#a3171f", fibra: 0.14 }), { profundidade: 0.55, z: 4, sai: [0.1, 0.8] }),
+      folha((W, H) => ({ palavra: "", corpo: 0, base: H * (estreita() ? 0.86 : 0.9), x: 0, alinha: "left", largura: "normal", peso: 400, espaco: 0, cor: "#f7f1e6", fibra: 0.1 }), { profundidade: 1, z: 6, sai: [0, 0.62] }),
+    ];
+    this.olhar = { x: 0, y: 0, alvoX: 0, alvoY: 0 };
+    this.suave = 0;
+    addEventListener("pointermove", (e) => { this.olhar.alvoX = (e.clientX / innerWidth) * 2 - 1; this.olhar.alvoY = (e.clientY / innerHeight) * 2 - 1; });
+    addEventListener("resize", () => this.#pintar());
+    this.#pintar();
+    window.__quadro = (dt) => this.#quadro(dt);
+    if (!window.__captura) { let antes = performance.now(); const laco = (agora) => { this.#quadro(Math.min(0.05, (agora - antes) / 1000)); antes = agora; requestAnimationFrame(laco); }; requestAnimationFrame(laco); }
+    this.tempo = 0;
+  }
+
+  #pintar() {
+    const W = this.cena.clientWidth * 1.2, H = this.cena.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2);
+    for (const f of this.folhas) f.pintar(W, H, dpr);
+  }
+
+  #quadro(dt) {
+    this.tempo = (this.tempo || 0) + dt;
+    const total = this.secao.offsetHeight - innerHeight;
+    const p = faixa(-this.secao.getBoundingClientRect().top / total, 0, 1);
+    this.suave += (p - this.suave) * Math.min(1, dt * 8);
+    const o = this.olhar; o.x += (o.alvoX - o.x) * Math.min(1, dt * 3); o.y += (o.alvoY - o.y) * Math.min(1, dt * 3);
+    const H = innerHeight;
+    for (const f of this.folhas) f.mover(this.suave, o.x, o.y, this.tempo, H);
+    /* o chão anda com a folha da frente */
+    const frente = this.folhas[2];
+    this.chao.style.transform = frente.el.style.transform.replace(/scale\([^)]*\)/, "");
+    const r = document.documentElement.style;
+    r.setProperty("--interface", (1 - faixa(this.suave, 0.05, 0.3)).toFixed(3));
+    r.setProperty("--ceu-sobe", (this.suave * H * 0.25).toFixed(1));
+    r.setProperty("--proxima", faixa(this.suave, 0.72, 0.95).toFixed(3));
+  }
+}
+
+document.fonts.load('900 100px "Archivo"').then(() => { window.__paisagem = new Paisagem(document.getElementById("cena")); });
+</script>
+</body>
+</html>
