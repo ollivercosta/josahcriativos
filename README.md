@@ -15,6 +15,8 @@ assets/
   css/                     um arquivo por seção (base.css guarda as cores, a fonte e as curvas)
   js/
     main.js                cria uma instância de classe para cada seção
+    trabalho.js            ponto de entrada das páginas de trabalho (/trabalhos/<nome>)
+    paginas/Projeto.js     menu da direita e imagem em tela inteira da página de trabalho
     nucleo/                serviços comuns: rolagem suave, ciclo de quadros, janelas, ícones
     secoes/                uma classe por seção (Hero, Trabalhos, Visor, Servicos, ...)
     vendor/lenis.mjs       rolagem com inércia (Lenis 1.1.13, licença MIT)
@@ -24,6 +26,13 @@ assets/
   fontes/archivo.woff2
   imagens/
 ```
+
+## Páginas de trabalho
+
+Cada trabalho de `assets/dados/trabalhos.js` ganha uma página própria em
+`/trabalhos/<nome-do-trabalho>`, gerada no build por `ferramentas/paginaDoProjeto.mjs`
+(três colunas: ficha, imagens e texto). Elas só existem depois do `npm run build`,
+em `publico/`. A tela final, o rodapé e os termos são copiados do `index.html`.
 
 ## Convenção de classes
 

@@ -25,7 +25,7 @@ import { Termos } from "./secoes/Termos.js";
 import { Trabalhos } from "./secoes/Trabalhos.js";
 import { Visor } from "./secoes/Visor.js";
 import { BASE_CHAT } from "../dados/chat.js";
-import { TRABALHOS } from "../dados/trabalhos.js";
+import { TRABALHOS, enderecoDoTrabalho } from "../dados/trabalhos.js";
 
 /** Títulos com palavras que sobem. A classe do título é o prefixo das classes geradas. */
 const TITULOS_REVELADOS = [
@@ -58,9 +58,10 @@ class Site {
     this.secoes.cabecalho = new Cabecalho($(".cabecalho"), $(".menu-movel"), this.ciclo, this.gestor);
     this.secoes.manifesto = new Manifesto($(".manifesto"), this.ciclo);
     this.secoes.visor = new Visor($(".visor"), TRABALHOS, this.gestor);
-    this.secoes.trabalhos = new Trabalhos($(".trabalhos"), TRABALHOS, (indice, lista) =>
-      this.secoes.visor.abrir(indice, lista),
-    );
+    /* cada trabalho tem a sua página (/trabalhos/<nome>), gerada no build */
+    this.secoes.trabalhos = new Trabalhos($(".trabalhos"), TRABALHOS, (indice) => {
+      window.location.href = enderecoDoTrabalho(TRABALHOS[indice]);
+    });
     this.secoes.servicos = new Servicos($(".servicos"), this.ciclo);
     this.secoes.processo = new Processo($(".processo"));
     this.secoes.sobre = new Sobre($(".sobre"));
