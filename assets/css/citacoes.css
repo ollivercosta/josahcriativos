@@ -1,0 +1,101 @@
+/* =========================================================================
+   BREVES DEPOIMENTOS (página inicial)
+   Um trecho de cada depoimento, lado a lado. Os depoimentos completos ficam
+   na página Como funciona.
+   ========================================================================= */
+
+.citacoes {
+  padding: var(--espaco-secao) var(--margem) 0;
+}
+
+.citacoes__titulo {
+  margin: 0 0 var(--espaco-titulo);
+  font-stretch: 115%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cor-vermelho);
+}
+
+.citacoes__lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 96px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.citacoes__item {
+  padding-top: 28px;
+  border-top: 1px solid var(--cor-tinta);
+}
+
+.citacoes__figura {
+  margin: 0;
+}
+
+.citacoes__frase {
+  margin: 0 0 28px;
+  font-size: clamp(1.4rem, 2.3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+}
+
+.citacoes__autor {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--cor-tinta-suave);
+}
+
+.citacoes__nome {
+  display: block;
+  color: var(--cor-tinta);
+  font-weight: 700;
+}
+
+.citacoes__mais {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: var(--espaco-titulo);
+  color: var(--cor-tinta);
+  text-decoration: none;
+  font-stretch: 115%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--cor-tinta);
+  padding-bottom: 6px;
+  transition:
+    color 0.4s var(--curva),
+    border-color 0.4s var(--curva);
+}
+
+.citacoes__mais:hover,
+.citacoes__mais:focus-visible {
+  color: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
+}
+
+.citacoes__mais-seta {
+  transition: transform 0.4s var(--curva);
+}
+
+.citacoes__mais:hover .citacoes__mais-seta {
+  transform: translateX(4px);
+}
+
+@media (max-width: 860px) {
+  .citacoes__lista {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .citacoes__mais {
+    min-height: var(--toque, 44px);
+  }
+}

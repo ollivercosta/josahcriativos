@@ -29,7 +29,7 @@ assets/
 
 ## Páginas
 
-- `/` (index.html): hero, trabalhos, a deixa para o Como funciona, FAQ, contato.
+- `/` (index.html): hero, trabalhos, a deixa para o Como funciona, depoimentos breves, FAQ, contato.
 - `/como-funciona` (paginas/como-funciona.html): serviços, processo e depoimentos.
 - `/sobre` (paginas/sobre.html): a apresentação.
 
@@ -59,7 +59,7 @@ compartilhada entre seções, então mudar um estilo não afeta outra parte do s
 - Imagens do portfólio: os originais ficam fora do repositório (Google Drive).
   `ferramentas/processar_imagens.py` gera a capa 4:3 e as páginas em WebP de cada
   projeto em `assets/imagens/trabalhos/<projeto>/`.
-- Depoimentos: seção `depoimentos` no `index.html`.
+- Depoimentos: seção `depoimentos` em `paginas/como-funciona.html`; os trechos curtos da inicial ficam na seção `citacoes` do `index.html`.
 - Cores: variáveis `--cor-*` em `assets/css/base.css`.
 
 Formatação: `npx prettier@3.3.3 --write .` (configuração em `.prettierrc`).
