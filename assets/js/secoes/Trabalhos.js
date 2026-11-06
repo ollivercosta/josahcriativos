@@ -18,8 +18,10 @@ export class Trabalhos {
   /**
    * @param {HTMLElement} raiz
    * @param {Array<object>} trabalhos
+   * @param {{ entradaPropria?: boolean }} [opcoes] sem entrada própria, quem
+   *   mostra cada quadro é o hero (as folhas da mesa pousam nos quadros)
    */
-  constructor(raiz, trabalhos) {
+  constructor(raiz, trabalhos, { entradaPropria = true } = {}) {
     this.raiz = raiz;
     this.trabalhos = trabalhos;
     this.filtros = raiz.querySelector(".trabalhos__filtros");
@@ -36,7 +38,26 @@ export class Trabalhos {
     ];
     this.#montarParede();
     this.#montarFiltros();
-    this.#observarEntrada();
+    if (entradaPropria) {
+      this.#observarEntrada();
+    } else {
+      this.pecas.forEach((peca) => peca.classList.add("trabalhos__peca--visivel", "trabalhos__peca--esperando"));
+    }
+  }
+
+  /** Os quadros da parede, na ordem dos trabalhos em ordem (destaques primeiro). */
+  get quadros() {
+    return this.pecas.map((peca) => peca.querySelector(".trabalhos__quadro"));
+  }
+
+  /** Os trabalhos na ordem da parede. */
+  get trabalhosEmOrdem() {
+    return this.ordem;
+  }
+
+  /** Mostra (ou esconde, à espera da folha) o quadro e a etiqueta de uma peça. */
+  pousar(indice, pousou) {
+    this.pecas[indice]?.classList.toggle("trabalhos__peca--esperando", !pousou);
   }
 
   #montarParede() {
