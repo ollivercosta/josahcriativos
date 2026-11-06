@@ -87,7 +87,7 @@
 /* ---------- as três colunas ---------- */
 .projeto__corpo {
   display: grid;
-  grid-template-columns: minmax(280px, 25fr) minmax(0, 46fr) minmax(300px, 29fr);
+  grid-template-columns: minmax(250px, 22fr) minmax(0, 55fr) minmax(250px, 23fr);
   gap: clamp(28px, 3vw, 56px);
   padding: calc(var(--barra) + var(--folga)) var(--margem) var(--espaco-secao);
   align-items: start;
@@ -95,7 +95,7 @@
 
 /* trabalho ainda sem textos: duas colunas, e as imagens ganham o espaço */
 .projeto__corpo--sem-texto {
-  grid-template-columns: minmax(280px, 25fr) minmax(0, 60fr);
+  grid-template-columns: minmax(250px, 22fr) minmax(0, 66fr);
 }
 
 .projeto__texto[hidden] {
@@ -148,27 +148,29 @@
   border-top: 1px solid var(--cor-tinta);
 }
 
+/* rótulo e valor na mesma linha, sem quebra */
 .projeto__ficha-linha {
-  display: grid;
-  grid-template-columns: 9em 1fr;
-  gap: 12px;
+  margin: 0;
   padding: 10px 0;
   border-bottom: 1px solid var(--cor-linha);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .projeto__ficha-rotulo {
+  display: inline-block;
+  min-width: 9.2em;
+  margin-right: 10px;
   font-stretch: 115%;
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--cor-tinta-suave);
-  padding-top: 3px;
 }
 
 .projeto__ficha-valor {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.35;
+  font-size: 0.88rem;
 }
 
 .projeto__ficha-valor--falta {
@@ -188,31 +190,6 @@
   color: var(--cor-tinta-suave);
 }
 
-.projeto__conversar {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 15px 24px;
-  border-radius: 999px;
-  background: var(--cor-vermelho);
-  color: #fff;
-  text-decoration: none;
-  font-stretch: 115%;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  transition:
-    background 0.4s var(--curva),
-    transform 0.4s var(--curva);
-}
-
-.projeto__conversar:hover,
-.projeto__conversar:focus-visible {
-  background: var(--cor-tinta);
-  transform: translateY(-2px);
-}
-
 /* ---------- centro: as imagens ---------- */
 .projeto__imagens {
   display: flex;
@@ -225,11 +202,6 @@
   margin: 0;
   animation: projeto-entra 1s var(--curva) both;
   animation-delay: 0.12s;
-}
-
-/* partes de uma mesma imagem longa: emendadas, sem espaço entre elas */
-.projeto__midia--parte + .projeto__midia--parte {
-  margin-top: -16px;
 }
 
 .projeto__ampliar {
@@ -358,8 +330,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: 6px;
-  padding: 10px 2px 12px;
+  padding: 10px 2px 14px;
   color: var(--cor-tinta-suave);
   text-decoration: none;
   font-stretch: 115%;
@@ -387,14 +358,24 @@
   color: var(--cor-tinta);
 }
 
+/* o nome da parte fica para leitores de tela; o ícone é o que se vê */
+.projeto__menu-nome {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .projeto__menu-link--ativo::after {
   transform: scaleX(1);
 }
 
 .projeto__menu-icone {
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;
@@ -446,27 +427,33 @@
   font-weight: 700;
 }
 
+/* as peças correm lado a lado e quebram só quando acaba a largura */
 .projeto__pecas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--cor-linha);
 }
 
 .projeto__peca {
-  padding: 8px 0;
-  border-bottom: 1px solid var(--cor-linha);
-  font-size: 0.9rem;
+  padding: 6px 12px;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  line-height: 1.2;
 }
 
-/* ---------- imagem em tela inteira ---------- */
+/* ---------- imagem em tela inteira ----------
+   A imagem aparece inteira, na largura da tela, e rola dentro da janela. */
 .ampliada {
   position: fixed;
   inset: 0;
   z-index: 400;
-  display: grid;
-  place-items: center;
-  background: rgba(14, 12, 10, 0.94);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(14, 12, 10, 0.96);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -481,28 +468,24 @@
 }
 
 .ampliada__imagem {
-  max-width: calc(100vw - 160px);
-  max-height: calc(100vh - 80px);
-  object-fit: contain;
-  transform: scale(0.97);
-  transition: transform 0.5s var(--curva);
-}
-
-.ampliada--aberta .ampliada__imagem {
-  transform: none;
+  display: block;
+  width: min(1400px, calc(100vw - 180px));
+  height: auto;
+  margin: 40px auto;
 }
 
 .ampliada__fechar,
 .ampliada__anterior,
 .ampliada__seguinte {
-  position: absolute;
+  position: fixed;
+  z-index: 1;
   display: grid;
   place-items: center;
   width: 48px;
   height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  background: transparent;
+  background: rgba(14, 12, 10, 0.6);
   color: #fff;
   font: inherit;
   font-size: 1.2rem;
@@ -513,12 +496,12 @@
 .ampliada__fechar:hover,
 .ampliada__anterior:hover,
 .ampliada__seguinte:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .ampliada__fechar {
   top: 20px;
-  right: 20px;
+  right: 24px;
 }
 
 .ampliada__anterior {
@@ -614,23 +597,12 @@
   }
 
   .projeto__menu-link {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .projeto__menu-link {
-    min-height: var(--toque, 44px);
-  }
-
-  .projeto__conversar {
-    width: 100%;
-    justify-content: center;
     min-height: var(--toque, 44px);
   }
 
   .ampliada__imagem {
-    max-width: 100vw;
-    max-height: 100vh;
+    width: 100vw;
+    margin: 72px 0 96px;
   }
 
   .ampliada__anterior,
