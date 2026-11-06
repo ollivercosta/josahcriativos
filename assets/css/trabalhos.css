@@ -366,7 +366,7 @@
   }
 
   .trabalhos__titulo {
-    font-size: var(--titulo-celular);
+    font-size: var(--titulo-celular, 2.6rem);
   }
 
   /* filtros numa linha só, rolando para o lado */
@@ -385,7 +385,7 @@
 
   .trabalhos__filtro {
     flex: none;
-    min-height: var(--toque);
+    min-height: var(--toque, 44px);
     white-space: nowrap;
   }
 
