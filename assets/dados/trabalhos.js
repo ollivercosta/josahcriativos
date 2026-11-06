@@ -53,11 +53,7 @@ export const TRABALHOS = [
       "Como o projeto ainda busca patrocínio, a régua de marcas ainda não existe. Por enquanto, o book fecha com a assinatura da Tabuleiro e o contato direto da produção.",
     pecas: { Apresentação: ["Book de captação"] },
     capa: "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-01.webp",
-      "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-02.webp",
-      "/assets/imagens/trabalhos/olha-o-cabelo-dela/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/olha-o-cabelo-dela/imagem.webp"],
   },
   {
     nome: "Amazônia Motirô",
@@ -128,11 +124,7 @@ export const TRABALHOS = [
       "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Banner"],
     },
     capa: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-01.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-02.webp",
-      "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/imagem.webp"],
   },
   {
     nome: "Forró Zevixe",
@@ -148,11 +140,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/forro-zevixe/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/forro-zevixe/parte-01.webp",
-      "/assets/imagens/trabalhos/forro-zevixe/parte-02.webp",
-      "/assets/imagens/trabalhos/forro-zevixe/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/forro-zevixe/imagem.webp"],
   },
   {
     nome: "Nanda Sabores e Afetos",
@@ -168,11 +156,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/nanda-sabores-e-afetos/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/nanda-sabores-e-afetos/parte-01.webp",
-      "/assets/imagens/trabalhos/nanda-sabores-e-afetos/parte-02.webp",
-      "/assets/imagens/trabalhos/nanda-sabores-e-afetos/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/nanda-sabores-e-afetos/imagem.webp"],
   },
   {
     nome: "Antropofagia Mapping",
@@ -201,11 +185,7 @@ export const TRABALHOS = [
       "Visual e mídia": ["Camisas", "Ecobag", "Backdrop", "Wind banner", "Testeira de ônibus", "Faixa"],
     },
     capa: "/assets/imagens/trabalhos/antropofagia-mapping/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/antropofagia-mapping/parte-01.webp",
-      "/assets/imagens/trabalhos/antropofagia-mapping/parte-02.webp",
-      "/assets/imagens/trabalhos/antropofagia-mapping/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/antropofagia-mapping/imagem.webp"],
   },
   {
     nome: "Tabuleiro Produções",
@@ -234,11 +214,7 @@ export const TRABALHOS = [
       "Visual e mídia": ["Selo", "Edição de vídeo", "Diagramação de livros"],
     },
     capa: "/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/tabuleiro-producoes/parte-01.webp",
-      "/assets/imagens/trabalhos/tabuleiro-producoes/parte-02.webp",
-      "/assets/imagens/trabalhos/tabuleiro-producoes/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/tabuleiro-producoes/imagem.webp"],
   },
   {
     nome: "Trombone Criativo",
@@ -254,10 +230,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/trombone-criativo/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/trombone-criativo/parte-01.webp",
-      "/assets/imagens/trabalhos/trombone-criativo/parte-02.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/trombone-criativo/imagem.webp"],
   },
   {
     nome: "Duda Filmes",
@@ -273,10 +246,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/duda-filmes/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/duda-filmes/parte-01.webp",
-      "/assets/imagens/trabalhos/duda-filmes/parte-02.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/duda-filmes/imagem.webp"],
   },
   {
     nome: "Festival de Roteiro",
@@ -292,10 +262,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/festival-de-roteiro/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/festival-de-roteiro/parte-01.webp",
-      "/assets/imagens/trabalhos/festival-de-roteiro/parte-02.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/festival-de-roteiro/imagem.webp"],
   },
   {
     nome: "Elas nas Telas",
@@ -311,11 +278,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/elas-nas-telas/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/elas-nas-telas/parte-01.webp",
-      "/assets/imagens/trabalhos/elas-nas-telas/parte-02.webp",
-      "/assets/imagens/trabalhos/elas-nas-telas/parte-03.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/elas-nas-telas/imagem.webp"],
   },
   {
     nome: "Festival Periferia no ar",
@@ -331,10 +294,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/festival-periferia-no-ar/capa.webp",
-    midias: [
-      "/assets/imagens/trabalhos/festival-periferia-no-ar/parte-01.webp",
-      "/assets/imagens/trabalhos/festival-periferia-no-ar/parte-02.webp",
-    ],
+    midias: ["/assets/imagens/trabalhos/festival-periferia-no-ar/imagem.webp"],
   },
   {
     nome: "Ong Acuba",
@@ -350,7 +310,7 @@ export const TRABALHOS = [
     resultado: "",
     pecas: [],
     capa: "/assets/imagens/trabalhos/ong-acuba/capa.webp",
-    midias: ["/assets/imagens/trabalhos/ong-acuba/parte-01.webp", "/assets/imagens/trabalhos/ong-acuba/parte-02.webp"],
+    midias: ["/assets/imagens/trabalhos/ong-acuba/imagem.webp"],
   },
 ];
 
