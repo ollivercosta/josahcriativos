@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero: serigrafia</title>
+<style>
+@font-face{font-family:"Archivo";src:url("/assets/fontes/archivo.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:block}
+:root{--mesa:#1d1a18;--papel:#f1ebdf;--tinta:#141210;--margem:4.4vw;--curva:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--mesa)}
+body{font-family:"Archivo",sans-serif;color:var(--tinta);-webkit-font-smoothing:antialiased}
+
+/* a mesa de impressão: a folha fica presa enquanto é levantada */
+.oficina{position:relative;height:230vh}
+.oficina__mesa{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--mesa);perspective:2200px}
+.oficina__mesa::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 40%,rgba(255,240,220,.07),rgba(0,0,0,.35));pointer-events:none}
+
+/* a folha */
+.folha{position:absolute;left:3.2vw;right:3.2vw;top:3.2vw;bottom:3.2vw;background:var(--papel);transform-origin:50% 0;
+  transform:translate3d(0,var(--folha-y,0px),0) rotateX(var(--folha-rx,0deg)) rotateY(var(--folha-ry,0deg)) rotate(var(--folha-r,0deg));will-change:transform}
+.folha::before{content:"";position:absolute;inset:0;background-image:var(--fibra);opacity:.9;mix-blend-mode:multiply;pointer-events:none}
+/* a sombra da folha sobre a mesa: cresce quando a folha é levantada */
+.folha__sombra{position:absolute;inset:0;z-index:-1;transform:translate3d(var(--sombra-x,0px),var(--sombra-y,6px),0);
+  box-shadow:0 2px 3px rgba(0,0,0,.45),0 var(--sombra-alcance,18px) var(--sombra-desfoque,40px) rgba(0,0,0,.55)}
+.folha--baixo{z-index:0}
+.folha--cima{z-index:2}
+
+/* as tintas: uma camada por cor, sobrepostas como na impressão (multiplicação) */
+.tinta{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;pointer-events:none;
+  clip-path:inset(0 0 calc(100% - var(--puxada,0%)) 0);transform:translate(var(--reg-x,0px),var(--reg-y,0px))}
+/* o rodo: o brilho da tinta molhada que corre com a borda da impressão */
+.rodo{position:absolute;left:0;right:0;height:14vh;top:calc(var(--puxada,0%) - 14vh);pointer-events:none;opacity:var(--rodo,0);
+  background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.22) 80%,rgba(255,255,255,.5) 98%,rgba(0,0,0,.12));mix-blend-mode:soft-light}
+
+/* o que é HTML, impresso em preto */
+.folha__miolo{position:absolute;inset:0;padding:2.6vw 3vw}
+.folha__cab{display:flex;justify-content:space-between;align-items:flex-start;opacity:var(--preto,0)}
+.folha__marca{color:var(--tinta);text-decoration:none;font-stretch:125%;font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;line-height:1.6}
+.folha__marca b{display:block;font-weight:800;font-size:.74rem}
+.folha__menu{display:flex;gap:30px;list-style:none}
+.folha__menu a{color:var(--tinta);text-decoration:none;font-stretch:125%;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase}
+.folha__menu a:hover{text-decoration:underline;text-underline-offset:6px}
+.folha__info{position:absolute;left:3vw;top:41%;width:min(24em,30%);opacity:var(--preto,0)}
+.folha__rotulo{font-stretch:125%;font-weight:800;font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:16px}
+.folha__texto{font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.45;margin-bottom:22px}
+.folha__botao{display:inline-flex;align-items:center;gap:14px;padding:15px 24px;border-radius:999px;background:var(--tinta);color:var(--papel);text-decoration:none;font-stretch:125%;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;transition:background .5s var(--curva),transform .5s var(--curva)}
+.folha__botao:hover{background:#c4161c;transform:translateY(-2px)}
+.folha__botao svg{width:16px;height:16px;transition:transform .5s var(--curva)}
+.folha__botao:hover svg{transform:translateX(4px)}
+.folha__creditos{position:absolute;left:3vw;right:3vw;bottom:2.4vw;display:flex;justify-content:space-between;align-items:flex-end;gap:3vw;opacity:var(--preto,0)}
+.folha__servicos{list-style:none;display:flex;flex-wrap:wrap;gap:4px 20px;font-stretch:125%;font-size:.6rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+.folha__por{flex:none;font-size:.8rem}.folha__por b{font-weight:800}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* a folha de baixo: a próxima peça, os trabalhos */
+.proxima{position:absolute;inset:0;padding:calc(2.6vw + 9vh) 3vw}
+.proxima__titulo{font-size:clamp(2.6rem,6.4vw,6.4rem);font-weight:300;letter-spacing:-.045em;line-height:.9}
+.proxima__titulo em{font-style:normal;font-weight:900;color:#c4161c;mix-blend-mode:multiply}
+.proxima__lista{list-style:none;margin-top:7vh;border-top:1.5px solid var(--tinta);max-width:62%}
+.proxima__lista li{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(20,18,16,.25);font-size:clamp(1.1rem,1.9vw,1.8rem);font-weight:300;letter-spacing:-.02em}
+.proxima__lista small{font-stretch:125%;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+
+@media (max-width:860px){
+  :root{--margem:20px}
+  .folha{left:12px;right:12px;top:12px;bottom:12px}
+  .folha__miolo{padding:18px}
+  .folha__menu{display:none}
+  .folha__info{left:18px;right:18px;width:auto;top:56%}
+  .folha__texto{font-size:.95rem}
+  .folha__creditos{left:18px;right:18px;bottom:16px;flex-direction:column;align-items:flex-start;gap:8px}
+  .folha__servicos{gap:3px 12px;font-size:.55rem}
+  .proxima{padding:80px 18px}
+  .proxima__lista{max-width:none}
+}
+</style>
+</head>
+<body>
+<section class="oficina" aria-label="Design e cultura">
+  <div class="oficina__mesa" id="mesa">
+    <!-- a próxima folha, já impressa, esperando por baixo -->
+    <div class="folha folha--baixo" id="baixo">
+      <div class="folha__sombra"></div>
+      <div class="proxima" id="trabalhos">
+        <p class="proxima__titulo">Alguns <em>trabalhos.</em></p>
+        <ol class="proxima__lista">
+          <li>Olha o Cabelo dela <small>Marca e apresentação</small></li>
+          <li>Antropofagia Mapping <small>Marca e apresentação</small></li>
+          <li>Tabuleiro Produções <small>Marca e apresentação</small></li>
+          <li>Amazônia Motirô <small>Marca e apresentação</small></li>
+          <li>Orquestra Jovem do Recôncavo <small>Marca e apresentação</small></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- o cartaz: cada tinta é um canvas; o preto é HTML -->
+    <div class="folha folha--cima" id="cartaz">
+      <div class="folha__sombra"></div>
+      <div class="rodo" id="rodo"></div>
+      <div class="folha__miolo">
+        <header class="folha__cab">
+          <a class="folha__marca" href="#"><b>Josah Oliveira</b>Designer gráfico</a>
+          <ul class="folha__menu"><li><a href="#trabalhos">Trabalhos</a></li><li><a href="#">Serviços</a></li><li><a href="#">Sobre</a></li><li><a href="#">Contato</a></li></ul>
+        </header>
+        <h1 class="sr">Design e cultura</h1>
+        <div class="folha__info">
+          <p class="folha__rotulo">Comunicação para projetos culturais</p>
+          <p class="folha__texto">Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.</p>
+          <a class="folha__botao" href="#trabalhos">Ver trabalhos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="folha__creditos">
+          <ul class="folha__servicos" aria-label="Serviços"><li>Identidade visual</li><li>Book de captação</li><li>Landing pages</li><li>Redes sociais</li><li>Material de palco</li><li>Vídeo e spots</li></ul>
+          <p class="folha__por">por <b>Josah Oliveira</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section style="height:60vh;background:var(--mesa)"></section>
+
+<script>
+/* Cada cor do cartaz é uma tela de serigrafia: pintada uma vez num canvas, com a textura
+   da tinta (cobertura irregular, poros da tela, borda que espalha). Depois, só se movem
+   camadas e máscaras; nada é redesenhado durante a rolagem. */
+const faixa = (v, a, b) => Math.min(1, Math.max(0, (v - a) / (b - a)));
+const suave = (v) => v * v * (3 - 2 * v);
+const entraSai = (v) => (v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2);
+
+/** a fibra do papel de algodão */
+function fibra() {
+  const cv = document.createElement("canvas"); cv.width = cv.height = 300;
+  const c = cv.getContext("2d"), img = c.createImageData(300, 300), d = img.data;
+  for (let i = 0; i < d.length; i += 4) { const v = 238 + (Math.random() - 0.5) * 26; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+  c.putImageData(img, 0, 0);
+  for (let i = 0; i < 140; i++) { c.strokeStyle = `rgba(${Math.random() < 0.5 ? "255,255,255" : "60,40,20"},${0.05 + Math.random() * 0.07})`; c.lineWidth = 0.7; c.beginPath(); const x = Math.random() * 300, y = Math.random() * 300, a = Math.random() * Math.PI; c.moveTo(x, y); c.quadraticCurveTo(x + Math.cos(a) * 12, y + Math.sin(a) * 12 + 3, x + Math.cos(a) * 26, y + Math.sin(a) * 26); c.stroke(); }
+  return cv;
+}
+
+/** os poros da tela: onde a tinta não passou por inteiro */
+function poros(w, h) {
+  const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+  const c = cv.getContext("2d");
+  for (let i = 0; i < (w * h) / 900; i++) { c.fillStyle = `rgba(0,0,0,${Math.random() * 0.5})`; const s = Math.random() * 1.8 + 0.4; c.fillRect(Math.random() * w, Math.random() * h, s, s); }
+  /* manchas largas de cobertura fraca: a tinta que faltou numa passada do rodo */
+  for (let i = 0; i < 26; i++) { const x = Math.random() * w, y = Math.random() * h, r = 40 + Math.random() * 180; const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(0,0,0,${0.08 + Math.random() * 0.12})`); g.addColorStop(1, "rgba(0,0,0,0)"); c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2); }
+  return cv;
+}
+
+/** uma tinta: a cor e o que ela imprime */
+class Tinta {
+  constructor(folha, nome, cor, desenho, registro) {
+    this.cor = cor; this.desenho = desenho; this.registro = registro;
+    this.canvas = document.createElement("canvas"); this.canvas.className = "tinta"; this.canvas.dataset.tinta = nome;
+    folha.insertBefore(this.canvas, folha.querySelector(".rodo"));
+  }
+  pintar(W, H, dpr, porosCanvas) {
+    const cv = this.canvas; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const c = cv.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    /* a borda da tinta espalha um pouco no papel */
+    c.fillStyle = this.cor; c.shadowColor = this.cor; c.shadowBlur = 1.2 * dpr;
+    this.desenho(c, W, H);
+    c.shadowBlur = 0;
+    /* a cobertura da tinta: um pouco mais clara e mais escura em pontos diferentes */
+    c.globalCompositeOperation = "source-atop"; c.globalAlpha = 0.08;
+    c.fillStyle = c.createPattern(porosCanvas, "repeat"); c.fillRect(0, 0, W, H);
+    /* os poros: a tinta some em pontos minúsculos */
+    c.globalCompositeOperation = "destination-out"; c.globalAlpha = 0.55;
+    c.drawImage(porosCanvas, Math.random() * -200, Math.random() * -200, W + 200, H + 200);
+    c.globalCompositeOperation = "source-over"; c.globalAlpha = 1;
+    cv.style.setProperty("--reg-x", `${this.registro[0]}px`); cv.style.setProperty("--reg-y", `${this.registro[1]}px`);
+  }
+}
+
+class Oficina {
+  constructor() {
+    this.mesa = document.getElementById("mesa"); this.secao = this.mesa.closest(".oficina");
+    this.cartaz = document.getElementById("cartaz"); this.baixo = document.getElementById("baixo"); this.rodo = document.getElementById("rodo");
+    document.documentElement.style.setProperty("--fibra", `url(${fibra().toDataURL()})`);
+    const tipo = (c, peso, largura, corpo) => { c.font = `${peso} ${corpo}px Archivo`; c.fontStretch = largura; };
+    const estreita = () => innerWidth < 861;
+    /* o cartaz: o "e" amarelo enorme ao fundo; "design" em vermelho no alto; "cultura" em azul embaixo.
+       Onde as tintas se cruzam, a multiplicação faz a terceira cor, como na prensa. */
+    this.tintas = [
+      new Tinta(this.cartaz, "amarelo", "#f0b21a", (c, W, H) => {
+        const corpo = estreita() ? W * 1.15 : H * 1.45; tipo(c, 900, "expanded", corpo); c.textAlign = "right"; c.textBaseline = "alphabetic";
+        c.fillText("e", estreita() ? W * 1.12 : W * 0.97, estreita() ? H * 0.6 : H * 1.02);
+      }, [2, -1]),
+      new Tinta(this.cartaz, "vermelho", "#c8161d", (c, W, H) => {
+        const corpo = estreita() ? W * 0.205 : W * 0.205; tipo(c, 900, "expanded", corpo); c.textAlign = "left"; c.textBaseline = "alphabetic"; c.letterSpacing = `${-corpo * 0.03}px`;
+        c.fillText("design", estreita() ? W * 0.04 : W * 0.025, estreita() ? H * 0.24 : H * 0.36);
+      }, [-1, 1]),
+      new Tinta(this.cartaz, "azul", "#1d3374", (c, W, H) => {
+        const corpo = estreita() ? W * 0.17 : W * 0.205; tipo(c, 900, "expanded", corpo); c.textAlign = "right"; c.textBaseline = "alphabetic"; c.letterSpacing = `${-corpo * 0.03}px`;
+        c.fillText("cultura", estreita() ? W * 0.97 : W * 0.985, estreita() ? H * 0.47 : H * 0.84);
+      }, [1, 2]),
+    ];
+    this.#pintar(); addEventListener("resize", () => this.#pintar());
+    this.olhar = { x: 0, y: 0, ax: 0, ay: 0 };
+    addEventListener("pointermove", (e) => { this.olhar.ax = (e.clientX / innerWidth) * 2 - 1; this.olhar.ay = (e.clientY / innerHeight) * 2 - 1; });
+    this.tempo = 0; this.suave = 0;
+    window.__quadro = (dt) => this.#quadro(dt);
+    if (!window.__captura) { let antes = performance.now(); const laco = (agora) => { this.#quadro(Math.min(0.05, (agora - antes) / 1000)); antes = agora; requestAnimationFrame(laco); }; requestAnimationFrame(laco); }
+  }
+
+  #pintar() {
+    const W = this.cartaz.clientWidth, H = this.cartaz.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2);
+    const p = poros(Math.round(W * dpr / 2), Math.round(H * dpr / 2));
+    for (const t of this.tintas) t.pintar(W, H, dpr, p);
+  }
+
+  #quadro(dt) {
+    this.tempo += dt; const t = this.tempo;
+    /* a abertura: as três tintas são puxadas uma depois da outra, e por fim o preto */
+    const puxadas = [faixa(t, 0.3, 1.25), faixa(t, 1.05, 2.0), faixa(t, 1.8, 2.75)];
+    let rodo = 0, ondeRodo = 0;
+    this.tintas.forEach((tinta, i) => {
+      const v = entraSai(puxadas[i]);
+      tinta.canvas.style.setProperty("--puxada", `${(v * 100).toFixed(2)}%`);
+      if (puxadas[i] > 0 && puxadas[i] < 1) { rodo = Math.sin(puxadas[i] * Math.PI); ondeRodo = v; }
+    });
+    this.rodo.style.setProperty("--puxada", `${(ondeRodo * 100).toFixed(2)}%`);
+    this.rodo.style.setProperty("--rodo", rodo.toFixed(3));
+    this.cartaz.style.setProperty("--preto", suave(faixa(t, 2.6, 3.2)).toFixed(3));
+
+    /* a folha acompanha o olhar, de leve: a sombra anda ao contrário */
+    const o = this.olhar; o.x += (o.ax - o.x) * Math.min(1, dt * 3); o.y += (o.ay - o.y) * Math.min(1, dt * 3);
+
+    /* a rolagem levanta a folha da mesa e leva embora, revelando a próxima */
+    const total = this.secao.offsetHeight - innerHeight;
+    const p = faixa(-this.secao.getBoundingClientRect().top / total, 0, 1);
+    this.suave += (p - this.suave) * Math.min(1, dt * 8);
+    const levanta = entraSai(faixa(this.suave, 0.05, 0.5)), leva = entraSai(faixa(this.suave, 0.35, 1));
+    const s = this.cartaz.style;
+    s.setProperty("--folha-rx", `${(-o.y * 1.2 * (1 - levanta) + levanta * 9).toFixed(3)}deg`);
+    s.setProperty("--folha-ry", `${(o.x * 1.6 * (1 - levanta)).toFixed(3)}deg`);
+    s.setProperty("--folha-r", `${(-leva * 7).toFixed(3)}deg`);
+    s.setProperty("--folha-y", `${(-leva * innerHeight * 1.25).toFixed(1)}px`);
+    s.setProperty("--sombra-x", `${(-o.x * 8 + levanta * 10).toFixed(1)}px`);
+    s.setProperty("--sombra-y", `${(6 - o.y * 5 + levanta * 50).toFixed(1)}px`);
+    s.setProperty("--sombra-alcance", `${(18 + levanta * 60).toFixed(1)}px`);
+    s.setProperty("--sombra-desfoque", `${(40 + levanta * 90).toFixed(1)}px`);
+  }
+}
+
+document.fonts.load('900 100px "Archivo"').then(() => { window.__oficina = new Oficina(); });
+</script>
+</body>
+</html>
