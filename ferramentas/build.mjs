@@ -4,7 +4,6 @@
  * Para o site no ar, este script gera a pasta `publico/` com:
  *   - um único CSS compactado, na mesma ordem dos <link> do index.html;
  *   - um único JS compactado, a partir de assets/js/main.js;
- *   - a cena 3D da cortina (com o three.js) num JS à parte, carregado depois;
  *   - o index.html apontando para esses dois arquivos;
  *   - fontes, imagens e ícones copiados como estão.
  * A Vercel roda `npm run build` e publica `publico/` (ver vercel.json).
@@ -43,19 +42,6 @@ await build({
   legalComments: "eof",
 });
 html = html.replace('src="/assets/js/main.js"', `src="/assets/js/main.js?v=${versao}"`);
-
-/* a cena 3D da cortina: pesa mais que o resto do site, por isso fica num arquivo próprio,
-   pedido pela seção Cortina só depois que a página aparece */
-await build({
-  entryPoints: ["assets/js/cena/CenaDaCortina.js"],
-  bundle: true,
-  minify: true,
-  format: "esm",
-  target: "es2020",
-  outfile: `${SAIDA}/assets/js/cena.js`,
-  legalComments: "eof",
-});
-html = html.replace('data-cena="/assets/js/cena/CenaDaCortina.js"', `data-cena="/assets/js/cena.js?v=${versao}"`);
 
 await writeFile(`${SAIDA}/index.html`, html);
 for (const caminho of [
