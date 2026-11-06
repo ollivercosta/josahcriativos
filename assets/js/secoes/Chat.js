@@ -195,7 +195,13 @@ export class Chat {
       botao.textContent = rotulo.join(":") || "Ver no site";
       botao.addEventListener("click", () => {
         if (window.innerWidth <= 600) this.fechar(false);
-        this.acoes.rolarPara(document.querySelector(seletor));
+        /* o destino pode estar nesta página ou em outra ("/sobre", "/#projetos") */
+        const destino = new URL(seletor, window.location.href);
+        const mesmaPagina =
+          destino.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
+        const alvo = mesmaPagina && destino.hash ? document.querySelector(destino.hash) : null;
+        if (alvo) this.acoes.rolarPara(alvo);
+        else window.location.href = destino.href;
       });
     } else {
       return null;

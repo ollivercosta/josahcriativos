@@ -54,20 +54,29 @@ class Site {
       if (titulo) new RevelaPalavras(titulo, seletor.slice(1));
     }
 
-    this.secoes.hero = new Hero($(".hero"));
+    /* cada página tem só algumas seções: cada classe só é criada se a seção existir */
+    const se = (seletor, criar) => {
+      const elemento = $(seletor);
+      return elemento ? criar(elemento) : null;
+    };
+    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     this.secoes.cabecalho = new Cabecalho($(".cabecalho"), $(".menu-movel"), this.ciclo, this.gestor);
-    this.secoes.manifesto = new Manifesto($(".manifesto"), this.ciclo);
-    this.secoes.visor = new Visor($(".visor"), TRABALHOS, this.gestor);
+    this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz, this.ciclo));
+    this.secoes.visor = se(".visor", (raiz) => new Visor(raiz, TRABALHOS, this.gestor));
     /* cada trabalho tem a sua página (/trabalhos/<nome>), gerada no build */
-    this.secoes.trabalhos = new Trabalhos($(".trabalhos"), TRABALHOS, (indice) => {
-      window.location.href = enderecoDoTrabalho(TRABALHOS[indice]);
-    });
-    this.secoes.servicos = new Servicos($(".servicos"), this.ciclo);
-    this.secoes.processo = new Processo($(".processo"));
-    this.secoes.sobre = new Sobre($(".sobre"));
-    this.secoes.depoimentos = new Depoimentos($(".depoimentos"));
-    this.secoes.faq = new Faq($(".faq"));
-    this.secoes.contato = new Contato($(".contato"));
+    this.secoes.trabalhos = se(
+      ".trabalhos",
+      (raiz) =>
+        new Trabalhos(raiz, TRABALHOS, (indice) => {
+          window.location.href = enderecoDoTrabalho(TRABALHOS[indice]);
+        }),
+    );
+    this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz, this.ciclo));
+    this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
+    this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
+    this.secoes.depoimentos = se(".depoimentos", (raiz) => new Depoimentos(raiz));
+    this.secoes.faq = se(".faq", (raiz) => new Faq(raiz));
+    this.secoes.contato = se(".contato", (raiz) => new Contato(raiz));
     this.secoes.termos = new Termos($(".termos"), this.gestor);
     this.secoes.chat = new Chat($(".chat"), BASE_CHAT, {
       abrirTermos: () => this.gestor.abrir("termos"),

@@ -162,3 +162,8 @@ dd {
     transition-delay: 0s !important;
   }
 }
+
+/* páginas internas (Como funciona, Sobre): sem o hero, o conteúdo começa abaixo do cabeçalho fixo */
+.pagina-interna main {
+  padding-top: var(--altura-cabecalho);
+}

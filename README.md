@@ -27,6 +27,17 @@ assets/
   imagens/
 ```
 
+## Páginas
+
+- `/` (index.html): hero, trabalhos, a deixa para o Como funciona, FAQ, contato.
+- `/como-funciona` (paginas/como-funciona.html): serviços, processo e depoimentos.
+- `/sobre` (paginas/sobre.html): a apresentação.
+
+Os arquivos de `paginas/` têm só o conteúdo próprio. No build, cada um é montado com
+o cabeçalho, a tela final de contato, o rodapé, os termos e o chat do `index.html`.
+Os links entre páginas usam o endereço completo (`/#faq`, `/sobre`), para funcionar
+de qualquer página.
+
 ## Páginas de trabalho
 
 Cada trabalho de `assets/dados/trabalhos.js` ganha uma página própria em

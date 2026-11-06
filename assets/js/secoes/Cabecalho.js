@@ -17,10 +17,18 @@ export class Cabecalho {
     this.gestor = gestor;
     this.botaoMenu = raiz.querySelector(".cabecalho__menu-botao");
     this.iconeMenu = raiz.querySelector(".cabecalho__menu-icone");
-    this.secoes = Array.from(raiz.querySelectorAll(".cabecalho__link")).map((link) => ({
-      link,
-      secao: document.querySelector(link.getAttribute("href")),
-    }));
+    /* os links levam a seções da inicial ("/#faq") ou a outras páginas ("/sobre"):
+       nesta página, um link é marcado quando aponta para ela ou para uma seção dela */
+    this.secoes = Array.from(raiz.querySelectorAll(".cabecalho__link")).map((link) => {
+      const destino = new URL(link.getAttribute("href"), window.location.href);
+      const mesmaPagina =
+        destino.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
+      const secao = mesmaPagina && destino.hash ? document.querySelector(destino.hash) : null;
+      if (mesmaPagina && !destino.hash) link.classList.add("cabecalho__link--ativo");
+      return { link, secao };
+    });
+    /* sem a cortina do hero (páginas internas), o cabeçalho fica sempre à vista */
+    this.sempreVisivel = !document.querySelector(".hero");
     this.menuAberto = false;
 
     this.#ligarMenu();
@@ -31,7 +39,7 @@ export class Cabecalho {
     const y = window.scrollY;
     const alturaTela = window.innerHeight;
     const total = document.documentElement.scrollHeight - alturaTela;
-    this.raiz.classList.toggle("cabecalho--visivel", y > alturaTela * 0.75 || this.menuAberto);
+    this.raiz.classList.toggle("cabecalho--visivel", this.sempreVisivel || y > alturaTela * 0.75 || this.menuAberto);
     this.raiz.style.setProperty("--progresso", total > 0 ? (y / total).toFixed(4) : "0");
     const linhaDeLeitura = alturaTela * 0.35;
     for (const { link, secao } of this.secoes) {

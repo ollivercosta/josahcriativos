@@ -33,3 +33,44 @@
     font-size: 1.75rem;
   }
 }
+
+/* a deixa: depois da frase, o caminho para entender como o trabalho acontece */
+.manifesto__botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: var(--espaco-titulo);
+  padding: 16px 26px;
+  border: 1px solid var(--cor-tinta);
+  border-radius: 999px;
+  color: var(--cor-tinta);
+  text-decoration: none;
+  font-stretch: 115%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition:
+    background 0.5s var(--curva),
+    color 0.5s var(--curva);
+}
+
+.manifesto__botao:hover,
+.manifesto__botao:focus-visible {
+  background: var(--cor-tinta);
+  color: var(--cor-fundo);
+}
+
+.manifesto__botao-seta {
+  transition: transform 0.5s var(--curva);
+}
+
+.manifesto__botao:hover .manifesto__botao-seta {
+  transform: translateX(4px);
+}
+
+@media (max-width: 860px) {
+  .manifesto__botao {
+    min-height: var(--toque, 44px);
+  }
+}

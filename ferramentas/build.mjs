@@ -48,6 +48,37 @@ html = html.replace('src="/assets/js/main.js"', `src="/assets/js/main.js?v=${ver
 
 await writeFile(`${SAIDA}/index.html`, html);
 
+/* as páginas internas: o mesmo cabeçalho, a mesma tela final e o mesmo rodapé da inicial,
+   com o conteúdo próprio de cada uma (arquivos em paginas/) no lugar das seções da inicial */
+const PAGINAS = [
+  {
+    arquivo: "como-funciona",
+    titulo: "Como funciona | Josah Oliveira",
+    descricao:
+      "Como Josah Oliveira ajuda projetos culturais: serviços, etapas do trabalho, do primeiro contato à entrega, e depoimentos de quem já trabalhou com ele.",
+  },
+  {
+    arquivo: "sobre",
+    titulo: "Sobre | Josah Oliveira",
+    descricao: "Quem é Josah Oliveira, designer gráfico de projetos culturais.",
+  },
+];
+for (const pagina of PAGINAS) {
+  const conteudo = (await readFile(`paginas/${pagina.arquivo}.html`, "utf8")).replace(/^<!--[\s\S]*?-->\n/, "");
+  const inicio = html.indexOf('<main id="conteudo">') + '<main id="conteudo">'.length;
+  const contato = html.indexOf("      <!-- CONTATO:");
+  const endereco = `https://josahcriativos.com.br/${pagina.arquivo}`;
+  const montada = (html.slice(0, inicio) + "\n" + conteudo + "\n" + html.slice(contato))
+    .replace(/<title>[^<]*<\/title>/, `<title>${pagina.titulo}</title>`)
+    .replace(/(name="description"\s+content=")[^"]*"/, `$1${pagina.descricao}"`)
+    .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${endereco}" />`)
+    .replace(/(property="og:title" content=")[^"]*"/, `$1${pagina.titulo}"`)
+    .replace(/(property="og:description"\s+content=")[^"]*"/, `$1${pagina.descricao}"`)
+    .replace(/(property="og:url" content=")[^"]*"/, `$1${endereco}"`)
+    .replace("<body>", '<body class="pagina-interna">');
+  await writeFile(`${SAIDA}/${pagina.arquivo}.html`, montada);
+}
+
 /* as páginas dos trabalhos: o mesmo cabeçalho, a mesma tela final e o mesmo rodapé da inicial */
 const CSS_DO_TRABALHO = ["base.css", "projeto.css", "contato.css", "rodape.css", "termos.css"];
 const cssDoTrabalho = (
