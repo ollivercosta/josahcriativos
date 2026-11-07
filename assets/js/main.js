@@ -70,7 +70,7 @@ class Site {
     this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     /* a mesa sobe por cima do hero; as folhas dela pousam nos quadros da parede de trabalhos */
     const parede = this.secoes.trabalhos;
-    this.secoes.mesa = se(".mesa", (raiz) => new Mesa(raiz, parede?.trabalhosEmOrdem ?? [], parede, $(".hero")));
+    this.secoes.mesa = se(".mesa", (raiz) => new Mesa(raiz, parede?.trabalhosEmOrdem ?? [], parede));
     this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz, this.ciclo));
     this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
@@ -86,6 +86,8 @@ class Site {
     this.vlibras = new VLibras();
     window.addEventListener("rolar-para", (evento) => this.rolagem.rolarPara(evento.detail));
     $(".rodape__ano").textContent = String(new Date().getFullYear());
+    /* com tudo montado (o início já mediu a própria altura), refaz o pulo de um endereço com # */
+    this.rolagem.corrigirEnderecoInicial();
   }
 }
 

@@ -23,9 +23,16 @@ export class Cabecalho {
       const destino = new URL(link.getAttribute("href"), window.location.href);
       const mesmaPagina =
         destino.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
-      const secao = mesmaPagina && destino.hash ? document.querySelector(destino.hash) : null;
+      let secao = mesmaPagina && destino.hash ? document.querySelector(destino.hash) : null;
+      /* um marco de destino (como o de Trabalhos, no fim do desmonte do hero) marca o começo;
+         a seção que ele indica marca o fim */
+      let marco = null;
+      if (secao?.dataset.secao) {
+        marco = secao;
+        secao = document.querySelector(secao.dataset.secao);
+      }
       if (mesmaPagina && !destino.hash) link.classList.add("cabecalho__link--ativo");
-      return { link, secao };
+      return { link, secao, marco };
     });
     /* sem a cortina do hero (páginas internas), o cabeçalho fica sempre à vista */
     this.sempreVisivel = !document.querySelector(".hero");
@@ -42,10 +49,11 @@ export class Cabecalho {
     this.raiz.classList.toggle("cabecalho--visivel", this.sempreVisivel || y > alturaTela * 0.75 || this.menuAberto);
     this.raiz.style.setProperty("--progresso", total > 0 ? (y / total).toFixed(4) : "0");
     const linhaDeLeitura = alturaTela * 0.35;
-    for (const { link, secao } of this.secoes) {
+    for (const { link, secao, marco } of this.secoes) {
       if (!secao) continue;
       const caixa = secao.getBoundingClientRect();
-      link.classList.toggle("cabecalho__link--ativo", caixa.top <= linhaDeLeitura && caixa.bottom > linhaDeLeitura);
+      const comeco = marco ? marco.getBoundingClientRect().top - 60 : caixa.top;
+      link.classList.toggle("cabecalho__link--ativo", comeco <= linhaDeLeitura && caixa.bottom > linhaDeLeitura);
     }
   }
 
