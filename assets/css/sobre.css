@@ -4,7 +4,7 @@
      a capa       a colagem (bloco vermelho, retrato recortado e linhas de
                   composição) ao lado da apresentação
      a manchete   a frase que resume o jeito de trabalhar, em tamanho de título
-     as colunas   trajetória e parceria, lado a lado
+     a trajetória contada em quatro momentos, em texto corrido
    ========================================================================= */
 
 .sobre {
@@ -207,32 +207,40 @@
   color: var(--cor-vermelho);
 }
 
-/* ---------- as colunas ---------- */
-.sobre__colunas {
+/* ---------- a trajetória: um texto corrido em duas colunas, como numa matéria ----------
+   Cada parágrafo abre com uma frase curta em negrito, que marca o momento. */
+.sobre__historia {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(32px, 6vw, 96px);
-  padding-left: clamp(64px, 9vw, 150px);
-}
-
-.sobre__coluna {
+  grid-template-columns: minmax(0, 0.32fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
   padding-top: 22px;
   border-top: 1px solid var(--cor-linha-forte);
 }
 
-.sobre__coluna-titulo {
-  margin: 0 0 18px;
+.sobre__historia-titulo {
+  margin: 0;
   font-stretch: 115%;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  color: var(--cor-vermelho);
 }
 
-.sobre__coluna-texto {
-  margin: 0;
-  font-size: 1.15rem;
+.sobre__historia-texto {
+  columns: 2;
+  column-gap: clamp(32px, 4vw, 64px);
+}
+
+.sobre__historia-paragrafo {
+  margin: 0 0 1.2em;
+  break-inside: avoid;
+  font-size: 1.12rem;
   line-height: 1.65;
+}
+
+.sobre__historia-abre {
+  font-weight: 800;
 }
 
 .sobre__trajetoria {
@@ -259,8 +267,12 @@
     padding-top: clamp(96px, 26vw, 130px);
   }
 
-  .sobre__colunas {
+  .sobre__historia {
     grid-template-columns: minmax(0, 1fr);
-    padding-left: 0;
+    gap: 18px;
+  }
+
+  .sobre__historia-texto {
+    columns: 1;
   }
 }
