@@ -24,7 +24,15 @@ export class Manifesto {
       const span = document.createElement("span");
       const forte = fortes.includes(palavra.replace(/[.,:;]/g, ""));
       span.className = forte ? "manifesto__palavra manifesto__palavra--forte" : "manifesto__palavra";
-      span.textContent = palavra;
+      if (this.palavras.length === 0) {
+        /* a primeira letra da frase é a letra grande que abre a seção */
+        const inicial = document.createElement("span");
+        inicial.className = "letra-inicial";
+        inicial.textContent = palavra[0];
+        span.append(inicial, palavra.slice(1));
+      } else {
+        span.textContent = palavra;
+      }
       this.texto.append(span, " ");
       this.palavras.push(span);
     }
