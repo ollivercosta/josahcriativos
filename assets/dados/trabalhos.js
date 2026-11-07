@@ -29,8 +29,11 @@
  *   pranchas   as peças na página do trabalho, uma por frente de serviço:
  *              { frente, nome, texto, itens: [...], tipo, ... } onde o tipo é
  *                "imagem"  imagem: prancha 1600 x 1000 px, sem texto embutido
+ *                          (ou paginas: as páginas de um book; a primeira aparece
+ *                          e as demais abrem em tela inteira)
  *                "site"    imagem: a página inteira; endereco: o site no ar
- *              Sem pranchas, a página mostra as imagens de midias, inteiras.
+ *              Sem pranchas, a página monta uma por frente das peças. Prancha sem
+ *              imagem aparece como moldura "Prancha a produzir".
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
  *   midias     imagens (endereço) ou vídeos (YouTube, Vimeo, Google Drive)
  *
@@ -77,6 +80,42 @@ export const TRABALHOS = [
     proposta: "",
     resultado: "",
     pecas: [],
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Book de captação",
+        texto:
+          "Documento de apresentação da ópera a patrocinadores, com o espetáculo, a circulação, as cotas de investimento e as contrapartidas. Clique na imagem para ver as páginas do book.",
+        itens: ["Book de captação"],
+        paginas: [
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-02.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-03.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-04.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-05.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-06.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-07.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-08.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-09.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-10.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-11.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-12.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-13.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-14.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-15.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-16.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-17.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-18.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-19.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-20.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-21.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-22.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-23.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-24.webp",
+          "/assets/imagens/trabalhos/amazonia-motiro/pagina-25.webp",
+        ],
+      },
+    ],
     capa: "/assets/imagens/trabalhos/amazonia-motiro/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp",
@@ -133,6 +172,29 @@ export const TRABALHOS = [
       Digital: ["Formulário de inscrição", "Redes sociais"],
       "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Banner"],
     },
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Book de captação",
+        texto:
+          "Documento de apresentação do plano anual a patrocinadores, com proposta, impacto, contrapartidas e cotas de investimento. A capa estabelece a hierarquia que se repete nas páginas internas: instrumentos em primeiro plano, título institucional e número do Pronac.",
+        itens: ["Identidade visual", "Book de captação"],
+      },
+      {
+        frente: "Visual e mídia",
+        nome: "Papelaria, brindes e sinalização",
+        texto:
+          "Itens de uso de alunos e equipe. A logomarca da orquestra ocupa a frente de cada peça, e as marcas de realização, apoio e patrocínio seguem a régua do projeto, aplicadas nas costas das camisas e nas áreas secundárias dos demais itens.",
+        itens: ["Camisas", "Ecobag", "Squeeze", "Caderno e agenda", "Banner"],
+      },
+      {
+        frente: "Digital",
+        nome: "Campanha de inscrições",
+        texto:
+          "Carrosséis e posts para a chamada pública de bolsas, com prioridade para as informações que levam à inscrição: gratuidade, faixa etária, instrumentos oferecidos e número limitado de vagas. O formulário recebeu um banner com a mesma linguagem, o que dá continuidade entre o anúncio e o cadastro.",
+        itens: ["Redes sociais", "Formulário de inscrição"],
+      },
+    ],
     capa: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp",
     midias: ["/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/imagem.webp"],
   },

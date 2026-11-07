@@ -62,29 +62,18 @@
 .projeto__vizinhos {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 0;
 }
 
 .projeto__vizinho {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--cor-linha-forte);
-  border-radius: 50%;
-  font-size: 1rem;
-  letter-spacing: 0;
-  transition:
-    background 0.4s var(--curva),
-    color 0.4s var(--curva),
-    border-color 0.4s var(--curva);
+  padding: 8px 0 8px 18px;
+  font-weight: 700;
+  transition: color 0.3s var(--curva);
 }
 
 .projeto__vizinho:hover,
 .projeto__vizinho:focus-visible {
-  background: var(--cor-tinta);
-  border-color: var(--cor-tinta);
-  color: #fff;
+  color: var(--cor-vermelho);
 }
 
 /* ---------- o corpo: uma coluna larga e centrada ---------- */
@@ -191,20 +180,22 @@
   color: var(--cor-tinta-suave);
 }
 
-/* ---------- imagem-chave: inteira, sem passar da altura da tela ---------- */
+/* ---------- imagem-chave: inteira, na largura da página ---------- */
 .projeto__chave {
   margin-top: clamp(40px, 6vh, 64px);
   margin-bottom: 0;
-  text-align: center;
 }
 
 .projeto__chave-imagem {
-  display: inline-block;
-  max-width: 100%;
-  max-height: 78vh;
-  width: auto;
+  display: block;
+  width: 100%;
   height: auto;
-  vertical-align: top;
+}
+
+.projeto__legenda {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--cor-tinta-suave);
 }
 
 /* ---------- contexto, solução e resultado ---------- */
@@ -288,6 +279,29 @@
 
 .projeto__prancha {
   min-width: 0;
+}
+
+/* a prancha ainda sem imagem: a moldura 16:10 com o nome e a medida */
+.projeto__prancha-vazia {
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  aspect-ratio: 16 / 10;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 22px, rgba(22, 19, 15, 0.025) 22px 23px),
+    var(--cor-cinza-claro);
+  text-align: center;
+}
+
+.projeto__prancha-vazia-nome {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.projeto__prancha-vazia-medida {
+  font-size: 0.85rem;
+  color: var(--cor-tinta-suave);
 }
 
 
@@ -413,53 +427,6 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-}
-
-/* sem pranchas ainda: as frentes à esquerda (presas) e as imagens do trabalho, inteiras, à direita */
-.projeto__galeria {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: clamp(28px, 4vw, 64px);
-  align-items: start;
-}
-
-.projeto__galeria--so-imagens {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-/* só imagens, sem frentes ao lado: na largura da coluna das pranchas, centradas */
-.projeto__galeria--so-imagens .projeto__midias {
-  width: min(100%, 860px);
-  margin: 0 auto;
-}
-
-.projeto__frentes {
-  position: sticky;
-  top: calc(var(--barra) + 28px);
-  display: grid;
-  gap: 28px;
-}
-
-.projeto__frentes .projeto__itens {
-  margin-top: 12px;
-}
-
-.projeto__midias {
-  display: grid;
-  gap: 24px;
-}
-
-.projeto__midia {
-  margin: 0;
-}
-
-.projeto__video {
-  display: block;
-  padding: 48px 24px;
-  background: var(--cor-cinza-claro);
-  color: var(--cor-tinta);
-  text-align: center;
-  font-weight: 700;
 }
 
 /* ---------- régua de marcas ---------- */
@@ -658,7 +625,6 @@
   .projeto__abertura,
   .projeto__peca,
   .projeto__peca:nth-of-type(even),
-  .projeto__galeria,
   .projeto__regua {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -677,10 +643,6 @@
 
   .projeto__pecas-titulo {
     white-space: normal;
-  }
-
-  .projeto__frentes {
-    position: static;
   }
 
   .projeto__mais-lista {
