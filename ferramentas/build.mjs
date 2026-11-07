@@ -74,7 +74,7 @@ for (const pagina of PAGINAS) {
 }
 
 /* as páginas dos trabalhos: o mesmo cabeçalho, a mesma tela final e o mesmo rodapé da inicial */
-const CSS_DO_TRABALHO = ["base.css", "projeto.css", "folheador.css", "contato.css", "rodape.css", "termos.css", "tipografia.css"];
+const CSS_DO_TRABALHO = ["base.css", "projeto.css", "contato.css", "rodape.css", "termos.css", "tipografia.css"];
 const cssDoTrabalho = (
   await Promise.all(CSS_DO_TRABALHO.map((arquivo) => readFile(`assets/css/${arquivo}`, "utf8")))
 ).join("\n");

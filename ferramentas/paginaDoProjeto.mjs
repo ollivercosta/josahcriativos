@@ -4,7 +4,7 @@
  * A estrutura é a de um estudo de caso, a mesma para todos: a abertura (nome e
  * desafio), a ficha técnica em uma linha, a imagem-chave, contexto, solução e
  * resultado, e as peças, uma prancha por frente de serviço com o texto ao lado.
- * A prancha pode ser uma imagem, o book folheável ou o site numa janela.
+ * A prancha pode ser uma imagem ou o site numa janela.
  * Embaixo, a mesma tela final (contato) e o mesmo rodapé da página inicial.
  *
  * O cabeçalho do documento, a tela final, o rodapé e os termos são copiados do
@@ -100,21 +100,9 @@ function etiquetas(itens) {
 /**
  * A imagem de uma prancha, conforme o tipo:
  *   imagem   a prancha inteira, que amplia num clique
- *   book     o folheador, com as páginas do book
  *   site     a página inteira numa janela de navegador, que rola por dentro
  */
 function quadroDaPrancha(prancha, trabalho, posicao) {
-  if (prancha.tipo === "book") {
-    return `<div class="folheador" tabindex="0" role="region" aria-roledescription="livro" aria-label="${escapar(prancha.nome)}: folheie com as setas" data-paginas='${escapar(JSON.stringify(prancha.paginas || []))}'>
-            <div class="folheador__palco"><div class="folheador__livro"></div></div>
-            <button type="button" class="folheador__seta folheador__seta--anterior" aria-label="Página anterior">&larr;</button>
-            <button type="button" class="folheador__seta folheador__seta--seguinte" aria-label="Próxima página">&rarr;</button>
-            <div class="folheador__rodape">
-              <span class="folheador__contador" aria-live="polite"></span>
-              <span class="folheador__barra" aria-hidden="true"><span class="folheador__progresso"></span></span>
-            </div>
-          </div>`;
-  }
   if (prancha.tipo === "site") {
     const visitar = prancha.endereco
       ? `<a class="projeto__site-visitar" href="${escapar(prancha.endereco)}" target="_blank" rel="noopener">Visitar o site <span aria-hidden="true">&rarr;</span></a>`
@@ -142,7 +130,7 @@ function pecas(trabalho) {
     let posicao = -1;
     corpo = pranchas
       .map((prancha) => {
-        if (prancha.tipo !== "book" && prancha.tipo !== "site") posicao += 1;
+        if (prancha.tipo !== "site") posicao += 1;
         return `<article class="projeto__peca projeto__peca--${prancha.tipo || "imagem"}">
           <div class="projeto__prancha">
           ${quadroDaPrancha(prancha, trabalho, posicao)}
@@ -205,7 +193,7 @@ function pecas(trabalho) {
 
 /** As imagens que abrem em tela inteira: as das pranchas de imagem, ou as do trabalho. */
 function imagensAmpliaveis(trabalho) {
-  const pranchas = (trabalho.pranchas || []).filter((p) => p.tipo !== "book" && p.tipo !== "site");
+  const pranchas = (trabalho.pranchas || []).filter((p) => p.tipo !== "site");
   if ((trabalho.pranchas || []).length) return pranchas.map((p) => p.imagem);
   return (trabalho.midias || []).filter(ehImagem);
 }

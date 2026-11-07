@@ -3,7 +3,6 @@
  * A página de um trabalho. O HTML já chega pronto (gerado no build por
  * ferramentas/paginaDoProjeto.mjs); esta classe só acrescenta a imagem em
  * tela inteira das pranchas, com as setas, o teclado e o deslizar do dedo.
- * O book folheável é a classe Folheador.
  */
 export class Projeto {
   /** @param {HTMLElement} corpo o <main class="projeto__corpo"> */

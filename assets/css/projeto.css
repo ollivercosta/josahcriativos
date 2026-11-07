@@ -3,7 +3,7 @@
    Um estudo de caso: a abertura (nome e desafio), a ficha técnica em uma
    linha, a imagem-chave, contexto, solução e resultado, e as peças, uma
    prancha por frente de serviço com o texto ao lado (a prancha pode ser
-   uma imagem, o book folheável ou o site numa janela). No celular, tudo
+   uma imagem ou o site numa janela). No celular, tudo
    numa coluna, na mesma ordem.
    ========================================================================= */
 
@@ -425,6 +425,12 @@
 
 .projeto__galeria--so-imagens {
   grid-template-columns: minmax(0, 1fr);
+}
+
+/* só imagens, sem frentes ao lado: na largura da coluna das pranchas, centradas */
+.projeto__galeria--so-imagens .projeto__midias {
+  width: min(100%, 860px);
+  margin: 0 auto;
 }
 
 .projeto__frentes {

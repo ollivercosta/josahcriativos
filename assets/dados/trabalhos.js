@@ -29,7 +29,6 @@
  *   pranchas   as peças na página do trabalho, uma por frente de serviço:
  *              { frente, nome, texto, itens: [...], tipo, ... } onde o tipo é
  *                "imagem"  imagem: prancha 1600 x 1000 px, sem texto embutido
- *                "book"    paginas: [imagens das páginas, geradas do PDF]
  *                "site"    imagem: a página inteira; endereco: o site no ar
  *              Sem pranchas, a página mostra as imagens de midias, inteiras.
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
@@ -78,43 +77,6 @@ export const TRABALHOS = [
     proposta: "",
     resultado: "",
     pecas: [],
-    pranchas: [
-      {
-        frente: "Apresentação",
-        nome: "Book de captação",
-        tipo: "book",
-        texto:
-          "Documento de apresentação da ópera a patrocinadores, com o espetáculo, a circulação, as cotas de investimento e as contrapartidas.",
-        itens: ["Book de captação"],
-        paginas: [
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-02.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-03.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-04.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-05.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-06.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-07.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-08.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-09.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-10.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-11.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-12.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-13.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-14.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-15.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-16.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-17.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-18.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-19.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-20.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-21.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-22.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-23.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-24.webp",
-        "/assets/imagens/trabalhos/amazonia-motiro/pagina-25.webp",
-        ],
-      },
-    ],
     capa: "/assets/imagens/trabalhos/amazonia-motiro/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp",
