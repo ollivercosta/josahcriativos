@@ -1,22 +1,12 @@
 /* =========================================================================
-   TEMA: CARTAZ
+   TEMA: COLAGEM
    Uma camada sobre os estilos das seções que troca a atmosfera inteira do
-   site, com a paleta dos cartazes e colagens das referências: papel creme,
-   tinta preta, vermelho de cartaz e amarelo, com azul cobalto de apoio.
-   Faixas inteiras em amarelo, vermelho e azul marcam as mudanças de assunto.
-   Três vozes tipográficas:
-     Syne         títulos, em escala contida (nada de letras gigantes)
-     Manrope      textos
-     Martian Mono rótulos, menus, botões, filtros e etiquetas
-   Sempre claro: o site não tem tema escuro.
+   site, com a paleta da colagem da referência 12: papel #f0e9e0, tinta
+   #121316, ardósia #3f464d, cinzas quentes #c4bdb5 e #88837f, vermelho
+   #91201d e ocre #dfa337. Faixas em ocre, ardósia e vermelho marcam as
+   mudanças de assunto. Sempre claro: o site não tem tema escuro.
+   Fontes: Manrope (títulos e textos, provisória) e Martian Mono (rótulos).
    ========================================================================= */
-
-@font-face {
-  font-family: "Syne";
-  src: url("/assets/fontes/syne.woff2") format("woff2");
-  font-weight: 400 800;
-  font-display: swap;
-}
 
 @font-face {
   font-family: "Manrope";
@@ -34,22 +24,26 @@
 }
 
 :root {
-  --papel: #f1ebdf;
-  --preto: #161311;
-  --vermelho: #e1301d;
-  --amarelo: #f5b512;
-  --azul: #1f4fa3;
+  /* a paleta da referência 12 (colagem): papel, tinta, ardósia, dois cinzas quentes, vermelho e ocre */
+  --papel: #f0e9e0;
+  --preto: #121316;
+  --ardosia: #3f464d;
+  --cinza-quente: #c4bdb5;
+  --cinza: #88837f;
+  --vermelho: #91201d;
+  --amarelo: #dfa337;
+  --azul: var(--ardosia);
   --cor-fundo: var(--papel);
   --cor-tinta: var(--preto);
   --cor-vermelho: var(--vermelho);
-  --cor-tinta-suave: rgba(22, 19, 17, 0.66);
-  --cor-tinta-apagada: rgba(22, 19, 17, 0.16);
-  --cor-linha: rgba(22, 19, 17, 0.13);
-  --cor-linha-forte: rgba(22, 19, 17, 0.32);
-  --cor-cinza-claro: #e7dfcf;
-  --cor-superficie: #e7dfcf;
+  --cor-tinta-suave: rgba(18, 19, 22, 0.66);
+  --cor-tinta-apagada: rgba(18, 19, 22, 0.16);
+  --cor-linha: rgba(18, 19, 22, 0.13);
+  --cor-linha-forte: rgba(18, 19, 22, 0.32);
+  --cor-cinza-claro: var(--cinza-quente);
+  --cor-superficie: var(--cinza-quente);
   --fonte: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --fonte-titulo: "Syne", "Manrope", sans-serif;
+  --fonte-titulo: "Manrope", "Helvetica Neue", Arial, sans-serif;
   --fonte-rotulo: "Martian Mono", ui-monospace, monospace;
   --titulo-celular: 2.1rem;
 }
@@ -69,7 +63,7 @@ body {
   color: var(--preto);
 }
 
-/* ---------- títulos: Syne, em escala contida ---------- */
+/* ---------- títulos em escala contida ---------- */
 .hero__titulo,
 .trabalhos__titulo,
 .faq__titulo,
@@ -203,10 +197,10 @@ body {
   font-size: 0.56rem !important;
 }
 
-/* ---------- manifesto: faixa amarela com tinta preta e destaque vermelho ---------- */
+/* ---------- manifesto: faixa ocre com tinta e destaque vermelho ---------- */
 .manifesto {
   --cor-tinta: var(--preto) !important;
-  --cor-tinta-apagada: rgba(22, 19, 17, 0.25) !important;
+  --cor-tinta-apagada: rgba(18, 19, 22, 0.25) !important;
   --cor-vermelho: var(--vermelho) !important;
   background: var(--amarelo) !important;
   color: var(--preto) !important;
@@ -219,24 +213,24 @@ body {
 }
 
 .manifesto__linha {
-  background: rgba(22, 19, 17, 0.45) !important;
+  background: rgba(18, 19, 22, 0.45) !important;
 }
 
 /* ---------- cabeçalho fixo e menu ---------- */
 .cabecalho {
-  background: rgba(241, 235, 223, 0.9) !important;
+  background: rgba(240, 233, 224, 0.9) !important;
 }
 
 .menu-movel {
   background: var(--papel) !important;
 }
 
-/* ---------- contato: faixa vermelha, destaque em amarelo ---------- */
+/* ---------- contato: faixa vermelha, destaque em ocre ---------- */
 .contato__titulo-forte {
   color: var(--amarelo) !important;
 }
 
-/* o nome do rodapé deixa de ser gigante: uma assinatura em Syne */
+/* o nome do rodapé deixa de ser gigante */
 .rodape__nome {
   font-family: var(--fonte-titulo) !important;
   font-weight: 700 !important;
@@ -253,11 +247,11 @@ body {
   background: #fff !important;
 }
 
-/* o painel do meio vira azul cobalto e o último, vermelho */
+/* o painel do meio vira ardósia e o último, vermelho */
 .servicos__painel--tinta {
   --cor-tinta: var(--papel);
-  --cor-tinta-suave: rgba(241, 235, 223, 0.75);
-  --cor-linha-forte: rgba(241, 235, 223, 0.3);
+  --cor-tinta-suave: rgba(240, 233, 224, 0.75);
+  --cor-linha-forte: rgba(240, 233, 224, 0.3);
   --cor-vermelho: var(--amarelo);
   background: var(--azul) !important;
   color: var(--papel) !important;
@@ -265,8 +259,8 @@ body {
 
 .servicos__painel--vermelho {
   --cor-tinta: var(--papel);
-  --cor-tinta-suave: rgba(241, 235, 223, 0.8);
-  --cor-linha-forte: rgba(241, 235, 223, 0.32);
+  --cor-tinta-suave: rgba(240, 233, 224, 0.8);
+  --cor-linha-forte: rgba(240, 233, 224, 0.32);
   --cor-vermelho: var(--amarelo);
   background: var(--vermelho) !important;
   color: var(--papel) !important;
@@ -279,10 +273,10 @@ body {
 
 /* ---------- página do projeto ---------- */
 .projeto__barra {
-  background: rgba(241, 235, 223, 0.92) !important;
+  background: rgba(240, 233, 224, 0.92) !important;
 }
 
-/* a Syne é larga: o nome do projeto ganha um tamanho que cabe na coluna */
+/* o nome do projeto ganha um tamanho que cabe na coluna */
 .projeto__titulo {
   font-weight: 700 !important;
   font-size: min(2.3rem, 11.5cqi) !important;
