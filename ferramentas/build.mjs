@@ -52,12 +52,6 @@ await writeFile(`${SAIDA}/index.html`, html);
    com o conteúdo próprio de cada uma (arquivos em paginas/) no lugar das seções da inicial */
 const PAGINAS = [
   {
-    arquivo: "como-funciona",
-    titulo: "Como funciona | Josah Oliveira",
-    descricao:
-      "Como Josah Oliveira ajuda projetos culturais: serviços, etapas do trabalho, do primeiro contato à entrega, e depoimentos de quem já trabalhou com ele.",
-  },
-  {
     arquivo: "sobre",
     titulo: "Sobre | Josah Oliveira",
     descricao: "Quem é Josah Oliveira, designer gráfico de projetos culturais.",
