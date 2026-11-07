@@ -1,203 +1,246 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
-import { capaDoTrabalho } from "../../dados/trabalhos.js";
 
 /**
- * Onde cada folha fica sobre a mesa, na ordem da parede (destaques primeiro).
- *   x, y        centro da folha, em % da largura e da altura da tela
- *   largura     em % da largura da tela
- *   giro        em graus
- *   fundo       profundidade: quanto a folha acompanha o mouse (0 a 1)
+ * Para onde cada peça do hero voa quando ele se desmonta.
+ *   x, y    deslocamento final, em vw (no próprio plano inclinado)
+ *   giro    em graus
+ *   atraso  fração do desmonte em que a peça começa a sair (0 a 1)
+ * As letras de CULTURA saem em leque: CUL para baixo e à esquerda, TURA para cima e à direita.
  */
-const MESA_LARGA = [
-  { x: 64, y: 46, largura: 24, giro: -4, fundo: 1 },
-  { x: 85, y: 40, largura: 21, giro: 5, fundo: 0.8 },
-  { x: 76, y: 73, largura: 22, giro: 2, fundo: 0.9 },
-  { x: 57, y: 75, largura: 14, giro: -7, fundo: 0.6 },
-  { x: 94, y: 69, largura: 14, giro: -3, fundo: 0.5 },
-  { x: 58, y: 26, largura: 12, giro: 8, fundo: 0.45 },
-  { x: 95, y: 24, largura: 11, giro: -9, fundo: 0.35 },
-  { x: 88, y: 92, largura: 13, giro: 6, fundo: 0.55 },
-  { x: 53, y: 54, largura: 10, giro: 10, fundo: 0.3 },
-  { x: 66, y: 93, largura: 12, giro: -5, fundo: 0.4 },
-  { x: 75, y: 22, largura: 11, giro: 4, fundo: 0.4 },
-  { x: 55, y: 96, largura: 11, giro: 7, fundo: 0.35 },
-  { x: 97, y: 47, largura: 11, giro: -6, fundo: 0.3 },
+const DESMONTE = {
+  ".hero__cabecalho": { x: 0, y: -8, giro: 0, atraso: 0 },
+  ".hero__rotulo-topo": { x: -24, y: -30, giro: -8, atraso: 0.04 },
+  ".hero__design": { x: -48, y: -36, giro: -14, atraso: 0 },
+  ".hero__barra-base": { x: -130, y: 0, giro: 0, atraso: 0.06 },
+  ".hero__barra-topo": { x: -70, y: 0, giro: 0, atraso: 0.1 },
+  ".hero__barra-haste": { x: 0, y: -80, giro: 0, atraso: 0.12 },
+  ".hero__barra-larga": { x: 100, y: 0, giro: 0, atraso: 0.05 },
+  ".hero__rotulo-servicos": { x: 60, y: 24, giro: 6, atraso: 0.1 },
+  ".hero__texto": { x: -32, y: 52, giro: -6, atraso: 0.12 },
+  ".hero__botao": { x: 22, y: 62, giro: 18, atraso: 0.16 },
+};
+const LETRAS = [
+  { x: -52, y: 26, giro: -22, atraso: 0.08 },
+  { x: -30, y: 48, giro: 16, atraso: 0.12 },
+  { x: -10, y: 62, giro: -12, atraso: 0.16 },
+  { x: 12, y: -56, giro: 12, atraso: 0.1 },
+  { x: 32, y: -46, giro: -16, atraso: 0.14 },
+  { x: 52, y: -32, giro: 18, atraso: 0.18 },
+  { x: 72, y: -16, giro: -12, atraso: 0.22 },
 ];
-
-const MESA_ESTREITA = [
-  { x: 35, y: 77, largura: 48, giro: -4, fundo: 1 },
-  { x: 72, y: 73, largura: 44, giro: 5, fundo: 0.8 },
-  { x: 58, y: 89, largura: 46, giro: 2, fundo: 0.9 },
-  { x: 12, y: 90, largura: 30, giro: -8, fundo: 0.6 },
-  { x: 92, y: 88, largura: 28, giro: 6, fundo: 0.5 },
-  { x: 28, y: 100, largura: 26, giro: 7, fundo: 0.45 },
-  { x: 82, y: 100, largura: 24, giro: -6, fundo: 0.35 },
-  { x: 52, y: 69, largura: 20, giro: 9, fundo: 0.55 },
-  { x: 10, y: 72, largura: 22, giro: -10, fundo: 0.3 },
-  { x: 94, y: 76, largura: 20, giro: -4, fundo: 0.4 },
-  { x: 46, y: 102, largura: 22, giro: 4, fundo: 0.4 },
-  { x: 66, y: 104, largura: 20, giro: -7, fundo: 0.35 },
-  { x: 18, y: 104, largura: 20, giro: 5, fundo: 0.3 },
-];
-
-/** A folha pousa quando o topo do seu quadro chega a esta altura da tela (fração). */
-const LINHA_DE_POUSO = 0.62;
-/** Queda na mesa ao abrir a página: duração de cada folha e intervalo entre elas, em ms. */
-const QUEDA = { duracao: 900, intervalo: 70, inicio: 350 };
+/** Quanto do desmonte cada peça leva para sair (fração). */
+const DURACAO_DA_SAIDA = 0.5;
 
 const limitar = (valor, minimo, maximo) => Math.min(Math.max(valor, minimo), maximo);
-const misturar = (a, b, t) => a + (b - a) * t;
-const suavizar = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-const desacelerar = (t) => 1 - Math.pow(1 - t, 3);
 
 /**
  * Hero
- * As capas dos trabalhos espalhadas sobre a mesa, como folhas impressas.
- * Ao abrir a página elas caem na mesa, uma depois da outra; com o mouse,
- * cada uma se desloca conforme a sua profundidade.
+ * Monta "CULTURA" letra a letra (CUL em tinta, TURA em vermelho), alinha a
+ * haste à letra T, faz as letras reagirem ao mouse e inclina o plano em
+ * 3D com o mouse e a rolagem, sempre com interpolação suave.
  *
- * Rolando, cada folha voa da mesa até o seu quadro na parede de trabalhos.
- * O voo de cada folha vai do topo da página até o momento em que o quadro
- * dela chega à LINHA_DE_POUSO; ali a folha some e o quadro de verdade (com
- * a etiqueta) aparece no mesmo lugar. Voltando a rolar para cima, ela volta
- * para a mesa. As posições são recalculadas a cada quadro a partir do
- * próprio quadro da parede, então qualquer mudança de layout é seguida.
+ * O hero fica no palco do início, por cima da mesa. Rolando, ele se
+ * desmonta: cada peça (letras, barras, textos, botão, serviços) voa para
+ * fora da tela e some, e a mesa aparece no lugar. Voltando a rolar para
+ * cima, as peças voltam para o lugar.
  */
 export class Hero {
-  /**
-   * @param {HTMLElement} raiz
-   * @param {Array<object>} trabalhos na ordem da parede
-   * @param {{ quadros: HTMLElement[], pousar: (indice: number, pousou: boolean) => void } | null} parede
-   */
-  constructor(raiz, trabalhos, parede) {
+  constructor(raiz) {
     this.raiz = raiz;
-    this.mesa = raiz.querySelector(".hero__mesa");
-    this.cabecalho = raiz.querySelector(".hero__cabecalho");
-    this.parede = parede;
-    this.trabalhos = trabalhos;
-    this.mouse = { alvoX: 0, alvoY: 0, x: 0, y: 0 };
-    this.inicio = performance.now();
-    this.quadro = 0;
-    this.parado = Ambiente.reduzMovimento;
+    this.plano = raiz.querySelector(".hero__plano");
+    this.cultura = raiz.querySelector(".hero__cultura");
+    this.haste = raiz.querySelector(".hero__barra-haste");
+    this.letras = [];
+    this.inclinacao = { alvoX: 0, alvoY: 0, x: 0, y: 0, rolagem: 0, rodando: false };
 
-    this.#dividirTitulo();
-    if (!parede || !parede.quadros.length) return;
-    this.#montarFolhas();
-    this.#ligarEventos();
-    this.#pedirQuadro();
+    this.#montarPalavra();
+    this.#alinharHaste();
+    if (document.fonts) document.fonts.ready.then(() => this.#alinharHaste());
+    window.addEventListener("resize", () => this.#alinharHaste());
+
+    this.inicio = raiz.closest(".inicio");
+    if (this.inicio) this.#ligarDesmonte();
+
+    if (Ambiente.reduzMovimento) return;
+    if (Ambiente.ponteiroFino) this.#letrasReagemAoMouse();
+    this.#inclinarPlano();
   }
 
-  /** Cada linha do título sobe por trás de uma máscara, uma depois da outra. */
-  #dividirTitulo() {
-    this.raiz.querySelectorAll(".hero__titulo-linha").forEach((linha, k) => {
-      const miolo = document.createElement("span");
-      miolo.className = "hero__titulo-miolo";
-      miolo.style.setProperty("--k", String(k));
-      miolo.append(...linha.childNodes);
-      linha.append(miolo);
+  #montarPalavra() {
+    Array.from("Cultura").forEach((letra, indice) => {
+      const span = document.createElement("span");
+      span.className = indice < 3 ? "hero__letra hero__letra--tinta" : "hero__letra hero__letra--vermelho";
+      span.style.setProperty("--i", String(indice));
+      span.textContent = letra;
+      this.cultura.append(span);
+      this.letras.push(span);
     });
   }
 
-  #montarFolhas() {
-    this.folhas = this.parede.quadros.map((_, indice) => {
-      const folha = document.createElement("div");
-      folha.className = "hero__folha";
-      folha.style.zIndex = String(40 - indice);
-      const imagem = document.createElement("img");
-      imagem.className = "hero__folha-imagem";
-      imagem.alt = "";
-      imagem.decoding = "async";
-      imagem.src = capaDoTrabalho(this.trabalhos[indice]) || "";
-      folha.append(imagem);
-      this.mesa.append(folha);
-      return { elemento: folha, largura: 0, altura: 0, pousou: null };
+  /** A haste nasce exatamente do centro do T, medido no próprio texto. */
+  #alinharHaste() {
+    if (Ambiente.telaEstreita && window.matchMedia("(max-width: 760px)").matches) return;
+    const letraT = this.letras[3];
+    if (!letraT) return;
+    const centro =
+      this.cultura.offsetLeft + letraT.offsetLeft + letraT.offsetWidth * 0.5 - this.haste.offsetWidth * 0.5;
+    const fim = this.cultura.offsetTop + letraT.offsetHeight * 0.32;
+    this.haste.style.left = `${centro}px`;
+    this.haste.style.top = "0px";
+    this.haste.style.height = `${fim}px`;
+  }
+
+  /**
+   * Cada letra sobe um pouco e gira de leve conforme a distância do mouse.
+   * Os centros das letras são medidos uma vez (ao entrar no hero e ao
+   * redimensionar), e não a cada movimento: medir a letra já deslocada
+   * criava uma realimentação que tremia. O movimento é interpolado quadro
+   * a quadro, sem transição de CSS que reinicie no meio do caminho.
+   */
+  #letrasReagemAoMouse() {
+    const estados = this.letras.map(() => ({ sobe: 0, gira: 0, alvoSobe: 0, alvoGira: 0 }));
+    let centros = [];
+    let rodando = false;
+
+    const medir = () => {
+      centros = this.letras.map((letra) => {
+        const caixa = letra.getBoundingClientRect();
+        return { x: caixa.left + caixa.width / 2, y: caixa.top + caixa.height / 2, largura: caixa.width };
+      });
+    };
+    const quadro = () => {
+      let emMovimento = false;
+      this.letras.forEach((letra, indice) => {
+        const estado = estados[indice];
+        estado.sobe += (estado.alvoSobe - estado.sobe) * 0.1;
+        estado.gira += (estado.alvoGira - estado.gira) * 0.1;
+        if (Math.abs(estado.alvoSobe - estado.sobe) > 0.0002 || Math.abs(estado.alvoGira - estado.gira) > 0.01) {
+          emMovimento = true;
+        }
+        letra.style.setProperty("--sobe", `${estado.sobe.toFixed(4)}em`);
+        letra.style.setProperty("--gira", `${estado.gira.toFixed(3)}deg`);
+      });
+      if (emMovimento) window.requestAnimationFrame(quadro);
+      else rodando = false;
+    };
+    const animar = () => {
+      if (rodando) return;
+      rodando = true;
+      window.requestAnimationFrame(quadro);
+    };
+
+    this.raiz.addEventListener("pointerenter", medir);
+    window.addEventListener("resize", medir);
+    window.addEventListener("scroll", () => (centros = []), { passive: true });
+    this.raiz.addEventListener("pointermove", (evento) => {
+      if (!centros.length) medir();
+      centros.forEach((centro, indice) => {
+        const dx = evento.clientX - centro.x;
+        const dy = evento.clientY - centro.y;
+        const forca = Math.max(0, 1 - Math.hypot(dx, dy) / (centro.largura * 1.6));
+        const suave = forca * forca * (3 - 2 * forca);
+        estados[indice].alvoSobe = -0.06 * suave;
+        /* o giro varia de forma contínua com a posição: sem salto ao cruzar o centro da letra */
+        const lado = Math.max(-1, Math.min(1, dx / (centro.largura * 0.6)));
+        estados[indice].alvoGira = -lado * 2.5 * suave;
+      });
+      animar();
+    });
+    this.raiz.addEventListener("pointerleave", () => {
+      estados.forEach((estado) => {
+        estado.alvoSobe = 0;
+        estado.alvoGira = 0;
+      });
+      animar();
     });
   }
 
-  #ligarEventos() {
-    const pedir = () => this.#pedirQuadro();
-    window.addEventListener("scroll", pedir, { passive: true });
-    window.addEventListener("resize", pedir);
-    if (!this.parado && Ambiente.ponteiroFino) {
+  /** O plano inclina seguindo o mouse e a rolagem. */
+  #inclinarPlano() {
+    const estado = this.inclinacao;
+    const iniciar = () => {
+      if (estado.rodando) return;
+      estado.rodando = true;
+      window.requestAnimationFrame(passo);
+    };
+    const passo = () => {
+      const alvoY = estado.alvoY + estado.rolagem * 0.012;
+      estado.x += (estado.alvoX - estado.x) * 0.06;
+      estado.y += (alvoY - estado.y) * 0.06;
+      this.plano.style.setProperty("--hero-rx", `${estado.x.toFixed(3)}deg`);
+      this.plano.style.setProperty("--hero-ry", `${estado.y.toFixed(3)}deg`);
+      const parado = Math.abs(estado.alvoX - estado.x) < 0.005 && Math.abs(alvoY - estado.y) < 0.005;
+      if (parado) estado.rodando = false;
+      else window.requestAnimationFrame(passo);
+    };
+    if (Ambiente.ponteiroFino) {
       window.addEventListener("pointermove", (evento) => {
-        if (window.scrollY > window.innerHeight) return;
-        this.mouse.alvoX = (evento.clientX / window.innerWidth) * 2 - 1;
-        this.mouse.alvoY = (evento.clientY / window.innerHeight) * 2 - 1;
-        pedir();
+        estado.alvoX = (evento.clientX / window.innerWidth - 0.5) * 7;
+        estado.alvoY = -(evento.clientY / window.innerHeight - 0.5) * 5;
+        iniciar();
       });
     }
+    window.addEventListener(
+      "scroll",
+      () => {
+        estado.rolagem = Math.min(window.scrollY, window.innerHeight);
+        iniciar();
+      },
+      { passive: true },
+    );
   }
 
-  #pedirQuadro() {
-    if (!this.quadro) this.quadro = window.requestAnimationFrame((agora) => this.#desenhar(agora));
-  }
-
-  /** Um quadro de animação: posiciona todas as folhas e decide se precisa de outro. */
-  #desenhar(agora) {
-    this.quadro = 0;
-    const largura = window.innerWidth;
-    const altura = window.innerHeight;
-    const rolagem = window.scrollY;
-    const poses = Ambiente.telaEstreita ? MESA_ESTREITA : MESA_LARGA;
-    /* nenhuma folha sobe acima desta linha: o menu do hero fica sempre livre */
-    const teto = this.cabecalho.offsetTop + this.cabecalho.offsetHeight + 28;
-    let continuar = false;
-
-    /* o mouse é seguido com atraso, para o movimento ser macio */
-    this.mouse.x = misturar(this.mouse.x, this.mouse.alvoX, 0.08);
-    this.mouse.y = misturar(this.mouse.y, this.mouse.alvoY, 0.08);
-    if (Math.abs(this.mouse.x - this.mouse.alvoX) + Math.abs(this.mouse.y - this.mouse.alvoY) > 0.002) continuar = true;
-
-    this.folhas.forEach((folha, indice) => {
-      const pose = poses[indice % poses.length];
-      const alvo = this.parede.quadros[indice].getBoundingClientRect();
-      if (!alvo.width) return;
-
-      /* o tamanho natural da folha é o do quadro: no hero ela fica menor (escala < 1, sem perder nitidez) */
-      if (folha.largura !== alvo.width || folha.altura !== alvo.height) {
-        folha.largura = alvo.width;
-        folha.altura = alvo.height;
-        folha.elemento.style.width = `${alvo.width}px`;
-        folha.elemento.style.height = `${alvo.height}px`;
-      }
-
-      /* queda na mesa ao abrir a página */
-      const tempo = agora - this.inicio - QUEDA.inicio - indice * QUEDA.intervalo;
-      const queda = this.parado ? 1 : limitar(tempo / QUEDA.duracao, 0, 1);
-      if (queda < 1) continuar = true;
-      const caiu = desacelerar(queda);
-
-      /* voo até o quadro: de 0 (na mesa) a 1 (pousada) conforme a rolagem */
-      const pouso = alvo.top + rolagem - altura * LINHA_DE_POUSO;
-      const voo = this.parado ? (rolagem > 0 ? 1 : 0) : limitar(rolagem / Math.max(pouso, 1), 0, 1);
-      const v = suavizar(voo);
-
-      const escalaNaMesa = ((pose.largura / 100) * largura) / alvo.width;
-      /* metade da altura da folha na mesa, com folga para o giro */
-      const meiaAltura = ((alvo.height * escalaNaMesa) / 2) * 1.12;
-      const naMesa = {
-        x: (pose.x / 100) * largura + this.mouse.x * pose.fundo * 18,
-        y: Math.max((pose.y / 100) * altura, teto + meiaAltura) + this.mouse.y * pose.fundo * 12,
-        escala: escalaNaMesa,
-      };
-      const x = misturar(naMesa.x, alvo.left + alvo.width / 2, v);
-      const y = misturar(naMesa.y, alvo.top + alvo.height / 2, v);
-      /* no meio do voo a folha sobe um pouco, como quem a levanta da mesa */
-      const levantada = Math.sin(Math.PI * v) * 0.05;
-      const escala = misturar(naMesa.escala, 1, v) * (1 + levantada) * misturar(1.18, 1, caiu);
-      const giro = misturar(pose.giro, 0, v) + misturar(pose.giro * 0.6, 0, caiu);
-
-      const pousou = voo >= 1;
-      const el = folha.elemento;
-      el.style.transform = `translate3d(${(x - alvo.width / 2).toFixed(1)}px, ${(y - alvo.height / 2).toFixed(1)}px, 0) rotate(${giro.toFixed(2)}deg) scale(${escala.toFixed(4)})`;
-      el.style.opacity = pousou ? "0" : String(caiu);
-      el.style.setProperty("--altura", (1 - v).toFixed(3));
-      if (folha.pousou !== pousou) {
-        folha.pousou = pousou;
-        this.parede.pousar(indice, pousou);
-      }
+  /** Junta as peças com o destino de cada uma e redesenha a cada rolagem. */
+  #ligarDesmonte() {
+    const pecas = [];
+    for (const [seletor, destino] of Object.entries(DESMONTE)) {
+      const elemento = this.raiz.querySelector(seletor);
+      if (elemento) pecas.push({ elemento, ...destino });
+    }
+    this.letras.forEach((letra, indice) => pecas.push({ elemento: letra, ...LETRAS[indice] }));
+    this.raiz.querySelectorAll(".hero__servico").forEach((servico, indice) => {
+      pecas.push({ elemento: servico, x: 60 + indice * 8, y: 22 + indice * 7, giro: 6, atraso: 0.1 + indice * 0.03 });
     });
+    this.pecas = pecas;
+    this.ultimoDesmonte = -1;
 
-    if (continuar) this.#pedirQuadro();
+    let pedido = 0;
+    const pedir = () => {
+      if (pedido) return;
+      pedido = window.requestAnimationFrame(() => {
+        pedido = 0;
+        this.#desmontar();
+      });
+    };
+    window.addEventListener("scroll", pedir, { passive: true });
+    window.addEventListener("resize", pedir);
+    pedir();
+  }
+
+  #desmontar() {
+    const caixa = this.inicio.getBoundingClientRect();
+    const desmonte = limitar(-caixa.top / Math.max(caixa.height - window.innerHeight, 1), 0, 1);
+    if (Math.abs(desmonte - this.ultimoDesmonte) < 0.0005) return;
+    this.ultimoDesmonte = desmonte;
+
+    /* ao começar a sair, as animações de entrada param e as peças passam a ser movidas daqui */
+    if (desmonte > 0) this.raiz.classList.add("hero--solto");
+    this.raiz.classList.toggle("hero--desfeito", desmonte > 0.5);
+
+    for (const peca of this.pecas) {
+      const t = limitar((desmonte - peca.atraso) / DURACAO_DA_SAIDA, 0, 1);
+      /* a peça acelera ao sair, como quem é puxada para fora */
+      const saida = t * t;
+      const estilo = peca.elemento.style;
+      if (saida === 0) {
+        estilo.translate = "";
+        estilo.rotate = "";
+        estilo.opacity = "";
+        continue;
+      }
+      estilo.translate = `${(peca.x * saida).toFixed(2)}vw ${(peca.y * saida).toFixed(2)}vw`;
+      estilo.rotate = `${(peca.giro * saida).toFixed(2)}deg`;
+      estilo.opacity = (1 - limitar(t * 1.25 - 0.2, 0, 1)).toFixed(3);
+    }
   }
 }

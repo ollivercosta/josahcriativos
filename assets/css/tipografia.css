@@ -23,8 +23,6 @@
 }
 
 /* ---------- títulos: a serifa ---------- */
-.hero__titulo,
-.trabalhos__titulo,
 .citacoes__titulo,
 .faq__titulo,
 .contato__titulo,
@@ -39,31 +37,11 @@
   font-style: normal;
 }
 
-/* ---------- hero: "Design" pesado em caixa baixa, "E CULTURA." leve em caixa alta ---------- */
-.hero__titulo {
-  font-weight: var(--serifa-pesada);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-}
-
-.hero__titulo-linha + .hero__titulo-linha {
-  margin-top: 0.08em;
-  font-size: 0.56em;
-  font-weight: var(--serifa-leve);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hero__titulo-destaque {
-  font-weight: inherit;
-}
-
 /* ---------- títulos das seções: capitular + duas linhas ----------
    A capitular (a primeira letra) ocupa a altura do título inteiro.
    Ao lado dela, duas linhas que se alternam: uma pesada, em caixa baixa,
    e outra leve, em caixa alta espaçada, seguida de um fio que vai até a
    margem, como na abertura de uma matéria de revista. */
-.trabalhos__titulo,
 .citacoes__titulo,
 .faq__titulo,
 .contato__titulo,
@@ -138,15 +116,13 @@
   display: none;
 }
 
-.trabalhos__cabeca,
 .processo__titulo-linha,
 .depoimentos__titulo-linha {
   display: block;
 }
 
 @media (max-width: 860px) {
-  .trabalhos__titulo,
-  .citacoes__titulo,
+    .citacoes__titulo,
   .faq__titulo,
   .contato__titulo,
   .servicos__titulo,
@@ -164,10 +140,6 @@
 
   [class$="__titulo-leve"]::after {
     content: none;
-  }
-
-  .hero__titulo-linha + .hero__titulo-linha {
-    font-size: 0.6em;
   }
 }
 

@@ -1,0 +1,33 @@
+/* =========================================================================
+   INÍCIO: o palco do hero e da mesa
+   Os dois ficam no mesmo palco, preso na tela enquanto se rola a altura
+   de uma tela. Nesse trecho o hero se desmonta por cima (Hero.js) e a
+   mesa aparece por baixo (Mesa.js); depois o palco segue a rolagem e as
+   capas da mesa voam para a parede de trabalhos.
+   ========================================================================= */
+
+.inicio {
+  position: relative;
+  /* a altura do palco mais o trecho de rolagem em que o hero se desmonta */
+  height: calc(100vh + 100vh);
+  height: calc(100svh + 100svh);
+}
+
+.inicio__palco {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+/* o destino dos links "Trabalhos": o ponto em que o hero já se desfez e a mesa está inteira
+   (a rolagem desconta 60px do cabeçalho, por isso o marco fica 60px abaixo) */
+.inicio__marco {
+  position: absolute;
+  left: 0;
+  top: calc(100% - 100svh + 60px);
+  width: 1px;
+  height: 1px;
+}

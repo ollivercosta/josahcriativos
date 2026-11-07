@@ -17,6 +17,7 @@ import { Contato } from "./secoes/Contato.js";
 import { Depoimentos } from "./secoes/Depoimentos.js";
 import { Faq } from "./secoes/Faq.js";
 import { Hero } from "./secoes/Hero.js";
+import { Mesa } from "./secoes/Mesa.js";
 import { Manifesto } from "./secoes/Manifesto.js";
 import { Processo } from "./secoes/Processo.js";
 import { Servicos } from "./secoes/Servicos.js";
@@ -29,7 +30,6 @@ import { TRABALHOS } from "../dados/trabalhos.js";
 
 /** Títulos com palavras que sobem. A classe do título é o prefixo das classes geradas. */
 const TITULOS_REVELADOS = [
-  ".trabalhos__titulo",
   ".servicos__titulo",
   ".processo__titulo",
   ".sobre__titulo",
@@ -65,11 +65,12 @@ class Site {
     /* cada trabalho tem a sua página (/trabalhos/<nome>), gerada no build: as capas são links para ela */
     this.secoes.trabalhos = se(
       ".trabalhos",
-      (raiz) => new Trabalhos(raiz, TRABALHOS, { entradaPropria: !$(".hero") }),
+      (raiz) => new Trabalhos(raiz, TRABALHOS, { entradaPropria: !$(".mesa") }),
     );
-    /* as folhas do hero pousam nos quadros da parede de trabalhos */
+    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
+    /* a mesa sobe por cima do hero; as folhas dela pousam nos quadros da parede de trabalhos */
     const parede = this.secoes.trabalhos;
-    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz, parede?.trabalhosEmOrdem ?? [], parede));
+    this.secoes.mesa = se(".mesa", (raiz) => new Mesa(raiz, parede?.trabalhosEmOrdem ?? [], parede, $(".hero")));
     this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz, this.ciclo));
     this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
