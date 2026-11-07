@@ -1,15 +1,19 @@
 /* =========================================================================
    TIPOGRAFIA DOS TÍTULOS
-   Os títulos das seções seguem o hero: a Archivo, com uma linha fina em
-   caixa baixa e outra pesada em caixa alta (como "design e" e "CULTURA",
-   e como "Alguns TRABALHOS." na mesa). A linha fina leva um fio que vai
-   até a margem.
+   Os títulos das seções seguem o hero: a Archivo, em duas linhas, uma em
+   caixa baixa (com um fio que vai até a margem) e outra pesada em caixa
+   alta, como "design e" e "CULTURA". Os pesos e o vermelho são os do site
+   original: a linha de cima é leve (300), exceto em "Antes de começar.",
+   que é toda pesada; o vermelho marca a palavra que já era vermelha.
    Fica por último na lista de estilos: só troca peso, caixa e espaçamento.
    ========================================================================= */
 
 :root {
-  --titulo-fino: 200;
+  --titulo-fino: 300;
   --titulo-forte: 900;
+  /* um tamanho só para os títulos das seções e o da mesa */
+  --titulo-secao: clamp(2.6rem, 4.6vw, 5.2rem);
+  --titulo-secao-celular: clamp(2.2rem, 10vw, 3rem);
 }
 
 /* ---------- títulos das seções: duas linhas ---------- */
@@ -26,7 +30,7 @@
   margin: 0;
   font-family: var(--fonte);
   font-style: normal;
-  font-size: clamp(2.6rem, 4.6vw, 5.2rem);
+  font-size: var(--titulo-secao);
   font-weight: var(--titulo-forte);
   line-height: 0.9;
   letter-spacing: -0.045em;
@@ -72,6 +76,45 @@
   opacity: 0.4;
 }
 
+/* ---------- o vermelho e os pesos de cada título, como no site original ---------- */
+/* "ajudar seu PROJETO" e "Quem dá VIDA a isso": a palavra em destaque */
+.servicos__titulo-destaque,
+.sobre__titulo-destaque {
+  color: var(--cor-vermelho);
+}
+
+/* "Quem já trabalhou COMIGO" e "Antes de COMEÇAR.": a linha pesada toda em vermelho */
+.depoimentos__titulo-pesado,
+.faq__titulo-pesado {
+  color: var(--cor-vermelho);
+}
+
+/* "Antes de começar." era todo pesado */
+.faq__titulo-leve {
+  font-weight: var(--titulo-forte);
+}
+
+/* "À ENTREGA": uma faixa vermelha corre por trás quando o título entra na tela */
+.processo__titulo-pesado {
+  justify-self: start;
+  align-self: flex-start;
+  padding: 0.04em 0.12em 0;
+  margin-left: -0.12em;
+  background: linear-gradient(var(--cor-vermelho), var(--cor-vermelho)) left center / 0% 100% no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 1.1s var(--curva) 0.5s;
+}
+
+.processo__titulo--visivel .processo__titulo-pesado {
+  background-size: 100% 100%;
+}
+
+/* no contato a linha de cima é longa e quebra: sem o fio, que ficaria solto ao lado */
+.contato__titulo-leve::after {
+  content: none;
+}
+
 /* as barras ao lado dos títulos saem: o fio da linha fina faz esse papel */
 [class*="__titulo-barra"] {
   display: none;
@@ -89,7 +132,7 @@
   .processo__titulo,
   .depoimentos__titulo,
   .sobre__titulo {
-    font-size: clamp(2.2rem, 10vw, 3rem);
+    font-size: var(--titulo-secao-celular);
   }
 
   /* no celular a linha fina pode quebrar; o fio sai para não apertar as palavras */
