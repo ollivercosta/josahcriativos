@@ -4,7 +4,7 @@
      a capa       a colagem (bloco vermelho, retrato recortado e linhas de
                   composição) ao lado da apresentação
      a manchete   a frase que resume o jeito de trabalhar, em tamanho de título
-     a trajetória contada em quatro momentos, em texto corrido
+     a trajetória   em texto corrido, em duas colunas
    ========================================================================= */
 
 .sobre {
@@ -207,8 +207,7 @@
   color: var(--cor-vermelho);
 }
 
-/* ---------- a trajetória: um texto corrido em duas colunas, como numa matéria ----------
-   Cada parágrafo abre com uma frase curta em negrito, que marca o momento. */
+/* ---------- a trajetória: um texto corrido em duas colunas, como numa matéria ---------- */
 .sobre__historia {
   display: grid;
   grid-template-columns: minmax(0, 0.32fr) minmax(0, 1fr);
@@ -239,8 +238,8 @@
   line-height: 1.65;
 }
 
-.sobre__historia-abre {
-  font-weight: 800;
+.sobre__historia-nome {
+  font-weight: 700;
 }
 
 .sobre__trajetoria {
