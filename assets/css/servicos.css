@@ -24,9 +24,6 @@
 
 .servicos__rotulo {
   grid-area: rotulo;
-  display: flex;
-  align-items: center;
-  gap: 14px;
   margin: 0;
   font-stretch: 115%;
   font-size: 0.72rem;
@@ -34,13 +31,6 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--cor-vermelho);
-}
-
-.servicos__rotulo::before {
-  content: "";
-  width: 34px;
-  height: 3px;
-  background: currentColor;
 }
 
 .servicos__cabeca .servicos__titulo {
