@@ -1,20 +1,27 @@
 /* =========================================================================
    QUEM DÁ VIDA A ISSO
-   Colagem: bloco vermelho, retrato recortado e linhas de composição. As
-   anotações ficam fora do bloco, sobre o branco, para leitura plena.
+   Um perfil em três tempos, como numa revista:
+     a capa       a colagem (bloco vermelho, retrato recortado e linhas de
+                  composição) ao lado da apresentação
+     a manchete   a frase que resume o jeito de trabalhar, em tamanho de título
+     as colunas   trajetória e parceria, lado a lado
    ========================================================================= */
 
 .sobre {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 5vw;
-  align-items: start;
   padding: var(--espaco-secao) var(--margem);
 }
 
+/* ---------- a capa ---------- */
+.sobre__capa {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 6vw;
+  align-items: center;
+}
+
 .sobre__colagem {
-  position: sticky;
-  top: calc(var(--altura-cabecalho) + 4vh);
+  position: relative;
+  margin: 0;
   aspect-ratio: 1;
 }
 
@@ -113,18 +120,31 @@
   transform: none;
 }
 
-/* ---------- texto ---------- */
-.sobre__titulo {
-  margin-bottom: var(--espaco-titulo);
-  font-weight: 300;
-  font-size: 2.7rem;
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+/* ---------- a apresentação ---------- */
+.sobre__apresentacao {
+  display: grid;
+  gap: clamp(22px, 3vh, 34px);
 }
 
-.sobre__titulo-forte {
-  font-weight: 900;
+/* o rótulo abre a página com um traço vermelho, como a retranca de uma revista */
+.sobre__rotulo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-stretch: 115%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--cor-vermelho);
+}
+
+.sobre__rotulo::before {
+  content: "";
+  width: 34px;
+  height: 3px;
+  background: currentColor;
 }
 
 .sobre__titulo-palavra {
@@ -147,98 +167,110 @@
 }
 
 .sobre__abertura {
-  margin-bottom: 22px;
-  font-size: 1.85rem;
-  line-height: 1.25;
-  letter-spacing: -0.03em;
-}
-
-.sobre__paragrafo {
-  margin-bottom: 22px;
-  font-size: 1.15rem;
-  line-height: 1.65;
-}
-
-.sobre__parceira {
-  font-weight: 800;
-  text-decoration-color: var(--cor-vermelho);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-
-.sobre__citacao {
-  margin-bottom: 22px;
-  padding-top: 22px;
-  border-top: 1px solid var(--cor-tinta);
-  font-size: 1.3rem;
-  line-height: 1.45;
+  margin: 0;
+  max-width: 24em;
+  font-size: clamp(1.25rem, 1.7vw, 1.75rem);
+  font-weight: 300;
+  line-height: 1.35;
   letter-spacing: -0.02em;
 }
 
-.sobre__citacao-trajetoria {
+.sobre__nome {
   font-weight: 800;
+}
+
+/* ---------- a manchete ---------- */
+.sobre__manchete {
+  position: relative;
+  margin: clamp(64px, 12vh, 140px) 0 0;
+  padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 6vw, 80px) clamp(64px, 9vw, 150px);
+  border-top: 3px solid var(--cor-tinta);
+}
+
+/* as aspas grandes, em vermelho, penduradas na margem da frase */
+.sobre__manchete::before {
+  content: "\201C";
+  position: absolute;
+  left: -0.04em;
+  top: 0.04em;
+  font-size: clamp(7rem, 13vw, 14rem);
+  font-weight: 900;
+  line-height: 1;
   color: var(--cor-vermelho);
 }
 
-.sobre__citacao-destaque {
-  font-style: normal;
-  font-weight: 800;
+.sobre__manchete-frase {
+  margin: 0;
+  max-width: 17em;
+  font-size: clamp(2.2rem, 4.4vw, 4.8rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
 }
 
-.sobre__clientes {
-  margin-top: 6vh;
+.sobre__manchete-leve {
+  color: var(--cor-tinta-suave);
 }
 
-.sobre__clientes-rotulo {
+.sobre__manchete-forte {
+  font-weight: 900;
+  color: var(--cor-vermelho);
+}
+
+/* ---------- as colunas ---------- */
+.sobre__colunas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 6vw, 96px);
+  padding-left: clamp(64px, 9vw, 150px);
+}
+
+.sobre__coluna {
+  padding-top: 22px;
+  border-top: 1px solid var(--cor-linha-forte);
+}
+
+.sobre__coluna-titulo {
+  margin: 0 0 18px;
   font-stretch: 115%;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
-.sobre__clientes-lista {
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
+.sobre__coluna-texto {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.65;
 }
 
-.sobre__cliente {
-  padding: 10px 0;
-  border-top: 1px solid var(--cor-linha-forte);
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: -0.03em;
-}
-
-.sobre__cliente-nome {
-  display: inline-block;
-  transition:
-    transform 0.9s var(--curva),
-    color 0.5s ease;
-}
-
-.sobre__cliente:hover .sobre__cliente-nome {
-  transform: translateX(1.2vw);
+.sobre__trajetoria {
+  font-weight: 800;
   color: var(--cor-vermelho);
 }
 
+.sobre__parceira {
+  font-weight: 800;
+  color: inherit;
+  text-decoration-color: var(--cor-vermelho);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
 @media (max-width: 860px) {
-  .sobre {
+  .sobre__capa {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 
-  .sobre__colagem {
-    position: relative;
-    top: auto;
+  .sobre__manchete {
+    padding-left: 0;
+    padding-top: clamp(96px, 26vw, 130px);
   }
 
-  .sobre__abertura {
-    font-size: 1.25rem;
-  }
-
-  .sobre__titulo {
-    font-size: var(--titulo-celular);
+  .sobre__colunas {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 0;
   }
 }

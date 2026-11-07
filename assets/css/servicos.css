@@ -4,19 +4,55 @@
    quando o próximo cobre a tela.
    ========================================================================= */
 
-/* título e a barra que prolonga a linha de base dele até a margem */
+/* a abertura da seção, como a de um capítulo: um fio grosso de margem a margem,
+   o rótulo em vermelho, o título à esquerda e o texto numa coluna à direita,
+   apoiado na base do título. Assim ela não se confunde com os painéis abaixo. */
 .servicos__cabeca {
+  position: relative;
   display: grid;
-  grid-template-columns: auto minmax(4vw, 1fr);
-  align-items: last baseline;
-  gap: 2vw;
-  padding: var(--espaco-secao) var(--margem) var(--espaco-titulo);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-areas:
+    "rotulo rotulo"
+    "titulo texto";
+  align-items: end;
+  column-gap: 6vw;
+  row-gap: clamp(24px, 4vh, 44px);
+  margin: 0 var(--margem);
+  padding: clamp(28px, 4vh, 44px) 0 var(--espaco-secao);
+  border-top: 3px solid var(--cor-tinta);
+}
+
+.servicos__rotulo {
+  grid-area: rotulo;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-stretch: 115%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-vermelho);
+}
+
+.servicos__rotulo::before {
+  content: "";
+  width: 34px;
+  height: 3px;
+  background: currentColor;
+}
+
+.servicos__cabeca .servicos__titulo {
+  grid-area: titulo;
 }
 
 .servicos__lede {
-  grid-column: 1 / -1;
-  max-width: 46em;
-  margin-top: 28px;
+  grid-area: texto;
+  max-width: 30em;
+  margin: 0;
+  padding-left: 22px;
+  border-left: 1px solid var(--cor-linha-forte);
   font-size: 1.15rem;
   line-height: 1.6;
   color: var(--cor-tinta-suave);
@@ -89,7 +125,7 @@
 }
 
 .servicos__painel--claro {
-  background: #fdfdfd;
+  background: #f3f2ef87;
   color: var(--cor-tinta);
 }
 
@@ -218,6 +254,14 @@
 }
 
 @media (max-width: 860px) {
+  .servicos__cabeca {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "rotulo"
+      "titulo"
+      "texto";
+  }
+
   .servicos__titulo-barra {
     display: none;
   }

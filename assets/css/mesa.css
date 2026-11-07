@@ -50,12 +50,13 @@
 }
 
 /* ---------- o título: a mesma fonte do hero (Archivo), como um segundo hero ----------
-   Uma linha fina em caixa baixa e outra pesada em caixa alta, como
-   "design e" e "CULTURA". */
+   Duas linhas como nos títulos das seções, no mesmo tamanho deles
+   (--titulo-secao, em tipografia.css): "Alguns" pesado em caixa baixa e
+   "TRABALHOS." pesado, em caixa alta e em vermelho, como no site original. */
 .mesa__titulo {
   margin: 0;
   font-family: var(--fonte);
-  font-size: clamp(2.6rem, 4.6vw, 5.2rem);
+  font-size: var(--titulo-secao);
   line-height: 0.9;
   letter-spacing: -0.045em;
 }
@@ -66,7 +67,7 @@
 
 .mesa__titulo-fino {
   display: block;
-  font-weight: 200;
+  font-weight: 900;
 }
 
 .mesa__titulo-forte {
@@ -74,6 +75,7 @@
   font-stretch: 100%;
   font-weight: 900;
   text-transform: uppercase;
+  color: var(--cor-vermelho);
 }
 
 /* ---------- a camada fixa com as folhas ---------- */
@@ -141,6 +143,6 @@
   }
 
   .mesa__titulo {
-    font-size: clamp(2.2rem, 10vw, 3rem);
+    font-size: var(--titulo-secao-celular);
   }
 }
