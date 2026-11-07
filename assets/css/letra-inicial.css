@@ -1,0 +1,33 @@
+/* =========================================================================
+   LETRA INICIAL
+   A primeira letra do título de cada seção, muito maior que as demais, na
+   mesma fonte do título (Libre Franklin). As outras letras seguem na mesma
+   linha de base, como numa capitular de cartaz.
+   ========================================================================= */
+
+.letra-inicial {
+  display: inline-block;
+  margin-right: 0.01em;
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 3.2em;
+  line-height: 0.74;
+  letter-spacing: -0.04em;
+  vertical-align: baseline;
+}
+
+@media (max-width: 860px) {
+  .letra-inicial {
+    font-size: 2.6em;
+  }
+}
+
+/* nos títulos com letra inicial, as palavras (máscaras de RevelaPalavras)
+   se alinham pela linha de base, para sentarem na base da letra grande.
+   A máscara tem a base na borda de baixo (overflow: hidden), 0,134em acima
+   da base do texto: o deslocamento compensa essa diferença, medida no navegador. */
+:is(h1, h2):has(.letra-inicial) [class*="__titulo-palavra"] {
+  position: relative;
+  top: 0.134em;
+  vertical-align: baseline;
+}

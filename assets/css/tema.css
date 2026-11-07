@@ -1,44 +1,64 @@
 /* =========================================================================
-   TEMA: PRETO E BRANCO
-   Uma camada sobre os estilos das seções. Preto #1b1b1b sobre um branco
-   acinzentado #ecebe8 são as cores principais; as cores da colagem
-   (vermelho #91201d, ocre #dfa337, ardósia #3f464d e cinzas quentes) ficam
-   como variações para outros usos: as faixas e os
-   painéis. Fonte única: Montserrat, do fino ao black. Sempre claro.
+   TEMA: PRETO E BRANCO TIPOGRÁFICO
+   Uma camada sobre os estilos das seções. Só preto e branco, sobre um
+   cinza claro de fundo que faz os cartões brancos e pretos se destacarem.
+   Duas fontes que contrastam:
+     Libre Franklin  títulos, letras gigantes, menus, botões e rótulos
+                     (a família da Franklin Gothic, desenhada para títulos)
+     Arvo            textos corridos (uma serifa quadrada, firme e legível,
+                     que conversa com o desenho reto da Franklin)
+   Os títulos das seções começam com uma letra gigante (letra-inicial.css).
+   Sempre claro: o fundo é claro; faixas pretas marcam algumas seções.
    ========================================================================= */
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("/assets/fontes/montserrat.woff2") format("woff2");
+  font-family: "Libre Franklin";
+  src: url("/assets/fontes/libre-franklin.woff2") format("woff2");
   font-weight: 100 900;
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Arvo";
+  src: url("/assets/fontes/arvo.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arvo";
+  src: url("/assets/fontes/arvo-negrito.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arvo";
+  src: url("/assets/fontes/arvo-italico.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  /* a paleta da referência 12 (colagem): papel, tinta, ardósia, dois cinzas quentes, vermelho e ocre */
-  --papel: #ecebe8;
-  --preto: #1b1b1b;
-  /* as cores da colagem ficam como variações para outros usos */
-  --ardosia: #3f464d;
-  --cinza-quente: #c4bdb5;
-  --cinza: #88837f;
-  --vermelho: #91201d;
-  --amarelo: #dfa337;
-  --ocre: var(--amarelo);
-  --azul: var(--ardosia);
-  --cor-fundo: var(--papel);
+  --preto: #111111;
+  --branco: #ffffff;
+  --fundo: #e8e8e6;
+  --cor-fundo: var(--fundo);
   --cor-tinta: var(--preto);
-  --cor-vermelho: var(--vermelho);
-  --cor-tinta-suave: rgba(27, 27, 27, 0.66);
-  --cor-tinta-apagada: rgba(27, 27, 27, 0.16);
-  --cor-linha: rgba(27, 27, 27, 0.13);
-  --cor-linha-forte: rgba(27, 27, 27, 0.32);
-  --cor-cinza-claro: var(--cinza-quente);
-  --cor-superficie: var(--cinza-quente);
-  --fonte: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --fonte-titulo: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --fonte-rotulo: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --titulo-celular: 2.1rem;
+  /* o "vermelho" das seções vira preto: o site não tem outra cor */
+  --cor-vermelho: var(--preto);
+  --cor-tinta-suave: rgba(17, 17, 17, 0.68);
+  --cor-tinta-apagada: rgba(17, 17, 17, 0.18);
+  --cor-linha: rgba(17, 17, 17, 0.14);
+  --cor-linha-forte: rgba(17, 17, 17, 0.32);
+  --cor-cinza-claro: #d9d9d6;
+  --cor-superficie: #d9d9d6;
+  --fonte: "Arvo", Rockwell, Georgia, serif;
+  --fonte-texto: "Arvo", Rockwell, Georgia, serif;
+  --fonte-titulo: "Libre Franklin", "Franklin Gothic Medium", Arial, sans-serif;
+  --fonte-rotulo: "Libre Franklin", "Franklin Gothic Medium", Arial, sans-serif;
+  --titulo-celular: 2.3rem;
 }
 
 html,
@@ -52,11 +72,12 @@ body {
 }
 
 ::selection {
-  background: var(--amarelo);
-  color: var(--preto);
+  background: var(--preto);
+  color: var(--branco);
 }
 
-/* ---------- títulos em escala contida ---------- */
+/* ---------- títulos: Libre Franklin, pesada ---------- */
+.hero__titulo,
 .trabalhos__titulo,
 .faq__titulo,
 .contato__titulo,
@@ -68,52 +89,56 @@ body {
 .projeto__titulo,
 .trabalhos__nome,
 .manifesto__texto,
-.servicos__painel-nome {
+.servicos__painel-nome,
+.faq__pergunta,
+.rodape__nome {
   font-family: var(--fonte-titulo) !important;
   font-stretch: 100% !important;
 }
 
+.hero__titulo {
+  font-weight: 800 !important;
+  letter-spacing: -0.045em !important;
+}
 
 .trabalhos__titulo,
 .faq__titulo,
 .contato__titulo,
+.citacoes__titulo,
 .servicos__titulo,
 .processo__titulo,
 .sobre__titulo,
 .depoimentos__titulo,
 .servicos__painel-nome {
-  font-size: clamp(2rem, 3.4vw, 3.4rem) !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  letter-spacing: -0.02em !important;
-  text-transform: uppercase;
+  margin: 0 !important;
+  font-size: clamp(2.4rem, 4.6vw, 4.8rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.035em !important;
+  text-transform: none !important;
+  color: var(--cor-tinta) !important;
 }
 
-.trabalhos__titulo-destaque,
-.faq__titulo-destaque {
-  color: var(--vermelho) !important;
+[class*="__titulo-destaque"],
+.contato__titulo-forte {
+  font-style: normal !important;
+  font-weight: inherit !important;
+  color: inherit !important;
 }
 
-/* as barras grossas ao lado dos títulos viram um fio fino */
+/* as barras ao lado dos títulos saem: a letra grande já marca o começo da seção */
 [class*="__titulo-barra"] {
-  height: 1px !important;
-  background: var(--cor-linha-forte) !important;
+  display: none !important;
 }
 
-.manifesto__texto {
-  font-weight: 600 !important;
-  font-size: clamp(1.6rem, 3vw, 3rem) !important;
-  line-height: 1.12 !important;
-  letter-spacing: -0.02em !important;
-}
-
-/* ---------- rótulos: pequenos e espaçados ---------- */
+/* ---------- rótulos, menus e botões: Libre Franklin ---------- */
+.hero__rotulo,
 .hero__marca,
 .hero__menu,
 .hero__menu-botao,
+.hero__botao,
 .trabalhos__filtro,
 .trabalhos__info,
-.citacoes__titulo,
 [class*="cabecalho__"],
 [class*="menu-movel__"],
 [class*="rotulo"],
@@ -122,124 +147,129 @@ body {
 [class*="__categoria"] {
   font-family: var(--fonte-rotulo) !important;
   font-stretch: 100% !important;
-  letter-spacing: 0.04em !important;
+}
+
+.hero__rotulo {
+  color: var(--cor-tinta) !important;
+  letter-spacing: 0.14em !important;
 }
 
 .hero__marca-nome {
   font-family: var(--fonte-titulo) !important;
-  font-size: 1.05rem !important;
-  letter-spacing: 0.02em !important;
+  font-weight: 800 !important;
 }
 
-/* ---------- botões: preto, e vermelho ao passar o mouse ---------- */
-.trabalhos__botao {
-  background: var(--preto) !important;
-  color: var(--papel) !important;
-  border-radius: 0 !important;
+.hero__texto,
+.hero__assinatura {
+  font-family: var(--fonte-texto) !important;
+}
+
+.hero__assinatura-nome {
+  font-family: var(--fonte-titulo) !important;
+}
+
+/* o botão do hero com cantos arredondados */
+.hero__botao {
+  border-radius: 14px !important;
 }
 
 /* ---------- trabalhos ---------- */
-.trabalhos__parede {
-  background: var(--cor-superficie) !important;
-}
-
 .trabalhos__nome {
-  font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
 }
 
 .trabalhos__info {
-  font-weight: 400 !important;
-  font-size: 0.56rem !important;
+  font-weight: 500 !important;
 }
 
-/* ---------- manifesto: faixa ocre com tinta e destaque vermelho ---------- */
+/* ---------- manifesto: faixa preta, a frase acende em branco ---------- */
 .manifesto {
-  --cor-tinta: var(--preto) !important;
-  --cor-tinta-apagada: rgba(27, 27, 27, 0.25) !important;
-  --cor-vermelho: var(--vermelho) !important;
-  background: var(--amarelo) !important;
-  color: var(--preto) !important;
+  --cor-tinta: var(--branco) !important;
+  --cor-tinta-apagada: rgba(255, 255, 255, 0.2) !important;
+  --cor-vermelho: var(--branco) !important;
+  background: var(--preto) !important;
+}
+
+.manifesto__texto {
+  font-weight: 700 !important;
+  letter-spacing: -0.035em !important;
 }
 
 .manifesto__botao {
-  background: var(--preto) !important;
-  color: var(--papel) !important;
-  border-radius: 0 !important;
+  background: var(--branco) !important;
+  color: var(--preto) !important;
+  border-radius: 14px !important;
 }
 
-.manifesto__linha {
-  background: rgba(27, 27, 27, 0.45) !important;
+/* ---------- depoimentos ---------- */
+.citacoes__frase {
+  font-family: var(--fonte-texto) !important;
+}
+
+/* ---------- perguntas ---------- */
+.faq__pergunta {
+  font-weight: 700 !important;
+}
+
+/* ---------- contato: faixa preta com texto branco ---------- */
+.contato {
+  --cor-tinta: var(--branco);
+  --cor-tinta-suave: rgba(255, 255, 255, 0.74);
+  --cor-linha: rgba(255, 255, 255, 0.16);
+  --cor-linha-forte: rgba(255, 255, 255, 0.34);
 }
 
 /* ---------- cabeçalho fixo e menu ---------- */
 .cabecalho {
-  background: rgba(236, 235, 232, 0.9) !important;
+  background: rgba(232, 232, 230, 0.9) !important;
 }
 
 .menu-movel {
-  background: var(--papel) !important;
+  background: var(--fundo) !important;
 }
 
-/* ---------- contato: faixa vermelha, destaque em ocre ---------- */
-.contato__titulo-forte {
-  color: var(--amarelo) !important;
-}
-
-/* o nome do rodapé deixa de ser gigante */
+/* o nome do rodapé */
 .rodape__nome {
-  font-family: var(--fonte-titulo) !important;
-  font-weight: 700 !important;
-  font-size: 8vw !important;
-  letter-spacing: -0.03em !important;
-  text-transform: uppercase;
-  margin: 4vw 0 0 !important;
-  padding: 0 var(--margem) 3vw !important;
-  line-height: 0.9 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.05em !important;
 }
 
 /* ---------- Como funciona ---------- */
 .servicos__painel--claro {
-  background: #fff !important;
+  background: var(--branco) !important;
 }
 
-/* o painel do meio vira ardósia e o último, vermelho */
-.servicos__painel--tinta {
-  --cor-tinta: var(--papel);
-  --cor-tinta-suave: rgba(240, 233, 224, 0.75);
-  --cor-linha-forte: rgba(240, 233, 224, 0.3);
-  --cor-vermelho: var(--amarelo);
-  background: var(--azul) !important;
-  color: var(--papel) !important;
-}
-
+.servicos__painel--tinta,
 .servicos__painel--vermelho {
-  --cor-tinta: var(--papel);
-  --cor-tinta-suave: rgba(240, 233, 224, 0.8);
-  --cor-linha-forte: rgba(240, 233, 224, 0.32);
-  --cor-vermelho: var(--amarelo);
-  background: var(--vermelho) !important;
-  color: var(--papel) !important;
+  --cor-tinta: var(--branco);
+  --cor-tinta-suave: rgba(255, 255, 255, 0.74);
+  --cor-linha-forte: rgba(255, 255, 255, 0.3);
+  --cor-vermelho: var(--branco);
+  background: var(--preto) !important;
+  color: var(--branco) !important;
 }
 
 .processo {
-  background: var(--cor-superficie) !important;
+  background: var(--branco) !important;
   color: var(--cor-tinta) !important;
 }
 
 /* ---------- página do projeto ---------- */
 .projeto__barra {
-  background: rgba(236, 235, 232, 0.92) !important;
+  background: rgba(232, 232, 230, 0.92) !important;
 }
 
 /* o nome do projeto ganha um tamanho que cabe na coluna */
 .projeto__titulo {
-  font-weight: 700 !important;
-  font-size: min(2.3rem, 11.5cqi) !important;
+  font-weight: 800 !important;
+  font-size: min(2.4rem, 12cqi) !important;
   line-height: 1.02 !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.03em !important;
   overflow-wrap: normal !important;
 }
 
-@media (max-width: 860px) {
+/* o rótulo "Fale comigo" sobre a foto continua preto no fundo branco */
+.contato__ima-rotulo {
+  color: var(--preto) !important;
 }

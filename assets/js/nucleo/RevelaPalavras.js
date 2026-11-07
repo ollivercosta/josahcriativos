@@ -29,7 +29,8 @@ export class RevelaPalavras {
     for (const filho of Array.from(no.childNodes)) {
       if (filho.nodeType === Node.TEXT_NODE) {
         filho.replaceWith(this.#fragmentoDePalavras(filho.textContent));
-      } else if (filho.nodeType === Node.ELEMENT_NODE) {
+      } else if (filho.nodeType === Node.ELEMENT_NODE && !filho.classList.contains("letra-inicial")) {
+        /* a letra inicial grande não entra na máscara: ela aparece por conta própria */
         this.#dividir(filho);
       }
     }
