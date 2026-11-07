@@ -208,10 +208,14 @@ export class Mesa {
     if (continuar) this.#pedirQuadro();
   }
 
-  /** Quanto o hero já se desmontou: 0 no topo da página, 1 quando o palco vai se soltar. */
+  /**
+   * Quanto o hero já se desmontou: 0 até o fim do avanço (o hero subindo,
+   * medido por Hero.js em --avanco), 1 quando o palco vai se soltar.
+   */
   #desmonte(altura) {
     if (!this.inicio) return 1;
-    const caixa = this.inicio.getBoundingClientRect();
-    return limitar(-caixa.top / Math.max(caixa.height - altura, 1), 0, 1);
+    const avanco = parseFloat(this.inicio.style.getPropertyValue("--avanco")) || 0;
+    const rolado = -this.inicio.getBoundingClientRect().top;
+    return limitar((rolado - avanco) / altura, 0, 1);
   }
 }

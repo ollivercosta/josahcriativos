@@ -258,7 +258,7 @@
 }
 
 .hero__servicos:hover .hero__servico {
-  color: rgba(22, 19, 15, 0.45);
+  color: rgba(163, 23, 31, 0.55);
 }
 
 .hero__servicos:hover .hero__servico:hover {
@@ -309,52 +309,6 @@
   text-transform: uppercase;
   color: var(--cor-vermelho);
   animation: hero-aparece 1.2s ease 1.2s both;
-}
-
-/* botão apoiado no eixo */
-.hero__botao {
-  position: absolute;
-  left: 50.5%;
-  top: 74%;
-  transform: translateZ(60px);
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 1.05vw 1.6vw 1.05vw 1.9vw;
-  border-radius: 999px;
-  background: var(--cor-tinta);
-  color: var(--cor-fundo);
-  font-weight: 600;
-  font-size: 1.05vw;
-  text-decoration: none;
-  overflow: hidden;
-  isolation: isolate;
-  animation: hero-aparece 1.2s ease 1.3s both;
-}
-
-.hero__botao::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--cor-vermelho);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.75s var(--curva);
-}
-
-.hero__botao:hover::before {
-  transform: scaleX(1);
-}
-
-.hero__botao-seta {
-  width: 1.2vw;
-  height: 1.2vw;
-  transition: transform 0.7s var(--curva);
-}
-
-.hero__botao:hover .hero__botao-seta {
-  transform: translateX(5px);
 }
 
 /* ---------- animações de entrada ---------- */
@@ -408,8 +362,7 @@
   .hero__design,
   .hero__cultura,
   .hero__barra-base,
-  .hero__texto,
-  .hero__botao {
+  .hero__texto {
     position: relative;
     left: auto;
     top: auto;
@@ -449,17 +402,6 @@
     margin-top: 22px;
   }
 
-  .hero__botao {
-    order: 7;
-    margin-top: 24px;
-    font-size: 0.95rem;
-    padding: 15px 22px 15px 26px;
-  }
-
-  .hero__botao-seta {
-    width: 18px;
-    height: 18px;
-  }
 
   .hero__barra-topo,
   .hero__barra-larga,

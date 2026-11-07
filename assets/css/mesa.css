@@ -50,12 +50,9 @@
 }
 
 /* ---------- o título: a mesma fonte do hero (Archivo), como um segundo hero ----------
-   A capitular ocupa a altura das duas linhas; ao lado, uma linha fina em
-   caixa baixa e outra pesada em caixa alta, como "design e" e "CULTURA". */
+   Uma linha fina em caixa baixa e outra pesada em caixa alta, como
+   "design e" e "CULTURA". */
 .mesa__titulo {
-  display: flex;
-  align-items: stretch;
-  gap: 0.05em;
   margin: 0;
   font-family: var(--fonte);
   font-size: clamp(2.6rem, 4.6vw, 5.2rem);
@@ -63,22 +60,8 @@
   letter-spacing: -0.045em;
 }
 
-.mesa__titulo-capitular {
-  flex: none;
-  margin: -0.02em 0 -0.06em -0.04em;
-  font-stretch: 100%;
-  font-size: 2.1em;
-  font-weight: 900;
-  line-height: 0.78;
-  letter-spacing: 0;
-}
-
 .mesa__titulo-corpo {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 0;
-  padding: 0.04em 0 0;
+  display: block;
 }
 
 .mesa__titulo-fino {
