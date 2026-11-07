@@ -17,7 +17,6 @@ const DESMONTE = {
   ".hero__barra-larga": { x: 100, y: 0, giro: 0, atraso: 0.05 },
   ".hero__rotulo-servicos": { x: 60, y: 24, giro: 6, atraso: 0.1 },
   ".hero__texto": { x: -32, y: 52, giro: -6, atraso: 0.12 },
-  ".hero__botao": { x: 22, y: 62, giro: 18, atraso: 0.16 },
 };
 const LETRAS = [
   { x: -52, y: 26, giro: -22, atraso: 0.08 },
@@ -39,8 +38,8 @@ const limitar = (valor, minimo, maximo) => Math.min(Math.max(valor, minimo), max
  * haste à letra T, faz as letras reagirem ao mouse e inclina o plano em
  * 3D com o mouse e a rolagem, sempre com interpolação suave.
  *
- * O hero fica no palco do início, por cima da mesa. Rolando, ele se
- * desmonta: cada peça (letras, barras, textos, botão, serviços) voa para
+ * O hero fica no palco do início, por cima da mesa. Rolando, ele primeiro
+ * sobe até mostrar a parte de baixo e depois se desmonta: cada peça (letras, barras, textos, serviços) voa para
  * fora da tela e some, e a mesa aparece no lugar. Voltando a rolar para
  * cima, as peças voltam para o lugar.
  */
@@ -202,7 +201,8 @@ export class Hero {
       pecas.push({ elemento: servico, x: 60 + indice * 8, y: 22 + indice * 7, giro: 6, atraso: 0.1 + indice * 0.03 });
     });
     this.pecas = pecas;
-    this.ultimoDesmonte = -1;
+    this.ultimoRolado = -1;
+    this.avanco = -1;
 
     let pedido = 0;
     const pedir = () => {
@@ -217,11 +217,27 @@ export class Hero {
     pedir();
   }
 
+  /**
+   * Dois trechos de rolagem com o palco preso:
+   *   avanço    o hero sobe até mostrar a parte de baixo dele (que fica abaixo da tela)
+   *   desmonte  uma tela de rolagem em que as peças voam e a mesa aparece
+   * O avanço é medido aqui e publicado em --avanco no bloco do início, que
+   * cresce na mesma medida (inicio.css) e é lido pela Mesa.
+   */
   #desmontar() {
-    const caixa = this.inicio.getBoundingClientRect();
-    const desmonte = limitar(-caixa.top / Math.max(caixa.height - window.innerHeight, 1), 0, 1);
-    if (Math.abs(desmonte - this.ultimoDesmonte) < 0.0005) return;
-    this.ultimoDesmonte = desmonte;
+    const alturaTela = window.innerHeight;
+    const avanco = Math.max(this.raiz.offsetHeight - alturaTela, 0);
+    if (avanco !== this.avanco) {
+      this.avanco = avanco;
+      this.inicio.style.setProperty("--avanco", `${avanco}px`);
+    }
+    const rolado = Math.max(-this.inicio.getBoundingClientRect().top, 0);
+    const subida = Math.min(rolado, avanco);
+    const desmonte = limitar((rolado - avanco) / alturaTela, 0, 1);
+    if (Math.abs(rolado - this.ultimoRolado) < 0.5) return;
+    this.ultimoRolado = rolado;
+
+    this.raiz.style.transform = subida ? `translate3d(0, ${(-subida).toFixed(1)}px, 0)` : "";
 
     /* ao começar a sair, as animações de entrada param e as peças passam a ser movidas daqui */
     if (desmonte > 0) this.raiz.classList.add("hero--solto");
