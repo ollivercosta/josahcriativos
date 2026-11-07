@@ -98,12 +98,34 @@ function etiquetas(itens) {
 }
 
 /**
+ * As pranchas do trabalho: as definidas em `pranchas` ou, sem elas, uma por
+ * frente de serviço (das peças) ou, sem peças, uma com o tipo do trabalho.
+ * Prancha sem imagem aparece como moldura "Prancha a produzir", com a medida.
+ */
+function pranchasDoTrabalho(trabalho) {
+  if (trabalho.pranchas && trabalho.pranchas.length) return trabalho.pranchas;
+  if (trabalho.pecas && !Array.isArray(trabalho.pecas)) {
+    return Object.entries(trabalho.pecas)
+      .filter(([, itens]) => itens.length)
+      .map(([frente, itens]) => ({ frente, nome: frente, itens }));
+  }
+  const itens = Array.isArray(trabalho.pecas) ? trabalho.pecas : [];
+  return [{ frente: trabalho.categoria || "", nome: trabalho.tipo || "Peças", itens }];
+}
+
+/** Todas as imagens que abrem em tela inteira, na ordem: as páginas de cada prancha ou a imagem dela. */
+function imagensAmpliaveis(trabalho) {
+  return pranchasDoTrabalho(trabalho).flatMap((p) => (p.tipo === "site" ? [] : p.paginas || (p.imagem ? [p.imagem] : [])));
+}
+
+/**
  * A imagem de uma prancha, conforme o tipo:
- *   imagem   a prancha inteira, que amplia num clique
+ *   imagem   a prancha inteira (ou a primeira página de um book), que amplia num clique
  *   site     a página inteira numa janela de navegador, que rola por dentro
+ *   sem imagem: a moldura da prancha a produzir
  */
 function quadroDaPrancha(prancha, trabalho, posicao) {
-  if (prancha.tipo === "site") {
+  if (prancha.tipo === "site" && prancha.imagem) {
     const visitar = prancha.endereco
       ? `<a class="projeto__site-visitar" href="${escapar(prancha.endereco)}" target="_blank" rel="noopener">Visitar o site <span aria-hidden="true">&rarr;</span></a>`
       : "";
@@ -115,25 +137,31 @@ function quadroDaPrancha(prancha, trabalho, posicao) {
             ${visitar}
           </div>`;
   }
-  return `<button type="button" class="projeto__ampliar" data-ampliar="${posicao}" aria-label="Ver ${escapar(prancha.nome)} em tela inteira">
-            <img class="projeto__prancha-imagem" src="${escapar(prancha.imagem)}" alt="${escapar(trabalho.nome)}: ${escapar(prancha.nome)}" loading="lazy" decoding="async" />
+  const imagem = prancha.imagem || (prancha.paginas && prancha.paginas[0]);
+  if (imagem) {
+    return `<button type="button" class="projeto__ampliar" data-ampliar="${posicao}" aria-label="Ver ${escapar(prancha.nome)} em tela inteira">
+            <img class="projeto__prancha-imagem" src="${escapar(imagem)}" alt="${escapar(trabalho.nome)}: ${escapar(prancha.nome)}" loading="lazy" decoding="async" />
             <span class="projeto__ampliar-rotulo">Ampliar</span>
           </button>`;
+  }
+  return `<div class="projeto__prancha-vazia">
+            <span class="projeto__rotulo">Prancha a produzir</span>
+            <span class="projeto__prancha-vazia-nome">${escapar(prancha.nome)}</span>
+            <span class="projeto__prancha-vazia-medida">1600 × 1000 px, sem texto embutido</span>
+          </div>`;
 }
 
-/** As peças: uma prancha por frente, com o texto ao lado; sem pranchas, as imagens do trabalho, inteiras. */
+/** As peças: uma prancha por frente, com o texto ao lado; a cada peça, os lados trocam. */
 function pecas(trabalho) {
-  const pranchas = trabalho.pranchas || [];
-  const frentes = Array.isArray(trabalho.pecas) ? [] : Object.keys(trabalho.pecas || {});
-  let corpo;
-  if (pranchas.length) {
-    let posicao = -1;
-    corpo = pranchas
-      .map((prancha) => {
-        if (prancha.tipo !== "site") posicao += 1;
-        return `<article class="projeto__peca projeto__peca--${prancha.tipo || "imagem"}">
+  const pranchas = pranchasDoTrabalho(trabalho);
+  let posicao = 0;
+  const corpo = pranchas
+    .map((prancha) => {
+      const quadro = quadroDaPrancha(prancha, trabalho, posicao);
+      if (prancha.tipo !== "site") posicao += (prancha.paginas || (prancha.imagem ? [prancha.imagem] : [])).length;
+      return `<article class="projeto__peca">
           <div class="projeto__prancha">
-          ${quadroDaPrancha(prancha, trabalho, posicao)}
+          ${quadro}
           </div>
           <div class="projeto__peca-texto">
             ${prancha.frente ? `<p class="projeto__rotulo projeto__rotulo--vermelho">${escapar(prancha.frente)}</p>` : ""}
@@ -142,66 +170,19 @@ function pecas(trabalho) {
             ${etiquetas(prancha.itens)}
           </div>
         </article>`;
-      })
-      .join("\n        ");
-  } else {
-    /* enquanto as pranchas não chegam: as frentes à esquerda e as imagens atuais, inteiras, à direita */
-    const grupos = Array.isArray(trabalho.pecas) ? [["", trabalho.pecas || []]] : Object.entries(trabalho.pecas || {});
-    const lista = grupos
-      .filter(([, itens]) => itens.length)
-      .map(
-        ([frente, itens]) =>
-          `<div class="projeto__frente">${frente ? `<p class="projeto__rotulo projeto__rotulo--vermelho">${escapar(frente)}</p>` : ""}${etiquetas(itens)}</div>`,
-      )
-      .join("");
-    let posicao = -1;
-    const midias = (trabalho.midias || [])
-      .map((midia) => {
-        if (ehImagem(midia)) {
-          posicao += 1;
-          return `<figure class="projeto__midia">
-              <button type="button" class="projeto__ampliar" data-ampliar="${posicao}" aria-label="Ver a imagem ${posicao + 1} em tela inteira">
-                <img class="projeto__imagem" src="${escapar(midia)}" alt="${escapar(trabalho.nome)}, imagem ${posicao + 1}" loading="lazy" decoding="async" />
-              </button>
-            </figure>`;
-        }
-        const endereco = typeof midia === "string" ? midia : midia.video || "";
-        return `<figure class="projeto__midia projeto__midia--video"><a class="projeto__video" href="${escapar(endereco)}" target="_blank" rel="noopener">Assistir ao vídeo</a></figure>`;
-      })
-      .join("\n            ");
-    corpo = `<div class="projeto__galeria${lista ? "" : " projeto__galeria--so-imagens"}">
-          ${lista ? `<div class="projeto__frentes">${lista}</div>` : ""}
-          <div class="projeto__midias">
-            ${midias}
-          </div>
-        </div>`;
-  }
-  const contagem = pranchas.length
-    ? `${pranchas.length} ${pranchas.length > 1 ? "frentes" : "frente"}`
-    : frentes.length
-      ? `${frentes.length} ${frentes.length > 1 ? "frentes" : "frente"}`
-      : "";
+    })
+    .join("\n        ");
+  const contagem = `${pranchas.length} ${pranchas.length > 1 ? "frentes" : "frente"}`;
   return `<section class="projeto__pecas" aria-labelledby="pecas-titulo">
         <div class="projeto__pecas-cabeca">
           <h2 class="projeto__pecas-titulo" id="pecas-titulo">As <b>peças</b></h2>
           <span class="projeto__pecas-fio" aria-hidden="true"></span>
-          ${contagem ? `<span class="projeto__rotulo">${contagem}</span>` : ""}
+          <span class="projeto__rotulo">${contagem}</span>
         </div>
         ${corpo}
       </section>`;
 }
 
-/** As imagens que abrem em tela inteira: as das pranchas de imagem, ou as do trabalho. */
-function imagensAmpliaveis(trabalho) {
-  const pranchas = (trabalho.pranchas || []).filter((p) => p.tipo !== "site");
-  if ((trabalho.pranchas || []).length) return pranchas.map((p) => p.imagem);
-  return (trabalho.midias || []).filter(ehImagem);
-}
-
-/**
- * @param {object} trabalho
- * @param {{ anterior: object, seguinte: object, relacionados: object[], partes: ReturnType<typeof partesComuns> }} contexto
- */
 export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, partes }) {
   const ficha = [
     ["Cliente", trabalho.cliente],
@@ -246,8 +227,8 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
       <a class="projeto__voltar" href="/#projetos"><span class="projeto__voltar-seta" aria-hidden="true">&larr;</span> Todos os trabalhos</a>
       <a class="projeto__marca" href="/" aria-label="Josah Oliveira, início"><b>Josah Oliveira</b> Designer gráfico</a>
       <nav class="projeto__vizinhos" aria-label="Outros trabalhos">
-        <a class="projeto__vizinho" href="${enderecoDoTrabalho(anterior)}" aria-label="Trabalho anterior: ${escapar(anterior.nome)}">&larr;</a>
-        <a class="projeto__vizinho" href="${enderecoDoTrabalho(seguinte)}" aria-label="Próximo trabalho: ${escapar(seguinte.nome)}">&rarr;</a>
+        <a class="projeto__vizinho" href="${enderecoDoTrabalho(anterior)}" aria-label="Trabalho anterior: ${escapar(anterior.nome)}">Anterior</a>
+        <a class="projeto__vizinho" href="${enderecoDoTrabalho(seguinte)}" aria-label="Próximo trabalho: ${escapar(seguinte.nome)}">Próximo</a>
       </nav>
     </header>
 
@@ -267,7 +248,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
       </dl>
 
       <!-- IMAGEM-CHAVE: a capa do projeto -->
-      ${capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /></figure>` : ""}
+      ${capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /><figcaption class="projeto__legenda">Imagem-chave do projeto.</figcaption></figure>` : ""}
 
       <!-- CONTEXTO, SOLUÇÃO E RESULTADO -->
       ${caso(trabalho)}
