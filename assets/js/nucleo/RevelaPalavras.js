@@ -30,6 +30,8 @@ export class RevelaPalavras {
       if (filho.nodeType === Node.TEXT_NODE) {
         filho.replaceWith(this.#fragmentoDePalavras(filho.textContent));
       } else if (filho.nodeType === Node.ELEMENT_NODE) {
+        /* a capitular fica inteira: ela não entra na máscara das palavras */
+        if (filho.classList.contains(`${this.prefixo}-capitular`)) continue;
         this.#dividir(filho);
       }
     }
