@@ -52,7 +52,9 @@ const desacelerar = (t) => 1 - Math.pow(1 - t, 3);
 
 /**
  * Hero
- * As capas dos trabalhos espalhadas sobre a mesa, como folhas impressas.
+ * Uma frase de apresentação, com os nomes de alguns projetos como links, e
+ * as capas dos trabalhos espalhadas sobre a mesa, como folhas impressas.
+ * Apontar um nome na frase levanta a folha daquele projeto.
  * Ao abrir a página elas caem na mesa, uma depois da outra; com o mouse,
  * cada uma se desloca conforme a sua profundidade.
  *
@@ -80,22 +82,28 @@ export class Hero {
     this.quadro = 0;
     this.parado = Ambiente.reduzMovimento;
 
-    this.#dividirTitulo();
+    this.realce = -1;
     if (!parede || !parede.quadros.length) return;
     this.#montarFolhas();
+    this.#ligarObras();
     this.#ligarEventos();
     this.#pedirQuadro();
   }
 
-  /** Cada linha do título sobe por trás de uma máscara, uma depois da outra. */
-  #dividirTitulo() {
-    this.raiz.querySelectorAll(".hero__titulo-linha").forEach((linha, k) => {
-      const miolo = document.createElement("span");
-      miolo.className = "hero__titulo-miolo";
-      miolo.style.setProperty("--k", String(k));
-      miolo.append(...linha.childNodes);
-      linha.append(miolo);
-    });
+  /** Os nomes de projetos na frase: apontar um deles levanta a folha dele na mesa. */
+  #ligarObras() {
+    for (const link of this.raiz.querySelectorAll(".hero__obra")) {
+      const indice = this.trabalhos.findIndex((trabalho) => trabalho.nome === link.dataset.trabalho);
+      if (indice < 0) continue;
+      const realcar = (sim) => {
+        this.realce = sim ? indice : -1;
+        this.#pedirQuadro();
+      };
+      link.addEventListener("pointerenter", () => realcar(true));
+      link.addEventListener("pointerleave", () => realcar(false));
+      link.addEventListener("focus", () => realcar(true));
+      link.addEventListener("blur", () => realcar(false));
+    }
   }
 
   #montarFolhas() {
@@ -110,7 +118,7 @@ export class Hero {
       imagem.src = capaDoTrabalho(this.trabalhos[indice]) || "";
       folha.append(imagem);
       this.mesa.append(folha);
-      return { elemento: folha, largura: 0, altura: 0, pousou: null };
+      return { elemento: folha, largura: 0, altura: 0, pousou: null, realce: 0 };
     });
   }
 
@@ -172,6 +180,13 @@ export class Hero {
       const voo = this.parado ? (rolagem > 0 ? 1 : 0) : limitar(rolagem / Math.max(pouso, 1), 0, 1);
       const v = suavizar(voo);
 
+      /* a folha apontada na frase sobe da mesa (só enquanto as folhas estão na mesa) */
+      const alvoDoRealce = indice === this.realce && !this.parado ? 1 : 0;
+      folha.realce = misturar(folha.realce, alvoDoRealce, 0.16);
+      if (Math.abs(folha.realce - alvoDoRealce) > 0.003) continuar = true;
+      const realce = folha.realce * (1 - v);
+
+
       const escalaNaMesa = ((pose.largura / 100) * largura) / alvo.width;
       /* metade da altura da folha na mesa, com folga para o giro */
       const meiaAltura = ((alvo.height * escalaNaMesa) / 2) * 1.12;
@@ -184,12 +199,13 @@ export class Hero {
       const y = misturar(naMesa.y, alvo.top + alvo.height / 2, v);
       /* no meio do voo a folha sobe um pouco, como quem a levanta da mesa */
       const levantada = Math.sin(Math.PI * v) * 0.05;
-      const escala = misturar(naMesa.escala, 1, v) * (1 + levantada) * misturar(1.18, 1, caiu);
+      const escala = misturar(naMesa.escala, 1, v) * (1 + levantada + realce * 0.09) * misturar(1.18, 1, caiu);
       const giro = misturar(pose.giro, 0, v) + misturar(pose.giro * 0.6, 0, caiu);
 
       const pousou = voo >= 1;
       const el = folha.elemento;
-      el.style.transform = `translate3d(${(x - alvo.width / 2).toFixed(1)}px, ${(y - alvo.height / 2).toFixed(1)}px, 0) rotate(${giro.toFixed(2)}deg) scale(${escala.toFixed(4)})`;
+      el.style.zIndex = realce > 0.02 ? "60" : String(40 - indice);
+      el.style.transform = `translate3d(${(x - alvo.width / 2).toFixed(1)}px, ${(y - alvo.height / 2 - realce * 16).toFixed(1)}px, 0) rotate(${(giro * (1 - realce * 0.6)).toFixed(2)}deg) scale(${escala.toFixed(4)})`;
       el.style.opacity = pousou ? "0" : String(caiu);
       el.style.setProperty("--altura", (1 - v).toFixed(3));
       if (folha.pousou !== pousou) {
