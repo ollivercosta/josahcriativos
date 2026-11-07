@@ -35,48 +35,139 @@
   font-family: var(--fonte-serifa);
   font-stretch: normal;
   font-optical-sizing: auto;
-  letter-spacing: -0.02em;
+  font-style: normal;
 }
 
-/* títulos com uma parte em destaque: o título é pesado e o destaque, leve */
-.hero__titulo,
-.trabalhos__titulo,
-.citacoes__titulo,
-.faq__titulo,
-.projeto__titulo {
-  font-weight: var(--serifa-pesada);
-}
-
-.hero__titulo-destaque,
-.trabalhos__titulo-destaque,
-.faq__titulo-destaque,
-.servicos__titulo-destaque {
-  font-weight: var(--serifa-leve);
-}
-
-/* títulos com uma parte forte: o título é leve e a parte forte, pesada */
-.contato__titulo,
-.servicos__titulo,
-.processo__titulo,
-.depoimentos__titulo,
-.sobre__titulo {
-  font-weight: var(--serifa-leve);
-}
-
-.contato__titulo-forte,
-.servicos__titulo-forte,
-.processo__titulo-forte,
-.depoimentos__titulo-forte,
-.sobre__titulo-forte {
-  font-weight: var(--serifa-pesada);
-}
-
-/* ---------- hero: "Design" pesado, "e cultura." leve ---------- */
+/* ---------- hero: "Design" pesado em caixa baixa, "E CULTURA." leve em caixa alta ---------- */
 .hero__titulo {
+  font-weight: var(--serifa-pesada);
   line-height: 0.92;
   letter-spacing: -0.03em;
 }
 
 .hero__titulo-linha + .hero__titulo-linha {
+  margin-top: 0.08em;
+  font-size: 0.56em;
   font-weight: var(--serifa-leve);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__titulo-destaque {
+  font-weight: inherit;
+}
+
+/* ---------- títulos das seções: capitular + duas linhas ----------
+   A capitular (a primeira letra) ocupa a altura do título inteiro.
+   Ao lado dela, duas linhas que se alternam: uma pesada, em caixa baixa,
+   e outra leve, em caixa alta espaçada, seguida de um fio que vai até a
+   margem, como na abertura de uma matéria de revista. */
+.trabalhos__titulo,
+.citacoes__titulo,
+.faq__titulo,
+.contato__titulo,
+.servicos__titulo,
+.processo__titulo,
+.depoimentos__titulo,
+.sobre__titulo {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  gap: 0.06em;
+  width: 100%;
+  max-width: none;
+  font-size: clamp(2.1rem, 3.4vw, 3.4rem);
+  font-weight: var(--serifa-pesada);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+[class$="__titulo-capitular"] {
+  flex: none;
+  margin: -0.06em 0 -0.1em;
+  font-size: 2.5em;
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: 0;
+}
+
+[class$="__titulo-corpo"] {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.3em;
+  padding: 0.12em 0 0.02em;
+}
+
+[class$="__titulo-pesado"] {
+  display: block;
+  font-weight: var(--serifa-pesada);
+}
+
+[class$="__titulo-leve"] {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  font-size: 0.36em;
+  font-weight: var(--serifa-leve);
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* o fio que segue a linha leve até a margem */
+[class$="__titulo-leve"]::after {
+  content: "";
+  flex: 1;
+  min-width: 2em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* as barras ao lado dos títulos saem: o fio da linha leve faz esse papel */
+[class*="__titulo-barra"] {
+  display: none;
+}
+
+.trabalhos__cabeca,
+.processo__titulo-linha,
+.depoimentos__titulo-linha {
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .trabalhos__titulo,
+  .citacoes__titulo,
+  .faq__titulo,
+  .contato__titulo,
+  .servicos__titulo,
+  .processo__titulo,
+  .depoimentos__titulo,
+  .sobre__titulo {
+    font-size: clamp(1.9rem, 8vw, 2.4rem);
+  }
+
+  /* no celular a linha leve pode quebrar; o fio sai para não apertar as palavras */
+  [class$="__titulo-leve"] {
+    display: block;
+    letter-spacing: 0.1em;
+  }
+
+  [class$="__titulo-leve"]::after {
+    content: none;
+  }
+
+  .hero__titulo-linha + .hero__titulo-linha {
+    font-size: 0.6em;
+  }
+}
+
+/* ---------- página do projeto ---------- */
+.projeto__titulo {
+  font-weight: var(--serifa-pesada);
+  letter-spacing: -0.02em;
 }
