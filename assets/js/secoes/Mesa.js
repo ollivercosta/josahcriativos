@@ -42,10 +42,11 @@ const MESA_ESTREITA = [
 
 /** A folha pousa quando o topo do seu quadro chega a esta altura da tela (fração). */
 const LINHA_DE_POUSO = 0.62;
-/** Queda na mesa: duração de cada folha e intervalo entre elas, em ms. */
-const QUEDA = { duracao: 900, intervalo: 70 };
-/** A queda começa quando o hero já se desmontou esta fração (0 a 1). */
-const INICIO_DA_QUEDA = 0.55;
+/**
+ * Queda na mesa, em frações do desmonte do hero: quando começa, quanto dura
+ * cada folha e o intervalo entre uma folha e a seguinte.
+ */
+const QUEDA = { inicio: 0.5, duracao: 0.3, intervalo: 0.015 };
 /** O texto da mesa aparece entre estas frações do desmonte do hero. */
 const TEXTO = { de: 0.4, ate: 0.9 };
 
@@ -58,7 +59,8 @@ const desacelerar = (t) => 1 - Math.pow(1 - t, 3);
  * Mesa
  * A abertura da seção de trabalhos: fica por baixo do hero, no mesmo palco
  * preso na tela, e aparece enquanto ele se desmonta. As capas caem na mesa,
- * uma depois da outra, e o texto surge à esquerda.
+ * uma depois da outra, e o texto surge à esquerda. Tudo segue a rolagem:
+ * voltando ao topo, as capas sobem e somem e o hero se monta sem elas.
  *
  * Quando o palco se solta e segue a rolagem, continuar rolando faz cada
  * folha voar até o seu quadro na parede de trabalhos. O voo de
@@ -81,7 +83,6 @@ export class Mesa {
     this.parede = parede;
     this.trabalhos = trabalhos;
     this.mouse = { alvoX: 0, alvoY: 0, x: 0, y: 0 };
-    this.inicioDaQueda = null;
     this.quadro = 0;
     this.parado = Ambiente.reduzMovimento;
 
@@ -123,11 +124,11 @@ export class Mesa {
   }
 
   #pedirQuadro() {
-    if (!this.quadro) this.quadro = window.requestAnimationFrame((agora) => this.#desenhar(agora));
+    if (!this.quadro) this.quadro = window.requestAnimationFrame(() => this.#desenhar());
   }
 
   /** Um quadro de animação: posiciona todas as folhas e decide se precisa de outro. */
-  #desenhar(agora) {
+  #desenhar() {
     this.quadro = 0;
     const largura = window.innerWidth;
     const altura = window.innerHeight;
@@ -145,8 +146,6 @@ export class Mesa {
     const revelada = this.parado ? 1 : limitar((desmonte - TEXTO.de) / (TEXTO.ate - TEXTO.de), 0, 1);
     this.raiz.style.setProperty("--revelada", desacelerar(revelada).toFixed(3));
 
-    /* a queda começa uma vez, quando o hero já se desmontou o bastante */
-    if (this.inicioDaQueda === null && desmonte >= INICIO_DA_QUEDA) this.inicioDaQueda = agora;
 
     this.mouse.x = misturar(this.mouse.x, this.mouse.alvoX, 0.08);
     this.mouse.y = misturar(this.mouse.y, this.mouse.alvoY, 0.08);
@@ -165,13 +164,10 @@ export class Mesa {
         folha.elemento.style.height = `${alvo.height}px`;
       }
 
-      /* queda na mesa */
-      let queda = 0;
-      if (this.parado) queda = 1;
-      else if (this.inicioDaQueda !== null) {
-        queda = limitar((agora - this.inicioDaQueda - indice * QUEDA.intervalo) / QUEDA.duracao, 0, 1);
-      }
-      if (this.inicioDaQueda !== null && queda < 1) continuar = true;
+      /* queda na mesa, presa à rolagem: voltando, a folha sobe e some enquanto o hero se monta */
+      const queda = this.parado
+        ? Number(desmonte >= QUEDA.inicio)
+        : limitar((desmonte - QUEDA.inicio - indice * QUEDA.intervalo) / QUEDA.duracao, 0, 1);
       const caiu = desacelerar(queda);
 
       /* voo até o quadro: de 0 (na mesa) a 1 (pousada) conforme a rolagem depois da mesa */
