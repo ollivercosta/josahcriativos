@@ -1,0 +1,82 @@
+/* =========================================================================
+   TIPOGRAFIA EDITORIAL
+   Os títulos ganham uma serifa de revista, desenhada para tamanhos grandes.
+   O contraste vem do peso: em cada título uma parte é pesada e a outra é
+   leve, como numa capa de revista. Os textos, menus e rótulos seguem na
+   Archivo (sem serifa, em maiúsculas espaçadas), que contrasta com a
+   serifa em caixa alta e baixa.
+   Fica por último na lista de estilos: só troca fonte, peso e espaçamento.
+   ========================================================================= */
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/assets/fontes/bodoni-moda.woff2") format("woff2");
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+:root {
+  --fonte-serifa: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --serifa-pesada: 800;
+  --serifa-leve: 400;
+}
+
+/* ---------- títulos: a serifa ---------- */
+.hero__titulo,
+.trabalhos__titulo,
+.citacoes__titulo,
+.faq__titulo,
+.contato__titulo,
+.servicos__titulo,
+.processo__titulo,
+.depoimentos__titulo,
+.sobre__titulo,
+.projeto__titulo {
+  font-family: var(--fonte-serifa);
+  font-stretch: normal;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+/* títulos com uma parte em destaque: o título é pesado e o destaque, leve */
+.hero__titulo,
+.trabalhos__titulo,
+.citacoes__titulo,
+.faq__titulo,
+.projeto__titulo {
+  font-weight: var(--serifa-pesada);
+}
+
+.hero__titulo-destaque,
+.trabalhos__titulo-destaque,
+.faq__titulo-destaque,
+.servicos__titulo-destaque {
+  font-weight: var(--serifa-leve);
+}
+
+/* títulos com uma parte forte: o título é leve e a parte forte, pesada */
+.contato__titulo,
+.servicos__titulo,
+.processo__titulo,
+.depoimentos__titulo,
+.sobre__titulo {
+  font-weight: var(--serifa-leve);
+}
+
+.contato__titulo-forte,
+.servicos__titulo-forte,
+.processo__titulo-forte,
+.depoimentos__titulo-forte,
+.sobre__titulo-forte {
+  font-weight: var(--serifa-pesada);
+}
+
+/* ---------- hero: "Design" pesado, "e cultura." leve ---------- */
+.hero__titulo {
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.hero__titulo-linha + .hero__titulo-linha {
+  font-weight: var(--serifa-leve);
+}
