@@ -23,6 +23,15 @@
  *   cliente, proponente, local, ano: ficha técnica no fim, sempre com as
  *   mesmas linhas em todos os projetos (vazio aparece como "A informar"). Texto entre colchetes aparece
  *   em itálico, como campo a preencher.
+ *   titulo     opcional: o nome em duas linhas na página do trabalho,
+ *              ["linha fina", "linha forte"] (ex.: ["Orquestra Jovem", "do Recôncavo"])
+ *   entregas   opcional: o resumo das entregas na ficha técnica (sem ele, vale o tipo)
+ *   pranchas   as peças na página do trabalho, uma por frente de serviço:
+ *              { frente, nome, texto, itens: [...], tipo, ... } onde o tipo é
+ *                "imagem"  imagem: prancha 1600 x 1000 px, sem texto embutido
+ *                "book"    paginas: [imagens das páginas, geradas do PDF]
+ *                "site"    imagem: a página inteira; endereco: o site no ar
+ *              Sem pranchas, a página mostra as imagens de midias, inteiras.
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
  *   midias     imagens (endereço) ou vídeos (YouTube, Vimeo, Google Drive)
  *
@@ -69,6 +78,43 @@ export const TRABALHOS = [
     proposta: "",
     resultado: "",
     pecas: [],
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Book de captação",
+        tipo: "book",
+        texto:
+          "Documento de apresentação da ópera a patrocinadores, com o espetáculo, a circulação, as cotas de investimento e as contrapartidas.",
+        itens: ["Book de captação"],
+        paginas: [
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-02.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-03.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-04.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-05.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-06.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-07.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-08.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-09.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-10.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-11.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-12.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-13.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-14.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-15.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-16.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-17.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-18.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-19.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-20.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-21.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-22.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-23.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-24.webp",
+        "/assets/imagens/trabalhos/amazonia-motiro/pagina-25.webp",
+        ],
+      },
+    ],
     capa: "/assets/imagens/trabalhos/amazonia-motiro/capa.webp",
     midias: [
       "/assets/imagens/trabalhos/amazonia-motiro/pagina-01.webp",
@@ -100,7 +146,9 @@ export const TRABALHOS = [
   },
   {
     nome: "Orquestra Jovem do Recôncavo",
+    titulo: ["Orquestra Jovem", "do Recôncavo"],
     tipo: "Book de captação",
+    entregas: "Identidade, book, papelaria, brindes e campanha digital",
     categoria: "Marca e apresentação",
     resumo:
       "Book de captação do plano anual da orquestra, com proposta, impacto, contrapartidas e cotas para patrocinadores.",
@@ -109,13 +157,13 @@ export const TRABALHOS = [
     local: "São Félix e Cachoeira (BA)",
     ano: "2026",
     desafio:
-      "A orquestra precisava apresentar o plano anual a patrocinadores e, ao mesmo tempo, chamar jovens do Recôncavo para as aulas.",
+      "Apresentar o plano anual a patrocinadores e, ao mesmo tempo, convocar jovens do Recôncavo para as aulas, com uma única linguagem visual.",
     sobre:
-      "Conduzida pelo maestro Vinicius Freitas, a Orquestra Jovem do Recôncavo forma músicos em São Félix e Cachoeira. O Plano Anual 2027 quer manter e ampliar essa formação, com prática artística, aperfeiçoamento técnico e apresentações. Para sair do papel, o plano dependia de duas coisas: patrocínio e alunos inscritos. E cada um desses públicos pedia uma conversa diferente.",
+      "Conduzida pelo maestro Vinicius Freitas, a Orquestra Jovem do Recôncavo forma músicos em São Félix e Cachoeira. O Plano Anual 2027 prevê a ampliação dessa formação, com prática artística, aperfeiçoamento técnico e apresentações públicas. Sua viabilidade dependia de dois públicos distintos: patrocinadores, que avaliam consistência e retorno de marca, e jovens de 10 a 15 anos, que precisavam se reconhecer na proposta.",
     proposta:
-      "Comecei pela marca que a orquestra já tinha. Tirei dela as cores quentes e equilibrei com azuis, para que o plano transmitisse seriedade a um patrocinador sem perder a energia de uma orquestra jovem. Os instrumentos viraram protagonistas das peças, recortados em blocos geométricos que lembram a tradição sem deixá-la pesada. Com essa base pronta, desenhei o book de captação, os materiais de alunos e equipe e a campanha de inscrições.",
+      "O sistema visual parte da marca existente da orquestra. As cores quentes originais foram equilibradas por uma base de azuis, que confere sobriedade ao material institucional sem comprometer o caráter jovem do projeto. Os instrumentos, recortados em blocos geométricos, assumem o papel de elemento central e garantem unidade entre o book de captação, os materiais da equipe e a campanha de inscrições.",
     resultado:
-      "O projeto conta hoje com patrocínio da TAG, pelo Fazcultura, do Governo da Bahia. Nas redes, a mesma linguagem abriu inscrições para aulas gratuitas de violão e bateria, voltadas a jovens de 10 a 15 anos em São Félix.",
+      "O projeto conta com patrocínio da TAG por meio do Fazcultura, programa de incentivo do Governo da Bahia. Nas redes, a mesma linguagem conduziu a campanha de inscrições para aulas gratuitas de violão e bateria, destinadas a jovens de 10 a 15 anos em São Félix.",
     regua:
       "Realização, apoio e patrocínio, com o Fazcultura e o Governo da Bahia, aplicados nas costas das camisas, na ecobag, no squeeze, na papelaria e no banner, e no card final de cada carrossel da campanha de inscrições.",
     pecas: {
