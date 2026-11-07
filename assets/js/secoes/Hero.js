@@ -2,42 +2,43 @@ import { Ambiente } from "../nucleo/Ambiente.js";
 import { capaDoTrabalho } from "../../dados/trabalhos.js";
 
 /**
- * Onde cada folha fica sobre a mesa, na ordem da parede (destaques primeiro).
+ * Onde cada folha fica na pilha, logo abaixo da dobra (y acima de 100: só as
+ * bordas de cima aparecem no pé da tela), na ordem da parede (destaques primeiro).
  *   x, y        centro da folha, em % da largura e da altura da tela
  *   largura     em % da largura da tela
  *   giro        em graus
  *   fundo       profundidade: quanto a folha acompanha o mouse (0 a 1)
  */
 const MESA_LARGA = [
-  { x: 64, y: 46, largura: 24, giro: -4, fundo: 1 },
-  { x: 85, y: 40, largura: 21, giro: 5, fundo: 0.8 },
-  { x: 76, y: 73, largura: 22, giro: 2, fundo: 0.9 },
-  { x: 57, y: 75, largura: 14, giro: -7, fundo: 0.6 },
-  { x: 94, y: 69, largura: 14, giro: -3, fundo: 0.5 },
-  { x: 58, y: 26, largura: 12, giro: 8, fundo: 0.45 },
-  { x: 95, y: 24, largura: 11, giro: -9, fundo: 0.35 },
-  { x: 88, y: 92, largura: 13, giro: 6, fundo: 0.55 },
-  { x: 53, y: 54, largura: 10, giro: 10, fundo: 0.3 },
-  { x: 66, y: 93, largura: 12, giro: -5, fundo: 0.4 },
-  { x: 75, y: 22, largura: 11, giro: 4, fundo: 0.4 },
-  { x: 55, y: 96, largura: 11, giro: 7, fundo: 0.35 },
-  { x: 97, y: 47, largura: 11, giro: -6, fundo: 0.3 },
+  { x: 62, y: 107, largura: 22, giro: -4, fundo: 1 },
+  { x: 80, y: 108, largura: 21, giro: 5, fundo: 0.8 },
+  { x: 71, y: 110, largura: 22, giro: 2, fundo: 0.9 },
+  { x: 54, y: 112, largura: 16, giro: -7, fundo: 0.6 },
+  { x: 90, y: 112, largura: 16, giro: -3, fundo: 0.5 },
+  { x: 46, y: 114, largura: 15, giro: 8, fundo: 0.45 },
+  { x: 96, y: 110, largura: 14, giro: -9, fundo: 0.35 },
+  { x: 84, y: 116, largura: 15, giro: 6, fundo: 0.55 },
+  { x: 38, y: 116, largura: 14, giro: 10, fundo: 0.3 },
+  { x: 66, y: 118, largura: 15, giro: -5, fundo: 0.4 },
+  { x: 76, y: 118, largura: 14, giro: 4, fundo: 0.4 },
+  { x: 58, y: 120, largura: 14, giro: 7, fundo: 0.35 },
+  { x: 30, y: 118, largura: 13, giro: -6, fundo: 0.3 },
 ];
 
 const MESA_ESTREITA = [
-  { x: 35, y: 77, largura: 48, giro: -4, fundo: 1 },
-  { x: 72, y: 73, largura: 44, giro: 5, fundo: 0.8 },
-  { x: 58, y: 89, largura: 46, giro: 2, fundo: 0.9 },
-  { x: 12, y: 90, largura: 30, giro: -8, fundo: 0.6 },
-  { x: 92, y: 88, largura: 28, giro: 6, fundo: 0.5 },
-  { x: 28, y: 100, largura: 26, giro: 7, fundo: 0.45 },
-  { x: 82, y: 100, largura: 24, giro: -6, fundo: 0.35 },
-  { x: 52, y: 69, largura: 20, giro: 9, fundo: 0.55 },
-  { x: 10, y: 72, largura: 22, giro: -10, fundo: 0.3 },
-  { x: 94, y: 76, largura: 20, giro: -4, fundo: 0.4 },
-  { x: 46, y: 102, largura: 22, giro: 4, fundo: 0.4 },
-  { x: 66, y: 104, largura: 20, giro: -7, fundo: 0.35 },
-  { x: 18, y: 104, largura: 20, giro: 5, fundo: 0.3 },
+  { x: 40, y: 93, largura: 54, giro: -4, fundo: 1 },
+  { x: 72, y: 94, largura: 50, giro: 5, fundo: 0.8 },
+  { x: 56, y: 98, largura: 52, giro: 2, fundo: 0.9 },
+  { x: 14, y: 99, largura: 36, giro: -8, fundo: 0.6 },
+  { x: 90, y: 99, largura: 34, giro: 6, fundo: 0.5 },
+  { x: 28, y: 103, largura: 30, giro: 7, fundo: 0.45 },
+  { x: 80, y: 104, largura: 30, giro: -6, fundo: 0.35 },
+  { x: 50, y: 104, largura: 28, giro: 9, fundo: 0.55 },
+  { x: 10, y: 105, largura: 28, giro: -10, fundo: 0.3 },
+  { x: 96, y: 105, largura: 26, giro: -4, fundo: 0.4 },
+  { x: 42, y: 107, largura: 28, giro: 4, fundo: 0.4 },
+  { x: 66, y: 108, largura: 26, giro: -7, fundo: 0.35 },
+  { x: 20, y: 109, largura: 26, giro: 5, fundo: 0.3 },
 ];
 
 /** A folha pousa quando o topo do seu quadro chega a esta altura da tela (fração). */
@@ -52,9 +53,9 @@ const desacelerar = (t) => 1 - Math.pow(1 - t, 3);
 
 /**
  * Hero
- * As capas dos trabalhos espalhadas sobre a mesa, como folhas impressas.
- * Ao abrir a página elas caem na mesa, uma depois da outra; com o mouse,
- * cada uma se desloca conforme a sua profundidade.
+ * "cultura" em letras gigantes, com três ecos em cinza atrás que seguem o
+ * mouse e se abrem conforme a rolagem. As capas dos trabalhos ficam numa
+ * pilha logo abaixo da dobra, com as bordas aparecendo no pé da tela.
  *
  * Rolando, cada folha voa da mesa até o seu quadro na parede de trabalhos.
  * O voo de cada folha vai do topo da página até o momento em que o quadro
@@ -73,6 +74,7 @@ export class Hero {
     this.raiz = raiz;
     this.mesa = raiz.querySelector(".hero__mesa");
     this.cabecalho = raiz.querySelector(".hero__cabecalho");
+    this.rodape = raiz.querySelector(".hero__rodape");
     this.parede = parede;
     this.trabalhos = trabalhos;
     this.mouse = { alvoX: 0, alvoY: 0, x: 0, y: 0 };
@@ -80,22 +82,14 @@ export class Hero {
     this.quadro = 0;
     this.parado = Ambiente.reduzMovimento;
 
-    this.#dividirTitulo();
-    if (!parede || !parede.quadros.length) return;
+    this.ecos = [...raiz.querySelectorAll(".hero__eco")];
+    if (!parede || !parede.quadros.length) {
+      this.#pedirQuadro();
+      return;
+    }
     this.#montarFolhas();
     this.#ligarEventos();
     this.#pedirQuadro();
-  }
-
-  /** Cada linha do título sobe por trás de uma máscara, uma depois da outra. */
-  #dividirTitulo() {
-    this.raiz.querySelectorAll(".hero__titulo-linha").forEach((linha, k) => {
-      const miolo = document.createElement("span");
-      miolo.className = "hero__titulo-miolo";
-      miolo.style.setProperty("--k", String(k));
-      miolo.append(...linha.childNodes);
-      linha.append(miolo);
-    });
   }
 
   #montarFolhas() {
@@ -141,12 +135,31 @@ export class Hero {
     const poses = Ambiente.telaEstreita ? MESA_ESTREITA : MESA_LARGA;
     /* nenhuma folha sobe acima desta linha: o menu do hero fica sempre livre */
     const teto = this.cabecalho.offsetTop + this.cabecalho.offsetHeight + 28;
+    /* e nenhuma cobre o texto do pé do hero: a pilha começa abaixo dele */
+    const piso = this.rodape ? this.rodape.offsetTop + this.rodape.offsetHeight + 28 : 0;
     let continuar = false;
 
     /* o mouse é seguido com atraso, para o movimento ser macio */
     this.mouse.x = misturar(this.mouse.x, this.mouse.alvoX, 0.08);
     this.mouse.y = misturar(this.mouse.y, this.mouse.alvoY, 0.08);
     if (Math.abs(this.mouse.x - this.mouse.alvoX) + Math.abs(this.mouse.y - this.mouse.alvoY) > 0.002) continuar = true;
+
+    /* os ecos da palavra: cada um mais afastado, puxados pelo mouse e abertos pela rolagem */
+    if (rolagem < altura * 1.2) {
+      const abertura = this.parado ? 1 : 1 + Math.min(rolagem / altura, 1) * 2.4;
+      this.ecos.forEach((eco, k) => {
+        const camada = this.ecos.length - k;
+        const passo = largura * 0.024 * camada * abertura;
+        const x = -passo + this.mouse.x * camada * 14;
+        const y = -passo * 0.12 + this.mouse.y * camada * 9;
+        eco.style.setProperty("--eco-x", `${x.toFixed(1)}px`);
+        eco.style.setProperty("--eco-y", `${y.toFixed(1)}px`);
+      });
+    }
+    if (!this.folhas) {
+      if (continuar) this.#pedirQuadro();
+      return;
+    }
 
     this.folhas.forEach((folha, indice) => {
       const pose = poses[indice % poses.length];
@@ -177,7 +190,7 @@ export class Hero {
       const meiaAltura = ((alvo.height * escalaNaMesa) / 2) * 1.12;
       const naMesa = {
         x: (pose.x / 100) * largura + this.mouse.x * pose.fundo * 18,
-        y: Math.max((pose.y / 100) * altura, teto + meiaAltura) + this.mouse.y * pose.fundo * 12,
+        y: Math.max((pose.y / 100) * altura, teto + meiaAltura, piso + meiaAltura * 0.8) + this.mouse.y * pose.fundo * 12,
         escala: escalaNaMesa,
       };
       const x = misturar(naMesa.x, alvo.left + alvo.width / 2, v);
