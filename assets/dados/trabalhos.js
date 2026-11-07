@@ -20,6 +20,8 @@
  *              { "Apresentação": [...], "Digital": [...], "Visual e mídia": [...] }
  *   regua      onde as marcas de realização, apoio e patrocínio foram aplicadas
  *              no projeto (bloco "Régua de marcas")
+ *   reguaImagem opcional: a régua de marcas como imagem, em largura total
+ *              abaixo do texto (fundo branco, sem tratamento de cor)
  *   cliente, proponente, local, ano: ficha técnica no fim, sempre com as
  *   mesmas linhas em todos os projetos (vazio aparece como "A informar"). Texto entre colchetes aparece
  *   em itálico, como campo a preencher.
@@ -28,7 +30,7 @@
  *   entregas   opcional: o resumo das entregas na ficha técnica (sem ele, vale o tipo)
  *   pranchas   as peças na página do trabalho, uma por frente de serviço:
  *              { frente, nome, texto, itens: [...], tipo, ... } onde o tipo é
- *                "imagem"  imagem: prancha 1600 x 1000 px, sem texto embutido
+ *                "imagem"  imagem: prancha 16:9, sem texto embutido
  *                          (ou paginas: as páginas de um book; a primeira aparece
  *                          e as demais abrem em tela inteira)
  *                "site"    imagem: a página inteira; endereco: o site no ar
@@ -172,13 +174,23 @@ export const TRABALHOS = [
       Digital: ["Formulário de inscrição", "Redes sociais"],
       "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Banner"],
     },
+    reguaImagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/regua.webp",
     pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Identidade visual",
+        texto:
+          "A marca existente da orquestra foi mantida e ganhou uma base de azuis, que equilibra as cores quentes originais e dá sobriedade ao material institucional. Os instrumentos, recortados em blocos geométricos, são o elemento central do sistema e se repetem em todas as peças.",
+        itens: ["Identidade visual"],
+        imagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-capa.webp",
+      },
       {
         frente: "Apresentação",
         nome: "Book de captação",
         texto:
           "Documento de apresentação do plano anual a patrocinadores, com proposta, impacto, contrapartidas e cotas de investimento. A capa estabelece a hierarquia que se repete nas páginas internas: instrumentos em primeiro plano, título institucional e número do Pronac.",
-        itens: ["Identidade visual", "Book de captação"],
+        itens: ["Book de captação"],
+        imagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-book.webp",
       },
       {
         frente: "Visual e mídia",
@@ -186,6 +198,7 @@ export const TRABALHOS = [
         texto:
           "Itens de uso de alunos e equipe. A logomarca da orquestra ocupa a frente de cada peça, e as marcas de realização, apoio e patrocínio seguem a régua do projeto, aplicadas nas costas das camisas e nas áreas secundárias dos demais itens.",
         itens: ["Camisas", "Ecobag", "Squeeze", "Caderno e agenda", "Banner"],
+        imagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-brindes.webp",
       },
       {
         frente: "Digital",
@@ -193,6 +206,7 @@ export const TRABALHOS = [
         texto:
           "Carrosséis e posts para a chamada pública de bolsas, com prioridade para as informações que levam à inscrição: gratuidade, faixa etária, instrumentos oferecidos e número limitado de vagas. O formulário recebeu um banner com a mesma linguagem, o que dá continuidade entre o anúncio e o cadastro.",
         itens: ["Redes sociais", "Formulário de inscrição"],
+        imagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-redes.webp",
       },
     ],
     capa: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/capa.webp",
@@ -253,6 +267,7 @@ export const TRABALHOS = [
       "O festival aconteceu nos dias 9 e 10 de janeiro de 2026, na Praça Dom Pedro II, com patrocínio do Banco da Amazônia, do Banco do Brasil, da Caixa e dos Correios. A marca acompanhou o evento inteiro, do backdrop de fotos à testeira de ônibus, e seguiu nas redes com a programação, o júri e os artistas selecionados.",
     regua:
       "Apoio, patrocínio e realização, com a Lei Rouanet e o Ministério da Cultura, aplicados nas costas das camisas, na ecobag, no wind banner, na faixa e na testeira de ônibus. No backdrop, as marcas ganham um painel próprio, pensado para as fotos do evento.",
+    reguaImagem: "/assets/imagens/trabalhos/antropofagia-mapping/regua.webp",
     pecas: {
       Apresentação: ["Identidade visual", "Plano de mídia", "Book de captação"],
       Digital: ["Redes sociais"],

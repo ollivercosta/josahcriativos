@@ -172,7 +172,9 @@ function pecas(trabalho) {
         </article>`;
     })
     .join("\n        ");
-  const contagem = `${pranchas.length} ${pranchas.length > 1 ? "frentes" : "frente"}`;
+  // conta as frentes, não as pranchas: uma frente pode ter mais de uma prancha
+  const frentes = new Set(pranchas.map((prancha) => prancha.frente)).size;
+  const contagem = `${frentes} ${frentes > 1 ? "frentes" : "frente"}`;
   return `<section class="projeto__pecas" aria-labelledby="pecas-titulo">
         <div class="projeto__pecas-cabeca">
           <h2 class="projeto__pecas-titulo" id="pecas-titulo">As <b>peças</b></h2>
@@ -248,7 +250,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
       </dl>
 
       <!-- IMAGEM-CHAVE: a capa do projeto -->
-      ${capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /><figcaption class="projeto__legenda">Imagem-chave do projeto.</figcaption></figure>` : ""}
+      ${capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /></figure>` : ""}
 
       <!-- CONTEXTO, SOLUÇÃO E RESULTADO -->
       ${caso(trabalho)}
@@ -260,6 +262,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
       <section class="projeto__regua" aria-label="Régua de marcas">
         <p class="projeto__rotulo projeto__rotulo--vermelho">Régua de marcas</p>
         ${paragrafos(trabalho.regua, "projeto__regua-texto")}
+        ${trabalho.reguaImagem ? `<figure class="projeto__regua-figura"><img class="projeto__regua-imagem" src="${escapar(trabalho.reguaImagem)}" alt="Régua de marcas de ${escapar(trabalho.nome)}: realização, apoio e patrocínio" loading="lazy" decoding="async" /></figure>` : ""}
       </section>` : ""}
 
       ${mais}
