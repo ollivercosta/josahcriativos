@@ -1,9 +1,9 @@
 /* =========================================================================
-   TEMA: GRÁFICA
+   TEMA: CARTAZ
    Uma camada sobre os estilos das seções que troca a atmosfera inteira do
-   site, como uma oficina de impressão: papel claro, tinta azul ultramar no
-   lugar do preto e rosa de impressão como cor de destaque. Faixas inteiras
-   em azul e em rosa marcam as mudanças de assunto.
+   site, com a paleta dos cartazes e colagens das referências: papel creme,
+   tinta preta, vermelho de cartaz e amarelo, com azul cobalto de apoio.
+   Faixas inteiras em amarelo, vermelho e azul marcam as mudanças de assunto.
    Três vozes tipográficas:
      Syne         títulos, em escala contida (nada de letras gigantes)
      Manrope      textos
@@ -34,18 +34,20 @@
 }
 
 :root {
-  --papel: #f3f1ec;
-  --azul: #1f2a96;
-  --rosa: #ff4f8b;
+  --papel: #f1ebdf;
+  --preto: #161311;
+  --vermelho: #e1301d;
+  --amarelo: #f5b512;
+  --azul: #1f4fa3;
   --cor-fundo: var(--papel);
-  --cor-tinta: var(--azul);
-  --cor-vermelho: var(--rosa);
-  --cor-tinta-suave: rgba(31, 42, 150, 0.68);
-  --cor-tinta-apagada: rgba(31, 42, 150, 0.16);
-  --cor-linha: rgba(31, 42, 150, 0.14);
-  --cor-linha-forte: rgba(31, 42, 150, 0.32);
-  --cor-cinza-claro: #e6e8f2;
-  --cor-superficie: #e6e8f2;
+  --cor-tinta: var(--preto);
+  --cor-vermelho: var(--vermelho);
+  --cor-tinta-suave: rgba(22, 19, 17, 0.66);
+  --cor-tinta-apagada: rgba(22, 19, 17, 0.16);
+  --cor-linha: rgba(22, 19, 17, 0.13);
+  --cor-linha-forte: rgba(22, 19, 17, 0.32);
+  --cor-cinza-claro: #e7dfcf;
+  --cor-superficie: #e7dfcf;
   --fonte: "Manrope", "Helvetica Neue", Arial, sans-serif;
   --fonte-titulo: "Syne", "Manrope", sans-serif;
   --fonte-rotulo: "Martian Mono", ui-monospace, monospace;
@@ -63,8 +65,8 @@ body {
 }
 
 ::selection {
-  background: var(--rosa);
-  color: #fff;
+  background: var(--amarelo);
+  color: var(--preto);
 }
 
 /* ---------- títulos: Syne, em escala contida ---------- */
@@ -111,7 +113,7 @@ body {
 .hero__titulo-destaque,
 .trabalhos__titulo-destaque,
 .faq__titulo-destaque {
-  color: var(--rosa) !important;
+  color: var(--vermelho) !important;
 }
 
 /* as barras grossas ao lado dos títulos viram um fio fino */
@@ -155,17 +157,17 @@ body {
   letter-spacing: 0.02em !important;
 }
 
-/* ---------- botões: azul, e rosa ao passar o mouse ---------- */
+/* ---------- botões: preto, e vermelho ao passar o mouse ---------- */
 .hero__botao,
 .trabalhos__botao {
-  background: var(--azul) !important;
+  background: var(--preto) !important;
   color: var(--papel) !important;
   border-radius: 0 !important;
 }
 
 .hero__botao:hover {
-  background: var(--rosa) !important;
-  color: #fff !important;
+  background: var(--vermelho) !important;
+  color: var(--papel) !important;
 }
 
 /* ---------- hero ---------- */
@@ -174,7 +176,7 @@ body {
 }
 
 .hero__rotulo {
-  color: var(--rosa);
+  color: var(--vermelho);
 }
 
 .hero__texto {
@@ -201,47 +203,37 @@ body {
   font-size: 0.56rem !important;
 }
 
-/* ---------- manifesto: faixa rosa com tinta azul ---------- */
+/* ---------- manifesto: faixa amarela com tinta preta e destaque vermelho ---------- */
 .manifesto {
-  --cor-tinta: var(--azul) !important;
-  --cor-tinta-apagada: rgba(31, 42, 150, 0.25) !important;
-  --cor-vermelho: var(--azul) !important;
-  background: var(--rosa) !important;
-  color: var(--azul) !important;
+  --cor-tinta: var(--preto) !important;
+  --cor-tinta-apagada: rgba(22, 19, 17, 0.25) !important;
+  --cor-vermelho: var(--vermelho) !important;
+  background: var(--amarelo) !important;
+  color: var(--preto) !important;
 }
 
 .manifesto__botao {
-  background: var(--azul) !important;
+  background: var(--preto) !important;
   color: var(--papel) !important;
   border-radius: 0 !important;
 }
 
 .manifesto__linha {
-  background: rgba(31, 42, 150, 0.45) !important;
+  background: rgba(22, 19, 17, 0.45) !important;
 }
 
 /* ---------- cabeçalho fixo e menu ---------- */
 .cabecalho {
-  background: rgba(243, 241, 236, 0.9) !important;
+  background: rgba(241, 235, 223, 0.9) !important;
 }
 
 .menu-movel {
   background: var(--papel) !important;
 }
 
-/* ---------- chat: o botão segue o azul ---------- */
-.chat__botao {
-  background: var(--azul) !important;
-  color: var(--papel) !important;
-}
-
-/* ---------- contato: faixa azul com papel ---------- */
-.contato {
-  --cor-vermelho: var(--azul);
-}
-
+/* ---------- contato: faixa vermelha, destaque em amarelo ---------- */
 .contato__titulo-forte {
-  color: var(--rosa) !important;
+  color: var(--amarelo) !important;
 }
 
 /* o nome do rodapé deixa de ser gigante: uma assinatura em Syne */
@@ -261,22 +253,23 @@ body {
   background: #fff !important;
 }
 
+/* o painel do meio vira azul cobalto e o último, vermelho */
 .servicos__painel--tinta {
   --cor-tinta: var(--papel);
-  --cor-tinta-suave: rgba(243, 241, 236, 0.72);
-  --cor-linha-forte: rgba(243, 241, 236, 0.3);
-  --cor-vermelho: var(--rosa);
+  --cor-tinta-suave: rgba(241, 235, 223, 0.75);
+  --cor-linha-forte: rgba(241, 235, 223, 0.3);
+  --cor-vermelho: var(--amarelo);
   background: var(--azul) !important;
   color: var(--papel) !important;
 }
 
 .servicos__painel--vermelho {
-  --cor-tinta: var(--azul);
-  --cor-tinta-suave: rgba(31, 42, 150, 0.75);
-  --cor-linha-forte: rgba(31, 42, 150, 0.32);
-  --cor-vermelho: var(--azul);
-  background: var(--rosa) !important;
-  color: var(--azul) !important;
+  --cor-tinta: var(--papel);
+  --cor-tinta-suave: rgba(241, 235, 223, 0.8);
+  --cor-linha-forte: rgba(241, 235, 223, 0.32);
+  --cor-vermelho: var(--amarelo);
+  background: var(--vermelho) !important;
+  color: var(--papel) !important;
 }
 
 .processo {
@@ -286,7 +279,7 @@ body {
 
 /* ---------- página do projeto ---------- */
 .projeto__barra {
-  background: rgba(243, 241, 236, 0.92) !important;
+  background: rgba(241, 235, 223, 0.92) !important;
 }
 
 /* a Syne é larga: o nome do projeto ganha um tamanho que cabe na coluna */
