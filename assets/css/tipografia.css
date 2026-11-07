@@ -1,6 +1,7 @@
 /* =========================================================================
    TIPOGRAFIA EDITORIAL
-   Os títulos ganham uma serifa de revista, desenhada para tamanhos grandes.
+   Os títulos ganham uma serifa editorial de leitura nítida (Source Serif 4),
+   com traços firmes que continuam legíveis também em tamanho pequeno.
    O contraste vem do peso: em cada título uma parte é pesada e a outra é
    leve, como numa capa de revista. Os textos, menus e rótulos seguem na
    Archivo (sem serifa, em maiúsculas espaçadas), que contrasta com a
@@ -9,14 +10,14 @@
    ========================================================================= */
 
 @font-face {
-  font-family: "Bodoni Moda";
-  src: url("/assets/fontes/bodoni-moda.woff2") format("woff2");
-  font-weight: 400 900;
+  font-family: "Source Serif 4";
+  src: url("/assets/fontes/source-serif-4.woff2") format("woff2");
+  font-weight: 200 900;
   font-display: swap;
 }
 
 :root {
-  --fonte-serifa: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --fonte-serifa: "Source Serif 4", Georgia, serif;
   --serifa-pesada: 800;
   --serifa-leve: 400;
 }
@@ -76,7 +77,7 @@
   gap: 0.06em;
   width: 100%;
   max-width: none;
-  font-size: clamp(2.1rem, 3.4vw, 3.4rem);
+  font-size: clamp(2.8rem, 5vw, 5.2rem);
   font-weight: var(--serifa-pesada);
   line-height: 0.95;
   letter-spacing: -0.02em;
@@ -111,11 +112,15 @@
   display: flex;
   align-items: center;
   gap: 0.9em;
-  font-size: 0.36em;
+  font-size: 0.46em;
   font-weight: var(--serifa-leve);
-  line-height: 1.2;
-  letter-spacing: 0.14em;
+  line-height: 1.15;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+[class$="__titulo-leve-texto"] {
+  min-width: 0;
 }
 
 /* o fio que segue a linha leve até a margem */
@@ -148,13 +153,13 @@
   .processo__titulo,
   .depoimentos__titulo,
   .sobre__titulo {
-    font-size: clamp(1.9rem, 8vw, 2.4rem);
+    font-size: clamp(2.4rem, 10.5vw, 3.2rem);
   }
 
   /* no celular a linha leve pode quebrar; o fio sai para não apertar as palavras */
   [class$="__titulo-leve"] {
     display: block;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
   }
 
   [class$="__titulo-leve"]::after {
