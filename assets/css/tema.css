@@ -1,32 +1,24 @@
 /* =========================================================================
-   TEMA: COLAGEM
-   Uma camada sobre os estilos das seções que troca a atmosfera inteira do
-   site, com a paleta da colagem da referência 12: papel #f0e9e0, tinta
-   #121316, ardósia #3f464d, cinzas quentes #c4bdb5 e #88837f, vermelho
-   #91201d e ocre #dfa337. Faixas em ocre, ardósia e vermelho marcam as
-   mudanças de assunto. Sempre claro: o site não tem tema escuro.
-   Fontes: Manrope (títulos e textos, provisória) e Martian Mono (rótulos).
+   TEMA: PRETO E BRANCO
+   Uma camada sobre os estilos das seções. Preto #1b1b1b sobre um branco
+   acinzentado #ecebe8 são as cores principais; as cores da colagem
+   (vermelho #91201d, ocre #dfa337, ardósia #3f464d e cinzas quentes) ficam
+   como variações para outros usos: as faixas e os
+   painéis. Fonte única: Montserrat, do fino ao black. Sempre claro.
    ========================================================================= */
 
 @font-face {
-  font-family: "Manrope";
-  src: url("/assets/fontes/manrope.woff2") format("woff2");
-  font-weight: 300 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Martian Mono";
-  src: url("/assets/fontes/martian-mono.woff2") format("woff2");
-  font-weight: 300 700;
-  font-stretch: 75% 112.5%;
+  font-family: "Montserrat";
+  src: url("/assets/fontes/montserrat.woff2") format("woff2");
+  font-weight: 100 900;
   font-display: swap;
 }
 
 :root {
   /* a paleta da referência 12 (colagem): papel, tinta, ardósia, dois cinzas quentes, vermelho e ocre */
-  --papel: #f0e9e0;
-  --preto: #121316;
+  --papel: #ecebe8;
+  --preto: #1b1b1b;
+  /* as cores da colagem ficam como variações para outros usos */
   --ardosia: #3f464d;
   --cinza-quente: #c4bdb5;
   --cinza: #88837f;
@@ -37,15 +29,15 @@
   --cor-fundo: var(--papel);
   --cor-tinta: var(--preto);
   --cor-vermelho: var(--vermelho);
-  --cor-tinta-suave: rgba(18, 19, 22, 0.66);
-  --cor-tinta-apagada: rgba(18, 19, 22, 0.16);
-  --cor-linha: rgba(18, 19, 22, 0.13);
-  --cor-linha-forte: rgba(18, 19, 22, 0.32);
+  --cor-tinta-suave: rgba(27, 27, 27, 0.66);
+  --cor-tinta-apagada: rgba(27, 27, 27, 0.16);
+  --cor-linha: rgba(27, 27, 27, 0.13);
+  --cor-linha-forte: rgba(27, 27, 27, 0.32);
   --cor-cinza-claro: var(--cinza-quente);
   --cor-superficie: var(--cinza-quente);
-  --fonte: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --fonte-titulo: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --fonte-rotulo: "Martian Mono", ui-monospace, monospace;
+  --fonte: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --fonte-titulo: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --fonte-rotulo: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --titulo-celular: 2.1rem;
 }
 
@@ -65,7 +57,6 @@ body {
 }
 
 /* ---------- títulos em escala contida ---------- */
-.hero__titulo,
 .trabalhos__titulo,
 .faq__titulo,
 .contato__titulo,
@@ -82,13 +73,6 @@ body {
   font-stretch: 100% !important;
 }
 
-.hero__titulo {
-  font-size: clamp(2.6rem, 4.6vw, 4.6rem) !important;
-  font-weight: 700 !important;
-  line-height: 0.98 !important;
-  letter-spacing: -0.03em !important;
-  text-transform: uppercase;
-}
 
 .trabalhos__titulo,
 .faq__titulo,
@@ -105,7 +89,6 @@ body {
   text-transform: uppercase;
 }
 
-.hero__titulo-destaque,
 .trabalhos__titulo-destaque,
 .faq__titulo-destaque {
   color: var(--vermelho) !important;
@@ -124,13 +107,10 @@ body {
   letter-spacing: -0.02em !important;
 }
 
-/* ---------- rótulos: Martian Mono, pequenos e espaçados ---------- */
-.hero__rotulo,
+/* ---------- rótulos: pequenos e espaçados ---------- */
 .hero__marca,
 .hero__menu,
 .hero__menu-botao,
-.hero__botao,
-.hero__assinatura,
 .trabalhos__filtro,
 .trabalhos__info,
 .citacoes__titulo,
@@ -152,32 +132,11 @@ body {
 }
 
 /* ---------- botões: preto, e vermelho ao passar o mouse ---------- */
-.hero__botao,
 .trabalhos__botao {
   background: var(--preto) !important;
   color: var(--papel) !important;
   border-radius: 0 !important;
 }
-
-.hero__botao:hover {
-  background: var(--vermelho) !important;
-  color: var(--papel) !important;
-}
-
-/* ---------- hero ---------- */
-.hero__conteudo {
-  gap: 22px;
-}
-
-.hero__rotulo {
-  color: var(--vermelho);
-}
-
-.hero__texto {
-  font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-  line-height: 1.55;
-}
-
 
 /* ---------- trabalhos ---------- */
 .trabalhos__parede {
@@ -197,7 +156,7 @@ body {
 /* ---------- manifesto: faixa ocre com tinta e destaque vermelho ---------- */
 .manifesto {
   --cor-tinta: var(--preto) !important;
-  --cor-tinta-apagada: rgba(18, 19, 22, 0.25) !important;
+  --cor-tinta-apagada: rgba(27, 27, 27, 0.25) !important;
   --cor-vermelho: var(--vermelho) !important;
   background: var(--amarelo) !important;
   color: var(--preto) !important;
@@ -210,12 +169,12 @@ body {
 }
 
 .manifesto__linha {
-  background: rgba(18, 19, 22, 0.45) !important;
+  background: rgba(27, 27, 27, 0.45) !important;
 }
 
 /* ---------- cabeçalho fixo e menu ---------- */
 .cabecalho {
-  background: rgba(240, 233, 224, 0.9) !important;
+  background: rgba(236, 235, 232, 0.9) !important;
 }
 
 .menu-movel {
@@ -270,7 +229,7 @@ body {
 
 /* ---------- página do projeto ---------- */
 .projeto__barra {
-  background: rgba(240, 233, 224, 0.92) !important;
+  background: rgba(236, 235, 232, 0.92) !important;
 }
 
 /* o nome do projeto ganha um tamanho que cabe na coluna */
@@ -283,7 +242,4 @@ body {
 }
 
 @media (max-width: 860px) {
-  .hero__titulo {
-    font-size: min(10.5vw, 7vh) !important;
-  }
 }
