@@ -32,6 +32,7 @@
   --cinza: #88837f;
   --vermelho: #91201d;
   --amarelo: #dfa337;
+  --ocre: var(--amarelo);
   --azul: var(--ardosia);
   --cor-fundo: var(--papel);
   --cor-tinta: var(--preto);
@@ -128,7 +129,6 @@ body {
 .hero__marca,
 .hero__menu,
 .hero__menu-botao,
-.hero__servicos,
 .hero__botao,
 .hero__assinatura,
 .trabalhos__filtro,
@@ -178,9 +178,6 @@ body {
   line-height: 1.55;
 }
 
-.hero__servicos {
-  font-weight: 400 !important;
-}
 
 /* ---------- trabalhos ---------- */
 .trabalhos__parede {
