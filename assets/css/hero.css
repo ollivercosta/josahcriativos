@@ -1,13 +1,11 @@
 /* =========================================================================
-   HERO: a palavra
-   "cultura" ocupa a tela inteira, com três ecos em cinza atrás dela que se
-   deslocam com o mouse e se afastam com a rolagem; embaixo, três
-   informações lado a lado.
+   HERO: a mesa
+   O texto à esquerda; à direita, as capas dos trabalhos espalhadas sobre a
+   mesa como folhas impressas, com sombra de papel. Elas caem na mesa quando
+   a página abre e acompanham o mouse em profundidades diferentes.
 
-   As capas dos trabalhos ficam empilhadas logo abaixo da dobra, com as
-   bordas aparecendo. Rolando a página, cada folha sobe da pilha e pousa no
-   seu quadro da parede de trabalhos: as folhas e os quadros são as mesmas
-   capas.
+   Rolando a página, cada folha sai da mesa e pousa no seu quadro da parede
+   de trabalhos, logo abaixo: as folhas e os quadros são as mesmas capas.
    As folhas vivem numa camada fixa (.hero__mesa) e são posicionadas por
    assets/js/secoes/Hero.js; só transform e opacity mudam.
    ========================================================================= */
@@ -92,118 +90,116 @@
   cursor: pointer;
 }
 
-/* ---------- a palavra: "cultura" gigante, com ecos que acompanham o mouse ---------- */
+/* ---------- o texto ---------- */
 .hero__conteudo {
   position: absolute;
   z-index: 2;
   left: var(--margem);
-  right: var(--margem);
-  top: 19%;
+  top: 50%;
+  width: 42vw;
+  display: grid;
+  gap: clamp(18px, 2.6vh, 28px);
+  /* o bloco fica centrado na altura da tela, sem vazio em cima */
+  transform: translateY(-46%);
 }
 
-.hero__palavra {
-  position: relative;
-  margin: 0;
-  font-family: var(--fonte-titulo, var(--fonte));
-  font-weight: 900;
-  font-size: 26.4vw;
-  line-height: 0.8;
-  letter-spacing: -0.065em;
-  white-space: nowrap;
-  margin-left: -0.05em;
-  padding-top: 0.3em;
-}
-
-/* a quebra só existe no celular, onde a palavra vira duas linhas */
-.hero__quebra {
-  display: none;
-}
-
-/* a palavra da frente e os ecos ficam empilhados no mesmo lugar */
-.hero__palavra-frente,
-.hero__eco {
-  display: block;
-  will-change: transform;
-}
-
-.hero__palavra-frente {
-  position: relative;
-  color: var(--cor-tinta);
-  animation: hero-sobe 1.2s var(--curva) 0.1s both;
-}
-
-.hero__eco {
-  position: absolute;
-  left: 0;
-  top: 0.3em;
-  transform: translate3d(var(--eco-x, 0), var(--eco-y, 0), 0);
-  text-shadow: 0.015em 0.025em 0.05em rgba(0, 0, 0, 0.1);
-}
-
-.hero__eco--1 {
-  color: #b9b9b6;
-}
-
-.hero__eco--2 {
-  color: #cfcfcc;
-}
-
-.hero__eco--3 {
-  color: #dededb;
-}
 
 .hero__rotulo {
-  position: absolute;
-  left: 0;
-  top: 0;
   margin: 0;
+  font-stretch: 115%;
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
-  letter-spacing: -0.01em;
-  animation: hero-sobe 1.1s var(--curva) 0.3s both;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cor-vermelho);
+  animation: hero-sobe 1.1s var(--curva) 0.15s both;
 }
 
-/* ---------- rodapé do hero: três informações lado a lado ---------- */
-.hero__rodape {
-  position: absolute;
-  z-index: 2;
-  left: var(--margem);
-  right: var(--margem);
-  bottom: clamp(56px, 13vh, 130px);
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 2fr);
-  gap: 32px;
-  align-items: end;
-  font-size: clamp(0.95rem, 1.05vw, 1.08rem);
-  animation: hero-sobe 1.1s var(--curva) 0.5s both;
+.hero__titulo {
+  margin: 0;
+  /* ecos: três cópias em cinza atrás das letras (como nas letras sobrepostas da referência);
+     o deslocamento vem de Hero.js, conforme o mouse e a rolagem */
+  --eco-x: -0.05em;
+  --eco-y: -0.02em;
+  text-shadow:
+    var(--eco-x) var(--eco-y) 0 #b9b9b6,
+    calc(var(--eco-x) * 2) calc(var(--eco-y) * 2) 0 #cfcfcc,
+    calc(var(--eco-x) * 3) calc(var(--eco-y) * 3) 0 #dededb,
+    0.02em 0.04em 0.08em rgba(0, 0, 0, 0.12);
+  font-weight: 900;
+  font-size: min(8.2vw, 15vh);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+}
+
+.hero__titulo-linha {
+  display: block;
+  /* a máscara corta só embaixo (a linha sobe por trás dela) e deixa os ecos passarem para os lados e para cima */
+  clip-path: inset(-1em -1em 0 -1em);
+  padding: 0 0.06em 0.08em 0;
+  margin-bottom: -0.08em;
+}
+
+.hero__titulo-miolo {
+  display: inline-block;
+  animation: hero-linha 1.3s var(--curva) both;
+  animation-delay: calc(0.25s + var(--k, 0) * 0.12s);
+}
+
+.hero__titulo-destaque {
+  font-style: normal;
+  color: var(--cor-vermelho);
 }
 
 .hero__texto {
   max-width: 30em;
   margin: 0;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
   line-height: 1.5;
+  color: var(--cor-tinta-suave);
+  animation: hero-sobe 1.1s var(--curva) 0.55s both;
 }
 
-.hero__local {
-  margin: 0;
+.hero__acao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+  animation: hero-sobe 1.1s var(--curva) 0.65s both;
 }
 
-.hero__link {
-  justify-self: end;
+.hero__botao {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  color: inherit;
+  gap: 12px;
+  padding: 16px 26px;
+  border-radius: 999px;
+  background: var(--cor-tinta);
+  color: #fff;
+  font-stretch: 112%;
+  font-size: 0.74rem;
   font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   text-decoration: none;
+  transition: background 0.4s var(--curva);
 }
 
-.hero__link-seta {
+.hero__botao-seta {
+  width: 18px;
+  height: 18px;
   transition: transform 0.5s var(--curva);
 }
 
-.hero__link:hover .hero__link-seta {
-  transform: translateX(6px);
+.hero__assinatura {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cor-tinta-suave);
+}
+
+.hero__assinatura-nome {
+  font-weight: 700;
+  color: var(--cor-tinta);
 }
 
 /* ---------- a mesa: camada fixa com as folhas ---------- */
@@ -256,6 +252,16 @@
   object-fit: contain;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .hero__botao:hover {
+    background: var(--cor-vermelho);
+  }
+
+  .hero__botao:hover .hero__botao-seta {
+    transform: translateX(4px);
+  }
+}
+
 @keyframes hero-aparece {
   from {
     opacity: 0;
@@ -266,6 +272,12 @@
   from {
     opacity: 0;
     transform: translate3d(0, 18px, 0);
+  }
+}
+
+@keyframes hero-linha {
+  from {
+    transform: translate3d(0, 105%, 0);
   }
 }
 
@@ -282,44 +294,31 @@
     top: 18px;
   }
 
+  /* no celular o texto fica em cima e as folhas, na parte de baixo da tela */
   .hero__conteudo {
-    top: 118px;
-  }
-
-  /* no celular a palavra se parte em duas linhas e ocupa a largura toda */
-  .hero__quebra {
-    display: inline;
-  }
-
-  .hero__palavra {
-    font-size: 44vw;
-    line-height: 0.78;
-    padding-top: 0.24em;
-  }
-
-  .hero__eco {
-    top: 0.24em;
-  }
-
-  /* o texto vem logo abaixo da palavra; o resto da tela é da pilha de capas */
-  .hero__rodape {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 20px;
-    top: calc(170px + 80vw);
+    top: 92px;
     bottom: auto;
-    font-size: 0.92rem;
+    transform: none;
+    width: auto;
+    right: var(--margem);
+    gap: 16px;
+  }
+
+  .hero__titulo {
+    font-size: min(15vw, 9vh);
   }
 
   .hero__texto {
-    grid-column: 1 / -1;
+    font-size: 0.98rem;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero__cabecalho,
-  .hero__palavra-frente,
   .hero__rotulo,
-  .hero__rodape {
-    animation: none;
-  }
+  .hero__titulo-miolo,
+  .hero__texto,
+  .hero__acao,
+
 }
