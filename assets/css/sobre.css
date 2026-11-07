@@ -126,11 +126,8 @@
   gap: clamp(22px, 3vh, 34px);
 }
 
-/* o rótulo abre a página com um traço vermelho, como a retranca de uma revista */
+/* o rótulo abre a página em vermelho, como a retranca de uma revista */
 .sobre__rotulo {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   margin: 0;
   font-stretch: 115%;
   font-size: 0.72rem;
@@ -138,13 +135,6 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--cor-vermelho);
-}
-
-.sobre__rotulo::before {
-  content: "";
-  width: 34px;
-  height: 3px;
-  background: currentColor;
 }
 
 .sobre__titulo-palavra {
