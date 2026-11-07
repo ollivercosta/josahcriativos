@@ -10,7 +10,6 @@
   --cor-tinta: #f3eee6;
   --cor-tinta-apagada: rgba(243, 238, 230, 0.16);
   --cor-vermelho: #e2453b;
-  margin-top: var(--espaco-secao);
   padding: var(--espaco-secao) var(--margem);
   background: #16130f;
   color: var(--cor-tinta);
