@@ -17,7 +17,8 @@
   align-items: end;
   column-gap: 6vw;
   row-gap: clamp(24px, 4vh, 44px);
-  margin: 0 var(--margem);
+  /* o mesmo espaço das outras seções antes do fio de abertura */
+  margin: var(--espaco-secao) var(--margem) 0;
   padding: clamp(28px, 4vh, 44px) 0 var(--espaco-secao);
   border-top: 3px solid var(--cor-tinta);
 }
