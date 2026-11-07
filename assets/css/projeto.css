@@ -445,6 +445,20 @@
   line-height: 1.7;
 }
 
+/* a régua como imagem: em largura total, sobre branco, como foi aplicada nas peças */
+.projeto__regua-figura {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: clamp(12px, 2vw, 28px);
+  background: #fff;
+}
+
+.projeto__regua-imagem {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- mais com o cliente ---------- */
 .projeto__mais {
   margin-top: var(--respiro);
@@ -610,6 +624,17 @@
 
 /* ---------- celular: uma coluna ---------- */
 @media (max-width: 860px) {
+  /* no celular a régua fica legível: ela rola para o lado em vez de encolher */
+  .projeto__regua-figura {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .projeto__regua-imagem {
+    width: 900px;
+    max-width: none;
+  }
+
   .projeto {
     --barra: 56px;
   }
