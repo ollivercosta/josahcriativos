@@ -1,47 +1,18 @@
 /* =========================================================================
-   TIPOGRAFIA EDITORIAL
-   Os títulos ganham uma serifa editorial de leitura nítida (Source Serif 4),
-   com traços firmes que continuam legíveis também em tamanho pequeno.
-   O contraste vem do peso: em cada título uma parte é pesada e a outra é
-   leve, como numa capa de revista. Os textos, menus e rótulos seguem na
-   Archivo (sem serifa, em maiúsculas espaçadas), que contrasta com a
-   serifa em caixa alta e baixa.
-   Fica por último na lista de estilos: só troca fonte, peso e espaçamento.
+   TIPOGRAFIA DOS TÍTULOS
+   Os títulos das seções seguem o hero: a Archivo, com uma linha fina em
+   caixa baixa e outra pesada em caixa alta (como "design e" e "CULTURA",
+   e como "Alguns TRABALHOS." na mesa). A linha fina leva um fio que vai
+   até a margem.
+   Fica por último na lista de estilos: só troca peso, caixa e espaçamento.
    ========================================================================= */
 
-@font-face {
-  font-family: "Source Serif 4";
-  src: url("/assets/fontes/source-serif-4.woff2") format("woff2");
-  font-weight: 200 900;
-  font-display: swap;
-}
-
 :root {
-  --fonte-serifa: "Source Serif 4", Georgia, serif;
-  --serifa-pesada: 800;
-  --serifa-leve: 400;
+  --titulo-fino: 200;
+  --titulo-forte: 900;
 }
 
-/* ---------- títulos: a serifa ---------- */
-.citacoes__titulo,
-.faq__titulo,
-.contato__titulo,
-.servicos__titulo,
-.processo__titulo,
-.depoimentos__titulo,
-.sobre__titulo,
-.projeto__titulo {
-  font-family: var(--fonte-serifa);
-  font-stretch: normal;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
-/* ---------- títulos das seções: duas linhas ----------
-   Duas linhas que se alternam: uma pesada, em caixa baixa, e outra leve,
-   em caixa alta espaçada, seguida de um fio que vai até a margem, como
-   na abertura de uma matéria de revista. */
-.citacoes__titulo,
+/* ---------- títulos das seções: duas linhas ---------- */
 .faq__titulo,
 .contato__titulo,
 .servicos__titulo,
@@ -50,14 +21,15 @@
 .sobre__titulo {
   display: flex;
   flex: 1 1 auto;
-  align-items: stretch;
-  gap: 0.06em;
   width: 100%;
   max-width: none;
-  font-size: clamp(2.8rem, 5vw, 5.2rem);
-  font-weight: var(--serifa-pesada);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  margin: 0;
+  font-family: var(--fonte);
+  font-style: normal;
+  font-size: clamp(2.6rem, 4.6vw, 5.2rem);
+  font-weight: var(--titulo-forte);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
   text-transform: none;
 }
 
@@ -67,41 +39,40 @@
   min-width: 0;
   flex-direction: column;
   justify-content: space-between;
-  gap: 0.3em;
-  padding: 0.12em 0 0.02em;
+  gap: 0;
 }
 
+/* a linha pesada: caixa alta, largura normal da Archivo */
 [class$="__titulo-pesado"] {
   display: block;
-  font-weight: var(--serifa-pesada);
+  font-stretch: 100%;
+  font-weight: var(--titulo-forte);
+  text-transform: uppercase;
 }
 
+/* a linha fina: caixa baixa, seguida do fio */
 [class$="__titulo-leve"] {
   display: flex;
   align-items: center;
-  gap: 0.9em;
-  font-size: 0.46em;
-  font-weight: var(--serifa-leve);
-  line-height: 1.15;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  gap: 0.4em;
+  font-weight: var(--titulo-fino);
 }
 
 [class$="__titulo-leve-texto"] {
   min-width: 0;
 }
 
-/* o fio que segue a linha leve até a margem */
+/* o fio que segue a linha fina até a margem */
 [class$="__titulo-leve"]::after {
   content: "";
   flex: 1;
-  min-width: 2em;
+  min-width: 1em;
   height: 1px;
   background: currentColor;
   opacity: 0.4;
 }
 
-/* as barras ao lado dos títulos saem: o fio da linha leve faz esse papel */
+/* as barras ao lado dos títulos saem: o fio da linha fina faz esse papel */
 [class*="__titulo-barra"] {
   display: none;
 }
@@ -112,20 +83,18 @@
 }
 
 @media (max-width: 860px) {
-    .citacoes__titulo,
   .faq__titulo,
   .contato__titulo,
   .servicos__titulo,
   .processo__titulo,
   .depoimentos__titulo,
   .sobre__titulo {
-    font-size: clamp(2.4rem, 10.5vw, 3.2rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
-  /* no celular a linha leve pode quebrar; o fio sai para não apertar as palavras */
+  /* no celular a linha fina pode quebrar; o fio sai para não apertar as palavras */
   [class$="__titulo-leve"] {
     display: block;
-    letter-spacing: 0.06em;
   }
 
   [class$="__titulo-leve"]::after {
@@ -135,6 +104,7 @@
 
 /* ---------- página do projeto ---------- */
 .projeto__titulo {
-  font-weight: var(--serifa-pesada);
-  letter-spacing: -0.02em;
+  font-family: var(--fonte);
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
