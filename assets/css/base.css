@@ -167,3 +167,8 @@ dd {
 .pagina-interna main {
   padding-top: var(--altura-cabecalho);
 }
+
+/* um pulo direto para um endereço com # desconta o cabeçalho fixo, como a rolagem suave */
+main [id] {
+  scroll-margin-top: 60px;
+}
