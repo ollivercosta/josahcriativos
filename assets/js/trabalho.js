@@ -5,7 +5,6 @@
  */
 import { GestorDeSobreposicoes } from "./nucleo/GestorDeSobreposicoes.js";
 import { VLibras } from "./nucleo/VLibras.js";
-import { Folheador } from "./paginas/Folheador.js";
 import { Projeto } from "./paginas/Projeto.js";
 import { Contato } from "./secoes/Contato.js";
 import { Termos } from "./secoes/Termos.js";
@@ -23,7 +22,6 @@ const semInercia = {
 const $ = (seletor) => document.querySelector(seletor);
 const gestor = new GestorDeSobreposicoes(semInercia);
 new Projeto($(".projeto__corpo"));
-document.querySelectorAll(".folheador").forEach((raiz) => new Folheador(raiz));
 new Contato($(".contato"));
 new Termos($(".termos"), gestor);
 new VLibras();
