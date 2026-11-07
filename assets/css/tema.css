@@ -65,7 +65,6 @@ body {
 }
 
 /* ---------- títulos em escala contida ---------- */
-.hero__titulo,
 .trabalhos__titulo,
 .faq__titulo,
 .contato__titulo,
@@ -82,13 +81,6 @@ body {
   font-stretch: 100% !important;
 }
 
-.hero__titulo {
-  font-size: clamp(2.6rem, 4.6vw, 4.6rem) !important;
-  font-weight: 700 !important;
-  line-height: 0.98 !important;
-  letter-spacing: -0.03em !important;
-  text-transform: uppercase;
-}
 
 .trabalhos__titulo,
 .faq__titulo,
@@ -105,7 +97,6 @@ body {
   text-transform: uppercase;
 }
 
-.hero__titulo-destaque,
 .trabalhos__titulo-destaque,
 .faq__titulo-destaque {
   color: var(--vermelho) !important;
@@ -125,12 +116,9 @@ body {
 }
 
 /* ---------- rótulos: Martian Mono, pequenos e espaçados ---------- */
-.hero__rotulo,
 .hero__marca,
 .hero__menu,
 .hero__menu-botao,
-.hero__botao,
-.hero__assinatura,
 .trabalhos__filtro,
 .trabalhos__info,
 .citacoes__titulo,
@@ -152,32 +140,19 @@ body {
 }
 
 /* ---------- botões: preto, e vermelho ao passar o mouse ---------- */
-.hero__botao,
 .trabalhos__botao {
   background: var(--preto) !important;
   color: var(--papel) !important;
   border-radius: 0 !important;
 }
 
-.hero__botao:hover {
-  background: var(--vermelho) !important;
-  color: var(--papel) !important;
+/* ---------- hero: o cabeçalho do hero na mesma letra da frase ---------- */
+.hero__marca,
+.hero__menu,
+.hero__menu-botao {
+  font-family: "Schibsted Grotesk", var(--fonte) !important;
+  letter-spacing: 0.06em !important;
 }
-
-/* ---------- hero ---------- */
-.hero__conteudo {
-  gap: 22px;
-}
-
-.hero__rotulo {
-  color: var(--vermelho);
-}
-
-.hero__texto {
-  font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-  line-height: 1.55;
-}
-
 
 /* ---------- trabalhos ---------- */
 .trabalhos__parede {
@@ -283,7 +258,4 @@ body {
 }
 
 @media (max-width: 860px) {
-  .hero__titulo {
-    font-size: min(10.5vw, 7vh) !important;
-  }
 }
