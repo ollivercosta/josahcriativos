@@ -233,7 +233,9 @@ export const TRABALHOS = [
   {
     nome: "Antropofagia Mapping",
     destaque: true,
+    titulo: ["Antropofagia", "Mapping"],
     tipo: "Book de captação",
+    entregas: "Identidade, book, plano de mídia, sinalização, brindes e redes sociais",
     categoria: "Marca e apresentação",
     resumo:
       "Book de captação de um projeto pensado a partir da preservação da natureza e da cultura, com grafismos que atravessam todas as peças.",
@@ -256,6 +258,48 @@ export const TRABALHOS = [
       Digital: ["Redes sociais"],
       "Visual e mídia": ["Camisas", "Ecobag", "Backdrop", "Wind banner", "Testeira de ônibus", "Faixa"],
     },
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Identidade visual",
+        imagem: "/assets/imagens/trabalhos/antropofagia-mapping/prancha-logomarca.webp",
+        texto:
+          "A logomarca organiza o sistema inteiro. As letras sobrepõem camadas, como a própria floresta, e incorporam grafismos que remetem à ancestralidade e à cultura de Belém. O contorno em neon, sobre fundo verde escuro, traduz o mapping, a projeção de luz sobre superfícies, linguagem central do festival.",
+        itens: ["Identidade visual"],
+      },
+      {
+        frente: "Apresentação",
+        nome: "Plano de mídia e book de captação",
+        imagem: "/assets/imagens/trabalhos/antropofagia-mapping/prancha-book.webp",
+        texto:
+          "Os primeiros desdobramentos da marca foram os documentos de captação. O plano de mídia e o book apresentam o festival a patrocinadores com a mesma atmosfera do evento: grafismos, vegetação e o brilho do neon conduzem a leitura das informações institucionais.",
+        itens: ["Plano de mídia", "Book de captação"],
+      },
+      {
+        frente: "Visual e mídia",
+        nome: "Camisas e ecobag",
+        imagem: "/assets/imagens/trabalhos/antropofagia-mapping/prancha-camisa-ecobag.webp",
+        texto:
+          "Peças de uso da equipe e do público. A logomarca ocupa a frente, acompanhada de um grafismo em tom sobre tom, e as marcas de apoio, patrocínio e realização seguem a régua do projeto nas costas da camisa e na base da ecobag.",
+        itens: ["Camisas", "Ecobag"],
+      },
+      {
+        frente: "Visual e mídia",
+        nome: "Sinalização do evento",
+        imagem: "/assets/imagens/trabalhos/antropofagia-mapping/prancha-windbanner-testeira-backdrop.webp",
+        texto:
+          "As peças de rua e de palco levam a marca para a Praça Dom Pedro II. A faixa e a testeira de ônibus priorizam data, horário e local, legíveis à distância; o wind banner reforça a presença no espaço; e o backdrop reúne as marcas parceiras em um painel próprio, pensado para as fotos do evento.",
+        itens: ["Faixa", "Testeira de ônibus", "Wind banner", "Backdrop"],
+      },
+      {
+        frente: "Digital",
+        nome: "Redes sociais",
+        imagem: "/assets/imagens/trabalhos/antropofagia-mapping/prancha-redes.webp",
+        texto:
+          "A comunicação digital acompanhou o festival antes e durante o evento, com a programação, a ficha técnica, o júri e os artistas selecionados. Cada formato mantém a estrutura da marca, com o logotipo no alto e a informação principal em destaque, o que garante reconhecimento imediato no feed.",
+        itens: ["Redes sociais"],
+      },
+    ],
     capa: "/assets/imagens/trabalhos/antropofagia-mapping/capa.webp",
     midias: ["/assets/imagens/trabalhos/antropofagia-mapping/imagem.webp"],
   },
