@@ -410,6 +410,29 @@
   outline: none;
 }
 
+/* a página inteira no lugar da imagem-chave (sites e portfólios longos) */
+.projeto__chave--rolagem .projeto__site-janela {
+  aspect-ratio: 16 / 9;
+  max-height: 78svh;
+}
+
+.projeto__site-barra {
+  align-items: center;
+}
+
+.projeto__site-dica {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: var(--cor-tinta-suave);
+}
+
+/* portfólio: a mesma janela, sem os botões de navegador */
+.projeto__site--documento .projeto__site-barra span {
+  display: none;
+}
+
 .projeto__site-imagem {
   display: block;
   width: 100%;
@@ -624,6 +647,14 @@
 
 /* ---------- celular: uma coluna ---------- */
 @media (max-width: 860px) {
+  .projeto__chave--rolagem .projeto__site-janela {
+    aspect-ratio: 4 / 5;
+  }
+
+  .projeto__site-dica {
+    font-size: 0.66rem;
+  }
+
   /* no celular a régua fica legível: ela rola para o lado em vez de encolher */
   .projeto__regua-figura {
     overflow-x: auto;
