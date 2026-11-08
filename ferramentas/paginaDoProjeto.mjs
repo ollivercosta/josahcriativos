@@ -151,6 +151,35 @@ function quadroDaPrancha(prancha, trabalho, posicao) {
           </div>`;
 }
 
+/**
+ * Sites e portfólios longos, sem pranchas: a página inteira entra no lugar da
+ * imagem-chave, numa janela que rola por dentro. Nesse caso não há "As peças".
+ */
+function paginaInteira(trabalho) {
+  if (trabalho.pranchas && trabalho.pranchas.length) return null;
+  const imagem = (trabalho.midias || []).find((m) => typeof m === "string" && ehImagem(m));
+  if (!imagem) return null;
+  const site = trabalho.categoria === "Web e redes";
+  const documento = /portf[óo]lio/i.test(trabalho.tipo || "");
+  if (!site && !documento) return null;
+  return { imagem, site };
+}
+
+function janelaDaPagina(trabalho, { imagem, site }) {
+  const visitar = trabalho.endereco
+    ? `<a class="projeto__site-visitar" href="${escapar(trabalho.endereco)}" target="_blank" rel="noopener">Visitar o site <span aria-hidden="true">&rarr;</span></a>`
+    : "";
+  return `<figure class="projeto__chave projeto__chave--rolagem">
+        <div class="projeto__site${site ? "" : " projeto__site--documento"}">
+          <div class="projeto__site-barra"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><em class="projeto__site-dica">Role dentro da janela para ver ${site ? "o site" : "o portfólio"} inteiro</em></div>
+          <div class="projeto__site-janela" tabindex="0" aria-label="${escapar(trabalho.nome)}: role para ver a página inteira" data-lenis-prevent>
+            <img class="projeto__site-imagem" src="${escapar(imagem)}" alt="${escapar(trabalho.nome)}, página inteira" fetchpriority="high" decoding="async" />
+          </div>
+          ${visitar}
+        </div>
+      </figure>`;
+}
+
 /** As peças: uma prancha por frente, com o texto ao lado; a cada peça, os lados trocam. */
 function pecas(trabalho) {
   const pranchas = pranchasDoTrabalho(trabalho);
@@ -201,6 +230,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
   const desafio = trabalho.desafio || trabalho.resumo || "";
   // a imagem-chave: a prancha de capa, quando existe; senão, a capa da grade
   const capa = trabalho.chave || capaDoTrabalho(trabalho);
+  const pagina = paginaInteira(trabalho);
   const mais = relacionados.length
     ? `<section class="projeto__mais" aria-labelledby="projeto-mais-titulo">
         <h2 class="projeto__rotulo" id="projeto-mais-titulo">Mais com a ${escapar(trabalho.cliente)}</h2>
@@ -251,13 +281,13 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
       </dl>
 
       <!-- IMAGEM-CHAVE: a capa do projeto -->
-      ${capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /></figure>` : ""}
+      ${pagina ? janelaDaPagina(trabalho, pagina) : capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /></figure>` : ""}
 
       <!-- CONTEXTO, SOLUÇÃO E RESULTADO -->
       ${caso(trabalho)}
 
       <!-- AS PEÇAS: uma prancha por frente de serviço, com o texto ao lado -->
-      ${pecas(trabalho)}
+      ${pagina ? "" : pecas(trabalho)}
 
       ${trabalho.regua ? `<!-- RÉGUA DE MARCAS -->
       <section class="projeto__regua" aria-label="Régua de marcas">
