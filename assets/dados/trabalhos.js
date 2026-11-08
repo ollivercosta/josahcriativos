@@ -36,6 +36,8 @@
  *                "site"    imagem: a página inteira; endereco: o site no ar
  *              Sem pranchas, a página monta uma por frente das peças. Prancha sem
  *              imagem aparece como moldura "Prancha a produzir".
+ *   chave      opcional: a prancha de capa (16:9, sem texto embutido), imagem-chave
+ *              no topo da página do trabalho; sem ela, vale a capa
  *   capa       imagem 4:3 usada na grade, no destaque e nas vitrines
  *   midias     imagens (endereço) ou vídeos (YouTube, Vimeo, Google Drive)
  *
@@ -175,21 +177,14 @@ export const TRABALHOS = [
       "Visual e mídia": ["Camisas", "Ecobag", "Squeeze", "Papelaria", "Banner"],
     },
     reguaImagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/regua.webp",
+    chave: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-capa.webp",
     pranchas: [
-      {
-        frente: "Apresentação",
-        nome: "Identidade visual",
-        texto:
-          "A marca existente da orquestra foi mantida e ganhou uma base de azuis, que equilibra as cores quentes originais e dá sobriedade ao material institucional. Os instrumentos, recortados em blocos geométricos, são o elemento central do sistema e se repetem em todas as peças.",
-        itens: ["Identidade visual"],
-        imagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-capa.webp",
-      },
       {
         frente: "Apresentação",
         nome: "Book de captação",
         texto:
           "Documento de apresentação do plano anual a patrocinadores, com proposta, impacto, contrapartidas e cotas de investimento. A capa estabelece a hierarquia que se repete nas páginas internas: instrumentos em primeiro plano, título institucional e número do Pronac.",
-        itens: ["Book de captação"],
+        itens: ["Identidade visual", "Book de captação"],
         imagem: "/assets/imagens/trabalhos/orquestra-jovem-do-reconcavo/prancha-book.webp",
       },
       {
@@ -344,6 +339,49 @@ export const TRABALHOS = [
       Digital: ["Sites", "Curso online", "Redes sociais"],
       "Visual e mídia": ["Selo", "Edição de vídeo", "Diagramação de livros"],
     },
+    chave: "/assets/imagens/trabalhos/tabuleiro-producoes/prancha-capa.webp",
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Portfólios de serviços",
+        texto:
+          "Dois portfólios com a mesma estrutura e públicos diferentes: um para artistas, outro para empresas e ONGs. As capas partem do símbolo da Tabuleiro sobre faixas de cor, e o público de cada volume já aparece na capa.",
+        itens: ["Identidade visual", "Portfólio de serviços"],
+        imagem: "/assets/imagens/trabalhos/tabuleiro-producoes/prancha-portfolios.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "Books de captação",
+        texto:
+          "Os books dos projetos atendidos pela produtora partem de um mesmo modelo de organização, e cada capa mantém a identidade do próprio projeto. Na estante estão, entre outros, a Orquestra Jovem do Recôncavo, a ópera Amazônia Motirô, o Festival de Percussão 2 de Julho e o Olha o Cabelo Dela.",
+        itens: ["Books de captação"],
+        imagem: "/assets/imagens/trabalhos/tabuleiro-producoes/prancha-book.webp",
+      },
+      {
+        frente: "Digital",
+        nome: "Sites",
+        texto:
+          "O site institucional reúne artistas, serviços, cursos, projetos, a central de editais e a lojinha, e apresenta os números da produtora. Ao lado, outros sites que desenvolvi para projetos culturais.",
+        itens: ["Sites"],
+        imagem: "/assets/imagens/trabalhos/tabuleiro-producoes/prancha-site.webp",
+      },
+      {
+        frente: "Digital",
+        nome: "Curso online e livros",
+        texto:
+          "As peças do curso online Cultura On foram pensadas para computador, tablet e celular. Na mesma frente está a preparação de livros para os formatos digital e impresso, como Num Mundo de Silêncio, Surge a Música e Trombone Criativo.",
+        itens: ["Curso online", "Diagramação de livros"],
+        imagem: "/assets/imagens/trabalhos/tabuleiro-producoes/prancha-curso-livraria.webp",
+      },
+      {
+        frente: "Digital",
+        nome: "Redes sociais",
+        texto:
+          "Posts da Tabuleiro e dos projetos que ela produz: chamadas para editais, programação de festivais, concertos e datas comemorativas. A marca da produtora entra como assinatura, sem disputar espaço com a identidade de cada projeto.",
+        itens: ["Redes sociais"],
+        imagem: "/assets/imagens/trabalhos/tabuleiro-producoes/prancha-redes.webp",
+      },
+    ],
     capa: "/assets/imagens/trabalhos/tabuleiro-producoes/capa.webp",
     midias: ["/assets/imagens/trabalhos/tabuleiro-producoes/imagem.webp"],
   },

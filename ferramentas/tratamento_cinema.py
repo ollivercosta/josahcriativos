@@ -5,6 +5,8 @@ Perfil "noite" (padrão, para fundos escuros como o do ANMA): também marcação
 cor (sombras verde-petróleo, luzes quentes) e brilho no neon da identidade.
 Perfil "marca" (para identidades coloridas como a da Orquestra): sem mudar as
 cores da marca e sem brilho, só luz, contraste, vinheta e grão.
+Perfil "claro" (para fundos brancos ou de papel, como o da Tabuleiro): como o
+"marca", com vinheta bem leve, para o fundo não ficar cinza nos cantos.
 
 Uso com retângulos de sombra a apagar (frações x0,y0,x1,y1 da imagem):
 python3 ferramentas/tratamento_cinema.py original.png saida.webp 2400 noite 0.184,0.386,0.722,0.943
@@ -79,7 +81,8 @@ def tratar(entrada, saida, largura=None, perfil="noite", caixas=(), luz=(0.5, 0.
     cor_feixe = np.array([1.0, 0.86, 0.66], np.float32)
     if not noite: cor_feixe = np.array([1.0, 0.95, 0.88], np.float32)
     a = 1 - (1 - a) * (1 - feixe[..., None] * cor_feixe * 0.12)  # screen
-    a = a * (0.9 + 0.1 * feixe[..., None])                       # o resto um pouco mais escuro
+    fundo_claro = perfil == "claro"
+    a = a * ((0.97 if fundo_claro else 0.9) + (0.03 if fundo_claro else 0.1) * feixe[..., None])  # o resto um pouco mais escuro
 
     # 4. bloom: o que já é claro (neon, logos, camisas) ganha um halo
     orig = np.asarray(im).astype(np.float32) / 255.0
@@ -96,6 +99,7 @@ def tratar(entrada, saida, largura=None, perfil="noite", caixas=(), luz=(0.5, 0.
     # 5. vinheta oval
     dv = np.sqrt(((xx - w / 2) / (w * 0.62)) ** 2 + ((yy - h * 0.48) / (h * 0.62)) ** 2)
     vin = np.clip(1 - (dv - 0.6) * 0.7, 0.58, 1) ** 1.3
+    if fundo_claro: vin = np.clip(1 - (dv - 0.75) * 0.35, 0.86, 1)
     a = a * vin[..., None]
 
     # 6. granulado fino de filme, mais visível nos meios-tons
