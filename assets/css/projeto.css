@@ -411,7 +411,10 @@
 }
 
 /* a página inteira no lugar da imagem-chave (sites e portfólios longos) */
+/* a largura vem primeiro: em telas baixas a altura máxima corta a janela,
+   mas não a estreita (sem width, a proporção encolheria a largura junto) */
 .projeto__chave--rolagem .projeto__site-janela {
+  width: 100%;
   aspect-ratio: 16 / 9;
   max-height: 78svh;
 }
