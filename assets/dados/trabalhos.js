@@ -67,6 +67,45 @@ export const TRABALHOS = [
     regua:
       "Como o projeto ainda busca patrocínio, a régua de marcas ainda não existe. Por enquanto, o book fecha com a assinatura da Tabuleiro e o contato direto da produção.",
     pecas: { Apresentação: ["Book de captação"] },
+    chave: "/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-capa.webp",
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Abertura",
+        texto:
+          "A abertura apresenta a ideia central do projeto em uma frase: o cabelo deixa de ser estética e se afirma como linguagem cultural. A silhueta do cabelo crespo ocupa a página inteira e serve de moldura para o texto.",
+        itens: ["Book de captação"],
+        imagem: "/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-mensagem.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "A artista",
+        texto:
+          "A apresentação de Itana Rosa combina retrato de palco e texto biográfico. A faixa amarela e o grafismo de inspiração africana organizam a leitura, e os búzios e as folhas repetem os elementos da capa.",
+        imagem: "/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-artista.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "O que o projeto entrega",
+        texto:
+          "As páginas de impacto explicam o que o projeto entrega, como a valorização da cultura afro-brasileira e o intercâmbio entre Brasil e África. O cabelo, em preto e branco, divide a página entre o texto e as fotos da artista.",
+        imagem: "/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-entrega.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "Cotas e contrapartidas",
+        texto:
+          "A página de investimento abre a parte comercial do book, com os planos de cotas, as contrapartidas e o valor aprovado para captação em destaque, sem ruído visual ao redor.",
+        imagem: "/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-contrapartida.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "Convite ao patrocínio",
+        texto:
+          "O fechamento retoma a marca do projeto e faz um convite direto: a empresa interessada encontra, na mesma página, o contato da produção e a assinatura da Tabuleiro.",
+        imagem: "/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-final.webp",
+      },
+    ],
     capa: "/assets/imagens/trabalhos/olha-o-cabelo-dela/capa.webp",
     midias: ["/assets/imagens/trabalhos/olha-o-cabelo-dela/imagem.webp"],
   },
