@@ -259,6 +259,53 @@ export const TRABALHOS = [
     proposta: "",
     resultado: "",
     pecas: [],
+    chave: "/assets/imagens/trabalhos/forro-zevixe/pagina-capa.webp",
+    pranchas: [
+      {
+        frente: "Apresentação",
+        nome: "Apresentação em cordel",
+        texto:
+          "A banda se apresenta com um poema de minha autoria, Hoje tem forró, Zé! Vixe!, que conta a origem do projeto em versos. O chapéu de couro e a xilogravura dos músicos trazem a estética do sertão para a página.",
+        itens: ["Portfólio artístico"],
+        imagem: "/assets/imagens/trabalhos/forro-zevixe/pagina-poesia.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "Repertório",
+        texto:
+          "O repertório é organizado em sete blocos por ritmo, como baião, xote, xote reggae e rastapé, e mistura músicas autorais com clássicos de Dominguinhos, Alceu Valença e Petrúcio Amorim.",
+        imagem: "/assets/imagens/trabalhos/forro-zevixe/pagina-repertorio.webp",
+      },
+      {
+        frente: "Digital",
+        nome: "Música e clipping",
+        texto:
+          "Clipes, gravações e apresentações ao vivo reunidos em uma página, com acesso às plataformas de áudio. A música autoral O Amor Diz Sempre Sim aparece em diferentes registros.",
+        imagem: "/assets/imagens/trabalhos/forro-zevixe/pagina-musicas.webp",
+      },
+      {
+        frente: "Digital",
+        nome: "Divulgação dos shows",
+        texto:
+          "Cartazes e posts da temporada do projeto Forró Zevixe Convida, com convidados, datas e agenda do mês. A logomarca e as bandeirinhas dão unidade às peças.",
+        itens: ["Redes sociais"],
+        imagem: "/assets/imagens/trabalhos/forro-zevixe/pagina-redes.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "Mapa de palco",
+        texto:
+          "A disposição dos instrumentos e dos retornos, apresentada em uma maquete com a marca da banda ao fundo, orienta a produção técnica de quem contrata o show.",
+        imagem: "/assets/imagens/trabalhos/forro-zevixe/pagina-mapa.webp",
+      },
+      {
+        frente: "Apresentação",
+        nome: "Contatos",
+        texto:
+          "O fechamento leva às redes sociais, às plataformas de música e ao contato da assessoria da banda.",
+        imagem: "/assets/imagens/trabalhos/forro-zevixe/pagina-final.webp",
+      },
+    ],
     capa: "/assets/imagens/trabalhos/forro-zevixe/capa.webp",
     midias: ["/assets/imagens/trabalhos/forro-zevixe/imagem.webp"],
   },
