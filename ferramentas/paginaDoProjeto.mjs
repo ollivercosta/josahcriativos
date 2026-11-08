@@ -199,7 +199,8 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
     })
     .join("\n          ");
   const desafio = trabalho.desafio || trabalho.resumo || "";
-  const capa = capaDoTrabalho(trabalho);
+  // a imagem-chave: a prancha de capa, quando existe; senão, a capa da grade
+  const capa = trabalho.chave || capaDoTrabalho(trabalho);
   const mais = relacionados.length
     ? `<section class="projeto__mais" aria-labelledby="projeto-mais-titulo">
         <h2 class="projeto__rotulo" id="projeto-mais-titulo">Mais com a ${escapar(trabalho.cliente)}</h2>
