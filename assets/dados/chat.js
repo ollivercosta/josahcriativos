@@ -25,10 +25,10 @@ export const BASE_CHAT = {
     ops: ["servicos", "como_funciona", "orcamento", "prazos", "pagamento", "editais", "sobre", "falar"],
   },
   servicos: {
-    rot: "Quais serviços você faz?",
+    rot: "Quais são os serviços?",
     txt: [
-      "Trabalho em três frentes que se complementam:",
-      "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Digital: landing pages, formulários e campanhas para redes sociais.\n• Visual e mídia: material de palco, vídeos, teasers e spots.",
+      "O trabalho se organiza em três frentes que se complementam:",
+      "• Apresentação: identidade visual, book de captação e portfólio artístico.\n• Digital: landing pages, formulários e campanhas para redes sociais.\n• Visual e mídia: material de palco, vídeos e spots.",
       "Qual delas interessa ao seu projeto?",
     ],
     ops: ["sv_apresentacao", "sv_web", "sv_midia", "impressao"],
@@ -38,9 +38,9 @@ export const BASE_CHAT = {
   sv_apresentacao: {
     rot: "Marca, book e portfólio",
     txt: [
-      "Identidade visual: uma marca pensada para o uso real do evento. Funciona em cor e em preto e branco, em tamanho pequeno e grande, e convive com os logos de apoiadores e patrocinadores.",
-      "Book de captação: transformo o projeto aprovado em um documento que o parecerista consegue avaliar em poucos minutos. Para patrocinadores, a versão comercial destaca cotas e retorno de marca.",
-      "Portfólio artístico: organizo a trajetória de artistas, coletivos e produtoras na ordem em que os editais perguntam.",
+      "Identidade visual: define como o projeto é percebido por público, parceiros e financiadores. A logomarca garante reconhecimento imediato em todas as peças, inclusive ao lado das marcas apoiadoras.",
+      "Book de captação: reúne proposta, valores e critérios em um documento único, para que os pareceristas avaliem o projeto com rapidez e segurança.",
+      "Portfólio artístico: apresenta a trajetória e comprova a atuação de quem realiza o projeto.",
     ],
     ops: ["orcamento", "sv_web", "sv_midia"],
     kw: "marca logo logomarca logotipo identidade visual book captacao portfolio parecerista patrocinador patrocinio cotas trajetoria apresentacao",
@@ -49,9 +49,9 @@ export const BASE_CHAT = {
   sv_web: {
     rot: "Sites, formulários e redes",
     txt: [
-      "Landing page: uma página com programação, local e inscrição ou venda de ingressos logo no início, funcionando bem no celular. As atualizações durante o projeto estão incluídas.",
-      "Formulários: inscrição para oficinas, convocatórias, cadastro de artistas e credenciamento de imprensa, feitos no Google Forms e configurados na sua conta.",
-      "Redes sociais: um modelo único para toda a programação, para a equipe trocar nome, data e line-up sem refazer a arte.",
+      "Landing page: concentra divulgação, venda de ingressos e formulários de pesquisa em um só endereço.",
+      "Formulários: inscrição, convocatória e credenciamento de imprensa, configurados no Google Forms, na conta do projeto, pedindo apenas o que o regulamento exige.",
+      "Redes sociais: campanhas com identidade visual, logomarca e régua aplicadas de maneira uniforme em todas as peças.",
     ],
     ops: ["orcamento", "sv_apresentacao", "sv_midia"],
     kw: "site sites landing pagina web internet formulario formularios inscricao inscricoes credenciamento google forms redes sociais instagram campanha post posts ingresso ingressos",
@@ -60,18 +60,18 @@ export const BASE_CHAT = {
   sv_midia: {
     rot: "Palco, vídeo e spots",
     txt: [
-      "Material de palco e evento: saia de palco, banners, wind banners, credenciais, camisas, bags e papelaria, com a régua de apoio no padrão do financiador, em arquivo pronto para produção.",
-      "Vídeo: teasers de 30 a 60 segundos, pílulas de bastidores e registros curtos de apresentações.",
-      "Spots de 15 e 30 segundos para rádio e TV: você grava a chamada e eu edito com trilha e efeitos.",
+      "Material de palco e evento: saia de palco, banners, credenciais, camisas e papelaria na linguagem das peças digitais, com a régua de apoio no padrão do financiador, em arquivo pronto para produção.",
+      "Vídeo: apresentação do projeto nas redes sociais e registro da sua execução.",
+      "Spots para rádio e TV, para levar a divulgação além das redes sociais.",
     ],
     ops: ["orcamento", "impressao", "sv_apresentacao"],
     kw: "palco banner banners saia wind credencial credenciais camisa camisas bag bags papelaria video videos teaser teasers edicao spot spots radio tv audio regua",
     frases: ["material de palco", "wind banner"],
   },
   impressao: {
-    rot: "Você entrega impresso?",
+    rot: "Os impressos estão incluídos?",
     txt: [
-      "Todos os serviços são entregues em formato digital. Crio a arte em arquivo pronto para produção, mas não faço impressão nem produção gráfica e não contrato nem intermedio gráficas ou fornecedores.",
+      "Não. Todos os serviços são entregues em formato digital, em arquivo pronto para produção. Josah Oliveira não realiza impressão nem produção gráfica e não contrata nem intermedeia gráficas ou fornecedores.",
       "Essa contratação e os custos ficam com o cliente.",
     ],
     ops: ["servicos", "orcamento"],
@@ -89,7 +89,7 @@ export const BASE_CHAT = {
     frases: ["como funciona", "como contratar", "primeiro passo"],
   },
   revisoes: {
-    rot: "Quantas revisões tenho?",
+    rot: "Quantas revisões estão incluídas?",
     txt: ["Cada entrega tem até 3 rodadas de revisão, dentro do que foi combinado na proposta."],
     ops: ["prazos", "pagamento"],
     kw: "revisao revisoes ajuste ajustes alteracao alteracoes mudanca mudar refazer rodadas correcao",
@@ -97,8 +97,8 @@ export const BASE_CHAT = {
   prazos: {
     rot: "Qual é o prazo?",
     txt: [
-      "Depois do briefing você recebe cronograma e prioridades. Entrego por etapa, começando pelo essencial do seu prazo.",
-      "O prazo começa a contar quando o briefing está concluído, a entrada paga e todo o seu material recebido.",
+      "Depois do briefing, o cliente recebe o cronograma e as prioridades. As entregas acontecem por etapa, começando pelo que o prazo mais exige.",
+      "O prazo começa a contar quando o briefing está concluído, a entrada paga e todo o material do cliente recebido.",
     ],
     ops: ["urgencia", "pagamento", "revisoes"],
     kw: "prazo prazos tempo demora demorado dias semanas cronograma quando entrega leva",
@@ -107,8 +107,8 @@ export const BASE_CHAT = {
   urgencia: {
     rot: "Tenho urgência",
     txt: [
-      "Dá para atender conforme a minha agenda. Primeiro avalio em que etapa o projeto está e proponho um plano focado no essencial.",
-      "Se o prazo não permitir criar tudo de uma vez, priorizo o indispensável e finalizo o restante na sequência. Entregas priorizadas podem ter condições diferenciadas, informadas antes do aceite da proposta.",
+      "Sim, conforme a agenda. O primeiro passo é entender em que etapa o projeto está e avaliar a viabilidade.",
+      "Se o prazo não permitir criar tudo de uma vez, o indispensável é priorizado e o restante é finalizado na sequência. As entregas priorizadas podem ter condições diferenciadas, informadas antes do aceite da proposta.",
     ],
     ops: ["@wa", "prazos"],
     kw: "urgente urgencia rapido rapida pressa amanha corrido apertado correria aprovado",
@@ -117,9 +117,9 @@ export const BASE_CHAT = {
   pagamento: {
     rot: "Pagamento e nota fiscal",
     txt: [
-      "A parceria é formalizada com contrato de prestação de serviços. Em serviços únicos, vale a proposta aceita por escrito.",
-      "Como regra, o pagamento é 50% na entrada, que inicia o trabalho, e 50% na aprovação final. A proposta pode prever pagamento único, parcelamento ou saldo por entrega.",
-      "Emito Nota Fiscal de Serviços Avulsa a cada pagamento, válida para a prestação de contas.",
+      "A contratação é formalizada por contrato de prestação de serviços ou, em serviços únicos, por proposta aceita por escrito.",
+      "Como regra, o pagamento é de 50% na entrada, que inicia o trabalho, e 50% na aprovação final. A proposta pode prever outra condição.",
+      "A cada pagamento é emitida Nota Fiscal de Serviços Avulsa, para uso na prestação de contas.",
     ],
     ops: ["orcamento", "termos"],
     kw: "pagamento pagamentos pagar pago pix parcela parcelas parcelamento parcelar entrada contrato nota fiscal nf recibo formalizacao cnpj",
@@ -128,8 +128,8 @@ export const BASE_CHAT = {
   orcamento: {
     rot: "Quanto custa?",
     txt: [
-      "O valor depende das peças, do prazo e das exigências do edital, então não trabalho com tabela fixa.",
-      "Conte o seu projeto pelo WhatsApp e eu respondo com uma proposta por escrito, com escopo, prazo e valores.",
+      "O valor depende das peças, do prazo e das exigências do edital, por isso não há tabela fixa.",
+      "Pelo WhatsApp, informe o que o projeto precisa e o prazo disponível. O retorno é uma proposta por escrito, com escopo, prazo e valores.",
     ],
     ops: ["@wa_orcamento", "definir", "pagamento"],
     kw: "preco precos valor valores custa custo custos orcamento orcamentos quanto tabela cobra cobrar investimento",
@@ -138,18 +138,18 @@ export const BASE_CHAT = {
   editais: {
     rot: "Atende qualquer edital?",
     txt: [
-      "Sim. Atendo projetos contemplados em qualquer mecanismo de fomento, seja municipal, estadual ou federal.",
-      "Minha especialidade é adequar a identidade visual do projeto às regras do edital conquistado, aplicando as exigências técnicas e de marca informadas no briefing.",
+      "Sim. São atendidos projetos contemplados em qualquer mecanismo de fomento, seja municipal, estadual ou federal.",
+      "O foco é adequar a identidade visual do projeto às regras do edital conquistado, aplicando as exigências técnicas e de marca informadas no briefing.",
     ],
     ops: ["escrita", "definir", "orcamento"],
     kw: "edital editais lei leis incentivo rouanet pnab aldir blanc paulo gustavo fomento financiador financiamento municipal estadual federal chamada chamamento regras exigencias",
     frases: ["lei de incentivo", "lei rouanet", "aldir blanc", "paulo gustavo"],
   },
   escrita: {
-    rot: "Você escreve o projeto?",
+    rot: "A escrita do projeto está incluída?",
     txt: [
-      "Não escrevo o projeto, eu o visto. Atuo na direção de arte e no design estratégico: marca, páginas na web, campanhas e materiais de palco e evento, sempre em formato digital.",
-      "Para a elaboração e a gestão de projetos culturais, indico a Tabuleiro Produções, sem qualquer obrigação de contratação.",
+      "Não. Josah Oliveira atua na direção de arte e no design estratégico: marca, páginas na web, campanhas para redes sociais e materiais de palco e evento, sempre em formato digital.",
+      "Para elaboração e gestão de projetos culturais, a indicação é a Tabuleiro Produções, sem qualquer obrigação de contratação.",
     ],
     ops: ["editais", "servicos"],
     kw: "escrever escreve escrita elaboracao elaborar redacao redigir texto textos gestao inscrever",
@@ -158,8 +158,8 @@ export const BASE_CHAT = {
   definir: {
     rot: "Não sei quais artes preciso",
     txt: [
-      "Não tem problema. Você não precisa pedir uma arte específica: analiso o seu evento e monto o conjunto de peças ideal para ele.",
-      "Entram no escopo apenas as peças que você aceitar na proposta.",
+      "O briefing serve para isso. A partir dele, Josah Oliveira analisa o evento e sugere o conjunto de peças adequado ao projeto.",
+      "Entram no escopo apenas as peças aceitas pelo cliente na proposta.",
     ],
     ops: ["orcamento", "servicos"],
     kw: "definir ajuda ajudar sugerir sugestao pecas artes quais ecossistema duvida indicar",
@@ -185,14 +185,14 @@ export const BASE_CHAT = {
   termos: {
     rot: "Termos e reembolso",
     txt: [
-      "Termos de Uso, Política de Privacidade e Política de Reembolso estão no rodapé do site. Posso abrir para você.",
+      "Termos de Uso, Política de Privacidade e Política de Reembolso estão no rodapé do site. O botão abaixo abre os documentos.",
     ],
     ops: ["@termos", "pagamento"],
     kw: "termos termo politica privacidade reembolso reembolsar cancelamento cancelar devolucao desistir lgpd dados",
   },
   falar: {
     rot: "Falar com Josah",
-    txt: ["Pode falar direto comigo:\nWhatsApp (71) 99144-8218\nE-mail josahcriativos@gmail.com"],
+    txt: ["Os canais diretos com Josah Oliveira são:\nWhatsApp (71) 99144-8218\nE-mail josahcriativos@gmail.com"],
     ops: ["@wa", "@email"],
     kw: "falar contato contatos whatsapp zap wpp telefone celular email mail conversar atendimento humano pessoa atendente ligar",
     frases: ["falar com", "falar direto"],
