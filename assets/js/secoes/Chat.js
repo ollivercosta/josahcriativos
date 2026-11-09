@@ -3,7 +3,7 @@ import { icone } from "../nucleo/Icones.js";
 
 const WHATSAPP = "5571991448218";
 const MENSAGEM_PADRAO = "Olá, Josah! Vim pelo site de Josah Oliveira e gostaria de falar sobre um projeto.";
-const GMAIL = "https://mail.google.com/mail/?view=cm&fs=1&to=josahcriativos%40gmail.com";
+const GMAIL = "https://mail.google.com/mail/?view=cm&fs=1&to=contato%40josahcriativos.com.br";
 const CHAVE_VISTO = "jc-chat-visto";
 
 const PARADAS = (
