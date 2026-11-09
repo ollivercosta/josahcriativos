@@ -3,6 +3,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "josahcriativos.vercel.app"
+        }
+      ],
+      "destination": "https://josahcriativos.com.br/:path*",
+      "permanent": true
+    },
+    {
       "source": "/como-funciona",
       "destination": "/#servicos",
       "permanent": true
@@ -30,8 +41,15 @@
   "buildCommand": "npm run build",
   "outputDirectory": "publico",
   "images": {
-    "sizes": [640, 1080, 1920],
-    "formats": ["image/avif", "image/webp"],
+    "sizes": [
+      640,
+      1080,
+      1920
+    ],
+    "formats": [
+      "image/avif",
+      "image/webp"
+    ],
     "minimumCacheTTL": 2678400,
     "remotePatterns": [
       {
