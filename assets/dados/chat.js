@@ -192,7 +192,7 @@ export const BASE_CHAT = {
   },
   falar: {
     rot: "Falar com Josah",
-    txt: ["Os canais diretos com Josah Oliveira são:\nWhatsApp (71) 99144-8218\nE-mail josahcriativos@gmail.com"],
+    txt: ["Os canais diretos com Josah Oliveira são:\nWhatsApp (71) 99144-8218\nE-mail contato@josahcriativos.com.br"],
     ops: ["@wa", "@email"],
     kw: "falar contato contatos whatsapp zap wpp telefone celular email mail conversar atendimento humano pessoa atendente ligar",
     frases: ["falar com", "falar direto"],
