@@ -54,6 +54,11 @@ export class RolagemSuave {
    * refeito, já com as medidas certas e o mesmo desconto do cabeçalho.
    */
   corrigirEnderecoInicial() {
+    /* "#topo" não aparece no endereço: o início é só o domínio */
+    if (window.location.hash === "#topo") {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      return;
+    }
     const alvo = this.#alvoDoEndereco(window.location.href);
     if (!alvo) return;
     /* o pulo do navegador acontece até o fim do carregamento: a correção vem depois dele */
@@ -62,15 +67,29 @@ export class RolagemSuave {
     else window.addEventListener("load", corrigir, { once: true });
   }
 
+  /** O endereço aponta para esta mesma página? */
+  #mesmaPagina(destino) {
+    return (
+      destino.origin === window.location.origin &&
+      destino.pathname.replace(/\.html$/, "").replace(/\/$/, "") ===
+        window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "")
+    );
+  }
+
   /** O elemento de destino de um endereço desta mesma página, ou null. */
   #alvoDoEndereco(endereco) {
     const destino = new URL(endereco, window.location.href);
-    const mesmaPagina =
-      destino.origin === window.location.origin &&
-      destino.pathname.replace(/\.html$/, "").replace(/\/$/, "") ===
-        window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
-    if (!mesmaPagina || destino.hash.length < 2) return null;
+    if (!this.#mesmaPagina(destino) || destino.hash.length < 2) return null;
     return document.getElementById(decodeURIComponent(destino.hash.slice(1)));
+  }
+
+  /** Volta ao início da página, sem animação longa presa ao cabeçalho. */
+  rolarAoTopo() {
+    if (this.#lenis) {
+      this.#lenis.scrollTo(0, { duration: 1.6, force: true });
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: Ambiente.reduzMovimento ? "auto" : "smooth" });
   }
 
   /** Links para esta mesma página ("#faq" ou "/#faq") rolam com o mesmo desconto do cabeçalho. */
@@ -78,6 +97,15 @@ export class RolagemSuave {
     document.addEventListener("click", (evento) => {
       const link = evento.target.closest("a[href]");
       if (!link || link.target === "_blank") return;
+      /* o nome no topo leva ao início da página com o endereço limpo, sem "#topo" */
+      const destino = new URL(link.href, window.location.href);
+      if (this.#mesmaPagina(destino) && (destino.hash === "" || destino.hash === "#topo")) {
+        evento.preventDefault();
+        const limpo = window.location.pathname + window.location.search;
+        if (window.location.hash) window.history.pushState(null, "", limpo);
+        this.rolarAoTopo();
+        return;
+      }
       const alvo = this.#alvoDoEndereco(link.href);
       if (!alvo) return;
       evento.preventDefault();
