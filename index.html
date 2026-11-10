@@ -540,7 +540,7 @@
         </div>
         <div class="depoimentos__grade">
           <ul class="depoimentos__nomes" role="tablist" aria-label="Depoimentos">
-            <li class="depoimentos__nome-item">
+            <li class="depoimentos__nome-item" role="presentation">
               <button
                 type="button"
                 class="depoimentos__aba"
@@ -555,7 +555,7 @@
                 </span>
               </button>
             </li>
-            <li class="depoimentos__nome-item">
+            <li class="depoimentos__nome-item" role="presentation">
               <button
                 type="button"
                 class="depoimentos__aba"
@@ -803,9 +803,12 @@
         <span class="rodape__direitos">
           &copy; <span class="rodape__ano">2026</span> Josah Oliveira. Todos os direitos reservados.
         </span>
-        <button type="button" class="rodape__termos" data-abrir="termos">
+        <span class="rodape__links">
+          <button type="button" class="rodape__termos" data-abrir="termos" data-aba="3">Acessibilidade</button>
+          <button type="button" class="rodape__termos" data-abrir="termos">
           Termos de Uso, Política de Privacidade e Política de Reembolso
         </button>
+        </span>
       </div>
       <span class="rodape__nome" aria-hidden="true">Josah <em class="rodape__nome-destaque">Oliveira</em></span>
     </footer>
@@ -896,7 +899,7 @@
             <h2 class="termos__titulo" id="termos-titulo">
               Central de Privacidade <span class="termos__titulo-destaque">&amp;</span> Termos
             </h2>
-            <p class="termos__subtitulo">Regras de uso, privacidade, contratação e reembolso</p>
+            <p class="termos__subtitulo">Regras de uso, privacidade, contratação, reembolso e acessibilidade</p>
           </div>
           <div class="termos__abas" role="tablist" aria-label="Documentos" aria-orientation="vertical">
             <button
@@ -956,6 +959,27 @@
                 />
               </svg>
               <span class="termos__aba-nome">Política de Reembolso</span>
+              <svg class="termos__aba-seta" viewBox="0 0 256 256" aria-hidden="true" focusable="false">
+                <path
+                  d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                />
+              </svg>
+            </button>
+            <button
+              class="termos__aba"
+              type="button"
+              role="tab"
+              id="termos-aba-3"
+              aria-controls="termos-documento-3"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <svg class="termos__aba-icone" viewBox="0 0 256 256" aria-hidden="true" focusable="false">
+                <path
+                  d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM116,76a12,12,0,1,1,12,12A12,12,0,0,1,116,76Zm63.6,24.38-35.6,8.9V136l20.79,41.58a8,8,0,1,1-14.31,7.16L128,149.89l-22.48,44.85a8,8,0,1,1-14.31-7.16L112,136V109.28l-35.6-8.9a8,8,0,0,1,3.88-15.52l46.2,11.55a1.37,1.37,0,0,0,.24,0l1.28.32,1.28-.32a1.37,1.37,0,0,0,.24,0l46.2-11.55a8,8,0,1,1,3.88,15.52Z"
+                />
+              </svg>
+              <span class="termos__aba-nome">Acessibilidade</span>
               <svg class="termos__aba-seta" viewBox="0 0 256 256" aria-hidden="true" focusable="false">
                 <path
                   d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
@@ -1474,6 +1498,64 @@
               <strong class="termos__secao-titulo">10. Contato</strong>
               <p class="termos__paragrafo">
                 Dúvidas sobre pagamento, entrega ou cancelamento: josahcriativos@gmail.com.
+              </p>
+            </div>
+          </section>
+          <section
+            class="termos__documento"
+            id="termos-documento-3"
+            role="tabpanel"
+            aria-labelledby="termos-aba-3"
+            hidden
+          >
+            <header class="termos__documento-cabeca">
+              <h3 class="termos__documento-titulo">Declaração de Acessibilidade</h3>
+            </header>
+            <div class="termos__texto">
+              <span class="termos__data">Última atualização: 10 de novembro de 2026.</span>
+              <p class="termos__paragrafo">
+                Defendo que um projeto cultural só chega longe quando é compreendido por quem avalia, por quem apoia e
+                por quem participa. Isso vale também para este site. Esta declaração informa o que ele oferece, como foi
+                verificado, o que ainda não está resolvido e como relatar um problema.
+              </p>
+
+              <strong class="termos__secao-titulo">1. Referência adotada</strong>
+              <p class="termos__paragrafo">
+                O site toma como referência as Diretrizes de Acessibilidade para Conteúdo Web (WCAG) 2.2, nível AA, do
+                W3C, e os princípios da Lei Brasileira de Inclusão da Pessoa com Deficiência (Lei 13.146/2015).
+              </p>
+
+              <strong class="termos__secao-titulo">2. O que o site oferece</strong>
+              <p class="termos__paragrafo">
+                Link "Pular para o conteúdo" no início de cada página. Navegação por teclado, com indicação visível do
+                elemento em foco. Títulos com texto legível por leitores de tela, mesmo quando o desenho os divide em
+                partes. Texto alternativo nas imagens de conteúdo. Respeito à configuração do sistema que pede menos
+                movimento: com ela ativada, animações e transições são desligadas e o manifesto aparece inteiro, sem o
+                efeito de leitura. Tradução para Libras pelo VLibras, do governo federal.
+              </p>
+
+              <strong class="termos__secao-titulo">3. Como foi verificado</strong>
+              <p class="termos__paragrafo">
+                Em 10 de novembro de 2026, a página inicial, a página Sobre e as páginas de trabalho passaram por
+                verificação automática com a ferramenta axe-core, pelos critérios da WCAG 2.2 nível AA. Os problemas
+                apontados foram corrigidos. Restou um alerta de contraste na lista de serviços do topo, conferido
+                manualmente: a ferramenta não consegue ler o fundo branco por causa da perspectiva do desenho. Verificação automática não cobre todos os critérios, e por isso este
+                documento também lista limitações conhecidas.
+              </p>
+
+              <strong class="termos__secao-titulo">4. Limitações conhecidas</strong>
+              <p class="termos__paragrafo">
+                As peças do portfólio, como books, cartazes e artes para redes, aparecem como imagens. O texto escrito
+                dentro delas não é lido por leitores de tela; o texto alternativo informa o projeto e a peça, e a
+                descrição do trabalho está no texto da página. Vídeos e imagens hospedados em serviços externos seguem
+                os recursos de acessibilidade dessas plataformas.
+              </p>
+
+              <strong class="termos__secao-titulo">5. Como relatar um problema</strong>
+              <p class="termos__paragrafo">
+                Se alguma parte do site não funcionar para você, escreva para josahcriativos@gmail.com ou chame pelo
+                WhatsApp informando a página e o que aconteceu. Se precisar de algum conteúdo em outro formato, peça pelos
+                mesmos canais.
               </p>
             </div>
           </section>
