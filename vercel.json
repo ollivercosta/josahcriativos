@@ -17,6 +17,11 @@
       "source": "/como-funciona",
       "destination": "/#servicos",
       "permanent": true
+    },
+    {
+      "source": "/trabalhos/festival-de-roteiro",
+      "destination": "/trabalhos/fera",
+      "permanent": true
     }
   ],
   "headers": [
