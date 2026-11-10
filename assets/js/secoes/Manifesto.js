@@ -13,6 +13,11 @@ export class Manifesto {
     this.palavras = [];
     this.lidas = -1;
     this.#dividir();
+    // com "reduzir movimento" ativado, a frase aparece inteira, sem o efeito de leitura
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      this.palavras.forEach((palavra) => palavra.classList.add("manifesto__palavra--lida"));
+      return;
+    }
     ciclo.inscrever(() => this.#aoRolar());
   }
 
