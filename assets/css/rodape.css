@@ -22,6 +22,12 @@
   color: var(--cor-tinta-suave);
 }
 
+.rodape__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+}
+
 .rodape__termos {
   padding: 0;
   border: 0;
@@ -32,6 +38,7 @@
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-align: left;
   cursor: pointer;
   transition: color 0.4s ease;
 }

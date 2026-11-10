@@ -1,7 +1,7 @@
 import { Ambiente } from "../nucleo/Ambiente.js";
 
 /**
- * Termos (Termos de Uso, Política de Privacidade, Política de Reembolso)
+ * Termos (Termos de Uso, Política de Privacidade, Política de Reembolso, Acessibilidade)
  * Abas por documento, índice gerado a partir dos títulos de cada seção e
  * marcação da seção que está sendo lida.
  */
@@ -29,8 +29,17 @@ export class Termos {
     gestor.registrar("termos", raiz, {
       classeAberta: "termos--aberto",
       foco: () => raiz.querySelector(".termos__fechar"),
-      aoAbrir: () => this.selecionar(0),
+      aoAbrir: () => this.selecionar(this.abaPedida ?? 0),
     });
+    // um gatilho com data-aba abre a central já no documento pedido (ex.: Acessibilidade no rodapé)
+    document.addEventListener(
+      "click",
+      (evento) => {
+        const gatilho = evento.target.closest('[data-abrir="termos"]');
+        if (gatilho) this.abaPedida = Number(gatilho.getAttribute("data-aba") ?? 0);
+      },
+      true,
+    );
     this.selecionar(0);
   }
 
