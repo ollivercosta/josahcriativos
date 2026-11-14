@@ -1,0 +1,888 @@
+---
+import Base from "../layouts/Base.astro";
+import { trabalhos, legenda } from "../dados/utilidades.js";
+
+const destaques = trabalhos.filter((t) => t.destaque);
+const alturas = ["alta", "media", "baixa", "media", "alta", "baixa", "media"];
+
+const servicos = ["Identidade visual", "Book de captação", "Landing pages", "Redes sociais", "Material de palco", "Vídeo e spots"];
+
+const frentes = [
+  {
+    nome: "Apresentação",
+    texto: "Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.",
+    para: ["Bancas e pareceristas", "Patrocinadores", "Proponentes"],
+    itens: [
+      {
+        nome: "Identidade visual e logomarca",
+        texto:
+          "A identidade visual define como o projeto é percebido por público, parceiros e financiadores. A logomarca garante reconhecimento imediato em todas as peças, inclusive ao lado das marcas apoiadoras.",
+      },
+      {
+        nome: "Book de captação",
+        texto:
+          "O book de captação reúne proposta, valores e critérios em um documento único. A informação organizada permite que os pareceristas avaliem o projeto com rapidez e segurança.",
+      },
+      {
+        nome: "Portfólio artístico",
+        texto:
+          "O portfólio apresenta a trajetória e comprova a atuação de quem realiza o projeto. O histórico se transforma em credibilidade para a nova proposta.",
+      },
+    ],
+  },
+  {
+    nome: "Digital",
+    texto: "Comunicação online, fluxo de inscrições e relacionamento com o público do evento.",
+    para: ["Público do evento", "Inscritos e participantes", "Imprensa"],
+    itens: [
+      {
+        nome: "Landing pages culturais",
+        texto:
+          "A landing page concentra divulgação, venda de ingressos e formulários de pesquisa em um só endereço. O público encontra tudo no mesmo lugar, venha de qual canal vier.",
+      },
+      {
+        nome: "Formulários e credenciamento",
+        texto:
+          "Os formulários de inscrição, convocatória e credenciamento de imprensa são configurados no Google Forms, na conta do projeto. Eles solicitam apenas o que o regulamento exige, o que agiliza o preenchimento e a seleção.",
+      },
+      {
+        nome: "Campanhas para redes sociais",
+        texto:
+          "As campanhas aplicam identidade visual, logomarca e régua de maneira uniforme em todas as peças. A consistência gera reconhecimento a cada publicação e assegura a presença das marcas parceiras.",
+      },
+    ],
+  },
+  {
+    nome: "Visual e mídia",
+    texto: "Artes digitais para espaços de eventos, palco e canais de difusão do projeto.",
+    para: ["Palco e espaço do evento", "Telas e redes", "Rádio e TV"],
+    itens: [
+      {
+        nome: "Artes digitais e material de palco",
+        texto:
+          "Saia de palco, banners, credenciais, camisas e papelaria seguem a linguagem das peças digitais. No evento, esse material assegura a exposição correta das marcas, com a régua de apoio no padrão do financiador.",
+      },
+      {
+        nome: "Edição de vídeo",
+        texto:
+          "Os vídeos apresentam o projeto nas redes sociais e registram a sua realização. Eles funcionam ao mesmo tempo como divulgação e como comprovação da execução.",
+      },
+      {
+        nome: "Spots para rádio e TV",
+        texto: "Os spots levam o projeto ao rádio e à TV. Com eles, a divulgação alcança um público além das redes sociais.",
+      },
+    ],
+  },
+];
+
+const etapas = [
+  {
+    nome: "Briefing",
+    texto:
+      "Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a lista de peças e o cronograma.",
+  },
+  { nome: "Proposta e orçamento", texto: "Escopo, prazo e valores por escrito, aceitos antes de qualquer produção." },
+  {
+    nome: "Produção",
+    texto:
+      "Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do material recebido.",
+  },
+  { nome: "Revisão", texto: "Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta." },
+  { nome: "Aprovação", texto: "O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta." },
+  {
+    nome: "Entrega",
+    texto: "Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.",
+  },
+];
+
+const depoimentos = [
+  {
+    nome: "Flávio Baianino",
+    cargo: "Presidente da ONG ACUBA",
+    texto:
+      "Josah é um profissional diferenciado, com uma contribuição muito importante para a trajetória da ONG ACUBA. Ao longo dessa parceria, fortaleceu nossos projetos com seu talento na música, no design, na comunicação digital e nas ações sociais, também contribuindo como secretário de comunicação. Só tenho a agradecer por essa conexão e por ter esse grande parceiro ao nosso lado, somando forças e fortalecendo a cultura e a transformação social.",
+    dados: { Projeto: "ONG ACUBA", Serviço: "Design e comunicação digital", Fomento: "Lei Paulo Gustavo" },
+  },
+  {
+    nome: "Vinicius Freitas",
+    cargo: "Maestro da Orquestra Jovem do Recôncavo",
+    texto:
+      "Trabalhar com o designer Josah está sendo uma experiência fantástica, sua percepção e capacidade de colocar em prática nossas ideias é algo surreal. Particularmente, eu o conhecia desenvolvendo trabalhos musicais excelentes e não imaginava que ele poderia impulsionar nossa comunicação visual. Agradeço pela parceria e dedicação, vida longa ao Josah!",
+    dados: { Projeto: "Orquestra Jovem do Recôncavo", Serviço: "Identidade visual e peças do projeto", Fomento: "Fazcultura" },
+  },
+];
+
+const perguntas = [
+  {
+    p: "A elaboração escrita do projeto está incluída?",
+    r: "Não. Josah Oliveira atua na direção de arte e no design estratégico: cria as artes de que o projeto precisa para se apresentar, como marca, páginas na web, campanhas para redes sociais e materiais de palco e evento, sempre em formato digital. Para elaboração e gestão de projetos culturais, a indicação é a Tabuleiro Produções, sem qualquer obrigação de contratação.",
+  },
+  {
+    p: "E quando não se sabe quais artes o projeto precisa?",
+    r: "O briefing serve para isso. A partir dele, Josah Oliveira analisa o evento e sugere o conjunto de peças adequado ao projeto. Entram no escopo apenas as peças aceitas pelo cliente na proposta.",
+  },
+  {
+    p: "Projetos com urgência são atendidos?",
+    r: "Sim, conforme a agenda. O primeiro passo é entender em que etapa o projeto está e avaliar a viabilidade. Se o prazo não permitir criar tudo de uma vez, o indispensável é priorizado e o restante é finalizado na sequência. As entregas priorizadas podem ter condições diferenciadas, informadas antes do aceite da proposta.",
+  },
+  {
+    p: "Existe formalização contratual e emissão de Nota Fiscal?",
+    r: "Sim. A contratação é formalizada por contrato de prestação de serviços ou, em serviços únicos, por proposta aceita por escrito. A cada pagamento é emitida Nota Fiscal de Serviços Avulsa, para uso na prestação de contas. Como regra, o pagamento é de 50% na entrada, que inicia o trabalho, e 50% na aprovação final. A proposta pode prever outra condição.",
+  },
+  {
+    p: "Os materiais impressos estão incluídos?",
+    r: "Não. Todos os serviços são prestados e entregues de forma digital, em arquivo pronto para produção. Josah Oliveira não realiza impressão nem produção gráfica e não contrata nem intermedeia gráficas ou fornecedores. Essa contratação e os custos ficam a cargo do cliente.",
+  },
+];
+---
+
+<Base>
+  <!-- Abertura -->
+  <section class="abertura">
+    <div class="caixa abertura__topo">
+      <p class="rotulo abertura__chamada" data-entra>Comunicação para projetos culturais</p>
+      <h1 class="abertura__titulo t-gg" data-palavras>Design <span class="abertura__e">e</span> cultura</h1>
+      <div class="abertura__apoio grade">
+        <p class="abertura__texto texto-g" data-entra style="--ordem:5">
+          Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
+        </p>
+        <ul class="abertura__servicos texto-p" data-entra style="--ordem:7" aria-label="Serviços">
+          {servicos.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="faixa" data-faixa data-entra style="--ordem:9">
+      <ul class="faixa__trilho" data-faixa-trilho>
+        {
+          [...trabalhos, ...trabalhos].map((t, i) => (
+            <li class={`faixa__item faixa__item--${alturas[i % alturas.length]}`} aria-hidden={i >= trabalhos.length ? "true" : undefined}>
+              <a href={t.href} data-cursor="Ver" tabindex={i >= trabalhos.length ? -1 : undefined} draggable="false">
+                <span class="quadro faixa__capa">
+                  <img src={t.capa} alt="" width="1200" height="900" loading={i < 6 ? "eager" : "lazy"} draggable="false" />
+                </span>
+                <span class="faixa__legenda">
+                  <span class="faixa__nome">{t.nome}</span>
+                  <span class="suave">{t.tipo}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Trabalhos -->
+  <section class="secao" id="trabalhos">
+    <div class="caixa">
+      <header class="grade cabeca">
+        <p class="rotulo cabeca__rotulo" data-entra>Portfólio</p>
+        <h2 class="t-g cabeca__titulo" data-palavras>Alguns trabalhos.</h2>
+        <p class="cabeca__texto suave" data-entra>
+          Festivais, orquestras, espetáculos e projetos de formação. Uma seleção de projetos recentes, do desafio à solução visual. Conheça
+          cada projeto!
+        </p>
+      </header>
+
+      <div class="selecao">
+        {
+          destaques.map((t, i) => (
+            <article class={`selecao__item selecao__item--${["a", "b", "c"][i % 3]} grade`}>
+              <a class="selecao__imagem quadro quadro--deriva" href={t.href} data-cursor="Ver" data-entra transition:name={`capa-${t.slug}`}>
+                <img src={t.chave || t.capa} alt={`${t.nome}, ${t.tipo}`} loading="lazy" />
+              </a>
+              <div class="selecao__texto" data-entra style="--ordem:1">
+                <p class="rotulo suave">{legenda(t)}</p>
+                <h3 class="t-m">
+                  <a href={t.href}>{t.nome}</a>
+                </h3>
+                <p class="suave">{t.resumo}</p>
+                <a class="selecao__elo" href={t.href}>
+                  <span class="elo elo--posto">Ver projeto</span> <span class="seta" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="todos" data-entra>
+        <a class="t-m todos__elo" href="/trabalhos" data-ima>
+          Trabalhos <span class="seta" aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="manifesto secao fio">
+    <div class="caixa grade">
+      <p class="manifesto__frase t-g" data-palavras data-observa>
+        Um projeto cultural só chega longe quando é compreendido <span class="grifo">por quem avalia,</span>{" "}<span class="grifo">por quem apoia</span> e <span class="grifo">por quem participa.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="secao fio" id="como-funciona">
+    <div class="caixa">
+      <header class="grade cabeca">
+        <p class="rotulo cabeca__rotulo" data-entra>Como funciona</p>
+        <h2 class="t-g cabeca__titulo" data-palavras>Como posso ajudar seu projeto</h2>
+        <p class="cabeca__texto suave" data-entra>
+          Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho:
+          régua de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a prestação de
+          contas.
+        </p>
+      </header>
+
+      <div class="frentes">
+        {
+          frentes.map((f, i) => (
+            <div class={`frente ${i === 0 ? "aberta" : ""}`} data-frente data-entra style={`--ordem:${i}`}>
+              <h3>
+                <button class="frente__botao grade" aria-expanded={i === 0 ? "true" : "false"}>
+                  <span class="frente__nome t-g">{f.nome}</span>
+                  <span class="frente__resumo suave">{f.texto}</span>
+                  <span class="frente__sinal" aria-hidden="true" />
+                </button>
+              </h3>
+              <div class="frente__painel">
+                <div class="frente__dentro">
+                  <div class="frente__conteudo grade">
+                    <div class="frente__para">
+                      <p class="rotulo suave">Pensado para</p>
+                      <ul>
+                        {f.para.map((p) => <li>{p}</li>)}
+                      </ul>
+                    </div>
+                    {f.itens.map((s) => (
+                      <div class="frente__servico">
+                        <h4 class="t-p">{s.nome}</h4>
+                        <p class="texto-p suave">{s.texto}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Processo -->
+  <section class="secao secao--colada">
+    <div class="caixa">
+      <header class="grade cabeca">
+        <h2 class="t-g cabeca__titulo" data-palavras>Do primeiro contato à entrega</h2>
+        <p class="cabeca__texto suave" data-entra>Cada etapa é combinada antes de ser executada.</p>
+      </header>
+
+      <ol class="percurso" data-progresso="x">
+        {
+          etapas.map((e, i) => (
+            <li class="percurso__etapa" data-passo data-entra style={`--ordem:${i}`}>
+              <span class="percurso__marco" aria-hidden="true" />
+              <h3 class="t-p">{e.nome}</h3>
+              <p class="texto-p suave">{e.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="secao fio">
+    <div class="caixa">
+      <header class="grade cabeca">
+        <h2 class="t-g cabeca__titulo" data-palavras>Quem já trabalhou comigo</h2>
+      </header>
+      <div class="vozes grade">
+        {
+          depoimentos.map((d, i) => (
+            <figure class="voz" data-entra style={`--ordem:${i * 2}`}>
+              <blockquote class="texto-g">
+                <p>{d.texto}</p>
+              </blockquote>
+              <figcaption>
+                <p class="t-p">{d.nome}</p>
+                <p class="suave">{d.cargo}</p>
+                <dl class="voz__dados texto-p">
+                  {Object.entries(d.dados).map(([k, v]) => (
+                    <div>
+                      <dt class="rotulo suave">{k}</dt>
+                      <dd>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="secao fio" id="faq">
+    <div class="caixa grade">
+      <header class="faq__cabeca">
+        <h2 class="t-g" data-palavras>Antes de começar.</h2>
+        <p class="suave" data-entra>
+          Respostas diretas sobre contratação e entrega. Em caso de dúvida, valem a proposta e os <a class="elo elo--posto" href="#">Termos de Uso</a>.
+        </p>
+      </header>
+      <div class="faq__lista">
+        {
+          perguntas.map((q, i) => (
+            <div class="pergunta" data-pergunta data-entra style={`--ordem:${i}`}>
+              <h3>
+                <button class="pergunta__botao" aria-expanded="false">
+                  <span class="t-p">{q.p}</span>
+                  <span class="frente__sinal" aria-hidden="true" />
+                </button>
+              </h3>
+              <div class="pergunta__painel">
+                <div class="pergunta__dentro">
+                  <p class="suave leitura">{q.r}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  /* Abertura ------------------------------------------------------------- */
+  .abertura {
+    min-height: calc(100svh - var(--cabecalho));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--e-6);
+    padding-top: var(--e-5);
+    padding-bottom: var(--e-5);
+    overflow: clip;
+  }
+  .abertura__chamada {
+    color: var(--tinta-media);
+    display: flex;
+    align-items: center;
+    gap: var(--e-2);
+  }
+  .abertura__chamada::before {
+    content: "";
+    width: var(--e-1);
+    height: var(--e-1);
+    border-radius: 50%;
+    background: var(--vermelho);
+  }
+  .abertura__titulo {
+    margin-top: var(--e-3);
+    margin-left: -0.04em;
+    text-wrap: nowrap;
+  }
+  .abertura__e {
+    color: var(--vermelho);
+  }
+  .abertura__apoio {
+    margin-top: var(--e-5);
+    align-items: end;
+  }
+  .abertura__texto {
+    grid-column: 1 / span 5;
+  }
+  .abertura__servicos {
+    grid-column: 8 / span 5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--calha);
+    color: var(--tinta-media);
+  }
+  .abertura__servicos li {
+    padding-block: var(--e-1);
+    border-top: 1px solid var(--linha);
+  }
+  @media (max-width: 900px) {
+    .abertura__titulo {
+      text-wrap: balance;
+    }
+    .abertura__texto,
+    .abertura__servicos {
+      grid-column: 1 / -1;
+    }
+    .abertura__servicos {
+      margin-top: var(--e-4);
+    }
+  }
+
+  /* Faixa de capas ------------------------------------------------------- */
+  .faixa {
+    --altura: clamp(150px, 25svh, 280px);
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+  }
+  .faixa:active {
+    cursor: grabbing;
+  }
+  .faixa__trilho {
+    display: flex;
+    align-items: flex-end;
+    width: max-content;
+    will-change: transform;
+  }
+  .faixa__item {
+    flex: none;
+    padding-right: var(--calha);
+    transition: opacity var(--medio) var(--curva);
+  }
+  .faixa__item--alta .faixa__capa {
+    height: var(--altura);
+  }
+  .faixa__item--media .faixa__capa {
+    height: calc(var(--altura) * 0.76);
+  }
+  .faixa__item--baixa .faixa__capa {
+    height: calc(var(--altura) * 0.56);
+  }
+  .faixa__capa {
+    aspect-ratio: 4 / 3;
+    transition: transform var(--medio) var(--curva);
+  }
+  .faixa__legenda {
+    display: flex;
+    gap: var(--e-1);
+    margin-top: var(--e-1);
+    font-size: var(--texto-pp);
+    white-space: nowrap;
+  }
+  .faixa__nome {
+    font-weight: 600;
+  }
+  @media (hover: hover) {
+    .faixa:hover .faixa__item {
+      opacity: 0.4;
+    }
+    .faixa:hover .faixa__item:hover {
+      opacity: 1;
+    }
+    .faixa__item:hover .faixa__capa {
+      transform: translateY(calc(var(--e-1) * -1));
+    }
+    .faixa__item:hover .faixa__capa img {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Cabeça de seção -------------------------------------------------------- */
+  .cabeca {
+    row-gap: var(--e-3);
+    align-items: end;
+    margin-bottom: var(--e-7);
+  }
+  .cabeca__rotulo {
+    grid-column: 1 / -1;
+    color: var(--tinta-media);
+  }
+  .cabeca__titulo {
+    grid-column: 1 / span 7;
+  }
+  .cabeca__texto {
+    grid-column: 9 / span 4;
+  }
+  @media (max-width: 900px) {
+    .cabeca {
+      margin-bottom: var(--e-6);
+    }
+    .cabeca__titulo,
+    .cabeca__texto {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Seleção de trabalhos --------------------------------------------------- */
+  .selecao {
+    display: grid;
+    row-gap: var(--pausa);
+  }
+  .selecao__item {
+    align-items: end;
+    row-gap: var(--e-3);
+  }
+  .selecao__imagem {
+    aspect-ratio: 16 / 9;
+  }
+  .selecao__texto {
+    display: grid;
+    gap: var(--e-2);
+    justify-items: start;
+    padding-bottom: var(--e-1);
+  }
+  .selecao__elo {
+    margin-top: var(--e-2);
+  }
+  .selecao__item--a .selecao__imagem {
+    grid-column: 1 / span 8;
+  }
+  .selecao__item--a .selecao__texto {
+    grid-column: 9 / span 4;
+  }
+  .selecao__item--b .selecao__imagem {
+    grid-column: 6 / span 7;
+    grid-row: 1;
+  }
+  .selecao__item--b .selecao__texto {
+    grid-column: 1 / span 4;
+    grid-row: 1;
+  }
+  .selecao__item--c .selecao__imagem {
+    grid-column: 3 / span 10;
+  }
+  .selecao__item--c .selecao__texto {
+    grid-column: 3 / span 5;
+  }
+  .selecao__imagem:hover img {
+    transform: scale(1.03);
+  }
+  @media (max-width: 900px) {
+    .selecao__item .selecao__imagem,
+    .selecao__item .selecao__texto {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+  }
+  .todos {
+    margin-top: var(--pausa);
+    display: flex;
+    justify-content: flex-end;
+  }
+  .todos__elo {
+    display: inline-flex;
+    gap: var(--e-3);
+    align-items: baseline;
+    padding-bottom: var(--e-1);
+    border-bottom: 1px solid var(--tinta);
+    transition: color var(--breve);
+  }
+  .todos__elo:hover {
+    color: var(--vermelho);
+    border-color: var(--vermelho);
+  }
+
+  /* Manifesto -------------------------------------------------------------- */
+  .manifesto__frase {
+    grid-column: 1 / span 11;
+    text-wrap: pretty;
+  }
+  .grifo {
+    background: linear-gradient(var(--vermelho), var(--vermelho)) 0 96% / 0 0.055em no-repeat;
+    transition: background-size 1.4s var(--curva-vai-vem);
+  }
+  .presente .grifo {
+    background-size: 100% 0.055em;
+  }
+  .presente .grifo:nth-of-type(1) {
+    transition-delay: 0.9s;
+  }
+  .presente .grifo:nth-of-type(2) {
+    transition-delay: 1.5s;
+  }
+  .presente .grifo:nth-of-type(3) {
+    transition-delay: 2.1s;
+  }
+  @media (max-width: 900px) {
+    .manifesto__frase {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Frentes de serviço ------------------------------------------------------ */
+  .frente {
+    border-top: 1px solid var(--linha);
+  }
+  .frente:last-child {
+    border-bottom: 1px solid var(--linha);
+  }
+  .frente__botao {
+    width: 100%;
+    align-items: center;
+    padding-block: var(--e-4);
+  }
+  .frente__nome {
+    grid-column: 1 / span 7;
+    transition:
+      transform var(--medio) var(--curva),
+      color var(--breve);
+  }
+  .frente__resumo {
+    grid-column: 8 / span 4;
+    font-weight: 400;
+  }
+  .frente__sinal {
+    grid-column: 12;
+    justify-self: end;
+    position: relative;
+    width: var(--e-3);
+    height: var(--e-3);
+    flex: none;
+  }
+  .frente__sinal::before,
+  .frente__sinal::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform var(--medio) var(--curva);
+  }
+  .frente__sinal::after {
+    transform: rotate(90deg);
+  }
+  .aberta > h3 .frente__sinal::after {
+    transform: rotate(0deg);
+  }
+  .frente:not(.aberta) .frente__botao:hover .frente__nome {
+    transform: translateX(var(--e-3));
+    color: var(--vermelho);
+  }
+  .frente__painel,
+  .pergunta__painel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--longo) var(--curva);
+  }
+  .aberta > .frente__painel,
+  .aberta > .pergunta__painel {
+    grid-template-rows: 1fr;
+  }
+  .frente__dentro,
+  .pergunta__dentro {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .frente__conteudo {
+    padding-top: var(--e-3);
+    padding-bottom: var(--e-6);
+    row-gap: var(--e-4);
+    opacity: 0;
+    transform: translateY(var(--e-2));
+    transition:
+      opacity var(--medio) var(--curva),
+      transform var(--medio) var(--curva);
+  }
+  .aberta .frente__conteudo {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.15s;
+  }
+  .frente__para,
+  .frente__servico {
+    grid-column: span 3;
+    display: grid;
+    gap: var(--e-2);
+    align-content: start;
+  }
+  .frente__para li {
+    padding-block: var(--e-1);
+    border-top: 1px solid var(--linha);
+  }
+  .frente__servico {
+    padding-top: var(--e-2);
+    border-top: 1px solid var(--tinta);
+  }
+  @media (max-width: 900px) {
+    .frente__nome {
+      grid-column: 1 / span 10;
+    }
+    .frente__resumo {
+      grid-column: 1 / span 11;
+      grid-row: 2;
+      margin-top: var(--e-1);
+    }
+    .frente__para,
+    .frente__servico {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Percurso ----------------------------------------------------------------- */
+  .percurso {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: var(--calha);
+    padding-top: var(--e-4);
+  }
+  .percurso::before,
+  .percurso::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--linha);
+  }
+  .percurso::after {
+    height: 2px;
+    top: -0.5px;
+    background: var(--vermelho);
+    transform-origin: 0 50%;
+    transform: scaleX(var(--avanco, 0));
+    transition: transform var(--medio) var(--curva);
+  }
+  .percurso__etapa {
+    position: relative;
+    display: grid;
+    gap: var(--e-2);
+    align-content: start;
+    padding-right: var(--e-2);
+  }
+  .percurso__etapa > * {
+    opacity: 0.38;
+    transition: opacity var(--medio) var(--curva);
+  }
+  .percurso__etapa.chegou > * {
+    opacity: 1;
+  }
+  .percurso__marco {
+    position: absolute;
+    left: 0;
+    top: calc(var(--e-4) * -1 - 5px);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--papel);
+    border: 1px solid var(--tinta-leve);
+    opacity: 1 !important;
+    transition:
+      background-color var(--medio) var(--curva),
+      border-color var(--medio) var(--curva),
+      scale var(--medio) var(--curva);
+  }
+  .chegou .percurso__marco {
+    background: var(--vermelho);
+    border-color: var(--vermelho);
+    scale: 1.25;
+  }
+  @media (max-width: 1000px) {
+    .percurso {
+      grid-template-columns: 1fr;
+      padding-top: 0;
+      padding-left: var(--e-4);
+      row-gap: var(--e-5);
+    }
+    .percurso::before,
+    .percurso::after {
+      width: 1px;
+      height: 100%;
+    }
+    .percurso::after {
+      width: 2px;
+      left: -0.5px;
+      top: 0;
+      transform-origin: 50% 0;
+      transform: scaleY(var(--avanco, 0));
+    }
+    .percurso__marco {
+      left: calc(var(--e-4) * -1 - 5px);
+      top: 0.5em;
+    }
+  }
+
+  /* Vozes -------------------------------------------------------------------- */
+  .vozes {
+    row-gap: var(--e-7);
+  }
+  .voz {
+    grid-column: span 5;
+    display: grid;
+    gap: var(--e-5);
+    align-content: start;
+  }
+  .voz:nth-child(2) {
+    grid-column: 7 / span 6;
+    margin-top: var(--e-8);
+  }
+  .voz blockquote {
+    padding-top: var(--e-3);
+    border-top: 1px solid var(--tinta);
+  }
+  .voz__dados {
+    margin-top: var(--e-3);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--e-2);
+    padding-top: var(--e-2);
+    border-top: 1px solid var(--linha);
+  }
+  .voz__dados dt {
+    margin-bottom: 4px;
+  }
+  @media (max-width: 900px) {
+    .voz,
+    .voz:nth-child(2) {
+      grid-column: 1 / -1;
+      margin-top: 0;
+    }
+    .voz__dados {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* FAQ ---------------------------------------------------------------------- */
+  .faq__cabeca {
+    grid-column: 1 / span 4;
+    display: grid;
+    gap: var(--e-3);
+    align-content: start;
+    position: sticky;
+    top: calc(var(--cabecalho) + var(--e-4));
+    align-self: start;
+  }
+  .faq__lista {
+    grid-column: 6 / span 7;
+  }
+  .pergunta {
+    border-top: 1px solid var(--linha);
+  }
+  .pergunta:last-child {
+    border-bottom: 1px solid var(--linha);
+  }
+  .pergunta__botao {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--e-4);
+    padding-block: var(--e-3);
+    transition: color var(--breve);
+  }
+  .pergunta__botao:hover {
+    color: var(--vermelho);
+  }
+  .pergunta__dentro p {
+    padding-bottom: var(--e-4);
+  }
+  @media (max-width: 900px) {
+    .faq__cabeca,
+    .faq__lista {
+      grid-column: 1 / -1;
+      position: static;
+    }
+    .faq__lista {
+      margin-top: var(--e-5);
+    }
+  }
+</style>

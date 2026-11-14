@@ -1,0 +1,407 @@
+/* ==========================================================================
+   SISTEMA
+   Todos os valores do site saem daqui. Nenhum componente usa medida solta.
+
+   Pulso      unidade de 8px; todo espaço é múltiplo dela
+   Compasso   grade de 12 colunas, agrupadas em 3, 4 ou 6
+   Intervalo  títulos em razão 1,5; texto em razão 1,25
+   Pausa      o espaço entre seções é definido antes do conteúdo
+   ========================================================================== */
+
+:root {
+  /* Cor */
+  --papel: #f5f1ea;
+  --papel-fundo: #ece6db;
+  --tinta: #1b1815;
+  --tinta-media: rgba(27, 24, 21, 0.68);
+  --tinta-leve: rgba(27, 24, 21, 0.42);
+  --linha: rgba(27, 24, 21, 0.16);
+  --vermelho: #a3171f;
+
+  /* Fontes */
+  --fonte-titulo: "Gloock", "Times New Roman", serif;
+  --fonte-texto: "Atkinson Hyperlegible Next Variable", "Helvetica Neue", Arial, sans-serif;
+
+  /* Intervalos de título (razão 1,5) */
+  --titulo-p: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
+  --titulo-m: clamp(2.125rem, 1.2rem + 2.9vw, 3.375rem);
+  --titulo-g: clamp(2.75rem, 1rem + 5.4vw, 5.0625rem);
+  --titulo-gg: clamp(3.5rem, 0.2rem + 12.4vw, 12.5rem);
+
+  /* Intervalos de texto (razão 1,25) */
+  --texto-pp: 0.8125rem;
+  --texto-p: 0.9375rem;
+  --texto: 1.0625rem;
+  --texto-g: clamp(1.1875rem, 1.05rem + 0.45vw, 1.375rem);
+
+  /* Pulso */
+  --e-1: 8px;
+  --e-2: 16px;
+  --e-3: 24px;
+  --e-4: 32px;
+  --e-5: 48px;
+  --e-6: 64px;
+  --e-7: 96px;
+  --e-8: 128px;
+  --pausa: clamp(96px, 14vw, 192px);
+
+  /* Grade */
+  --margem: clamp(20px, 4.4vw, 64px);
+  --calha: clamp(16px, 1.7vw, 24px);
+  --largura: 1680px;
+
+  /* Movimento: três durações, duas curvas */
+  --breve: 0.25s;
+  --medio: 0.6s;
+  --longo: 1.1s;
+  --curva: cubic-bezier(0.16, 1, 0.3, 1);
+  --curva-vai-vem: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --cabecalho: 72px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--papel);
+  color: var(--tinta);
+  scrollbar-gutter: stable;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  font-size: var(--texto);
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--vermelho);
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+/* Tipos ------------------------------------------------------------------ */
+
+.t-gg,
+.t-g,
+.t-m,
+.t-p {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.t-gg {
+  font-size: var(--titulo-gg);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+}
+.t-g {
+  font-size: var(--titulo-g);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.t-m {
+  font-size: var(--titulo-m);
+  line-height: 1.04;
+}
+.t-p {
+  font-size: var(--titulo-p);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.texto-g {
+  font-size: var(--texto-g);
+  line-height: 1.45;
+}
+.texto-p {
+  font-size: var(--texto-p);
+}
+.suave {
+  color: var(--tinta-media);
+}
+.rotulo {
+  font-size: var(--texto-pp);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.leitura {
+  max-width: 62ch;
+}
+.leitura p + p {
+  margin-top: var(--e-2);
+}
+
+/* Grade ------------------------------------------------------------------ */
+
+.caixa {
+  width: 100%;
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding-inline: var(--margem);
+}
+.grade {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--calha);
+}
+.secao {
+  padding-block: var(--pausa);
+}
+.secao--colada {
+  padding-top: 0;
+}
+.fio {
+  border-top: 1px solid var(--linha);
+}
+
+/* Elo: link com traço que se desenha ---------------------------------------- */
+
+.elo {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size var(--medio) var(--curva);
+  padding-bottom: 2px;
+}
+.elo:hover,
+.elo[aria-current="page"] {
+  background-size: 100% 1px;
+}
+.elo--posto {
+  background-size: 100% 1px;
+  background-position: 100% 100%;
+}
+.elo--posto:hover {
+  background-size: 0 1px;
+}
+
+.seta {
+  display: inline-block;
+  transition: transform var(--medio) var(--curva);
+}
+a:hover > .seta,
+button:hover > .seta {
+  transform: translateX(6px);
+}
+
+/* Botão -------------------------------------------------------------------- */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-4);
+  background: var(--tinta);
+  color: var(--papel);
+  font-size: var(--texto-g);
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  will-change: transform;
+}
+.botao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--vermelho);
+  transform: translateY(101%);
+  transition: transform var(--medio) var(--curva);
+  z-index: -1;
+}
+.botao:hover::before {
+  transform: none;
+}
+
+/* Entrada: os elementos sobem e assentam. Sem recorte. ---------------------- */
+
+[data-entra] {
+  opacity: 0;
+  transform: translateY(var(--e-4));
+  transition:
+    opacity var(--longo) var(--curva),
+    transform var(--longo) var(--curva);
+  transition-delay: calc(var(--ordem, 0) * 90ms);
+}
+[data-entra].presente {
+  opacity: 1;
+  transform: none;
+}
+
+.palavra {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.42em) rotate(2.5deg);
+  transform-origin: 0 100%;
+  transition:
+    opacity var(--longo) var(--curva),
+    transform var(--longo) var(--curva);
+  transition-delay: calc(var(--ordem, 0) * 55ms);
+}
+.presente .palavra,
+.palavra.presente {
+  opacity: 1;
+  transform: none;
+}
+
+/* Moldura de imagem com deriva: a imagem desliza dentro do quadro na rolagem */
+
+.quadro {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: var(--papel-fundo);
+}
+.quadro > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--longo) var(--curva);
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .quadro--deriva > img {
+      scale: 1.14;
+      animation: deriva linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+@keyframes deriva {
+  from {
+    translate: 0 -5.5%;
+  }
+  to {
+    translate: 0 5.5%;
+  }
+}
+
+/* Cursor com rótulo --------------------------------------------------------- */
+
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 90;
+  pointer-events: none;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--vermelho);
+  color: var(--papel);
+  font-size: var(--texto-pp);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  scale: 0;
+  transition: scale var(--medio) var(--curva);
+}
+.cursor.ativo {
+  scale: 1;
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* Transição entre páginas ---------------------------------------------------- */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--curva-vai-vem);
+}
+::view-transition-group(*) {
+  animation-duration: 0.75s;
+  animation-timing-function: var(--curva);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+  [data-entra],
+  .palavra {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.so-leitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

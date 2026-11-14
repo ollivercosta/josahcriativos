@@ -14,11 +14,6 @@
       "permanent": true
     },
     {
-      "source": "/como-funciona",
-      "destination": "/#servicos",
-      "permanent": true
-    },
-    {
       "source": "/trabalhos/festival-de-roteiro",
       "destination": "/trabalhos/fera",
       "permanent": true
@@ -43,32 +38,5 @@
       ]
     }
   ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "publico",
-  "images": {
-    "sizes": [
-      640,
-      1080,
-      1920
-    ],
-    "formats": [
-      "image/avif",
-      "image/webp"
-    ],
-    "minimumCacheTTL": 2678400,
-    "remotePatterns": [
-      {
-        "protocol": "https",
-        "hostname": "blogger.googleusercontent.com"
-      },
-      {
-        "protocol": "https",
-        "hostname": "mir-s3-cdn-cf.behance.net"
-      },
-      {
-        "protocol": "https",
-        "hostname": "i.ytimg.com"
-      }
-    ]
-  }
+  "framework": "astro"
 }

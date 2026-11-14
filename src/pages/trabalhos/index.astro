@@ -1,0 +1,142 @@
+---
+import Base from "../../layouts/Base.astro";
+import { trabalhos, categorias, legenda } from "../../dados/utilidades.js";
+
+/* Compasso da parede: grupos de colunas que somam 12 e se alternam */
+const compasso = [7, 5, 4, 4, 4, 5, 7, 6, 6, 4, 8, 7, 5];
+---
+
+<Base titulo="Trabalhos | Josah Oliveira">
+  <section class="caixa parede">
+    <header class="grade parede__cabeca">
+      <h1 class="t-gg parede__titulo" data-palavras>Trabalhos</h1>
+      <p class="suave parede__texto" data-entra>
+        Festivais, orquestras, espetáculos e projetos de formação. Uma seleção de projetos recentes, do desafio à solução visual. Conheça cada
+        projeto!
+      </p>
+    </header>
+
+    <div class="filtros" role="group" aria-label="Filtrar trabalhos" data-entra>
+      <button class="filtro" data-filtro="todos" aria-pressed="true">Todos</button>
+      {categorias.map((c) => <button class="filtro" data-filtro={c} aria-pressed="false">{c}</button>)}
+    </div>
+
+    <ul class="grade parede__lista">
+      {
+        trabalhos.map((t, i) => (
+          <li class="cartao" style={`--colunas:${compasso[i % compasso.length]}; view-transition-name: cartao-${t.slug}`} data-categoria={t.categoria}>
+            <a href={t.href} data-cursor="Ver" data-entra style={`--ordem:${i % 3}`}>
+              <span class="quadro cartao__capa" transition:name={`capa-${t.slug}`}>
+                <img src={t.capa} alt="" width="1200" height="900" loading={i < 4 ? "eager" : "lazy"} />
+              </span>
+              <span class="cartao__texto">
+                <span class="t-p cartao__nome">{t.nome}</span>
+                <span class="texto-p suave">{legenda(t)}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style is:global>
+  .parede {
+    padding-top: var(--e-6);
+    padding-bottom: var(--pausa);
+  }
+  .parede__cabeca {
+    align-items: end;
+    row-gap: var(--e-3);
+  }
+  .parede__titulo {
+    grid-column: 1 / span 8;
+    margin-left: -0.04em;
+  }
+  .parede__texto {
+    grid-column: 9 / span 4;
+    padding-bottom: var(--e-2);
+  }
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-1) var(--e-4);
+    margin-top: var(--e-7);
+    padding-bottom: var(--e-2);
+    border-bottom: 1px solid var(--linha);
+  }
+  .filtro {
+    position: relative;
+    padding-block: var(--e-1);
+    color: var(--tinta-media);
+    transition: color var(--breve);
+  }
+  .filtro::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--e-2) * -1 - 1px);
+    height: 2px;
+    background: var(--vermelho);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform var(--medio) var(--curva);
+  }
+  .filtro:hover,
+  .filtro[aria-pressed="true"] {
+    color: var(--tinta);
+  }
+  .filtro[aria-pressed="true"]::after {
+    transform: none;
+  }
+  .parede__lista {
+    margin-top: var(--e-6);
+    row-gap: var(--e-7);
+    align-items: end;
+  }
+  .cartao {
+    grid-column: span var(--colunas);
+  }
+  .cartao[hidden] {
+    display: none;
+  }
+  .cartao a {
+    display: grid;
+    gap: var(--e-2);
+  }
+  .cartao__capa {
+    aspect-ratio: 4 / 3;
+  }
+  .cartao a:hover .cartao__capa img {
+    transform: scale(1.04);
+  }
+  .cartao__texto {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--e-2);
+    padding-top: var(--e-1);
+    border-top: 1px solid var(--linha);
+    transition: border-color var(--medio) var(--curva);
+  }
+  .cartao a:hover .cartao__texto {
+    border-color: var(--tinta);
+  }
+  .cartao__nome {
+    transition: transform var(--medio) var(--curva);
+  }
+  .cartao a:hover .cartao__nome {
+    transform: translateX(var(--e-1));
+  }
+  @media (max-width: 900px) {
+    .parede__titulo,
+    .parede__texto {
+      grid-column: 1 / -1;
+    }
+    .cartao {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
