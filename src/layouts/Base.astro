@@ -1,0 +1,236 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "@fontsource/gloock/latin-400.css";
+import "@fontsource-variable/atkinson-hyperlegible-next/index.css";
+import "../styles/base.css";
+
+const {
+  titulo = "Josah Oliveira | Designer gráfico",
+  descricao = "Josah Oliveira, designer gráfico em Salvador, Bahia. Identidade visual, peças gráficas, páginas e vídeos para projetos culturais e outros clientes.",
+} = Astro.props;
+
+const caminho = Astro.url.pathname;
+const menu = [
+  { nome: "Trabalhos", href: "/trabalhos" },
+  { nome: "Como funciona", href: "/#como-funciona" },
+  { nome: "Sobre", href: "/sobre" },
+  { nome: "FAQ", href: "/#faq" },
+  { nome: "Contato", href: "#contato" },
+];
+const zap =
+  "https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto.";
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="so-leitor" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="caixa cabecalho__linha">
+        <a class="cabecalho__marca" href="/">
+          <span class="cabecalho__nome">Josah Oliveira</span>
+          <span class="cabecalho__oficio rotulo">Designer gráfico</span>
+        </a>
+        <nav aria-label="Principal">
+          <ul class="cabecalho__menu">
+            {
+              menu.map((m) => (
+                <li>
+                  <a class="elo" href={m.href} aria-current={caminho.startsWith(m.href) && m.href.length > 1 && !m.href.includes("#") ? "page" : undefined}>
+                    {m.nome}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <slot />
+    </main>
+
+    <section class="contato secao" id="contato">
+      <div class="caixa grade">
+        <h2 class="contato__titulo t-g" data-palavras>Vamos apresentar o seu projeto para o mundo?</h2>
+        <div class="contato__texto" data-entra>
+          <p class="texto-g">
+            Informe o que o projeto precisa e o prazo disponível. O retorno traz um cronograma e a indicação das peças mais adequadas.
+          </p>
+          <a class="botao" href={zap} target="_blank" rel="noopener" data-ima>
+            Fale comigo <span class="seta" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <dl class="contato__canais" data-entra>
+          <div>
+            <dt class="rotulo suave">WhatsApp</dt>
+            <dd><a class="elo" href={zap} target="_blank" rel="noopener">(71) 99144-8218</a></dd>
+          </div>
+          <div>
+            <dt class="rotulo suave">E-mail</dt>
+            <dd><a class="elo" href="mailto:contato@josahcriativos.com.br">contato@josahcriativos.com.br</a></dd>
+          </div>
+          <div>
+            <dt class="rotulo suave">Redes</dt>
+            <dd class="contato__redes">
+              <a class="elo" href="https://www.behance.net/josafoliveira1" target="_blank" rel="noopener">Behance</a>
+              <a class="elo" href="https://www.linkedin.com/in/josaholiveira/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="elo" href="https://github.com/ollivercosta" target="_blank" rel="noopener">GitHub</a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <footer class="rodape">
+      <div class="caixa rodape__linha texto-p suave">
+        <p>© 2026 Josah Oliveira. Todos os direitos reservados.</p>
+        <p class="rodape__elos">
+          <a class="elo" href="#">Acessibilidade</a>
+          <a class="elo" href="#">Termos de Uso, Política de Privacidade e Política de Reembolso</a>
+        </p>
+      </div>
+    </footer>
+
+    <div class="cursor" aria-hidden="true" transition:persist></div>
+
+    <script>
+      import "../scripts/site.js";
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .cabecalho {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    height: var(--cabecalho);
+    transition:
+      transform var(--medio) var(--curva),
+      background-color var(--medio) var(--curva);
+    view-transition-name: cabecalho;
+  }
+  .cabecalho--solto {
+    background: color-mix(in srgb, var(--papel) 88%, transparent);
+    backdrop-filter: blur(14px);
+  }
+  .cabecalho--oculto {
+    transform: translateY(-100%);
+  }
+  .cabecalho__linha {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e-4);
+  }
+  .cabecalho__marca {
+    display: flex;
+    align-items: baseline;
+    gap: var(--e-2);
+  }
+  .cabecalho__nome {
+    font-family: var(--fonte-titulo);
+    font-size: 1.375rem;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .cabecalho__oficio {
+    color: var(--tinta-media);
+  }
+  .cabecalho__menu {
+    display: flex;
+    gap: var(--e-4);
+    font-size: var(--texto-p);
+  }
+  @media (max-width: 760px) {
+    .cabecalho__oficio {
+      display: none;
+    }
+    .cabecalho__menu {
+      gap: var(--e-2);
+      font-size: var(--texto-pp);
+    }
+    .cabecalho__menu li:nth-child(2),
+    .cabecalho__menu li:nth-child(4) {
+      display: none;
+    }
+  }
+
+  main {
+    padding-top: var(--cabecalho);
+  }
+
+  .contato {
+    border-top: 1px solid var(--linha);
+  }
+  .contato__titulo {
+    grid-column: 1 / span 9;
+  }
+  .contato__texto {
+    grid-column: 1 / span 5;
+    margin-top: var(--e-6);
+    display: grid;
+    gap: var(--e-5);
+    justify-items: start;
+  }
+  .contato__canais {
+    grid-column: 8 / span 5;
+    margin-top: var(--e-6);
+    display: grid;
+    gap: var(--e-3);
+    align-content: start;
+  }
+  .contato__canais > div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--e-2);
+    align-items: baseline;
+    padding-top: var(--e-3);
+    border-top: 1px solid var(--linha);
+  }
+  .contato__canais dd {
+    font-size: var(--texto-g);
+  }
+  .contato__redes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-1) var(--e-3);
+  }
+  @media (max-width: 900px) {
+    .contato__titulo,
+    .contato__texto,
+    .contato__canais {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .rodape {
+    border-top: 1px solid var(--linha);
+    padding-block: var(--e-4);
+  }
+  .rodape__linha {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--e-2) var(--e-4);
+  }
+  .rodape__elos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-1) var(--e-4);
+  }
+</style>

@@ -1,0 +1,121 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base titulo="Sobre | Josah Oliveira">
+  <section class="caixa sobre">
+    <div class="grade sobre__topo">
+      <p class="rotulo suave sobre__rotulo" data-entra>Sobre</p>
+      <h1 class="t-gg sobre__titulo" data-palavras>Quem dá vida a isso</h1>
+      <figure class="quadro quadro--deriva sobre__retrato" data-entra>
+        <img src="/imagens/retrato-pb.webp" alt="Foto de Josah Oliveira" width="1334" height="1050" />
+      </figure>
+      <div class="sobre__entrada" data-entra style="--ordem:1">
+        <ul class="rotulo sobre__papeis">
+          <li>Designer gráfico</li>
+          <li class="suave">Músico</li>
+          <li class="suave">Dev</li>
+        </ul>
+        <p class="texto-g">
+          Sou <strong>Josah Oliveira</strong>, designer gráfico. Há mais de dez anos desenvolvo identidades visuais, sistemas visuais e
+          soluções de comunicação para projetos culturais e digitais.
+        </p>
+      </div>
+    </div>
+
+    <blockquote class="grade sobre__manchete secao">
+      <p class="t-g" data-palavras data-observa>
+        Menos sobre estética isolada, mais sobre <span class="grifo">estruturar informação e narrativa.</span>
+      </p>
+    </blockquote>
+
+    <div class="grade sobre__historia">
+      <h2 class="rotulo sobre__historia-titulo" data-entra>Trajetória</h2>
+      <div class="leitura sobre__historia-texto" data-entra>
+        <p>
+          Atuo como designer gráfico com foco em identidade visual, sistemas visuais e comunicação para projetos culturais. Comecei como
+          designer júnior na <strong>Design Comunicação Visual</strong>, em Jequié (BA), com sinalização, peças de grande formato e
+          preparação de arquivos para produção gráfica. Essa base técnica em impressão e aplicação física ainda orienta minhas decisões de
+          legibilidade, escala e acabamento.
+        </p>
+        <p>
+          A música me aproximou da produção cultural. Sou estudante de Música Popular na <strong>Universidade Federal da Bahia</strong> e,
+          em 2021, lecionei violão e ukulele na Escola de Música Villa Lobos, em Teixeira de Freitas (BA). Essa vivência me deu repertório
+          sobre a linguagem e as demandas dos projetos culturais que atendo.
+        </p>
+        <p>
+          Cheguei à <a class="elo elo--posto" href="https://tabuleiroproducoes.com.br/" target="_blank" rel="noopener">Tabuleiro Produções</a>,
+          produtora especializada em elaboração de projetos e captação de recursos, em 2022. Desde 2023 atuo como designer da produtora,
+          hoje como Designer Pleno, responsável pelo desenvolvimento de identidades e sistemas visuais, pela direção de arte das campanhas
+          e pela consistência das marcas em todos os pontos de contato, dos books de captação aos materiais de evento.
+        </p>
+        <p>
+          Em paralelo à graduação, curso o técnico em Desenvolvimento de Sistemas no
+          <strong>Instituto Federal do Sul de Minas Gerais</strong>, com estudos em UX e design de interfaces aplicados ao desenvolvimento
+          de landing pages.
+        </p>
+        <p>
+          Da produção gráfica ao digital, minha atuação integra direção de arte, design estratégico e desenvolvimento web para que
+          projetos culturais comuniquem com clareza em qualquer meio.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  .sobre {
+    padding-top: var(--e-6);
+    padding-bottom: var(--pausa);
+  }
+  .sobre__topo {
+    row-gap: var(--e-4);
+    align-items: end;
+  }
+  .sobre__rotulo,
+  .sobre__titulo {
+    grid-column: 1 / -1;
+  }
+  .sobre__titulo {
+    margin-left: -0.04em;
+  }
+  .sobre__retrato {
+    grid-column: 1 / span 7;
+    aspect-ratio: 4 / 3;
+    margin-top: var(--e-4);
+  }
+  .sobre__entrada {
+    grid-column: 9 / span 4;
+    display: grid;
+    gap: var(--e-4);
+  }
+  .sobre__papeis {
+    display: flex;
+    gap: var(--e-3);
+    padding-bottom: var(--e-2);
+    border-bottom: 1px solid var(--linha);
+  }
+  .sobre__manchete p {
+    grid-column: 2 / span 10;
+  }
+  .sobre__historia-titulo {
+    grid-column: 1 / span 3;
+    padding-top: 0.4em;
+  }
+  .sobre__historia-texto {
+    grid-column: 5 / span 7;
+    font-size: var(--texto-g);
+  }
+  .sobre__historia-texto p + p {
+    margin-top: var(--e-3);
+  }
+  @media (max-width: 900px) {
+    .sobre__retrato,
+    .sobre__entrada,
+    .sobre__manchete p,
+    .sobre__historia-titulo,
+    .sobre__historia-texto {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

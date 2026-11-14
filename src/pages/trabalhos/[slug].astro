@@ -1,0 +1,576 @@
+---
+import Base from "../../layouts/Base.astro";
+import { trabalhos, legenda } from "../../dados/utilidades.js";
+
+export function getStaticPaths() {
+  return trabalhos.map((t, i) => ({
+    params: { slug: t.slug },
+    props: { t, proximo: trabalhos[(i + 1) % trabalhos.length] },
+  }));
+}
+
+const { t, proximo } = Astro.props;
+
+const ehImagem = (m) => typeof m === "string" && /\.(webp|jpe?g|png|avif)$/i.test(m);
+const ficha = [
+  ["Cliente", t.cliente],
+  ["Proponente", t.proponente],
+  ["Local", t.local],
+  ["Ano", t.ano],
+  ["Entregas", t.entregas || t.tipo],
+].filter(([, v]) => v);
+
+const blocos = [
+  ["O projeto", t.sobre],
+  ["A proposta", t.proposta],
+  ["O resultado", t.resultado],
+].filter(([, v]) => v);
+
+const pecas = Array.isArray(t.pecas) ? (t.pecas.length ? { "": t.pecas } : {}) : t.pecas || {};
+const pranchas = t.pranchas || [];
+const paginaInteira = !pranchas.length ? (t.midias || []).find(ehImagem) : null;
+const moldes = ["larga", "direita", "esquerda"];
+---
+
+<Base titulo={`${t.nome} | Josah Oliveira`} descricao={t.resumo}>
+  <article class="trabalho">
+    <header class="caixa trabalho__topo">
+      <p class="rotulo suave" data-entra>
+        <a class="elo" href="/trabalhos">Trabalhos</a>
+        <span aria-hidden="true"> / </span>
+        {t.categoria}
+      </p>
+      <h1 class:list={["trabalho__titulo", t.nome.length > 18 ? "t-g trabalho__titulo--longo" : "t-gg"]} data-palavras>
+        {t.titulo ? t.titulo.map((l) => <span class="trabalho__linha">{l} </span>) : t.nome}
+      </h1>
+      <div class="grade trabalho__entrada">
+        <p class="texto-g trabalho__resumo" data-entra>{t.resumo}</p>
+        <dl class="trabalho__ficha texto-p" data-entra style="--ordem:1">
+          {
+            ficha.map(([k, v]) => (
+              <div>
+                <dt class="rotulo suave">{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </header>
+
+    <div class="caixa">
+      <figure class="trabalho__capa quadro" transition:name={`capa-${t.slug}`}>
+        <img src={t.chave || t.capa} alt={`${t.nome}, ${t.tipo}`} />
+      </figure>
+    </div>
+
+    {
+      t.desafio && (
+        <section class="caixa grade desafio secao">
+          <p class="rotulo suave desafio__rotulo" data-entra>
+            Desafio
+          </p>
+          <p class="t-m desafio__frase" data-palavras>
+            {t.desafio}
+          </p>
+        </section>
+      )
+    }
+
+    {
+      blocos.length > 0 && (
+        <section class:list={["caixa grade blocos", !t.desafio && "secao"]}>
+          {blocos.map(([k, v], i) => (
+            <div class={`bloco bloco--de-${blocos.length}`} data-entra style={`--ordem:${i}`}>
+              <h2 class="rotulo">{k}</h2>
+              <p class="suave">{v}</p>
+            </div>
+          ))}
+          {Object.keys(pecas).length > 0 && (
+            <div class="bloco bloco--pecas" data-entra>
+              {Object.entries(pecas).map(([frente, itens]) => (
+                <div class="pecas__grupo">
+                  {frente && <p class="rotulo suave">{frente}</p>}
+                  <ul class="pecas__lista">
+                    {itens.map((p) => (
+                      <li>{p}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    {
+      pranchas.length > 0 && (
+        <section class="pranchas secao">
+          {pranchas.map((p, i) =>
+            p.paginas ? (
+              <div class="folhas" data-folhas>
+                <div class="caixa grade folhas__cabeca" data-entra>
+                  <div class="folhas__titulo">
+                    <p class="rotulo suave">{p.frente}</p>
+                    <h2 class="t-m">{p.nome}</h2>
+                  </div>
+                  <p class="suave folhas__texto">{p.texto}</p>
+                </div>
+                <div class="folhas__trilho" data-folhas-trilho data-lenis-prevent tabindex="0" aria-label={`Páginas: ${p.nome}`}>
+                  {p.paginas.map((src, n) => (
+                    <figure class="folhas__folha">
+                      <img src={src} alt="" loading={n < 3 ? "eager" : "lazy"} draggable="false" width="1400" height="788" />
+                    </figure>
+                  ))}
+                </div>
+                <div class="caixa folhas__controle">
+                  <div class="folhas__linha" aria-hidden="true">
+                    <span data-folhas-barra />
+                  </div>
+                  <div class="folhas__botoes">
+                    <button data-folhas-ir="-1" aria-label="Página anterior">
+                      <span aria-hidden="true">←</span>
+                    </button>
+                    <button data-folhas-ir="1" aria-label="Próxima página">
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div class={`caixa grade prancha prancha--${moldes[i % moldes.length]}`}>
+                {p.imagem && (
+                  <figure class="prancha__imagem quadro" data-entra>
+                    <img src={p.imagem} alt={`${t.nome}: ${p.nome}`} loading="lazy" />
+                  </figure>
+                )}
+                <div class="prancha__texto" data-entra style="--ordem:1">
+                  <p class="rotulo suave">{p.frente}</p>
+                  <h2 class="t-m">{p.nome}</h2>
+                  <p class="suave">{p.texto}</p>
+                  {p.itens && (
+                    <ul class="pecas__lista">
+                      {p.itens.map((it) => (
+                        <li>{it}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ),
+          )}
+        </section>
+      )
+    }
+
+    {
+      paginaInteira && (
+        <section class="janela" data-janela>
+          <div class="janela__fixo">
+            <div class="caixa grade">
+              <div class="janela__moldura">
+                <div class="janela__barra" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <i />
+                </div>
+                <div class="janela__vidro" data-janela-vidro>
+                  <img src={paginaInteira} alt={`${t.nome}: página completa`} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      (t.regua || t.reguaImagem) && (
+        <section class="caixa grade regua secao fio">
+          <h2 class="rotulo regua__rotulo" data-entra>
+            Régua de marcas
+          </h2>
+          {t.regua && (
+            <p class="texto-g regua__texto" data-entra>
+              {t.regua}
+            </p>
+          )}
+          {t.reguaImagem && (
+            <figure class="regua__imagem" data-entra>
+              <img src={t.reguaImagem} alt="Régua de marcas do projeto" loading="lazy" />
+            </figure>
+          )}
+        </section>
+      )
+    }
+
+    <a class="proximo" href={proximo.href} data-cursor="Ver">
+      <div class="caixa grade proximo__dentro">
+        <div class="proximo__texto">
+          <p class="rotulo suave">Próximo trabalho</p>
+          <p class="t-g proximo__nome">{proximo.nome}</p>
+          <p class="suave">{legenda(proximo)}</p>
+        </div>
+        <span class="proximo__capa quadro quadro--deriva" transition:name={`capa-${proximo.slug}`}>
+          <img src={proximo.chave || proximo.capa} alt="" loading="lazy" />
+        </span>
+      </div>
+    </a>
+  </article>
+</Base>
+
+<style is:global>
+  .trabalho__topo {
+    padding-top: var(--e-6);
+  }
+  .trabalho__titulo {
+    margin-top: var(--e-3);
+    margin-left: -0.03em;
+  }
+  .trabalho__titulo.t-gg {
+    font-size: clamp(3.5rem, 0.6rem + 10vw, 10.5rem);
+  }
+  .trabalho__titulo--longo {
+    font-size: clamp(2.75rem, 0.6rem + 7.4vw, 7.6rem);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+  }
+  .trabalho__linha {
+    display: block;
+  }
+  .trabalho__entrada {
+    margin-top: var(--e-6);
+    margin-bottom: var(--e-6);
+    row-gap: var(--e-5);
+    align-items: end;
+  }
+  .trabalho__resumo {
+    grid-column: 1 / span 6;
+  }
+  .trabalho__ficha {
+    grid-column: 8 / span 5;
+  }
+  .trabalho__ficha > div {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: var(--e-2);
+    align-items: baseline;
+    padding-block: var(--e-1);
+    border-top: 1px solid var(--linha);
+  }
+  .trabalho__ficha > div:last-child {
+    border-bottom: 1px solid var(--linha);
+  }
+  .trabalho__capa {
+    aspect-ratio: 16 / 9;
+  }
+
+  .desafio {
+    row-gap: var(--e-3);
+    padding-bottom: var(--e-7);
+  }
+  .desafio__rotulo {
+    grid-column: 1 / span 2;
+    padding-top: 0.6em;
+  }
+  .desafio__frase {
+    grid-column: 3 / span 9;
+  }
+
+  .blocos {
+    row-gap: var(--e-5);
+  }
+  .bloco {
+    display: grid;
+    gap: var(--e-2);
+    align-content: start;
+    padding-top: var(--e-2);
+    border-top: 1px solid var(--tinta);
+  }
+  .bloco--de-3 {
+    grid-column: span 4;
+  }
+  .bloco--de-2 {
+    grid-column: span 6;
+  }
+  .bloco--de-1 {
+    grid-column: 3 / span 7;
+  }
+  .bloco--pecas {
+    grid-column: 1 / -1;
+    border-top-color: var(--linha);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-3) var(--e-6);
+  }
+  .pecas__grupo {
+    display: grid;
+    gap: var(--e-1);
+    align-content: start;
+  }
+  .pecas__lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-1);
+    font-size: var(--texto-p);
+  }
+  .pecas__lista li {
+    padding: 4px var(--e-2);
+    border: 1px solid var(--linha);
+  }
+
+  .pranchas {
+    display: grid;
+    row-gap: var(--pausa);
+  }
+  .prancha {
+    row-gap: var(--e-4);
+    align-items: end;
+  }
+  .prancha__texto {
+    display: grid;
+    gap: var(--e-2);
+    align-content: start;
+    justify-items: start;
+  }
+  .prancha--larga .prancha__imagem {
+    grid-column: 1 / -1;
+  }
+  .prancha--larga .prancha__texto {
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
+  .prancha--larga .prancha__texto > .rotulo,
+  .prancha--larga .prancha__texto > h2 {
+    grid-column: 1 / span 5;
+  }
+  .prancha--larga .prancha__texto > p:not(.rotulo),
+  .prancha--larga .prancha__texto > ul {
+    grid-column: 7 / span 6;
+  }
+  .prancha--larga .prancha__texto > p:not(.rotulo) {
+    grid-row: 1 / span 2;
+  }
+  .prancha--direita .prancha__imagem {
+    grid-column: 5 / span 8;
+    grid-row: 1;
+  }
+  .prancha--direita .prancha__texto {
+    grid-column: 1 / span 4;
+    grid-row: 1;
+  }
+  .prancha--esquerda .prancha__imagem {
+    grid-column: 1 / span 8;
+  }
+  .prancha--esquerda .prancha__texto {
+    grid-column: 9 / span 4;
+  }
+
+  /* Folhas: páginas de um book, lado a lado */
+  .folhas__cabeca {
+    align-items: end;
+    row-gap: var(--e-3);
+    margin-bottom: var(--e-5);
+  }
+  .folhas__titulo {
+    grid-column: 1 / span 6;
+    display: grid;
+    gap: var(--e-2);
+  }
+  .folhas__texto {
+    grid-column: 8 / span 5;
+  }
+  .folhas__trilho {
+    display: flex;
+    column-gap: var(--calha);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: max(var(--margem), calc((100vw - var(--largura)) / 2 + var(--margem)));
+    padding-inline: max(var(--margem), calc((100vw - var(--largura)) / 2 + var(--margem)));
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .folhas__trilho::-webkit-scrollbar {
+    display: none;
+  }
+  .folhas__trilho.arrastando {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+  .folhas__folha {
+    flex: none;
+    width: min(62vw, 980px);
+    scroll-snap-align: start;
+    background: var(--papel-fundo);
+    box-shadow: 0 1px 0 var(--linha);
+  }
+  .folhas__folha img {
+    width: 100%;
+  }
+  .folhas__controle {
+    margin-top: var(--e-4);
+    display: flex;
+    align-items: center;
+    gap: var(--e-4);
+  }
+  .folhas__linha {
+    flex: 1;
+    height: 1px;
+    background: var(--linha);
+    position: relative;
+  }
+  .folhas__linha span {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    height: 3px;
+    width: 10%;
+    background: var(--tinta);
+    transition: transform var(--breve) linear;
+  }
+  .folhas__botoes {
+    display: flex;
+    gap: var(--e-1);
+  }
+  .folhas__botoes button {
+    width: var(--e-6);
+    height: var(--e-6);
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--tinta);
+    font-size: var(--texto-g);
+    transition:
+      background-color var(--breve),
+      color var(--breve);
+  }
+  .folhas__botoes button:hover {
+    background: var(--tinta);
+    color: var(--papel);
+  }
+
+  /* Janela: a página inteira rola dentro do quadro enquanto a pessoa rola */
+  .janela {
+    height: 320vh;
+    margin-top: var(--pausa);
+  }
+  .janela__fixo {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+  }
+  .janela__moldura {
+    grid-column: 2 / span 10;
+    border: 1px solid var(--tinta);
+    background: var(--papel);
+    box-shadow: var(--e-2) var(--e-2) 0 var(--papel-fundo);
+  }
+  .janela__barra {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: var(--e-4);
+    padding-inline: var(--e-2);
+    border-bottom: 1px solid var(--tinta);
+  }
+  .janela__barra span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--tinta);
+  }
+  .janela__barra i {
+    flex: 1;
+    height: 2px;
+    margin-left: var(--e-2);
+    background: linear-gradient(var(--vermelho), var(--vermelho)) 0 0 / calc(var(--avanco, 0) * 100%) 100% no-repeat, var(--linha);
+  }
+  .janela__vidro {
+    height: min(74vh, 52vw);
+    overflow: hidden;
+  }
+  .janela__vidro img {
+    width: 100%;
+    will-change: transform;
+  }
+
+  .regua {
+    row-gap: var(--e-4);
+    margin-top: var(--pausa);
+  }
+  .regua__rotulo {
+    grid-column: 1 / span 2;
+    padding-top: 0.5em;
+  }
+  .regua__texto {
+    grid-column: 3 / span 8;
+  }
+  .regua__imagem {
+    grid-column: 1 / -1;
+    background: #fff;
+    padding: var(--e-4);
+  }
+
+  .proximo {
+    display: block;
+    margin-top: var(--pausa);
+    border-top: 1px solid var(--linha);
+    padding-block: var(--e-7);
+    transition: background-color var(--medio) var(--curva);
+  }
+  .proximo:hover {
+    background: var(--papel-fundo);
+  }
+  .proximo__dentro {
+    align-items: end;
+    row-gap: var(--e-4);
+  }
+  .proximo__texto {
+    grid-column: 1 / span 7;
+    display: grid;
+    gap: var(--e-2);
+  }
+  .proximo__nome {
+    transition: transform var(--medio) var(--curva);
+  }
+  .proximo:hover .proximo__nome {
+    transform: translateX(var(--e-3));
+  }
+  .proximo__capa {
+    grid-column: 9 / span 4;
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 900px) {
+    .trabalho__resumo,
+    .trabalho__ficha,
+    .desafio__rotulo,
+    .desafio__frase,
+    .bloco,
+    .folhas__titulo,
+    .folhas__texto,
+    .regua__rotulo,
+    .regua__texto,
+    .proximo__texto,
+    .proximo__capa,
+    .prancha .prancha__imagem,
+    .prancha .prancha__texto,
+    .prancha--larga .prancha__texto > * {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+    }
+    .folhas__folha {
+      width: 84vw;
+    }
+    .janela__moldura {
+      grid-column: 1 / -1;
+    }
+    .janela__vidro {
+      height: 68vh;
+    }
+  }
+</style>
