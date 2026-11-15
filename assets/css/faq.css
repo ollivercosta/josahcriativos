@@ -71,6 +71,32 @@
   color: var(--cor-vermelho);
 }
 
+/* link para o assistente de dúvidas do sistema (área do cliente), abaixo do texto de abertura */
+.faq__assistente {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 24px;
+  padding: 0 22px;
+  border: 1px solid var(--cor-tinta);
+  border-radius: 999px;
+  color: var(--cor-tinta);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+.faq__assistente:hover {
+  background: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
+  color: var(--cor-fundo);
+}
+
+.faq__assistente:focus-visible {
+  outline: 2px solid var(--cor-vermelho);
+  outline-offset: 3px;
+}
+
 .faq__lista {
   border-top: 1px solid var(--cor-tinta);
 }
