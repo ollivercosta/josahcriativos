@@ -130,7 +130,7 @@ export const BASE_CHAT = {
     rot: "Quanto custa?",
     txt: [
       "O valor depende das peças, do prazo e das exigências do edital, por isso não há tabela fixa.",
-      "Faça uma solicitação na Área do cliente ou chame no WhatsApp, informando o que o projeto precisa e o prazo disponível. O retorno é uma proposta por escrito, com escopo, prazo e valores.",
+      "Faça uma solicitação na Área do cliente ou chame no WhatsApp, informando quais peças você precisa e o prazo disponível. O retorno é uma proposta por escrito, com escopo, prazo e valores.",
     ],
     ops: ["solicitar", "@wa_orcamento", "definir", "pagamento"],
     kw: "preco precos valor valores custa custo custos orcamento orcamentos quanto tabela cobra cobrar investimento",
@@ -194,27 +194,27 @@ export const BASE_CHAT = {
   solicitar: {
     rot: "Como faço uma solicitação?",
     txt: [
-      "A solicitação é feita na Área do cliente, no menu do site:\n1. Crie a sua conta com nome, e-mail e senha.\n2. Confirme o e-mail com o código de 6 dígitos que chega na sua caixa de entrada.\n3. Em Nova solicitação, escolha o serviço, conte o que o projeto precisa e, se quiser, informe a data desejada e links de referência.",
+      "A solicitação é feita na Área do cliente, no menu do site:\n1. Crie a sua conta com nome, e-mail e senha.\n2. Confirme o e-mail com o código de 6 dígitos que chega na sua caixa de entrada.\n3. Em Nova solicitação, escolha o serviço, conte quais peças você precisa e, se quiser, informe o prazo e links de referência.",
       "A resposta chega por e-mail. Na Área do cliente você acompanha a situação: enviada, em análise, aceita ou recusada.",
-      "Se a solicitação for aceita, o próximo passo é uma reunião para o briefing.",
+      "Se a solicitação for aceita, o próximo passo é uma reunião para alinhar o briefing das peças.",
     ],
     ops: ["@criar_conta", "@area", "definir", "acompanhar"],
     kw: "solicitacao solicitacoes solicitar pedido pedir pedidos contratar contratacao conta cadastro cadastrar criar comecar iniciar orcamento:1 projeto:1 area cliente",
     frases: ["fazer uma solicitacao", "como solicitar", "fazer um pedido", "como contratar", "criar conta", "area do cliente", "quero contratar"],
   },
   acompanhar: {
-    rot: "Como acompanho o meu projeto?",
+    rot: "Como acompanho o andamento?",
     txt: [
-      "Cada projeto tem um portal próprio, com orçamento, entregas, pagamentos, contrato e comentários. O link chega por e-mail quando o projeto começa.",
-      "Com uma conta na Área do cliente, você vê as suas solicitações e todos os seus projetos num só lugar.",
+      "Cada trabalho contratado tem um portal próprio, com orçamento, entregas, pagamentos, contrato e comentários. O link chega por e-mail quando o trabalho começa.",
+      "Com uma conta na Área do cliente, você vê as suas solicitações e todos os trabalhos contratados num só lugar.",
     ],
     ops: ["@area", "solicitar"],
     kw: "acompanhar acompanhamento andamento status situacao portal entregas onde ver meu projeto login entrar acesso",
-    frases: ["acompanhar o projeto", "ver o andamento", "meu projeto", "entrar na conta"],
+    frases: ["acompanhar o projeto", "acompanhar o trabalho", "ver o andamento", "meu projeto", "entrar na conta"],
   },
   falar: {
     rot: "Falar com Josah",
-    txt: ["Os canais diretos com Josah Oliveira são:\nWhatsApp (71) 99144-8218\nE-mail contato@josahcriativos.com.br"],
+    txt: ["Os canais diretos com Josah Oliveira são:\nWhatsApp (71) 99144-8218\nE-mail josahcriativos@gmail.com"],
     ops: ["@wa", "@email"],
     kw: "falar contato contatos whatsapp zap wpp telefone celular email mail conversar atendimento humano pessoa atendente ligar",
     frases: ["falar com", "falar direto"],
