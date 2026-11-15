@@ -5,6 +5,7 @@
      txt  ... lista de baloes de resposta (\n quebra a linha)
      ops  ... proximos botoes. Nomes de outros assuntos ou acoes:
               @wa (WhatsApp), @wa_orcamento, @email, @termos,
+              @area (Área do cliente), @criar_conta (cadastro na Área do cliente),
               @ver:/endereco#id:Rotulo (rola ate a secao, ou abre a pagina se ela for outra)
      kw   ... palavras que a busca reconhece quando o visitante digita.
               "palavra:1" vale menos (palavras genericas). Sem acento.
@@ -18,11 +19,11 @@ export const BASE_CHAT = {
       "Olá! Este é o tira-dúvidas do site de Josah Oliveira.",
       "Escolha um assunto abaixo ou digite a sua pergunta.",
     ],
-    ops: ["servicos", "como_funciona", "orcamento", "prazos", "editais", "portfolio", "falar"],
+    ops: ["solicitar", "servicos", "como_funciona", "orcamento", "prazos", "editais", "portfolio", "falar"],
   },
   menu: {
     txt: ["Sobre o que mais você quer saber?"],
-    ops: ["servicos", "como_funciona", "orcamento", "prazos", "pagamento", "editais", "sobre", "falar"],
+    ops: ["solicitar", "servicos", "como_funciona", "orcamento", "prazos", "pagamento", "acompanhar", "editais", "sobre", "falar"],
   },
   servicos: {
     rot: "Quais são os serviços?",
@@ -84,9 +85,9 @@ export const BASE_CHAT = {
       "São cinco etapas, e cada uma é combinada antes de ser executada:\n1. Briefing\n2. Proposta e orçamento\n3. Produção\n4. Revisão\n5. Entrega",
       "Escopo, prazo e valores ficam definidos por escrito antes de qualquer produção.",
     ],
-    ops: ["revisoes", "prazos", "pagamento", "definir"],
-    kw: "funciona etapas etapa processo passo passos briefing comecar inicio contratar contratacao",
-    frases: ["como funciona", "como contratar", "primeiro passo"],
+    ops: ["solicitar", "revisoes", "prazos", "pagamento", "definir"],
+    kw: "funciona etapas etapa processo passo passos briefing",
+    frases: ["como funciona", "primeiro passo"],
   },
   revisoes: {
     rot: "Quantas revisões estão incluídas?",
@@ -129,9 +130,9 @@ export const BASE_CHAT = {
     rot: "Quanto custa?",
     txt: [
       "O valor depende das peças, do prazo e das exigências do edital, por isso não há tabela fixa.",
-      "Pelo WhatsApp, informe o que o projeto precisa e o prazo disponível. O retorno é uma proposta por escrito, com escopo, prazo e valores.",
+      "Faça uma solicitação na Área do cliente ou chame no WhatsApp, informando o que o projeto precisa e o prazo disponível. O retorno é uma proposta por escrito, com escopo, prazo e valores.",
     ],
-    ops: ["@wa_orcamento", "definir", "pagamento"],
+    ops: ["solicitar", "@wa_orcamento", "definir", "pagamento"],
     kw: "preco precos valor valores custa custo custos orcamento orcamentos quanto tabela cobra cobrar investimento",
     frases: ["quanto custa", "quanto cobra", "quanto fica"],
   },
@@ -189,6 +190,27 @@ export const BASE_CHAT = {
     ],
     ops: ["@termos", "pagamento"],
     kw: "termos termo politica privacidade reembolso reembolsar cancelamento cancelar devolucao desistir lgpd dados",
+  },
+  solicitar: {
+    rot: "Como faço uma solicitação?",
+    txt: [
+      "A solicitação é feita na Área do cliente, no menu do site:\n1. Crie a sua conta com nome, e-mail e senha.\n2. Confirme o e-mail com o código de 6 dígitos que chega na sua caixa de entrada.\n3. Em Nova solicitação, escolha o serviço, conte o que o projeto precisa e, se quiser, informe a data desejada e links de referência.",
+      "A resposta chega por e-mail. Na Área do cliente você acompanha a situação: enviada, em análise, aceita ou recusada.",
+      "Se a solicitação for aceita, o próximo passo é uma reunião para o briefing.",
+    ],
+    ops: ["@criar_conta", "@area", "definir", "acompanhar"],
+    kw: "solicitacao solicitacoes solicitar pedido pedir pedidos contratar contratacao conta cadastro cadastrar criar comecar iniciar orcamento:1 projeto:1 area cliente",
+    frases: ["fazer uma solicitacao", "como solicitar", "fazer um pedido", "como contratar", "criar conta", "area do cliente", "quero contratar"],
+  },
+  acompanhar: {
+    rot: "Como acompanho o meu projeto?",
+    txt: [
+      "Cada projeto tem um portal próprio, com orçamento, entregas, pagamentos, contrato e comentários. O link chega por e-mail quando o projeto começa.",
+      "Com uma conta na Área do cliente, você vê as suas solicitações e todos os seus projetos num só lugar.",
+    ],
+    ops: ["@area", "solicitar"],
+    kw: "acompanhar acompanhamento andamento status situacao portal entregas onde ver meu projeto login entrar acesso",
+    frases: ["acompanhar o projeto", "ver o andamento", "meu projeto", "entrar na conta"],
   },
   falar: {
     rot: "Falar com Josah",

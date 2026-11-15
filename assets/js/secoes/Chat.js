@@ -5,6 +5,8 @@ const WHATSAPP = "5571991448218";
 const MENSAGEM_PADRAO = "Olá, Josah! Vim pelo site de Josah Oliveira e gostaria de falar sobre um projeto.";
 const GMAIL = "https://mail.google.com/mail/?view=cm&fs=1&to=contato%40josahcriativos.com.br";
 const CHAVE_VISTO = "jc-chat-visto";
+/* Área do cliente (sistema): conta, solicitações e projetos */
+const AREA = "https://app.josahcriativos.com.br/area.html";
 
 const PARADAS = (
   "a o e de da do das dos em no na nos nas um uma uns umas para pra pro por com sem que qual quais quando como " +
@@ -62,7 +64,7 @@ export class Chat {
   abrir() {
     this.painel.hidden = false;
     this.botao.setAttribute("aria-expanded", "true");
-    this.botao.setAttribute("aria-label", "Fechar o tira-dúvidas");
+    this.botao.setAttribute("aria-label", "Fechar dúvidas e solicitações");
     this.botao.classList.remove("chat__botao--aviso");
     this.convite.hidden = true;
     this.#marcarVisto();
@@ -76,7 +78,7 @@ export class Chat {
   fechar(focar) {
     this.painel.hidden = true;
     this.botao.setAttribute("aria-expanded", "false");
-    this.botao.setAttribute("aria-label", "Abrir o tira-dúvidas");
+    this.botao.setAttribute("aria-label", "Abrir dúvidas e solicitações");
     if (focar) this.botao.focus();
   }
 
@@ -174,6 +176,13 @@ export class Chat {
       link.href = this.#linkWhatsapp(mensagem);
       link.innerHTML = icone("whatsapp-logo", "chat__opcao-icone");
       link.append(rotulo);
+      return link;
+    }
+    if (acao === "@area" || acao === "@criar_conta") {
+      const link = document.createElement("a");
+      link.className = "chat__opcao chat__opcao--acao";
+      link.href = acao === "@area" ? AREA : AREA + "?criar=1";
+      link.textContent = acao === "@area" ? "Entrar na Área do cliente" : "Criar conta";
       return link;
     }
     const botao = document.createElement("button");

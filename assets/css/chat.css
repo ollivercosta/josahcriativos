@@ -10,55 +10,92 @@
   z-index: 140;
 }
 
-/* ---------- botão ---------- */
+/* ---------- botão: selo com o rosto ilustrado e o texto "dúvidas e solicitações" girando ao redor ---------- */
 .chat__botao {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 112px;
+  height: 112px;
   display: grid;
   place-items: center;
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: #960018;
-  color: #fff;
-  box-shadow: 0 14px 32px -14px rgba(150, 0, 24, 0.7);
+  background: none;
+  color: var(--cor-tinta);
   cursor: pointer;
-  isolation: isolate;
-  transition:
-    transform 0.8s var(--curva),
-    background 0.5s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.chat__botao:hover {
+.chat__botao:focus-visible {
+  outline: 2px solid var(--cor-vermelho);
+  outline-offset: 3px;
+}
+
+.chat__selo {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 14px 22px rgba(22, 19, 15, 0.22));
+}
+
+.chat__selo-fundo {
+  fill: #fff;
+  stroke: var(--cor-linha-forte);
+  stroke-width: 1;
+}
+
+.chat__selo-texto {
+  fill: var(--cor-tinta);
+  font-family: var(--fonte);
+  font-size: 9.6px;
+  font-weight: 600;
+  font-stretch: 115%;
+}
+
+.chat__selo-anel {
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+  animation: chat-anel 28s linear infinite;
+}
+
+.chat__selo-disco {
+  fill: #960018;
+  transition: fill 0.5s ease;
+}
+
+.chat__selo-cabelo,
+.chat__selo-olho {
+  fill: #fff;
+}
+
+.chat__selo-linha {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chat__selo-rosto {
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+  transition: transform 0.8s var(--curva);
+}
+
+.chat__botao:hover .chat__selo-disco {
+  fill: #6e0012;
+}
+
+.chat__botao:hover .chat__selo-rosto {
   transform: scale(1.06);
-  background: var(--cor-tinta);
 }
 
-/* pulso: um anel da mesma cor que se expande e some, em ritmo calmo */
-.chat__botao::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: 50%;
-  background: #960018;
-  animation: chat-pulso 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
-  pointer-events: none;
-}
-
-/* com o painel aberto, ou ao passar o mouse, o pulso para */
-.chat__botao[aria-expanded="true"]::before,
-.chat__botao:hover::before {
-  animation: none;
-  opacity: 0;
-}
-
+/* ponto de aviso, junto ao convite */
 .chat__botao::after {
   content: "";
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 10px;
+  right: 10px;
   width: 14px;
   height: 14px;
   border: 2px solid #fff;
@@ -72,31 +109,36 @@
   transform: scale(1);
 }
 
-.chat__botao-abrir {
-  width: 30px;
-  height: 30px;
+/* com o painel aberto: só o disco, com o X no lugar do rosto */
+.chat__botao[aria-expanded="true"] .chat__selo-fundo,
+.chat__botao[aria-expanded="true"] .chat__selo-anel,
+.chat__botao[aria-expanded="true"] .chat__selo-rosto {
+  display: none;
 }
 
 .chat__botao-fechar {
+  position: absolute;
   display: none;
   width: 22px;
   height: 22px;
-  fill: currentColor;
-}
-
-.chat__botao[aria-expanded="true"] .chat__botao-abrir {
-  display: none;
+  fill: #fff;
 }
 
 .chat__botao[aria-expanded="true"] .chat__botao-fechar {
   display: block;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .chat__selo-anel {
+    animation: none;
+  }
+}
+
 /* ---------- convite ---------- */
 .chat__convite {
   position: absolute;
   right: 0;
-  bottom: 74px;
+  bottom: 120px;
   width: max-content;
   max-width: min(270px, calc(100vw - 40px));
   display: flex;
@@ -139,7 +181,7 @@
 .chat__painel {
   position: absolute;
   right: 0;
-  bottom: 74px;
+  bottom: 120px;
   width: min(390px, calc(100vw - 40px));
   height: min(580px, calc(100dvh - 120px));
   display: flex;
@@ -420,16 +462,9 @@
   fill: currentColor;
 }
 
-@keyframes chat-pulso {
-  0% {
-    transform: scale(1);
-    opacity: 0.55;
-  }
-
-  70%,
-  100% {
-    transform: scale(1.7);
-    opacity: 0;
+@keyframes chat-anel {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -463,16 +498,25 @@
 
 @media (max-width: 600px) {
   .chat {
-    right: 14px;
-    bottom: 14px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .chat__botao {
+    width: 92px;
+    height: 92px;
+  }
+
+  .chat__convite {
+    bottom: 100px;
   }
 
   .chat__painel {
     position: fixed;
     left: 10px;
     right: 10px;
-    bottom: 84px;
+    bottom: 108px;
     width: auto;
-    height: min(560px, calc(100dvh - 100px));
+    height: min(560px, calc(100dvh - 124px));
   }
 }
