@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node ferramentas/build.mjs"
+    "build": "node ferramentas/build.mjs",
+    "test": "node ferramentas/build.mjs && node ferramentas/testar-chat.mjs"
   },
   "devDependencies": {
     "esbuild": "0.24.0"
