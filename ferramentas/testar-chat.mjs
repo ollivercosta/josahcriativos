@@ -11,6 +11,7 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const RAIZ = new URL("../publico/", import.meta.url).pathname;
+const CONFIG = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
 const AREA = "https://app.josahcriativos.com.br/area.html";
 const TIPOS = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".woff2": "font/woff2", ".json": "application/json" };
 
@@ -19,7 +20,10 @@ const servidor = createServer(async (req, res) => {
   let arq = join(RAIZ, caminho);
   try {
     if ((await stat(arq)).isDirectory()) arq = join(arq, "index.html");
-    res.writeHead(200, { "content-type": TIPOS[extname(arq)] || "application/octet-stream" });
+    // aplica os cabeçalhos do vercel.json, como na Vercel; a CSP vale aqui em modo obrigatório (Report-Only vira bloqueio)
+    const cab = {};
+    for (const h of CONFIG.headers) if (new RegExp("^" + h.source.replace(/\(\.\*\)/g, ".*") + "$").test(caminho)) for (const x of h.headers) cab[x.key.replace("-Report-Only", "")] = x.value;
+    res.writeHead(200, { ...cab, "content-type": TIPOS[extname(arq)] || "application/octet-stream" });
     res.end(await readFile(arq));
   } catch {
     res.writeHead(404);
@@ -41,7 +45,7 @@ try {
     const pagina = await navegador.newPage({ viewport: { width: w, height: h } });
     const erros = [];
     pagina.on("pageerror", (e) => erros.push(e.message));
-    pagina.on("console", (m) => m.type() === "error" && !/Failed to load resource|vlibras/i.test(m.text()) && erros.push(m.text()));
+    pagina.on("console", (m) => m.type() === "error" && !/Failed to load resource/i.test(m.text()) && !/^(?!.*Content Security Policy).*vlibras/i.test(m.text()) && erros.push(m.text()));
     await pagina.goto(URL_SITE);
     await pagina.waitForTimeout(600);
     await pagina.click(".chat__botao");
@@ -75,6 +79,28 @@ try {
     conferir(erros.length === 0, `${nome}: sem erros no console ${erros.join("; ")}`);
     await pagina.close();
   }
+  // páginas de trabalho e Sobre carregam sem violar a CSP (o VLibras não carrega aqui: a rede de teste não alcança o gov.br)
+  for (const caminho of ["sobre", "trabalhos/fera"]) {
+    const p = await navegador.newPage();
+    const v = [];
+    p.on("console", (m) => /Content Security Policy/.test(m.text()) && !/vlibras/i.test(m.text()) && v.push(m.text()));
+    await p.goto(URL_SITE + caminho + ".html");
+    await p.waitForTimeout(800);
+    conferir(v.length === 0, `${caminho}: sem violação da CSP ${v.join("; ")}`);
+    await p.close();
+  }
+  // cabeçalhos de segurança declarados
+  const todos = Object.fromEntries(CONFIG.headers[0].headers.map((x) => [x.key, x.value]));
+  for (const k of ["Strict-Transport-Security", "Permissions-Policy", "Cross-Origin-Opener-Policy", "Cross-Origin-Resource-Policy", "X-Content-Type-Options", "Referrer-Policy", "X-Frame-Options"]) conferir(!!todos[k], "cabeçalho " + k);
+  conferir(/preload/.test(todos["Strict-Transport-Security"] || ""), "HSTS com preload");
+  const csp = todos["Content-Security-Policy"] || todos["Content-Security-Policy-Report-Only"] || "";
+  conferir(/object-src 'none'/.test(csp) && /base-uri 'none'/.test(csp) && !/script-src[^;]*'unsafe-inline'/.test(csp), "CSP sem script inline, sem object e sem base");
+  // nada de protótipos publicados e escapamento das páginas de trabalho
+  const { existsSync } = await import("node:fs");
+  conferir(!existsSync(RAIZ + "prototipos"), "protótipos fora do site publicado");
+  const { escapar } = await import("./paginaDoProjeto.mjs").catch(() => ({}));
+  if (escapar) conferir(!/'/.test(escapar("a'b")), "aspa simples escapada nas páginas de trabalho");
+  conferir((CONFIG.images.remotePatterns || []).every((r) => r.hostname === "i.ytimg.com"), "otimização de imagem só para as miniaturas do YouTube");
   // nenhuma página publicada usa o e-mail pessoal
   const html = await (await fetch(URL_SITE)).text();
   conferir(!/josahcriativos(@|%40)gmail/.test(html), "a página inicial publicada não tem o e-mail pessoal");

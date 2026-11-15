@@ -15,12 +15,13 @@ import { capaDoTrabalho, ehImagem, enderecoDoTrabalho } from "../assets/dados/tr
 const SITE = "https://josahcriativos.com.br";
 const FALTA_INFORMAR = "A informar";
 
-const escapar = (texto) =>
+export const escapar = (texto) =>
   String(texto ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 /** Trecho do index.html entre dois marcadores (o primeiro incluído, o segundo não). */
 function trecho(html, inicio, fim) {
@@ -265,7 +266,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
       </nav>
     </header>
 
-    <main id="conteudo" class="projeto__corpo" data-imagens='${escapar(JSON.stringify(imagensAmpliaveis(trabalho)))}'>
+    <main id="conteudo" class="projeto__corpo" data-imagens="${escapar(JSON.stringify(imagensAmpliaveis(trabalho)))}">
       <!-- ABERTURA: a categoria, o nome e o desafio -->
       <section class="projeto__abertura">
         <div class="projeto__abertura-nome">

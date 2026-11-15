@@ -39,6 +39,26 @@
         {
           "key": "X-Frame-Options",
           "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-site"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' https://vlibras.gov.br https://*.vlibras.gov.br; style-src 'self' 'unsafe-inline' https://vlibras.gov.br https://*.vlibras.gov.br; img-src 'self' data: blob: https://i.ytimg.com https://vlibras.gov.br https://*.vlibras.gov.br; font-src 'self' data: https://vlibras.gov.br https://*.vlibras.gov.br; connect-src 'self' https://vlibras.gov.br https://*.vlibras.gov.br; media-src 'self' blob: https://vlibras.gov.br https://*.vlibras.gov.br; frame-src https://www.youtube-nocookie.com https://player.vimeo.com https://drive.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
         }
       ]
     }
@@ -59,15 +79,8 @@
     "remotePatterns": [
       {
         "protocol": "https",
-        "hostname": "blogger.googleusercontent.com"
-      },
-      {
-        "protocol": "https",
-        "hostname": "mir-s3-cdn-cf.behance.net"
-      },
-      {
-        "protocol": "https",
-        "hostname": "i.ytimg.com"
+        "hostname": "i.ytimg.com",
+        "pathname": "/vi/**"
       }
     ]
   }

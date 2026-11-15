@@ -111,8 +111,8 @@ for (const caminho of [
   "favicon-48.png",
   "apple-touch-icon.png",
   "og-image.png",
-  /* protótipos de direção visual, só para avaliação; não são linkados pelo site */
-  "prototipos",
+  /* protótipos de direção visual (pasta prototipos/) ficam fora do site publicado: eram páginas soltas, indexáveis e com uma
+     cópia antiga dos termos (achado do pentest de 2026-11-15). Para avaliar, abra o arquivo direto no computador. */
 ]) {
   await cp(caminho, `${SAIDA}/${caminho}`, { recursive: true });
 }
