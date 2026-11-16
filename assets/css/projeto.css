@@ -23,7 +23,7 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 var(--margem);
-  background: rgba(253, 248, 241, 0.92);
+  background: rgb(var(--fundo-rgb) / 0.92);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--cor-linha);
@@ -190,7 +190,7 @@
 .projeto__chave--livro {
   padding: clamp(28px, 4vw, 56px) clamp(16px, 3vw, 40px) clamp(20px, 3vw, 32px);
   border-radius: var(--raio-g, 20px);
-  background: radial-gradient(70% 70% at 50% 35%, var(--azul-s) 0%, rgba(226, 237, 242, 0) 100%);
+  background: radial-gradient(70% 70% at 50% 35%, var(--azul-s) 0%, transparent 100%);
 }
 
 .projeto__livro {
@@ -357,7 +357,7 @@
   gap: 10px;
   aspect-ratio: 16 / 10;
   background:
-    repeating-linear-gradient(135deg, transparent 0 22px, rgba(10, 32, 55, 0.025) 22px 23px),
+    repeating-linear-gradient(135deg, transparent 0 22px, rgb(var(--sombra-rgb) / 0.025) 22px 23px),
     var(--cor-cinza-claro);
   text-align: center;
 }
@@ -433,7 +433,7 @@
   color: var(--cor-tinta);
   font-size: 0.78rem;
   font-weight: 600;
-  box-shadow: 0 4px 14px rgba(10, 32, 55, 0.14);
+  box-shadow: 0 4px 14px rgb(var(--sombra-rgb) / 0.14);
   opacity: 0;
   transform: translateY(6px);
   transition:
@@ -454,8 +454,8 @@
   overflow: hidden;
   background: var(--superficie);
   box-shadow:
-    0 1px 2px rgba(10, 32, 55, 0.08),
-    0 24px 50px -20px rgba(10, 32, 55, 0.35);
+    0 1px 2px rgb(var(--sombra-rgb) / 0.08),
+    0 24px 50px -20px rgb(var(--sombra-rgb) / 0.35);
 }
 
 .projeto__site-barra {
@@ -531,7 +531,7 @@
   gap: clamp(28px, 4vw, 64px);
   margin-top: clamp(56px, 9vh, 100px);
   padding: clamp(32px, 5vh, 48px) clamp(24px, 3vw, 48px);
-  background: #f3f2ef87;
+  background: rgb(var(--fundo-alt-rgb) / 0.53);
 }
 
 .projeto__regua-texto {
@@ -642,7 +642,7 @@
   z-index: 400;
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: rgba(34, 31, 27, 0.96);
+  background: rgb(var(--escuro-rgb) / 0.96);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -672,9 +672,9 @@
   place-items: center;
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(253, 248, 241, 0.3);
+  border: 1px solid rgb(var(--sobre-cor-rgb) / 0.3);
   border-radius: 50%;
-  background: rgba(34, 31, 27, 0.6);
+  background: rgb(var(--escuro-rgb) / 0.6);
   color: var(--texto-sobre-cor);
   font: inherit;
   font-size: 1.2rem;
@@ -685,7 +685,7 @@
 .ampliada__fechar:hover,
 .ampliada__anterior:hover,
 .ampliada__seguinte:hover {
-  background: rgba(253, 248, 241, 0.16);
+  background: rgb(var(--sobre-cor-rgb) / 0.16);
 }
 
 .ampliada__fechar {

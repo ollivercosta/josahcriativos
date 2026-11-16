@@ -1,25 +1,36 @@
-"""Gera as escalas de cor do site (50 a 950) em OKLCH e converte para hex.
+"""Gera as escalas de cor do site (25/50 a 950) em OKLCH, converte para hex e
+monta o bloco :root inteiro de assets/css/base.css.
 
 Uso: python3 ferramentas/cor/escalas.py            (imprime a tabela)
      python3 ferramentas/cor/escalas.py --json     (imprime as escalas em JSON)
-     python3 ferramentas/cor/escalas.py --css      (imprime os tokens :root)
+     python3 ferramentas/cor/escalas.py --root     (imprime o bloco :root completo de base.css)
 
-Regras:
-- Cada matiz tem um degrau-âncora com a cor exata da referência Riviera.
-- A luminosidade (L do OKLCH) segue degraus perceptuais fixos; o croma é
-  reduzido nas pontas (fundos claros e textos escuros ficam calmos).
-- Cor fora do gamut sRGB: o croma desce até caber (o L e o matiz ficam).
+Paleta v2 (nov/2026), "papel, tinta e urucum":
+- papel: o neutro. Matiz 85 (claros) a 65 (escuros), croma baixo. Fundos,
+  cartões, bordas e texto corrido. É o 60.
+- tinta: a estrutura. O mesmo matiz do papel, com croma mínimo (0.008 a 0.010):
+  nos escuros é um carvão de tinta de impressão, levemente quente, sem virar marrom. Títulos, superfícies fortes e o bloco do
+  contato. É o 30. Papel e tinta são a mesma família: a página é uma folha
+  impressa, não uma colagem de chapas.
+- urucum: o acento (vermelho-alaranjado do pigmento). Só ação e interação. É o 10.
+- palha: o pigmento do próprio papel, com mais croma (mesmo matiz). Detalhes
+  materiais: vistos, aspas, etiquetas de público.
+- semânticas (sucesso, aviso, erro, info): mesma régua de L e croma moderado.
+
+Regras de construção:
+- A luminosidade (L do OKLCH) segue degraus perceptuais fixos (L_ALVO).
+- O croma é baixo nas pontas e sobe no meio; o matiz desliza dos claros para os escuros.
+- Cor fora do gamut sRGB: o croma desce até caber (L e matiz ficam).
 """
 
 import json
 import math
 import sys
 
-DEGRAUS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+DEGRAUS = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-# luminosidade OKLCH alvo de cada degrau (as âncoras sobrescrevem o seu degrau)
-L_ALVO = {50: 0.982, 100: 0.952, 200: 0.905, 300: 0.840, 400: 0.755, 500: 0.665,
-          600: 0.575, 700: 0.490, 800: 0.410, 900: 0.330, 950: 0.240}
+L_ALVO = {25: 0.994, 50: 0.979, 100: 0.952, 200: 0.905, 300: 0.840, 400: 0.755, 500: 0.665,
+          600: 0.575, 700: 0.490, 800: 0.410, 900: 0.330, 950: 0.235}
 
 
 # ---------- conversões sRGB <-> OKLab <-> OKLCH ----------
@@ -76,84 +87,182 @@ def hex_oklch(hx):
     return L, math.hypot(a, b), math.degrees(math.atan2(b, a)) % 360
 
 
-# ---------- definição das famílias ----------
-# croma por degrau (50 ... 950): baixo nas pontas, pico no meio.
-# matiz: (matiz dos claros, matiz dos escuros); desliza entre os dois.
+# ---------- famílias ----------
+# matiz: (claros, escuros), desliza até o degrau 600; croma: um valor por degrau (25 ... 950)
 FAMILIAS = {
-    # azul Riviera: âncora 900 = #183451. Nos claros o matiz desliza para o
-    # azul-céu do tecido da foto (mais ciano) com croma baixo (névoa, não neon).
-    "azul": {"ancora": (900, "#183451"), "matiz": (232, 251),
-             "croma": [0.008, 0.018, 0.032, 0.045, 0.058, 0.066, 0.070, 0.070, 0.068, None, 0.052]},
-    # terracota moderna: âncora 600 = #A9501C
-    "terracota": {"ancora": (600, "#a9501c"), "matiz": (58, 47),
-                  "croma": [0.012, 0.030, 0.060, 0.095, 0.125, 0.140, None, 0.122, 0.100, 0.075, 0.050]},
-    # areia (Sand Linen): âncora 400 = #D4AF83
-    "areia": {"ancora": (400, "#d4af83"), "matiz": (78, 70),
-              "croma": [0.012, 0.026, 0.045, 0.062, None, 0.074, 0.070, 0.064, 0.055, 0.044, 0.032]},
-    # marfim: o neutro quente (subtom quente declarado, matiz ~82).
-    # Âncora 100 = #F3ECDE (Soft Ivory). Escuros quase sem croma: texto neutro.
-    "marfim": {"ancora": (100, "#f3ecde"), "matiz": (80, 75),
-               "croma": [0.011, None, 0.020, 0.020, 0.018, 0.016, 0.014, 0.012, 0.010, 0.009, 0.008]},
-    # semânticas: mesmos degraus de L e croma na faixa da paleta
-    "sucesso": {"ancora": None, "matiz": (160, 156),
-                "croma": [0.014, 0.032, 0.060, 0.085, 0.100, 0.105, 0.100, 0.090, 0.075, 0.058, 0.040]},
-    "aviso": {"ancora": None, "matiz": (88, 76),
-              "croma": [0.018, 0.045, 0.085, 0.110, 0.120, 0.120, 0.115, 0.100, 0.084, 0.066, 0.048]},
-    "erro": {"ancora": None, "matiz": (10, 14),
-             "croma": [0.010, 0.026, 0.050, 0.090, 0.135, 0.150, 0.150, 0.135, 0.110, 0.080, 0.050]},
+    "papel": {"matiz": (85, 65),
+              "croma": [0.004, 0.007, 0.012, 0.015, 0.016, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.009]},
+    "tinta": {"matiz": (85, 60),
+              "croma": [0.004, 0.006, 0.009, 0.010, 0.010, 0.009, 0.009, 0.009, 0.009, 0.009, 0.008, 0.008]},
+    "urucum": {"matiz": (52, 37),
+               "croma": [0.008, 0.016, 0.036, 0.068, 0.110, 0.150, 0.170, 0.172, 0.150, 0.124, 0.096, 0.066]},
+    "palha": {"matiz": (88, 76),
+              "croma": [0.008, 0.016, 0.030, 0.050, 0.068, 0.080, 0.082, 0.078, 0.068, 0.056, 0.044, 0.032]},
+    "sucesso": {"matiz": (158, 154),
+                "croma": [0.008, 0.016, 0.034, 0.062, 0.088, 0.104, 0.108, 0.104, 0.092, 0.078, 0.060, 0.042]},
+    "aviso": {"matiz": (88, 74),
+              "croma": [0.010, 0.022, 0.050, 0.090, 0.116, 0.126, 0.124, 0.118, 0.104, 0.088, 0.068, 0.050]},
+    "erro": {"matiz": (12, 14),
+             "croma": [0.006, 0.012, 0.028, 0.054, 0.094, 0.138, 0.154, 0.152, 0.136, 0.112, 0.082, 0.052]},
+    "info": {"matiz": (235, 250),
+             "croma": [0.005, 0.010, 0.022, 0.040, 0.058, 0.072, 0.080, 0.080, 0.076, 0.066, 0.054, 0.040]},
 }
 
-
-def _l_remapeado(d, d_anc, L_anc):
-    """Ajusta os degraus de L para a âncora cair no seu degrau sem colar nos vizinhos."""
-    L = L_ALVO[d]
-    if d_anc is None or d == d_anc:
-        return L
-    La = L_ALVO[d_anc]
-    if d < d_anc:   # lado claro: de L_ALVO[50] até a âncora
-        top = L_ALVO[50]
-        return top - (top - L) / (top - La) * (top - L_anc)
-    bot = L_ALVO[950]
-    return bot + (L - bot) / (La - bot) * (L_anc - bot)
+# o urucum-600 é o CTA: L um pouco abaixo da régua para o texto claro passar com folga (>= 4.8)
+AJUSTE_L = {("urucum", 600): 0.555, ("urucum", 500): 0.640}
 
 
 def escala(nome, f):
-    d_anc, hx, L_anc = None, None, None
-    if f["ancora"]:
-        d_anc, hx = f["ancora"]
-        L_anc = hex_oklch(hx)[0]
     out = {}
     for i, d in enumerate(DEGRAUS):
-        if d == d_anc:
-            out[d] = hx
-            continue
-        t = min(1, i / 6)  # o matiz chega ao dos escuros no degrau 600
+        t = min(1, i / 7)
         h = f["matiz"][0] + (f["matiz"][1] - f["matiz"][0]) * t
-        out[d] = oklch_hex(_l_remapeado(d, d_anc, L_anc), f["croma"][i], h)
+        out[d] = oklch_hex(AJUSTE_L.get((nome, d), L_ALVO[d]), f["croma"][i], h)
     return out
 
 
 ESCALAS = {n: escala(n, f) for n, f in FAMILIAS.items()}
+E = ESCALAS
+
+# cursores do título (Titulo.js): mesma luz (L 0.50) e croma moderado, matizes distribuídos
+AGENTES = {
+    "grid": E["tinta"][900],
+    "contorno": oklch_hex(0.50, 0.090, 245),
+    "curvas": oklch_hex(0.50, 0.095, 305),
+    "vetores": oklch_hex(0.50, 0.095, 158),
+    "cor": E["urucum"][600],
+    "espaco": oklch_hex(0.50, 0.100, 78),
+    "medidas": oklch_hex(0.48, 0.115, 2),
+}
+
+# ---------- papéis: o token aponta para um degrau ----------
+PAPEIS = [
+    ("fundo", "papel-50", "fundo dominante (A)"),
+    ("fundo-alt", "papel-100", "fundo alternado (B)"),
+    ("superficie", "papel-25", "cartões, campos, pílulas ativas"),
+    ("borda", "papel-200", "bordas e divisórias, trilha de filtros"),
+    ("borda-forte", "papel-300", "contorno de botão secundário, fio apagado"),
+    ("borda-controle", "papel-500", "borda de campo de texto (3:1)"),
+    ("texto-titulo", "tinta-950", "títulos"),
+    ("texto-sobre-cor", "papel-50", "texto sobre tinta e urucum"),
+    ("acao", "urucum-600", "CTA principal"),
+    ("acao-hover", "urucum-700", "CTA hover"),
+    ("acao-active", "urucum-800", "CTA active"),
+    ("acao-escuro", "urucum-400", "CTA sobre o bloco de tinta (texto tinta-950)"),
+    ("acao-escuro-hover", "urucum-300", "CTA sobre o bloco de tinta, hover"),
+    ("acao-2", "tinta-900", "ação secundária"),
+    ("acao-2-hover", "tinta-800", "ação secundária hover"),
+    ("link", "tinta-900", "link em texto (sempre sublinhado)"),
+    ("foco", "urucum-700", "anel de foco"),
+    ("selecao", "urucum-100", "seleção de texto"),
+    ("nevoa", "papel-25", "luz da abertura e do book"),
+    ("destaque", "urucum-600", "palavra forte"),
+    ("rotulo", "urucum-700", "rótulos de seção"),
+    ("forte", "tinta-900", "superfícies fortes"),
+    ("forte-2", "tinta-950", "bloco do contato"),
+]
+
+# nomes de escala que as folhas das seções já usam: apontam para as famílias novas.
+# azul = estrutura (tinta), terracota = acento (urucum), marfim = neutro (papel), areia = detalhe (palha)
+ALIAS_FAMILIA = {"azul": "tinta", "terracota": "urucum", "marfim": "papel", "areia": "palha"}
+
+ALIASES = [
+    ("azul", "tinta-900"), ("azul-esc", "tinta-950"), ("azul-2", "tinta-700"), ("azul-3", "tinta-400"),
+    ("azul-s", "tinta-100"), ("azul-ss", "tinta-50"),
+    ("terracota", "urucum-600"), ("terracota-esc", "urucum-700"), ("terracota-claro", "urucum-500"),
+    ("terracota-s", "urucum-100"), ("areia", "palha-400"), ("areia-s", "palha-100"), ("marfim", "papel-100"),
+    ("ink", "tinta-950"), ("texto", "papel-900"), ("suave", "papel-700"), ("linha", "papel-200"),
+    ("linha-2", "papel-300"), ("fundo-claro", "papel-100"), ("branco", "papel-50"),
+]
 
 
-def tokens_css():
-    linhas = [":root {"]
-    for n, e in ESCALAS.items():
+def canais(hx):
+    r, g, b = (round(c * 255) for c in hex_rgb(hx))
+    return f"{r} {g} {b}"
+
+
+def tok(ref):
+    fam, d = ref.rsplit("-", 1)
+    return E[fam][int(d)]
+
+
+def bloco_root():
+    L = [":root {",
+         "  /* escalas 25 a 950 (OKLCH; geradas por ferramentas/cor/escalas.py --root) */"]
+    for n, e in E.items():
         for d, hx in e.items():
-            linhas.append(f"  --{n}-{d}: {hx};")
-    linhas.append("}")
-    return "\n".join(linhas)
+            L.append(f"  --{n}-{d}: {hx};")
+    L.append("")
+    L.append("  /* nomes de escala que as folhas das seções usam, apontando para as famílias:")
+    L.append("     azul = tinta (estrutura), terracota = urucum (acento), marfim = papel (neutro), areia = palha */")
+    for velho, novo in ALIAS_FAMILIA.items():
+        for d in DEGRAUS:
+            L.append(f"  --{velho}-{d}: var(--{novo}-{d});")
+    L.append("")
+    L.append("  /* papéis: os componentes usam estes nomes, não os degraus soltos */")
+    for t, ref, _ in PAPEIS:
+        L.append(f"  --{t}: var(--{ref});")
+    L.append("")
+    L.append("  /* canais RGB para transparências: rgb(var(--sombra-rgb) / 0.1) */")
+    L.append(f"  --sombra-rgb: {canais(E['tinta'][950])};")
+    L.append(f"  --fundo-rgb: {canais(E['papel'][50])};")
+    L.append(f"  --fundo-alt-rgb: {canais(E['papel'][100])};")
+    L.append(f"  --superficie-rgb: {canais(E['papel'][25])};")
+    L.append(f"  --escuro-rgb: {canais(E['papel'][950])};")
+    L.append(f"  --sobre-cor-rgb: {canais(E['papel'][50])};")
+    L.append("")
+    L.append("  /* cursores do título (Titulo.js): mesma luz, matizes distribuídos */")
+    for k, v in AGENTES.items():
+        L.append(f"  --agente-{k}: {v};")
+    L.append("")
+    L.append("  /* nomes usados nas folhas das seções */")
+    for t, ref in ALIASES:
+        L.append(f"  --{t}: var(--{ref});")
+    L.append("")
+    L.append("  /* nomes antigos, mantidos para as janelas (visor, termos, chat) e as páginas de trabalho */")
+    for a, b in [("cor-fundo", "var(--branco)"), ("cor-tinta", "var(--ink)"), ("cor-vermelho", "var(--tinta-800)"),
+                 ("cor-tinta-suave", "var(--suave)"), ("cor-tinta-apagada", "rgb(var(--sombra-rgb) / 0.16)"),
+                 ("cor-linha", "var(--linha)"), ("cor-linha-forte", "var(--linha-2)"),
+                 ("cor-cinza-claro", "var(--fundo-claro)")]:
+        L.append(f"  --{a}: {b};")
+    L.append("")
+    L.append('  --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;')
+    L.append("""
+  /* curvas: desaceleram no fim, sem rebote */
+  --curva: cubic-bezier(0.22, 1, 0.36, 1);
+  --curva-suave: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --curva-entra-sai: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --raio: 12px;
+  --raio-g: 20px;
+  --sombra: 0 1px 2px rgb(var(--sombra-rgb) / 0.05), 0 12px 32px -12px rgb(var(--sombra-rgb) / 0.16);
+  --sombra-g: 0 2px 4px rgb(var(--sombra-rgb) / 0.05), 0 40px 90px -30px rgb(var(--sombra-rgb) / 0.32);
+
+  --largura: 1180px;
+  --margem: clamp(20px, 4vw, 40px);
+  --espaco-secao: clamp(80px, 10vw, 136px);
+  --espaco-titulo: clamp(32px, 4vw, 56px);
+  --altura-cabecalho: 60px;
+
+  /* tipografia: um tamanho para os títulos das seções, outro para a abertura */
+  --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
+  --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
+}""")
+    return "\n".join(L)
 
 
 if __name__ == "__main__":
     if "--json" in sys.argv:
         print(json.dumps(ESCALAS, indent=1))
-    elif "--css" in sys.argv:
-        print(tokens_css())
+    elif "--root" in sys.argv:
+        print(bloco_root())
     else:
-        print("degrau  " + "  ".join(f"{n:>10}" for n in ESCALAS))
+        print("degrau  " + "  ".join(f"{n:>9}" for n in ESCALAS))
         for d in DEGRAUS:
-            print(f"{d:>6}  " + "  ".join(f"{ESCALAS[n][d]:>10}" for n in ESCALAS))
+            print(f"{d:>6}  " + "  ".join(f"{ESCALAS[n][d]:>9}" for n in ESCALAS))
         print()
         for n, e in ESCALAS.items():
             print(n, " ".join(f"{d}:L{hex_oklch(h)[0]:.3f}/C{hex_oklch(h)[1]:.3f}/h{hex_oklch(h)[2]:.0f}" for d, h in e.items()))
+        print()
+        for k, v in AGENTES.items():
+            print("agente", k, v)

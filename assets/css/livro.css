@@ -80,20 +80,20 @@
 .livro__lado--esq::after {
   background: linear-gradient(
     to left,
-    rgba(10, 32, 55, 0.34) 0,
-    rgba(10, 32, 55, 0.12) 1.6%,
-    rgba(253, 248, 241, 0.05) 4%,
-    rgba(10, 32, 55, 0) 9%
+    rgb(var(--sombra-rgb) / 0.34) 0,
+    rgb(var(--sombra-rgb) / 0.12) 1.6%,
+    rgb(var(--sobre-cor-rgb) / 0.05) 4%,
+    transparent 9%
   );
 }
 
 .livro__lado--dir::after {
   background: linear-gradient(
     to right,
-    rgba(10, 32, 55, 0.34) 0,
-    rgba(10, 32, 55, 0.12) 1.6%,
-    rgba(253, 248, 241, 0.05) 4%,
-    rgba(10, 32, 55, 0) 9%
+    rgb(var(--sombra-rgb) / 0.34) 0,
+    rgb(var(--sombra-rgb) / 0.12) 1.6%,
+    rgb(var(--sobre-cor-rgb) / 0.05) 4%,
+    transparent 9%
   );
 }
 

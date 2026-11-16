@@ -1,67 +1,36 @@
-"""Papéis de cor, contraste WCAG 2.2 e simulação de daltonismo do site.
+"""Papéis de cor, contraste WCAG 2.2, névoa da abertura e simulação de daltonismo do site.
 
-Uso: python3 ferramentas/cor/validar.py           (tabela em texto)
+Uso: python3 ferramentas/cor/validar.py           (relatório em texto)
      python3 ferramentas/cor/validar.py --md      (tabelas em Markdown, para docs/design/cor.md)
+     python3 ferramentas/cor/validar.py --papeis  (lista token -> hex)
 
 - Contraste: fórmula de luminância relativa da WCAG 2.x.
   Mínimos: texto normal 4.5, texto grande 3.0, gráfico/borda de controle 3.0.
   "decorativo" é só informativo (sem mínimo).
+- Névoa: amostra o degradê da abertura (mistura em sRGB, como o navegador faz)
+  e mede croma e matiz OKLCH em cada passo. Uma transição "suja" aparece como
+  matiz que atravessa o cinza (croma perto de zero no meio, matiz mudando de lado).
 - Daltonismo: matrizes de Machado, Oliveira e Fernandes (2009), severidade 1.0,
   aplicadas em RGB linear. Para cada par que precisa ser distinguido, mede a
-  diferença perceptual (deltaE OK, distância euclidiana em OKLab, x100) e o
-  contraste de luminância depois da simulação. Distinto = deltaE OK >= 10 ou
-  contraste >= 1.5 (e com o reforço não-cromático indicado na coluna "apoio").
+  diferença perceptual (deltaE OK x100) e o contraste de luminância depois da
+  simulação. Distinto = deltaE OK >= 10 ou contraste >= 1.5 (com o apoio indicado).
 """
 
+import math
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from escalas import ESCALAS, _lin, _gam, hex_rgb, rgb_hex, rgb_oklab, oklch_hex  # noqa: E402
+from escalas import ESCALAS, PAPEIS as PAPEIS_DEF, AGENTES, _lin, _gam, hex_rgb, rgb_hex, rgb_oklab, tok  # noqa: E402
 
 E = ESCALAS
-SUPERFICIE_ELEVADA = oklch_hex(0.993, 0.006, 80)  # "marfim-25": cartões sobre os dois fundos
-
-# ---------- papéis (tokens de propósito) ----------
-PAPEIS = {
-    "fundo": E["marfim"][50],
-    "fundo-alt": E["marfim"][100],
-    "superficie": SUPERFICIE_ELEVADA,
-    "borda": E["marfim"][200],
-    "borda-forte": E["marfim"][300],
-    "borda-controle": E["marfim"][500],
-    "texto-titulo": E["azul"][950],
-    "texto": E["marfim"][900],
-    "texto-2": E["marfim"][700],
-    "texto-apagado": E["marfim"][300],
-    "texto-sobre-cor": E["marfim"][50],
-    "acao": E["terracota"][600],
-    "acao-hover": E["terracota"][700],
-    "acao-active": E["terracota"][800],
-    "acao-desativada-fundo": E["marfim"][200],
-    "acao-desativada-texto": E["marfim"][600],
-    "acao-2": E["azul"][900],
-    "acao-2-hover": E["azul"][800],
-    "link": E["azul"][800],
-    "foco": E["azul"][700],
-    "selecao": E["azul"][100],
-    "destaque": E["terracota"][600],
-    "rotulo": E["terracota"][700],
-    "forte": E["azul"][900],
-    "forte-2": E["azul"][950],
-    "nevoa": E["azul"][100],
-}
-
-# cursores do título (Titulo.js): mesma luminosidade e croma, matizes da paleta
-AGENTES = {
-    "Grid": E["azul"][900],
-    "Contorno": oklch_hex(0.50, 0.085, 240),
-    "Curvas": oklch_hex(0.50, 0.090, 300),
-    "Vetores": E["sucesso"][700],
-    "Cor": E["terracota"][600],
-    "Espaçamento": E["aviso"][700],
-    "Medidas": oklch_hex(0.48, 0.110, 5),
-}
+P = {t: tok(ref) for t, ref, _ in PAPEIS_DEF}
+P["texto"] = E["papel"][900]
+P["texto-2"] = E["papel"][700]
+P["texto-apagado"] = E["papel"][300]
+P["acao-desativada-fundo"] = E["papel"][200]
+P["acao-desativada-texto"] = E["papel"][600]
+PAPEIS = P
 
 
 def lum(hx):
@@ -81,98 +50,111 @@ def sobre(fg, bg, alfa):
 
 
 MIN = {"texto": 4.5, "grande": 3.0, "grafico": 3.0, "decorativo": 0}
+T, U, Pa, Pl = E["tinta"], E["urucum"], E["papel"], E["palha"]
 
-P = PAPEIS
 # (onde, frente, fundo, tipo)
 PARES = [
-    ("Texto corrido no fundo", P["texto"], P["fundo"], "texto"),
+    ("Texto corrido (papel-900) no fundo", P["texto"], P["fundo"], "texto"),
     ("Texto corrido no fundo-alt", P["texto"], P["fundo-alt"], "texto"),
     ("Texto corrido em cartão", P["texto"], P["superficie"], "texto"),
-    ("Texto secundário no fundo", P["texto-2"], P["fundo"], "texto"),
+    ("Texto secundário (papel-700) no fundo", P["texto-2"], P["fundo"], "texto"),
     ("Texto secundário no fundo-alt", P["texto-2"], P["fundo-alt"], "texto"),
     ("Texto secundário em cartão", P["texto-2"], P["superficie"], "texto"),
-    ("Texto secundário na barra de filtros (marfim-200)", P["texto-2"], E["marfim"][200], "texto"),
-    ("Título no fundo", P["texto-titulo"], P["fundo"], "texto"),
+    ("Texto secundário na trilha dos filtros (papel-200)", P["texto-2"], Pa[200], "texto"),
+    ("Título (tinta-950) no fundo", P["texto-titulo"], P["fundo"], "texto"),
     ("Título no fundo-alt", P["texto-titulo"], P["fundo-alt"], "texto"),
-    ("Título na névoa da abertura (azul-100)", P["texto-titulo"], P["nevoa"], "texto"),
-    ("Rótulo (terracota-700) no fundo", P["rotulo"], P["fundo"], "texto"),
-    ("Rótulo (terracota-700) no fundo-alt", P["rotulo"], P["fundo-alt"], "texto"),
-    ("Rótulo da abertura (terracota-600, 2rem) na névoa", P["destaque"], P["nevoa"], "grande"),
-    ("Palavra forte do manifesto (terracota-600)", P["destaque"], P["fundo"], "grande"),
+    ("Título na névoa (papel-25)", P["texto-titulo"], P["nevoa"], "texto"),
+    ("Rótulo (urucum-700) no fundo", P["rotulo"], P["fundo"], "texto"),
+    ("Rótulo (urucum-700) no fundo-alt", P["rotulo"], P["fundo-alt"], "texto"),
+    ("Rótulo (urucum-700) no cartão", P["rotulo"], P["superficie"], "texto"),
+    ("Rótulo da abertura (urucum-700, 2rem) na névoa", P["rotulo"], P["nevoa"], "grande"),
+    ("Palavra forte do manifesto (urucum-600, grande)", P["destaque"], P["fundo"], "grande"),
     ("Manifesto: palavra ainda apagada (transitória)", P["texto-apagado"], P["fundo"], "decorativo"),
-    ("Link (azul-800) no fundo", P["link"], P["fundo"], "texto"),
-    ("Cabeçalho: link (texto-2) sobre a névoa", P["texto-2"], sobre(P["fundo"], P["nevoa"], 0.72), "texto"),
-    ("CTA: texto no terracota-600", P["texto-sobre-cor"], P["acao"], "texto"),
-    ("CTA hover: texto no terracota-700", P["texto-sobre-cor"], P["acao-hover"], "texto"),
-    ("CTA active: texto no terracota-800", P["texto-sobre-cor"], P["acao-active"], "texto"),
+    ("Link (tinta-900, sublinhado) no fundo", P["link"], P["fundo"], "texto"),
+    ("Link no fundo-alt", P["link"], P["fundo-alt"], "texto"),
+    ("Cabeçalho: link (texto-2) sobre fundo 55% na névoa", P["texto-2"], sobre(P["fundo"], P["nevoa"], 0.55), "texto"),
+    ("CTA: texto (papel-50) no urucum-600", P["texto-sobre-cor"], P["acao"], "texto"),
+    ("CTA hover: texto no urucum-700", P["texto-sobre-cor"], P["acao-hover"], "texto"),
+    ("CTA active: texto no urucum-800", P["texto-sobre-cor"], P["acao-active"], "texto"),
     ("CTA (forma) contra o fundo", P["acao"], P["fundo"], "grafico"),
+    ("CTA (forma) contra o fundo-alt", P["acao"], P["fundo-alt"], "grafico"),
     ("CTA desativado: texto", P["acao-desativada-texto"], P["acao-desativada-fundo"], "decorativo"),
-    ("Ação secundária: texto/borda azul-900 no fundo", P["acao-2"], P["fundo"], "texto"),
-    ("Ação secundária hover: texto no azul-900", P["texto-sobre-cor"], P["acao-2"], "texto"),
-    ("Foco (azul-700) no fundo", P["foco"], P["fundo"], "grafico"),
-    ("Foco (azul-700) no fundo-alt", P["foco"], P["fundo-alt"], "grafico"),
-    ("Foco no bloco azul (anel marfim-50)", P["texto-sobre-cor"], E["azul"][950], "grafico"),
-    ("Borda de campo (marfim-500) em cartão", P["borda-controle"], P["superficie"], "grafico"),
-    ("Seleção de texto", P["texto-titulo"], P["selecao"], "texto"),
-    ("Tag Destaque (terracota-800 em terracota-100)", E["terracota"][800], E["terracota"][100], "texto"),
-    ("Serviço aceso (terracota-800 em terracota-100)", E["terracota"][800], E["terracota"][100], "texto"),
-    ("Serviço apagado (texto-2 no fundo)", P["texto-2"], P["fundo"], "texto"),
-    ("Público (areia-800 em areia-100)", E["areia"][800], E["areia"][100], "texto"),
-    ("Cartão 'Seu projeto': título no azul-900", P["texto-sobre-cor"], E["azul"][900], "texto"),
-    ("Cartão 'Seu projeto': regra (marfim-200) no azul-900", E["marfim"][200], E["azul"][900], "texto"),
-    ("Cartão 'Seu projeto': visto (areia-300) no azul-900", E["areia"][300], E["azul"][900], "grafico"),
+    ("Ação secundária: texto/borda tinta-900 no fundo", P["acao-2"], P["fundo"], "texto"),
+    ("Ação secundária hover: texto no tinta-900", P["texto-sobre-cor"], P["acao-2"], "texto"),
+    ("Ação secundária hover 2: texto no tinta-800", P["texto-sobre-cor"], P["acao-2-hover"], "texto"),
+    ("Foco (urucum-700) no fundo", P["foco"], P["fundo"], "grafico"),
+    ("Foco (urucum-700) no fundo-alt", P["foco"], P["fundo-alt"], "grafico"),
+    ("Foco (urucum-700) no cartão", P["foco"], P["superficie"], "grafico"),
+    ("Foco no bloco de tinta (anel papel-50)", P["texto-sobre-cor"], T[950], "grafico"),
+    ("Borda de campo (papel-500) em cartão", P["borda-controle"], P["superficie"], "grafico"),
+    ("Seleção de texto (tinta-950 em urucum-100)", P["texto-titulo"], P["selecao"], "texto"),
+    ("Tag Destaque (urucum-800 em urucum-100)", U[800], U[100], "texto"),
+    ("Serviço aceso (urucum-800 em urucum-100)", U[800], U[100], "texto"),
+    ("Serviço aceso: borda urucum-500 no fundo-alt", U[500], P["fundo-alt"], "grafico"),
+    ("Público (palha-800 em palha-100)", Pl[800], Pl[100], "texto"),
+    ("Cartão 'Seu projeto': título no tinta-900", P["texto-sobre-cor"], T[900], "texto"),
+    ("Cartão 'Seu projeto': título sob o brilho tinta-700", P["texto-sobre-cor"], T[700], "texto"),
+    ("Cartão 'Seu projeto': regra (papel-200) no tinta-900", Pa[200], T[900], "texto"),
+    ("Cartão 'Seu projeto': regra (papel-200) sob o brilho tinta-700", Pa[200], T[700], "texto"),
+    ("Cartão 'Seu projeto': visto (palha-300) no tinta-900", Pl[300], T[900], "grafico"),
     ("Processo: número (texto-2) no fundo", P["texto-2"], P["fundo"], "texto"),
-    ("Processo: número feito (terracota-700)", P["rotulo"], P["fundo"], "texto"),
-    ("Processo: número atual (marfim-50 no azul-900)", P["texto-sobre-cor"], E["azul"][900], "texto"),
-    ("Processo: selo (marfim-50 no azul-900)", P["texto-sobre-cor"], E["azul"][900], "texto"),
-    ("Processo: fio aceso terracota-600 no fundo", P["acao"], P["fundo"], "grafico"),
-    ("Processo: botão aprovado (marfim-50 em sucesso-700)", P["texto-sobre-cor"], E["sucesso"][700], "texto"),
-    ("Processo: pino de comentário (marfim-50 em aviso-700)", P["texto-sobre-cor"], E["aviso"][700], "texto"),
+    ("Processo: número feito (urucum-700)", U[700], P["fundo"], "texto"),
+    ("Processo: número atual (papel-50 no tinta-900)", P["texto-sobre-cor"], T[900], "texto"),
+    ("Processo: fio aceso urucum-600 no fundo", P["acao"], P["fundo"], "grafico"),
+    ("Processo: botão aprovado (papel-50 em sucesso-700)", P["texto-sobre-cor"], E["sucesso"][700], "texto"),
+    ("Processo: pino de comentário (papel-50 em aviso-700)", P["texto-sobre-cor"], E["aviso"][700], "texto"),
     ("Processo: 'aguardando' (aviso-800 em aviso-100)", E["aviso"][800], E["aviso"][100], "texto"),
     ("Processo: 'pago/ok' (sucesso-800 em sucesso-100)", E["sucesso"][800], E["sucesso"][100], "texto"),
-    ("Depoimento: aspas (areia-400) no cartão", E["areia"][400], P["superficie"], "decorativo"),
-    ("FAQ: sinal fechado (azul-900 em marfim-100)", E["azul"][900], E["marfim"][100], "grafico"),
-    ("FAQ: sinal aberto (terracota-700 em terracota-100)", E["terracota"][700], E["terracota"][100], "grafico"),
-    ("Contato: título (marfim-50 no azul-950)", P["texto-sobre-cor"], E["azul"][950], "texto"),
-    ("Contato: título sob o brilho (marfim-50 no azul-800)", P["texto-sobre-cor"], E["azul"][800], "texto"),
-    ("Contato: texto (marfim-200 no azul-950)", E["marfim"][200], E["azul"][950], "texto"),
-    ("Contato: texto sob o brilho (marfim-200 no azul-800)", E["marfim"][200], E["azul"][800], "texto"),
-    ("Contato: rótulos (azul-200 no azul-950)", E["azul"][200], E["azul"][950], "texto"),
-    ("Contato: CTA no escuro (azul-950 em terracota-400)", E["azul"][950], E["terracota"][400], "texto"),
-    ("Contato: CTA no escuro hover (azul-950 em terracota-300)", E["azul"][950], E["terracota"][300], "texto"),
-    ("Contato: CTA no escuro (forma terracota-400) no azul-950", E["terracota"][400], E["azul"][950], "grafico"),
-    ("Contato: CTA no escuro (forma terracota-400) sob o brilho azul-800", E["terracota"][400], E["azul"][800], "grafico"),
-    ("Recusado: CTA terracota-600 sob o brilho azul-800", P["acao"], E["azul"][800], "grafico"),
-    ("Chat: topo (marfim-50 no azul-900)", P["texto-sobre-cor"], E["azul"][900], "texto"),
-    ("Chat: minha mensagem (marfim-50 no azul-900)", P["texto-sobre-cor"], E["azul"][900], "texto"),
+    ("Depoimento: aspas (palha-400) no cartão", Pl[400], P["superficie"], "decorativo"),
+    ("FAQ: sinal fechado (tinta-900 em papel-100)", T[900], Pa[100], "grafico"),
+    ("FAQ: sinal aberto (urucum-700 em urucum-100)", U[700], U[100], "grafico"),
+    ("Contato: título (papel-50 no tinta-950)", P["texto-sobre-cor"], T[950], "texto"),
+    ("Contato: título sob o brilho (papel-50 no tinta-800)", P["texto-sobre-cor"], T[800], "texto"),
+    ("Contato: texto (papel-200 no tinta-950)", Pa[200], T[950], "texto"),
+    ("Contato: texto sob o brilho (papel-200 no tinta-800)", Pa[200], T[800], "texto"),
+    ("Contato: rótulos (tinta-200 no tinta-950)", T[200], T[950], "texto"),
+    ("Contato: rótulos sob o brilho (tinta-200 no tinta-800)", T[200], T[800], "texto"),
+    ("Contato: CTA no escuro (tinta-950 em urucum-400)", T[950], U[400], "texto"),
+    ("Contato: CTA no escuro hover (tinta-950 em urucum-300)", T[950], U[300], "texto"),
+    ("Contato: CTA (forma urucum-400) no tinta-950", U[400], T[950], "grafico"),
+    ("Contato: CTA (forma urucum-400) sob o brilho tinta-800", U[400], T[800], "grafico"),
+    ("Recusado: CTA urucum-500 sob o brilho tinta-800", U[500], T[800], "grafico"),
+    ("Recusado: CTA urucum-600 com texto claro sob o brilho tinta-800", U[600], T[800], "grafico"),
+    ("Chat: topo (papel-50 no tinta-900)", P["texto-sobre-cor"], T[900], "texto"),
+    ("Chat: minha mensagem (papel-50 no tinta-900)", P["texto-sobre-cor"], T[900], "texto"),
     ("Chat: mensagem do bot (texto em cartão)", P["texto"], P["superficie"], "texto"),
-    ("Chat: aviso (terracota-600) contra o retrato/branco", P["acao"], P["superficie"], "grafico"),
+    ("Chat: aviso (urucum-600) contra o cartão", P["acao"], P["superficie"], "grafico"),
     ("Rodapé: texto-2 no fundo", P["texto-2"], P["fundo"], "texto"),
-    ("Visor/livro: texto no escuro (marfim-100 em marfim-950)", E["marfim"][100], E["marfim"][950], "texto"),
+    ("Visor/livro: texto no escuro (papel-100 em papel-950)", Pa[100], Pa[950], "texto"),
 ]
 for nome, cor in AGENTES.items():
     PARES.append((f"Cursor do título '{nome}': rótulo branco", "#ffffff", cor, "texto"))
-for s in ("sucesso", "aviso", "erro"):
+for s in ("sucesso", "aviso", "erro", "info"):
     PARES.append((f"Semântica {s}: texto 800 no fundo 100", E[s][800], E[s][100], "texto"))
     PARES.append((f"Semântica {s}: ícone 600 no fundo 50", E[s][600], E[s][50], "grafico"))
     PARES.append((f"Semântica {s}: borda 300 no fundo 50", E[s][300], E[s][50], "decorativo"))
-PARES.append(("Semântica info: texto azul-800 no azul-100", E["azul"][800], E["azul"][100], "texto"))
 
-# pares da aplicação atual (antes) que falham ou ficam no limite
-ANTES = [
-    ("Rótulo terracota #a9501c (0.95rem) no azul-céu #e2edf2 (serviços)", "#a9501c", "#e2edf2", "texto"),
-    ("Texto suave #6b645a na areia #ece0cc (depoimentos)", "#6b645a", "#ece0cc", "texto"),
-    ("Contato: rótulos branco 70% no terracota", sobre("#ffffff", "#a9501c", 0.70), "#a9501c", "texto"),
-    ("Contato: texto branco 85% sob o brilho #c96f38", sobre("#ffffff", "#c96f38", 0.85), "#c96f38", "texto"),
-    ("Contato: título branco sob o brilho #c96f38", "#ffffff", "#c96f38", "texto"),
-    ("Processo: pino branco no amarelo #e0a106", "#ffffff", "#e0a106", "texto"),
-    ("Processo: 'aguardando' #8a6200 em #fdf3d8", "#8a6200", "#fdf3d8", "texto"),
-    ("Público #6b4a22 em areia #ece0cc", "#6b4a22", "#ece0cc", "texto"),
-    ("Hero: cursor 'Espaçamento' rótulo branco em #b8862f", "#ffffff", "#b8862f", "texto"),
-    ("Processo: número feito terracota #a9501c no #fbf8f2", "#a9501c", "#fbf8f2", "texto"),
-    ("Borda do campo do chat #d3c4ab no branco", "#d3c4ab", "#ffffff", "grafico"),
-    ("Cartão 'Seu projeto': visto #d4af83 no #183451", "#d4af83", "#183451", "grafico"),
+# ---------- névoa da abertura ----------
+NEVOA = [
+    ("v1 (anterior): azul-100 #e4f1fa sobre marfim-50 #fdf8f1", "#e4f1fa", "#fdf8f1"),
+    ("v2 (nova): papel-25 sobre papel-50", P["nevoa"], P["fundo"]),
+    ("v2 (nova): base, papel-50 para papel-100 (fundo-alt)", P["fundo"], P["fundo-alt"]),
 ]
+
+
+def oklch(hx):
+    L, a, b = rgb_oklab(hex_rgb(hx))
+    return L, math.hypot(a, b), math.degrees(math.atan2(b, a)) % 360
+
+
+def amostrar_nevoa(a, b, n=6):
+    out = []
+    for i in range(n + 1):
+        t = i / n
+        hx = rgb_hex([x * (1 - t) + y * t for x, y in zip(hex_rgb(a), hex_rgb(b))])
+        out.append((hx, *oklch(hx)))
+    return out
+
 
 # ---------- daltonismo ----------
 MACHADO = {
@@ -194,18 +176,18 @@ def de_ok(a, b):
     return 100 * sum((x - y) ** 2 for x, y in zip(la, lb)) ** 0.5
 
 
-# (o que distinguir, cor A, cor B, apoio não-cromático)
 DISTINGUIR = [
-    ("CTA no escuro (terracota-400) x bloco azul-950", E["terracota"][400], E["azul"][950], "texto do botão + forma em pílula"),
-    ("CTA terracota x fundo marfim", P["acao"], P["fundo"], "texto do botão"),
-    ("Fio aceso x fio apagado (serviços)", P["acao"], E["marfim"][300], "espessura 2px x 1.5px"),
-    ("Serviço aceso x apagado (borda terracota-500 x marfim-200)", E["terracota"][500], E["marfim"][200], "fundo terracota-100 + peso 600"),
-    ("Etapa feita x etapa atual (processo)", P["acao"], E["azul"][900], "atual cheia + halo; feita só contorno"),
-    ("Etapa feita x etapa futura", P["acao"], E["marfim"][300], "número + posição"),
+    ("CTA no escuro (urucum-400) x bloco tinta-950", U[400], T[950], "texto do botão + forma em pílula"),
+    ("CTA urucum-600 x fundo papel", P["acao"], P["fundo"], "texto do botão"),
+    ("CTA urucum-600 x ação secundária tinta-900", P["acao"], P["acao-2"], "cheio x contorno"),
+    ("Fio aceso x fio apagado (serviços)", P["acao"], Pa[300], "espessura 2px x 1.5px"),
+    ("Serviço aceso x apagado (borda urucum-500 x papel-200)", U[500], Pa[200], "fundo urucum-100 + peso 600"),
+    ("Etapa feita x etapa atual (processo)", P["acao"], T[900], "atual cheia + halo; feita só contorno"),
+    ("Etapa feita x etapa futura", P["acao"], Pa[300], "número + posição"),
     ("Sucesso x erro (ícones)", E["sucesso"][600], E["erro"][600], "ícone e texto sempre"),
     ("Sucesso x aviso", E["sucesso"][600], E["aviso"][600], "ícone e texto sempre"),
-    ("Erro x terracota (ação)", E["erro"][600], P["acao"], "erro só com ícone + texto; nunca botão"),
-    ("Destaque (terracota) x título (azul-950)", P["destaque"], P["texto-titulo"], "peso 700"),
+    ("Erro x urucum (ação)", E["erro"][600], P["acao"], "erro só com ícone + texto; nunca botão"),
+    ("Destaque (urucum-600) x título (tinta-950)", P["destaque"], P["texto-titulo"], "peso 700"),
 ]
 _nomes = list(AGENTES)
 for i in range(len(_nomes)):
@@ -217,24 +199,41 @@ def relatorio(md=False):
     linhas = []
     add = linhas.append
 
-    def tabela_contraste(pares, titulo):
+    if md:
+        add("\n#### Contraste (todos os pares usados)\n")
+        add("| Par | Frente | Fundo | Tipo | Contraste | Mínimo | Resultado |")
+        add("|---|---|---|---|---:|---:|---|")
+    else:
+        add("== Contraste")
+    reprova = 0
+    for onde, fg, bg, tipo in PARES:
+        c = contraste(fg, bg)
+        mi = MIN[tipo]
+        res = "info" if mi == 0 else ("passa" if c >= mi else "REPROVA")
+        if res == "REPROVA" and not onde.startswith("Recusado"):
+            reprova += 1
         if md:
-            add(f"\n#### {titulo}\n")
-            add("| Par | Frente | Fundo | Tipo | Contraste | Mínimo | Resultado |")
-            add("|---|---|---|---|---:|---:|---|")
+            add(f"| {onde} | `{fg}` | `{bg}` | {tipo} | {c:.2f} | {mi or '-'} | {res} |")
         else:
-            add(f"\n== {titulo}")
-        for onde, fg, bg, tipo in pares:
-            c = contraste(fg, bg)
-            mi = MIN[tipo]
-            res = "info" if mi == 0 else ("passa" if c >= mi else "REPROVA")
-            if md:
-                add(f"| {onde} | `{fg}` | `{bg}` | {tipo} | {c:.2f} | {mi or '-'} | {res} |")
-            else:
-                add(f"{res:8} {c:5.2f} (min {mi}) {fg} / {bg}  {onde}")
+            add(f"{res:8} {c:5.2f} (min {mi}) {fg} / {bg}  {onde}")
+    add(f"\nReprovados (fora a linha 'Recusado'): {reprova}")
 
-    tabela_contraste(ANTES, "Aplicação atual: pares reprovados ou no limite")
-    tabela_contraste(PARES, "Proposta: todos os pares usados")
+    if md:
+        add("\n#### Névoa da abertura (mistura em sRGB, 7 amostras do topo à borda)\n")
+        add("| Degradê | Amostras (hex, croma OKLCH, matiz) | Croma mínimo | Variação de matiz |")
+        add("|---|---|---:|---:|")
+    else:
+        add("\n== Névoa")
+    for nome, a, b in NEVOA:
+        am = amostrar_nevoa(a, b)
+        cmin = min(x[2] for x in am)
+        hs = [x[3] for x in am if x[2] > 0.003]
+        dh = max(hs) - min(hs) if hs else 0
+        txt = ", ".join(f"{hx} C{c:.3f} h{h:.0f}" for hx, L, c, h in am)
+        if md:
+            add(f"| {nome} | {txt} | {cmin:.4f} | {dh:.0f} |")
+        else:
+            add(f"{nome}: Cmin {cmin:.4f}  dh {dh:.0f}\n   {txt}")
 
     if md:
         add("\n#### Daltonismo (Machado 2009, severidade 1.0)\n")
@@ -261,7 +260,6 @@ if __name__ == "__main__":
     if "--papeis" in sys.argv:
         for k, v in PAPEIS.items():
             print(f"{k:24} {v}")
-        print("superficie-elevada (marfim-25)", SUPERFICIE_ELEVADA)
         for k, v in AGENTES.items():
             print(f"agente {k:14} {v}")
     else:

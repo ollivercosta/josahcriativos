@@ -58,7 +58,7 @@
 }
 
 .depoimentos__aba:hover {
-  background: rgba(253, 248, 241, 0.7);
+  background: rgb(var(--superficie-rgb) / 0.7);
 }
 
 .depoimentos__aba[aria-selected="true"] {

@@ -2,12 +2,13 @@
 
 Uso: python3 ferramentas/cor/medir_area.py <captura-sem-imagens.png> [...]
 
-Classifica cada pixel pelo OKLCH em grupos e soma as faixas:
-- 60 dominante: os dois fundos da mesma escala, marfim-50 e marfim-100 (0.93 <= L < 0.987), e a névoa azul;
-- 30 secundária: superfícies marfim-25 (cartões, L >= 0.987), marfim-200 (filtros, bordas) e o azul
-  Riviera (cartão "Seu projeto", bloco do contato, selos, títulos);
-- 10 destaque: terracota (matiz 25-70 com croma >= 0.07; e os terracota claros de tags e serviços acesos);
-- outro: texto corrido e secundário neutro, areia, antisserrilhado.
+Classifica cada pixel pelo OKLCH em grupos e soma as faixas (paleta v2, papel, tinta e urucum):
+- 60 dominante: os dois fundos da escala papel, papel-50 e papel-100 (0.93 <= L < 0.987); a névoa
+  da abertura é papel-25/papel-50 e cai aqui ou nos cartões;
+- 30 secundária: superfícies papel-25 (cartões, L >= 0.987), papel-200 (filtros, bordas) e a tinta
+  (neutro escuro, L < 0.45: cartão "Seu projeto", bloco do contato, selos, títulos e texto);
+- 10 destaque: urucum (matiz 25-60 com croma >= 0.07; e os urucum claros de tags e serviços acesos);
+- outro: neutros médios (texto secundário, antisserrilhado), palha.
 """
 import sys
 from PIL import Image
@@ -23,31 +24,31 @@ def grupo(rgb, cache={}):
     L, a, b = rgb_oklab(tuple(c / 255 for c in rgb))
     C = math.hypot(a, b)
     h = math.degrees(math.atan2(b, a)) % 360
-    if L >= 0.86 and 30 <= h <= 65 and C >= 0.025:
-        g = "terracota clara"
-    elif 25 <= h <= 70 and C >= 0.07 and L < 0.86:
-        g = "terracota"
-    elif L >= 0.86 and 200 <= h <= 260 and C >= 0.012:
-        g = "névoa azul"
+    if L >= 0.86 and 25 <= h <= 60 and C >= 0.025:
+        g = "urucum claro"
+    elif 20 <= h <= 60 and C >= 0.07 and L < 0.86:
+        g = "urucum"
+    elif 65 <= h <= 100 and C >= 0.04:
+        g = "palha"
     elif L >= 0.987:
-        g = "marfim-25 (cartões)"
+        g = "papel-25 (cartões)"
     elif L >= 0.965:
-        g = "marfim-50 (fundo)"
+        g = "papel-50 (fundo)"
     elif L >= 0.93:
-        g = "marfim-100 (fundo-alt)"
+        g = "papel-100 (fundo-alt)"
     elif L >= 0.86:
-        g = "marfim-200 (bordas)"
-    elif (200 <= h <= 275 and C >= 0.02 and L < 0.75) or L < 0.33:
-        g = "azul"
+        g = "papel-200 (bordas)"
+    elif L < 0.45 and C < 0.03:
+        g = "tinta"
     else:
         g = "neutro médio"
     cache[rgb] = g
     return g
 
 
-FAIXA = {"marfim-50 (fundo)": "60", "marfim-100 (fundo-alt)": "60", "névoa azul": "60",
-         "marfim-25 (cartões)": "30", "marfim-200 (bordas)": "30", "azul": "30",
-         "terracota": "10", "terracota clara": "10", "neutro médio": "outro"}
+FAIXA = {"papel-50 (fundo)": "60", "papel-100 (fundo-alt)": "60",
+         "papel-25 (cartões)": "30", "papel-200 (bordas)": "30", "tinta": "30",
+         "urucum": "10", "urucum claro": "10", "palha": "outro", "neutro médio": "outro"}
 
 def medir(im, titulo, detalhe=True):
     cont = {}

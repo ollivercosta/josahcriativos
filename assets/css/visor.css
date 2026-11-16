@@ -34,7 +34,7 @@
   gap: 16px;
   height: 66px;
   padding: 0 var(--margem);
-  background: rgba(253, 248, 241, 0.92);
+  background: rgb(var(--fundo-rgb) / 0.92);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--cor-linha);

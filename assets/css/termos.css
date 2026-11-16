@@ -23,7 +23,7 @@
 .termos__fundo {
   position: absolute;
   inset: 0;
-  background: rgba(10, 32, 55, 0.5);
+  background: rgb(var(--sombra-rgb) / 0.5);
 }
 
 .termos__painel {
@@ -36,7 +36,7 @@
   overflow: hidden;
   background: var(--superficie);
   border-radius: var(--raio-g);
-  box-shadow: 0 40px 90px -40px rgba(10, 32, 55, 0.6);
+  box-shadow: 0 40px 90px -40px rgb(var(--sombra-rgb) / 0.6);
   transform: translateY(28px);
   transition: transform 0.9s var(--curva);
 }

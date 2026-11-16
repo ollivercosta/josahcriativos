@@ -39,13 +39,13 @@ const ESPALHA = 110; // unidades de fonte a mais entre as letras antes do ajuste
 const DESCENDENTE = 420;
 
 const AGENTES = [
-  { id: "grid", nome: "Grid", cor: "#183451" },
-  { id: "contorno", nome: "Contorno", cor: "#2f698f" },
-  { id: "curvas", nome: "Curvas", cor: "#6b578f" },
-  { id: "vetores", nome: "Vetores", cor: "#2e6f4a" },
-  { id: "cor", nome: "Cor", cor: "#a9501c" },
-  { id: "espaco", nome: "Espaçamento", cor: "#805708" },
-  { id: "medidas", nome: "Medidas", cor: "#8f3f55" },
+  { id: "grid", nome: "Grid", cor: "var(--agente-grid)" },
+  { id: "contorno", nome: "Contorno", cor: "var(--agente-contorno)" },
+  { id: "curvas", nome: "Curvas", cor: "var(--agente-curvas)" },
+  { id: "vetores", nome: "Vetores", cor: "var(--agente-vetores)" },
+  { id: "cor", nome: "Cor", cor: "var(--agente-cor)" },
+  { id: "espaco", nome: "Espaçamento", cor: "var(--agente-espaco)" },
+  { id: "medidas", nome: "Medidas", cor: "var(--agente-medidas)" },
 ];
 
 const limitar = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -109,7 +109,7 @@ export class Titulo {
     const svg = document.createElementNS(SVG, "svg");
     svg.setAttribute("class", "hero__desenho");
     svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
-    svg.innerHTML = `<defs><linearGradient id="hero-tinta" gradientUnits="userSpaceOnUse" x1="0" y1="${TITULO.capa}" x2="0" y2="${DESCENDENTE}"><stop offset="0" stop-color="#0a2037"/><stop offset="1" stop-color="#183451"/></linearGradient></defs>`;
+    svg.innerHTML = `<defs><linearGradient id="hero-tinta" gradientUnits="userSpaceOnUse" x1="0" y1="${TITULO.capa}" x2="0" y2="${DESCENDENTE}"><stop offset="0" style="stop-color: var(--tinta-950)"/><stop offset="1" style="stop-color: var(--tinta-900)"/></linearGradient></defs>`;
 
     /* guias: maiúsculas, altura-x, linha de base, descendentes */
     this.guias = [
@@ -381,7 +381,7 @@ export class Titulo {
     });
     const arrastando = t >= T.espaco[0] && t <= T.espaco[1] + 200;
     this.agentes[5].nome.textContent = arrastando ? `Espaçamento ${Math.round(-60 * (1 - k))}` : "Espaçamento";
-    this.agentes[4].nome.textContent = t >= letras[0].tc ? "Cor #183451" : "Cor";
+    this.agentes[4].nome.textContent = t >= letras[0].tc ? "Cor #211d1a" : "Cor";
   }
 
   /** Cada agente aparece pouco antes da sua tarefa. */

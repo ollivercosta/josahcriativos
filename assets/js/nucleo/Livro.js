@@ -28,15 +28,15 @@ const FAIXAS = 24;
 /** Quanto a folha se curva no meio da virada, em graus. */
 const CURVA = 64;
 /** Cor do verso de uma folha sem página (papel). */
-const PAPEL = "#f3ecde";
-const TINTA = "12, 14, 20";
+const PAPEL = "var(--fundo-alt)";
+const TINTA = "var(--sombra-rgb)";
 /** Direção da luz: da esquerda e da frente (x, z). */
 const LUZ_X = -0.26;
 const LUZ_Z = 0.965;
 const RAD = Math.PI / 180;
 /** O vinco da lombada, o mesmo de livro.css: vai junto com a imagem nas faces da folha. */
 const VINCO = (lado) =>
-  `linear-gradient(to ${lado}, rgba(15, 23, 42, 0.34) 0, rgba(15, 23, 42, 0.12) 1.6%, rgba(255, 255, 255, 0.05) 4%, rgba(15, 23, 42, 0) 9%)`;
+  `linear-gradient(to ${lado}, rgb(var(--sombra-rgb) / 0.34) 0, rgb(var(--sombra-rgb) / 0.12) 1.6%, rgb(var(--sobre-cor-rgb) / 0.05) 4%, transparent 9%)`;
 /** Quanto cada faixa avança sobre a vizinha, para não abrir frestas entre elas. */
 const SOBRA = 2;
 /** Abaixo desta largura, uma página por vez. */
@@ -52,8 +52,8 @@ const degrau = (a, b, x) => {
 
 /** Tom sobre a face: escurece abaixo de 1, clareia um pouco acima. */
 function tom(brilho) {
-  if (brilho < 1) return `rgba(${TINTA}, ${Math.min(0.58, (1 - brilho) * 0.68).toFixed(3)})`;
-  return `rgba(255, 255, 255, ${Math.min(0.16, (brilho - 1) * 1.3).toFixed(3)})`;
+  if (brilho < 1) return `rgb(${TINTA} / ${Math.min(0.58, (1 - brilho) * 0.68).toFixed(3)})`;
+  return `rgb(var(--sobre-cor-rgb) / ${Math.min(0.16, (brilho - 1) * 1.3).toFixed(3)})`;
 }
 
 export class Livro {
@@ -268,9 +268,9 @@ export class Livro {
     const sinal = lado === "esq" ? -1 : 1;
     const bordas = [];
     for (let i = 1; i <= camadas; i += 1) {
-      bordas.push(`${sinal * i}px ${i * 0.6}px 0 ${i % 2 ? "#fdf8f1" : "#d0c7ba"}`);
+      bordas.push(`${sinal * i}px ${i * 0.6}px 0 ${i % 2 ? "var(--papel-50)" : "var(--papel-300)"}`);
     }
-    bordas.push(`${sinal * 4}px 26px 40px -22px rgba(${TINTA}, 0.55)`);
+    bordas.push(`${sinal * 4}px 26px 40px -22px rgb(${TINTA} / 0.55)`);
     raiz.style.boxShadow = bordas.join(", ");
   }
 
@@ -431,12 +431,12 @@ export class Livro {
     const inicioDir = Math.max(0, maxX);
     this.lados.dir.sombra.style.background =
       naDireita > 0.004
-        ? `linear-gradient(90deg, rgba(${TINTA}, ${naDireita.toFixed(3)}) ${inicioDir}px, rgba(${TINTA}, 0) ${inicioDir + largura}px)`
+        ? `linear-gradient(90deg, rgb(${TINTA} / ${naDireita.toFixed(3)}) ${inicioDir}px, rgb(${TINTA} / 0) ${inicioDir + largura}px)`
         : "none";
     const inicioEsq = Math.max(0, -minX);
     this.lados.esq.sombra.style.background =
       naEsquerda > 0.004
-        ? `linear-gradient(270deg, rgba(${TINTA}, ${naEsquerda.toFixed(3)}) ${inicioEsq}px, rgba(${TINTA}, 0) ${inicioEsq + largura}px)`
+        ? `linear-gradient(270deg, rgb(${TINTA} / ${naEsquerda.toFixed(3)}) ${inicioEsq}px, rgb(${TINTA} / 0) ${inicioEsq + largura}px)`
         : "none";
 
     /* capa e contracapa: o book desliza para o centro junto com a folha */
