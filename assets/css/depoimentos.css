@@ -1,124 +1,94 @@
 /* =========================================================================
-   QUEM JÁ TRABALHOU COMIGO
-   Um depoimento em destaque, com os dados do projeto ao lado; os outros
-   são escolhidos pelo nome. A troca é um cruzamento suave, sem salto.
+   QUEM JÁ TRABALHOU COMIGO (depoimentos)
+   Os nomes numa coluna de abas à esquerda; à direita, o depoimento num
+   cartão claro, com a ficha (projeto, serviço, fomento) embaixo. Com mais
+   de um depoimento, a aba ativa mostra o tempo até a troca automática.
    ========================================================================= */
 
 .depoimentos {
   padding: var(--espaco-secao) var(--margem);
-  border-top: 1px solid var(--cor-tinta);
+  background: var(--fundo-claro);
+}
+
+.depoimentos__titulo,
+.depoimentos__grade {
+  max-width: var(--largura);
+  margin-inline: auto;
 }
 
 .depoimentos__titulo {
-  font-weight: 300;
-  font-size: 5.6vw;
-  line-height: 0.98;
-  letter-spacing: -0.05em;
-}
-
-.depoimentos__titulo-forte {
-  font-weight: 900;
-  color: var(--cor-vermelho);
-}
-
-.depoimentos__titulo-palavra {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  padding: 0 0.08em 0.1em 0.04em;
-  margin: 0 -0.08em -0.1em -0.04em;
-}
-
-.depoimentos__titulo-miolo {
-  display: inline-block;
-  transform: translateY(110%);
-  transition: transform 1.2s var(--curva);
-  transition-delay: calc(var(--k, 0) * 60ms);
-}
-
-.depoimentos__titulo--visivel .depoimentos__titulo-miolo {
-  transform: none;
-}
-
-/* título e a barra que prolonga a linha de base dele até a margem */
-.depoimentos__titulo-linha {
-  display: grid;
-  grid-template-columns: auto minmax(4vw, 1fr);
-  align-items: last baseline;
-  gap: 2vw;
-  margin-bottom: var(--espaco-titulo);
-}
-
-.depoimentos__titulo-barra {
-  height: max(5px, 0.6vw);
-  background: var(--cor-tinta);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.4s var(--curva) 0.35s;
-}
-
-.depoimentos__titulo--visivel + .depoimentos__titulo-barra {
-  transform: scaleX(1);
+  font-size: var(--titulo-secao);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
 
 .depoimentos__grade {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-  gap: 5vw;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+  margin-top: var(--espaco-titulo);
 }
 
 .depoimentos__nomes {
+  display: grid;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.depoimentos__nome-item {
-  border-top: 1px solid var(--cor-linha-forte);
-}
-
-.depoimentos__nome-item:first-child {
-  border-top: 0;
 }
 
 .depoimentos__aba {
   position: relative;
   display: block;
   width: 100%;
-  padding: 14px 0 14px 0;
+  overflow: hidden;
+  padding: 14px 18px;
   border: 0;
-  background: none;
+  border-radius: var(--raio);
+  background: transparent;
+  color: var(--suave);
+  font-size: 0.92rem;
   text-align: left;
-  color: var(--cor-tinta-suave);
   cursor: pointer;
-  transition: color 0.5s ease;
-}
-
-.depoimentos__aba::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 14px;
-  bottom: 14px;
-  width: 3px;
-  background: var(--cor-vermelho);
-  transform: scaleY(0);
   transition:
-    transform 0.8s var(--curva),
-    opacity 0.8s ease;
+    background-color 0.3s var(--curva),
+    box-shadow 0.3s var(--curva);
 }
 
-/* troca automática: a barra vermelha da aba ativa se completa em 20 s */
+.depoimentos__aba:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.depoimentos__aba[aria-selected="true"] {
+  background: var(--branco);
+  box-shadow: var(--sombra);
+}
+
+.depoimentos__aba-conteudo {
+  display: grid;
+  gap: 2px;
+}
+
+.depoimentos__aba-nome {
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+/* a barra do tempo até a troca automática */
 .depoimentos__aba::after {
   content: "";
   position: absolute;
-  left: 0;
-  top: 14px;
-  bottom: 14px;
-  width: 3px;
-  background: var(--cor-vermelho);
-  transform: scaleY(0);
-  transform-origin: top;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--azul);
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 .depoimentos__aba--contando::after {
@@ -129,173 +99,83 @@
   animation-play-state: paused;
 }
 
-/* com a troca automática ligada, a barra fixa vira o trilho */
-.depoimentos--automatico .depoimentos__aba[aria-selected="true"]::before {
-  opacity: 0.22;
-}
-
-@keyframes depoimento-tempo-linha {
+@keyframes depoimento-tempo {
   to {
     transform: scaleX(1);
   }
 }
 
-@keyframes depoimento-tempo {
-  to {
-    transform: scaleY(1);
-  }
-}
-
-.depoimentos__aba-conteudo {
-  display: block;
-  transition: transform 0.9s var(--curva);
-}
-
-.depoimentos__aba-nome {
-  display: block;
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
-}
-
-.depoimentos__aba[aria-selected="true"] {
-  color: var(--cor-tinta);
-}
-
-.depoimentos__aba[aria-selected="true"]::before {
-  transform: scaleY(1);
-}
-
-.depoimentos__aba[aria-selected="true"] .depoimentos__aba-conteudo {
-  transform: translateX(16px);
-}
-
-/* todos os depoimentos ocupam a mesma célula: a troca é por opacidade */
 .depoimentos__palco {
   display: grid;
 }
 
 .depoimentos__item {
   grid-area: 1 / 1;
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: var(--raio-g);
+  background: var(--branco);
+  box-shadow: var(--sombra);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(16px);
   transition:
-    opacity 0.7s var(--curva-suave),
-    transform 1s var(--curva),
-    visibility 0s 0.7s;
+    opacity 0.6s var(--curva),
+    visibility 0s linear 0.6s;
 }
 
 .depoimentos__item--ativo {
   opacity: 1;
   visibility: visible;
-  transform: none;
-  transition:
-    opacity 0.9s var(--curva-suave) 0.15s,
-    transform 1.1s var(--curva) 0.15s;
+  transition: opacity 0.6s var(--curva);
 }
 
 .depoimentos__citacao {
-  margin-bottom: 3vw;
-  font-weight: 300;
-  font-size: clamp(1.5rem, 2.3vw, 2.6rem);
-  line-height: 1.22;
-  letter-spacing: -0.03em;
+  margin: 0;
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .depoimentos__citacao::before {
-  content: "\201C";
-  color: var(--cor-vermelho);
-  font-weight: 900;
+  content: "“";
+  display: block;
+  height: 0.6em;
+  margin-bottom: 6px;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--azul-3);
 }
 
 .depoimentos__dados {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2vw;
-  padding-top: 18px;
-  border-top: 1px solid var(--cor-tinta);
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--linha);
 }
 
 .depoimentos__dado-rotulo {
-  font-stretch: 115%;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cor-tinta-suave);
+  font-size: 0.82rem;
+  color: var(--suave);
 }
 
 .depoimentos__dado-valor {
-  margin-top: 4px;
-  font-weight: 700;
+  margin-top: 2px;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 @media (max-width: 860px) {
-  .depoimentos__titulo-barra {
-    display: none;
-  }
-
-  .depoimentos__titulo {
-    font-size: var(--titulo-celular);
-  }
-
   .depoimentos__grade {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
   }
 
-  /* os nomes viram duas abas lado a lado, com a barra de tempo embaixo */
   .depoimentos__nomes {
-    display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(0, 1fr);
-    gap: 12px;
-  }
-
-  .depoimentos__nome-item {
-    border-top: 0;
-  }
-
-  .depoimentos__aba {
-    height: 100%;
-    padding: 0 0 12px;
-    font-size: 0.85rem;
-  }
-
-  .depoimentos__aba::before,
-  .depoimentos__aba::after {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: auto;
-    height: 3px;
-    transform-origin: left;
-  }
-
-  .depoimentos__aba::before {
-    transform: scaleX(0);
-  }
-
-  .depoimentos__aba[aria-selected="true"]::before {
-    transform: scaleX(1);
-  }
-
-  .depoimentos__aba::after {
-    transform: scaleX(0);
-  }
-
-  .depoimentos__aba--contando::after {
-    animation-name: depoimento-tempo-linha;
-  }
-
-  .depoimentos__aba[aria-selected="true"] .depoimentos__aba-conteudo {
-    transform: none;
-  }
-
-  .depoimentos__citacao {
-    font-size: 1.15rem;
   }
 
   .depoimentos__dados {

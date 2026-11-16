@@ -186,15 +186,13 @@
     </script>
 
     <!-- Fonte e estilos: um arquivo por seção, em assets/css/ -->
-    <link rel="preload" href="/assets/fontes/archivo.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fontes/inter.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="/assets/css/cabecalho.css" />
-    <link rel="stylesheet" href="/assets/css/inicio.css" />
     <link rel="stylesheet" href="/assets/css/hero.css" />
-    <link rel="stylesheet" href="/assets/css/mesa.css" />
-    <link rel="stylesheet" href="/assets/css/manifesto.css" />
     <link rel="stylesheet" href="/assets/css/trabalhos.css" />
     <link rel="stylesheet" href="/assets/css/visor.css" />
+    <link rel="stylesheet" href="/assets/css/manifesto.css" />
     <link rel="stylesheet" href="/assets/css/servicos.css" />
     <link rel="stylesheet" href="/assets/css/processo.css" />
     <link rel="stylesheet" href="/assets/css/sobre.css" />
@@ -212,22 +210,25 @@
   <body>
     <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
+    <!-- CABEÇALHO: barra de vidro fixa; o menu do meio marca a seção visível com uma pílula que desliza -->
     <header class="cabecalho">
       <div class="cabecalho__faixa">
         <a class="cabecalho__marca" href="/" aria-label="Josah Oliveira, início">
           <b class="cabecalho__marca-nome">Josah Oliveira</b>
-          Designer gráfico
+          <span class="cabecalho__marca-sub">Designer gráfico</span>
         </a>
         <nav class="cabecalho__navegacao" aria-label="Principal">
           <ul class="cabecalho__nav">
             <li class="cabecalho__item"><a class="cabecalho__link" href="/#projetos">Trabalhos</a></li>
-            <li class="cabecalho__item"><a class="cabecalho__link" href="/#servicos">Como funciona</a></li>
+            <li class="cabecalho__item"><a class="cabecalho__link" href="/#servicos">Serviços</a></li>
+            <li class="cabecalho__item"><a class="cabecalho__link" href="/#processo">Processo</a></li>
             <li class="cabecalho__item"><a class="cabecalho__link" href="/sobre">Sobre</a></li>
             <li class="cabecalho__item"><a class="cabecalho__link" href="/#faq">FAQ</a></li>
-            <li class="cabecalho__item"><a class="cabecalho__link" href="#contato">Contato</a></li>
-            <li class="cabecalho__item"><a class="cabecalho__link" href="https://app.josahcriativos.com.br/area.html">Área do cliente</a></li>
+            <li class="cabecalho__item"><a class="cabecalho__link" href="/#contato">Contato</a></li>
           </ul>
+          <span class="cabecalho__pilula" aria-hidden="true"></span>
         </nav>
+        <a class="cabecalho__area" href="https://app.josahcriativos.com.br/area.html">Área do cliente</a>
         <button
           type="button"
           class="cabecalho__menu-botao"
@@ -249,16 +250,16 @@
           </svg>
         </button>
       </div>
-      <span class="cabecalho__progresso" aria-hidden="true"></span>
     </header>
 
     <div class="menu-movel" id="menu-movel" aria-hidden="true">
       <ul class="menu-movel__lista">
         <li class="menu-movel__item"><a class="menu-movel__link" href="/#projetos">Trabalhos</a></li>
-        <li class="menu-movel__item"><a class="menu-movel__link" href="/#servicos">Como funciona</a></li>
+        <li class="menu-movel__item"><a class="menu-movel__link" href="/#servicos">Serviços</a></li>
+        <li class="menu-movel__item"><a class="menu-movel__link" href="/#processo">Processo</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="/sobre">Sobre</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="/#faq">FAQ</a></li>
-        <li class="menu-movel__item"><a class="menu-movel__link" href="#contato">Contato</a></li>
+        <li class="menu-movel__item"><a class="menu-movel__link" href="/#contato">Contato</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="https://app.josahcriativos.com.br/area.html">Área do cliente</a></li>
       </ul>
       <div class="menu-movel__rodape">
@@ -280,68 +281,45 @@
     </div>
 
     <main id="conteudo">
-      <!-- INÍCIO: o hero e a mesa no mesmo palco, preso na tela. Rolando, o hero se desmonta
-           (letras, barras e textos saem voando) e a mesa aparece no lugar dele -->
-      <div class="inicio" id="topo">
-        <span class="inicio__marco" id="projetos" data-secao=".trabalhos" aria-hidden="true"></span>
-        <div class="inicio__palco">
-      <!-- HERO: "design e CULTURA" no plano inclinado -->
-      <section class="hero" aria-label="Design e cultura">
-        <header class="hero__cabecalho">
-          <a class="hero__marca" href="/"><b class="hero__marca-nome">Josah Oliveira</b>Designer gráfico</a>
-          <button type="button" class="hero__menu-botao" aria-label="Abrir menu">Menu</button>
-          <ul class="hero__menu">
-            <li class="hero__menu-item"><a class="hero__menu-link" href="#projetos">Trabalhos</a></li>
-            <li class="hero__menu-item"><a class="hero__menu-link" href="#servicos">Como funciona</a></li>
-            <li class="hero__menu-item"><a class="hero__menu-link" href="/sobre">Sobre</a></li>
-            <li class="hero__menu-item"><a class="hero__menu-link" href="#contato">Contato</a></li>
-          </ul>
-        </header>
-
-        <div class="hero__plano">
-          <span class="hero__barra-base" aria-hidden="true"></span>
-          <span class="hero__barra-topo" aria-hidden="true"></span>
-          <span class="hero__barra-haste" aria-hidden="true"></span>
-          <span class="hero__barra-larga" aria-hidden="true">
-            <span class="hero__assinatura">por <b class="hero__assinatura-nome">Josah Oliveira</b></span>
-          </span>
-
-          <p class="hero__rotulo-topo">Comunicação para projetos culturais</p>
-          <h1 class="hero__design" aria-label="Design e cultura.">design e</h1>
-          <p class="hero__cultura" aria-hidden="true"></p>
-
-          <p class="hero__rotulo-servicos" aria-hidden="true">Serviços</p>
+      <!-- ABERTURA: a frase, um botão só e os trabalhos em destaque numa prancha que troca pelas abas -->
+      <section class="hero" id="topo" aria-labelledby="hero-titulo">
+        <div class="hero__texto-bloco">
+          <p class="hero__rotulo">Comunicação para projetos culturais</p>
+          <h1 class="hero__titulo" id="hero-titulo">Design e cultura.</h1>
           <p class="hero__texto">
             Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
           </p>
-          <ul class="hero__servicos" aria-label="Serviços">
-            <li class="hero__servico" style="--i: 0">Identidade visual</li>
-            <li class="hero__servico" style="--i: 1">Book de captação</li>
-            <li class="hero__servico" style="--i: 2">Landing pages</li>
-            <li class="hero__servico" style="--i: 3">Redes sociais</li>
-            <li class="hero__servico" style="--i: 4">Material de palco</li>
-            <li class="hero__servico" style="--i: 5">Vídeo e spots</li>
-          </ul>
+          <a class="hero__botao" href="/#projetos">Ver trabalhos</a>
         </div>
+        <figure class="hero__prancha" aria-label="Trabalhos em destaque">
+          <a class="hero__prancha-link" href="/#projetos">
+            <img class="hero__prancha-imagem" src="/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-capa.webp" alt="" width="2400" height="1697" fetchpriority="high" />
+          </a>
+          <figcaption class="hero__prancha-legenda">
+            <span class="hero__prancha-nome"></span>
+            <span class="hero__prancha-tipo"></span>
+          </figcaption>
+        </figure>
+        <div class="hero__abas" role="tablist" aria-label="Trabalhos em destaque"></div>
+        <ul class="hero__servicos" aria-label="Serviços">
+          <li class="hero__servico">Identidade visual</li>
+          <li class="hero__servico">Book de captação</li>
+          <li class="hero__servico">Landing pages</li>
+          <li class="hero__servico">Redes sociais</li>
+          <li class="hero__servico">Material de palco</li>
+          <li class="hero__servico">Vídeo e spots</li>
+        </ul>
       </section>
 
-      <!-- ALGUNS TRABALHOS: a parede de exposição é montada por assets/js/secoes/Trabalhos.js
-           a partir de assets/dados/trabalhos.js (destaque: true põe o projeto na primeira fileira) -->
-      <!-- MESA: a abertura dos trabalhos; aparece quando o hero se desmonta, e as capas voam para a parede -->
-      <section class="mesa" aria-labelledby="mesa-titulo">
-        <div class="mesa__conteudo">
-          <p class="mesa__rotulo">Portfólio</p>
-          <h2 class="mesa__titulo" id="mesa-titulo" aria-label="Alguns trabalhos."><span class="mesa__titulo-corpo" aria-hidden="true"><span class="mesa__titulo-fino">Alguns</span><span class="mesa__titulo-forte">trabalhos.</span></span></h2>
-          <p class="mesa__texto">
+      <!-- TRABALHOS: a grade é montada por assets/js/secoes/Trabalhos.js a partir de assets/dados/trabalhos.js
+           (destaque: true põe o projeto na primeira fileira, maior) -->
+      <section class="trabalhos" id="projetos" aria-labelledby="trabalhos-titulo">
+        <div class="trabalhos__cabeca">
+          <h2 class="trabalhos__titulo" id="trabalhos-titulo">Alguns trabalhos.</h2>
+          <p class="trabalhos__texto">
             Festivais, orquestras, espetáculos e projetos de formação. Uma seleção de projetos recentes, do desafio à solução visual. Conheça cada projeto!
           </p>
         </div>
-        <div class="mesa__camada" aria-hidden="true"></div>
-      </section>
-        </div>
-      </div>
-
-      <section class="trabalhos" aria-labelledby="mesa-titulo">
         <div class="trabalhos__filtros" role="group" aria-label="Filtrar trabalhos"></div>
         <div class="trabalhos__parede">
           <ul class="trabalhos__fileira trabalhos__fileira--destaques" aria-label="Trabalhos em destaque"></ul>
@@ -349,27 +327,31 @@
         </div>
       </section>
 
-      <!-- MANIFESTO: a frase se acende conforme a leitura e abre os serviços -->
+      <!-- MANIFESTO -->
       <section class="manifesto" aria-label="Manifesto">
-        <p class="manifesto__texto" data-fortes="compreendido">
-          Um projeto cultural só chega longe quando é compreendido por quem avalia, por quem apoia e por quem participa.
+        <p class="manifesto__texto">
+          Um projeto cultural só chega longe quando é <strong class="manifesto__forte">compreendido</strong> por quem avalia, por quem apoia e por quem participa.
         </p>
       </section>
 
-      <!-- COMO POSSO AJUDAR SEU PROJETO: painéis que se empilham (o único trecho com rolagem presa) -->
+      <!-- COMO POSSO AJUDAR SEU PROJETO: três frentes em abas, na mesma tela -->
       <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
         <div class="servicos__cabeca">
           <p class="servicos__rotulo">Como funciona</p>
-          <h2 class="servicos__titulo" id="servicos-titulo" aria-label="Como posso ajudar seu projeto"><span class="servicos__titulo-corpo" aria-hidden="true"><span class="servicos__titulo-leve"><span class="servicos__titulo-leve-texto">Como posso</span></span><span class="servicos__titulo-pesado">ajudar seu <span class="servicos__titulo-destaque">projeto</span></span></span></h2>
-          <span class="servicos__titulo-barra" aria-hidden="true"></span>
+          <h2 class="servicos__titulo" id="servicos-titulo">Como posso ajudar seu projeto</h2>
           <p class="servicos__lede">
             Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho: régua
             de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a
             prestação de contas.
           </p>
         </div>
-        <div class="servicos__pilha">
-          <article class="servicos__painel servicos__painel--claro">
+        <div class="servicos__abas" role="tablist" aria-label="Frentes de serviço">
+          <button type="button" class="servicos__aba" role="tab" id="servicos-aba-1" aria-controls="servicos-painel-1" aria-selected="true">Apresentação</button>
+          <button type="button" class="servicos__aba" role="tab" id="servicos-aba-2" aria-controls="servicos-painel-2" aria-selected="false" tabindex="-1">Digital</button>
+          <button type="button" class="servicos__aba" role="tab" id="servicos-aba-3" aria-controls="servicos-painel-3" aria-selected="false" tabindex="-1">Visual e mídia</button>
+        </div>
+        <div class="servicos__paineis">
+          <article class="servicos__painel" id="servicos-painel-1" role="tabpanel" aria-labelledby="servicos-aba-1">
             <div class="servicos__painel-cabeca">
               <h3 class="servicos__painel-nome">Apresentação</h3>
               <p class="servicos__painel-descricao">
@@ -405,7 +387,7 @@
               </div>
             </dl>
           </article>
-          <article class="servicos__painel servicos__painel--tinta">
+          <article class="servicos__painel" id="servicos-painel-2" role="tabpanel" aria-labelledby="servicos-aba-2" hidden>
             <div class="servicos__painel-cabeca">
               <h3 class="servicos__painel-nome">Digital</h3>
               <p class="servicos__painel-descricao">
@@ -441,7 +423,7 @@
               </div>
             </dl>
           </article>
-          <article class="servicos__painel servicos__painel--vermelho">
+          <article class="servicos__painel" id="servicos-painel-3" role="tabpanel" aria-labelledby="servicos-aba-3" hidden>
             <div class="servicos__painel-cabeca">
               <h3 class="servicos__painel-nome">Visual e mídia</h3>
               <p class="servicos__painel-descricao">
@@ -480,66 +462,40 @@
         </div>
       </section>
 
-      <!-- DO PRIMEIRO CONTATO À ENTREGA: as etapas entram uma a uma, sem prender a rolagem -->
+      <!-- DO PRIMEIRO CONTATO À ENTREGA: as etapas em sequência; escolher uma mostra o que acontece nela -->
       <section class="processo" id="processo" aria-labelledby="processo-titulo">
-        <div class="processo__palco">
-          <div class="processo__abertura">
-            <div class="processo__titulo-linha">
-              <h2 class="processo__titulo" id="processo-titulo" aria-label="Do primeiro contato à entrega"><span class="processo__titulo-corpo" aria-hidden="true"><span class="processo__titulo-leve"><span class="processo__titulo-leve-texto">Do primeiro contato</span></span><span class="processo__titulo-pesado">à entrega</span></span></h2>
-              <span class="processo__titulo-barra" aria-hidden="true"></span>
-            </div>
-            <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
-          </div>
-          <div class="processo__centro">
-            <div class="processo__etapa">
-              <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Briefing</span></h3>
-              <p class="processo__etapa-texto">
-                Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a
-                lista de peças e o cronograma.
-              </p>
-            </div>
-            <div class="processo__etapa">
-              <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Proposta e orçamento</span></h3>
-              <p class="processo__etapa-texto">
-                Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.
-              </p>
-            </div>
-            <div class="processo__etapa">
-              <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Produção</span></h3>
-              <p class="processo__etapa-texto">
-                Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do
-                material recebido.
-              </p>
-            </div>
-            <div class="processo__etapa">
-              <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Revisão</span></h3>
-              <p class="processo__etapa-texto">
-                Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.
-              </p>
-            </div>
-            <div class="processo__etapa">
-              <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Aprovação</span></h3>
-              <p class="processo__etapa-texto">
-                O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.
-              </p>
-            </div>
-            <div class="processo__etapa">
-              <h3 class="processo__etapa-nome"><span class="processo__etapa-miolo">Entrega</span></h3>
-              <p class="processo__etapa-texto">
-                Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.
-              </p>
-            </div>
-          </div>
+        <div class="processo__cabeca">
+          <h2 class="processo__titulo" id="processo-titulo">Do primeiro contato à entrega</h2>
+          <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
+        </div>
+        <ol class="processo__etapas" role="tablist" aria-label="Etapas do trabalho">
+          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="true" aria-controls="processo-detalhe"><span class="processo__numero">1</span><span class="processo__etapa-nome">Briefing</span></button></li>
+          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">2</span><span class="processo__etapa-nome">Proposta e orçamento</span></button></li>
+          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">3</span><span class="processo__etapa-nome">Produção</span></button></li>
+          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">4</span><span class="processo__etapa-nome">Revisão</span></button></li>
+          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">5</span><span class="processo__etapa-nome">Aprovação</span></button></li>
+          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">6</span><span class="processo__etapa-nome">Entrega</span></button></li>
+        </ol>
+        <div class="processo__detalhe" id="processo-detalhe" role="tabpanel" aria-live="polite">
+          <p class="processo__texto" data-etapa="1">
+            Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a
+            lista de peças e o cronograma.
+          </p>
+          <p class="processo__texto" data-etapa="2" hidden>Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.</p>
+          <p class="processo__texto" data-etapa="3" hidden>
+            Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do
+            material recebido.
+          </p>
+          <p class="processo__texto" data-etapa="4" hidden>Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.</p>
+          <p class="processo__texto" data-etapa="5" hidden>O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.</p>
+          <p class="processo__texto" data-etapa="6" hidden>Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.</p>
         </div>
       </section>
 
       <!-- DEPOIMENTOS: para incluir outro, copie um <li> das abas (com aria-controls novo)
            e um <figure> do palco (com o id correspondente). -->
       <section class="depoimentos" id="depoimentos" aria-labelledby="depoimentos-titulo">
-        <div class="depoimentos__titulo-linha">
-          <h2 class="depoimentos__titulo" id="depoimentos-titulo" aria-label="Quem já trabalhou comigo"><span class="depoimentos__titulo-corpo" aria-hidden="true"><span class="depoimentos__titulo-leve"><span class="depoimentos__titulo-leve-texto">Quem já trabalhou</span></span><span class="depoimentos__titulo-pesado">comigo</span></span></h2>
-          <span class="depoimentos__titulo-barra" aria-hidden="true"></span>
-        </div>
+        <h2 class="depoimentos__titulo" id="depoimentos-titulo">Quem já trabalhou comigo</h2>
         <div class="depoimentos__grade">
           <ul class="depoimentos__nomes" role="tablist" aria-label="Depoimentos">
             <li class="depoimentos__nome-item" role="presentation">
@@ -631,7 +587,7 @@
       <!-- ANTES DE COMEÇAR: perguntas frequentes -->
       <section class="faq" id="faq" aria-labelledby="faq-titulo">
         <div class="faq__lado">
-          <h2 class="faq__titulo" id="faq-titulo" aria-label="Antes de começar."><span class="faq__titulo-corpo" aria-hidden="true"><span class="faq__titulo-leve"><span class="faq__titulo-leve-texto">Antes de</span></span><span class="faq__titulo-pesado">começar.</span></span></h2>
+          <h2 class="faq__titulo" id="faq-titulo">Antes de começar.</h2>
           <p class="faq__lede">
             Respostas diretas sobre contratação e entrega. Em caso de dúvida, valem a proposta e os
             <button type="button" class="faq__termos" data-abrir="termos">Termos de Uso</button>.
@@ -696,68 +652,27 @@
         </div>
       </section>
 
-      <!-- CONTATO: faixa vermelho com o círculo magnético -->
+      <!-- CONTATO: a faixa azul que fecha a página, com um botão só -->
       <section class="contato" id="contato" aria-labelledby="contato-titulo">
-        <div class="contato__topo">
-          <div class="contato__chamada">
-            <h2 class="contato__titulo" id="contato-titulo" aria-label="Vamos apresentar o seu projeto para o mundo?"><span class="contato__titulo-corpo" aria-hidden="true"><span class="contato__titulo-leve"><span class="contato__titulo-leve-texto">Vamos apresentar o seu projeto</span></span><span class="contato__titulo-pesado">para o mundo?</span></span></h2>
-            <p class="contato__lede">
-              Informe o que o projeto precisa e o prazo disponível. O retorno traz um cronograma e a indicação das peças mais adequadas.
-            </p>
-          </div>
-          <a
-            class="contato__ima"
-            href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto."
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Fale comigo pelo WhatsApp"
-          >
-            <span class="contato__ima-circulo" aria-hidden="true"></span>
-            <span class="contato__ima-janela" aria-hidden="true">
-              <img
-                class="contato__retrato-corpo"
-                src="/assets/imagens/retrato-contato.webp"
-                alt=""
-                width="640"
-                height="621"
-                loading="lazy"
-              />
-            </span>
-            <img
-              class="contato__retrato-cabeca"
-              src="/assets/imagens/retrato-contato.webp"
-              alt=""
-              width="640"
-              height="621"
-              loading="lazy"
-            />
-            <span class="contato__ima-rotulo">Fale comigo</span>
-          </a>
-        </div>
-        <ul class="contato__canais">
-          <li class="contato__canal">
-            <span class="contato__canal-rotulo">WhatsApp</span>
-            <a
-              class="contato__canal-link"
-              href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto."
-              target="_blank"
-              rel="noopener noreferrer"
-              >(71) 99144-8218</a
-            >
-          </li>
-          <li class="contato__canal">
-            <span class="contato__canal-rotulo">E-mail</span>
-            <a
-              class="contato__canal-link"
-              href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=contato%40josahcriativos.com.br"
-              target="_blank"
-              rel="noopener noreferrer"
-              >contato@josahcriativos.com.br</a
-            >
-          </li>
-          <li class="contato__canal">
-            <span class="contato__canal-rotulo">Redes</span>
-            <span class="contato__redes">
+        <div class="contato__faixa">
+          <img class="contato__retrato" src="/assets/imagens/retrato-contato.webp" alt="" width="640" height="621" loading="lazy" />
+          <h2 class="contato__titulo" id="contato-titulo">Vamos apresentar o seu projeto para o mundo?</h2>
+          <p class="contato__lede">
+            Informe o que o projeto precisa e o prazo disponível. O retorno traz um cronograma e a indicação das peças mais adequadas.
+          </p>
+          <a class="contato__botao" href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Fale comigo pelo WhatsApp</a>
+          <ul class="contato__canais">
+            <li class="contato__canal">
+              <span class="contato__canal-rotulo">WhatsApp</span>
+              <a class="contato__canal-link" href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">(71) 99144-8218</a>
+            </li>
+            <li class="contato__canal">
+              <span class="contato__canal-rotulo">E-mail</span>
+              <a class="contato__canal-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=contato%40josahcriativos.com.br" target="_blank" rel="noopener noreferrer">contato@josahcriativos.com.br</a>
+            </li>
+            <li class="contato__canal">
+              <span class="contato__canal-rotulo">Redes</span>
+              <span class="contato__redes">
               <a
                 class="contato__rede"
                 href="https://github.com/ollivercosta"
@@ -795,25 +710,23 @@
                   /></svg
               ></a>
             </span>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </section>
     </main>
 
     <footer class="rodape">
       <div class="rodape__linha">
-        <span class="rodape__direitos">
-          &copy; <span class="rodape__ano">2026</span> Josah Oliveira. Todos os direitos reservados.
-        </span>
+        <a class="rodape__marca" href="/"><b>Josah Oliveira</b> Designer gráfico</a>
         <span class="rodape__links">
           <button type="button" class="rodape__termos" data-abrir="termos" data-aba="3">Acessibilidade</button>
-          <button type="button" class="rodape__termos" data-abrir="termos">
-          Termos de Uso, Política de Privacidade e Política de Reembolso
-        </button>
+          <button type="button" class="rodape__termos" data-abrir="termos">Termos de Uso, Política de Privacidade e Política de Reembolso</button>
         </span>
+        <span class="rodape__direitos">&copy; <span class="rodape__ano">2026</span> Josah Oliveira. Todos os direitos reservados.</span>
       </div>
-      <span class="rodape__nome" aria-hidden="true">Josah <em class="rodape__nome-destaque">Oliveira</em></span>
     </footer>
+
 
     <!-- VISOR DE PROJETO: mini ficha de design + imagens (preenchido por Visor.js) -->
     <div

@@ -87,22 +87,18 @@
 
 .sobre__anotacao-principal {
   display: block;
-  font-stretch: 115%;
   font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0;
   line-height: 1.8;
-  text-transform: uppercase;
 }
 
 .sobre__anotacao-linha {
   display: block;
-  font-stretch: 115%;
   font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0;
   line-height: 1.8;
-  text-transform: uppercase;
   color: var(--cor-tinta-suave);
 }
 
@@ -129,11 +125,9 @@
 /* o rótulo abre a página em vermelho, como a retranca de uma revista */
 .sobre__rotulo {
   margin: 0;
-  font-stretch: 115%;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--cor-vermelho);
 }
 
@@ -166,7 +160,7 @@
 }
 
 .sobre__nome {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* ---------- a manchete ---------- */
@@ -184,7 +178,7 @@
   left: -0.04em;
   top: 0.04em;
   font-size: clamp(7rem, 13vw, 14rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
   color: var(--cor-vermelho);
 }
@@ -203,7 +197,7 @@
 }
 
 .sobre__manchete-forte {
-  font-weight: 900;
+  font-weight: 700;
   color: var(--cor-vermelho);
 }
 
@@ -218,11 +212,9 @@
 
 .sobre__historia-titulo {
   margin: 0;
-  font-stretch: 115%;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--cor-vermelho);
 }
 
@@ -243,12 +235,12 @@
 }
 
 .sobre__trajetoria {
-  font-weight: 800;
+  font-weight: 700;
   color: var(--cor-vermelho);
 }
 
 .sobre__parceira {
-  font-weight: 800;
+  font-weight: 700;
   color: inherit;
   text-decoration-color: var(--cor-vermelho);
   text-decoration-thickness: 2px;

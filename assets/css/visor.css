@@ -47,11 +47,9 @@
   padding: 8px 4px;
   border: 0;
   background: none;
-  font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   cursor: pointer;
   transition: color 0.4s ease;
 }
@@ -131,17 +129,15 @@
 
 .visor__tipo {
   margin-bottom: 14px;
-  font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--cor-vermelho);
 }
 
 .visor__titulo {
   margin-bottom: 22px;
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(2rem, 13cqi, 4.6rem);
   line-height: 0.92;
   letter-spacing: -0.05em;
@@ -161,11 +157,9 @@
 
 .visor__bloco-titulo {
   margin-bottom: 8px;
-  font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--cor-tinta-suave);
 }
 
@@ -363,7 +357,7 @@
 
 .visor__relacionados-titulo {
   margin-bottom: 20px;
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(1.4rem, 2.2vw, 2rem);
   line-height: 1;
   letter-spacing: -0.04em;
@@ -432,16 +426,14 @@
 .visor__seguinte-rotulo {
   display: block;
   margin-bottom: 6px;
-  font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--cor-tinta-suave);
 }
 
 .visor__seguinte-nome {
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(2rem, 3.4vw, 3.2rem);
   line-height: 1;
   letter-spacing: -0.045em;

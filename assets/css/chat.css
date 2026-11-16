@@ -120,7 +120,7 @@
 }
 
 .chat__botao[aria-expanded="true"] .chat__selo-disco {
-  fill: #960018;
+  fill: var(--azul);
 }
 
 .chat__botao-fechar {
@@ -205,7 +205,7 @@
   align-items: center;
   gap: 10px;
   padding: 14px 10px 14px 16px;
-  background: var(--cor-tinta);
+  background: var(--azul);
   color: #fff;
 }
 
@@ -230,7 +230,7 @@
 }
 
 .chat__titulo {
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.3rem;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -425,7 +425,7 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--cor-tinta);
+  background: var(--azul);
   color: #fff;
   cursor: pointer;
   transition: background 0.4s ease;

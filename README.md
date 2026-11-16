@@ -23,13 +23,16 @@ assets/
   dados/
     trabalhos.js           projetos: nome, destaque, tipo, categoria, resumo, ficha e imagens
     chat.js                perguntas e respostas do tira-dúvidas
-  fontes/archivo.woff2
+  fontes/inter.woff2       a fonte do site (a mesma do sistema e dos portais)
   imagens/
 ```
 
 ## Páginas
 
-- `/` (index.html): início (o hero diagonal se desmonta e a mesa dos trabalhos aparece), trabalhos, manifesto, Como funciona (serviços e processo), depoimentos, FAQ, contato.
+- `/` (index.html): abertura (título, um botão e a prancha dos trabalhos em destaque, com abas), trabalhos, manifesto,
+  serviços (três frentes em abas), processo (seis etapas; escolher uma mostra o texto dela), depoimentos, FAQ, contato.
+  Desde 2026-11 o site usa a linguagem do sistema: azul #1F5373, Inter, fundos claros, botões em pílula, cabeçalho de
+  vidro com a pílula que marca a seção visível.
 - `/como-funciona` redireciona para `/#servicos` (vercel.json).
 - `/sobre` (paginas/sobre.html): a apresentação.
 

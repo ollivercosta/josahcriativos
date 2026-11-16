@@ -1,42 +1,27 @@
 /* =========================================================================
    MANIFESTO
-   A frase se escreve conforme a leitura avança: cada palavra sai do cinza
-   para a tinta, e as palavras-chave chegam em vermelho.
+   Uma frase, centralizada e grande, entre os trabalhos e os serviços.
+   A palavra que resume a ideia fica no azul do site.
    ========================================================================= */
 
-/* a deixa ganha uma faixa própria, em tinta: a frase acende em creme e o
-   vermelho fica um tom mais claro, para manter o contraste sobre o escuro */
 .manifesto {
-  --cor-tinta: #f3eee6;
-  --cor-tinta-apagada: rgba(243, 238, 230, 0.16);
-  --cor-vermelho: #e2453b;
   padding: var(--espaco-secao) var(--margem);
-  background: #16130f;
-  color: var(--cor-tinta);
+  background: var(--branco);
 }
 
 .manifesto__texto {
-  font-weight: 400;
-  font-size: 5.2vw;
-  line-height: 1.06;
-  letter-spacing: -0.045em;
+  max-width: 980px;
+  margin-inline: auto;
+  font-size: clamp(1.75rem, 3.4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
 }
 
-.manifesto__palavra {
-  color: var(--cor-tinta-apagada);
-  transition: color 0.7s var(--curva-suave);
-}
-
-.manifesto__palavra--lida {
-  color: var(--cor-tinta);
-}
-
-.manifesto__palavra--forte.manifesto__palavra--lida {
-  color: var(--cor-vermelho);
-}
-
-@media (max-width: 860px) {
-  .manifesto__texto {
-    font-size: 1.75rem;
-  }
+.manifesto__forte {
+  font-weight: 700;
+  color: var(--azul);
 }

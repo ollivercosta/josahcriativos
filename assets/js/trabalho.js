@@ -6,7 +6,6 @@
 import { GestorDeSobreposicoes } from "./nucleo/GestorDeSobreposicoes.js";
 import { VLibras } from "./nucleo/VLibras.js";
 import { Projeto } from "./paginas/Projeto.js";
-import { Contato } from "./secoes/Contato.js";
 import { Termos } from "./secoes/Termos.js";
 
 /* sem a rolagem com inércia: aqui há janelas de texto com rolagem própria */
@@ -22,7 +21,6 @@ const semInercia = {
 const $ = (seletor) => document.querySelector(seletor);
 const gestor = new GestorDeSobreposicoes(semInercia);
 new Projeto($(".projeto__corpo"));
-new Contato($(".contato"));
 new Termos($(".termos"), gestor);
 new VLibras();
 const ano = $(".rodape__ano");

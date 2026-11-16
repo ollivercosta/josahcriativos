@@ -1,8 +1,8 @@
 /**
  * Cabecalho
- * O cabeçalho fixo entra depois do hero, mostra o progresso da leitura e
- * marca o link da seção visível. Também controla o menu do celular, que
- * pode ser aberto pelo botão do cabeçalho ou pelo botão "Menu" do hero.
+ * A barra de vidro fica sempre à vista; ao rolar, ganha fundo mais firme e
+ * uma linha embaixo. O menu do meio marca a seção visível com uma pílula
+ * branca que desliza até o link dela. Também controla o menu do celular.
  */
 export class Cabecalho {
   /**
@@ -15,6 +15,8 @@ export class Cabecalho {
     this.raiz = raiz;
     this.menu = menu;
     this.gestor = gestor;
+    this.navegacao = raiz.querySelector(".cabecalho__navegacao");
+    this.pilula = raiz.querySelector(".cabecalho__pilula");
     this.botaoMenu = raiz.querySelector(".cabecalho__menu-botao");
     this.iconeMenu = raiz.querySelector(".cabecalho__menu-icone");
     /* os links levam a seções da inicial ("/#faq") ou a outras páginas ("/sobre"):
@@ -23,43 +25,47 @@ export class Cabecalho {
       const destino = new URL(link.getAttribute("href"), window.location.href);
       const mesmaPagina =
         destino.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
-      let secao = mesmaPagina && destino.hash ? document.querySelector(destino.hash) : null;
-      /* um marco de destino (como o de Trabalhos, no fim do desmonte do hero) marca o começo;
-         a seção que ele indica marca o fim */
-      let marco = null;
-      if (secao?.dataset.secao) {
-        marco = secao;
-        secao = document.querySelector(secao.dataset.secao);
-      }
-      if (mesmaPagina && !destino.hash) link.classList.add("cabecalho__link--ativo");
-      return { link, secao, marco };
+      const secao = mesmaPagina && destino.hash ? document.querySelector(destino.hash) : null;
+      return { link, secao, fixo: mesmaPagina && !destino.hash };
     });
-    /* sem a cortina do hero (páginas internas), o cabeçalho fica sempre à vista */
-    this.sempreVisivel = !document.querySelector(".hero");
+    this.ativo = null;
     this.menuAberto = false;
-
     this.#ligarMenu();
+    window.addEventListener("resize", () => this.#moverPilula());
+    document.fonts?.ready.then(() => this.#moverPilula());
     ciclo.inscrever(() => this.#aoRolar());
+    this.#aoRolar();
   }
 
   #aoRolar() {
-    const y = window.scrollY;
-    const alturaTela = window.innerHeight;
-    const total = document.documentElement.scrollHeight - alturaTela;
-    this.raiz.classList.toggle("cabecalho--visivel", this.sempreVisivel || y > alturaTela * 0.75 || this.menuAberto);
-    this.raiz.style.setProperty("--progresso", total > 0 ? (y / total).toFixed(4) : "0");
-    const linhaDeLeitura = alturaTela * 0.35;
-    for (const { link, secao, marco } of this.secoes) {
+    this.raiz.classList.toggle("cabecalho--rolou", window.scrollY > 8);
+    const linhaDeLeitura = window.innerHeight * 0.35;
+    let ativo = this.secoes.find((item) => item.fixo)?.link || null;
+    for (const { link, secao } of this.secoes) {
       if (!secao) continue;
       const caixa = secao.getBoundingClientRect();
-      const comeco = marco ? marco.getBoundingClientRect().top - 60 : caixa.top;
-      link.classList.toggle("cabecalho__link--ativo", comeco <= linhaDeLeitura && caixa.bottom > linhaDeLeitura);
+      if (caixa.top <= linhaDeLeitura && caixa.bottom > linhaDeLeitura) ativo = link;
     }
+    if (ativo !== this.ativo) {
+      this.ativo = ativo;
+      for (const { link } of this.secoes) link.classList.toggle("cabecalho__link--ativo", link === ativo);
+      this.#moverPilula();
+    }
+  }
+
+  #moverPilula() {
+    if (!this.pilula) return;
+    const ativo = this.ativo;
+    this.navegacao.classList.toggle("cabecalho__navegacao--com-pilula", !!ativo);
+    if (!ativo) return;
+    const base = this.navegacao.getBoundingClientRect();
+    const caixa = ativo.getBoundingClientRect();
+    this.pilula.style.setProperty("--pilula-x", `${(caixa.left - base.left).toFixed(1)}px`);
+    this.pilula.style.setProperty("--pilula-l", `${caixa.width.toFixed(1)}px`);
   }
 
   #ligarMenu() {
     this.botaoMenu.addEventListener("click", () => this.alternarMenu(!this.menuAberto));
-    document.querySelector(".hero__menu-botao")?.addEventListener("click", () => this.alternarMenu(true));
     this.menu.addEventListener("click", (evento) => {
       if (evento.target.closest("a")) this.alternarMenu(false);
     });
@@ -76,7 +82,6 @@ export class Cabecalho {
     this.menu.classList.toggle("menu-movel--aberto", abrir);
     this.menu.setAttribute("aria-hidden", abrir ? "false" : "true");
     this.raiz.classList.toggle("cabecalho--menu-aberto", abrir);
-    if (abrir) this.raiz.classList.add("cabecalho--visivel");
     this.botaoMenu.setAttribute("aria-expanded", abrir ? "true" : "false");
     this.botaoMenu.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
     this.iconeMenu.innerHTML = abrir

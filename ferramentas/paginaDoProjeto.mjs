@@ -250,7 +250,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
 <html lang="pt-BR">
   <head>
     ${cabecaDoTrabalho(partes.cabeca, trabalho).trim()}
-    <link rel="preload" href="/assets/fontes/archivo.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fontes/inter.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/assets/css/trabalho.css" />
     <script type="module" src="/assets/js/trabalho.js"></script>
   </head>

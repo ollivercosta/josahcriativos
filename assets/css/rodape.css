@@ -1,64 +1,63 @@
 /* =========================================================================
    RODAPÉ
-   Direitos, acesso aos termos e o nome em escala de cartaz.
+   Uma linha: a marca, os links dos termos e da acessibilidade e os
+   direitos. No celular, empilha.
    ========================================================================= */
 
 .rodape {
-  position: relative;
-  overflow: hidden;
-  padding: 26px 0 0;
+  border-top: 1px solid var(--linha);
+  background: var(--branco);
 }
 
 .rodape__linha {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 12px 32px;
-  padding: 0 var(--margem);
-  font-stretch: 115%;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--cor-tinta-suave);
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding: 28px var(--margem);
+  font-size: 0.88rem;
+  color: var(--suave);
+}
+
+.rodape__marca {
+  color: var(--suave);
+  text-decoration: none;
+}
+
+.rodape__marca b {
+  margin-right: 6px;
+  color: var(--azul);
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 .rodape__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 32px;
+  gap: 8px 20px;
 }
 
 .rodape__termos {
   padding: 0;
   border: 0;
   background: none;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: inherit;
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-align: left;
+  color: var(--suave);
+  font-size: inherit;
   cursor: pointer;
-  transition: color 0.4s ease;
 }
 
 .rodape__termos:hover {
-  color: var(--cor-vermelho);
+  color: var(--azul);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.rodape__nome {
-  display: block;
-  margin: 3vw 0 -3vw;
-  padding-left: 2vw;
-  font-weight: 900;
-  font-size: 15.6vw;
-  line-height: 0.8;
-  letter-spacing: -0.065em;
-  white-space: nowrap;
-}
-
-.rodape__nome-destaque {
-  font-style: normal;
-  color: var(--cor-vermelho);
+@media (max-width: 760px) {
+  .rodape__linha {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

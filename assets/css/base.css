@@ -1,44 +1,66 @@
 /* =========================================================================
    BASE
-   Tokens da identidade (cores, fonte, curvas, medidas) e o reset mínimo.
-   Nenhuma classe daqui é aplicada a elementos das seções: cada seção tem
-   o seu próprio arquivo e as suas próprias classes.
+   Tokens da identidade e o reset mínimo. Desde 2026-11 o site usa a mesma
+   linguagem do sistema e dos portais: azul #1F5373, a fonte Inter e fundos
+   claros (branco e cinza-azulado), com cantos arredondados e botões em
+   pílula. Nenhuma classe daqui é aplicada a elementos das seções.
    ========================================================================= */
 
 @font-face {
-  font-family: "Archivo";
-  src: url("/assets/fontes/archivo.woff2") format("woff2");
+  font-family: "Inter";
+  src: url("/assets/fontes/inter.woff2") format("woff2");
   font-weight: 100 900;
-  font-stretch: 62% 125%;
+  font-style: normal;
   font-display: swap;
 }
 
 :root {
-  /* paleta: branco, tinta e vermelho (três cores) */
-  --cor-fundo: #ffffff;
-  --cor-tinta: #16130f;
-  --cor-vermelho: #a3171f;
+  /* paleta do sistema */
+  --azul: #1f5373;
+  --azul-esc: #17435e;
+  --azul-2: #2c709b;
+  --azul-3: #6fa3c4;
+  --azul-s: #e8f0f5;
+  --azul-ss: #f2f7fa;
+  --ink: #0f172a;
+  --texto: #1e293b;
+  --suave: #526074;
+  --linha: #e2e8f0;
+  --linha-2: #cbd5e1;
+  --fundo-claro: #f5f7fa;
+  --branco: #ffffff;
 
-  /* variações de opacidade da tinta (não são cores novas) */
-  --cor-tinta-suave: rgba(22, 19, 15, 0.62);
-  --cor-tinta-apagada: rgba(22, 19, 15, 0.16);
-  --cor-linha: rgba(22, 19, 15, 0.12);
-  --cor-linha-forte: rgba(22, 19, 15, 0.3);
-  --cor-cinza-claro: #f3f2ef;
+  /* nomes antigos, mantidos para as janelas (visor, termos, chat) e as páginas de trabalho */
+  --cor-fundo: var(--branco);
+  --cor-tinta: var(--ink);
+  --cor-vermelho: var(--azul);
+  --cor-tinta-suave: var(--suave);
+  --cor-tinta-apagada: rgba(15, 23, 42, 0.16);
+  --cor-linha: var(--linha);
+  --cor-linha-forte: var(--linha-2);
+  --cor-cinza-claro: var(--fundo-claro);
 
-  --fonte: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* curvas: todas desaceleram no fim, sem rebote */
-  --curva: cubic-bezier(0.16, 1, 0.3, 1);
+  /* curvas: desaceleram no fim, sem rebote */
+  --curva: cubic-bezier(0.22, 1, 0.36, 1);
   --curva-suave: cubic-bezier(0.22, 0.61, 0.36, 1);
   --curva-entra-sai: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --margem: 4.4vw;
+  --raio: 12px;
+  --raio-g: 20px;
+  --sombra: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -12px rgba(15, 23, 42, 0.14);
+  --sombra-g: 0 2px 4px rgba(15, 23, 42, 0.04), 0 40px 90px -30px rgba(31, 83, 115, 0.38);
 
-  /* espaçamento padrão: entre seções e entre um título de seção e o conteúdo */
-  --espaco-secao: clamp(88px, 13vh, 150px);
-  --espaco-titulo: clamp(40px, 7vh, 80px);
-  --altura-cabecalho: 72px;
+  --largura: 1180px;
+  --margem: clamp(20px, 4vw, 40px);
+  --espaco-secao: clamp(80px, 10vw, 136px);
+  --espaco-titulo: clamp(32px, 4vw, 56px);
+  --altura-cabecalho: 60px;
+
+  /* tipografia: um tamanho para os títulos das seções, outro para a abertura */
+  --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
+  --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
 
 *,
@@ -49,6 +71,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--altura-cabecalho) + 24px);
 }
 
 html,
@@ -77,12 +100,14 @@ html.pagina--travada {
 
 body {
   margin: 0;
-  background: var(--cor-fundo);
-  color: var(--cor-tinta);
+  background: var(--branco);
+  color: var(--texto);
   font-family: var(--fonte);
   font-size: 1.0625rem;
-  line-height: 1.6;
+  line-height: 1.58;
+  letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img,
@@ -97,8 +122,10 @@ a {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
+  letter-spacing: inherit;
   color: inherit;
 }
 
@@ -113,41 +140,65 @@ dd {
   margin: 0;
 }
 
+h1,
+h2,
+h3 {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 ::selection {
-  background: var(--cor-vermelho);
-  color: #fff;
+  background: var(--azul-s);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--cor-vermelho);
+  outline: 3px solid var(--azul-2);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* link de acessibilidade para pular o cabeçalho */
 .pular-conteudo {
-  position: absolute;
+  position: fixed;
   left: 12px;
   top: -60px;
   z-index: 500;
-  padding: 10px 14px;
-  background: var(--cor-tinta);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--azul);
   color: #fff;
+  font-weight: 600;
   text-decoration: none;
-  transition: top 0.4s var(--curva);
+  transition: top 0.3s var(--curva);
 }
 
 .pular-conteudo:focus {
   top: 12px;
 }
 
-/* celular: uma margem lateral, um respiro entre seções e um tamanho de
-   título para todas as seções (o hero mantém a escala própria) */
+/* entrada das seções: o conteúdo sobe 16px e aparece quando chega à tela (assets/js/nucleo/Revela.js) */
+.revela {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s var(--curva),
+    transform 0.8s var(--curva);
+  transition-delay: var(--atraso, 0ms);
+}
+
+.revela--visivel {
+  opacity: 1;
+  transform: none;
+}
+
 @media (max-width: 860px) {
   :root {
-    --margem: 20px;
     --espaco-secao: 72px;
-    --espaco-titulo: 28px;
-    --titulo-celular: 2.6rem;
     --toque: 44px;
   }
 }
@@ -161,14 +212,18 @@ dd {
     transition-duration: 0.001ms !important;
     transition-delay: 0s !important;
   }
+
+  .revela {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-/* páginas internas (Como funciona, Sobre): sem o hero, o conteúdo começa abaixo do cabeçalho fixo */
+/* páginas internas (Sobre): o conteúdo começa abaixo do cabeçalho fixo */
 .pagina-interna main {
   padding-top: var(--altura-cabecalho);
 }
 
-/* um pulo direto para um endereço com # desconta o cabeçalho fixo, como a rolagem suave */
 main [id] {
-  scroll-margin-top: 60px;
+  scroll-margin-top: calc(var(--altura-cabecalho) + 16px);
 }

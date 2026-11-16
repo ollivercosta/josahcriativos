@@ -35,6 +35,7 @@
   grid-template-columns: 350px minmax(0, 1fr);
   overflow: hidden;
   background: #fff;
+  border-radius: var(--raio-g);
   box-shadow: 0 40px 90px -40px rgba(22, 19, 15, 0.6);
   transform: translateY(28px);
   transition: transform 0.9s var(--curva);
@@ -56,7 +57,7 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--cor-tinta);
+  background: var(--azul);
   color: #fff;
   cursor: pointer;
   transition: background 0.4s ease;
@@ -80,7 +81,7 @@
 
 .termos__titulo {
   margin-bottom: 10px;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.9rem;
   line-height: 0.95;
   letter-spacing: -0.045em;
@@ -124,7 +125,7 @@
 
 .termos__aba--ativa,
 .termos__aba--ativa:hover {
-  background: var(--cor-tinta);
+  background: var(--azul);
   color: #fff;
 }
 
@@ -186,7 +187,7 @@
 
 .termos__documento-titulo {
   margin-bottom: 26px;
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(2.2rem, 3.8vw, 3.4rem);
   line-height: 0.95;
   letter-spacing: -0.05em;
@@ -202,11 +203,9 @@
 .termos__data {
   display: block;
   margin-bottom: 20px;
-  font-stretch: 115%;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: var(--cor-vermelho);
 }
 
@@ -218,7 +217,7 @@
 .termos__secao-titulo {
   display: block;
   margin: 32px 0 10px;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
   color: var(--cor-tinta);
