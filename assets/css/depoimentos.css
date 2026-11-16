@@ -7,7 +7,7 @@
 
 .depoimentos {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--fundo-claro);
+  background: var(--areia-s);
 }
 
 .depoimentos__titulo,
@@ -86,7 +86,7 @@
   bottom: 0;
   height: 2px;
   border-radius: 2px;
-  background: var(--azul);
+  background: var(--terracota);
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -145,7 +145,7 @@
   font-size: 3.2rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--azul-3);
+  color: var(--areia);
 }
 
 .depoimentos__dados {

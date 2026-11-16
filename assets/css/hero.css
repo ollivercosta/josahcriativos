@@ -12,7 +12,7 @@
   overflow: clip;
   padding: calc(var(--altura-cabecalho) + clamp(48px, 8vw, 104px)) var(--margem) clamp(48px, 6vw, 80px);
   background:
-    radial-gradient(70% 55% at 50% 0%, var(--azul-ss) 0%, rgba(242, 247, 250, 0) 100%),
+    radial-gradient(70% 55% at 50% 0%, var(--azul-s) 0%, rgba(226, 237, 242, 0) 100%),
     var(--branco);
   text-align: center;
 }
@@ -27,9 +27,9 @@
 
 .hero__rotulo {
   font-size: clamp(1.2rem, 4.4vw, 2rem);
-  letter-spacing: -0.02em;
   font-weight: 600;
-  color: var(--azul);
+  letter-spacing: -0.02em;
+  color: var(--terracota);
 }
 
 /* o título: uma linha só. O texto fica para leitores de tela; quem aparece é o
@@ -171,7 +171,7 @@
   top: 0;
   left: 0;
   width: 0;
-  border-left: 1px solid #db2777;
+  border-left: 1px solid #9c3d54;
   opacity: 0;
 }
 
@@ -181,7 +181,7 @@
   position: absolute;
   left: -5px;
   width: 9px;
-  border-top: 1px solid #db2777;
+  border-top: 1px solid #9c3d54;
 }
 
 .hero__cota::before {
@@ -198,7 +198,7 @@
   right: 8px;
   padding: 2px 6px;
   border-radius: 4px;
-  background: #db2777;
+  background: #9c3d54;
   color: #fff;
   white-space: nowrap;
   transform: translateY(-50%);
@@ -208,7 +208,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  border: 1px solid #1f5373;
+  border: 1px solid #183451;
   opacity: 0;
 }
 
@@ -216,7 +216,7 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  border: 1px solid #1f5373;
+  border: 1px solid #183451;
   background: #fff;
 }
 
@@ -246,7 +246,7 @@
   left: 50%;
   padding: 2px 8px;
   border-radius: 4px;
-  background: #1f5373;
+  background: #183451;
   color: #fff;
   white-space: nowrap;
   transform: translateX(-50%);
@@ -293,7 +293,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--azul-3);
+  background: var(--terracota-claro);
 }
 
 @keyframes hero-faixa {

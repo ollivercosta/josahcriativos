@@ -55,7 +55,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: var(--azul);
+  background: var(--terracota);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }
@@ -115,8 +115,8 @@
 }
 
 .processo__no--feito .processo__numero {
-  border-color: var(--azul);
-  color: var(--azul);
+  border-color: var(--terracota);
+  color: var(--terracota);
 }
 
 .processo__no[aria-selected="true"] .processo__numero {
@@ -144,7 +144,7 @@
   min-height: 340px;
   padding: clamp(28px, 4vw, 48px);
   border-radius: var(--raio-g);
-  background: var(--azul-ss);
+  background: var(--fundo-claro);
 }
 
 .processo__painel[hidden] {
@@ -165,7 +165,7 @@
 .processo__passo {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--azul);
+  color: var(--terracota);
 }
 
 .processo__nome {

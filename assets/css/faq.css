@@ -83,7 +83,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--azul-s);
+  background: var(--terracota-s);
 }
 
 .faq__sinal::before,
@@ -96,7 +96,7 @@
   height: 2px;
   margin: -1px 0 0 -6px;
   border-radius: 2px;
-  background: var(--azul);
+  background: var(--terracota);
   transition: transform 0.4s var(--curva);
 }
 

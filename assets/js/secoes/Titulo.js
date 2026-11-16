@@ -39,13 +39,13 @@ const ESPALHA = 110; // unidades de fonte a mais entre as letras antes do ajuste
 const DESCENDENTE = 420;
 
 const AGENTES = [
-  { id: "grid", nome: "Grid", cor: "#1f5373" },
-  { id: "contorno", nome: "Contorno", cor: "#0284c7" },
-  { id: "curvas", nome: "Curvas", cor: "#7c3aed" },
-  { id: "vetores", nome: "Vetores", cor: "#059669" },
-  { id: "cor", nome: "Cor", cor: "#d97706" },
-  { id: "espaco", nome: "Espaçamento", cor: "#e11d48" },
-  { id: "medidas", nome: "Medidas", cor: "#db2777" },
+  { id: "grid", nome: "Grid", cor: "#183451" },
+  { id: "contorno", nome: "Contorno", cor: "#3b7a99" },
+  { id: "curvas", nome: "Curvas", cor: "#6e5ba8" },
+  { id: "vetores", nome: "Vetores", cor: "#3e7d5e" },
+  { id: "cor", nome: "Cor", cor: "#a9501c" },
+  { id: "espaco", nome: "Espaçamento", cor: "#b8862f" },
+  { id: "medidas", nome: "Medidas", cor: "#9c3d54" },
 ];
 
 const limitar = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -109,7 +109,7 @@ export class Titulo {
     const svg = document.createElementNS(SVG, "svg");
     svg.setAttribute("class", "hero__desenho");
     svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
-    svg.innerHTML = `<defs><linearGradient id="hero-tinta" gradientUnits="userSpaceOnUse" x1="0" y1="${TITULO.capa}" x2="0" y2="${DESCENDENTE}"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#17435e"/></linearGradient></defs>`;
+    svg.innerHTML = `<defs><linearGradient id="hero-tinta" gradientUnits="userSpaceOnUse" x1="0" y1="${TITULO.capa}" x2="0" y2="${DESCENDENTE}"><stop offset="0" stop-color="#14202e"/><stop offset="1" stop-color="#183451"/></linearGradient></defs>`;
 
     /* guias: maiúsculas, altura-x, linha de base, descendentes */
     this.guias = [
@@ -381,7 +381,7 @@ export class Titulo {
     });
     const arrastando = t >= T.espaco[0] && t <= T.espaco[1] + 200;
     this.agentes[5].nome.textContent = arrastando ? `Espaçamento ${Math.round(-60 * (1 - k))}` : "Espaçamento";
-    this.agentes[4].nome.textContent = t >= letras[0].tc ? "Cor #0F172A" : "Cor";
+    this.agentes[4].nome.textContent = t >= letras[0].tc ? "Cor #183451" : "Cor";
   }
 
   /** Cada agente aparece pouco antes da sua tarefa. */

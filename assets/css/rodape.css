@@ -50,7 +50,7 @@
 }
 
 .rodape__termos:hover {
-  color: var(--azul);
+  color: var(--terracota);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

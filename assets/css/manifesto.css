@@ -23,7 +23,7 @@
 
 .manifesto__forte {
   font-weight: 700;
-  color: var(--azul);
+  color: var(--terracota);
 }
 
 /* leitura no ritmo da rolagem (Manifesto.js): as palavras começam claras e acendem */
@@ -37,5 +37,5 @@
 }
 
 .manifesto__texto--leitura .manifesto__forte .manifesto__palavra--acesa {
-  color: var(--azul);
+  color: var(--terracota);
 }

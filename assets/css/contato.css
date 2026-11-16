@@ -15,8 +15,8 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), var(--azul-2) 0%, rgba(44, 112, 155, 0) 70%),
-    var(--azul);
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), var(--terracota-claro) 0%, rgba(201, 111, 56, 0) 70%),
+    var(--terracota);
   color: #fff;
   text-align: center;
 }
@@ -29,7 +29,7 @@
   border: 3px solid rgba(255, 255, 255, 0.6);
   object-fit: cover;
   object-position: 50% 20%;
-  background: var(--azul-esc);
+  background: var(--terracota-esc);
 }
 
 .contato__titulo {
@@ -55,7 +55,7 @@
   padding: 15px 32px;
   border-radius: 999px;
   background: #fff;
-  color: var(--azul);
+  color: var(--terracota-esc);
   font-weight: 650;
   text-decoration: none;
   transition:

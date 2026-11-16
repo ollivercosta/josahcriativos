@@ -205,8 +205,8 @@
 .trabalhos__selo {
   padding: 2px 10px;
   border-radius: 999px;
-  background: var(--azul-s);
-  color: var(--azul);
+  background: var(--terracota-s);
+  color: var(--terracota-esc);
   font-size: 0.78rem;
   font-weight: 600;
 }
@@ -253,8 +253,9 @@
 }
 
 .trabalhos__mais:hover {
-  border-color: var(--azul);
-  box-shadow: 0 8px 20px -12px rgba(31, 83, 115, 0.5);
+  border-color: var(--terracota);
+  color: var(--terracota);
+  box-shadow: 0 8px 20px -12px rgba(169, 80, 28, 0.45);
 }
 
 .trabalhos__mais[hidden] {

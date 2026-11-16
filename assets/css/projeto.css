@@ -190,7 +190,7 @@
 .projeto__chave--livro {
   padding: clamp(28px, 4vw, 56px) clamp(16px, 3vw, 40px) clamp(20px, 3vw, 32px);
   border-radius: var(--raio-g, 20px);
-  background: radial-gradient(70% 70% at 50% 35%, var(--azul-ss) 0%, rgba(242, 247, 250, 0) 100%);
+  background: radial-gradient(70% 70% at 50% 35%, var(--azul-s) 0%, rgba(226, 237, 242, 0) 100%);
 }
 
 .projeto__livro {

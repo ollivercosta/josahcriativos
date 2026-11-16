@@ -9,7 +9,7 @@
 
 .servicos {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--fundo-claro);
+  background: var(--azul-s);
 }
 
 .servicos__cabeca,
@@ -22,7 +22,7 @@
 .servicos__rotulo {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--azul);
+  color: var(--terracota);
 }
 
 .servicos__titulo {
@@ -67,7 +67,7 @@
 }
 
 .servicos__fio--aceso {
-  stroke: var(--azul);
+  stroke: var(--terracota);
   stroke-width: 2;
   opacity: 1;
 }
@@ -84,7 +84,7 @@
 }
 
 .servicos__pulso {
-  fill: var(--azul-2);
+  fill: var(--terracota-claro);
 }
 
 .servicos__frentes {
@@ -117,7 +117,7 @@
 }
 
 .servicos__frente[aria-selected="true"] {
-  border-color: var(--azul);
+  border-color: var(--terracota);
   background: var(--branco);
   box-shadow: var(--sombra);
 }
@@ -143,7 +143,7 @@
   right: 0;
   bottom: 0;
   height: 3px;
-  background: var(--azul);
+  background: var(--terracota);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }
@@ -166,10 +166,10 @@
   padding: 24px;
   border-radius: var(--raio-g);
   background:
-    radial-gradient(90% 80% at 50% 0%, var(--azul-2) 0%, rgba(44, 112, 155, 0) 75%),
+    radial-gradient(90% 80% at 50% 0%, var(--azul-2) 0%, rgba(42, 76, 110, 0) 75%),
     var(--azul);
   color: #fff;
-  box-shadow: 0 24px 50px -24px rgba(31, 83, 115, 0.7);
+  box-shadow: 0 24px 50px -24px rgba(24, 52, 81, 0.7);
 }
 
 .servicos__centro-nome {
@@ -202,8 +202,8 @@
   top: 0.35em;
   width: 12px;
   height: 7px;
-  border-left: 2px solid var(--azul-3);
-  border-bottom: 2px solid var(--azul-3);
+  border-left: 2px solid var(--areia);
+  border-bottom: 2px solid var(--areia);
   transform: rotate(-45deg);
 }
 
@@ -231,9 +231,9 @@
 }
 
 .servicos__destino--aceso {
-  border-color: var(--azul-3);
-  background: var(--azul-s);
-  color: var(--azul);
+  border-color: var(--terracota-claro);
+  background: var(--terracota-s);
+  color: var(--terracota-esc);
   font-weight: 600;
 }
 
@@ -302,8 +302,8 @@
 .servicos__publico-item {
   padding: 6px 14px;
   border-radius: 999px;
-  background: var(--azul-s);
-  color: var(--azul);
+  background: var(--areia-s);
+  color: #6b4a22;
   font-size: 0.88rem;
   font-weight: 500;
 }

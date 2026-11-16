@@ -1,9 +1,12 @@
 /* =========================================================================
    BASE
-   Tokens da identidade e o reset mínimo. Desde 2026-11 o site usa a mesma
-   linguagem do sistema e dos portais: azul #1F5373, a fonte Inter e fundos
-   claros (branco e cinza-azulado), com cantos arredondados e botões em
-   pílula. Nenhuma classe daqui é aplicada a elementos das seções.
+   Tokens da identidade e o reset mínimo. Paleta (referência "Riviera"):
+   azul Riviera #183451 para títulos e blocos fortes, terracota #A9501C como
+   acento (botões, tags, interação e o encerramento), marfim #F3ECDE e areia
+   #D4AF83 nos fundos e o azul-céu claro do tecido da referência como seção
+   fria. Fonte Inter, cantos arredondados e botões em pílula. Os nomes
+   --azul-* ficaram (são usados em todo o site), agora com os tons Riviera.
+   Nenhuma classe daqui é aplicada a elementos das seções.
    ========================================================================= */
 
 @font-face {
@@ -15,27 +18,36 @@
 }
 
 :root {
-  /* paleta do sistema */
-  --azul: #1f5373;
-  --azul-esc: #17435e;
-  --azul-2: #2c709b;
-  --azul-3: #6fa3c4;
-  --azul-s: #e8f0f5;
-  --azul-ss: #f2f7fa;
-  --ink: #0f172a;
-  --texto: #1e293b;
-  --suave: #526074;
-  --linha: #e2e8f0;
-  --linha-2: #cbd5e1;
-  --fundo-claro: #f5f7fa;
-  --branco: #ffffff;
+  /* azul Riviera */
+  --azul: #183451;
+  --azul-esc: #0f2439;
+  --azul-2: #2a4c6e;
+  --azul-3: #8fb4c8;
+  --azul-s: #e2edf2;
+  --azul-ss: #edf3f5;
+  /* terracota: o acento */
+  --terracota: #a9501c;
+  --terracota-esc: #873e12;
+  --terracota-claro: #c96f38;
+  --terracota-s: #f4e0d1;
+  /* marfim e areia: os fundos quentes */
+  --areia: #d4af83;
+  --areia-s: #ece0cc;
+  --marfim: #f3ecde;
+  --ink: #14202e;
+  --texto: #2b2a28;
+  --suave: #6b645a;
+  --linha: #e5dbca;
+  --linha-2: #d3c4ab;
+  --fundo-claro: #f3ecde;
+  --branco: #fbf8f2;
 
   /* nomes antigos, mantidos para as janelas (visor, termos, chat) e as páginas de trabalho */
   --cor-fundo: var(--branco);
   --cor-tinta: var(--ink);
   --cor-vermelho: var(--azul);
   --cor-tinta-suave: var(--suave);
-  --cor-tinta-apagada: rgba(15, 23, 42, 0.16);
+  --cor-tinta-apagada: rgba(20, 32, 46, 0.16);
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
   --cor-cinza-claro: var(--fundo-claro);
@@ -49,8 +61,8 @@
 
   --raio: 12px;
   --raio-g: 20px;
-  --sombra: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -12px rgba(15, 23, 42, 0.14);
-  --sombra-g: 0 2px 4px rgba(15, 23, 42, 0.04), 0 40px 90px -30px rgba(31, 83, 115, 0.38);
+  --sombra: 0 1px 2px rgba(24, 52, 81, 0.05), 0 12px 32px -12px rgba(24, 52, 81, 0.16);
+  --sombra-g: 0 2px 4px rgba(24, 52, 81, 0.05), 0 40px 90px -30px rgba(24, 52, 81, 0.34);
 
   --largura: 1180px;
   --margem: clamp(20px, 4vw, 40px);
