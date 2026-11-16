@@ -16,26 +16,24 @@
   font-display: swap;
 }
 
+
 :root {
-  /* PALETA: quatro cores e as variações mais próximas de cada uma.
-     Cada seção do site tem o seu fundo (veja "fundos por seção"): o ritmo
-     alterna branco, creme, espresso, ouro claro e terracota, para que cada
-     rolagem mude de ambiente sem sair da mesma família. */
-  --espresso: #2b1b17;
-  --espresso-suave: #6b5a52;
-  --terracota: #c1440e;
-  --terracota-escuro: #9a3509;
-  --terracota-claro: #f6dccd;
-  --creme: #fbf3e7;
-  --ouro: #e8b84b;
-  --ouro-claro: #f8e7be;
-  --branco: #ffffff;
-  --linha: #ebdfcd;
-  --linha-2: #d6c5ad;
-  --sucesso: #2f7a4f;
-  --sucesso-claro: #dff1e5;
-  --aviso: #8a6305;
-  --aviso-claro: #fbebc4;
+  /* PALETA: identidade baseada em roxo profundo, amarelo vibrante e branco neutro. */
+  --espresso: #0D000A;
+  --espresso-suave: #4D394B;
+  --terracota: #FEDD00;
+  --terracota-escuro: #D9BD00;
+  --terracota-claro: #FFF5A8;
+  --creme: #F3F2F2;
+  --ouro: #FEDD00;
+  --ouro-claro: #FFF5A8;
+  --branco: #FFFFFF;
+  --linha: #E9E7E8;
+  --linha-2: #B9B5B8;
+  --sucesso: #2F7A4F;
+  --sucesso-claro: #DFF1E5;
+  --aviso: #8A6305;
+  --aviso-claro: #FBEBC4;
 
   /* fundos por seção */
   --fundo-hero: var(--branco);
@@ -55,26 +53,26 @@
   --superficie: var(--branco);
   --borda: var(--linha);
   --borda-forte: var(--linha-2);
-  --borda-controle: #9c8b80;
+  --borda-controle: #9C8B98;
   --ink: var(--espresso);
-  --texto: #3d2c27;
+  --texto: #352D34;
   --suave: var(--espresso-suave);
   --texto-titulo: var(--espresso);
   --texto-sobre-cor: var(--creme);
   --acao: var(--terracota);
   --acao-hover: var(--terracota-escuro);
   --acao-escuro: var(--ouro);
-  --acao-escuro-hover: #f0c96d;
+  --acao-escuro-hover: #E8C900;
   --acao-2: var(--espresso);
-  --acao-2-hover: #4a332d;
+  --acao-2-hover: #352333;
   --link: var(--espresso);
   --foco: var(--terracota-escuro);
   --selecao: var(--ouro-claro);
   --nevoa: var(--creme);
   --destaque: var(--terracota);
-  --rotulo: var(--terracota-escuro);
+  --rotulo: var(--espresso);
   --azul: var(--espresso);
-  --azul-2: #4a332d;
+  --azul-2: #352333;
   --azul-3: var(--linha-2);
   --azul-s: var(--creme);
   --azul-ss: var(--creme);
@@ -89,21 +87,21 @@
   --cor-cinza-claro: var(--creme);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 43 27 23;
-  --escuro-rgb: 43 27 23;
+  --sombra-rgb: 13 0 10;
+  --escuro-rgb: 13 0 10;
   --fundo-rgb: 255 255 255;
-  --fundo-alt-rgb: 251 243 231;
+  --fundo-alt-rgb: 243 242 242;
   --superficie-rgb: 255 255 255;
-  --sobre-cor-rgb: 251 243 231;
+  --sobre-cor-rgb: 243 242 242;
 
   /* cursores do título (Titulo.js) */
   --agente-grid: var(--espresso);
-  --agente-contorno: #2f6e8c;
-  --agente-curvas: #6b578f;
+  --agente-contorno: #2F6E8C;
+  --agente-curvas: #6B578F;
   --agente-vetores: var(--sucesso);
   --agente-cor: var(--terracota);
   --agente-espaco: var(--aviso);
-  --agente-medidas: #8f3f55;
+  --agente-medidas: #8F3F55;
 
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --curva: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,6 +119,7 @@
   --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
+
 
 
 
