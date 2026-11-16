@@ -45,7 +45,7 @@
 }
 
 .chat__selo-disco {
-  fill: #eedfd2;
+  fill: var(--fundo-alt);
   transition: fill 0.5s ease;
 }
 

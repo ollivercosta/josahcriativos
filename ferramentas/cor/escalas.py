@@ -1,26 +1,29 @@
-"""Gera as escalas de cor do site (25/50 a 950) em OKLCH, converte para hex e
+"""Gera as escalas de cor do site (25 a 950) em OKLCH, converte para hex e
 monta o bloco :root inteiro de assets/css/base.css.
 
-Uso: python3 ferramentas/cor/escalas.py            (imprime a tabela)
-     python3 ferramentas/cor/escalas.py --json     (imprime as escalas em JSON)
-     python3 ferramentas/cor/escalas.py --root     (imprime o bloco :root completo de base.css)
+Uso: python3 ferramentas/cor/escalas.py                       (tabela da direção escolhida)
+     python3 ferramentas/cor/escalas.py --json                (escalas em JSON)
+     python3 ferramentas/cor/escalas.py --root                (bloco :root completo de base.css)
+     python3 ferramentas/cor/escalas.py --direcao riso --root (qualquer uma das direções testadas)
 
-Paleta v2 (nov/2026), "papel, tinta e urucum":
-- papel: o neutro. Matiz 85 (claros) a 65 (escuros), croma baixo. Fundos,
-  cartões, bordas e texto corrido. É o 60.
-- tinta: a estrutura. O mesmo matiz do papel, com croma mínimo (0.008 a 0.010):
-  nos escuros é um carvão de tinta de impressão, levemente quente, sem virar marrom. Títulos, superfícies fortes e o bloco do
-  contato. É o 30. Papel e tinta são a mesma família: a página é uma folha
-  impressa, não uma colagem de chapas.
-- urucum: o acento (vermelho-alaranjado do pigmento). Só ação e interação. É o 10.
-- palha: o pigmento do próprio papel, com mais croma (mesmo matiz). Detalhes
-  materiais: vistos, aspas, etiquetas de público.
-- semânticas (sucesso, aviso, erro, info): mesma régua de L e croma moderado.
+Paleta v3 (nov/2026). Criada do zero, sem partir das referências do dono nem das
+paletas v1 e v2. Quatro direções foram montadas e comparadas no site (DIRECOES);
+a escolhida está em ESCOLHIDA. Cada direção tem quatro famílias com papel fixo:
+- neutro: os fundos e o texto corrido. É o 60.
+- estrutura: títulos, superfícies fortes e o único bloco de cor cheia (contato). É o 30.
+- acento: só ação e interação. É o 10.
+- detalhe: vistos, aspas, etiquetas de público.
+Mais as semânticas (sucesso, aviso, erro, info) na mesma régua de L.
 
 Regras de construção:
-- A luminosidade (L do OKLCH) segue degraus perceptuais fixos (L_ALVO).
+- A luminosidade (L do OKLCH) segue degraus perceptuais fixos (L_ALVO); uma família
+  pode trocar um degrau (ajuste "L").
 - O croma é baixo nas pontas e sobe no meio; o matiz desliza dos claros para os escuros.
 - Cor fora do gamut sRGB: o croma desce até caber (L e matiz ficam).
+
+As folhas das seções usam nomes de escala antigos (papel, tinta, urucum, palha da v2;
+azul, terracota, marfim, areia da v1). Eles continuam existindo só como apelidos
+das famílias novas, para que trocar a paleta seja só trocar o :root.
 """
 
 import json
@@ -87,93 +90,196 @@ def hex_oklch(hx):
     return L, math.hypot(a, b), math.degrees(math.atan2(b, a)) % 360
 
 
-# ---------- famílias ----------
-# matiz: (claros, escuros), desliza até o degrau 600; croma: um valor por degrau (25 ... 950)
-FAMILIAS = {
-    "papel": {"matiz": (85, 65),
-              "croma": [0.004, 0.007, 0.012, 0.015, 0.016, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.009]},
-    "tinta": {"matiz": (85, 60),
-              "croma": [0.004, 0.006, 0.009, 0.010, 0.010, 0.009, 0.009, 0.009, 0.009, 0.009, 0.008, 0.008]},
-    "urucum": {"matiz": (52, 37),
-               "croma": [0.008, 0.016, 0.036, 0.068, 0.110, 0.150, 0.170, 0.172, 0.150, 0.124, 0.096, 0.066]},
-    "palha": {"matiz": (88, 76),
-              "croma": [0.008, 0.016, 0.030, 0.050, 0.068, 0.080, 0.082, 0.078, 0.068, 0.056, 0.044, 0.032]},
-    "sucesso": {"matiz": (158, 154),
+# ---------- direções testadas ----------
+# Cada família: matiz (claros, escuros), desliza até o degrau 600; croma por degrau (25 ... 950);
+# "L": degraus com luminosidade própria.
+SEMANTICAS = {
+    "sucesso": {"matiz": (142, 145),
                 "croma": [0.008, 0.016, 0.034, 0.062, 0.088, 0.104, 0.108, 0.104, 0.092, 0.078, 0.060, 0.042]},
-    "aviso": {"matiz": (88, 74),
-              "croma": [0.010, 0.022, 0.050, 0.090, 0.116, 0.126, 0.124, 0.118, 0.104, 0.088, 0.068, 0.050]},
-    "erro": {"matiz": (12, 14),
-             "croma": [0.006, 0.012, 0.028, 0.054, 0.094, 0.138, 0.154, 0.152, 0.136, 0.112, 0.082, 0.052]},
-    "info": {"matiz": (235, 250),
+    # aviso: amarelo-limão (matiz > 100), não âmbar; o âmbar cai na faixa proibida
+    "aviso": {"matiz": (106, 108),
+              "croma": [0.010, 0.022, 0.050, 0.090, 0.112, 0.118, 0.114, 0.108, 0.098, 0.084, 0.066, 0.048]},
+    "erro": {"matiz": (8, 8),
+             "croma": [0.006, 0.012, 0.028, 0.054, 0.094, 0.138, 0.160, 0.160, 0.140, 0.114, 0.084, 0.054]},
+    # info: azul-petróleo (matiz 212), fora da faixa do azul-marinho nos escuros
+    "info": {"matiz": (214, 212),
              "croma": [0.005, 0.010, 0.022, 0.040, 0.058, 0.072, 0.080, 0.080, 0.076, 0.066, 0.054, 0.040]},
 }
 
-# o urucum-600 é o CTA: L um pouco abaixo da régua para o texto claro passar com folga (>= 4.8)
-AJUSTE_L = {("urucum", 600): 0.555, ("urucum", 500): 0.640}
+DIRECOES = {
+    # 1. Riso: branco de impressão frio, preto violáceo de risografia, rosa fluorescente
+    "riso": {
+        "nome": "Riso (branco frio, preto violáceo, rosa fluorescente)",
+        "familias": {
+            "neutro": ("gelo", {"matiz": (285, 290),
+                                "croma": [0.002, 0.003, 0.005, 0.007, 0.008, 0.009, 0.010, 0.010, 0.010, 0.011, 0.012, 0.014]}),
+            "estrutura": ("preto", {"matiz": (295, 292),
+                                    "croma": [0.003, 0.006, 0.012, 0.020, 0.030, 0.040, 0.050, 0.056, 0.060, 0.060, 0.034, 0.024],
+                                    "L": {800: 0.300, 900: 0.145, 950: 0.105}}),
+            "acento": ("rosa", {"matiz": (352, 356),
+                                "croma": [0.008, 0.018, 0.040, 0.075, 0.120, 0.170, 0.205, 0.215, 0.190, 0.155, 0.115, 0.075],
+                                "L": {600: 0.555, 500: 0.640}}),
+            "detalhe": ("lilas", {"matiz": (305, 305),
+                                  "croma": [0.006, 0.014, 0.030, 0.055, 0.080, 0.100, 0.105, 0.100, 0.088, 0.072, 0.056, 0.040]}),
+        },
+        "agentes": {"contorno": 215, "curvas": 300, "vetores": 155, "espaco": 110, "medidas": 8},
+    },
+    # 2. Ameixa e jade: cinza lilás, ameixa profunda, jade
+    "ameixa": {
+        "nome": "Ameixa e jade (cinza lilás, ameixa, jade)",
+        "familias": {
+            "neutro": ("lilas", {"matiz": (305, 310),
+                                 "croma": [0.003, 0.006, 0.010, 0.013, 0.015, 0.016, 0.016, 0.016, 0.016, 0.017, 0.018, 0.020]}),
+            "estrutura": ("ameixa", {"matiz": (318, 328),
+                                     "croma": [0.004, 0.008, 0.018, 0.032, 0.048, 0.064, 0.078, 0.088, 0.094, 0.096, 0.094, 0.078],
+                                     "L": {900: 0.310, 950: 0.205}}),
+            "acento": ("jade", {"matiz": (178, 176),
+                                "croma": [0.008, 0.018, 0.040, 0.072, 0.105, 0.130, 0.132, 0.120, 0.104, 0.088, 0.068, 0.048],
+                                "L": {600: 0.530, 500: 0.600}}),
+            "detalhe": ("malva", {"matiz": (345, 340),
+                                  "croma": [0.006, 0.014, 0.030, 0.055, 0.080, 0.096, 0.100, 0.096, 0.086, 0.072, 0.056, 0.040]}),
+        },
+        "agentes": {"contorno": 228, "curvas": 275, "vetores": 138, "espaco": 106, "medidas": 5},
+    },
+    # 3. Ultramar: cinza de galeria, grafite neutro, azul ultramar
+    "ultramar": {
+        "nome": "Ultramar (cinza de galeria, grafite, ultramar)",
+        "familias": {
+            "neutro": ("cinza", {"matiz": (280, 285),
+                                 "croma": [0.001, 0.002, 0.003, 0.004, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005]}),
+            "estrutura": ("grafite", {"matiz": (285, 285),
+                                      "croma": [0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.006, 0.006, 0.006, 0.006, 0.006, 0.006],
+                                      "L": {800: 0.27, 900: 0.150, 950: 0.115}}),
+            "acento": ("ultramar", {"matiz": (276, 278),
+                                    "croma": [0.008, 0.018, 0.040, 0.075, 0.115, 0.160, 0.205, 0.230, 0.215, 0.180, 0.140, 0.095],
+                                    "L": {600: 0.500, 500: 0.600}}),
+            "detalhe": ("verde", {"matiz": (128, 132),
+                                  "croma": [0.008, 0.016, 0.034, 0.062, 0.090, 0.110, 0.112, 0.104, 0.090, 0.074, 0.056, 0.040]}),
+        },
+        "agentes": {"contorno": 205, "curvas": 320, "vetores": 150, "espaco": 112, "medidas": 5},
+    },
+    # 4. Menta: a única com fundo que passa a distância 0.08 das paletas antigas
+    "menta": {
+        "nome": "Menta (página menta, verde-garrafa, fúcsia)",
+        "familias": {
+            "neutro": ("menta", {"matiz": (168, 172),
+                                 "croma": [0.030, 0.092, 0.095, 0.070, 0.050, 0.040, 0.034, 0.030, 0.026, 0.024, 0.022, 0.020],
+                                 "L": {25: 0.985, 50: 0.935, 100: 0.905, 200: 0.860}}),
+            "estrutura": ("garrafa", {"matiz": (165, 150),
+                                      "croma": [0.006, 0.012, 0.024, 0.040, 0.056, 0.066, 0.074, 0.078, 0.082, 0.086, 0.090, 0.050],
+                                      "L": {900: 0.300, 950: 0.155}}),
+            "acento": ("fucsia", {"matiz": (350, 354),
+                                  "croma": [0.008, 0.018, 0.040, 0.075, 0.120, 0.170, 0.205, 0.215, 0.190, 0.155, 0.115, 0.075],
+                                  "L": {600: 0.540, 500: 0.630}}),
+            "detalhe": ("lilas", {"matiz": (305, 305),
+                                  "croma": [0.006, 0.014, 0.030, 0.055, 0.080, 0.100, 0.105, 0.100, 0.088, 0.072, 0.056, 0.040]}),
+        },
+        "agentes": {"contorno": 215, "curvas": 300, "vetores": 145, "espaco": 110, "medidas": 8},
+    },
+}
+
+ESCOLHIDA = "ameixa"
 
 
-def escala(nome, f):
+def _arg_direcao():
+    if "--direcao" in sys.argv:
+        return sys.argv[sys.argv.index("--direcao") + 1]
+    return ESCOLHIDA
+
+
+DIRECAO = _arg_direcao()
+D = DIRECOES[DIRECAO]
+
+# nome de cada família nesta direção: neutro -> "lilas" etc.
+NOME = {papel: nome for papel, (nome, _) in D["familias"].items()}
+
+
+def escala(f):
     out = {}
     for i, d in enumerate(DEGRAUS):
         t = min(1, i / 7)
         h = f["matiz"][0] + (f["matiz"][1] - f["matiz"][0]) * t
-        out[d] = oklch_hex(AJUSTE_L.get((nome, d), L_ALVO[d]), f["croma"][i], h)
+        L = f.get("L", {}).get(d, L_ALVO[d])
+        out[d] = oklch_hex(L, f["croma"][i], h % 360)
     return out
 
 
-ESCALAS = {n: escala(n, f) for n, f in FAMILIAS.items()}
+ESCALAS = {}
+for _papel, (_nome, _f) in D["familias"].items():
+    ESCALAS[_nome] = escala(_f)
+for _nome, _f in SEMANTICAS.items():
+    ESCALAS[_nome] = escala(_f)
 E = ESCALAS
 
+N, S, A, T = (E[NOME[p]] for p in ("neutro", "estrutura", "acento", "detalhe"))
+
 # cursores do título (Titulo.js): mesma luz (L 0.50) e croma moderado, matizes distribuídos
+_ag = D["agentes"]
 AGENTES = {
-    "grid": E["tinta"][900],
-    "contorno": oklch_hex(0.50, 0.090, 245),
-    "curvas": oklch_hex(0.50, 0.095, 305),
-    "vetores": oklch_hex(0.50, 0.095, 158),
-    "cor": E["urucum"][600],
-    "espaco": oklch_hex(0.50, 0.100, 78),
-    "medidas": oklch_hex(0.48, 0.115, 2),
+    "grid": S[900],
+    "contorno": oklch_hex(0.50, 0.090, _ag["contorno"]),
+    "curvas": oklch_hex(0.50, 0.100, _ag["curvas"]),
+    "vetores": oklch_hex(0.50, 0.095, _ag["vetores"]),
+    "cor": A[600],
+    "espaco": oklch_hex(0.50, 0.100, _ag["espaco"]),
+    "medidas": oklch_hex(0.48, 0.110, _ag["medidas"]),
 }
 
-# ---------- papéis: o token aponta para um degrau ----------
+# ---------- papéis: o token aponta para um degrau (papel da família, degrau) ----------
 PAPEIS = [
-    ("fundo", "papel-50", "fundo dominante (A)"),
-    ("fundo-alt", "papel-100", "fundo alternado (B)"),
-    ("superficie", "papel-25", "cartões, campos, pílulas ativas"),
-    ("borda", "papel-200", "bordas e divisórias, trilha de filtros"),
-    ("borda-forte", "papel-300", "contorno de botão secundário, fio apagado"),
-    ("borda-controle", "papel-500", "borda de campo de texto (3:1)"),
-    ("texto-titulo", "tinta-950", "títulos"),
-    ("texto-sobre-cor", "papel-50", "texto sobre tinta e urucum"),
-    ("acao", "urucum-600", "CTA principal"),
-    ("acao-hover", "urucum-700", "CTA hover"),
-    ("acao-active", "urucum-800", "CTA active"),
-    ("acao-escuro", "urucum-400", "CTA sobre o bloco de tinta (texto tinta-950)"),
-    ("acao-escuro-hover", "urucum-300", "CTA sobre o bloco de tinta, hover"),
-    ("acao-2", "tinta-900", "ação secundária"),
-    ("acao-2-hover", "tinta-800", "ação secundária hover"),
-    ("link", "tinta-900", "link em texto (sempre sublinhado)"),
-    ("foco", "urucum-700", "anel de foco"),
-    ("selecao", "urucum-100", "seleção de texto"),
-    ("nevoa", "papel-25", "luz da abertura e do book"),
-    ("destaque", "urucum-600", "palavra forte"),
-    ("rotulo", "urucum-700", "rótulos de seção"),
-    ("forte", "tinta-900", "superfícies fortes"),
-    ("forte-2", "tinta-950", "bloco do contato"),
+    ("fundo", ("neutro", 50), "fundo dominante (A)"),
+    ("fundo-alt", ("neutro", 100), "fundo alternado (B)"),
+    ("superficie", ("neutro", 25), "cartões, campos, pílulas ativas"),
+    ("borda", ("neutro", 200), "bordas e divisórias, trilha de filtros"),
+    ("borda-forte", ("neutro", 300), "contorno de botão secundário, fio apagado"),
+    ("borda-controle", ("neutro", 500), "borda de campo de texto (3:1)"),
+    ("texto-titulo", ("estrutura", 950), "títulos"),
+    ("texto-sobre-cor", ("neutro", 25), "texto sobre a estrutura e o acento"),
+    ("acao", ("acento", 600), "CTA principal"),
+    ("acao-hover", ("acento", 700), "CTA hover"),
+    ("acao-active", ("acento", 800), "CTA active"),
+    ("acao-escuro", ("acento", 400), "CTA sobre o bloco da estrutura (texto estrutura-950)"),
+    ("acao-escuro-hover", ("acento", 300), "CTA sobre o bloco da estrutura, hover"),
+    ("acao-2", ("estrutura", 900), "ação secundária"),
+    ("acao-2-hover", ("estrutura", 800), "ação secundária hover"),
+    ("link", ("estrutura", 900), "link em texto (sempre sublinhado)"),
+    ("foco", ("acento", 700), "anel de foco"),
+    ("selecao", ("acento", 100), "seleção de texto"),
+    ("nevoa", ("neutro", 25), "luz da abertura e do book"),
+    ("destaque", ("acento", 600), "palavra forte"),
+    ("rotulo", ("acento", 700), "rótulos de seção"),
+    ("forte", ("estrutura", 900), "superfícies fortes"),
+    ("forte-2", ("estrutura", 950), "bloco do contato"),
 ]
 
-# nomes de escala que as folhas das seções já usam: apontam para as famílias novas.
-# azul = estrutura (tinta), terracota = acento (urucum), marfim = neutro (papel), areia = detalhe (palha)
-ALIAS_FAMILIA = {"azul": "tinta", "terracota": "urucum", "marfim": "papel", "areia": "palha"}
+# nomes de escala que as folhas das seções já usam, como apelidos das famílias novas
+# v2: papel = neutro, tinta = estrutura, urucum = acento, palha = detalhe
+# v1: marfim = neutro, azul = estrutura, terracota = acento, areia = detalhe
+APELIDOS = [("papel", "neutro"), ("tinta", "estrutura"), ("urucum", "acento"), ("palha", "detalhe"),
+            ("marfim", "neutro"), ("azul", "estrutura"), ("terracota", "acento"), ("areia", "detalhe")]
 
 ALIASES = [
-    ("azul", "tinta-900"), ("azul-esc", "tinta-950"), ("azul-2", "tinta-700"), ("azul-3", "tinta-400"),
-    ("azul-s", "tinta-100"), ("azul-ss", "tinta-50"),
-    ("terracota", "urucum-600"), ("terracota-esc", "urucum-700"), ("terracota-claro", "urucum-500"),
-    ("terracota-s", "urucum-100"), ("areia", "palha-400"), ("areia-s", "palha-100"), ("marfim", "papel-100"),
-    ("ink", "tinta-950"), ("texto", "papel-900"), ("suave", "papel-700"), ("linha", "papel-200"),
-    ("linha-2", "papel-300"), ("fundo-claro", "papel-100"), ("branco", "papel-50"),
+    ("azul", ("estrutura", 900)), ("azul-esc", ("estrutura", 950)), ("azul-2", ("estrutura", 700)),
+    ("azul-3", ("estrutura", 400)), ("azul-s", ("estrutura", 100)), ("azul-ss", ("estrutura", 50)),
+    ("terracota", ("acento", 600)), ("terracota-esc", ("acento", 700)), ("terracota-claro", ("acento", 500)),
+    ("terracota-s", ("acento", 100)), ("areia", ("detalhe", 400)), ("areia-s", ("detalhe", 100)),
+    ("marfim", ("neutro", 100)), ("ink", ("estrutura", 950)), ("texto", ("neutro", 900)),
+    ("suave", ("neutro", 700)), ("linha", ("neutro", 200)), ("linha-2", ("neutro", 300)),
+    ("fundo-claro", ("neutro", 100)), ("branco", ("neutro", 50)),
 ]
+
+
+def ref(par):
+    papel, d = par
+    return f"{NOME[papel]}-{d}"
+
+
+def tok(r):
+    """'lilas-50' ou ('neutro', 50) -> hex."""
+    if isinstance(r, tuple):
+        r = ref(r)
+    fam, d = r.rsplit("-", 1)
+    return E[fam][int(d)]
 
 
 def canais(hx):
@@ -181,46 +287,43 @@ def canais(hx):
     return f"{r} {g} {b}"
 
 
-def tok(ref):
-    fam, d = ref.rsplit("-", 1)
-    return E[fam][int(d)]
-
-
 def bloco_root():
     L = [":root {",
-         "  /* escalas 25 a 950 (OKLCH; geradas por ferramentas/cor/escalas.py --root) */"]
+         f"  /* paleta v3: {D['nome']}",
+         "     escalas 25 a 950 (OKLCH; geradas por ferramentas/cor/escalas.py --root) */"]
     for n, e in E.items():
         for d, hx in e.items():
             L.append(f"  --{n}-{d}: {hx};")
     L.append("")
-    L.append("  /* nomes de escala que as folhas das seções usam, apontando para as famílias:")
-    L.append("     azul = tinta (estrutura), terracota = urucum (acento), marfim = papel (neutro), areia = palha */")
-    for velho, novo in ALIAS_FAMILIA.items():
+    L.append("  /* nomes de escala que as folhas das seções usam (v1 e v2), apelidos das famílias novas:")
+    L.append(f"     papel/marfim = {NOME['neutro']}, tinta/azul = {NOME['estrutura']}, "
+             f"urucum/terracota = {NOME['acento']}, palha/areia = {NOME['detalhe']} */")
+    for velho, papel in APELIDOS:
         for d in DEGRAUS:
-            L.append(f"  --{velho}-{d}: var(--{novo}-{d});")
+            L.append(f"  --{velho}-{d}: var(--{NOME[papel]}-{d});")
     L.append("")
     L.append("  /* papéis: os componentes usam estes nomes, não os degraus soltos */")
-    for t, ref, _ in PAPEIS:
-        L.append(f"  --{t}: var(--{ref});")
+    for t, r, _ in PAPEIS:
+        L.append(f"  --{t}: var(--{ref(r)});")
     L.append("")
     L.append("  /* canais RGB para transparências: rgb(var(--sombra-rgb) / 0.1) */")
-    L.append(f"  --sombra-rgb: {canais(E['tinta'][950])};")
-    L.append(f"  --fundo-rgb: {canais(E['papel'][50])};")
-    L.append(f"  --fundo-alt-rgb: {canais(E['papel'][100])};")
-    L.append(f"  --superficie-rgb: {canais(E['papel'][25])};")
-    L.append(f"  --escuro-rgb: {canais(E['papel'][950])};")
-    L.append(f"  --sobre-cor-rgb: {canais(E['papel'][50])};")
+    L.append(f"  --sombra-rgb: {canais(S[950])};")
+    L.append(f"  --fundo-rgb: {canais(N[50])};")
+    L.append(f"  --fundo-alt-rgb: {canais(N[100])};")
+    L.append(f"  --superficie-rgb: {canais(N[25])};")
+    L.append(f"  --escuro-rgb: {canais(N[950])};")
+    L.append(f"  --sobre-cor-rgb: {canais(N[25])};")
     L.append("")
     L.append("  /* cursores do título (Titulo.js): mesma luz, matizes distribuídos */")
     for k, v in AGENTES.items():
         L.append(f"  --agente-{k}: {v};")
     L.append("")
     L.append("  /* nomes usados nas folhas das seções */")
-    for t, ref in ALIASES:
-        L.append(f"  --{t}: var(--{ref});")
+    for t, r in ALIASES:
+        L.append(f"  --{t}: var(--{ref(r)});")
     L.append("")
     L.append("  /* nomes antigos, mantidos para as janelas (visor, termos, chat) e as páginas de trabalho */")
-    for a, b in [("cor-fundo", "var(--branco)"), ("cor-tinta", "var(--ink)"), ("cor-vermelho", "var(--tinta-800)"),
+    for a, b in [("cor-fundo", "var(--branco)"), ("cor-tinta", "var(--ink)"), ("cor-vermelho", f"var(--{ref(('estrutura', 800))})"),
                  ("cor-tinta-suave", "var(--suave)"), ("cor-tinta-apagada", "rgb(var(--sombra-rgb) / 0.16)"),
                  ("cor-linha", "var(--linha)"), ("cor-linha-forte", "var(--linha-2)"),
                  ("cor-cinza-claro", "var(--fundo-claro)")]:
@@ -257,6 +360,7 @@ if __name__ == "__main__":
     elif "--root" in sys.argv:
         print(bloco_root())
     else:
+        print(f"direção: {DIRECAO} ({D['nome']})")
         print("degrau  " + "  ".join(f"{n:>9}" for n in ESCALAS))
         for d in DEGRAUS:
             print(f"{d:>6}  " + "  ".join(f"{ESCALAS[n][d]:>9}" for n in ESCALAS))

@@ -381,7 +381,9 @@ export class Titulo {
     });
     const arrastando = t >= T.espaco[0] && t <= T.espaco[1] + 200;
     this.agentes[5].nome.textContent = arrastando ? `Espaçamento ${Math.round(-60 * (1 - k))}` : "Espaçamento";
-    this.agentes[4].nome.textContent = t >= letras[0].tc ? "Cor #211d1a" : "Cor";
+    /* o valor mostrado é a cor real do título, lida do token (troca junto com a paleta) */
+    this.corDoTitulo ??= getComputedStyle(document.documentElement).getPropertyValue("--texto-titulo").trim().toUpperCase();
+    this.agentes[4].nome.textContent = t >= letras[0].tc ? `Cor ${this.corDoTitulo}` : "Cor";
   }
 
   /** Cada agente aparece pouco antes da sua tarefa. */
