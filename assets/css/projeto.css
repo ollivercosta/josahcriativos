@@ -462,14 +462,14 @@
   display: flex;
   gap: 7px;
   padding: 11px 14px;
-  background: var(--marfim-100);
+  background: var(--creme);
 }
 
 .projeto__site-barra span {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--marfim-300);
+  background: var(--linha);
 }
 
 .projeto__site-janela {

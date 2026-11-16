@@ -109,7 +109,7 @@ export class Titulo {
     const svg = document.createElementNS(SVG, "svg");
     svg.setAttribute("class", "hero__desenho");
     svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
-    svg.innerHTML = `<defs><linearGradient id="hero-tinta" gradientUnits="userSpaceOnUse" x1="0" y1="${TITULO.capa}" x2="0" y2="${DESCENDENTE}"><stop offset="0" style="stop-color: var(--tinta-950)"/><stop offset="1" style="stop-color: var(--tinta-900)"/></linearGradient></defs>`;
+    svg.innerHTML = `<defs><linearGradient id="hero-tinta" gradientUnits="userSpaceOnUse" x1="0" y1="${TITULO.capa}" x2="0" y2="${DESCENDENTE}"><stop offset="0" style="stop-color: var(--espresso)"/><stop offset="1" style="stop-color: var(--espresso)"/></linearGradient></defs>`;
 
     /* guias: maiúsculas, altura-x, linha de base, descendentes */
     this.guias = [

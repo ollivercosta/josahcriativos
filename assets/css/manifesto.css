@@ -6,7 +6,11 @@
 
 .manifesto {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--branco);
+  background: var(--fundo-manifesto);
+  /* seção escura: as cores do texto se invertem só aqui */
+  --ink: var(--creme);
+  --linha-2: rgb(var(--sobre-cor-rgb) / 0.26);
+  --terracota: var(--ouro);
 }
 
 .manifesto__texto {

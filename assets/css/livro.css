@@ -43,7 +43,7 @@
   top: 0;
   width: var(--livro-w);
   height: var(--livro-h);
-  background: var(--marfim-950);
+  background: var(--espresso);
 }
 
 .livro__lado--esq {
@@ -150,7 +150,7 @@
   opacity: var(--livro-opaco, 1);
   position: absolute;
   inset: 0;
-  background-color: var(--marfim-950);
+  background-color: var(--espresso);
   background-repeat: no-repeat;
   background-size: var(--livro-w) var(--livro-h);
   -webkit-backface-visibility: hidden;

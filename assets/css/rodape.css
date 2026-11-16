@@ -5,8 +5,11 @@
    ========================================================================= */
 
 .rodape {
-  border-top: 1px solid var(--linha);
-  background: var(--fundo);
+  background: var(--fundo-rodape);
+  /* rodapé escuro: as cores do texto se invertem só aqui */
+  --suave: #cdbcae;
+  --azul: var(--creme);
+  --link: var(--ouro);
 }
 
 .rodape__linha {

@@ -17,289 +17,111 @@
 }
 
 :root {
-  /* paleta v4: Espresso, Terracota, Cream e Gold (referência do dono, aplicada exatamente:
-     Espresso #2B1B17 = espresso-950, Terracotta #C1440E = terracota-600, Cream #FBF3E7 = creme-50, Gold #E8B84B = ouro-400)
-     escalas 25 a 950 (OKLCH; geradas por ferramentas/cor/escalas.py --root) */
-  --creme-25: #fefbf6;
-  --creme-50: #fbf3e7;
-  --creme-100: #f5ebdb;
-  --creme-200: #eadfcd;
-  --creme-300: #d1c9bc;
-  --creme-400: #bbb1a2;
-  --creme-500: #a29785;
-  --creme-600: #897d6b;
-  --creme-700: #6e6352;
-  --creme-800: #544a3c;
-  --creme-900: #3b342a;
-  --creme-950: #25211b;
-  --espresso-25: #fefcfc;
-  --espresso-50: #fbf5f4;
-  --espresso-100: #f6edea;
-  --espresso-200: #ecdbd7;
-  --espresso-300: #dcc4be;
-  --espresso-400: #c9aba3;
-  --espresso-500: #b18f87;
-  --espresso-600: #98766d;
-  --espresso-700: #7b5b53;
-  --espresso-800: #5e433d;
-  --espresso-900: #422e2a;
-  --espresso-950: #2b1b17;
-  --terracota-25: #fffcfb;
-  --terracota-50: #fff4f1;
-  --terracota-100: #ffeae3;
-  --terracota-200: #ffd5c7;
-  --terracota-300: #ffb298;
-  --terracota-400: #fd865d;
-  --terracota-500: #e85d28;
-  --terracota-600: #c1440e;
-  --terracota-700: #9e3402;
-  --terracota-800: #7b2500;
-  --terracota-900: #5c1900;
-  --terracota-950: #400e00;
-  --ouro-25: #fffcf7;
-  --ouro-50: #faf6ee;
-  --ouro-100: #fcf2dd;
-  --ouro-200: #f6e5c2;
-  --ouro-300: #ecd19c;
-  --ouro-400: #e8b84b;
-  --ouro-500: #c69b35;
-  --ouro-600: #a77e0e;
-  --ouro-700: #836204;
-  --ouro-800: #614703;
-  --ouro-900: #453200;
-  --ouro-950: #2d1f00;
-  --sucesso-25: #fafffa;
-  --sucesso-50: #f2fbf1;
-  --sucesso-100: #e3f5e1;
-  --sucesso-200: #c8ebc6;
-  --sucesso-300: #a8daa6;
-  --sucesso-400: #86c185;
-  --sucesso-500: #68a569;
-  --sucesso-600: #4f8951;
-  --sucesso-700: #3c6e3e;
-  --sucesso-800: #2d552f;
-  --sucesso-900: #203d21;
-  --sucesso-950: #102311;
-  --aviso-25: #fefef6;
-  --aviso-50: #faf9e9;
-  --aviso-100: #f3f2cc;
-  --aviso-200: #e6e49e;
-  --aviso-300: #d2d077;
-  --aviso-400: #b7b556;
-  --aviso-500: #9b993d;
-  --aviso-600: #7f7d25;
-  --aviso-700: #666412;
-  --aviso-800: #4f4d08;
-  --aviso-900: #393806;
-  --aviso-950: #202002;
-  --erro-25: #fefcfd;
-  --erro-50: #fff5f7;
-  --erro-100: #ffe9ec;
-  --erro-200: #ffd3d9;
-  --erro-300: #feb2bf;
-  --erro-400: #f8889f;
-  --erro-500: #e26381;
-  --erro-600: #c34767;
-  --erro-700: #9e3651;
-  --erro-800: #7b2a3e;
-  --erro-900: #581f2d;
-  --erro-950: #331219;
-  --info-25: #fbfefe;
-  --info-50: #f1fafc;
-  --info-100: #dff3f8;
-  --info-200: #c2e7f0;
-  --info-300: #9fd5e1;
-  --info-400: #78bccb;
-  --info-500: #53a1b0;
-  --info-600: #358594;
-  --info-700: #1d6c79;
-  --info-800: #0f545f;
-  --info-900: #073c45;
-  --info-950: #012329;
+  /* PALETA: quatro cores e as variações mais próximas de cada uma.
+     Cada seção do site tem o seu fundo (veja "fundos por seção"): o ritmo
+     alterna branco, creme, espresso, ouro claro e terracota, para que cada
+     rolagem mude de ambiente sem sair da mesma família. */
+  --espresso: #2b1b17;
+  --espresso-suave: #6b5a52;
+  --terracota: #c1440e;
+  --terracota-escuro: #9a3509;
+  --terracota-claro: #f6dccd;
+  --creme: #fbf3e7;
+  --ouro: #e8b84b;
+  --ouro-claro: #f8e7be;
+  --branco: #ffffff;
+  --linha: #ebdfcd;
+  --linha-2: #d6c5ad;
+  --sucesso: #2f7a4f;
+  --sucesso-claro: #dff1e5;
+  --aviso: #8a6305;
+  --aviso-claro: #fbebc4;
 
-  /* nomes de escala que as folhas das seções usam (v1 e v2), apelidos das famílias novas:
-     papel/marfim = creme, tinta/azul = espresso, urucum = terracota, palha/areia = ouro */
-  --papel-25: var(--creme-25);
-  --papel-50: var(--creme-50);
-  --papel-100: var(--creme-100);
-  --papel-200: var(--creme-200);
-  --papel-300: var(--creme-300);
-  --papel-400: var(--creme-400);
-  --papel-500: var(--creme-500);
-  --papel-600: var(--creme-600);
-  --papel-700: var(--creme-700);
-  --papel-800: var(--creme-800);
-  --papel-900: var(--creme-900);
-  --papel-950: var(--creme-950);
-  --tinta-25: var(--espresso-25);
-  --tinta-50: var(--espresso-50);
-  --tinta-100: var(--espresso-100);
-  --tinta-200: var(--espresso-200);
-  --tinta-300: var(--espresso-300);
-  --tinta-400: var(--espresso-400);
-  --tinta-500: var(--espresso-500);
-  --tinta-600: var(--espresso-600);
-  --tinta-700: var(--espresso-700);
-  --tinta-800: var(--espresso-800);
-  --tinta-900: var(--espresso-900);
-  --tinta-950: var(--espresso-950);
-  --urucum-25: var(--terracota-25);
-  --urucum-50: var(--terracota-50);
-  --urucum-100: var(--terracota-100);
-  --urucum-200: var(--terracota-200);
-  --urucum-300: var(--terracota-300);
-  --urucum-400: var(--terracota-400);
-  --urucum-500: var(--terracota-500);
-  --urucum-600: var(--terracota-600);
-  --urucum-700: var(--terracota-700);
-  --urucum-800: var(--terracota-800);
-  --urucum-900: var(--terracota-900);
-  --urucum-950: var(--terracota-950);
-  --palha-25: var(--ouro-25);
-  --palha-50: var(--ouro-50);
-  --palha-100: var(--ouro-100);
-  --palha-200: var(--ouro-200);
-  --palha-300: var(--ouro-300);
-  --palha-400: var(--ouro-400);
-  --palha-500: var(--ouro-500);
-  --palha-600: var(--ouro-600);
-  --palha-700: var(--ouro-700);
-  --palha-800: var(--ouro-800);
-  --palha-900: var(--ouro-900);
-  --palha-950: var(--ouro-950);
-  --marfim-25: var(--creme-25);
-  --marfim-50: var(--creme-50);
-  --marfim-100: var(--creme-100);
-  --marfim-200: var(--creme-200);
-  --marfim-300: var(--creme-300);
-  --marfim-400: var(--creme-400);
-  --marfim-500: var(--creme-500);
-  --marfim-600: var(--creme-600);
-  --marfim-700: var(--creme-700);
-  --marfim-800: var(--creme-800);
-  --marfim-900: var(--creme-900);
-  --marfim-950: var(--creme-950);
-  --azul-25: var(--espresso-25);
-  --azul-50: var(--espresso-50);
-  --azul-100: var(--espresso-100);
-  --azul-200: var(--espresso-200);
-  --azul-300: var(--espresso-300);
-  --azul-400: var(--espresso-400);
-  --azul-500: var(--espresso-500);
-  --azul-600: var(--espresso-600);
-  --azul-700: var(--espresso-700);
-  --azul-800: var(--espresso-800);
-  --azul-900: var(--espresso-900);
-  --azul-950: var(--espresso-950);
-  --areia-25: var(--ouro-25);
-  --areia-50: var(--ouro-50);
-  --areia-100: var(--ouro-100);
-  --areia-200: var(--ouro-200);
-  --areia-300: var(--ouro-300);
-  --areia-400: var(--ouro-400);
-  --areia-500: var(--ouro-500);
-  --areia-600: var(--ouro-600);
-  --areia-700: var(--ouro-700);
-  --areia-800: var(--ouro-800);
-  --areia-900: var(--ouro-900);
-  --areia-950: var(--ouro-950);
+  /* fundos por seção */
+  --fundo-hero: var(--branco);
+  --fundo-trabalhos: var(--creme);
+  --fundo-manifesto: var(--espresso);
+  --fundo-servicos: var(--branco);
+  --fundo-processo: var(--ouro-claro);
+  --fundo-depoimentos: var(--creme);
+  --fundo-faq: var(--creme);
+  --fundo-contato: var(--branco);
+  --fundo-faixa-contato: var(--terracota);
+  --fundo-rodape: var(--espresso);
 
-  /* papéis: os componentes usam estes nomes, não os degraus soltos */
-  --fundo: var(--creme-50);
-  --fundo-alt: var(--creme-100);
-  --superficie: var(--creme-25);
-  --borda: var(--creme-200);
-  --borda-forte: var(--creme-300);
-  --borda-controle: var(--creme-600);
-  --texto-titulo: var(--espresso-950);
-  --texto-sobre-cor: var(--creme-25);
-  --acao: var(--terracota-600);
-  --acao-hover: var(--terracota-700);
-  --acao-active: var(--terracota-800);
-  --acao-escuro: var(--ouro-400);
-  --acao-escuro-hover: var(--ouro-300);
-  --acao-2: var(--espresso-900);
-  --acao-2-hover: var(--espresso-800);
-  --link: var(--espresso-900);
-  --foco: var(--terracota-700);
-  --selecao: var(--terracota-100);
-  --nevoa: var(--creme-25);
-  --destaque: var(--terracota-600);
-  --rotulo: var(--terracota-700);
-  --forte: var(--espresso-900);
-  --forte-2: var(--espresso-950);
-
-  /* canais RGB para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 43 27 23;
-  --fundo-rgb: 251 243 231;
-  --fundo-alt-rgb: 245 235 219;
-  --superficie-rgb: 254 251 246;
-  --escuro-rgb: 43 27 23;
-  --sobre-cor-rgb: 254 251 246;
-
-  /* cursores do título (Titulo.js): mesma luz, matizes distribuídos */
-  --agente-grid: #422e2a;
-  --agente-contorno: #176d8b;
-  --agente-curvas: #535d9c;
-  --agente-vetores: #477038;
-  --agente-cor: #c1440e;
-  --agente-espaco: #836204;
-  --agente-medidas: #8f3f55;
-
-  /* nomes usados nas folhas das seções */
-  --azul: var(--espresso-900);
-  --azul-esc: var(--espresso-950);
-  --azul-2: var(--espresso-700);
-  --azul-3: var(--espresso-400);
-  --azul-s: var(--espresso-100);
-  --azul-ss: var(--espresso-50);
-  --terracota: var(--terracota-600);
-  --terracota-esc: var(--terracota-700);
-  --terracota-claro: var(--terracota-500);
-  --terracota-s: var(--terracota-100);
-  --areia: var(--ouro-400);
-  --areia-s: var(--ouro-100);
-  --marfim: var(--creme-100);
-  --ink: var(--espresso-950);
-  --texto: var(--creme-900);
-  --suave: var(--creme-700);
-  --linha: var(--creme-200);
-  --linha-2: var(--creme-300);
-  --fundo-claro: var(--creme-100);
-  --branco: var(--creme-50);
-
-  /* nomes antigos, mantidos para as janelas (visor, termos, chat) e as páginas de trabalho */
+  /* papéis usados pelos componentes */
+  --fundo: var(--branco);
+  --fundo-alt: var(--creme);
+  --superficie: var(--branco);
+  --borda: var(--linha);
+  --borda-forte: var(--linha-2);
+  --borda-controle: #9c8b80;
+  --ink: var(--espresso);
+  --texto: #3d2c27;
+  --suave: var(--espresso-suave);
+  --texto-titulo: var(--espresso);
+  --texto-sobre-cor: var(--creme);
+  --acao: var(--terracota);
+  --acao-hover: var(--terracota-escuro);
+  --acao-escuro: var(--ouro);
+  --acao-escuro-hover: #f0c96d;
+  --acao-2: var(--espresso);
+  --acao-2-hover: #4a332d;
+  --link: var(--espresso);
+  --foco: var(--terracota-escuro);
+  --selecao: var(--ouro-claro);
+  --nevoa: var(--creme);
+  --destaque: var(--terracota);
+  --rotulo: var(--terracota-escuro);
+  --azul: var(--espresso);
+  --azul-2: #4a332d;
+  --azul-3: var(--linha-2);
+  --azul-s: var(--creme);
+  --azul-ss: var(--creme);
+  --areia: var(--ouro);
+  --fundo-claro: var(--creme);
   --cor-fundo: var(--branco);
-  --cor-tinta: var(--ink);
-  --cor-vermelho: var(--espresso-800);
-  --cor-tinta-suave: var(--suave);
-  --cor-tinta-apagada: rgb(var(--sombra-rgb) / 0.16);
+  --cor-tinta: var(--espresso);
+  --cor-vermelho: var(--terracota-escuro);
+  --cor-tinta-suave: var(--espresso-suave);
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
-  --cor-cinza-claro: var(--fundo-claro);
+  --cor-cinza-claro: var(--creme);
+
+  /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
+  --sombra-rgb: 43 27 23;
+  --escuro-rgb: 43 27 23;
+  --fundo-rgb: 255 255 255;
+  --fundo-alt-rgb: 251 243 231;
+  --superficie-rgb: 255 255 255;
+  --sobre-cor-rgb: 251 243 231;
+
+  /* cursores do título (Titulo.js) */
+  --agente-grid: var(--espresso);
+  --agente-contorno: #2f6e8c;
+  --agente-curvas: #6b578f;
+  --agente-vetores: var(--sucesso);
+  --agente-cor: var(--terracota);
+  --agente-espaco: var(--aviso);
+  --agente-medidas: #8f3f55;
 
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-
-  /* curvas: desaceleram no fim, sem rebote */
   --curva: cubic-bezier(0.22, 1, 0.36, 1);
   --curva-suave: cubic-bezier(0.22, 0.61, 0.36, 1);
   --curva-entra-sai: cubic-bezier(0.65, 0, 0.35, 1);
-
   --raio: 12px;
   --raio-g: 20px;
   --sombra: 0 1px 2px rgb(var(--sombra-rgb) / 0.05), 0 12px 32px -12px rgb(var(--sombra-rgb) / 0.16);
   --sombra-g: 0 2px 4px rgb(var(--sombra-rgb) / 0.05), 0 40px 90px -30px rgb(var(--sombra-rgb) / 0.32);
-
   --largura: 1180px;
   --margem: clamp(20px, 4vw, 40px);
   --espaco-secao: clamp(80px, 10vw, 136px);
   --espaco-titulo: clamp(32px, 4vw, 56px);
   --altura-cabecalho: 60px;
-
-  /* tipografia: um tamanho para os títulos das seções, outro para a abertura */
   --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
+
 
 
 

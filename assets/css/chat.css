@@ -63,7 +63,7 @@
 }
 
 .chat__selo-roupa {
-  fill: var(--terracota-700);
+  fill: var(--terracota-escuro);
 }
 
 .chat__selo-olho {
@@ -103,7 +103,7 @@
   right: 2px;
   width: 14px;
   height: 14px;
-  border: 2px solid var(--marfim-50);
+  border: 2px solid var(--creme);
   border-radius: 50%;
   background: var(--acao);
   transform: scale(0);
@@ -306,7 +306,7 @@
 
 .chat__mensagem--eu {
   align-self: flex-end;
-  background: var(--azul-900);
+  background: var(--espresso);
   color: var(--texto-sobre-cor);
   border-bottom-right-radius: 4px;
 }
@@ -424,7 +424,7 @@
 }
 
 .chat__entrada:focus {
-  border-color: var(--azul-900);
+  border-color: var(--espresso);
   outline: none;
 }
 

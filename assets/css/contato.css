@@ -7,6 +7,7 @@
 
 .contato {
   padding: 0 var(--margem) var(--espaco-secao);
+  background: var(--fundo-contato);
 }
 
 .contato__faixa {
@@ -15,8 +16,8 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), var(--azul-800) 0%, transparent 70%),
-    var(--azul-950);
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #cf5217 0%, transparent 70%),
+    var(--fundo-faixa-contato);
   color: var(--texto-sobre-cor);
   text-align: center;
 }
@@ -29,7 +30,7 @@
   border: 3px solid rgb(var(--sobre-cor-rgb) / 0.6);
   object-fit: cover;
   object-position: 50% 20%;
-  background: var(--azul-800);
+  background: var(--espresso);
 }
 
 .contato__titulo {
@@ -46,7 +47,7 @@
   max-width: 34em;
   margin: 18px auto 0;
   font-size: 1.12rem;
-  color: var(--marfim-200);
+  color: var(--creme);
 }
 
 .contato__botao {
@@ -54,8 +55,8 @@
   margin-top: 32px;
   padding: 15px 32px;
   border-radius: 999px;
-  background: var(--acao-escuro);
-  color: var(--azul-950);
+  background: var(--espresso);
+  color: var(--creme);
   font-weight: 650;
   text-decoration: none;
   transition:
@@ -65,7 +66,7 @@
 
 .contato__botao:hover {
   transform: translateY(-2px);
-  background: var(--acao-escuro-hover);
+  background: #4a332d;
   box-shadow: 0 14px 30px -12px rgb(var(--sombra-rgb) / 0.6);
 }
 
@@ -88,7 +89,7 @@
 
 .contato__canal-rotulo {
   font-size: 0.85rem;
-  color: var(--azul-200);
+  color: var(--creme);
 }
 
 .contato__canal-link {

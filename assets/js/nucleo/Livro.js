@@ -268,7 +268,7 @@ export class Livro {
     const sinal = lado === "esq" ? -1 : 1;
     const bordas = [];
     for (let i = 1; i <= camadas; i += 1) {
-      bordas.push(`${sinal * i}px ${i * 0.6}px 0 ${i % 2 ? "var(--papel-50)" : "var(--papel-300)"}`);
+      bordas.push(`${sinal * i}px ${i * 0.6}px 0 ${i % 2 ? "var(--creme)" : "var(--linha-2)"}`);
     }
     bordas.push(`${sinal * 4}px 26px 40px -22px rgb(${TINTA} / 0.55)`);
     raiz.style.boxShadow = bordas.join(", ");

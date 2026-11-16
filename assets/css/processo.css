@@ -10,7 +10,9 @@
 
 .processo {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--fundo);
+  background: var(--fundo-processo);
+  /* o painel da etapa fica branco sobre o ouro claro */
+  --fundo-alt: var(--branco);
 }
 
 .processo__cabeca,
@@ -116,7 +118,7 @@
 
 .processo__no--feito .processo__numero {
   border-color: var(--terracota);
-  color: var(--terracota-700);
+  color: var(--terracota-escuro);
 }
 
 .processo__no[aria-selected="true"] .processo__numero {
@@ -321,7 +323,7 @@
   width: var(--l);
   height: 8px;
   border-radius: 8px;
-  background: var(--azul-200);
+  background: var(--linha);
   transform-origin: 0 50%;
 }
 
@@ -352,7 +354,7 @@
   display: inline-grid;
   padding: 10px 20px;
   border-radius: 999px;
-  background: var(--sucesso-700);
+  background: var(--sucesso);
   color: var(--texto-sobre-cor);
   font-size: 0.92rem;
   font-weight: 600;
@@ -555,7 +557,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50% 50% 50% 0;
-  background: var(--aviso-700);
+  background: var(--aviso);
   color: var(--texto-sobre-cor);
   font-size: 0.72rem;
   font-weight: 700;
@@ -623,8 +625,8 @@
   display: inline-grid;
   padding: 6px 14px;
   border-radius: 999px;
-  background: var(--sucesso-100);
-  color: var(--sucesso-800);
+  background: var(--sucesso-claro);
+  color: var(--sucesso);
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -644,8 +646,8 @@
 @keyframes processo-pago {
   0%,
   62% {
-    background-color: var(--aviso-100);
-    color: var(--aviso-800);
+    background-color: var(--aviso-claro);
+    color: var(--aviso);
   }
 }
 
@@ -693,7 +695,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: var(--sucesso-600);
+  background: var(--sucesso);
   transform-origin: 0 50%;
 }
 
@@ -706,8 +708,8 @@
   display: inline-flex;
   padding: 7px 14px;
   border-radius: 999px;
-  background: var(--sucesso-100);
-  color: var(--sucesso-800);
+  background: var(--sucesso-claro);
+  color: var(--sucesso);
   font-weight: 600;
 }
 

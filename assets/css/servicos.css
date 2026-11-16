@@ -9,7 +9,7 @@
 
 .servicos {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--fundo-alt);
+  background: var(--fundo-servicos);
 }
 
 .servicos__cabeca,
@@ -113,11 +113,11 @@
 }
 
 .servicos__frente:hover {
-  border-color: var(--marfim-400);
+  border-color: var(--linha);
 }
 
 .servicos__frente[aria-selected="true"] {
-  border-color: var(--terracota-500);
+  border-color: var(--terracota);
   background: var(--superficie);
   box-shadow: var(--sombra);
 }
@@ -192,7 +192,7 @@
   padding-left: 22px;
   font-size: 0.9rem;
   line-height: 1.4;
-  color: var(--marfim-200);
+  color: var(--linha);
 }
 
 .servicos__regra::before {
@@ -202,8 +202,8 @@
   top: 0.35em;
   width: 12px;
   height: 7px;
-  border-left: 2px solid var(--areia-300);
-  border-bottom: 2px solid var(--areia-300);
+  border-left: 2px solid var(--ouro);
+  border-bottom: 2px solid var(--ouro);
   transform: rotate(-45deg);
 }
 
@@ -231,9 +231,9 @@
 }
 
 .servicos__destino--aceso {
-  border-color: var(--terracota-500);
-  background: var(--terracota-100);
-  color: var(--terracota-800);
+  border-color: var(--terracota);
+  background: var(--terracota-claro);
+  color: var(--terracota-escuro);
   font-weight: 600;
 }
 
@@ -302,8 +302,8 @@
 .servicos__publico-item {
   padding: 6px 14px;
   border-radius: 999px;
-  background: var(--areia-100);
-  color: var(--areia-800);
+  background: var(--ouro-claro);
+  color: var(--suave);
   font-size: 0.88rem;
   font-weight: 500;
 }
