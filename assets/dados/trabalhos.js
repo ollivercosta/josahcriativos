@@ -192,6 +192,7 @@ export const TRABALHOS = [
   {
     nome: "Orquestra Jovem do Recôncavo",
     titulo: ["Orquestra Jovem", "do Recôncavo"],
+    destaque: true,
     tipo: "Book de captação",
     entregas: "Identidade, book, papelaria, brindes e campanha digital",
     categoria: "Marca e apresentação",
@@ -437,7 +438,6 @@ export const TRABALHOS = [
   },
   {
     nome: "Tabuleiro Produções",
-    destaque: true,
     tipo: "Identidade visual",
     categoria: "Marca e apresentação",
     resumo:

@@ -24,6 +24,7 @@ assets/
   dados/
     trabalhos.js           projetos: nome, destaque, tipo, categoria, resumo, ficha e imagens
     livros.js              os books folheáveis da abertura (páginas em imagens/livros/<projeto>/NN.webp)
+    titulo.js              contornos das letras do título da abertura (gerado; não editar à mão)
     chat.js                perguntas e respostas do tira-dúvidas
   fontes/inter.woff2       a fonte do site (a mesma do sistema e dos portais)
   imagens/
@@ -31,9 +32,10 @@ assets/
 
 ## Páginas
 
-- `/` (index.html): abertura (título, um botão e os books folheáveis, que viram sozinhos e com o mouse, o toque ou
+- `/` (index.html): abertura (o título "Design e cultura" montado por agentes de design na frente do visitante,
+  em `secoes/Titulo.js`, com os contornos gerados por `ferramentas/gerar_titulo.py`; um botão e os books folheáveis, que viram sozinhos e com o mouse, o toque ou
   as setas; o book começa inclinado e se endireita com a rolagem), trabalhos (filtro que tira de cena o que não é
-  da categoria e reorganiza o resto), manifesto (a frase acende no ritmo da rolagem), serviços (mapa com fios entre
+  da categoria e reorganiza o resto; seis aparecem antes do botão "Ver mais"), manifesto (a frase acende no ritmo da rolagem), serviços (mapa com fios entre
   frente, projeto e serviços, que troca de frente sozinho), processo (seis etapas que avançam sozinhas, cada uma com
   uma cena animada), depoimentos, FAQ, contato.
   As demonstrações automáticas param quando o visitante interage e voltam depois de 10 s parado; com menos movimento

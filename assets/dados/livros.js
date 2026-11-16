@@ -12,8 +12,9 @@
  */
 export const LIVROS = [
   { projeto: "Olha o Cabelo dela", razao: 1.4142, total: 6, pasta: "olha-o-cabelo-dela" },
-  { projeto: "Forró Zevixe", razao: 16 / 9, total: 7, pasta: "forro-zevixe" },
-  { projeto: "Amazônia Motirô", razao: 16 / 9, total: 25, pasta: "amazonia-motiro" },
+  /* ANMA e OJR: por enquanto as páginas são as pranchas do projeto; trocar pelas páginas do book quando houver */
+  { projeto: "Antropofagia Mapping", razao: 16 / 9, total: 5, pasta: "antropofagia-mapping" },
+  { projeto: "Orquestra Jovem do Recôncavo", razao: 16 / 9, total: 4, pasta: "orquestra-jovem-do-reconcavo" },
 ];
 
 /** Os endereços das páginas de um book, na ordem. */

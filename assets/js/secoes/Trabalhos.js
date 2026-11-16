@@ -2,6 +2,8 @@ import { Ambiente } from "../nucleo/Ambiente.js";
 import { capaDoTrabalho, enderecoDoTrabalho } from "../../dados/trabalhos.js";
 
 const TODOS = "Todos";
+/** Quantos trabalhos aparecem antes do botão "Ver mais". */
+const LIMITE = 6;
 
 /**
  * Trabalhos
@@ -29,6 +31,7 @@ export class Trabalhos {
     this.fileiraDeDestaques = raiz.querySelector(".trabalhos__fileira--destaques");
     this.fileiraDosDemais = raiz.querySelector(".trabalhos__fileira--demais");
     this.filtroAtual = TODOS;
+    this.tudo = false;
     this.pecas = [];
 
     /* destaques primeiro, depois os demais, na ordem dos dados */
@@ -38,6 +41,8 @@ export class Trabalhos {
     ];
     this.#montarParede();
     this.#montarFiltros();
+    this.#montarMais();
+    this.#aplicar(false);
     if (entradaPropria) {
       this.#observarEntrada();
     } else {
@@ -116,17 +121,46 @@ export class Trabalhos {
   #filtrar(categoria) {
     if (categoria === this.filtroAtual) return;
     this.filtroAtual = categoria;
+    this.tudo = false;
     for (const botao of this.filtros.querySelectorAll(".trabalhos__filtro")) {
       botao.setAttribute("aria-pressed", botao.textContent === categoria ? "true" : "false");
     }
     this.#moverIndicador();
+    this.#aplicar(true);
+  }
+
+  /** O botão "Ver mais" abaixo da parede: mostra o resto da categoria. */
+  #montarMais() {
+    this.mais = this.#elemento("button", "trabalhos__mais", "Ver mais trabalhos");
+    this.mais.type = "button";
+    this.mais.addEventListener("click", () => {
+      this.tudo = true;
+      this.#aplicar(true);
+      /* o foco vai para o primeiro trabalho que acabou de aparecer */
+      this.primeiroNovo?.focus({ preventScroll: true });
+    });
+    this.parede.after(this.mais);
+  }
+
+  /**
+   * Mostra o que cabe: os trabalhos da categoria escolhida, até seis enquanto
+   * "Ver mais" não for usado.
+   */
+  #aplicar(animar) {
+    const categoria = this.filtroAtual;
     const itens = this.pecas.map((peca) => peca.parentElement);
-    const fica = (item) => categoria === TODOS || item.firstElementChild.dataset.categoria === categoria;
+    const daCategoria = itens.filter((item) => categoria === TODOS || item.firstElementChild.dataset.categoria === categoria);
+    const mostrados = new Set(this.tudo ? daCategoria : daCategoria.slice(0, LIMITE));
+    const fica = (item) => mostrados.has(item);
     const saem = itens.filter((item) => !item.hidden && !fica(item));
     const entram = itens.filter((item) => item.hidden && fica(item));
-    this.contador.textContent = `${itens.filter(fica).length} trabalhos`;
+    this.primeiroNovo = entram[0]?.firstElementChild;
+    const restam = daCategoria.length - mostrados.size;
+    this.mais.hidden = restam <= 0;
+    this.mais.textContent = `Ver mais trabalhos (${restam})`;
+    this.contador.textContent = `${daCategoria.length} trabalhos`;
 
-    if (Ambiente.reduzMovimento || !Element.prototype.animate) {
+    if (!animar || Ambiente.reduzMovimento || !Element.prototype.animate) {
       itens.forEach((item) => (item.hidden = !fica(item)));
       this.#ajustarFileiras();
       return;

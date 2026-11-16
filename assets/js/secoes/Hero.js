@@ -2,6 +2,7 @@ import { Abas } from "../nucleo/Abas.js";
 import { Ambiente } from "../nucleo/Ambiente.js";
 import { Ciclo } from "../nucleo/Ciclo.js";
 import { Livro } from "../nucleo/Livro.js";
+import { Titulo } from "./Titulo.js";
 import { LIVROS, paginasDoLivro } from "../../dados/livros.js";
 import { enderecoDoTrabalho } from "../../dados/trabalhos.js";
 
@@ -11,7 +12,8 @@ const TEMPO_CAPA = 2600;
 
 /**
  * Hero (abertura)
- * O título entra palavra por palavra. Abaixo, os books folheáveis: abas com
+ * O título é montado por agentes de design na frente do visitante (Titulo.js).
+ * Abaixo, os books folheáveis: abas com
  * o nome de cada book, setas, a página atual e o link para o projeto.
  *
  * O book folheia sozinho enquanto está na tela e, no fim, passa para o
@@ -39,6 +41,8 @@ export class Hero {
     this.setas = Array.from(raiz.querySelectorAll(".hero__seta"));
     this.atual = -1;
 
+    const titulo = raiz.querySelector(".hero__titulo");
+    if (titulo) this.titulo = new Titulo(titulo);
     if (this.livros.length) this.#montarBooks();
     this.#inclinacao();
     this.#faixa();
@@ -160,7 +164,6 @@ export class Hero {
     );
     window.addEventListener("resize", calcular);
     calcular();
-    this.raiz.classList.add("hero--inclinada");
   }
 
   /** A faixa de serviços em laço: uma cópia da lista (escondida dos leitores de tela) emenda o fim no começo. */

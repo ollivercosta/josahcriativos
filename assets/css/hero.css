@@ -1,6 +1,6 @@
 /* =========================================================================
    ABERTURA (hero)
-   O título grande, entrando palavra por palavra, um texto curto e um botão
+   O título grande, montado por agentes (Titulo.js), um texto curto e um botão
    só. Abaixo, os books folheáveis: o book começa inclinado e se endireita
    com a rolagem (--t vai de 1 a 0, calculado em Hero.js); as abas com o
    nome de cada book, as setas e a página atual ficam logo abaixo. A faixa
@@ -8,7 +8,7 @@
    ========================================================================= */
 
 .hero {
-  --t: 0;
+  --t: 1;
   --some: 1;
   position: relative;
   overflow: clip;
@@ -33,29 +33,224 @@
   color: var(--azul);
 }
 
-/* o título: duas linhas grandes, cada uma sobe de dentro de uma máscara */
+/* o título: uma linha só. O texto fica para leitores de tela; quem aparece é o
+   desenho montado pelos agentes (Titulo.js), do mesmo tamanho do texto */
 .hero__titulo {
   margin-top: 12px;
-  font-size: clamp(3.6rem, 11.5vw, 10.5rem);
+  font-size: clamp(2.6rem, 12.2vw, 9.4rem);
   font-weight: 760;
-  line-height: 0.9;
+  line-height: 1.17;
   letter-spacing: -0.06em;
+  white-space: nowrap;
   color: var(--ink);
 }
 
-.hero__linha {
-  display: block;
-  overflow: hidden;
-  padding: 0.04em 0.08em 0.2em;
-  margin: -0.04em -0.08em -0.2em;
+/* sem o script, o texto aparece sozinho depois de um instante */
+@keyframes hero-texto-reserva {
+  from {
+    opacity: 0;
+  }
 }
 
-.hero__palavra {
-  display: inline-block;
-  background: linear-gradient(180deg, var(--ink) 30%, var(--azul-esc) 130%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.hero__titulo-texto {
+  animation: hero-texto-reserva 0.6s ease 1.6s both;
+}
+
+.hero__titulo--desenhado .hero__titulo-texto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.hero__palco {
+  position: relative;
+  display: block;
+  width: calc(var(--largura-em) * 1em);
+  max-width: 100%;
+  aspect-ratio: var(--proporcao);
+  margin-inline: auto;
+  margin-block: -0.04em;
+  font-size: 1em;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: normal;
+}
+
+.hero__desenho {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero__letra {
+  fill: url(#hero-tinta);
+  fill-opacity: 0;
+  stroke: var(--azul-2);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.hero__letra--pronta {
+  fill-opacity: 1;
+  stroke: none;
+}
+
+.hero__guia {
+  stroke: var(--azul-3);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+}
+
+.hero__nos rect {
+  fill: #fff;
+  stroke: var(--azul-2);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* a camada dos agentes: cursores, rótulos das guias, cotas e seleção, em pixels */
+.hero__agentes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--fonte);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.hero__agente {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.hero__agente svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: var(--cor);
+  stroke: #fff;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.3));
+}
+
+.hero__agente-nome {
+  position: absolute;
+  top: 17px;
+  left: 13px;
+  padding: 3px 8px;
+  border-radius: 4px 10px 10px 10px;
+  background: var(--cor);
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+}
+
+.hero__guia-nome {
+  position: absolute;
+  top: -17px;
+  left: 0;
+  color: var(--azul-2);
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.hero__cota {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  border-left: 1px solid #db2777;
+  opacity: 0;
+}
+
+.hero__cota::before,
+.hero__cota::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  width: 9px;
+  border-top: 1px solid #db2777;
+}
+
+.hero__cota::before {
+  top: 0;
+}
+
+.hero__cota::after {
+  bottom: 0;
+}
+
+.hero__cota-valor {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #db2777;
+  color: #fff;
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+.hero__selecao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #1f5373;
+  opacity: 0;
+}
+
+.hero__alca {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #1f5373;
+  background: #fff;
+}
+
+.hero__alca--a {
+  top: -4px;
+  left: -4px;
+}
+
+.hero__alca--b {
+  top: -4px;
+  right: -4px;
+}
+
+.hero__alca--c {
+  bottom: -4px;
+  left: -4px;
+}
+
+.hero__alca--d {
+  right: -4px;
+  bottom: -4px;
+}
+
+.hero__selecao-valor {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #1f5373;
+  color: #fff;
+  white-space: nowrap;
+  transform: translateX(-50%);
 }
 
 .hero__texto {
@@ -105,13 +300,45 @@
   transform: translateY(10px);
 }
 
+@media (max-width: 600px) {
+  .hero__agentes {
+    font-size: 9.5px;
+  }
+
+  .hero__agente svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .hero__agente-nome {
+    top: 13px;
+    left: 10px;
+    padding: 2px 6px;
+  }
+
+  .hero__guia-nome {
+    display: none;
+  }
+}
+
+/* antes do script montar o book, o lugar dele já fica reservado (capa do primeiro book) */
+.hero__livro:empty {
+  aspect-ratio: 2.83;
+}
+
+@media (max-width: 679px) {
+  .hero__livro:empty {
+    aspect-ratio: 1.414;
+  }
+}
+
 /* a moldura inclina e cresce com a rolagem: o book vem para perto da tela */
 .hero__moldura {
   position: relative;
   transform-origin: 50% 0;
 }
 
-.hero--inclinada .hero__moldura {
+.hero__moldura {
   transform: perspective(1500px) rotateX(calc(var(--t) * 20deg)) scale(calc(1 - var(--t) * 0.1));
   will-change: transform;
 }
@@ -328,12 +555,6 @@
   }
 }
 
-@keyframes hero-palavra {
-  from {
-    transform: translateY(105%);
-  }
-}
-
 @keyframes hero-book {
   from {
     opacity: 0;
@@ -347,14 +568,6 @@
 .hero__controles,
 .hero__faixa {
   animation: hero-sobe 0.9s var(--curva) both;
-}
-
-.hero__palavra {
-  animation: hero-palavra 1.1s var(--curva) both;
-}
-
-.hero__linha:nth-child(2) .hero__palavra {
-  animation-delay: 0.1s;
 }
 
 .hero__texto {
@@ -407,7 +620,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__palavra,
+  .hero {
+    --t: 0;
+  }
+
+  .hero__titulo-texto {
+    animation: none;
+  }
+
   .hero__livro {
     animation: none;
   }

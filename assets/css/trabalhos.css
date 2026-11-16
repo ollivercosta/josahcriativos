@@ -233,3 +233,30 @@
     display: none;
   }
 }
+
+/* "Ver mais": abaixo da parede, mostra o resto da categoria (seis aparecem antes) */
+.trabalhos__mais {
+  display: block;
+  margin: 40px auto 0;
+  padding: 13px 28px;
+  border: 1px solid var(--linha-2);
+  border-radius: 999px;
+  background: var(--branco);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.3s var(--curva),
+    background-color 0.3s var(--curva),
+    box-shadow 0.3s var(--curva);
+}
+
+.trabalhos__mais:hover {
+  border-color: var(--azul);
+  box-shadow: 0 8px 20px -12px rgba(31, 83, 115, 0.5);
+}
+
+.trabalhos__mais[hidden] {
+  display: none;
+}
