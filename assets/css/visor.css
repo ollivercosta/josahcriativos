@@ -34,7 +34,7 @@
   gap: 16px;
   height: 66px;
   padding: 0 var(--margem);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(253, 248, 241, 0.92);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--cor-linha);
@@ -89,7 +89,7 @@
 .visor__fechar {
   margin-left: 8px;
   background: var(--cor-tinta);
-  color: #fff;
+  color: var(--texto-sobre-cor);
 }
 
 .visor__fechar:hover {
@@ -132,7 +132,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--cor-vermelho);
+  color: var(--rotulo);
 }
 
 .visor__titulo {
@@ -219,7 +219,7 @@
 
 /* régua de marcas: marcada em vermelho, por ser o ponto que o fomento confere */
 .visor__bloco--regua {
-  border-top-color: var(--cor-vermelho);
+  border-top-color: var(--acao);
 }
 
 .visor__regua-texto {
@@ -298,7 +298,7 @@
   display: grid;
   place-items: center;
   background: var(--cor-tinta);
-  color: #fff;
+  color: var(--texto-sobre-cor);
 }
 
 .visor__video-botao {
@@ -308,7 +308,7 @@
   padding: 14px 22px;
   border: 0;
   border-radius: 999px;
-  background: #fff;
+  background: var(--superficie);
   color: var(--cor-tinta);
   font-weight: 600;
   cursor: pointer;
@@ -319,7 +319,7 @@
 
 .visor__video-botao:hover {
   background: var(--cor-vermelho);
-  color: #fff;
+  color: var(--texto-sobre-cor);
 }
 
 .visor__video-icone {

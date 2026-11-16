@@ -128,7 +128,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--cor-vermelho);
+  color: var(--rotulo);
 }
 
 .sobre__titulo-palavra {
@@ -180,7 +180,7 @@
   font-size: clamp(7rem, 13vw, 14rem);
   font-weight: 700;
   line-height: 1;
-  color: var(--cor-vermelho);
+  color: var(--destaque);
 }
 
 .sobre__manchete-frase {
@@ -198,7 +198,7 @@
 
 .sobre__manchete-forte {
   font-weight: 700;
-  color: var(--cor-vermelho);
+  color: var(--destaque);
 }
 
 /* ---------- a trajetória: um texto corrido em duas colunas, como numa matéria ---------- */
@@ -215,7 +215,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--cor-vermelho);
+  color: var(--rotulo);
 }
 
 .sobre__historia-texto {
@@ -242,7 +242,7 @@
 .sobre__parceira {
   font-weight: 700;
   color: inherit;
-  text-decoration-color: var(--cor-vermelho);
+  text-decoration-color: var(--acao);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }

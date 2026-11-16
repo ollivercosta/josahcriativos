@@ -7,7 +7,7 @@
 
 .depoimentos {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--areia-s);
+  background: var(--fundo-alt);
 }
 
 .depoimentos__titulo,
@@ -58,11 +58,11 @@
 }
 
 .depoimentos__aba:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(253, 248, 241, 0.7);
 }
 
 .depoimentos__aba[aria-selected="true"] {
-  background: var(--branco);
+  background: var(--superficie);
   box-shadow: var(--sombra);
 }
 
@@ -113,7 +113,7 @@
   grid-area: 1 / 1;
   padding: clamp(28px, 4vw, 48px);
   border-radius: var(--raio-g);
-  background: var(--branco);
+  background: var(--superficie);
   box-shadow: var(--sombra);
   opacity: 0;
   visibility: hidden;

@@ -23,7 +23,7 @@
 .termos__fundo {
   position: absolute;
   inset: 0;
-  background: rgba(22, 19, 15, 0.55);
+  background: rgba(10, 32, 55, 0.5);
 }
 
 .termos__painel {
@@ -34,9 +34,9 @@
   display: grid;
   grid-template-columns: 350px minmax(0, 1fr);
   overflow: hidden;
-  background: #fff;
+  background: var(--superficie);
   border-radius: var(--raio-g);
-  box-shadow: 0 40px 90px -40px rgba(22, 19, 15, 0.6);
+  box-shadow: 0 40px 90px -40px rgba(10, 32, 55, 0.6);
   transform: translateY(28px);
   transition: transform 0.9s var(--curva);
 }
@@ -58,7 +58,7 @@
   border: 0;
   border-radius: 50%;
   background: var(--azul);
-  color: #fff;
+  color: var(--texto-sobre-cor);
   cursor: pointer;
   transition: background 0.4s ease;
 }
@@ -88,7 +88,7 @@
 }
 
 .termos__titulo-destaque {
-  color: var(--cor-vermelho);
+  color: var(--rotulo);
 }
 
 .termos__subtitulo {
@@ -126,7 +126,7 @@
 .termos__aba--ativa,
 .termos__aba--ativa:hover {
   background: var(--azul);
-  color: #fff;
+  color: var(--texto-sobre-cor);
 }
 
 .termos__aba-icone,
@@ -172,7 +172,7 @@
 .termos__indice-link:hover,
 .termos__indice-link--atual {
   color: var(--cor-tinta);
-  border-left-color: var(--cor-vermelho);
+  border-left-color: var(--acao);
 }
 
 .termos__principal {
@@ -206,7 +206,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--cor-vermelho);
+  color: var(--rotulo);
 }
 
 .termos__paragrafo,

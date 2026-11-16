@@ -10,7 +10,7 @@
 
 .processo {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--branco);
+  background: var(--fundo);
 }
 
 .processo__cabeca,
@@ -55,7 +55,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: var(--terracota);
+  background: var(--acao);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }
@@ -91,7 +91,7 @@
   height: 46px;
   border: 2px solid var(--linha-2);
   border-radius: 50%;
-  background: var(--branco);
+  background: var(--fundo);
   color: var(--suave);
   font-weight: 650;
   transition:
@@ -116,13 +116,13 @@
 
 .processo__no--feito .processo__numero {
   border-color: var(--terracota);
-  color: var(--terracota);
+  color: var(--terracota-700);
 }
 
 .processo__no[aria-selected="true"] .processo__numero {
   border-color: var(--azul);
   background: var(--azul);
-  color: #fff;
+  color: var(--texto-sobre-cor);
   box-shadow: 0 0 0 6px var(--azul-s);
   transform: scale(1.06);
 }
@@ -144,7 +144,7 @@
   min-height: 340px;
   padding: clamp(28px, 4vw, 48px);
   border-radius: var(--raio-g);
-  background: var(--fundo-claro);
+  background: var(--fundo-alt);
 }
 
 .processo__painel[hidden] {
@@ -165,7 +165,7 @@
 .processo__passo {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--terracota);
+  color: var(--rotulo);
 }
 
 .processo__nome {
@@ -195,7 +195,7 @@
   position: relative;
   padding: 22px 24px;
   border-radius: var(--raio);
-  background: var(--branco);
+  background: var(--superficie);
   box-shadow: var(--sombra);
 }
 
@@ -276,7 +276,7 @@
   padding: 8px 16px;
   border-radius: 999px;
   background: var(--azul);
-  color: #fff;
+  color: var(--texto-sobre-cor);
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -321,7 +321,7 @@
   width: var(--l);
   height: 8px;
   border-radius: 8px;
-  background: var(--azul-s);
+  background: var(--azul-200);
   transform-origin: 0 50%;
 }
 
@@ -352,8 +352,8 @@
   display: inline-grid;
   padding: 10px 20px;
   border-radius: 999px;
-  background: var(--verde, #1f7a4d);
-  color: #fff;
+  background: var(--sucesso-700);
+  color: var(--texto-sobre-cor);
   font-size: 0.92rem;
   font-weight: 600;
 }
@@ -423,11 +423,11 @@
   width: 22px;
   height: 22px;
   fill: var(--ink);
-  stroke: #fff;
+  stroke: var(--texto-sobre-cor);
   stroke-width: 1.4;
   opacity: 0;
   pointer-events: none;
-  filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.3));
+  filter: drop-shadow(0 2px 3px rgba(10, 32, 55, 0.3));
 }
 
 @keyframes processo-cursor {
@@ -555,11 +555,11 @@
   width: 24px;
   height: 24px;
   border-radius: 50% 50% 50% 0;
-  background: #e0a106;
-  color: #fff;
+  background: var(--aviso-700);
+  color: var(--texto-sobre-cor);
   font-size: 0.72rem;
   font-weight: 700;
-  box-shadow: 0 4px 10px -2px rgba(15, 23, 42, 0.35);
+  box-shadow: 0 4px 10px -2px rgba(10, 32, 55, 0.35);
 }
 
 @keyframes processo-pino {
@@ -585,7 +585,7 @@
   padding: 7px 0;
   border-radius: 999px;
   background: var(--azul);
-  color: #fff;
+  color: var(--texto-sobre-cor);
   font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
@@ -623,8 +623,8 @@
   display: inline-grid;
   padding: 6px 14px;
   border-radius: 999px;
-  background: #e3f3ea;
-  color: #1f7a4d;
+  background: var(--sucesso-100);
+  color: var(--sucesso-800);
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -644,8 +644,8 @@
 @keyframes processo-pago {
   0%,
   62% {
-    background-color: #fdf3d8;
-    color: #8a6200;
+    background-color: var(--aviso-100);
+    color: var(--aviso-800);
   }
 }
 
@@ -693,7 +693,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: #1f7a4d;
+  background: var(--sucesso-600);
   transform-origin: 0 50%;
 }
 
@@ -706,8 +706,8 @@
   display: inline-flex;
   padding: 7px 14px;
   border-radius: 999px;
-  background: #e3f3ea;
-  color: #1f7a4d;
+  background: var(--sucesso-100);
+  color: var(--sucesso-800);
   font-weight: 600;
 }
 

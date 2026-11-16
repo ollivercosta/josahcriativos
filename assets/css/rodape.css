@@ -6,7 +6,7 @@
 
 .rodape {
   border-top: 1px solid var(--linha);
-  background: var(--branco);
+  background: var(--fundo);
 }
 
 .rodape__linha {
@@ -50,7 +50,7 @@
 }
 
 .rodape__termos:hover {
-  color: var(--terracota);
+  color: var(--link);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

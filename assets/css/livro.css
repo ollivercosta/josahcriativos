@@ -43,7 +43,7 @@
   top: 0;
   width: var(--livro-w);
   height: var(--livro-h);
-  background: #1c1c1c;
+  background: var(--marfim-950);
 }
 
 .livro__lado--esq {
@@ -80,20 +80,20 @@
 .livro__lado--esq::after {
   background: linear-gradient(
     to left,
-    rgba(15, 23, 42, 0.34) 0,
-    rgba(15, 23, 42, 0.12) 1.6%,
-    rgba(255, 255, 255, 0.05) 4%,
-    rgba(15, 23, 42, 0) 9%
+    rgba(10, 32, 55, 0.34) 0,
+    rgba(10, 32, 55, 0.12) 1.6%,
+    rgba(253, 248, 241, 0.05) 4%,
+    rgba(10, 32, 55, 0) 9%
   );
 }
 
 .livro__lado--dir::after {
   background: linear-gradient(
     to right,
-    rgba(15, 23, 42, 0.34) 0,
-    rgba(15, 23, 42, 0.12) 1.6%,
-    rgba(255, 255, 255, 0.05) 4%,
-    rgba(15, 23, 42, 0) 9%
+    rgba(10, 32, 55, 0.34) 0,
+    rgba(10, 32, 55, 0.12) 1.6%,
+    rgba(253, 248, 241, 0.05) 4%,
+    rgba(10, 32, 55, 0) 9%
   );
 }
 
@@ -150,7 +150,7 @@
   opacity: var(--livro-opaco, 1);
   position: absolute;
   inset: 0;
-  background-color: #1c1c1c;
+  background-color: var(--marfim-950);
   background-repeat: no-repeat;
   background-size: var(--livro-w) var(--livro-h);
   -webkit-backface-visibility: hidden;

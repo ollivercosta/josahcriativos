@@ -31,7 +31,7 @@
   padding: 0;
   border: 0;
   background: none;
-  color: var(--azul);
+  color: var(--link);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -46,7 +46,7 @@
 .faq__item {
   border: 1px solid var(--linha);
   border-radius: var(--raio);
-  background: var(--branco);
+  background: var(--superficie);
   transition:
     border-color 0.3s var(--curva),
     box-shadow 0.3s var(--curva);
@@ -83,7 +83,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--terracota-s);
+  background: var(--marfim-100);
 }
 
 .faq__sinal::before,
@@ -96,7 +96,7 @@
   height: 2px;
   margin: -1px 0 0 -6px;
   border-radius: 2px;
-  background: var(--terracota);
+  background: var(--azul-900);
   transition: transform 0.4s var(--curva);
 }
 
@@ -121,4 +121,14 @@
   .faq {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* aberta: o sinal passa ao acento (estado de interação) */
+.faq__item[open] .faq__sinal {
+  background: var(--terracota-100);
+}
+
+.faq__item[open] .faq__sinal::before,
+.faq__item[open] .faq__sinal::after {
+  background: var(--terracota-700);
 }

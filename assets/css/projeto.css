@@ -23,7 +23,7 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 var(--margem);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(253, 248, 241, 0.92);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--cor-linha);
@@ -100,7 +100,7 @@
 }
 
 .projeto__rotulo--vermelho {
-  color: var(--cor-vermelho);
+  color: var(--rotulo);
 }
 
 /* ---------- abertura ---------- */
@@ -132,7 +132,7 @@
 .projeto__desafio {
   margin: 0;
   padding-left: 22px;
-  border-left: 3px solid var(--cor-vermelho);
+  border-left: 3px solid var(--acao);
   font-size: clamp(1.15rem, 1.5vw, 1.45rem);
   font-weight: 300;
   line-height: 1.4;
@@ -357,7 +357,7 @@
   gap: 10px;
   aspect-ratio: 16 / 10;
   background:
-    repeating-linear-gradient(135deg, transparent 0 22px, rgba(22, 19, 15, 0.025) 22px 23px),
+    repeating-linear-gradient(135deg, transparent 0 22px, rgba(10, 32, 55, 0.025) 22px 23px),
     var(--cor-cinza-claro);
   text-align: center;
 }
@@ -429,11 +429,11 @@
   bottom: 14px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: #fff;
+  background: var(--superficie);
   color: var(--cor-tinta);
   font-size: 0.78rem;
   font-weight: 600;
-  box-shadow: 0 4px 14px rgba(22, 19, 15, 0.14);
+  box-shadow: 0 4px 14px rgba(10, 32, 55, 0.14);
   opacity: 0;
   transform: translateY(6px);
   transition:
@@ -452,24 +452,24 @@
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: #fff;
+  background: var(--superficie);
   box-shadow:
-    0 1px 2px rgba(22, 19, 15, 0.08),
-    0 24px 50px -20px rgba(22, 19, 15, 0.35);
+    0 1px 2px rgba(10, 32, 55, 0.08),
+    0 24px 50px -20px rgba(10, 32, 55, 0.35);
 }
 
 .projeto__site-barra {
   display: flex;
   gap: 7px;
   padding: 11px 14px;
-  background: #ecebe7;
+  background: var(--marfim-100);
 }
 
 .projeto__site-barra span {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #cfccc5;
+  background: var(--marfim-300);
 }
 
 .projeto__site-janela {
@@ -518,7 +518,7 @@
   padding: 9px 16px;
   border-radius: 999px;
   background: var(--cor-tinta);
-  color: #fff;
+  color: var(--texto-sobre-cor);
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
@@ -545,7 +545,7 @@
   grid-column: 1 / -1;
   margin: 0;
   padding: clamp(12px, 2vw, 28px);
-  background: #fff;
+  background: var(--superficie);
 }
 
 .projeto__regua-imagem {
@@ -642,7 +642,7 @@
   z-index: 400;
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: rgba(14, 12, 10, 0.96);
+  background: rgba(34, 31, 27, 0.96);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -672,10 +672,10 @@
   place-items: center;
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(253, 248, 241, 0.3);
   border-radius: 50%;
-  background: rgba(14, 12, 10, 0.6);
-  color: #fff;
+  background: rgba(34, 31, 27, 0.6);
+  color: var(--texto-sobre-cor);
   font: inherit;
   font-size: 1.2rem;
   cursor: pointer;
@@ -685,7 +685,7 @@
 .ampliada__fechar:hover,
 .ampliada__anterior:hover,
 .ampliada__seguinte:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(253, 248, 241, 0.16);
 }
 
 .ampliada__fechar {

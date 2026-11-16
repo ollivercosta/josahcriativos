@@ -1,11 +1,9 @@
 /* =========================================================================
    BASE
-   Tokens da identidade e o reset mínimo. Paleta (referência "Riviera"):
-   azul Riviera #183451 para títulos e blocos fortes, terracota #A9501C como
-   acento (botões, tags, interação e o encerramento), marfim #F3ECDE e areia
-   #D4AF83 nos fundos e o azul-céu claro do tecido da referência como seção
-   fria. Fonte Inter, cantos arredondados e botões em pílula. Os nomes
-   --azul-* ficaram (são usados em todo o site), agora com os tons Riviera.
+   Tokens da identidade e o reset mínimo. Paleta: marfim como fundo (dois
+   degraus alternados), azul Riviera como estrutura e único bloco de cor
+   cheia (contato), terracota só para ação e interação, areia em detalhes.
+   Escalas, papéis, contraste e regras em docs/design/cor.md.
    Nenhuma classe daqui é aplicada a elementos das seções.
    ========================================================================= */
 
@@ -18,36 +16,139 @@
 }
 
 :root {
-  /* azul Riviera */
-  --azul: #183451;
-  --azul-esc: #0f2439;
-  --azul-2: #2a4c6e;
-  --azul-3: #8fb4c8;
-  --azul-s: #e2edf2;
-  --azul-ss: #edf3f5;
-  /* terracota: o acento */
-  --terracota: #a9501c;
-  --terracota-esc: #873e12;
-  --terracota-claro: #c96f38;
-  --terracota-s: #f4e0d1;
-  /* marfim e areia: os fundos quentes */
-  --areia: #d4af83;
-  --areia-s: #ece0cc;
-  --marfim: #f3ecde;
-  --ink: #14202e;
-  --texto: #2b2a28;
-  --suave: #6b645a;
-  --linha: #e5dbca;
-  --linha-2: #d3c4ab;
-  --fundo-claro: #f3ecde;
-  --branco: #fbf8f2;
+  /* escalas 50 a 950 (OKLCH; geradas por ferramentas/cor/escalas.py) */
+  --azul-50: #f4fafe;
+  --azul-100: #e4f1fa;
+  --azul-200: #cde3f2;
+  --azul-300: #b1cee5;
+  --azul-400: #90b3d1;
+  --azul-500: #7296b9;
+  --azul-600: #577a9f;
+  --azul-700: #3f6184;
+  --azul-800: #2a4a6b;
+  --azul-900: #183451;
+  --azul-950: #0a2037;
+  --terracota-50: #fff8f3;
+  --terracota-100: #ffeadb;
+  --terracota-200: #fed3b8;
+  --terracota-300: #f8b58c;
+  --terracota-400: #e7905c;
+  --terracota-500: #cc6d33;
+  --terracota-600: #a9501c;
+  --terracota-700: #8d3d09;
+  --terracota-800: #6e300a;
+  --terracota-900: #51240c;
+  --terracota-950: #321708;
+  --areia-50: #fef8f0;
+  --areia-100: #faeedd;
+  --areia-200: #f4dfc2;
+  --areia-300: #e8caa2;
+  --areia-400: #d4af83;
+  --areia-500: #b69266;
+  --areia-600: #98764e;
+  --areia-700: #7b5d3a;
+  --areia-800: #60472a;
+  --areia-900: #45321c;
+  --areia-950: #291d0e;
+  --marfim-50: #fdf8f1;
+  --marfim-100: #f3ecde;
+  --marfim-200: #e5dccf;
+  --marfim-300: #d0c7ba;
+  --marfim-400: #b4ada2;
+  --marfim-500: #989188;
+  --marfim-600: #7d776f;
+  --marfim-700: #645f58;
+  --marfim-800: #4d4944;
+  --marfim-900: #383530;
+  --marfim-950: #221f1b;
+  --sucesso-50: #f2fcf6;
+  --sucesso-100: #def6e8;
+  --sucesso-200: #bfecd1;
+  --sucesso-300: #9bdcb6;
+  --sucesso-400: #77c396;
+  --sucesso-500: #58a779;
+  --sucesso-600: #408a60;
+  --sucesso-700: #2e6f4a;
+  --sucesso-800: #225639;
+  --sucesso-900: #193e29;
+  --sucesso-950: #0d2517;
+  --aviso-50: #fef9ec;
+  --aviso-100: #fdeece;
+  --aviso-200: #fbdc9e;
+  --aviso-300: #eec474;
+  --aviso-400: #d7a64e;
+  --aviso-500: #bc8930;
+  --aviso-600: #9f6e13;
+  --aviso-700: #805708;
+  --aviso-800: #644304;
+  --aviso-900: #483004;
+  --aviso-950: #2c1c02;
+  --erro-50: #fef7f8;
+  --erro-100: #ffe9eb;
+  --erro-200: #ffd3d7;
+  --erro-300: #feb3bb;
+  --erro-400: #f88998;
+  --erro-500: #e06879;
+  --erro-600: #c14c5d;
+  --erro-700: #9e3849;
+  --erro-800: #7a2c38;
+  --erro-900: #572129;
+  --erro-950: #331418;
+  --marfim-25: #fffcf8;
+
+  /* papéis: os componentes usam estes nomes, não os degraus soltos */
+  --fundo: var(--marfim-50);
+  --fundo-alt: var(--marfim-100);
+  --superficie: var(--marfim-25);
+  --borda: var(--marfim-200);
+  --borda-forte: var(--marfim-300);
+  --borda-controle: var(--marfim-500);
+  --texto-titulo: var(--azul-950);
+  --texto-sobre-cor: var(--marfim-50);
+  --acao: var(--terracota-600);
+  --acao-hover: var(--terracota-700);
+  --acao-active: var(--terracota-800);
+  --acao-escuro: var(--terracota-400);
+  --acao-escuro-hover: var(--terracota-300);
+  --acao-2: var(--azul-900);
+  --acao-2-hover: var(--azul-800);
+  --link: var(--azul-800);
+  --foco: var(--azul-700);
+  --selecao: var(--azul-100);
+  --nevoa: var(--azul-100);
+  --destaque: var(--terracota-600);
+  --rotulo: var(--terracota-700);
+  --forte: var(--azul-900);
+  --forte-2: var(--azul-950);
+
+  /* nomes usados nas folhas das seções, apontando para os degraus */
+  --azul: var(--azul-900);
+  --azul-esc: var(--azul-950);
+  --azul-2: var(--azul-700);
+  --azul-3: var(--azul-300);
+  --azul-s: var(--azul-100);
+  --azul-ss: var(--azul-50);
+  --terracota: var(--terracota-600);
+  --terracota-esc: var(--terracota-700);
+  --terracota-claro: var(--terracota-500);
+  --terracota-s: var(--terracota-100);
+  --areia: var(--areia-400);
+  --areia-s: var(--areia-100);
+  --marfim: var(--marfim-100);
+  --ink: var(--azul-950);
+  --texto: var(--marfim-900);
+  --suave: var(--marfim-700);
+  --linha: var(--marfim-200);
+  --linha-2: var(--marfim-300);
+  --fundo-claro: var(--marfim-100);
+  --branco: var(--marfim-50);
 
   /* nomes antigos, mantidos para as janelas (visor, termos, chat) e as páginas de trabalho */
   --cor-fundo: var(--branco);
   --cor-tinta: var(--ink);
-  --cor-vermelho: var(--azul);
+  --cor-vermelho: var(--azul-800);
   --cor-tinta-suave: var(--suave);
-  --cor-tinta-apagada: rgba(20, 32, 46, 0.16);
+  --cor-tinta-apagada: rgba(10, 32, 55, 0.16);
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
   --cor-cinza-claro: var(--fundo-claro);
@@ -61,8 +162,8 @@
 
   --raio: 12px;
   --raio-g: 20px;
-  --sombra: 0 1px 2px rgba(24, 52, 81, 0.05), 0 12px 32px -12px rgba(24, 52, 81, 0.16);
-  --sombra-g: 0 2px 4px rgba(24, 52, 81, 0.05), 0 40px 90px -30px rgba(24, 52, 81, 0.34);
+  --sombra: 0 1px 2px rgba(10, 32, 55, 0.05), 0 12px 32px -12px rgba(10, 32, 55, 0.16);
+  --sombra-g: 0 2px 4px rgba(10, 32, 55, 0.05), 0 40px 90px -30px rgba(10, 32, 55, 0.32);
 
   --largura: 1180px;
   --margem: clamp(20px, 4vw, 40px);
@@ -112,7 +213,7 @@ html.pagina--travada {
 
 body {
   margin: 0;
-  background: var(--branco);
+  background: var(--fundo);
   color: var(--texto);
   font-family: var(--fonte);
   font-size: 1.0625rem;
@@ -164,12 +265,12 @@ p {
 }
 
 ::selection {
-  background: var(--azul-s);
-  color: var(--ink);
+  background: var(--selecao);
+  color: var(--texto-titulo);
 }
 
 :focus-visible {
-  outline: 3px solid var(--azul-2);
+  outline: 3px solid var(--foco);
   outline-offset: 3px;
   border-radius: 4px;
 }

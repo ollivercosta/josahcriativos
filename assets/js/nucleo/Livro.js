@@ -28,7 +28,7 @@ const FAIXAS = 24;
 /** Quanto a folha se curva no meio da virada, em graus. */
 const CURVA = 64;
 /** Cor do verso de uma folha sem página (papel). */
-const PAPEL = "#ecebe6";
+const PAPEL = "#f3ecde";
 const TINTA = "12, 14, 20";
 /** Direção da luz: da esquerda e da frente (x, z). */
 const LUZ_X = -0.26;
@@ -268,7 +268,7 @@ export class Livro {
     const sinal = lado === "esq" ? -1 : 1;
     const bordas = [];
     for (let i = 1; i <= camadas; i += 1) {
-      bordas.push(`${sinal * i}px ${i * 0.6}px 0 ${i % 2 ? "#f2f1ed" : "#d3d2cc"}`);
+      bordas.push(`${sinal * i}px ${i * 0.6}px 0 ${i % 2 ? "#fdf8f1" : "#d0c7ba"}`);
     }
     bordas.push(`${sinal * 4}px 26px 40px -22px rgba(${TINTA}, 0.55)`);
     raiz.style.boxShadow = bordas.join(", ");

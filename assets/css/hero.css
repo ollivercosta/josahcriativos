@@ -12,8 +12,9 @@
   overflow: clip;
   padding: calc(var(--altura-cabecalho) + clamp(48px, 8vw, 104px)) var(--margem) clamp(48px, 6vw, 80px);
   background:
-    radial-gradient(70% 55% at 50% 0%, var(--azul-s) 0%, rgba(226, 237, 242, 0) 100%),
-    var(--branco);
+    radial-gradient(70% 55% at 50% 0%, var(--nevoa) 0%, rgba(228, 241, 250, 0) 100%),
+    radial-gradient(80% 45% at 50% 100%, var(--fundo-alt) 0%, rgba(243, 236, 222, 0) 100%),
+    var(--fundo);
   text-align: center;
 }
 
@@ -29,7 +30,7 @@
   font-size: clamp(1.2rem, 4.4vw, 2rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--terracota);
+  color: var(--rotulo);
 }
 
 /* o título: uma linha só. O texto fica para leitores de tela; quem aparece é o
@@ -107,7 +108,7 @@
 }
 
 .hero__nos rect {
-  fill: #fff;
+  fill: var(--superficie);
   stroke: var(--azul-2);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
@@ -138,9 +139,9 @@
   width: 20px;
   height: 20px;
   fill: var(--cor);
-  stroke: #fff;
+  stroke: var(--texto-sobre-cor);
   stroke-width: 1.5;
-  filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.3));
+  filter: drop-shadow(0 2px 3px rgba(10, 32, 55, 0.3));
 }
 
 .hero__agente-nome {
@@ -150,9 +151,9 @@
   padding: 3px 8px;
   border-radius: 4px 10px 10px 10px;
   background: var(--cor);
-  color: #fff;
+  color: var(--texto-sobre-cor);
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 2px 6px rgba(10, 32, 55, 0.18);
 }
 
 .hero__guia-nome {
@@ -171,7 +172,7 @@
   top: 0;
   left: 0;
   width: 0;
-  border-left: 1px solid #9c3d54;
+  border-left: 1px solid #8f3f55;
   opacity: 0;
 }
 
@@ -181,7 +182,7 @@
   position: absolute;
   left: -5px;
   width: 9px;
-  border-top: 1px solid #9c3d54;
+  border-top: 1px solid #8f3f55;
 }
 
 .hero__cota::before {
@@ -198,8 +199,8 @@
   right: 8px;
   padding: 2px 6px;
   border-radius: 4px;
-  background: #9c3d54;
-  color: #fff;
+  background: #8f3f55;
+  color: var(--texto-sobre-cor);
   white-space: nowrap;
   transform: translateY(-50%);
 }
@@ -208,7 +209,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  border: 1px solid #183451;
+  border: 1px solid var(--azul-900);
   opacity: 0;
 }
 
@@ -216,8 +217,8 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  border: 1px solid #183451;
-  background: #fff;
+  border: 1px solid var(--azul-900);
+  background: var(--superficie);
 }
 
 .hero__alca--a {
@@ -246,8 +247,8 @@
   left: 50%;
   padding: 2px 8px;
   border-radius: 4px;
-  background: #183451;
-  color: #fff;
+  background: var(--azul-900);
+  color: var(--texto-sobre-cor);
   white-space: nowrap;
   transform: translateX(-50%);
 }

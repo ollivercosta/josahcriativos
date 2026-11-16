@@ -1,6 +1,6 @@
 /* =========================================================================
    CONTATO
-   A faixa azul que fecha a página: o retrato, o título, o texto e um botão
+   O bloco azul que fecha a página (o único bloco de cor cheia do site): o retrato, o título, o texto e um botão
    só (WhatsApp). Abaixo, os canais: WhatsApp, e-mail e redes.
    Também usado na tela final das páginas internas e das de trabalho.
    ========================================================================= */
@@ -15,9 +15,9 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), var(--terracota-claro) 0%, rgba(201, 111, 56, 0) 70%),
-    var(--terracota);
-  color: #fff;
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), var(--azul-800) 0%, rgba(42, 74, 107, 0) 70%),
+    var(--azul-950);
+  color: var(--texto-sobre-cor);
   text-align: center;
 }
 
@@ -26,10 +26,10 @@
   height: 96px;
   margin: 0 auto 24px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.6);
+  border: 3px solid rgba(253, 248, 241, 0.6);
   object-fit: cover;
   object-position: 50% 20%;
-  background: var(--terracota-esc);
+  background: var(--azul-800);
 }
 
 .contato__titulo {
@@ -39,14 +39,14 @@
   font-weight: 650;
   line-height: 1.08;
   letter-spacing: -0.035em;
-  color: #fff;
+  color: var(--texto-sobre-cor);
 }
 
 .contato__lede {
   max-width: 34em;
   margin: 18px auto 0;
   font-size: 1.12rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--marfim-200);
 }
 
 .contato__botao {
@@ -54,8 +54,8 @@
   margin-top: 32px;
   padding: 15px 32px;
   border-radius: 999px;
-  background: #fff;
-  color: var(--terracota-esc);
+  background: var(--acao-escuro);
+  color: var(--azul-950);
   font-weight: 650;
   text-decoration: none;
   transition:
@@ -65,7 +65,8 @@
 
 .contato__botao:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.45);
+  background: var(--acao-escuro-hover);
+  box-shadow: 0 14px 30px -12px rgba(5, 16, 28, 0.6);
 }
 
 .contato__canais {
@@ -75,7 +76,7 @@
   max-width: 860px;
   margin: clamp(40px, 5vw, 56px) auto 0;
   padding: 24px 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(253, 248, 241, 0.16);
   list-style: none;
 }
 
@@ -87,11 +88,11 @@
 
 .contato__canal-rotulo {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--azul-200);
 }
 
 .contato__canal-link {
-  color: #fff;
+  color: var(--texto-sobre-cor);
   font-weight: 600;
   text-decoration: none;
   overflow-wrap: anywhere;
@@ -113,18 +114,18 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(253, 248, 241, 0.1);
   transition: background-color 0.3s var(--curva);
 }
 
 .contato__rede:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(253, 248, 241, 0.2);
 }
 
 .contato__rede-icone {
   width: 20px;
   height: 20px;
-  fill: #fff;
+  fill: var(--texto-sobre-cor);
 }
 
 @media (max-width: 760px) {
@@ -135,4 +136,8 @@
   .contato__faixa {
     border-radius: 22px;
   }
+}
+
+.contato__faixa :focus-visible {
+  outline-color: var(--texto-sobre-cor);
 }
