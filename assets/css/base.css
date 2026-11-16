@@ -17,16 +17,18 @@
 }
 
 
+
 :root {
-  /* PALETA: identidade baseada em roxo profundo, amarelo vibrante e branco neutro. */
+  /* PALETA: roxo profundo, amarelo vibrante e branco neutro.
+     O amarelo é exclusivo para detalhes e destaques, nunca para backgrounds. */
   --espresso: #0D000A;
   --espresso-suave: #4D394B;
   --terracota: #FEDD00;
   --terracota-escuro: #D9BD00;
-  --terracota-claro: #FFF5A8;
+  --terracota-claro: #E9E7E8;
   --creme: #F3F2F2;
   --ouro: #FEDD00;
-  --ouro-claro: #FFF5A8;
+  --ouro-claro: #E9E7E8;
   --branco: #FFFFFF;
   --linha: #E9E7E8;
   --linha-2: #B9B5B8;
@@ -40,11 +42,11 @@
   --fundo-trabalhos: var(--creme);
   --fundo-manifesto: var(--espresso);
   --fundo-servicos: var(--branco);
-  --fundo-processo: var(--ouro-claro);
+  --fundo-processo: var(--creme);
   --fundo-depoimentos: var(--creme);
   --fundo-faq: var(--creme);
   --fundo-contato: var(--branco);
-  --fundo-faixa-contato: var(--terracota);
+  --fundo-faixa-contato: var(--espresso);
   --fundo-rodape: var(--espresso);
 
   /* papéis usados pelos componentes */
@@ -59,15 +61,15 @@
   --suave: var(--espresso-suave);
   --texto-titulo: var(--espresso);
   --texto-sobre-cor: var(--creme);
-  --acao: var(--terracota);
-  --acao-hover: var(--terracota-escuro);
-  --acao-escuro: var(--ouro);
-  --acao-escuro-hover: #E8C900;
+  --acao: var(--espresso);
+  --acao-hover: #352333;
+  --acao-escuro: var(--branco);
+  --acao-escuro-hover: #E9E7E8;
   --acao-2: var(--espresso);
   --acao-2-hover: #352333;
   --link: var(--espresso);
   --foco: var(--terracota-escuro);
-  --selecao: var(--ouro-claro);
+  --selecao: #E9E7E8;
   --nevoa: var(--creme);
   --destaque: var(--terracota);
   --rotulo: var(--espresso);
@@ -119,6 +121,7 @@
   --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
+
 
 
 
