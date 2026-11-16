@@ -5,6 +5,7 @@
  */
 import { GestorDeSobreposicoes } from "./nucleo/GestorDeSobreposicoes.js";
 import { VLibras } from "./nucleo/VLibras.js";
+import { LivroDoProjeto } from "./paginas/LivroDoProjeto.js";
 import { Projeto } from "./paginas/Projeto.js";
 import { Termos } from "./secoes/Termos.js";
 
@@ -21,6 +22,8 @@ const semInercia = {
 const $ = (seletor) => document.querySelector(seletor);
 const gestor = new GestorDeSobreposicoes(semInercia);
 new Projeto($(".projeto__corpo"));
+const livro = $(".projeto__chave--livro");
+if (livro) new LivroDoProjeto(livro);
 new Termos($(".termos"), gestor);
 new VLibras();
 const ano = $(".rodape__ano");

@@ -1,14 +1,12 @@
 /* =========================================================================
    ABERTURA (hero)
-   O título grande, montado por agentes (Titulo.js), um texto curto e um botão
-   só. Abaixo, os books folheáveis: o book começa inclinado e se endireita
-   com a rolagem (--t vai de 1 a 0, calculado em Hero.js); as abas com o
-   nome de cada book, as setas e a página atual ficam logo abaixo. A faixa
-   de serviços corre de lado e fecha a abertura.
+   O rótulo, o título grande montado por agentes (Titulo.js) e um texto
+   curto, que clareia com a rolagem (--some, em Hero.js). A faixa de serviços
+   corre de lado e fecha a abertura. Os books folheáveis ficam nas páginas
+   de cada trabalho de book.
    ========================================================================= */
 
 .hero {
-  --t: 1;
   --some: 1;
   position: relative;
   overflow: clip;
@@ -28,7 +26,8 @@
 }
 
 .hero__rotulo {
-  font-size: 0.95rem;
+  font-size: clamp(1.2rem, 4.4vw, 2rem);
+  letter-spacing: -0.02em;
   font-weight: 600;
   color: var(--azul);
 }
@@ -261,232 +260,6 @@
   color: var(--suave);
 }
 
-.hero__botao {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 30px;
-  padding: 14px 30px;
-  border-radius: 999px;
-  background: var(--azul);
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    background-color 0.3s var(--curva),
-    box-shadow 0.3s var(--curva),
-    transform 0.3s var(--curva);
-}
-
-.hero__botao:hover {
-  background: var(--azul-esc);
-  box-shadow: 0 10px 24px -10px rgba(31, 83, 115, 0.65);
-  transform: translateY(-1px);
-}
-
-/* ---------- os books ---------- */
-.hero__estudio {
-  position: relative;
-  z-index: 1;
-  max-width: 1120px;
-  margin: clamp(48px, 7vw, 88px) auto 0;
-  transition:
-    opacity 0.32s var(--curva),
-    transform 0.32s var(--curva);
-}
-
-.hero__estudio--trocando {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-@media (max-width: 600px) {
-  .hero__agentes {
-    font-size: 9.5px;
-  }
-
-  .hero__agente svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .hero__agente-nome {
-    top: 13px;
-    left: 10px;
-    padding: 2px 6px;
-  }
-
-  .hero__guia-nome {
-    display: none;
-  }
-}
-
-/* antes do script montar o book, o lugar dele já fica reservado (capa do primeiro book) */
-.hero__livro:empty {
-  aspect-ratio: 2.83;
-}
-
-@media (max-width: 679px) {
-  .hero__livro:empty {
-    aspect-ratio: 1.414;
-  }
-}
-
-/* a moldura inclina e cresce com a rolagem: o book vem para perto da tela */
-.hero__moldura {
-  position: relative;
-  transform-origin: 50% 0;
-}
-
-.hero__moldura {
-  transform: perspective(1500px) rotateX(calc(var(--t) * 20deg)) scale(calc(1 - var(--t) * 0.1));
-  will-change: transform;
-}
-
-/* a sombra da mesa, embaixo do book */
-.hero__moldura::after {
-  content: "";
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  bottom: -28px;
-  height: 40px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(15, 23, 42, 0.22), rgba(15, 23, 42, 0));
-  filter: blur(6px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.hero__controles {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  gap: 16px 24px;
-  margin-top: 40px;
-}
-
-.hero__abas {
-  display: inline-flex;
-  justify-self: start;
-  gap: 4px;
-  padding: 4px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.05);
-}
-
-.hero__aba {
-  position: relative;
-  overflow: hidden;
-  padding: 8px 16px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--suave);
-  font-size: 0.86rem;
-  font-weight: 500;
-  white-space: nowrap;
-  cursor: pointer;
-  transition:
-    background-color 0.3s var(--curva),
-    color 0.3s var(--curva),
-    box-shadow 0.3s var(--curva);
-}
-
-.hero__aba:hover {
-  color: var(--ink);
-}
-
-.hero__aba[aria-selected="true"] {
-  background: var(--branco);
-  color: var(--ink);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
-}
-
-/* quanto do book já foi folheado */
-.hero__aba-barra {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 4px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--azul);
-  transform: scaleX(var(--lido, 0));
-  transform-origin: 0 50%;
-  opacity: 0;
-  transition:
-    transform 0.6s var(--curva),
-    opacity 0.3s var(--curva);
-}
-
-.hero__aba[aria-selected="true"] .hero__aba-barra {
-  opacity: 1;
-}
-
-.hero__folhear {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.hero__seta {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--linha);
-  border-radius: 50%;
-  background: var(--branco);
-  color: var(--ink);
-  cursor: pointer;
-  transition:
-    border-color 0.3s var(--curva),
-    background-color 0.3s var(--curva),
-    opacity 0.3s var(--curva);
-}
-
-.hero__seta svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.hero__seta:hover:not(:disabled) {
-  border-color: var(--azul-3);
-  background: var(--azul-ss);
-}
-
-.hero__seta:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.hero__pagina {
-  min-width: 11.5em;
-  font-size: 0.9rem;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--suave);
-}
-
-.hero__projeto {
-  justify-self: end;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--azul);
-  text-decoration: none;
-}
-
-.hero__projeto:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
 /* ---------- a faixa de serviços ---------- */
 .hero__faixa {
   display: flex;
@@ -555,17 +328,8 @@
   }
 }
 
-@keyframes hero-book {
-  from {
-    opacity: 0;
-    transform: translateY(70px);
-  }
-}
-
 .hero__rotulo,
 .hero__texto,
-.hero__botao,
-.hero__controles,
 .hero__faixa {
   animation: hero-sobe 0.9s var(--curva) both;
 }
@@ -574,61 +338,12 @@
   animation-delay: 0.3s;
 }
 
-.hero__botao {
-  animation-delay: 0.38s;
-}
-
-.hero__livro {
-  animation: hero-book 1.4s var(--curva) 0.35s both;
-}
-
-.hero__controles {
-  animation-delay: 0.7s;
-}
-
 .hero__faixa {
   animation-delay: 0.85s;
 }
 
-@media (max-width: 860px) {
-  .hero__controles {
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    margin-top: 32px;
-  }
-
-  .hero__abas,
-  .hero__projeto {
-    justify-self: center;
-  }
-
-  /* as abas ficam numa linha só e deslizam para o lado, sem quebrar */
-  .hero__abas {
-    display: flex;
-    max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .hero__abas::-webkit-scrollbar {
-    display: none;
-  }
-
-  .hero__aba {
-    flex: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero {
-    --t: 0;
-  }
-
   .hero__titulo-texto {
-    animation: none;
-  }
-
-  .hero__livro {
     animation: none;
   }
 }

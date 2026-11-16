@@ -187,10 +187,8 @@
 
     <!-- Fonte e estilos: um arquivo por seção, em assets/css/ -->
     <link rel="preload" href="/assets/fontes/inter.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/imagens/livros/olha-o-cabelo-dela/01.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="/assets/css/cabecalho.css" />
-    <link rel="stylesheet" href="/assets/css/livro.css" />
     <link rel="stylesheet" href="/assets/css/hero.css" />
     <link rel="stylesheet" href="/assets/css/trabalhos.css" />
     <link rel="stylesheet" href="/assets/css/visor.css" />
@@ -283,8 +281,7 @@
     </div>
 
     <main id="conteudo">
-      <!-- ABERTURA: o título, um botão só e os books folheáveis (assets/js/secoes/Hero.js e nucleo/Livro.js).
-           O book começa inclinado e se endireita com a rolagem, vindo para perto da tela. -->
+      <!-- ABERTURA: o rótulo, o título montado pelos agentes (assets/js/secoes/Titulo.js), o texto e a faixa de serviços. -->
       <section class="hero" id="topo" aria-labelledby="hero-titulo">
         <div class="hero__texto-bloco">
           <p class="hero__rotulo">Comunicação para projetos culturais</p>
@@ -292,25 +289,6 @@
           <p class="hero__texto">
             Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
           </p>
-          <a class="hero__botao" href="/#projetos">Ver trabalhos</a>
-        </div>
-        <div class="hero__estudio">
-          <div class="hero__moldura">
-            <div class="hero__livro" id="hero-livro"></div>
-          </div>
-          <div class="hero__controles">
-            <div class="hero__abas" role="tablist" aria-label="Books"></div>
-            <div class="hero__folhear">
-              <button type="button" class="hero__seta" data-ir="-1" aria-label="Página anterior" aria-controls="hero-livro">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-              </button>
-              <span class="hero__pagina" aria-live="off">Capa</span>
-              <button type="button" class="hero__seta" data-ir="1" aria-label="Próxima página" aria-controls="hero-livro">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-              </button>
-            </div>
-            <a class="hero__projeto" href="/#projetos">Ver o projeto</a>
-          </div>
         </div>
         <div class="hero__faixa">
           <ul class="hero__servicos" aria-label="Serviços">

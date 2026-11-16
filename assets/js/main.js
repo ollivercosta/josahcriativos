@@ -62,7 +62,7 @@ class Site {
     this.secoes.visor = se(".visor", (raiz) => new Visor(raiz, TRABALHOS, this.gestor));
     /* cada trabalho tem a sua página (/trabalhos/<nome>), gerada no build: as capas são links para ela */
     this.secoes.trabalhos = se(".trabalhos", (raiz) => new Trabalhos(raiz, TRABALHOS));
-    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz, TRABALHOS));
+    this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz));
     this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz));
     this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));

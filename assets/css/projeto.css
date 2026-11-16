@@ -186,6 +186,83 @@
   height: auto;
 }
 
+/* ---------- trabalhos de book: o book folheável no lugar da imagem-chave ---------- */
+.projeto__chave--livro {
+  padding: clamp(28px, 4vw, 56px) clamp(16px, 3vw, 40px) clamp(20px, 3vw, 32px);
+  border-radius: var(--raio-g, 20px);
+  background: radial-gradient(70% 70% at 50% 35%, var(--azul-ss) 0%, rgba(242, 247, 250, 0) 100%);
+}
+
+.projeto__livro {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.projeto__livro-reserva {
+  display: block;
+  width: 50%;
+  margin-inline: auto;
+}
+
+.projeto__livro-barra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.projeto__livro-seta {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--linha);
+  border-radius: 50%;
+  background: var(--branco);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color 0.3s var(--curva),
+    background-color 0.3s var(--curva),
+    opacity 0.3s var(--curva);
+}
+
+.projeto__livro-seta svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.projeto__livro-seta:hover:not(:disabled) {
+  border-color: var(--azul-3);
+  background: var(--azul-ss);
+}
+
+.projeto__livro-seta:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.projeto__livro-pagina {
+  min-width: 11.5em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--suave);
+  text-align: center;
+}
+
+@media (max-width: 679px) {
+  .projeto__livro-reserva {
+    width: 100%;
+  }
+}
+
 .projeto__legenda {
   margin-top: 12px;
   font-size: 0.85rem;

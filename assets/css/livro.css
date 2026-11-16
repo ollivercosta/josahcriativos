@@ -68,7 +68,8 @@
   -webkit-user-drag: none;
 }
 
-/* o vinco: a página afunda um pouco perto da lombada */
+/* o vinco: a página afunda um pouco perto da lombada (o mesmo gradiente vai
+   nas faces da folha, em Livro.js, para a folha pousar igual à página) */
 .livro__lado::after {
   content: "";
   position: absolute;
@@ -117,11 +118,25 @@
   display: none;
 }
 
+/* no fim da virada a folha se dissolve sobre as páginas paradas, que já são
+   iguais a ela. A transparência vai nas faces (pela variável), porque
+   opacidade na própria folha achataria o 3D das faixas. */
+@property --livro-opaco {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.livro__folha--saindo {
+  --livro-opaco: 0 !important;
+  transition: --livro-opaco 0.18s linear;
+}
+
 .livro__faixa {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(var(--livro-faixa) + 1px);
+  width: calc(var(--livro-faixa) + 2px);
   height: 100%;
   transform-origin: 0 50%;
   transform-style: preserve-3d;
@@ -132,6 +147,7 @@
 }
 
 .livro__face {
+  opacity: var(--livro-opaco, 1);
   position: absolute;
   inset: 0;
   background-color: #1c1c1c;

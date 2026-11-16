@@ -23,7 +23,7 @@ assets/
     vendor/lenis.mjs       rolagem com inércia (Lenis 1.1.13, licença MIT)
   dados/
     trabalhos.js           projetos: nome, destaque, tipo, categoria, resumo, ficha e imagens
-    livros.js              os books folheáveis da abertura (páginas em imagens/livros/<projeto>/NN.webp)
+    livros.js              os books folheáveis das páginas de trabalho (páginas em imagens/livros/<projeto>/NN.webp)
     titulo.js              contornos das letras do título da abertura (gerado; não editar à mão)
     chat.js                perguntas e respostas do tira-dúvidas
   fontes/inter.woff2       a fonte do site (a mesma do sistema e dos portais)
@@ -33,8 +33,7 @@ assets/
 ## Páginas
 
 - `/` (index.html): abertura (o título "Design e cultura" montado por agentes de design na frente do visitante,
-  em `secoes/Titulo.js`, com os contornos gerados por `ferramentas/gerar_titulo.py`; um botão e os books folheáveis, que viram sozinhos e com o mouse, o toque ou
-  as setas; o book começa inclinado e se endireita com a rolagem), trabalhos (filtro que tira de cena o que não é
+  em `secoes/Titulo.js`, com os contornos gerados por `ferramentas/gerar_titulo.py`), trabalhos (filtro que tira de cena o que não é
   da categoria e reorganiza o resto; seis aparecem antes do botão "Ver mais"), manifesto (a frase acende no ritmo da rolagem), serviços (mapa com fios entre
   frente, projeto e serviços, que troca de frente sozinho), processo (seis etapas que avançam sozinhas, cada uma com
   uma cena animada), depoimentos, FAQ, contato.
@@ -66,7 +65,8 @@ compartilhada entre seções, então mudar um estilo não afeta outra parte do s
 
 ## Tarefas comuns
 
-- Incluir um book na abertura: gere as páginas em `assets/imagens/livros/<projeto>/01.webp, 02.webp...`
+- Trabalhos de book: o book folheável entra no lugar da imagem-chave da página do trabalho (vira sozinho e com o
+  mouse, o toque, as setas ou o teclado). Incluir ou trocar um book: gere as páginas em `assets/imagens/livros/<projeto>/01.webp, 02.webp...`
   (1120 px de largura, todas na proporção do book) e acrescente o book em `assets/dados/livros.js`.
 - Trocar ou incluir um trabalho: `assets/dados/trabalhos.js`. Use `destaque: true`
   nos projetos que aparecem primeiro na lista, com o selo "Destaque".

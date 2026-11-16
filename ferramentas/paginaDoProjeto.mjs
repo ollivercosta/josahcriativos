@@ -11,6 +11,7 @@
  * index.html, para que uma mudança lá chegue a todas as páginas.
  */
 import { capaDoTrabalho, ehImagem, enderecoDoTrabalho } from "../assets/dados/trabalhos.js";
+import { livroDoTrabalho, paginasDoLivro } from "../assets/dados/livros.js";
 
 const SITE = "https://josahcriativos.com.br";
 const FALTA_INFORMAR = "A informar";
@@ -166,6 +167,28 @@ function paginaInteira(trabalho) {
   return { imagem, site };
 }
 
+/**
+ * Trabalhos de book: o book folheável entra no lugar da imagem-chave
+ * (assets/js/paginas/LivroDoProjeto.js monta o book; sem script, fica a capa).
+ */
+function livroDaPagina(trabalho, livro) {
+  const paginas = paginasDoLivro(livro);
+  return `<figure class="projeto__chave projeto__chave--livro">
+        <div class="projeto__livro" id="projeto-livro" data-paginas="${escapar(JSON.stringify(paginas))}" data-razao="${livro.razao}" data-rotulo="Book ${escapar(trabalho.nome)}">
+          <img class="projeto__livro-reserva" src="${escapar(paginas[0])}" alt="${escapar(trabalho.nome)}: capa do book" fetchpriority="high" decoding="async" />
+        </div>
+        <figcaption class="projeto__livro-barra">
+          <button type="button" class="projeto__livro-seta" data-ir="-1" aria-label="Página anterior" aria-controls="projeto-livro" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <span class="projeto__livro-pagina" aria-live="off">Capa</span>
+          <button type="button" class="projeto__livro-seta" data-ir="1" aria-label="Próxima página" aria-controls="projeto-livro">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </figcaption>
+      </figure>`;
+}
+
 function janelaDaPagina(trabalho, { imagem, site }) {
   const visitar = trabalho.endereco
     ? `<a class="projeto__site-visitar" href="${escapar(trabalho.endereco)}" target="_blank" rel="noopener">Visitar o site <span aria-hidden="true">&rarr;</span></a>`
@@ -232,6 +255,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
   // a imagem-chave: a prancha de capa, quando existe; senão, a capa da grade
   const capa = trabalho.chave || capaDoTrabalho(trabalho);
   const pagina = paginaInteira(trabalho);
+  const livro = livroDoTrabalho(trabalho);
   const mais = relacionados.length
     ? `<section class="projeto__mais" aria-labelledby="projeto-mais-titulo">
         <h2 class="projeto__rotulo" id="projeto-mais-titulo">Mais com a ${escapar(trabalho.cliente)}</h2>
@@ -281,8 +305,8 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
           ${ficha}
       </dl>
 
-      <!-- IMAGEM-CHAVE: a capa do projeto -->
-      ${pagina ? janelaDaPagina(trabalho, pagina) : capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /></figure>` : ""}
+      <!-- IMAGEM-CHAVE: a capa do projeto; nos trabalhos de book, o book folheável -->
+      ${livro ? livroDaPagina(trabalho, livro) : pagina ? janelaDaPagina(trabalho, pagina) : capa ? `<figure class="projeto__chave"><img class="projeto__chave-imagem" src="${escapar(capa)}" alt="${escapar(trabalho.nome)}" fetchpriority="high" decoding="async" /></figure>` : ""}
 
       <!-- CONTEXTO, SOLUÇÃO E RESULTADO -->
       ${caso(trabalho)}

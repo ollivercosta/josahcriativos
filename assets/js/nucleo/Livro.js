@@ -34,6 +34,11 @@ const TINTA = "12, 14, 20";
 const LUZ_X = -0.26;
 const LUZ_Z = 0.965;
 const RAD = Math.PI / 180;
+/** O vinco da lombada, o mesmo de livro.css: vai junto com a imagem nas faces da folha. */
+const VINCO = (lado) =>
+  `linear-gradient(to ${lado}, rgba(15, 23, 42, 0.34) 0, rgba(15, 23, 42, 0.12) 1.6%, rgba(255, 255, 255, 0.05) 4%, rgba(15, 23, 42, 0) 9%)`;
+/** Quanto cada faixa avança sobre a vizinha, para não abrir frestas entre elas. */
+const SOBRA = 2;
 /** Abaixo desta largura, uma página por vez. */
 const LARGURA_DUPLA = 640;
 
@@ -207,7 +212,7 @@ export class Livro {
     this.palco.style.perspective = `${Math.round(W * 3.4)}px`;
     this.faixas.forEach(({ frente, verso }, i) => {
       frente.style.backgroundPosition = `${-i * sw}px 0`;
-      verso.style.backgroundPosition = `${-(W - (i + 1) * sw - 1)}px 0`;
+      verso.style.backgroundPosition = `${-(W - (i + 1) * sw - SOBRA)}px 0`;
     });
     this.#renderizar();
   }
@@ -269,13 +274,24 @@ export class Livro {
     raiz.style.boxShadow = bordas.join(", ");
   }
 
-  #renderizar() {
+  #renderizar(dissolver = false) {
     const abertura = this.aberturas[this.indice];
     if (!abertura) return;
     this.#mostrar("esq", abertura.esq);
     this.#mostrar("dir", abertura.dir);
     this.corpo.style.transform = `translateX(${this.#deslocamento(abertura)}px)`;
-    this.folha.hidden = true;
+    clearTimeout(this.saida);
+    if (dissolver && !this.folha.hidden) {
+      this.folha.classList.add("livro__folha--saindo");
+      this.saida = setTimeout(() => {
+        if (this.estado !== "parado") return;
+        this.folha.hidden = true;
+        this.folha.classList.remove("livro__folha--saindo");
+      }, 180);
+    } else {
+      this.folha.hidden = true;
+      this.folha.classList.remove("livro__folha--saindo");
+    }
     this.aoMudar({
       indice: this.indice,
       quantas: this.aberturas.length,
@@ -317,9 +333,9 @@ export class Livro {
     this.B = B;
     this.#mostrar("esq", A.esq);
     this.#mostrar("dir", B.dir);
-    const fundo = (pagina) => (pagina === null ? "none" : `url("${this.paginas[pagina]}")`);
-    const frente = fundo(A.dir);
-    const verso = fundo(B.esq);
+    const fundo = (pagina, lado) => (pagina === null ? "none" : `${VINCO(lado)}, url("${this.paginas[pagina]}")`);
+    const frente = fundo(A.dir, "right");
+    const verso = fundo(B.esq, "left");
     for (const f of this.faixas) {
       f.frente.style.backgroundImage = frente;
       f.verso.style.backgroundImage = verso;
@@ -327,6 +343,8 @@ export class Livro {
     }
     this.p = direcao > 0 ? 0 : 1;
     this.alvo = this.p;
+    clearTimeout(this.saida);
+    this.folha.classList.remove("livro__folha--saindo");
     this.folha.hidden = false;
     this.estado = "segurando";
     this.#desenhar(this.p);
@@ -394,12 +412,11 @@ export class Livro {
       maxZ = Math.max(maxZ, z);
     });
 
-    /* luz: frente e verso, interpolada entre as juntas; a lombada escurece um pouco */
+    /* luz: frente e verso, interpolada entre as juntas (o vinco da lombada já vem na imagem da face) */
     const juntas = angulos.map((angulo, i) => (i === 0 ? angulo : (angulo + angulos[i - 1]) / 2));
     juntas.push(angulos[FAIXAS - 1]);
-    const vinco = (k) => 1 - 0.2 * Math.exp(-(k * sw) / (0.035 * W));
-    const frente = juntas.map((a, k) => ((-LUZ_X * Math.sin(a * RAD) + LUZ_Z * Math.cos(a * RAD)) / LUZ_Z) * vinco(k));
-    const verso = juntas.map((a, k) => ((LUZ_X * Math.sin(a * RAD) - LUZ_Z * Math.cos(a * RAD)) / LUZ_Z) * vinco(k));
+    const frente = juntas.map((a) => (-LUZ_X * Math.sin(a * RAD) + LUZ_Z * Math.cos(a * RAD)) / LUZ_Z);
+    const verso = juntas.map((a) => (LUZ_X * Math.sin(a * RAD) - LUZ_Z * Math.cos(a * RAD)) / LUZ_Z);
     this.faixas.forEach((f, i) => {
       f.luzFrente.style.background = `linear-gradient(90deg, ${tom(frente[i])}, ${tom(frente[i + 1])})`;
       f.luzVerso.style.background = `linear-gradient(90deg, ${tom(verso[i + 1])}, ${tom(verso[i])})`;
@@ -428,7 +445,8 @@ export class Livro {
     this.corpo.style.transform = `translateX(${de + (para - de) * p}px)`;
 
     /* uma página por vez: a folha some ao sair da página */
-    this.folha.style.opacity = this.duplo ? "1" : String(1 - degrau(0.45, 0.8, p));
+    /* (pela variável das faces: opacidade na própria folha achataria o 3D) */
+    this.folha.style.setProperty("--livro-opaco", this.duplo ? "1" : String(1 - degrau(0.45, 0.8, p)));
   }
 
   /* ---------- movimento ---------- */
@@ -473,7 +491,9 @@ export class Livro {
     if (completou) this.indice += direcao;
     this.animacao = null;
     this.estado = "parado";
-    this.#renderizar();
+    /* as páginas paradas já mostram a abertura nova por baixo da folha, que
+       então se dissolve em vez de sumir de uma vez (sem o "assentar" da troca) */
+    this.#renderizar(true);
     this.#preCarregar();
     if (this.fila > 0 && completou) {
       this.fila -= 1;
@@ -503,6 +523,9 @@ export class Livro {
       const direcao = this.duplo ? (x >= 0 ? 1 : -1) : x >= 0.4 ? 1 : -1;
       toque = { id: evento.pointerId, x0: evento.clientX, y0: evento.clientY, direcao, arrastou: false, vx: 0, ultimo: evento.clientX, t: performance.now() };
     });
+
+    let rolou = 0;
+    window.addEventListener("scroll", () => (rolou = performance.now()), { passive: true });
 
     corpo.addEventListener("pointermove", (evento) => {
       const x = relativo(evento);
@@ -534,7 +557,8 @@ export class Livro {
         return;
       }
       /* com o mouse perto da borda de fora, a ponta da folha se levanta */
-      if (evento.pointerType !== "mouse" || Ambiente.reduzMovimento) return;
+      /* com a página rolando, o conteúdo passa por baixo do mouse parado: não é um gesto */
+      if (evento.pointerType !== "mouse" || Ambiente.reduzMovimento || performance.now() - rolou < 250) return;
       if (this.estado === "virando" || this.estado === "arrastando") return;
       let direcao = 0;
       if (x > (this.duplo ? 0.78 : 0.75) && x <= 1 && this.temProxima) direcao = 1;
