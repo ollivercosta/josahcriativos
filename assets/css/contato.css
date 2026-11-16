@@ -15,7 +15,7 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(80% 90% at 50% 0%, var(--azul-2) 0%, rgba(44, 112, 155, 0) 70%),
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), var(--azul-2) 0%, rgba(44, 112, 155, 0) 70%),
     var(--azul);
   color: #fff;
   text-align: center;

@@ -1,0 +1,162 @@
+/* =========================================================================
+   LIVRO (book folheável, assets/js/nucleo/Livro.js)
+   As duas páginas abertas, o vinco da lombada e a folha que vira, feita de
+   faixas encadeadas em 3D. As medidas (--livro-w, --livro-h, --livro-faixa)
+   vêm do script; a luz e as sombras de cada quadro também.
+   ========================================================================= */
+
+.livro {
+  position: relative;
+  outline: none;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.livro:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 10px;
+  border-radius: 6px;
+}
+
+.livro__palco {
+  display: flex;
+  justify-content: center;
+  height: var(--livro-h, 0);
+  perspective-origin: 50% 45%;
+}
+
+.livro__corpo {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  cursor: grab;
+}
+
+.livro--arrastando .livro__corpo {
+  cursor: grabbing;
+}
+
+.livro__lado {
+  position: absolute;
+  top: 0;
+  width: var(--livro-w);
+  height: var(--livro-h);
+  background: #1c1c1c;
+}
+
+.livro__lado--esq {
+  border-radius: 3px 0 0 3px;
+}
+
+.livro__lado--dir {
+  border-radius: 0 3px 3px 0;
+}
+
+.livro__lado--vazio {
+  visibility: hidden;
+}
+
+.livro__imagem {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* o vinco: a página afunda um pouco perto da lombada */
+.livro__lado::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.livro__lado--esq::after {
+  background: linear-gradient(
+    to left,
+    rgba(15, 23, 42, 0.34) 0,
+    rgba(15, 23, 42, 0.12) 1.6%,
+    rgba(255, 255, 255, 0.05) 4%,
+    rgba(15, 23, 42, 0) 9%
+  );
+}
+
+.livro__lado--dir::after {
+  background: linear-gradient(
+    to right,
+    rgba(15, 23, 42, 0.34) 0,
+    rgba(15, 23, 42, 0.12) 1.6%,
+    rgba(255, 255, 255, 0.05) 4%,
+    rgba(15, 23, 42, 0) 9%
+  );
+}
+
+.livro__sombra {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---------- a folha que vira ---------- */
+.livro__folha {
+  position: absolute;
+  top: 0;
+  width: var(--livro-w);
+  height: var(--livro-h);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.livro__folha[hidden] {
+  display: none;
+}
+
+.livro__faixa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--livro-faixa) + 1px);
+  height: 100%;
+  transform-origin: 0 50%;
+  transform-style: preserve-3d;
+}
+
+.livro__faixa .livro__faixa {
+  left: var(--livro-faixa);
+}
+
+.livro__face {
+  position: absolute;
+  inset: 0;
+  background-color: #1c1c1c;
+  background-repeat: no-repeat;
+  background-size: var(--livro-w) var(--livro-h);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.livro__face--verso {
+  transform: rotateY(180deg);
+}
+
+.livro__luz {
+  position: absolute;
+  inset: 0;
+}
+
+/* troca imediata (menos movimento): só um cruzamento curto */
+@keyframes livro-troca {
+  from {
+    opacity: 0.4;
+  }
+}
+
+.livro--troca .livro__lado {
+  animation: livro-troca 0.3s ease-out;
+}

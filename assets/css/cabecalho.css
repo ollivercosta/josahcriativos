@@ -19,6 +19,20 @@
     border-color 0.4s var(--curva);
 }
 
+/* a linha de leitura: cresce da esquerda conforme a página é rolada */
+.cabecalho::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--azul-3), var(--azul));
+  transform: scaleX(var(--lido, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
 .cabecalho--rolou,
 .cabecalho--menu-aberto {
   background: rgba(255, 255, 255, 0.78);

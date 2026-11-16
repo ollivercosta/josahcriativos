@@ -187,8 +187,10 @@
 
     <!-- Fonte e estilos: um arquivo por seção, em assets/css/ -->
     <link rel="preload" href="/assets/fontes/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/imagens/livros/olha-o-cabelo-dela/01.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="/assets/css/cabecalho.css" />
+    <link rel="stylesheet" href="/assets/css/livro.css" />
     <link rel="stylesheet" href="/assets/css/hero.css" />
     <link rel="stylesheet" href="/assets/css/trabalhos.css" />
     <link rel="stylesheet" href="/assets/css/visor.css" />
@@ -281,34 +283,50 @@
     </div>
 
     <main id="conteudo">
-      <!-- ABERTURA: a frase, um botão só e os trabalhos em destaque numa prancha que troca pelas abas -->
+      <!-- ABERTURA: o título, um botão só e os books folheáveis (assets/js/secoes/Hero.js e nucleo/Livro.js).
+           O book começa inclinado e se endireita com a rolagem, vindo para perto da tela. -->
       <section class="hero" id="topo" aria-labelledby="hero-titulo">
         <div class="hero__texto-bloco">
           <p class="hero__rotulo">Comunicação para projetos culturais</p>
-          <h1 class="hero__titulo" id="hero-titulo">Design e cultura.</h1>
+          <h1 class="hero__titulo" id="hero-titulo">
+            <span class="hero__linha"><span class="hero__palavra">Design</span></span>
+            <span class="hero__linha"><span class="hero__palavra">e cultura</span></span>
+          </h1>
           <p class="hero__texto">
             Transformo a proposta do seu projeto em uma linguagem visual clara, aplicada a cada peça de que ele precisa.
           </p>
           <a class="hero__botao" href="/#projetos">Ver trabalhos</a>
         </div>
-        <figure class="hero__prancha" aria-label="Trabalhos em destaque">
-          <a class="hero__prancha-link" href="/#projetos">
-            <img class="hero__prancha-imagem" src="/assets/imagens/trabalhos/olha-o-cabelo-dela/pagina-capa.webp" alt="" width="2400" height="1697" fetchpriority="high" />
-          </a>
-          <figcaption class="hero__prancha-legenda">
-            <span class="hero__prancha-nome"></span>
-            <span class="hero__prancha-tipo"></span>
-          </figcaption>
-        </figure>
-        <div class="hero__abas" role="tablist" aria-label="Trabalhos em destaque"></div>
-        <ul class="hero__servicos" aria-label="Serviços">
-          <li class="hero__servico">Identidade visual</li>
-          <li class="hero__servico">Book de captação</li>
-          <li class="hero__servico">Landing pages</li>
-          <li class="hero__servico">Redes sociais</li>
-          <li class="hero__servico">Material de palco</li>
-          <li class="hero__servico">Vídeo e spots</li>
-        </ul>
+        <div class="hero__estudio">
+          <div class="hero__moldura">
+            <div class="hero__livro" id="hero-livro"></div>
+          </div>
+          <div class="hero__controles">
+            <div class="hero__abas" role="tablist" aria-label="Books"></div>
+            <div class="hero__folhear">
+              <button type="button" class="hero__seta" data-ir="-1" aria-label="Página anterior" aria-controls="hero-livro">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+              </button>
+              <span class="hero__pagina" aria-live="off">Capa</span>
+              <button type="button" class="hero__seta" data-ir="1" aria-label="Próxima página" aria-controls="hero-livro">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
+            <a class="hero__projeto" href="/#projetos">Ver o projeto</a>
+          </div>
+        </div>
+        <div class="hero__faixa">
+          <ul class="hero__servicos" aria-label="Serviços">
+            <li class="hero__servico">Identidade visual</li>
+            <li class="hero__servico">Book de captação</li>
+            <li class="hero__servico">Portfólio artístico</li>
+            <li class="hero__servico">Landing pages</li>
+            <li class="hero__servico">Redes sociais</li>
+            <li class="hero__servico">Formulários e credenciamento</li>
+            <li class="hero__servico">Material de palco</li>
+            <li class="hero__servico">Vídeo e spots</li>
+          </ul>
+        </div>
       </section>
 
       <!-- TRABALHOS: a grade é montada por assets/js/secoes/Trabalhos.js a partir de assets/dados/trabalhos.js
@@ -320,7 +338,10 @@
             Festivais, orquestras, espetáculos e projetos de formação. Uma seleção de projetos recentes, do desafio à solução visual. Conheça cada projeto!
           </p>
         </div>
-        <div class="trabalhos__filtros" role="group" aria-label="Filtrar trabalhos"></div>
+        <div class="trabalhos__barra">
+          <div class="trabalhos__filtros" role="group" aria-label="Filtrar trabalhos"></div>
+          <span class="trabalhos__contador" aria-live="polite"></span>
+        </div>
         <div class="trabalhos__parede">
           <ul class="trabalhos__fileira trabalhos__fileira--destaques" aria-label="Trabalhos em destaque"></ul>
           <ul class="trabalhos__fileira trabalhos__fileira--demais" aria-label="Outros trabalhos"></ul>
@@ -334,161 +355,264 @@
         </p>
       </section>
 
-      <!-- COMO POSSO AJUDAR SEU PROJETO: três frentes em abas, na mesma tela -->
+      <!-- COMO POSSO AJUDAR SEU PROJETO: o mapa liga a frente escolhida ao projeto e aos serviços dela
+           (assets/js/secoes/Servicos.js desenha os fios e troca de frente sozinho enquanto está na tela).
+           Abaixo do mapa, o público e a descrição de cada serviço da frente. -->
       <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
         <div class="servicos__cabeca">
           <p class="servicos__rotulo">Como funciona</p>
           <h2 class="servicos__titulo" id="servicos-titulo">Como posso ajudar seu projeto</h2>
-          <p class="servicos__lede">
-            Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho: régua
-            de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a
-            prestação de contas.
-          </p>
+          <p class="servicos__lede">Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho.</p>
         </div>
-        <div class="servicos__abas" role="tablist" aria-label="Frentes de serviço">
-          <button type="button" class="servicos__aba" role="tab" id="servicos-aba-1" aria-controls="servicos-painel-1" aria-selected="true">Apresentação</button>
-          <button type="button" class="servicos__aba" role="tab" id="servicos-aba-2" aria-controls="servicos-painel-2" aria-selected="false" tabindex="-1">Digital</button>
-          <button type="button" class="servicos__aba" role="tab" id="servicos-aba-3" aria-controls="servicos-painel-3" aria-selected="false" tabindex="-1">Visual e mídia</button>
+        <div class="servicos__mapa">
+          <svg class="servicos__fios" aria-hidden="true"></svg>
+          <div class="servicos__frentes" role="tablist" aria-label="Frentes de serviço">
+            <button type="button" class="servicos__frente" role="tab" id="servicos-aba-1" aria-controls="servicos-painel-1" aria-selected="true">
+              <span class="servicos__frente-nome">Apresentação</span>
+              <span class="servicos__frente-texto">Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.</span>
+            </button>
+            <button type="button" class="servicos__frente" role="tab" id="servicos-aba-2" aria-controls="servicos-painel-2" aria-selected="false" tabindex="-1">
+              <span class="servicos__frente-nome">Digital</span>
+              <span class="servicos__frente-texto">Comunicação online, fluxo de inscrições e relacionamento com o público do evento.</span>
+            </button>
+            <button type="button" class="servicos__frente" role="tab" id="servicos-aba-3" aria-controls="servicos-painel-3" aria-selected="false" tabindex="-1">
+              <span class="servicos__frente-nome">Visual e mídia</span>
+              <span class="servicos__frente-texto">Artes digitais para espaços de eventos, palco e canais de difusão do projeto.</span>
+            </button>
+          </div>
+          <div class="servicos__centro">
+            <span class="servicos__centro-nome">Seu projeto</span>
+            <ul class="servicos__regras">
+              <li class="servicos__regra">Régua de logos na ordem e na proporção do financiador</li>
+              <li class="servicos__regra">Peças dentro das normas do edital</li>
+              <li class="servicos__regra">Arquivos prontos para a prestação de contas</li>
+            </ul>
+          </div>
+          <ul class="servicos__destinos" aria-label="Serviços">
+            <li class="servicos__destino" data-frente="1">Identidade visual e logomarca</li>
+            <li class="servicos__destino" data-frente="1">Book de captação</li>
+            <li class="servicos__destino" data-frente="1">Portfólio artístico</li>
+            <li class="servicos__destino" data-frente="2">Landing pages culturais</li>
+            <li class="servicos__destino" data-frente="2">Formulários e credenciamento</li>
+            <li class="servicos__destino" data-frente="2">Campanhas para redes sociais</li>
+            <li class="servicos__destino" data-frente="3">Artes digitais e material de palco</li>
+            <li class="servicos__destino" data-frente="3">Edição de vídeo</li>
+            <li class="servicos__destino" data-frente="3">Spots para rádio e TV</li>
+          </ul>
         </div>
         <div class="servicos__paineis">
-          <article class="servicos__painel" id="servicos-painel-1" role="tabpanel" aria-labelledby="servicos-aba-1">
-            <div class="servicos__painel-cabeca">
-              <h3 class="servicos__painel-nome">Apresentação</h3>
-              <p class="servicos__painel-descricao">
-                Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.
-              </p>
-              <div class="servicos__publico">
-                <p class="servicos__publico-rotulo">Pensado para</p>
-                <ul class="servicos__publico-lista">
-                  <li class="servicos__publico-item">Bancas e pareceristas</li>
-                  <li class="servicos__publico-item">Patrocinadores</li>
-                  <li class="servicos__publico-item">Proponentes</li>
-                </ul>
-              </div>
+          <div class="servicos__painel" id="servicos-painel-1" role="tabpanel" aria-labelledby="servicos-aba-1">
+            <p class="servicos__painel-descricao">Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.</p>
+            <div class="servicos__publico">
+              <p class="servicos__publico-rotulo">Pensado para</p>
+              <ul class="servicos__publico-lista"><li class="servicos__publico-item">Bancas e pareceristas</li><li class="servicos__publico-item">Patrocinadores</li><li class="servicos__publico-item">Proponentes</li></ul>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Identidade visual e logomarca</dt>
-                <dd class="servicos__item-texto">
-                  A identidade visual define como o projeto é percebido por público, parceiros e financiadores. A logomarca garante reconhecimento imediato em todas as peças, inclusive ao lado das marcas apoiadoras.
-                </dd>
+                <dd class="servicos__item-texto">A identidade visual define como o projeto é percebido por público, parceiros e financiadores. A logomarca garante reconhecimento imediato em todas as peças, inclusive ao lado das marcas apoiadoras.</dd>
               </div>
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Book de captação</dt>
-                <dd class="servicos__item-texto">
-                  O book de captação reúne proposta, valores e critérios em um documento único. A informação organizada permite que os pareceristas avaliem o projeto com rapidez e segurança.
-                </dd>
+                <dd class="servicos__item-texto">O book de captação reúne proposta, valores e critérios em um documento único. A informação organizada permite que os pareceristas avaliem o projeto com rapidez e segurança.</dd>
               </div>
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Portfólio artístico</dt>
-                <dd class="servicos__item-texto">
-                  O portfólio apresenta a trajetória e comprova a atuação de quem realiza o projeto. O histórico se transforma em credibilidade para a nova proposta.
-                </dd>
+                <dd class="servicos__item-texto">O portfólio apresenta a trajetória e comprova a atuação de quem realiza o projeto. O histórico se transforma em credibilidade para a nova proposta.</dd>
               </div>
             </dl>
-          </article>
-          <article class="servicos__painel" id="servicos-painel-2" role="tabpanel" aria-labelledby="servicos-aba-2" hidden>
-            <div class="servicos__painel-cabeca">
-              <h3 class="servicos__painel-nome">Digital</h3>
-              <p class="servicos__painel-descricao">
-                Comunicação online, fluxo de inscrições e relacionamento com o público do evento.
-              </p>
-              <div class="servicos__publico">
-                <p class="servicos__publico-rotulo">Pensado para</p>
-                <ul class="servicos__publico-lista">
-                  <li class="servicos__publico-item">Público do evento</li>
-                  <li class="servicos__publico-item">Inscritos e participantes</li>
-                  <li class="servicos__publico-item">Imprensa</li>
-                </ul>
-              </div>
+          </div>
+          <div class="servicos__painel" id="servicos-painel-2" role="tabpanel" aria-labelledby="servicos-aba-2" hidden>
+            <p class="servicos__painel-descricao">Comunicação online, fluxo de inscrições e relacionamento com o público do evento.</p>
+            <div class="servicos__publico">
+              <p class="servicos__publico-rotulo">Pensado para</p>
+              <ul class="servicos__publico-lista"><li class="servicos__publico-item">Público do evento</li><li class="servicos__publico-item">Inscritos e participantes</li><li class="servicos__publico-item">Imprensa</li></ul>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Landing pages culturais</dt>
-                <dd class="servicos__item-texto">
-                  A landing page concentra divulgação, venda de ingressos e formulários de pesquisa em um só endereço. O público encontra tudo no mesmo lugar, venha de qual canal vier.
-                </dd>
+                <dd class="servicos__item-texto">A landing page concentra divulgação, venda de ingressos e formulários de pesquisa em um só endereço. O público encontra tudo no mesmo lugar, venha de qual canal vier.</dd>
               </div>
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Formulários e credenciamento</dt>
-                <dd class="servicos__item-texto">
-                  Os formulários de inscrição, convocatória e credenciamento de imprensa são configurados no Google Forms, na conta do projeto. Eles solicitam apenas o que o regulamento exige, o que agiliza o preenchimento e a seleção.
-                </dd>
+                <dd class="servicos__item-texto">Os formulários de inscrição, convocatória e credenciamento de imprensa são configurados no Google Forms, na conta do projeto. Eles solicitam apenas o que o regulamento exige, o que agiliza o preenchimento e a seleção.</dd>
               </div>
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Campanhas para redes sociais</dt>
-                <dd class="servicos__item-texto">
-                  As campanhas aplicam identidade visual, logomarca e régua de maneira uniforme em todas as peças. A consistência gera reconhecimento a cada publicação e assegura a presença das marcas parceiras.
-                </dd>
+                <dd class="servicos__item-texto">As campanhas aplicam identidade visual, logomarca e régua de maneira uniforme em todas as peças. A consistência gera reconhecimento a cada publicação e assegura a presença das marcas parceiras.</dd>
               </div>
             </dl>
-          </article>
-          <article class="servicos__painel" id="servicos-painel-3" role="tabpanel" aria-labelledby="servicos-aba-3" hidden>
-            <div class="servicos__painel-cabeca">
-              <h3 class="servicos__painel-nome">Visual e mídia</h3>
-              <p class="servicos__painel-descricao">
-                Artes digitais para espaços de eventos, palco e canais de difusão do projeto.
-              </p>
-              <div class="servicos__publico">
-                <p class="servicos__publico-rotulo">Pensado para</p>
-                <ul class="servicos__publico-lista">
-                  <li class="servicos__publico-item">Palco e espaço do evento</li>
-                  <li class="servicos__publico-item">Telas e redes</li>
-                  <li class="servicos__publico-item">Rádio e TV</li>
-                </ul>
-              </div>
+          </div>
+          <div class="servicos__painel" id="servicos-painel-3" role="tabpanel" aria-labelledby="servicos-aba-3" hidden>
+            <p class="servicos__painel-descricao">Artes digitais para espaços de eventos, palco e canais de difusão do projeto.</p>
+            <div class="servicos__publico">
+              <p class="servicos__publico-rotulo">Pensado para</p>
+              <ul class="servicos__publico-lista"><li class="servicos__publico-item">Palco e espaço do evento</li><li class="servicos__publico-item">Telas e redes</li><li class="servicos__publico-item">Rádio e TV</li></ul>
             </div>
             <dl class="servicos__lista">
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Artes digitais e material de palco</dt>
-                <dd class="servicos__item-texto">
-                  Saia de palco, banners, credenciais, camisas e papelaria seguem a linguagem das peças digitais. No evento, esse material assegura a exposição correta das marcas, com a régua de apoio no padrão do financiador.
-                </dd>
+                <dd class="servicos__item-texto">Saia de palco, banners, credenciais, camisas e papelaria seguem a linguagem das peças digitais. No evento, esse material assegura a exposição correta das marcas, com a régua de apoio no padrão do financiador.</dd>
               </div>
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Edição de vídeo</dt>
-                <dd class="servicos__item-texto">
-                  Os vídeos apresentam o projeto nas redes sociais e registram a sua realização. Eles funcionam ao mesmo tempo como divulgação e como comprovação da execução.
-                </dd>
+                <dd class="servicos__item-texto">Os vídeos apresentam o projeto nas redes sociais e registram a sua realização. Eles funcionam ao mesmo tempo como divulgação e como comprovação da execução.</dd>
               </div>
               <div class="servicos__item">
                 <dt class="servicos__item-nome">Spots para rádio e TV</dt>
-                <dd class="servicos__item-texto">
-                  Os spots levam o projeto ao rádio e à TV. Com eles, a divulgação alcança um público além das redes sociais.
-                </dd>
+                <dd class="servicos__item-texto">Os spots levam o projeto ao rádio e à TV. Com eles, a divulgação alcança um público além das redes sociais.</dd>
               </div>
             </dl>
-          </article>
+          </div>
         </div>
       </section>
 
-      <!-- DO PRIMEIRO CONTATO À ENTREGA: as etapas em sequência; escolher uma mostra o que acontece nela -->
+      <!-- DO PRIMEIRO CONTATO À ENTREGA: as seis etapas numa linha; cada etapa mostra o texto e uma cena animada
+           do que acontece nela. assets/js/secoes/Processo.js avança sozinho enquanto a seção está na tela. -->
       <section class="processo" id="processo" aria-labelledby="processo-titulo">
         <div class="processo__cabeca">
           <h2 class="processo__titulo" id="processo-titulo">Do primeiro contato à entrega</h2>
           <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
         </div>
-        <ol class="processo__etapas" role="tablist" aria-label="Etapas do trabalho">
-          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="true" aria-controls="processo-detalhe"><span class="processo__numero">1</span><span class="processo__etapa-nome">Briefing</span></button></li>
-          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">2</span><span class="processo__etapa-nome">Proposta e orçamento</span></button></li>
-          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">3</span><span class="processo__etapa-nome">Produção</span></button></li>
-          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">4</span><span class="processo__etapa-nome">Revisão</span></button></li>
-          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">5</span><span class="processo__etapa-nome">Aprovação</span></button></li>
-          <li class="processo__etapa"><button type="button" class="processo__no" role="tab" aria-selected="false" aria-controls="processo-detalhe" tabindex="-1"><span class="processo__numero">6</span><span class="processo__etapa-nome">Entrega</span></button></li>
-        </ol>
-        <div class="processo__detalhe" id="processo-detalhe" role="tabpanel" aria-live="polite">
-          <p class="processo__texto" data-etapa="1">
-            Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a
-            lista de peças e o cronograma.
-          </p>
-          <p class="processo__texto" data-etapa="2" hidden>Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.</p>
-          <p class="processo__texto" data-etapa="3" hidden>
-            Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do
-            material recebido.
-          </p>
-          <p class="processo__texto" data-etapa="4" hidden>Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.</p>
-          <p class="processo__texto" data-etapa="5" hidden>O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.</p>
-          <p class="processo__texto" data-etapa="6" hidden>Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.</p>
+        <div class="processo__quadro">
+          <div class="processo__trilha">
+            <span class="processo__trilho" aria-hidden="true"><span class="processo__trilho-cheio"></span></span>
+            <ol class="processo__etapas" role="tablist" aria-label="Etapas do trabalho">
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-1" aria-controls="processo-painel-1" aria-selected="true"><span class="processo__numero">1</span><span class="processo__etapa-nome">Briefing</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-2" aria-controls="processo-painel-2" aria-selected="false" tabindex="-1"><span class="processo__numero">2</span><span class="processo__etapa-nome">Proposta e orçamento</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-3" aria-controls="processo-painel-3" aria-selected="false" tabindex="-1"><span class="processo__numero">3</span><span class="processo__etapa-nome">Produção</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-4" aria-controls="processo-painel-4" aria-selected="false" tabindex="-1"><span class="processo__numero">4</span><span class="processo__etapa-nome">Revisão</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-5" aria-controls="processo-painel-5" aria-selected="false" tabindex="-1"><span class="processo__numero">5</span><span class="processo__etapa-nome">Aprovação</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-6" aria-controls="processo-painel-6" aria-selected="false" tabindex="-1"><span class="processo__numero">6</span><span class="processo__etapa-nome">Entrega</span></button></li>
+            </ol>
+          </div>
+          <div class="processo__paineis">
+          <div class="processo__painel" id="processo-painel-1" role="tabpanel" aria-labelledby="processo-aba-1">
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 1 de 6</p>
+              <h3 class="processo__nome">Briefing</h3>
+              <p class="processo__texto">Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a lista de peças e o cronograma.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Briefing do projeto</p>
+                <ul class="processo__checklist">
+                  <li class="processo__checado">Projeto e proposta</li>
+                  <li class="processo__checado">Público</li>
+                  <li class="processo__checado">Exigências do edital</li>
+                  <li class="processo__checado">Marcas do financiador</li>
+                </ul>
+              </div>
+              <div class="processo__saidas">
+                <span class="processo__selo">Lista de peças</span>
+                <span class="processo__selo">Cronograma</span>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-2" role="tabpanel" aria-labelledby="processo-aba-2" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 2 de 6</p>
+              <h3 class="processo__nome">Proposta e orçamento</h3>
+              <p class="processo__texto">Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao processo__cartao--documento">
+                <p class="processo__cartao-titulo">Proposta</p>
+                <dl class="processo__linhas">
+                  <div class="processo__linha"><dt>Escopo</dt><dd><span class="processo__barra" style="--l: 92%"></span></dd></div>
+                  <div class="processo__linha"><dt>Prazo</dt><dd><span class="processo__barra" style="--l: 54%"></span></dd></div>
+                  <div class="processo__linha"><dt>Valores</dt><dd><span class="processo__barra" style="--l: 70%"></span></dd></div>
+                </dl>
+                <span class="processo__botao"><span class="processo__antes">Aceitar proposta</span><span class="processo__depois">Aceita por escrito</span></span>
+                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-3" role="tabpanel" aria-labelledby="processo-aba-3" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 3 de 6</p>
+              <h3 class="processo__nome">Produção</h3>
+              <p class="processo__texto">Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do material recebido.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Cronograma de produção</p>
+                <ul class="processo__gantt">
+                  <li class="processo__tarefa" style="--i: 0; --de: 0%; --ate: 38%"><span>Identidade visual</span><i></i></li>
+                  <li class="processo__tarefa" style="--i: 1; --de: 30%; --ate: 70%"><span>Book de captação</span><i></i></li>
+                  <li class="processo__tarefa" style="--i: 2; --de: 52%; --ate: 84%"><span>Redes sociais</span><i></i></li>
+                  <li class="processo__tarefa" style="--i: 3; --de: 70%; --ate: 100%"><span>Material de palco</span><i></i></li>
+                </ul>
+                <p class="processo__nota">Primeiro o que o prazo mais exige</p>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-4" role="tabpanel" aria-labelledby="processo-aba-4" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 4 de 6</p>
+              <h3 class="processo__nome">Revisão</h3>
+              <p class="processo__texto">Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Revisão da entrega</p>
+                <div class="processo__prancha">
+                  <span class="processo__forma processo__forma--a"></span>
+                  <span class="processo__forma processo__forma--b"></span>
+                  <span class="processo__forma processo__forma--c"></span>
+                  <span class="processo__pino" style="--i: 0; --x: 22%; --y: 30%">1</span>
+                  <span class="processo__pino" style="--i: 1; --x: 70%; --y: 24%">2</span>
+                  <span class="processo__pino" style="--i: 2; --x: 56%; --y: 72%">3</span>
+                </div>
+                <div class="processo__rodadas">
+                  <span class="processo__rodada" style="--i: 0">Rodada 1</span>
+                  <span class="processo__rodada" style="--i: 1">Rodada 2</span>
+                  <span class="processo__rodada" style="--i: 2">Rodada 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-5" role="tabpanel" aria-labelledby="processo-aba-5" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 5 de 6</p>
+              <h3 class="processo__nome">Aprovação</h3>
+              <p class="processo__texto">O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Aprovação</p>
+                <div class="processo__aprova">
+                  <span class="processo__aprova-nome">Peças finais</span>
+                  <span class="processo__botao processo__botao--aprovar"><span class="processo__antes">Aprovar</span><span class="processo__depois">Aprovado</span></span>
+                </div>
+                <div class="processo__aprova">
+                  <span class="processo__aprova-nome">Saldo da proposta</span>
+                  <span class="processo__estado"><span class="processo__antes">Pendente</span><span class="processo__depois">Pago</span></span>
+                </div>
+                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-6" role="tabpanel" aria-labelledby="processo-aba-6" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 6 de 6</p>
+              <h3 class="processo__nome">Entrega</h3>
+              <p class="processo__texto">Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Arquivos finais</p>
+                <ul class="processo__arquivos">
+                  <li class="processo__arquivo" style="--i: 0"><span>book-de-captacao.pdf</span><i></i></li>
+                  <li class="processo__arquivo" style="--i: 1"><span>identidade-visual.svg</span><i></i></li>
+                  <li class="processo__arquivo" style="--i: 2"><span>campanha-redes.png</span><i></i></li>
+                  <li class="processo__arquivo" style="--i: 3"><span>spot-radio.mp3</span><i></i></li>
+                </ul>
+                <p class="processo__nota processo__nota--ok">Liberados após a compensação do pagamento</p>
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </section>
 

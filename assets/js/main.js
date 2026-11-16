@@ -13,9 +13,11 @@ import { RolagemSuave } from "./nucleo/RolagemSuave.js";
 import { VLibras } from "./nucleo/VLibras.js";
 import { Cabecalho } from "./secoes/Cabecalho.js";
 import { Chat } from "./secoes/Chat.js";
+import { Contato } from "./secoes/Contato.js";
 import { Depoimentos } from "./secoes/Depoimentos.js";
 import { Faq } from "./secoes/Faq.js";
 import { Hero } from "./secoes/Hero.js";
+import { Manifesto } from "./secoes/Manifesto.js";
 import { Processo } from "./secoes/Processo.js";
 import { Servicos } from "./secoes/Servicos.js";
 import { Sobre } from "./secoes/Sobre.js";
@@ -28,12 +30,11 @@ import { TRABALHOS } from "../dados/trabalhos.js";
 /** O que entra subindo quando chega à tela (a abertura tem a entrada própria, no CSS). */
 const REVELADOS = [
   ".trabalhos__cabeca",
-  ".manifesto__texto",
   ".servicos__cabeca",
+  ".servicos__mapa",
   ".servicos__paineis",
   ".processo__cabeca",
-  ".processo__etapas",
-  ".processo__detalhe",
+  ".processo__quadro",
   ".depoimentos__titulo",
   ".depoimentos__grade",
   ".faq__lado",
@@ -62,11 +63,13 @@ class Site {
     /* cada trabalho tem a sua página (/trabalhos/<nome>), gerada no build: as capas são links para ela */
     this.secoes.trabalhos = se(".trabalhos", (raiz) => new Trabalhos(raiz, TRABALHOS));
     this.secoes.hero = se(".hero", (raiz) => new Hero(raiz, TRABALHOS));
+    this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz));
     this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz));
     this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
     this.secoes.depoimentos = se(".depoimentos", (raiz) => new Depoimentos(raiz));
     this.secoes.faq = se(".faq", (raiz) => new Faq(raiz));
+    this.secoes.contato = se(".contato", (raiz) => new Contato(raiz));
     new Revela(REVELADOS);
     this.secoes.termos = new Termos($(".termos"), this.gestor);
     this.secoes.chat = new Chat($(".chat"), BASE_CHAT, {

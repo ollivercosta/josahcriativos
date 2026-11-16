@@ -39,6 +39,9 @@ export class Cabecalho {
 
   #aoRolar() {
     this.raiz.classList.toggle("cabecalho--rolou", window.scrollY > 8);
+    /* quanto da página já foi lido: a linha azul na base do cabeçalho */
+    const maximo = document.documentElement.scrollHeight - window.innerHeight;
+    this.raiz.style.setProperty("--lido", maximo > 0 ? Math.min(1, window.scrollY / maximo).toFixed(4) : "0");
     const linhaDeLeitura = window.innerHeight * 0.35;
     let ativo = this.secoes.find((item) => item.fixo)?.link || null;
     for (const { link, secao } of this.secoes) {

@@ -17,11 +17,13 @@ assets/
     main.js                cria uma instância de classe para cada seção
     trabalho.js            ponto de entrada das páginas de trabalho (/trabalhos/<nome>)
     paginas/Projeto.js     menu da direita e imagem em tela inteira da página de trabalho
-    nucleo/                serviços comuns: rolagem suave, ciclo de quadros, janelas, ícones
+    nucleo/                serviços comuns: rolagem suave, ciclo de quadros, janelas, ícones,
+                           Livro.js (o book folheável) e Ciclo.js (avanço automático das demonstrações)
     secoes/                uma classe por seção (Hero, Trabalhos, Visor, Servicos, ...)
     vendor/lenis.mjs       rolagem com inércia (Lenis 1.1.13, licença MIT)
   dados/
     trabalhos.js           projetos: nome, destaque, tipo, categoria, resumo, ficha e imagens
+    livros.js              os books folheáveis da abertura (páginas em imagens/livros/<projeto>/NN.webp)
     chat.js                perguntas e respostas do tira-dúvidas
   fontes/inter.woff2       a fonte do site (a mesma do sistema e dos portais)
   imagens/
@@ -29,8 +31,13 @@ assets/
 
 ## Páginas
 
-- `/` (index.html): abertura (título, um botão e a prancha dos trabalhos em destaque, com abas), trabalhos, manifesto,
-  serviços (três frentes em abas), processo (seis etapas; escolher uma mostra o texto dela), depoimentos, FAQ, contato.
+- `/` (index.html): abertura (título, um botão e os books folheáveis, que viram sozinhos e com o mouse, o toque ou
+  as setas; o book começa inclinado e se endireita com a rolagem), trabalhos (filtro que tira de cena o que não é
+  da categoria e reorganiza o resto), manifesto (a frase acende no ritmo da rolagem), serviços (mapa com fios entre
+  frente, projeto e serviços, que troca de frente sozinho), processo (seis etapas que avançam sozinhas, cada uma com
+  uma cena animada), depoimentos, FAQ, contato.
+  As demonstrações automáticas param quando o visitante interage e voltam depois de 10 s parado; com menos movimento
+  pedido no sistema, nada anda sozinho.
   Desde 2026-11 o site usa a linguagem do sistema: azul #1F5373, Inter, fundos claros, botões em pílula, cabeçalho de
   vidro com a pílula que marca a seção visível.
 - `/como-funciona` redireciona para `/#servicos` (vercel.json).
@@ -57,6 +64,8 @@ compartilhada entre seções, então mudar um estilo não afeta outra parte do s
 
 ## Tarefas comuns
 
+- Incluir um book na abertura: gere as páginas em `assets/imagens/livros/<projeto>/01.webp, 02.webp...`
+  (1120 px de largura, todas na proporção do book) e acrescente o book em `assets/dados/livros.js`.
 - Trocar ou incluir um trabalho: `assets/dados/trabalhos.js`. Use `destaque: true`
   nos projetos que aparecem primeiro na lista, com o selo "Destaque".
 - Imagens do portfólio: os originais ficam fora do repositório (Google Drive).

@@ -11,8 +11,8 @@ const TODOS = "Todos";
  * capa e uma etiqueta de museu: nome, tipo, ano e o selo de destaque.
  *
  * Cada fileira aparece quando chega à tela, um quadro depois do outro.
- * Os filtros de categoria não mudam nada de lugar: as peças de fora da
- * categoria se apagam, para o visitante não perder a referência.
+ * Os filtros de categoria tiram de cena o que está fora da categoria; o que
+ * fica se reorganiza deslizando até o novo lugar.
  */
 export class Trabalhos {
   /**
@@ -88,6 +88,12 @@ export class Trabalhos {
   }
 
   #montarFiltros() {
+    const indicador = this.#elemento("span", "trabalhos__pilula");
+    indicador.setAttribute("aria-hidden", "true");
+    this.filtros.append(indicador);
+    this.contador = this.raiz.querySelector(".trabalhos__contador");
+    if (this.contador) this.contador.textContent = `${this.ordem.length} trabalhos`;
+    else this.contador = document.createElement("span");
     const categorias = [TODOS, ...new Set(this.ordem.map((trabalho) => trabalho.categoria))];
     for (const categoria of categorias) {
       const botao = this.#elemento("button", "trabalhos__filtro", categoria);
@@ -96,20 +102,106 @@ export class Trabalhos {
       botao.addEventListener("click", () => this.#filtrar(categoria));
       this.filtros.append(botao);
     }
+    this.#moverIndicador();
+    if (document.fonts?.ready) document.fonts.ready.then(() => this.#moverIndicador());
+    window.addEventListener("resize", () => this.#moverIndicador());
   }
 
+  /**
+   * Filtra a parede: o que está fora da categoria sai de cena (some e libera
+   * o lugar), o que fica desliza até a nova posição e o que volta entra
+   * crescendo. As posições são medidas antes e depois da troca e cada peça
+   * anima a diferença (técnica FLIP), então nada pula de lugar.
+   */
   #filtrar(categoria) {
     if (categoria === this.filtroAtual) return;
     this.filtroAtual = categoria;
-    for (const botao of this.filtros.children) {
+    for (const botao of this.filtros.querySelectorAll(".trabalhos__filtro")) {
       botao.setAttribute("aria-pressed", botao.textContent === categoria ? "true" : "false");
     }
-    for (const peca of this.pecas) {
-      const fora = categoria !== TODOS && peca.dataset.categoria !== categoria;
-      peca.classList.toggle("trabalhos__peca--apagada", fora);
-      peca.tabIndex = fora ? -1 : 0;
-      peca.setAttribute("aria-hidden", fora ? "true" : "false");
+    this.#moverIndicador();
+    const itens = this.pecas.map((peca) => peca.parentElement);
+    const fica = (item) => categoria === TODOS || item.firstElementChild.dataset.categoria === categoria;
+    const saem = itens.filter((item) => !item.hidden && !fica(item));
+    const entram = itens.filter((item) => item.hidden && fica(item));
+    this.contador.textContent = `${itens.filter(fica).length} trabalhos`;
+
+    if (Ambiente.reduzMovimento || !Element.prototype.animate) {
+      itens.forEach((item) => (item.hidden = !fica(item)));
+      this.#ajustarFileiras();
+      return;
     }
+    this.animacoes?.forEach((animacao) => animacao.finish());
+    this.animacoes = [];
+    const antes = new Map(itens.filter((item) => !item.hidden).map((item) => [item, item.getBoundingClientRect()]));
+
+    const trocar = () => {
+      saem.forEach((item) => (item.hidden = true));
+      entram.forEach((item) => (item.hidden = false));
+      this.#ajustarFileiras();
+      /* depois de filtrar, a entrada é a do filtro: nada fica esperando chegar à tela */
+      itens.forEach((item) => !item.hidden && item.firstElementChild.classList.add("trabalhos__peca--visivel"));
+      itens
+        .filter((item) => !item.hidden)
+        .forEach((item, ordem) => {
+          const depois = item.getBoundingClientRect();
+          const inicio = antes.get(item);
+          if (inicio && !saem.includes(item)) {
+            const dx = inicio.left - depois.left;
+            const dy = inicio.top - depois.top;
+            const escala = inicio.width / depois.width;
+            if (Math.abs(dx) + Math.abs(dy) + Math.abs(escala - 1) > 0.5) {
+              this.animacoes.push(
+                item.animate(
+                  [{ transform: `translate(${dx}px, ${dy}px) scale(${escala})` }, { transform: "none" }],
+                  { duration: 620, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
+                ),
+              );
+            }
+          } else {
+            this.animacoes.push(
+              item.animate(
+                [
+                  { opacity: 0, transform: "translateY(18px) scale(0.96)" },
+                  { opacity: 1, transform: "none" },
+                ],
+                { duration: 560, delay: 120 + ordem * 50, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "backwards" },
+              ),
+            );
+          }
+        });
+    };
+
+    if (!saem.length) {
+      trocar();
+      return;
+    }
+    const saidas = saem.map((item) =>
+      item.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "scale(0.94)" }], {
+        duration: 240,
+        easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+        fill: "forwards",
+      }),
+    );
+    Promise.all(saidas.map((animacao) => animacao.finished.catch(() => {}))).then(() => {
+      trocar();
+      saidas.forEach((animacao) => animacao.cancel());
+    });
+  }
+
+  /** Uma fileira sem nenhuma peça visível sai do layout. */
+  #ajustarFileiras() {
+    for (const fileira of [this.fileiraDeDestaques, this.fileiraDosDemais]) {
+      fileira.hidden = !Array.from(fileira.children).some((item) => !item.hidden);
+    }
+  }
+
+  /** A pílula branca desliza até o filtro escolhido. */
+  #moverIndicador() {
+    const ativo = this.filtros.querySelector('[aria-pressed="true"]');
+    if (!ativo) return;
+    this.filtros.style.setProperty("--pilula-x", `${ativo.offsetLeft}px`);
+    this.filtros.style.setProperty("--pilula-l", `${ativo.offsetWidth}px`);
   }
 
   /**

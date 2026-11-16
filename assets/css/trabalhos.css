@@ -3,7 +3,8 @@
    Seção em fundo claro. O título e o texto, os filtros numa barra de abas
    em pílula e a grade: os destaques na primeira fileira, maiores, e os
    demais em três colunas. Cada cartão é um link para a página do trabalho.
-   Os filtros não mudam nada de lugar: o que está fora da categoria se apaga.
+   O filtro tira de cena o que está fora da categoria; o resto desliza até o
+   novo lugar (Trabalhos.js). A pílula branca desliza até o filtro escolhido.
    ========================================================================= */
 
 .trabalhos {
@@ -12,7 +13,7 @@
 }
 
 .trabalhos__cabeca,
-.trabalhos__filtros,
+.trabalhos__barra,
 .trabalhos__parede {
   max-width: var(--largura);
   margin-inline: auto;
@@ -32,24 +33,52 @@
   color: var(--suave);
 }
 
-.trabalhos__filtros {
+.trabalhos__barra {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: var(--espaco-titulo);
+  margin-bottom: 28px;
+}
+
+.trabalhos__filtros {
+  position: relative;
+  display: flex;
   gap: 4px;
-  width: fit-content;
-  margin: var(--espaco-titulo) 0 28px;
+  max-width: 100%;
   padding: 4px;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.05);
 }
 
-@media (min-width: 1181px) {
-  .trabalhos__filtros {
-    margin-left: max(0px, calc((100% - var(--largura)) / 2));
-  }
+/* a pílula branca que desliza até o filtro escolhido */
+.trabalhos__pilula {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: var(--pilula-l, 0);
+  border-radius: 999px;
+  background: var(--branco);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+  transform: translateX(var(--pilula-x, 0));
+  transition:
+    transform 0.5s var(--curva),
+    width 0.5s var(--curva);
+}
+
+.trabalhos__contador {
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--suave);
 }
 
 .trabalhos__filtro {
+  position: relative;
+  z-index: 1;
+  flex: none;
   padding: 8px 18px;
   border: 0;
   border-radius: 999px;
@@ -69,9 +98,7 @@
 }
 
 .trabalhos__filtro[aria-pressed="true"] {
-  background: var(--branco);
   color: var(--ink);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
 .trabalhos__parede {
@@ -88,7 +115,12 @@
 }
 
 .trabalhos__fileira--destaques {
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trabalhos__fileira[hidden],
+.trabalhos__item[hidden] {
+  display: none;
 }
 
 .trabalhos__fileira--demais {
@@ -125,11 +157,6 @@
 .trabalhos__peca--visivel:hover {
   transform: translateY(-4px);
   box-shadow: var(--sombra-g);
-}
-
-.trabalhos__peca--apagada {
-  opacity: 0.25;
-  pointer-events: none;
 }
 
 .trabalhos__quadro {
@@ -185,6 +212,7 @@
 }
 
 @media (max-width: 980px) {
+  .trabalhos__fileira--destaques,
   .trabalhos__fileira--demais {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -197,17 +225,11 @@
   }
 
   .trabalhos__filtros {
-    flex-wrap: nowrap;
-    max-width: 100%;
     overflow-x: auto;
     scrollbar-width: none;
   }
 
   .trabalhos__filtros::-webkit-scrollbar {
     display: none;
-  }
-
-  .trabalhos__filtro {
-    flex: none;
   }
 }

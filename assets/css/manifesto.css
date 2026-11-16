@@ -12,7 +12,7 @@
 .manifesto__texto {
   max-width: 980px;
   margin-inline: auto;
-  font-size: clamp(1.75rem, 3.4vw, 3rem);
+  font-size: clamp(1.9rem, 4.2vw, 3.6rem);
   font-weight: 600;
   line-height: 1.18;
   letter-spacing: -0.035em;
@@ -23,5 +23,19 @@
 
 .manifesto__forte {
   font-weight: 700;
+  color: var(--azul);
+}
+
+/* leitura no ritmo da rolagem (Manifesto.js): as palavras começam claras e acendem */
+.manifesto__texto--leitura .manifesto__palavra {
+  color: var(--linha-2);
+  transition: color 0.35s var(--curva);
+}
+
+.manifesto__texto--leitura .manifesto__palavra--acesa {
+  color: var(--ink);
+}
+
+.manifesto__texto--leitura .manifesto__forte .manifesto__palavra--acesa {
   color: var(--azul);
 }

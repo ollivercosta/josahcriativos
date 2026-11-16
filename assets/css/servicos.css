@@ -1,8 +1,10 @@
 /* =========================================================================
    COMO POSSO AJUDAR SEU PROJETO (serviços)
-   O título e o texto, as três frentes numa barra de abas e, abaixo, o
-   painel da frente escolhida: à esquerda a descrição e para quem é
-   pensada, à direita os serviços em cartões.
+   O título e o texto. Abaixo, o mapa: as frentes à esquerda, o projeto no
+   meio e os serviços à direita, ligados por fios desenhados no SVG
+   (Servicos.js). A frente escolhida tem uma barra de tempo da troca
+   automática; os serviços dela acendem. Embaixo do mapa, o público e a
+   descrição dos serviços da frente, em três colunas.
    ========================================================================= */
 
 .servicos {
@@ -11,7 +13,7 @@
 }
 
 .servicos__cabeca,
-.servicos__abas,
+.servicos__mapa,
 .servicos__paineis {
   max-width: var(--largura);
   margin-inline: auto;
@@ -38,86 +40,252 @@
   color: var(--suave);
 }
 
-.servicos__abas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  width: fit-content;
-  margin: var(--espaco-titulo) 0 24px;
-  padding: 4px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.05);
+/* ---------- o mapa ---------- */
+.servicos__mapa {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.85fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(64px, 9vw, 128px);
+  margin-top: var(--espaco-titulo);
 }
 
-@media (min-width: 1181px) {
-  .servicos__abas {
-    margin-left: calc((100% - var(--largura)) / 2);
+.servicos__fios {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.servicos__fio {
+  fill: none;
+  stroke: var(--linha-2);
+  stroke-width: 1.5;
+  opacity: 0.7;
+}
+
+.servicos__fio--aceso {
+  stroke: var(--azul);
+  stroke-width: 2;
+  opacity: 1;
+}
+
+@keyframes servicos-traco {
+  from {
+    stroke-dashoffset: 1;
   }
 }
 
-.servicos__aba {
-  padding: 9px 20px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--suave);
-  font-size: 0.95rem;
-  font-weight: 500;
+.servicos__fio--entra {
+  stroke-dasharray: 1;
+  animation: servicos-traco 0.9s var(--curva) both;
+}
+
+.servicos__pulso {
+  fill: var(--azul-2);
+}
+
+.servicos__frentes {
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+
+.servicos__frente {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: rgba(255, 255, 255, 0.55);
+  color: inherit;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
   transition:
-    background-color 0.3s var(--curva),
-    color 0.3s var(--curva),
-    box-shadow 0.3s var(--curva);
+    background-color 0.4s var(--curva),
+    border-color 0.4s var(--curva),
+    box-shadow 0.4s var(--curva);
 }
 
-.servicos__aba:hover {
-  color: var(--ink);
+.servicos__frente:hover {
+  border-color: var(--azul-3);
 }
 
-.servicos__aba[aria-selected="true"] {
-  background: var(--branco);
-  color: var(--ink);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
-}
-
-.servicos__painel {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
-  gap: clamp(24px, 4vw, 56px);
-  padding: clamp(28px, 4vw, 48px);
-  border-radius: var(--raio-g);
+.servicos__frente[aria-selected="true"] {
+  border-color: var(--azul);
   background: var(--branco);
   box-shadow: var(--sombra);
 }
 
-.servicos__painel:not([hidden]) {
-  animation: servicos-troca 0.6s var(--curva);
+.servicos__frente-nome {
+  font-size: 1.15rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.servicos__frente-texto {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--suave);
+}
+
+/* a barra de tempo da troca automática, na base da frente escolhida */
+.servicos__frente::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--azul);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+@keyframes servicos-tempo {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.servicos__frente--contando::after {
+  animation: servicos-tempo var(--tempo, 5s) linear both;
+}
+
+.servicos__centro {
+  position: relative;
+  padding: 24px;
+  border-radius: var(--raio-g);
+  background:
+    radial-gradient(90% 80% at 50% 0%, var(--azul-2) 0%, rgba(44, 112, 155, 0) 75%),
+    var(--azul);
+  color: #fff;
+  box-shadow: 0 24px 50px -24px rgba(31, 83, 115, 0.7);
+}
+
+.servicos__centro-nome {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.servicos__regras {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.servicos__regra {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.servicos__regra::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--azul-3);
+  border-bottom: 2px solid var(--azul-3);
+  transform: rotate(-45deg);
+}
+
+.servicos__destinos {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.servicos__destino {
+  padding: 10px 16px;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: var(--branco);
+  color: var(--suave);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition:
+    background-color 0.45s var(--curva),
+    border-color 0.45s var(--curva),
+    color 0.45s var(--curva);
+}
+
+.servicos__destino--aceso {
+  border-color: var(--azul-3);
+  background: var(--azul-s);
+  color: var(--azul);
+  font-weight: 600;
+}
+
+/* ---------- o detalhe da frente ---------- */
+.servicos__paineis {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.servicos__painel {
+  display: grid;
+  gap: 20px;
+}
+
+.servicos__painel[hidden] {
+  display: none;
+}
+
+.servicos__painel:not([hidden]) .servicos__item {
+  animation: servicos-troca 0.6s var(--curva) both;
+}
+
+.servicos__painel:not([hidden]) .servicos__item:nth-child(2) {
+  animation-delay: 0.07s;
+}
+
+.servicos__painel:not([hidden]) .servicos__item:nth-child(3) {
+  animation-delay: 0.14s;
 }
 
 @keyframes servicos-troca {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
 }
 
-.servicos__painel-nome {
-  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-  font-weight: 650;
-  letter-spacing: -0.03em;
-}
-
+/* a descrição da frente repete o texto do mapa; só aparece no celular, onde o mapa vira abas */
 .servicos__painel-descricao {
-  margin-top: 12px;
-  color: var(--suave);
+  display: none;
+  font-size: 1.05rem;
+  color: var(--texto);
 }
 
 .servicos__publico {
-  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
 }
 
 .servicos__publico-rotulo {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--ink);
 }
@@ -126,7 +294,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 12px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -142,18 +310,16 @@
 
 .servicos__lista {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
 }
 
 .servicos__item {
-  padding: 20px 22px;
-  border: 1px solid var(--linha);
+  padding: 22px 24px 24px;
   border-radius: var(--raio);
-  transition: border-color 0.3s var(--curva);
-}
-
-.servicos__item:hover {
-  border-color: var(--azul-3);
+  background: var(--branco);
+  box-shadow: var(--sombra);
 }
 
 .servicos__item-nome {
@@ -164,32 +330,79 @@
 }
 
 .servicos__item-texto {
-  margin-top: 6px;
+  margin: 8px 0 0;
   color: var(--suave);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
+  line-height: 1.55;
 }
 
-@media (max-width: 860px) {
-  .servicos__painel {
+/* ---------- telas menores: sem fios; as frentes viram abas ---------- */
+@media (max-width: 1000px) {
+  .servicos__mapa {
     grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
   }
 
-  .servicos__abas {
-    flex-wrap: nowrap;
-    max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .servicos__abas::-webkit-scrollbar {
+  .servicos__fios,
+  .servicos__destinos {
     display: none;
   }
 
-  .servicos__aba {
-    flex: none;
+  .servicos__centro {
+    order: -1;
   }
-}
 
-.servicos__painel[hidden] {
-  display: none;
+  .servicos__frentes {
+    display: flex;
+    gap: 4px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 4px;
+    overflow-x: auto;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.05);
+    scrollbar-width: none;
+  }
+
+  .servicos__frentes::-webkit-scrollbar {
+    display: none;
+  }
+
+  .servicos__frente {
+    flex: none;
+    padding: 9px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .servicos__frente[aria-selected="true"] {
+    background: var(--branco);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+
+  .servicos__frente-nome {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .servicos__frente-texto {
+    display: none;
+  }
+
+  .servicos__frente::after {
+    left: 16px;
+    right: 16px;
+    bottom: 3px;
+    height: 2px;
+    border-radius: 2px;
+  }
+
+  .servicos__lista {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .servicos__painel-descricao {
+    display: block;
+  }
 }
