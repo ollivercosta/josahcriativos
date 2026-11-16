@@ -182,9 +182,16 @@ export class Titulo {
   /** Os pontos de ancoragem do contorno (o fim de cada comando do caminho). */
   #pontos(d) {
     const pontos = [];
-    for (const comando of d.match(/[MLQCZ][^MLQCZ]*/g) || []) {
+    let x = 0;
+    let y = 0;
+    for (const comando of d.match(/[MLHVQCZ][^MLHVQCZ]*/g) || []) {
+      const letra = comando[0];
       const n = comando.slice(1).trim().split(/[\s,]+/).filter(Boolean).map(Number);
-      if (n.length >= 2) pontos.push([n[n.length - 2], n[n.length - 1]]);
+      if (letra === "H") x = n[n.length - 1];
+      else if (letra === "V") y = n[n.length - 1];
+      else if (n.length >= 2) [x, y] = n.slice(-2);
+      else continue;
+      pontos.push([x, y]);
     }
     return pontos;
   }
