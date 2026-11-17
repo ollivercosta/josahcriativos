@@ -19,91 +19,93 @@
 
 
 
+
 :root {
-  /* PALETA: Snowcap, Prismatic Orange, Corten Steel e Leather. */
-  --espresso: #43140E;
-  --espresso-suave: #5A2610;
-  --terracota: #F15A26;
-  --terracota-escuro: #C7471D;
-  --terracota-claro: #F3D99C;
-  --creme: #EEE4CD;
-  --ouro: #F3D99C;
-  --ouro-claro: #F3D99C;
+  /* PALETA: marrom profundo, creme e tons de vinho.
+     Identidade visual editorial, elegante e sofisticada. */
+  --espresso: #1E100F;
+  --espresso-suave: #4D0C12;
+  --terracota: #4D0C12;
+  --terracota-escuro: #30050E;
+  --terracota-claro: #E9DCCF;
+  --creme: #F6F3E4;
+  --ouro: #C9BBA3;
+  --ouro-claro: #EAE3D2;
   --branco: #FFFFFF;
-  --linha: #D9CCB8;
-  --linha-2: #C9B9A6;
+  --linha: #E5DDCF;
+  --linha-2: #C9BBA3;
   --sucesso: #464828;
   --sucesso-claro: #E6E7D9;
   --aviso: #964E23;
   --aviso-claro: #F3D99C;
 
   /* fundos por seção */
-  --fundo-hero: var(--branco);
-  --fundo-trabalhos: var(--creme);
+  --fundo-hero: var(--creme);
+  --fundo-trabalhos: var(--branco);
   --fundo-manifesto: var(--espresso);
-  --fundo-servicos: var(--branco);
-  --fundo-processo: var(--creme);
-  --fundo-depoimentos: var(--creme);
+  --fundo-servicos: var(--creme);
+  --fundo-processo: var(--ouro-claro);
+  --fundo-depoimentos: var(--branco);
   --fundo-faq: var(--creme);
-  --fundo-contato: var(--branco);
-  --fundo-faixa-contato: var(--terracota);
+  --fundo-contato: var(--creme);
+  --fundo-faixa-contato: var(--terracota-escuro);
   --fundo-rodape: var(--espresso);
 
   /* papéis usados pelos componentes */
-  --fundo: var(--branco);
-  --fundo-alt: var(--creme);
+  --fundo: var(--creme);
+  --fundo-alt: var(--branco);
   --superficie: var(--branco);
   --borda: var(--linha);
   --borda-forte: var(--linha-2);
-  --borda-controle: #964E23;
+  --borda-controle: #9B887E;
   --ink: var(--espresso);
-  --texto: #431F17;
-  --suave: var(--espresso-suave);
+  --texto: #382522;
+  --suave: #765D58;
   --texto-titulo: var(--espresso);
   --texto-sobre-cor: var(--creme);
   --acao: var(--terracota);
   --acao-hover: var(--terracota-escuro);
   --acao-escuro: var(--ouro);
-  --acao-escuro-hover: #E8C77C;
+  --acao-escuro-hover: #B8A98F;
   --acao-2: var(--espresso);
-  --acao-2-hover: var(--espresso-suave);
+  --acao-2-hover: #30050E;
   --link: var(--espresso);
-  --foco: var(--terracota-escuro);
+  --foco: var(--terracota);
   --selecao: var(--ouro-claro);
   --nevoa: var(--creme);
   --destaque: var(--terracota);
-  --rotulo: var(--espresso);
+  --rotulo: var(--terracota-escuro);
   --azul: var(--espresso);
-  --azul-2: var(--espresso-suave);
-  --azul-3: var(--linha-2);
+  --azul-2: #30050E;
+  --azul-3: #4D0C12;
   --azul-s: var(--creme);
-  --azul-ss: var(--creme);
+  --azul-ss: var(--branco);
   --areia: var(--ouro);
   --fundo-claro: var(--creme);
-  --cor-fundo: var(--branco);
+  --cor-fundo: var(--creme);
   --cor-tinta: var(--espresso);
   --cor-vermelho: var(--terracota-escuro);
-  --cor-tinta-suave: var(--espresso-suave);
+  --cor-tinta-suave: #765D58;
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
   --cor-cinza-claro: var(--creme);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 67 20 14;
-  --escuro-rgb: 67 20 14;
-  --fundo-rgb: 255 255 255;
-  --fundo-alt-rgb: 238 228 205;
+  --sombra-rgb: 30 16 15;
+  --escuro-rgb: 30 16 15;
+  --fundo-rgb: 246 243 228;
+  --fundo-alt-rgb: 255 255 255;
   --superficie-rgb: 255 255 255;
-  --sobre-cor-rgb: 238 228 205;
+  --sobre-cor-rgb: 246 243 228;
 
   /* cursores do título (Titulo.js) */
   --agente-grid: var(--espresso);
-  --agente-contorno: #464828;
+  --agente-contorno: #4D0C12;
   --agente-curvas: #964E23;
   --agente-vetores: var(--sucesso);
   --agente-cor: var(--terracota);
   --agente-espaco: var(--aviso);
-  --agente-medidas: #5A2610;
+  --agente-medidas: #30050E;
 
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --curva: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,6 +123,7 @@
   --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
+
 
 
 
