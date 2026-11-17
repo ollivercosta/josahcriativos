@@ -16,7 +16,7 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #cf5217 0%, transparent 70%),
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #6c0c20 0%, transparent 70%),
     var(--fundo-faixa-contato);
   color: var(--texto-sobre-cor);
   text-align: center;
