@@ -18,24 +18,24 @@
 
 
 
+
 :root {
-  /* PALETA: roxo profundo, amarelo vibrante e branco neutro.
-     O amarelo é exclusivo para detalhes e destaques, nunca para backgrounds. */
-  --espresso: #0D000A;
-  --espresso-suave: #4D394B;
-  --terracota: #FEDD00;
-  --terracota-escuro: #0D000A;
-  --terracota-claro: #E9E7E8;
-  --creme: #F3F2F2;
-  --ouro: #FEDD00;
-  --ouro-claro: #E9E7E8;
+  /* PALETA: Snowcap, Prismatic Orange, Corten Steel e Leather. */
+  --espresso: #43140E;
+  --espresso-suave: #5A2610;
+  --terracota: #F15A26;
+  --terracota-escuro: #C7471D;
+  --terracota-claro: #F3D99C;
+  --creme: #EEE4CD;
+  --ouro: #F3D99C;
+  --ouro-claro: #F3D99C;
   --branco: #FFFFFF;
-  --linha: #E9E7E8;
-  --linha-2: #B9B5B8;
-  --sucesso: #2F7A4F;
-  --sucesso-claro: #DFF1E5;
-  --aviso: #8A6305;
-  --aviso-claro: #FBEBC4;
+  --linha: #D9CCB8;
+  --linha-2: #C9B9A6;
+  --sucesso: #464828;
+  --sucesso-claro: #E6E7D9;
+  --aviso: #964E23;
+  --aviso-claro: #F3D99C;
 
   /* fundos por seção */
   --fundo-hero: var(--branco);
@@ -46,7 +46,7 @@
   --fundo-depoimentos: var(--creme);
   --fundo-faq: var(--creme);
   --fundo-contato: var(--branco);
-  --fundo-faixa-contato: var(--espresso);
+  --fundo-faixa-contato: var(--terracota);
   --fundo-rodape: var(--espresso);
 
   /* papéis usados pelos componentes */
@@ -55,26 +55,26 @@
   --superficie: var(--branco);
   --borda: var(--linha);
   --borda-forte: var(--linha-2);
-  --borda-controle: #9C8B98;
+  --borda-controle: #964E23;
   --ink: var(--espresso);
-  --texto: #352D34;
+  --texto: #431F17;
   --suave: var(--espresso-suave);
   --texto-titulo: var(--espresso);
   --texto-sobre-cor: var(--creme);
-  --acao: var(--espresso);
-  --acao-hover: #352333;
-  --acao-escuro: var(--branco);
-  --acao-escuro-hover: #E9E7E8;
+  --acao: var(--terracota);
+  --acao-hover: var(--terracota-escuro);
+  --acao-escuro: var(--ouro);
+  --acao-escuro-hover: #E8C77C;
   --acao-2: var(--espresso);
-  --acao-2-hover: #352333;
+  --acao-2-hover: var(--espresso-suave);
   --link: var(--espresso);
   --foco: var(--terracota-escuro);
-  --selecao: #E9E7E8;
+  --selecao: var(--ouro-claro);
   --nevoa: var(--creme);
   --destaque: var(--terracota);
   --rotulo: var(--espresso);
   --azul: var(--espresso);
-  --azul-2: #352333;
+  --azul-2: var(--espresso-suave);
   --azul-3: var(--linha-2);
   --azul-s: var(--creme);
   --azul-ss: var(--creme);
@@ -89,21 +89,21 @@
   --cor-cinza-claro: var(--creme);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 13 0 10;
-  --escuro-rgb: 13 0 10;
+  --sombra-rgb: 67 20 14;
+  --escuro-rgb: 67 20 14;
   --fundo-rgb: 255 255 255;
-  --fundo-alt-rgb: 243 242 242;
+  --fundo-alt-rgb: 238 228 205;
   --superficie-rgb: 255 255 255;
-  --sobre-cor-rgb: 243 242 242;
+  --sobre-cor-rgb: 238 228 205;
 
   /* cursores do título (Titulo.js) */
   --agente-grid: var(--espresso);
-  --agente-contorno: #2F6E8C;
-  --agente-curvas: #6B578F;
+  --agente-contorno: #464828;
+  --agente-curvas: #964E23;
   --agente-vetores: var(--sucesso);
   --agente-cor: var(--terracota);
   --agente-espaco: var(--aviso);
-  --agente-medidas: #8F3F55;
+  --agente-medidas: #5A2610;
 
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --curva: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,6 +121,7 @@
   --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
+
 
 
 
