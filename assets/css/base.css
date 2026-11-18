@@ -20,15 +20,16 @@
 
 
 
+
 :root {
-  /* PALETA: marrom profundo, creme e tons de vinho.
+  /* PALETA: marrom profundo, quase branco e tons de vinho.
      Identidade visual editorial, elegante e sofisticada. */
   --espresso: #30050e;
   --espresso-suave: #4D0C12;
   --terracota: #4D0C12;
   --terracota-escuro: #30050E;
   --terracota-claro: #E9DCCF;
-  --creme: #F6F3E4;
+  --creme: #FBFBFB;
   --ouro: #C9BBA3;
   --ouro-claro: #EAE3D2;
   --branco: #FFFFFF;
@@ -93,10 +94,10 @@
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
   --sombra-rgb: 30 16 15;
   --escuro-rgb: 30 16 15;
-  --fundo-rgb: 246 243 228;
+  --fundo-rgb: 251 251 251;
   --fundo-alt-rgb: 255 255 255;
   --superficie-rgb: 255 255 255;
-  --sobre-cor-rgb: 246 243 228;
+  --sobre-cor-rgb: 251 251 251;
 
   /* cursores do título (Titulo.js) */
   --agente-grid: var(--espresso);
@@ -123,6 +124,7 @@
   --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
+
 
 
 
