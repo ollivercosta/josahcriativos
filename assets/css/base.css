@@ -22,23 +22,23 @@
 
 
 :root {
-  /* PALETA: marrom profundo, quase branco e tons de vinho.
+  /* PALETA: marrom profundo, quase branco, branco, vinho profundo, vinho, marrom secundário e oliva.
      Identidade visual editorial, elegante e sofisticada. */
   --espresso: #30050e;
-  --espresso-suave: #4D0C12;
+  --espresso-suave: #5A2610;
   --terracota: #4D0C12;
   --terracota-escuro: #30050E;
-  --terracota-claro: #E9DCCF;
+  --terracota-claro: #F2E6E7;
   --creme: #FBFBFB;
-  --ouro: #C9BBA3;
-  --ouro-claro: #EAE3D2;
+  --ouro: #5A2610;
+  --ouro-claro: #EFE7E1;
   --branco: #FFFFFF;
-  --linha: #E5DDCF;
-  --linha-2: #C9BBA3;
+  --linha: #E6DFDC;
+  --linha-2: #CFC2BC;
   --sucesso: #464828;
   --sucesso-claro: #E6E7D9;
-  --aviso: #964E23;
-  --aviso-claro: #F3D99C;
+  --aviso: #5A2610;
+  --aviso-claro: #EFE4DD;
 
   /* fundos por seção */
   --fundo-hero: var(--creme);
@@ -58,19 +58,19 @@
   --superficie: var(--branco);
   --borda: var(--linha);
   --borda-forte: var(--linha-2);
-  --borda-controle: #9B887E;
+  --borda-controle: #8D7B74;
   --ink: var(--espresso);
-  --texto: #382522;
-  --suave: #765D58;
+  --texto: #1E100F;
+  --suave: #685550;
   --texto-titulo: var(--espresso);
   --texto-sobre-cor: var(--creme);
   --acao: var(--terracota);
   --acao-hover: var(--terracota-escuro);
   --acao-escuro: var(--ouro);
-  --acao-escuro-hover: #B8A98F;
+  --acao-escuro-hover: #471D0C;
   --acao-2: var(--espresso);
   --acao-2-hover: #30050E;
-  --link: var(--espresso);
+  --link: var(--terracota);
   --foco: var(--terracota);
   --selecao: var(--ouro-claro);
   --nevoa: var(--creme);
@@ -86,7 +86,7 @@
   --cor-fundo: var(--creme);
   --cor-tinta: var(--espresso);
   --cor-vermelho: var(--terracota-escuro);
-  --cor-tinta-suave: #765D58;
+  --cor-tinta-suave: #685550;
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
   --cor-cinza-claro: var(--creme);
@@ -102,7 +102,7 @@
   /* cursores do título (Titulo.js) */
   --agente-grid: var(--espresso);
   --agente-contorno: #4D0C12;
-  --agente-curvas: #964E23;
+  --agente-curvas: #5A2610;
   --agente-vetores: var(--sucesso);
   --agente-cor: var(--terracota);
   --agente-espaco: var(--aviso);
