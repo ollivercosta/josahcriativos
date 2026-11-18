@@ -7,7 +7,7 @@
 
 .depoimentos {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--fundo-depoimentos);
+  background: var(--creme:);
 }
 
 .depoimentos__titulo,
