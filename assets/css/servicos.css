@@ -1,9 +1,7 @@
 /* =========================================================================
    COMO POSSO AJUDAR SEU PROJETO (serviços)
-   Índice tipográfico: à esquerda, o nome de cada frente (fica parado enquanto
-   a lista dela passa); à direita, os serviços em linhas, com o nome grande e
-   uma frase curta. Abaixo, as regras que valem para todo projeto e o link
-   para a página /como-trabalho.
+   As três frentes lado a lado: o nome, uma frase e a lista dos serviços.
+   Abaixo, as regras que valem para todo projeto e o link para /como-trabalho.
    ========================================================================= */
 
 .servicos {
@@ -45,79 +43,40 @@
 }
 
 .servicos__indice {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
   margin-top: var(--espaco-titulo);
+  padding-top: 28px;
   border-top: 2px solid var(--ink);
 }
 
-.servicos__grupo {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
-  gap: clamp(20px, 4vw, 64px);
-  padding: clamp(24px, 3vw, 36px) 0;
-  border-bottom: 1px solid var(--borda-forte);
-}
-
 .servicos__grupo-nome {
-  position: sticky;
-  top: calc(var(--altura-cabecalho) + 24px);
-  align-self: start;
-  display: grid;
-  gap: 10px;
-  font-size: 1.05rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: var(--acao);
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .servicos__grupo-texto {
-  max-width: 22em;
+  margin-top: 8px;
   font-size: 0.95rem;
-  font-weight: 400;
   line-height: 1.5;
   color: var(--suave);
 }
 
 .servicos__linhas {
-  margin: 0;
+  margin: 20px 0 0;
   padding: 0;
   list-style: none;
 }
 
 .servicos__linha {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 8px 32px;
-  align-items: baseline;
-  padding: 14px 0;
+  padding: 12px 0;
   border-top: 1px solid var(--borda);
-}
-
-.servicos__linha:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.servicos__nome {
-  font-size: clamp(1.35rem, 2.3vw, 2rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--ink);
-  transition:
-    color 0.3s var(--curva),
-    transform 0.45s var(--curva);
-}
-
-.servicos__texto {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--suave);
-}
-
-@media (hover: hover) {
-  .servicos__linha:hover .servicos__nome {
-    color: var(--acao);
-    transform: translateX(8px);
-  }
 }
 
 .servicos__rodape {
@@ -126,7 +85,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px 40px;
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 .servicos__regras {
@@ -151,12 +110,7 @@
 }
 
 @media (max-width: 820px) {
-  .servicos__grupo,
-  .servicos__linha {
+  .servicos__indice {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .servicos__grupo-nome {
-    position: static;
   }
 }

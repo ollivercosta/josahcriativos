@@ -29,7 +29,7 @@
   font-size: clamp(1.2rem, 4.4vw, 2rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--rotulo);
+  color: var(--tinta);
 }
 
 /* o título: uma linha só. O texto fica para leitores de tela; quem aparece é o

@@ -27,9 +27,9 @@
   --creme: #FAFAFA;
   --cinza: #F2F2F2;
   --tinta: #0E0E0E;
-  --vermelho: #C8102E;
-  --vermelho-escuro: #A00D25;
-  --vermelho-vivo: #FF3B47; /* só sobre o preto, onde o vermelho base perde força */
+  --vermelho: #D7140A;
+  --vermelho-escuro: #B50E05;
+  --vermelho-vivo: #FF4A3D; /* só sobre o preto, onde o vermelho base perde força */
 
   /* apelidos dos nomes da paleta anterior, para as seções não quebrarem */
   --terracota: var(--vermelho);
@@ -65,7 +65,7 @@
   --fundo-depoimento: var(--cinza);
   --fundo-faq: var(--cinza);
   --fundo-contato: var(--branco);
-  --fundo-faixa-contato: var(--vermelho);
+  --fundo-faixa-contato: var(--cinza);
   --fundo-rodape: var(--tinta);
 
   /* papéis usados pelos componentes */
@@ -88,7 +88,7 @@
   --acao-2-hover: #000000;
   --link: var(--vermelho);
   --foco: var(--vermelho);
-  --selecao: #F8D7DC;
+  --selecao: #FBD9D4;
   --nevoa: var(--creme);
   --destaque: var(--terracota);
   --rotulo: var(--terracota);

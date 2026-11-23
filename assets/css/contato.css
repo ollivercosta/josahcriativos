@@ -16,9 +16,11 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #E3303F 0%, transparent 70%),
     var(--fundo-faixa-contato);
-  color: var(--texto-sobre-cor);
+  /* faixa clara e neutra: o fechamento mantém o equilíbrio do site; o vermelho fica só no botão */
+  --texto-sobre-cor: var(--ink);
+  --sobre-cor-rgb: var(--escuro-rgb);
+  color: var(--ink);
   text-align: center;
 }
 
@@ -48,7 +50,7 @@
   max-width: 34em;
   margin: 18px auto 0;
   font-size: 1.12rem;
-  color: var(--creme);
+  color: var(--suave);
 }
 
 .contato__botao {
@@ -56,8 +58,8 @@
   margin-top: 32px;
   padding: 15px 32px;
   border-radius: 999px;
-  background: var(--creme);
-  color: var(--vermelho);
+  background: var(--acao);
+  color: var(--branco);
   font-weight: 650;
   text-decoration: none;
   transition:
@@ -67,7 +69,7 @@
 
 .contato__botao:hover {
   transform: translateY(-2px);
-  background: var(--branco);
+  background: var(--acao-hover);
   box-shadow: 0 14px 30px -12px rgb(var(--sombra-rgb) / 0.6);
 }
 
@@ -90,7 +92,7 @@
 
 .contato__canal-rotulo {
   font-size: 0.85rem;
-  color: var(--creme);
+  color: var(--suave);
 }
 
 .contato__canal-link {
