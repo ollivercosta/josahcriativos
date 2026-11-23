@@ -1,6 +1,6 @@
 /* =========================================================================
    BASE
-   Tokens da identidade e o reset mínimo. Paleta "terracota, ocre e petróleo".
+   Tokens da identidade e o reset mínimo. Paleta "preto, vermelho e branco".
    Trocar a paleta é trocar o :root.
    Nenhuma classe daqui é aplicada a elementos das seções.
    ========================================================================= */
@@ -19,27 +19,33 @@
 
 
 :root {
-  /* PALETA "terracota, ocre e petróleo" (lógica do IMS): base branca dominante,
-     uma cor-assinatura quente (terracota) com contraponto frio (petróleo) e
-     o ocre como faísca. O escuro é quase preto e neutro, só para pausa. */
+  /* PALETA "preto, vermelho e branco": o branco domina, o preto é o texto e a
+     pausa (manifesto, rodapé), e o vermelho é a única cor, usada pouco:
+     ação, marcas dos títulos, a faixa de contato. Um cinza neutro separa
+     seções claras sem tingir a página. */
   --branco: #FFFFFF;
   --creme: #FAFAFA;
   --cinza: #F2F2F2;
-  --tinta: #141414;
-  --terracota: #A4493D;
-  --terracota-escuro: #8A3A30;
-  --ocre: #D99C1B;
-  --ocre-escuro: #8A5A00;
-  --ocre-claro: #F4EBDD;
-  --petroleo: #245C78;
-  --petroleo-escuro: #1B475D;
-  --petroleo-claro: #E4EDF2;
+  --tinta: #0E0E0E;
+  --vermelho: #C8102E;
+  --vermelho-escuro: #A00D25;
+  --vermelho-vivo: #FF3B47; /* só sobre o preto, onde o vermelho base perde força */
+
+  /* apelidos dos nomes da paleta anterior, para as seções não quebrarem */
+  --terracota: var(--vermelho);
+  --terracota-escuro: var(--vermelho-escuro);
+  --ocre: var(--vermelho-vivo);
+  --ocre-escuro: var(--vermelho-escuro);
+  --ocre-claro: var(--cinza);
+  --petroleo: var(--tinta);
+  --petroleo-escuro: #000000;
+  --petroleo-claro: var(--cinza);
   --linha: #E4E4E4;
   --linha-2: #CFCFCF;
   --sucesso: #2F6B4F;
   --sucesso-claro: #E3EFE8;
-  --aviso: var(--ocre-escuro);
-  --aviso-claro: var(--ocre-claro);
+  --aviso: #8A5A00;
+  --aviso-claro: #F4EBDD;
 
   /* nomes antigos ainda usados nas seções, apontando para a paleta nova */
   --espresso: var(--tinta);
@@ -51,14 +57,14 @@
 
   /* fundos por seção, na ordem da página */
   --fundo-hero: var(--branco);
-  --fundo-servicos: var(--ocre-claro);
+  --fundo-servicos: var(--cinza);
   --fundo-trabalhos: var(--branco);
   --fundo-manifesto: var(--tinta);
   --fundo-processo: var(--cinza);
   --fundo-depoimentos: var(--branco);
   --fundo-faq: var(--cinza);
   --fundo-contato: var(--branco);
-  --fundo-faixa-contato: var(--petroleo);
+  --fundo-faixa-contato: var(--vermelho);
   --fundo-rodape: var(--tinta);
 
   /* papéis usados pelos componentes */
@@ -69,7 +75,7 @@
   --borda-forte: var(--linha-2);
   --borda-controle: #8A8A8A;
   --ink: var(--tinta);
-  --texto: #141414;
+  --texto: #0E0E0E;
   --suave: #5E5E5E;
   --texto-titulo: var(--tinta);
   --texto-sobre-cor: var(--creme);
@@ -79,9 +85,9 @@
   --acao-escuro-hover: var(--petroleo-escuro);
   --acao-2: var(--tinta);
   --acao-2-hover: #000000;
-  --link: var(--petroleo);
-  --foco: var(--petroleo);
-  --selecao: var(--ocre-claro);
+  --link: var(--vermelho);
+  --foco: var(--vermelho);
+  --selecao: #F8D7DC;
   --nevoa: var(--creme);
   --destaque: var(--terracota);
   --rotulo: var(--terracota);
@@ -101,8 +107,8 @@
   --cor-cinza-claro: var(--cinza);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 20 20 20;
-  --escuro-rgb: 20 20 20;
+  --sombra-rgb: 14 14 14;
+  --escuro-rgb: 14 14 14;
   --fundo-rgb: 255 255 255;
   --fundo-alt-rgb: 242 242 242;
   --superficie-rgb: 255 255 255;
@@ -110,11 +116,11 @@
 
   /* cursores do título (Titulo.js) */
   --agente-grid: var(--tinta);
-  --agente-contorno: var(--terracota);
-  --agente-curvas: var(--petroleo);
-  --agente-vetores: var(--ocre-escuro);
+  --agente-contorno: var(--vermelho);
+  --agente-curvas: #555555;
+  --agente-vetores: var(--vermelho-escuro);
   --agente-cor: var(--terracota);
-  --agente-espaco: var(--petroleo-escuro);
+  --agente-espaco: #333333;
   --agente-medidas: var(--tinta);
 
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

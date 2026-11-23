@@ -102,21 +102,23 @@
   color: var(--ink);
 }
 
+/* ---------- galeria: quadrados lado a lado, a imagem é o conteúdo ----------
+   O nome e a categoria só aparecem sobre a imagem quando o cursor chega; as
+   outras peças recuam (escurecem e perdem a cor) para a escolhida ganhar foco.
+   No toque, o nome fica sempre visível na base da imagem. */
 .trabalhos__parede {
+  position: relative;
   display: grid;
-  gap: 24px;
+  gap: 6px;
 }
 
 .trabalhos__fileira {
   display: grid;
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.trabalhos__fileira--destaques {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .trabalhos__fileira[hidden],
@@ -124,30 +126,24 @@
   display: none;
 }
 
-.trabalhos__fileira--demais {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .trabalhos__fileira:empty {
   display: none;
 }
 
 .trabalhos__peca {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
   overflow: hidden;
-  border-radius: var(--raio-g);
-  background: var(--superficie);
-  box-shadow: var(--sombra);
-  color: inherit;
+  background: var(--linha);
+  color: var(--texto-sobre-cor);
   text-decoration: none;
   opacity: 0;
   transform: translateY(16px);
   transition:
     opacity 0.8s var(--curva) var(--atraso, 0ms),
     transform 0.8s var(--curva) var(--atraso, 0ms),
-    box-shadow 0.4s var(--curva);
+    filter 0.5s var(--curva);
 }
 
 .trabalhos__peca--visivel {
@@ -155,76 +151,132 @@
   transform: none;
 }
 
-.trabalhos__peca--visivel:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--sombra-g);
+/* foco: com o cursor sobre a galeria, as peças que não estão em foco recuam */
+@media (hover: hover) {
+  .trabalhos__parede:hover .trabalhos__peca--visivel:not(:hover) {
+    filter: grayscale(1) brightness(0.55);
+  }
 }
 
 .trabalhos__quadro {
+  position: absolute;
+  inset: 0;
   display: block;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--linha);
 }
 
 .trabalhos__imagem {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1s var(--curva);
+  transition: transform 1.2s var(--curva);
 }
 
-.trabalhos__peca:hover .trabalhos__imagem {
-  transform: scale(1.03);
+.trabalhos__peca:hover .trabalhos__imagem,
+.trabalhos__peca:focus-visible .trabalhos__imagem {
+  transform: scale(1.06);
 }
 
 .trabalhos__etiqueta {
+  position: absolute;
+  inset: auto 0 0;
   display: grid;
-  gap: 4px;
-  padding: 18px 22px 22px;
+  gap: 6px;
+  padding: 56px 22px 20px;
+  background: linear-gradient(to top, rgb(var(--escuro-rgb) / 0.85), transparent);
+  transform: translateY(101%);
+  transition: transform 0.55s var(--curva);
+}
+
+/* a linha vermelha corre na base da peça escolhida */
+.trabalhos__etiqueta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--acao);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--curva) 0.1s;
+}
+
+.trabalhos__peca:hover .trabalhos__etiqueta,
+.trabalhos__peca:focus-visible .trabalhos__etiqueta {
+  transform: none;
+}
+
+.trabalhos__peca:hover .trabalhos__etiqueta::after,
+.trabalhos__peca:focus-visible .trabalhos__etiqueta::after {
+  transform: none;
+}
+
+@media (hover: none) {
+  .trabalhos__etiqueta {
+    transform: none;
+  }
 }
 
 .trabalhos__nome {
-  font-size: 1.12rem;
-  font-weight: 650;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.trabalhos__fileira--destaques .trabalhos__nome {
-  font-size: 1.3rem;
+  color: inherit;
 }
 
 .trabalhos__info {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.92rem;
-  color: var(--suave);
+  font-size: 0.88rem;
+  color: rgb(var(--sobre-cor-rgb) / 0.78);
 }
 
 .trabalhos__selo {
   padding: 2px 10px;
   border-radius: 999px;
-  background: var(--terracota-claro);
-  color: var(--terracota-escuro);
-  font-size: 0.78rem;
+  background: var(--acao);
+  color: var(--texto-sobre-cor);
+  font-size: 0.74rem;
   font-weight: 600;
 }
 
+/* cursor próprio da galeria: um círculo vermelho com "Ver projeto" que segue o mouse */
+.trabalhos__cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  margin: -52px 0 0 -52px;
+  border-radius: 50%;
+  background: var(--acao);
+  color: var(--texto-sobre-cor);
+  font-size: 0.82rem;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.4;
+  transition:
+    opacity 0.3s var(--curva),
+    scale 0.4s var(--curva);
+}
+
+.trabalhos__cursor--ativo {
+  opacity: 1;
+  scale: 1;
+}
+
 @media (max-width: 980px) {
-  .trabalhos__fileira--destaques,
-  .trabalhos__fileira--demais {
+  .trabalhos__fileira {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 620px) {
-  .trabalhos__fileira--demais,
-  .trabalhos__fileira--destaques {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .trabalhos__filtros {
     overflow-x: auto;
     scrollbar-width: none;

@@ -43,6 +43,7 @@ export class Trabalhos {
     this.#montarFiltros();
     this.#montarMais();
     this.#aplicar(false);
+    this.#cursor();
     if (entradaPropria) {
       this.#observarEntrada();
     } else {
@@ -268,6 +269,33 @@ export class Trabalhos {
       { rootMargin: "0px 0px -12% 0px", threshold: 0.2 },
     );
     this.pecas.forEach((peca) => observador.observe(peca));
+  }
+
+  /**
+   * Cursor da galeria: com mouse, um círculo "Ver projeto" acompanha o ponteiro
+   * sobre as peças. Só posição e escala mudam (transform), sem custo de layout.
+   */
+  #cursor() {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches || Ambiente.reduzMovimento) return;
+    const cursor = this.#elemento("span", "trabalhos__cursor", "Ver projeto");
+    cursor.setAttribute("aria-hidden", "true");
+    this.parede.append(cursor);
+    this.parede.style.cursor = "none";
+    let quadro = 0;
+    let x = 0;
+    let y = 0;
+    this.parede.addEventListener("pointermove", (evento) => {
+      const caixa = this.parede.getBoundingClientRect();
+      x = evento.clientX - caixa.left;
+      y = evento.clientY - caixa.top;
+      cursor.classList.toggle("trabalhos__cursor--ativo", Boolean(evento.target.closest(".trabalhos__peca")));
+      if (!quadro)
+        quadro = requestAnimationFrame(() => {
+          quadro = 0;
+          cursor.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
+    this.parede.addEventListener("pointerleave", () => cursor.classList.remove("trabalhos__cursor--ativo"));
   }
 
   #elemento(tag, classe, texto) {
