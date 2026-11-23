@@ -45,9 +45,9 @@
      os blocos escuros usam a oliva e o marrom-quase-preto, e os claros
      alternam branco e quase branco, com um neutro quente no processo */
   --fundo-hero: var(--creme);
-  --fundo-trabalhos: var(--branco);
+  --fundo-trabalhos: var(--creme);
   --fundo-manifesto: var(--espresso);
-  --fundo-servicos: var(--creme);
+  --fundo-servicos: var(--branco);
   --fundo-processo: var(--pedra);
   --fundo-depoimentos: var(--branco);
   --fundo-faq: var(--creme);

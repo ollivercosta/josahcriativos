@@ -15,90 +15,72 @@ export class Hero {
     if (titulo) this.titulo = new Titulo(titulo);
     this.#clarear();
     this.#faixa();
-    this.#tela();
+    this.#facetas();
   }
 
   /**
-   * Fundo vivo: uma tela de arame em losangos, como uma cerca vista de perto.
-   * Os nós oscilam devagar, como tecido ao vento; a linha é fina e quase
-   * transparente para não disputar com o título. Para quando a abertura sai
-   * da tela; com movimento reduzido, fica parada.
+   * Fundo vivo: facetas que respiram. Um mosaico de polígonos irregulares
+   * (células de Voronoi a partir de uma grade hexagonal levemente deslocada),
+   * calculado uma única vez. Algumas facetas clareiam e escurecem devagar,
+   * só com opacidade em CSS: nada é redesenhado a cada quadro.
    */
-  #tela() {
-    const canvas = document.createElement("canvas");
-    canvas.className = "hero__tela";
-    canvas.setAttribute("aria-hidden", "true");
-    this.raiz.prepend(canvas);
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const cor = getComputedStyle(this.raiz).getPropertyValue("--ink").trim() || "#30050e";
-    let largura = 0;
-    let altura = 0;
-    let passo = 56;
-    let visivel = true;
-    let quadro = 0;
-
-    const medir = () => {
-      const r = this.raiz.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      largura = r.width;
-      altura = r.height;
-      passo = largura < 700 ? 40 : 56;
-      canvas.width = Math.round(largura * dpr);
-      canvas.height = Math.round(altura * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    // deslocamento suave do nó (i, j) no tempo t: duas ondas lentas cruzadas
-    const no = (i, j, t) => {
-      const x = i * passo;
-      const y = j * passo;
-      const a = Math.sin(x * 0.006 + t * 0.35) + Math.sin(y * 0.008 - t * 0.27);
-      const b = Math.cos(x * 0.005 - t * 0.22) + Math.sin((x + y) * 0.004 + t * 0.3);
-      return [x + a * 5, y + b * 6];
-    };
-
-    const desenhar = (t) => {
-      ctx.clearRect(0, 0, largura, altura);
-      ctx.strokeStyle = cor;
-      ctx.globalAlpha = 0.09;
-      ctx.lineWidth = 1;
-      const colunas = Math.ceil(largura / passo) + 2;
-      const linhas = Math.ceil(altura / passo) + 2;
-      ctx.beginPath();
-      // losangos: as duas diagonais da grade, nó a nó
-      for (let j = -1; j < linhas; j++) {
-        for (let i = -1; i < colunas; i++) {
-          const [x, y] = no(i, j, t);
-          const [xd, yd] = no(i + 1, j + 1, t);
-          const [xe, ye] = no(i - 1, j + 1, t);
-          ctx.moveTo(x, y);
-          ctx.lineTo(xd, yd);
-          ctx.moveTo(x, y);
-          ctx.lineTo(xe, ye);
+  #facetas() {
+    const L = 1600;
+    const A = 900;
+    const passo = 170;
+    let semente = 7;
+    const acaso = () => ((semente = (semente * 16807) % 2147483647) / 2147483647);
+    const pontos = [];
+    for (let j = -1, y = -passo / 2; y < A + passo; j++, y += passo * 0.86) {
+      for (let x = j % 2 ? -passo / 2 : 0; x < L + passo; x += passo) {
+        pontos.push([x + (acaso() - 0.5) * passo * 0.55, y + (acaso() - 0.5) * passo * 0.55]);
+      }
+    }
+    // cada célula: o retângulo recortado pelos semiplanos mais próximos de cada vizinho
+    const recortar = (poli, [px, py], [qx, qy]) => {
+      const mx = (px + qx) / 2;
+      const my = (py + qy) / 2;
+      const dx = qx - px;
+      const dy = qy - py;
+      const lado = ([x, y]) => (x - mx) * dx + (y - my) * dy;
+      const saida = [];
+      for (let i = 0; i < poli.length; i++) {
+        const a = poli[i];
+        const b = poli[(i + 1) % poli.length];
+        const la = lado(a);
+        const lb = lado(b);
+        if (la <= 0) saida.push(a);
+        if (la * lb < 0) {
+          const t = la / (la - lb);
+          saida.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
         }
       }
-      ctx.stroke();
+      return saida;
     };
-
-    const laco = (ms) => {
-      quadro = 0;
-      if (!visivel) return;
-      desenhar(ms / 1000);
-      quadro = requestAnimationFrame(laco);
-    };
-
-    medir();
-    desenhar(0);
-    new ResizeObserver(() => {
-      medir();
-      desenhar(performance.now() / 1000);
-    }).observe(this.raiz);
-    if (Ambiente.reduzMovimento) return;
-    new IntersectionObserver(([e]) => {
-      visivel = e.isIntersecting;
-      if (visivel && !quadro) quadro = requestAnimationFrame(laco);
-    }).observe(this.raiz);
+    const caminhos = [];
+    for (const p of pontos) {
+      let poli = [[0, 0], [L, 0], [L, A], [0, A]];
+      for (const q of pontos) {
+        if (q === p || Math.abs(q[0] - p[0]) > passo * 2.2 || Math.abs(q[1] - p[1]) > passo * 2.2) continue;
+        poli = recortar(poli, p, q);
+        if (poli.length < 3) break;
+      }
+      if (poli.length < 3) continue;
+      const d = "M" + poli.map(([x, y]) => `${x.toFixed(0)} ${y.toFixed(0)}`).join("L") + "Z";
+      const tom = (0.012 + acaso() * 0.022).toFixed(3);
+      const respira = acaso() < 0.4;
+      const estilo = respira
+        ? ` style="--tom:${tom};animation-delay:-${(acaso() * 16).toFixed(1)}s;animation-duration:${(11 + acaso() * 8).toFixed(1)}s"`
+        : ` style="--tom:${tom}"`;
+      caminhos.push(`<path d="${d}"${respira ? ' class="hero__faceta--respira"' : ""}${estilo}/>`);
+    }
+    const tela = document.createElement("div");
+    tela.className = "hero__facetas";
+    tela.setAttribute("aria-hidden", "true");
+    tela.innerHTML = `<svg viewBox="0 0 ${L} ${A}" preserveAspectRatio="xMidYMid slice">${caminhos.join("")}</svg>`;
+    this.raiz.prepend(tela);
+    // pausa a respiração quando a abertura sai da tela
+    new IntersectionObserver(([e]) => tela.classList.toggle("hero__facetas--parado", !e.isIntersecting)).observe(this.raiz);
   }
 
   /** O texto da abertura clareia enquanto a página sobe. */
