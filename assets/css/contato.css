@@ -1,6 +1,6 @@
 /* =========================================================================
    CONTATO
-   O bloco azul que fecha a página (o único bloco de cor cheia do site): o retrato, o título, o texto e um botão
+   O fechamento da página, sem fundo: o título, o texto e um botão
    só (WhatsApp). Abaixo, os canais: WhatsApp, e-mail e redes.
    Também usado na tela final das páginas internas e das de trabalho.
    ========================================================================= */
@@ -22,17 +22,6 @@
   --sobre-cor-rgb: var(--escuro-rgb);
   color: var(--ink);
   text-align: center;
-}
-
-.contato__retrato {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 24px;
-  border-radius: 50%;
-  border: 3px solid rgb(var(--sobre-cor-rgb) / 0.6);
-  object-fit: cover;
-  object-position: 50% 20%;
-  background: var(--espresso);
 }
 
 .contato__titulo {
