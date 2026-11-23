@@ -28,9 +28,10 @@
 .servicos__titulo {
   margin-top: 10px;
   font-size: var(--titulo-secao);
-  font-weight: 650;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 .servicos__lede {
@@ -405,4 +406,15 @@
   .servicos__painel-descricao {
     display: block;
   }
+}
+
+/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
+.servicos__titulo::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 6px;
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  border-radius: 1px;
+  background: var(--terracota);
 }

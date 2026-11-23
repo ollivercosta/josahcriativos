@@ -19,9 +19,10 @@
 
 .depoimentos__titulo {
   font-size: var(--titulo-secao);
-  font-weight: 650;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 .depoimentos__grade {
@@ -180,4 +181,15 @@
   .depoimentos__dados {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
+.depoimentos__titulo::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 6px;
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  border-radius: 1px;
+  background: var(--terracota);
 }

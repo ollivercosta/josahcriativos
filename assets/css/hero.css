@@ -348,56 +348,20 @@
   }
 }
 
-/* ---------- fundo vivo: manchas de cor muito suaves que se movem devagar ---------- */
-.hero::before,
-.hero::after {
-  content: "";
+/* ---------- fundo vivo: uma tela (cerca) de losangos que ondula devagar, desenhada em Hero.js ---------- */
+.hero__tela {
   position: absolute;
+  inset: 0;
   z-index: 0;
-  width: 70vmax;
-  height: 70vmax;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  filter: blur(80px);
-  opacity: 0.16;
-  will-change: transform;
+  /* some nas bordas e embaixo, para não criar emenda com a seção seguinte */
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 30%, transparent 100%);
 }
 
-.hero::before {
-  top: -38vmax;
-  left: -22vmax;
-  background: radial-gradient(closest-side, var(--terracota), transparent);
-  animation: hero-vivo-a 34s ease-in-out infinite alternate;
-}
-
-.hero::after {
-  top: -46vmax;
-  right: -28vmax;
-  background: radial-gradient(closest-side, var(--sucesso), transparent);
-  opacity: 0.14;
-  animation: hero-vivo-b 42s ease-in-out infinite alternate;
-}
-
-@keyframes hero-vivo-a {
-  to {
-    transform: translate(18vmax, 4vmax) scale(1.15);
-  }
-}
-
-@keyframes hero-vivo-b {
-  to {
-    transform: translate(-22vmax, 6vmax) scale(0.9);
-  }
-}
-
-.hero > * {
+.hero > *:not(.hero__tela) {
   position: relative;
   z-index: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero::before,
-  .hero::after {
-    animation: none;
-  }
 }

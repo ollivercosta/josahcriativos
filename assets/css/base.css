@@ -30,6 +30,7 @@
   --terracota-escuro: #30050E;
   --terracota-claro: #F2E6E7;
   --creme: #FBFBFB;
+  --pedra: #ECEEEA; /* claro neutro levemente frio: separa a seção sem puxar para o vinho */
   --ouro: #5A2610;
   --ouro-claro: #EFE7E1;
   --branco: #ffffff;
@@ -45,9 +46,9 @@
      alternam branco e quase branco, com um neutro quente no processo */
   --fundo-hero: var(--creme);
   --fundo-trabalhos: var(--branco);
-  --fundo-manifesto: var(--sucesso);
+  --fundo-manifesto: var(--espresso);
   --fundo-servicos: var(--creme);
-  --fundo-processo: #f3f0eb;
+  --fundo-processo: var(--pedra);
   --fundo-depoimentos: var(--branco);
   --fundo-faq: var(--creme);
   --fundo-contato: var(--creme);
@@ -123,7 +124,7 @@
   --espaco-secao: clamp(80px, 10vw, 136px);
   --espaco-titulo: clamp(32px, 4vw, 56px);
   --altura-cabecalho: 60px;
-  --titulo-secao: clamp(2rem, 3.6vw, 3.25rem);
+  --titulo-secao: clamp(2.5rem, 5.4vw, 4.75rem);
   --titulo-abertura: clamp(2.75rem, 6.4vw, 5.5rem);
 }
 
