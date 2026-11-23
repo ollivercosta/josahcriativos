@@ -145,3 +145,16 @@
   border-radius: 1px;
   background: var(--texto-sobre-cor);
 }
+
+/* atalho para as perguntas frequentes, logo abaixo do botão */
+.contato__duvidas {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: var(--suave);
+}
+
+.contato__duvidas a {
+  color: var(--ink);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}

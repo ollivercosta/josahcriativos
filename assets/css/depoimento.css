@@ -63,3 +63,17 @@
   font-size: 0.95rem;
   color: var(--suave);
 }
+
+.depoimento__mais {
+  display: block;
+  max-width: var(--largura);
+  margin: 24px auto 0;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.depoimento__mais:hover {
+  color: var(--acao);
+}

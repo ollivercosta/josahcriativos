@@ -1,0 +1,29 @@
+/* =========================================================================
+   COMO TRABALHO (/como-trabalho)
+   O índice no topo da página: atalhos para as etapas, os depoimentos e as
+   perguntas frequentes, para ninguém precisar descobrir o que há mais abaixo.
+   ========================================================================= */
+
+.como-trabalho__indice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: calc(var(--altura-cabecalho) + 40px) var(--margem) 0;
+}
+
+.como-trabalho__indice a {
+  padding: 9px 18px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.3s var(--curva);
+}
+
+.como-trabalho__indice a:hover {
+  border-color: var(--ink);
+}
