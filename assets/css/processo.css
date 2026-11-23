@@ -11,7 +11,12 @@
 .processo {
   padding: var(--espaco-secao) var(--margem);
   background: var(--fundo-processo);
-  /* o painel da etapa fica branco sobre o ouro claro */
+  /* nas animações do processo, linhas, bordas e marcas ficam só em preto e cinza:
+     o vermelho não se mistura ao preto aqui */
+  --acao: var(--tinta);
+  --terracota: var(--tinta);
+  --terracota-escuro: var(--tinta);
+  --rotulo: var(--suave);
 }
 
 .processo__cabeca,
@@ -370,7 +375,7 @@
   opacity: 0;
 }
 
-/* o botão começa azul com o texto de antes e, no clique, fica verde com o de depois */
+/* o botão começa preto com o texto de antes e, no clique, troca para o de depois */
 @keyframes processo-botao {
   0%,
   62% {
@@ -764,5 +769,5 @@
   height: 6px;
   margin: 0 0 clamp(18px, 2vw, 26px);
   border-radius: 1px;
-  background: var(--terracota);
+  background: var(--vermelho);
 }

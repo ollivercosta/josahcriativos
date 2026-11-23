@@ -42,10 +42,10 @@
   --petroleo-claro: var(--cinza);
   --linha: #E4E4E4;
   --linha-2: #CFCFCF;
-  --sucesso: #2F6B4F;
-  --sucesso-claro: #E3EFE8;
-  --aviso: #8A5A00;
-  --aviso-claro: #F4EBDD;
+  --sucesso: var(--tinta);
+  --sucesso-claro: var(--cinza);
+  --aviso: #555555;
+  --aviso-claro: var(--cinza);
 
   /* nomes antigos ainda usados nas seções, apontando para a paleta nova */
   --espresso: var(--tinta);
