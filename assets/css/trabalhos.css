@@ -241,35 +241,6 @@
   font-weight: 600;
 }
 
-/* cursor próprio da galeria: um círculo vermelho com "Ver projeto" que segue o mouse */
-.trabalhos__cursor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  width: 104px;
-  height: 104px;
-  margin: -52px 0 0 -52px;
-  border-radius: 50%;
-  background: var(--acao);
-  color: var(--texto-sobre-cor);
-  font-size: 0.82rem;
-  font-weight: 700;
-  pointer-events: none;
-  opacity: 0;
-  scale: 0.4;
-  transition:
-    opacity 0.3s var(--curva),
-    scale 0.4s var(--curva);
-}
-
-.trabalhos__cursor--ativo {
-  opacity: 1;
-  scale: 1;
-}
-
 @media (max-width: 980px) {
   .trabalhos__fileira {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -197,6 +197,7 @@
     <link rel="stylesheet" href="/assets/css/processo.css" />
     <link rel="stylesheet" href="/assets/css/sobre.css" />
     <link rel="stylesheet" href="/assets/css/depoimentos.css" />
+    <link rel="stylesheet" href="/assets/css/depoimento.css" />
     <link rel="stylesheet" href="/assets/css/faq.css" />
     <link rel="stylesheet" href="/assets/css/contato.css" />
     <link rel="stylesheet" href="/assets/css/rodape.css" />
@@ -219,11 +220,10 @@
         </a>
         <nav class="cabecalho__navegacao" aria-label="Principal">
           <ul class="cabecalho__nav">
-            <li class="cabecalho__item"><a class="cabecalho__link" href="/#servicos">Serviços</a></li>
             <li class="cabecalho__item"><a class="cabecalho__link" href="/#projetos">Trabalhos</a></li>
-            <li class="cabecalho__item"><a class="cabecalho__link" href="/#processo">Processo</a></li>
+            <li class="cabecalho__item"><a class="cabecalho__link" href="/#servicos">Serviços</a></li>
+            <li class="cabecalho__item"><a class="cabecalho__link" href="/como-trabalho">Como trabalho</a></li>
             <li class="cabecalho__item"><a class="cabecalho__link" href="/sobre">Sobre</a></li>
-            <li class="cabecalho__item"><a class="cabecalho__link" href="/#faq">FAQ</a></li>
             <li class="cabecalho__item"><a class="cabecalho__link" href="/#contato">Contato</a></li>
           </ul>
           <span class="cabecalho__pilula" aria-hidden="true"></span>
@@ -254,11 +254,10 @@
 
     <div class="menu-movel" id="menu-movel" aria-hidden="true">
       <ul class="menu-movel__lista">
-        <li class="menu-movel__item"><a class="menu-movel__link" href="/#servicos">Serviços</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="/#projetos">Trabalhos</a></li>
-        <li class="menu-movel__item"><a class="menu-movel__link" href="/#processo">Processo</a></li>
+        <li class="menu-movel__item"><a class="menu-movel__link" href="/#servicos">Serviços</a></li>
+        <li class="menu-movel__item"><a class="menu-movel__link" href="/como-trabalho">Como trabalho</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="/sobre">Sobre</a></li>
-        <li class="menu-movel__item"><a class="menu-movel__link" href="/#faq">FAQ</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="/#contato">Contato</a></li>
         <li class="menu-movel__item"><a class="menu-movel__link" href="https://app.josahcriativos.com.br/area.html">Área do cliente</a></li>
       </ul>
@@ -304,118 +303,6 @@
         </div>
       </section>
 
-      <!-- COMO POSSO AJUDAR SEU PROJETO: o mapa liga a frente escolhida ao projeto e aos serviços dela
-           (assets/js/secoes/Servicos.js desenha os fios e troca de frente sozinho enquanto está na tela).
-           Abaixo do mapa, o público e a descrição de cada serviço da frente. -->
-      <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
-        <div class="servicos__cabeca">
-          <p class="servicos__rotulo">Como funciona</p>
-          <h2 class="servicos__titulo" id="servicos-titulo">Como posso ajudar seu projeto</h2>
-          <p class="servicos__lede">Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho.</p>
-        </div>
-        <div class="servicos__mapa">
-          <svg class="servicos__fios" aria-hidden="true"></svg>
-          <div class="servicos__frentes" role="tablist" aria-label="Frentes de serviço">
-            <button type="button" class="servicos__frente" role="tab" id="servicos-aba-1" aria-controls="servicos-painel-1" aria-selected="true">
-              <span class="servicos__frente-nome">Apresentação</span>
-              <span class="servicos__frente-texto">Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.</span>
-            </button>
-            <button type="button" class="servicos__frente" role="tab" id="servicos-aba-2" aria-controls="servicos-painel-2" aria-selected="false" tabindex="-1">
-              <span class="servicos__frente-nome">Digital</span>
-              <span class="servicos__frente-texto">Comunicação online, fluxo de inscrições e relacionamento com o público do evento.</span>
-            </button>
-            <button type="button" class="servicos__frente" role="tab" id="servicos-aba-3" aria-controls="servicos-painel-3" aria-selected="false" tabindex="-1">
-              <span class="servicos__frente-nome">Visual e mídia</span>
-              <span class="servicos__frente-texto">Artes digitais para espaços de eventos, palco e canais de difusão do projeto.</span>
-            </button>
-          </div>
-          <div class="servicos__centro">
-            <span class="servicos__centro-nome">Seu projeto</span>
-            <ul class="servicos__regras">
-              <li class="servicos__regra">Régua de logos na ordem e na proporção do financiador</li>
-              <li class="servicos__regra">Peças dentro das normas do edital</li>
-              <li class="servicos__regra">Arquivos prontos para a prestação de contas</li>
-            </ul>
-          </div>
-          <ul class="servicos__destinos" aria-label="Serviços">
-            <li class="servicos__destino" data-frente="1">Identidade visual e logomarca</li>
-            <li class="servicos__destino" data-frente="1">Book de captação</li>
-            <li class="servicos__destino" data-frente="1">Portfólio artístico</li>
-            <li class="servicos__destino" data-frente="2">Landing pages culturais</li>
-            <li class="servicos__destino" data-frente="2">Formulários e credenciamento</li>
-            <li class="servicos__destino" data-frente="2">Campanhas para redes sociais</li>
-            <li class="servicos__destino" data-frente="3">Artes digitais e material de palco</li>
-            <li class="servicos__destino" data-frente="3">Edição de vídeo</li>
-            <li class="servicos__destino" data-frente="3">Spots para rádio e TV</li>
-          </ul>
-        </div>
-        <div class="servicos__paineis">
-          <div class="servicos__painel" id="servicos-painel-1" role="tabpanel" aria-labelledby="servicos-aba-1">
-            <p class="servicos__painel-descricao">Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.</p>
-            <div class="servicos__publico">
-              <p class="servicos__publico-rotulo">Pensado para</p>
-              <ul class="servicos__publico-lista"><li class="servicos__publico-item">Bancas e pareceristas</li><li class="servicos__publico-item">Patrocinadores</li><li class="servicos__publico-item">Proponentes</li></ul>
-            </div>
-            <dl class="servicos__lista">
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Identidade visual e logomarca</dt>
-                <dd class="servicos__item-texto">A identidade visual define como o projeto é percebido por público, parceiros e financiadores. A logomarca garante reconhecimento imediato em todas as peças, inclusive ao lado das marcas apoiadoras.</dd>
-              </div>
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Book de captação</dt>
-                <dd class="servicos__item-texto">O book de captação reúne proposta, valores e critérios em um documento único. A informação organizada permite que os pareceristas avaliem o projeto com rapidez e segurança.</dd>
-              </div>
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Portfólio artístico</dt>
-                <dd class="servicos__item-texto">O portfólio apresenta a trajetória e comprova a atuação de quem realiza o projeto. O histórico se transforma em credibilidade para a nova proposta.</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="servicos__painel" id="servicos-painel-2" role="tabpanel" aria-labelledby="servicos-aba-2" hidden>
-            <p class="servicos__painel-descricao">Comunicação online, fluxo de inscrições e relacionamento com o público do evento.</p>
-            <div class="servicos__publico">
-              <p class="servicos__publico-rotulo">Pensado para</p>
-              <ul class="servicos__publico-lista"><li class="servicos__publico-item">Público do evento</li><li class="servicos__publico-item">Inscritos e participantes</li><li class="servicos__publico-item">Imprensa</li></ul>
-            </div>
-            <dl class="servicos__lista">
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Landing pages culturais</dt>
-                <dd class="servicos__item-texto">A landing page concentra divulgação, venda de ingressos e formulários de pesquisa em um só endereço. O público encontra tudo no mesmo lugar, venha de qual canal vier.</dd>
-              </div>
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Formulários e credenciamento</dt>
-                <dd class="servicos__item-texto">Os formulários de inscrição, convocatória e credenciamento de imprensa são configurados no Google Forms, na conta do projeto. Eles solicitam apenas o que o regulamento exige, o que agiliza o preenchimento e a seleção.</dd>
-              </div>
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Campanhas para redes sociais</dt>
-                <dd class="servicos__item-texto">As campanhas aplicam identidade visual, logomarca e régua de maneira uniforme em todas as peças. A consistência gera reconhecimento a cada publicação e assegura a presença das marcas parceiras.</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="servicos__painel" id="servicos-painel-3" role="tabpanel" aria-labelledby="servicos-aba-3" hidden>
-            <p class="servicos__painel-descricao">Artes digitais para espaços de eventos, palco e canais de difusão do projeto.</p>
-            <div class="servicos__publico">
-              <p class="servicos__publico-rotulo">Pensado para</p>
-              <ul class="servicos__publico-lista"><li class="servicos__publico-item">Palco e espaço do evento</li><li class="servicos__publico-item">Telas e redes</li><li class="servicos__publico-item">Rádio e TV</li></ul>
-            </div>
-            <dl class="servicos__lista">
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Artes digitais e material de palco</dt>
-                <dd class="servicos__item-texto">Saia de palco, banners, credenciais, camisas e papelaria seguem a linguagem das peças digitais. No evento, esse material assegura a exposição correta das marcas, com a régua de apoio no padrão do financiador.</dd>
-              </div>
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Edição de vídeo</dt>
-                <dd class="servicos__item-texto">Os vídeos apresentam o projeto nas redes sociais e registram a sua realização. Eles funcionam ao mesmo tempo como divulgação e como comprovação da execução.</dd>
-              </div>
-              <div class="servicos__item">
-                <dt class="servicos__item-nome">Spots para rádio e TV</dt>
-                <dd class="servicos__item-texto">Os spots levam o projeto ao rádio e à TV. Com eles, a divulgação alcança um público além das redes sociais.</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </section>
-
       <!-- TRABALHOS: a grade é montada por assets/js/secoes/Trabalhos.js a partir de assets/dados/trabalhos.js
            (destaque: true põe o projeto na primeira fileira, maior) -->
       <section class="trabalhos" id="projetos" aria-labelledby="trabalhos-titulo">
@@ -442,313 +329,57 @@
         </p>
       </section>
 
-      <!-- DO PRIMEIRO CONTATO À ENTREGA: as seis etapas numa linha; cada etapa mostra o texto e uma cena animada
-           do que acontece nela. assets/js/secoes/Processo.js avança sozinho enquanto a seção está na tela. -->
-      <section class="processo" id="processo" aria-labelledby="processo-titulo">
-        <div class="processo__cabeca">
-          <h2 class="processo__titulo" id="processo-titulo">Do primeiro contato à entrega</h2>
-          <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
+      <!-- COMO POSSO AJUDAR SEU PROJETO: índice tipográfico dos serviços, agrupados pelas três frentes.
+           O processo e as perguntas frequentes ficam na página /como-trabalho. -->
+      <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
+        <div class="servicos__cabeca">
+          <h2 class="servicos__titulo" id="servicos-titulo">Como posso ajudar seu projeto</h2>
+          <p class="servicos__lede">Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho.</p>
         </div>
-        <div class="processo__quadro">
-          <div class="processo__trilha">
-            <span class="processo__trilho" aria-hidden="true"><span class="processo__trilho-cheio"></span></span>
-            <ol class="processo__etapas" role="tablist" aria-label="Etapas do trabalho">
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-1" aria-controls="processo-painel-1" aria-selected="true"><span class="processo__numero">1</span><span class="processo__etapa-nome">Briefing</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-2" aria-controls="processo-painel-2" aria-selected="false" tabindex="-1"><span class="processo__numero">2</span><span class="processo__etapa-nome">Proposta e orçamento</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-3" aria-controls="processo-painel-3" aria-selected="false" tabindex="-1"><span class="processo__numero">3</span><span class="processo__etapa-nome">Produção</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-4" aria-controls="processo-painel-4" aria-selected="false" tabindex="-1"><span class="processo__numero">4</span><span class="processo__etapa-nome">Revisão</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-5" aria-controls="processo-painel-5" aria-selected="false" tabindex="-1"><span class="processo__numero">5</span><span class="processo__etapa-nome">Aprovação</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-6" aria-controls="processo-painel-6" aria-selected="false" tabindex="-1"><span class="processo__numero">6</span><span class="processo__etapa-nome">Entrega</span></button></li>
-            </ol>
+        <div class="servicos__indice">
+          <div class="servicos__grupo">
+            <h3 class="servicos__grupo-nome">Apresentação<span class="servicos__grupo-texto">Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.</span></h3>
+            <ul class="servicos__linhas">
+              <li class="servicos__linha"><span class="servicos__nome">Identidade visual e logomarca</span><span class="servicos__texto">Define como o projeto é percebido e garante reconhecimento ao lado das marcas apoiadoras.</span></li>
+              <li class="servicos__linha"><span class="servicos__nome">Book de captação</span><span class="servicos__texto">Proposta, valores e critérios num documento único, para o parecerista avaliar com rapidez.</span></li>
+              <li class="servicos__linha"><span class="servicos__nome">Portfólio artístico</span><span class="servicos__texto">A trajetória de quem realiza, transformada em credibilidade para a nova proposta.</span></li>
+            </ul>
           </div>
-          <div class="processo__paineis">
-          <div class="processo__painel" id="processo-painel-1" role="tabpanel" aria-labelledby="processo-aba-1">
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 1 de 6</p>
-              <h3 class="processo__nome">Briefing</h3>
-              <p class="processo__texto">Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a lista de peças e o cronograma.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Briefing do projeto</p>
-                <ul class="processo__checklist">
-                  <li class="processo__checado">Projeto e proposta</li>
-                  <li class="processo__checado">Público</li>
-                  <li class="processo__checado">Exigências do edital</li>
-                  <li class="processo__checado">Marcas do financiador</li>
-                </ul>
-              </div>
-              <div class="processo__saidas">
-                <span class="processo__selo">Lista de peças</span>
-                <span class="processo__selo">Cronograma</span>
-              </div>
-            </div>
+          <div class="servicos__grupo">
+            <h3 class="servicos__grupo-nome">Digital<span class="servicos__grupo-texto">Comunicação online, fluxo de inscrições e relacionamento com o público do evento.</span></h3>
+            <ul class="servicos__linhas">
+              <li class="servicos__linha"><span class="servicos__nome">Landing pages culturais</span><span class="servicos__texto">Divulgação, ingressos e formulários no mesmo endereço, venha o público de onde vier.</span></li>
+              <li class="servicos__linha"><span class="servicos__nome">Formulários e credenciamento</span><span class="servicos__texto">Inscrição, convocatória e imprensa no Google Forms do projeto, pedindo só o que o regulamento exige.</span></li>
+              <li class="servicos__linha"><span class="servicos__nome">Campanhas para redes sociais</span><span class="servicos__texto">Identidade, logomarca e régua aplicadas com consistência em todas as publicações.</span></li>
+            </ul>
           </div>
-          <div class="processo__painel" id="processo-painel-2" role="tabpanel" aria-labelledby="processo-aba-2" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 2 de 6</p>
-              <h3 class="processo__nome">Proposta e orçamento</h3>
-              <p class="processo__texto">Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao processo__cartao--documento">
-                <p class="processo__cartao-titulo">Proposta</p>
-                <dl class="processo__linhas">
-                  <div class="processo__linha"><dt>Escopo</dt><dd><span class="processo__barra" style="--l: 92%"></span></dd></div>
-                  <div class="processo__linha"><dt>Prazo</dt><dd><span class="processo__barra" style="--l: 54%"></span></dd></div>
-                  <div class="processo__linha"><dt>Valores</dt><dd><span class="processo__barra" style="--l: 70%"></span></dd></div>
-                </dl>
-                <span class="processo__botao"><span class="processo__antes">Aceitar proposta</span><span class="processo__depois">Aceita por escrito</span></span>
-                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
-              </div>
-            </div>
+          <div class="servicos__grupo">
+            <h3 class="servicos__grupo-nome">Visual e mídia<span class="servicos__grupo-texto">Artes digitais para espaços de eventos, palco e canais de difusão do projeto.</span></h3>
+            <ul class="servicos__linhas">
+              <li class="servicos__linha"><span class="servicos__nome">Artes digitais e material de palco</span><span class="servicos__texto">Saia de palco, banners, credenciais e papelaria com a régua no padrão do financiador.</span></li>
+              <li class="servicos__linha"><span class="servicos__nome">Edição de vídeo</span><span class="servicos__texto">Divulgação nas redes e, ao mesmo tempo, comprovação da execução.</span></li>
+              <li class="servicos__linha"><span class="servicos__nome">Spots para rádio e TV</span><span class="servicos__texto">Levam o projeto a um público além das redes sociais.</span></li>
+            </ul>
           </div>
-          <div class="processo__painel" id="processo-painel-3" role="tabpanel" aria-labelledby="processo-aba-3" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 3 de 6</p>
-              <h3 class="processo__nome">Produção</h3>
-              <p class="processo__texto">Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do material recebido.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Cronograma de produção</p>
-                <ul class="processo__gantt">
-                  <li class="processo__tarefa" style="--i: 0; --de: 0%; --ate: 38%"><span>Identidade visual</span><i></i></li>
-                  <li class="processo__tarefa" style="--i: 1; --de: 30%; --ate: 70%"><span>Book de captação</span><i></i></li>
-                  <li class="processo__tarefa" style="--i: 2; --de: 52%; --ate: 84%"><span>Redes sociais</span><i></i></li>
-                  <li class="processo__tarefa" style="--i: 3; --de: 70%; --ate: 100%"><span>Material de palco</span><i></i></li>
-                </ul>
-                <p class="processo__nota">Primeiro o que o prazo mais exige</p>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-4" role="tabpanel" aria-labelledby="processo-aba-4" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 4 de 6</p>
-              <h3 class="processo__nome">Revisão</h3>
-              <p class="processo__texto">Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Revisão da entrega</p>
-                <div class="processo__prancha">
-                  <span class="processo__forma processo__forma--a"></span>
-                  <span class="processo__forma processo__forma--b"></span>
-                  <span class="processo__forma processo__forma--c"></span>
-                  <span class="processo__pino" style="--i: 0; --x: 22%; --y: 30%">1</span>
-                  <span class="processo__pino" style="--i: 1; --x: 70%; --y: 24%">2</span>
-                  <span class="processo__pino" style="--i: 2; --x: 56%; --y: 72%">3</span>
-                </div>
-                <div class="processo__rodadas">
-                  <span class="processo__rodada" style="--i: 0">Rodada 1</span>
-                  <span class="processo__rodada" style="--i: 1">Rodada 2</span>
-                  <span class="processo__rodada" style="--i: 2">Rodada 3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-5" role="tabpanel" aria-labelledby="processo-aba-5" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 5 de 6</p>
-              <h3 class="processo__nome">Aprovação</h3>
-              <p class="processo__texto">O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Aprovação</p>
-                <div class="processo__aprova">
-                  <span class="processo__aprova-nome">Peças finais</span>
-                  <span class="processo__botao processo__botao--aprovar"><span class="processo__antes">Aprovar</span><span class="processo__depois">Aprovado</span></span>
-                </div>
-                <div class="processo__aprova">
-                  <span class="processo__aprova-nome">Saldo da proposta</span>
-                  <span class="processo__estado"><span class="processo__antes">Pendente</span><span class="processo__depois">Pago</span></span>
-                </div>
-                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-6" role="tabpanel" aria-labelledby="processo-aba-6" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 6 de 6</p>
-              <h3 class="processo__nome">Entrega</h3>
-              <p class="processo__texto">Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Arquivos finais</p>
-                <ul class="processo__arquivos">
-                  <li class="processo__arquivo" style="--i: 0"><span>book-de-captacao.pdf</span><i></i></li>
-                  <li class="processo__arquivo" style="--i: 1"><span>identidade-visual.svg</span><i></i></li>
-                  <li class="processo__arquivo" style="--i: 2"><span>campanha-redes.png</span><i></i></li>
-                  <li class="processo__arquivo" style="--i: 3"><span>spot-radio.mp3</span><i></i></li>
-                </ul>
-                <p class="processo__nota processo__nota--ok">Liberados após a compensação do pagamento</p>
-              </div>
-            </div>
-          </div>
-          </div>
+        </div>
+        <div class="servicos__rodape">
+          <p class="servicos__regras">Em todo projeto: régua de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a prestação de contas.</p>
+          <a class="servicos__link" href="/como-trabalho">Veja como trabalho, etapa por etapa</a>
         </div>
       </section>
 
-      <!-- DEPOIMENTOS: para incluir outro, copie um <li> das abas (com aria-controls novo)
-           e um <figure> do palco (com o id correspondente). -->
-      <section class="depoimentos" id="depoimentos" aria-labelledby="depoimentos-titulo">
-        <h2 class="depoimentos__titulo" id="depoimentos-titulo">Quem já trabalhou comigo</h2>
-        <div class="depoimentos__grade">
-          <ul class="depoimentos__nomes" role="tablist" aria-label="Depoimentos">
-            <li class="depoimentos__nome-item" role="presentation">
-              <button
-                type="button"
-                class="depoimentos__aba"
-                role="tab"
-                aria-selected="true"
-                aria-controls="depoimento-1"
-                tabindex="0"
-              >
-                <span class="depoimentos__aba-conteudo">
-                  <b class="depoimentos__aba-nome">Flávio Baianino</b>
-                  Presidente da ONG ACUBA
-                </span>
-              </button>
-            </li>
-            <li class="depoimentos__nome-item" role="presentation">
-              <button
-                type="button"
-                class="depoimentos__aba"
-                role="tab"
-                aria-selected="false"
-                aria-controls="depoimento-2"
-                tabindex="-1"
-              >
-                <span class="depoimentos__aba-conteudo">
-                  <b class="depoimentos__aba-nome">Vinicius Freitas</b>
-                  Maestro da Orquestra Jovem do Recôncavo
-                </span>
-              </button>
-            </li>
-          </ul>
-          <div class="depoimentos__palco">
-            <figure
-              class="depoimentos__item depoimentos__item--ativo"
-              id="depoimento-1"
-              role="tabpanel"
-              aria-hidden="false"
-            >
-              <blockquote class="depoimentos__citacao">
-                Josah é um profissional diferenciado, com uma contribuição muito importante para a trajetória da ONG
-                ACUBA. Ao longo dessa parceria, fortaleceu nossos projetos com seu talento na música, no design, na
-                comunicação digital e nas ações sociais, também contribuindo como secretário de comunicação. Só tenho a
-                agradecer por essa conexão e por ter esse grande parceiro ao nosso lado, somando forças e fortalecendo a
-                cultura e a transformação social.
-              </blockquote>
-              <dl class="depoimentos__dados">
-                <div class="depoimentos__dado">
-                  <dt class="depoimentos__dado-rotulo">Projeto</dt>
-                  <dd class="depoimentos__dado-valor">ONG ACUBA</dd>
-                </div>
-                <div class="depoimentos__dado">
-                  <dt class="depoimentos__dado-rotulo">Serviço</dt>
-                  <dd class="depoimentos__dado-valor">Design e comunicação digital</dd>
-                </div>
-                <div class="depoimentos__dado">
-                  <dt class="depoimentos__dado-rotulo">Fomento</dt>
-                  <dd class="depoimentos__dado-valor">Lei Paulo Gustavo</dd>
-                </div>
-              </dl>
-            </figure>
-            <figure class="depoimentos__item" id="depoimento-2" role="tabpanel" aria-hidden="true">
-              <blockquote class="depoimentos__citacao">
-                Trabalhar com o designer Josah está sendo uma experiência fantástica, sua percepção e capacidade de
-                colocar em prática nossas ideias é algo surreal. Particularmente, eu o conhecia desenvolvendo trabalhos
-                musicais excelentes e não imaginava que ele poderia impulsionar nossa comunicação visual. Agradeço pela
-                parceria e dedicação, vida longa ao Josah!
-              </blockquote>
-              <dl class="depoimentos__dados">
-                <div class="depoimentos__dado">
-                  <dt class="depoimentos__dado-rotulo">Projeto</dt>
-                  <dd class="depoimentos__dado-valor">Orquestra Jovem do Recôncavo</dd>
-                </div>
-                <div class="depoimentos__dado">
-                  <dt class="depoimentos__dado-rotulo">Serviço</dt>
-                  <dd class="depoimentos__dado-valor">Identidade visual e peças do projeto</dd>
-                </div>
-                <div class="depoimentos__dado">
-                  <dt class="depoimentos__dado-rotulo">Fomento</dt>
-                  <dd class="depoimentos__dado-valor">Fazcultura</dd>
-                </div>
-              </dl>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- ANTES DE COMEÇAR: perguntas frequentes -->
-      <section class="faq" id="faq" aria-labelledby="faq-titulo">
-        <div class="faq__lado">
-          <h2 class="faq__titulo" id="faq-titulo">Antes de começar.</h2>
-          <p class="faq__lede">
-            Respostas diretas sobre contratação e entrega. Em caso de dúvida, valem a proposta e os
-            <button type="button" class="faq__termos" data-abrir="termos">Termos de Uso</button>.
-          </p>
-        </div>
-        <div class="faq__lista">
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto">A elaboração escrita do projeto está incluída?</span>
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                Não. Josah Oliveira atua na direção de arte e no design estratégico: cria as artes de que o projeto precisa para se apresentar, como marca, páginas na web, campanhas para redes sociais e materiais de palco e evento, sempre em formato digital. Para elaboração e gestão de projetos culturais, a indicação é a Tabuleiro Produções, sem qualquer obrigação de contratação.
-              </p>
-            </div>
-          </details>
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto">E quando não se sabe quais artes o projeto precisa?</span>
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                O briefing serve para isso. A partir dele, Josah Oliveira analisa o evento e sugere o conjunto de peças adequado ao projeto. Entram no escopo apenas as peças aceitas pelo cliente na proposta.
-              </p>
-            </div>
-          </details>
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto">Projetos com urgência são atendidos?</span>
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                Sim, conforme a agenda. O primeiro passo é entender em que etapa o projeto está e avaliar a viabilidade. Se o prazo não permitir criar tudo de uma vez, o indispensável é priorizado e o restante é finalizado na sequência. As entregas priorizadas podem ter condições diferenciadas, informadas antes do aceite da proposta.
-              </p>
-            </div>
-          </details>
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto">Existe formalização contratual e emissão de Nota Fiscal?</span>
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                Sim. A contratação é formalizada por contrato de prestação de serviços ou, em serviços únicos, por proposta aceita por escrito. A cada pagamento é emitida Nota Fiscal de Serviços Avulsa, para uso na prestação de contas. Como regra, o pagamento é de 50% na entrada, que inicia o trabalho, e 50% na aprovação final. A proposta pode prever outra condição.
-              </p>
-            </div>
-          </details>
-          <details class="faq__item" name="faq">
-            <summary class="faq__pergunta">
-              <span class="faq__pergunta-texto">Os materiais impressos estão incluídos?</span>
-              <span class="faq__sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="faq__resposta">
-              <p class="faq__resposta-texto">
-                Não. Todos os serviços são prestados e entregues de forma digital, em arquivo pronto para produção. Josah Oliveira não realiza impressão nem produção gráfica e não contrata nem intermedeia gráficas ou fornecedores. Essa contratação e os custos ficam a cargo do cliente.
-              </p>
-            </div>
-          </details>
-        </div>
+      <!-- DEPOIMENTO: uma voz só, grande. Os demais depoimentos ficam em /como-trabalho. -->
+      <section class="depoimento" aria-labelledby="depoimento-titulo">
+        <h2 class="depoimento__titulo" id="depoimento-titulo">Quem já trabalhou comigo</h2>
+        <figure class="depoimento__figura">
+          <blockquote class="depoimento__citacao">
+            <p>Trabalhar com o designer Josah está sendo uma experiência fantástica, sua percepção e capacidade de colocar em prática nossas ideias é algo surreal. Particularmente, eu o conhecia desenvolvendo trabalhos musicais excelentes e não imaginava que ele poderia impulsionar nossa comunicação visual. Agradeço pela parceria e dedicação, vida longa ao Josah!</p>
+          </blockquote>
+          <figcaption class="depoimento__autor">
+            <b class="depoimento__nome">Vinicius Freitas</b>
+            <span class="depoimento__cargo">Maestro da Orquestra Jovem do Recôncavo</span>
+          </figcaption>
+        </figure>
       </section>
 
       <!-- CONTATO: a faixa azul que fecha a página, com um botão só -->

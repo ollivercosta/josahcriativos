@@ -57,11 +57,12 @@
 
   /* fundos por seção, na ordem da página */
   --fundo-hero: var(--branco);
-  --fundo-servicos: var(--cinza);
+  --fundo-servicos: var(--branco);
   --fundo-trabalhos: var(--branco);
   --fundo-manifesto: var(--tinta);
   --fundo-processo: var(--cinza);
   --fundo-depoimentos: var(--branco);
+  --fundo-depoimento: var(--cinza);
   --fundo-faq: var(--cinza);
   --fundo-contato: var(--branco);
   --fundo-faixa-contato: var(--vermelho);

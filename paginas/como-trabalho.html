@@ -1,0 +1,315 @@
+<!--
+  COMO TRABALHO (/como-trabalho)
+  Só o conteúdo da página. O build (ferramentas/build.mjs) junta com o cabeçalho,
+  a tela final de contato e o rodapé do index.html.
+  Reúne o que saiu da inicial: o processo em seis etapas, os depoimentos e as perguntas frequentes.
+-->
+      <!-- DO PRIMEIRO CONTATO À ENTREGA: as seis etapas numa linha; cada etapa mostra o texto e uma cena animada
+           do que acontece nela. assets/js/secoes/Processo.js avança sozinho enquanto a seção está na tela. -->
+      <section class="processo" id="processo" aria-labelledby="processo-titulo">
+        <div class="processo__cabeca">
+          <h1 class="processo__titulo" id="processo-titulo">Do primeiro contato à entrega</h1>
+          <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
+        </div>
+        <div class="processo__quadro">
+          <div class="processo__trilha">
+            <span class="processo__trilho" aria-hidden="true"><span class="processo__trilho-cheio"></span></span>
+            <ol class="processo__etapas" role="tablist" aria-label="Etapas do trabalho">
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-1" aria-controls="processo-painel-1" aria-selected="true"><span class="processo__numero">1</span><span class="processo__etapa-nome">Briefing</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-2" aria-controls="processo-painel-2" aria-selected="false" tabindex="-1"><span class="processo__numero">2</span><span class="processo__etapa-nome">Proposta e orçamento</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-3" aria-controls="processo-painel-3" aria-selected="false" tabindex="-1"><span class="processo__numero">3</span><span class="processo__etapa-nome">Produção</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-4" aria-controls="processo-painel-4" aria-selected="false" tabindex="-1"><span class="processo__numero">4</span><span class="processo__etapa-nome">Revisão</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-5" aria-controls="processo-painel-5" aria-selected="false" tabindex="-1"><span class="processo__numero">5</span><span class="processo__etapa-nome">Aprovação</span></button></li>
+          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-6" aria-controls="processo-painel-6" aria-selected="false" tabindex="-1"><span class="processo__numero">6</span><span class="processo__etapa-nome">Entrega</span></button></li>
+            </ol>
+          </div>
+          <div class="processo__paineis">
+          <div class="processo__painel" id="processo-painel-1" role="tabpanel" aria-labelledby="processo-aba-1">
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 1 de 6</p>
+              <h3 class="processo__nome">Briefing</h3>
+              <p class="processo__texto">Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a lista de peças e o cronograma.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Briefing do projeto</p>
+                <ul class="processo__checklist">
+                  <li class="processo__checado">Projeto e proposta</li>
+                  <li class="processo__checado">Público</li>
+                  <li class="processo__checado">Exigências do edital</li>
+                  <li class="processo__checado">Marcas do financiador</li>
+                </ul>
+              </div>
+              <div class="processo__saidas">
+                <span class="processo__selo">Lista de peças</span>
+                <span class="processo__selo">Cronograma</span>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-2" role="tabpanel" aria-labelledby="processo-aba-2" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 2 de 6</p>
+              <h3 class="processo__nome">Proposta e orçamento</h3>
+              <p class="processo__texto">Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao processo__cartao--documento">
+                <p class="processo__cartao-titulo">Proposta</p>
+                <dl class="processo__linhas">
+                  <div class="processo__linha"><dt>Escopo</dt><dd><span class="processo__barra" style="--l: 92%"></span></dd></div>
+                  <div class="processo__linha"><dt>Prazo</dt><dd><span class="processo__barra" style="--l: 54%"></span></dd></div>
+                  <div class="processo__linha"><dt>Valores</dt><dd><span class="processo__barra" style="--l: 70%"></span></dd></div>
+                </dl>
+                <span class="processo__botao"><span class="processo__antes">Aceitar proposta</span><span class="processo__depois">Aceita por escrito</span></span>
+                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-3" role="tabpanel" aria-labelledby="processo-aba-3" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 3 de 6</p>
+              <h3 class="processo__nome">Produção</h3>
+              <p class="processo__texto">Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do material recebido.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Cronograma de produção</p>
+                <ul class="processo__gantt">
+                  <li class="processo__tarefa" style="--i: 0; --de: 0%; --ate: 38%"><span>Identidade visual</span><i></i></li>
+                  <li class="processo__tarefa" style="--i: 1; --de: 30%; --ate: 70%"><span>Book de captação</span><i></i></li>
+                  <li class="processo__tarefa" style="--i: 2; --de: 52%; --ate: 84%"><span>Redes sociais</span><i></i></li>
+                  <li class="processo__tarefa" style="--i: 3; --de: 70%; --ate: 100%"><span>Material de palco</span><i></i></li>
+                </ul>
+                <p class="processo__nota">Primeiro o que o prazo mais exige</p>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-4" role="tabpanel" aria-labelledby="processo-aba-4" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 4 de 6</p>
+              <h3 class="processo__nome">Revisão</h3>
+              <p class="processo__texto">Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Revisão da entrega</p>
+                <div class="processo__prancha">
+                  <span class="processo__forma processo__forma--a"></span>
+                  <span class="processo__forma processo__forma--b"></span>
+                  <span class="processo__forma processo__forma--c"></span>
+                  <span class="processo__pino" style="--i: 0; --x: 22%; --y: 30%">1</span>
+                  <span class="processo__pino" style="--i: 1; --x: 70%; --y: 24%">2</span>
+                  <span class="processo__pino" style="--i: 2; --x: 56%; --y: 72%">3</span>
+                </div>
+                <div class="processo__rodadas">
+                  <span class="processo__rodada" style="--i: 0">Rodada 1</span>
+                  <span class="processo__rodada" style="--i: 1">Rodada 2</span>
+                  <span class="processo__rodada" style="--i: 2">Rodada 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-5" role="tabpanel" aria-labelledby="processo-aba-5" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 5 de 6</p>
+              <h3 class="processo__nome">Aprovação</h3>
+              <p class="processo__texto">O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Aprovação</p>
+                <div class="processo__aprova">
+                  <span class="processo__aprova-nome">Peças finais</span>
+                  <span class="processo__botao processo__botao--aprovar"><span class="processo__antes">Aprovar</span><span class="processo__depois">Aprovado</span></span>
+                </div>
+                <div class="processo__aprova">
+                  <span class="processo__aprova-nome">Saldo da proposta</span>
+                  <span class="processo__estado"><span class="processo__antes">Pendente</span><span class="processo__depois">Pago</span></span>
+                </div>
+                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="processo__painel" id="processo-painel-6" role="tabpanel" aria-labelledby="processo-aba-6" hidden>
+            <div class="processo__info">
+              <p class="processo__passo">Etapa 6 de 6</p>
+              <h3 class="processo__nome">Entrega</h3>
+              <p class="processo__texto">Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.</p>
+            </div>
+            <div class="processo__cena" aria-hidden="true">
+              <div class="processo__cartao">
+                <p class="processo__cartao-titulo">Arquivos finais</p>
+                <ul class="processo__arquivos">
+                  <li class="processo__arquivo" style="--i: 0"><span>book-de-captacao.pdf</span><i></i></li>
+                  <li class="processo__arquivo" style="--i: 1"><span>identidade-visual.svg</span><i></i></li>
+                  <li class="processo__arquivo" style="--i: 2"><span>campanha-redes.png</span><i></i></li>
+                  <li class="processo__arquivo" style="--i: 3"><span>spot-radio.mp3</span><i></i></li>
+                </ul>
+                <p class="processo__nota processo__nota--ok">Liberados após a compensação do pagamento</p>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPOIMENTOS: para incluir outro, copie um <li> das abas (com aria-controls novo)
+           e um <figure> do palco (com o id correspondente). -->
+      <section class="depoimentos" id="depoimentos" aria-labelledby="depoimentos-titulo">
+        <h2 class="depoimentos__titulo" id="depoimentos-titulo">Quem já trabalhou comigo</h2>
+        <div class="depoimentos__grade">
+          <ul class="depoimentos__nomes" role="tablist" aria-label="Depoimentos">
+            <li class="depoimentos__nome-item" role="presentation">
+              <button
+                type="button"
+                class="depoimentos__aba"
+                role="tab"
+                aria-selected="true"
+                aria-controls="depoimento-1"
+                tabindex="0"
+              >
+                <span class="depoimentos__aba-conteudo">
+                  <b class="depoimentos__aba-nome">Flávio Baianino</b>
+                  Presidente da ONG ACUBA
+                </span>
+              </button>
+            </li>
+            <li class="depoimentos__nome-item" role="presentation">
+              <button
+                type="button"
+                class="depoimentos__aba"
+                role="tab"
+                aria-selected="false"
+                aria-controls="depoimento-2"
+                tabindex="-1"
+              >
+                <span class="depoimentos__aba-conteudo">
+                  <b class="depoimentos__aba-nome">Vinicius Freitas</b>
+                  Maestro da Orquestra Jovem do Recôncavo
+                </span>
+              </button>
+            </li>
+          </ul>
+          <div class="depoimentos__palco">
+            <figure
+              class="depoimentos__item depoimentos__item--ativo"
+              id="depoimento-1"
+              role="tabpanel"
+              aria-hidden="false"
+            >
+              <blockquote class="depoimentos__citacao">
+                Josah é um profissional diferenciado, com uma contribuição muito importante para a trajetória da ONG
+                ACUBA. Ao longo dessa parceria, fortaleceu nossos projetos com seu talento na música, no design, na
+                comunicação digital e nas ações sociais, também contribuindo como secretário de comunicação. Só tenho a
+                agradecer por essa conexão e por ter esse grande parceiro ao nosso lado, somando forças e fortalecendo a
+                cultura e a transformação social.
+              </blockquote>
+              <dl class="depoimentos__dados">
+                <div class="depoimentos__dado">
+                  <dt class="depoimentos__dado-rotulo">Projeto</dt>
+                  <dd class="depoimentos__dado-valor">ONG ACUBA</dd>
+                </div>
+                <div class="depoimentos__dado">
+                  <dt class="depoimentos__dado-rotulo">Serviço</dt>
+                  <dd class="depoimentos__dado-valor">Design e comunicação digital</dd>
+                </div>
+                <div class="depoimentos__dado">
+                  <dt class="depoimentos__dado-rotulo">Fomento</dt>
+                  <dd class="depoimentos__dado-valor">Lei Paulo Gustavo</dd>
+                </div>
+              </dl>
+            </figure>
+            <figure class="depoimentos__item" id="depoimento-2" role="tabpanel" aria-hidden="true">
+              <blockquote class="depoimentos__citacao">
+                Trabalhar com o designer Josah está sendo uma experiência fantástica, sua percepção e capacidade de
+                colocar em prática nossas ideias é algo surreal. Particularmente, eu o conhecia desenvolvendo trabalhos
+                musicais excelentes e não imaginava que ele poderia impulsionar nossa comunicação visual. Agradeço pela
+                parceria e dedicação, vida longa ao Josah!
+              </blockquote>
+              <dl class="depoimentos__dados">
+                <div class="depoimentos__dado">
+                  <dt class="depoimentos__dado-rotulo">Projeto</dt>
+                  <dd class="depoimentos__dado-valor">Orquestra Jovem do Recôncavo</dd>
+                </div>
+                <div class="depoimentos__dado">
+                  <dt class="depoimentos__dado-rotulo">Serviço</dt>
+                  <dd class="depoimentos__dado-valor">Identidade visual e peças do projeto</dd>
+                </div>
+                <div class="depoimentos__dado">
+                  <dt class="depoimentos__dado-rotulo">Fomento</dt>
+                  <dd class="depoimentos__dado-valor">Fazcultura</dd>
+                </div>
+              </dl>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANTES DE COMEÇAR: perguntas frequentes -->
+      <section class="faq" id="faq" aria-labelledby="faq-titulo">
+        <div class="faq__lado">
+          <h2 class="faq__titulo" id="faq-titulo">Antes de começar.</h2>
+          <p class="faq__lede">
+            Respostas diretas sobre contratação e entrega. Em caso de dúvida, valem a proposta e os
+            <button type="button" class="faq__termos" data-abrir="termos">Termos de Uso</button>.
+          </p>
+        </div>
+        <div class="faq__lista">
+          <details class="faq__item" name="faq">
+            <summary class="faq__pergunta">
+              <span class="faq__pergunta-texto">A elaboração escrita do projeto está incluída?</span>
+              <span class="faq__sinal" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__resposta">
+              <p class="faq__resposta-texto">
+                Não. Josah Oliveira atua na direção de arte e no design estratégico: cria as artes de que o projeto precisa para se apresentar, como marca, páginas na web, campanhas para redes sociais e materiais de palco e evento, sempre em formato digital. Para elaboração e gestão de projetos culturais, a indicação é a Tabuleiro Produções, sem qualquer obrigação de contratação.
+              </p>
+            </div>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary class="faq__pergunta">
+              <span class="faq__pergunta-texto">E quando não se sabe quais artes o projeto precisa?</span>
+              <span class="faq__sinal" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__resposta">
+              <p class="faq__resposta-texto">
+                O briefing serve para isso. A partir dele, Josah Oliveira analisa o evento e sugere o conjunto de peças adequado ao projeto. Entram no escopo apenas as peças aceitas pelo cliente na proposta.
+              </p>
+            </div>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary class="faq__pergunta">
+              <span class="faq__pergunta-texto">Projetos com urgência são atendidos?</span>
+              <span class="faq__sinal" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__resposta">
+              <p class="faq__resposta-texto">
+                Sim, conforme a agenda. O primeiro passo é entender em que etapa o projeto está e avaliar a viabilidade. Se o prazo não permitir criar tudo de uma vez, o indispensável é priorizado e o restante é finalizado na sequência. As entregas priorizadas podem ter condições diferenciadas, informadas antes do aceite da proposta.
+              </p>
+            </div>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary class="faq__pergunta">
+              <span class="faq__pergunta-texto">Existe formalização contratual e emissão de Nota Fiscal?</span>
+              <span class="faq__sinal" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__resposta">
+              <p class="faq__resposta-texto">
+                Sim. A contratação é formalizada por contrato de prestação de serviços ou, em serviços únicos, por proposta aceita por escrito. A cada pagamento é emitida Nota Fiscal de Serviços Avulsa, para uso na prestação de contas. Como regra, o pagamento é de 50% na entrada, que inicia o trabalho, e 50% na aprovação final. A proposta pode prever outra condição.
+              </p>
+            </div>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary class="faq__pergunta">
+              <span class="faq__pergunta-texto">Os materiais impressos estão incluídos?</span>
+              <span class="faq__sinal" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__resposta">
+              <p class="faq__resposta-texto">
+                Não. Todos os serviços são prestados e entregues de forma digital, em arquivo pronto para produção. Josah Oliveira não realiza impressão nem produção gráfica e não contrata nem intermedeia gráficas ou fornecedores. Essa contratação e os custos ficam a cargo do cliente.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+

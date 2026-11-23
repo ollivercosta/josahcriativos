@@ -1,10 +1,9 @@
 /* =========================================================================
    COMO POSSO AJUDAR SEU PROJETO (serviços)
-   O título e o texto. Abaixo, o mapa: as frentes à esquerda, o projeto no
-   meio e os serviços à direita, ligados por fios desenhados no SVG
-   (Servicos.js). A frente escolhida tem uma barra de tempo da troca
-   automática; os serviços dela acendem. Embaixo do mapa, o público e a
-   descrição dos serviços da frente, em três colunas.
+   Índice tipográfico: à esquerda, o nome de cada frente (fica parado enquanto
+   a lista dela passa); à direita, os serviços em linhas, com o nome grande e
+   uma frase curta. Abaixo, as regras que valem para todo projeto e o link
+   para a página /como-trabalho.
    ========================================================================= */
 
 .servicos {
@@ -13,25 +12,29 @@
 }
 
 .servicos__cabeca,
-.servicos__mapa,
-.servicos__paineis {
+.servicos__indice,
+.servicos__rodape {
   max-width: var(--largura);
   margin-inline: auto;
 }
 
-.servicos__rotulo {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--rotulo);
-}
-
 .servicos__titulo {
-  margin-top: 10px;
   font-size: var(--titulo-secao);
   font-weight: 750;
   line-height: 1;
   letter-spacing: -0.045em;
   text-wrap: balance;
+}
+
+/* marca do título: uma barra curta e grossa na cor de ação */
+.servicos__titulo::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 6px;
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  border-radius: 1px;
+  background: var(--terracota);
 }
 
 .servicos__lede {
@@ -41,380 +44,119 @@
   color: var(--suave);
 }
 
-/* ---------- o mapa ---------- */
-.servicos__mapa {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.85fr) minmax(0, 1fr);
-  align-items: center;
-  column-gap: clamp(64px, 9vw, 128px);
+.servicos__indice {
   margin-top: var(--espaco-titulo);
+  border-top: 2px solid var(--ink);
 }
 
-.servicos__fios {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.servicos__fio {
-  fill: none;
-  stroke: var(--linha-2);
-  stroke-width: 1.5;
-  opacity: 0.7;
-}
-
-.servicos__fio--aceso {
-  stroke: var(--terracota);
-  stroke-width: 2;
-  opacity: 1;
-}
-
-@keyframes servicos-traco {
-  from {
-    stroke-dashoffset: 1;
-  }
-}
-
-.servicos__fio--entra {
-  stroke-dasharray: 1;
-  animation: servicos-traco 0.9s var(--curva) both;
-}
-
-.servicos__pulso {
-  fill: var(--terracota-claro);
-}
-
-.servicos__frentes {
-  position: relative;
+.servicos__grupo {
   display: grid;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+  gap: clamp(20px, 4vw, 64px);
+  padding: clamp(24px, 3vw, 36px) 0;
+  border-bottom: 1px solid var(--borda-forte);
 }
 
-.servicos__frente {
-  position: relative;
-  overflow: hidden;
+.servicos__grupo-nome {
+  position: sticky;
+  top: calc(var(--altura-cabecalho) + 24px);
+  align-self: start;
   display: grid;
-  gap: 6px;
-  padding: 18px 20px 20px;
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
-  background: var(--superficie);
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background-color 0.4s var(--curva),
-    border-color 0.4s var(--curva),
-    box-shadow 0.4s var(--curva);
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--acao);
 }
 
-.servicos__frente:hover {
-  border-color: var(--linha);
-}
-
-.servicos__frente[aria-selected="true"] {
-  border-color: var(--terracota);
-  background: var(--superficie);
-  box-shadow: var(--sombra);
-}
-
-.servicos__frente-nome {
-  font-size: 1.15rem;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.servicos__frente-texto {
-  font-size: 0.92rem;
-  line-height: 1.45;
+.servicos__grupo-texto {
+  max-width: 22em;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--suave);
 }
 
-/* a barra de tempo da troca automática, na base da frente escolhida */
-.servicos__frente::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: var(--acao);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
+.servicos__linhas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-@keyframes servicos-tempo {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+.servicos__linha {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 8px 32px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--borda);
 }
 
-.servicos__frente--contando::after {
-  animation: servicos-tempo var(--tempo, 5s) linear both;
+.servicos__linha:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
-.servicos__centro {
-  position: relative;
-  padding: 24px;
-  border-radius: var(--raio-g);
-  background:
-    radial-gradient(90% 80% at 50% 0%, var(--azul-2) 0%, transparent 75%),
-    var(--azul);
-  color: var(--texto-sobre-cor);
-  box-shadow: 0 24px 50px -24px rgb(var(--sombra-rgb) / 0.6);
-}
-
-.servicos__centro-nome {
-  display: block;
-  font-size: 1.3rem;
+.servicos__nome {
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  transition:
+    color 0.3s var(--curva),
+    transform 0.45s var(--curva);
+}
+
+.servicos__texto {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--suave);
+}
+
+@media (hover: hover) {
+  .servicos__linha:hover .servicos__nome {
+    color: var(--acao);
+    transform: translateX(8px);
+  }
+}
+
+.servicos__rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 40px;
+  margin-top: 32px;
 }
 
 .servicos__regras {
-  display: grid;
-  gap: 10px;
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
+  max-width: 46em;
+  font-size: 0.98rem;
+  color: var(--suave);
 }
 
-.servicos__regra {
-  position: relative;
-  padding-left: 22px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: var(--linha);
-}
-
-.servicos__regra::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.35em;
-  width: 12px;
-  height: 7px;
-  border-left: 2px solid var(--ouro);
-  border-bottom: 2px solid var(--ouro);
-  transform: rotate(-45deg);
-}
-
-.servicos__destinos {
-  position: relative;
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.servicos__destino {
-  padding: 10px 16px;
-  border: 1px solid var(--borda);
+.servicos__link {
+  flex: none;
+  padding: 13px 26px;
   border-radius: 999px;
-  background: var(--superficie);
-  color: var(--suave);
-  font-size: 0.92rem;
-  font-weight: 500;
-  transition:
-    background-color 0.45s var(--curva),
-    border-color 0.45s var(--curva),
-    color 0.45s var(--curva);
-}
-
-.servicos__destino--aceso {
-  border-color: var(--terracota);
-  background: var(--terracota-claro);
-  color: var(--terracota-escuro);
+  background: var(--acao-2);
+  color: var(--texto-sobre-cor);
   font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s var(--curva);
 }
 
-/* ---------- o detalhe da frente ---------- */
-.servicos__paineis {
-  margin-top: clamp(40px, 5vw, 64px);
+.servicos__link:hover {
+  background: var(--acao);
 }
 
-.servicos__painel {
-  display: grid;
-  gap: 20px;
-}
-
-.servicos__painel[hidden] {
-  display: none;
-}
-
-.servicos__painel:not([hidden]) .servicos__item {
-  animation: servicos-troca 0.6s var(--curva) both;
-}
-
-.servicos__painel:not([hidden]) .servicos__item:nth-child(2) {
-  animation-delay: 0.07s;
-}
-
-.servicos__painel:not([hidden]) .servicos__item:nth-child(3) {
-  animation-delay: 0.14s;
-}
-
-@keyframes servicos-troca {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-}
-
-/* a descrição da frente repete o texto do mapa; só aparece no celular, onde o mapa vira abas */
-.servicos__painel-descricao {
-  display: none;
-  font-size: 1.05rem;
-  color: var(--texto);
-}
-
-.servicos__publico {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
-}
-
-.servicos__publico-rotulo {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.servicos__publico-lista {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.servicos__publico-item {
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--ouro-claro);
-  color: var(--suave);
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.servicos__lista {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 0;
-}
-
-.servicos__item {
-  padding: 22px 24px 24px;
-  border-radius: var(--raio);
-  background: var(--superficie);
-  box-shadow: var(--sombra);
-}
-
-.servicos__item-nome {
-  font-size: 1.08rem;
-  font-weight: 650;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-}
-
-.servicos__item-texto {
-  margin: 8px 0 0;
-  color: var(--suave);
-  font-size: 0.96rem;
-  line-height: 1.55;
-}
-
-/* ---------- telas menores: sem fios; as frentes viram abas ---------- */
-@media (max-width: 1000px) {
-  .servicos__mapa {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 20px;
-  }
-
-  .servicos__fios,
-  .servicos__destinos {
-    display: none;
-  }
-
-  .servicos__centro {
-    order: -1;
-  }
-
-  .servicos__frentes {
-    display: flex;
-    gap: 4px;
-    width: fit-content;
-    max-width: 100%;
-    padding: 4px;
-    overflow-x: auto;
-    border-radius: 999px;
-    background: var(--borda);
-    scrollbar-width: none;
-  }
-
-  .servicos__frentes::-webkit-scrollbar {
-    display: none;
-  }
-
-  .servicos__frente {
-    flex: none;
-    padding: 9px 18px;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-  }
-
-  .servicos__frente[aria-selected="true"] {
-    background: var(--superficie);
-    box-shadow: 0 1px 2px rgb(var(--sombra-rgb) / 0.08);
-  }
-
-  .servicos__frente-nome {
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
-  .servicos__frente-texto {
-    display: none;
-  }
-
-  .servicos__frente::after {
-    left: 16px;
-    right: 16px;
-    bottom: 3px;
-    height: 2px;
-    border-radius: 2px;
-  }
-
-  .servicos__lista {
+@media (max-width: 820px) {
+  .servicos__grupo,
+  .servicos__linha {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .servicos__painel-descricao {
-    display: block;
+  .servicos__grupo-nome {
+    position: static;
   }
-}
-
-/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
-.servicos__titulo::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 6px;
-  margin: 0 0 clamp(18px, 2vw, 26px);
-  border-radius: 1px;
-  background: var(--terracota);
 }

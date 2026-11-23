@@ -56,6 +56,11 @@ const PAGINAS = [
     titulo: "Sobre | Josah Oliveira",
     descricao: "Quem é Josah Oliveira, designer gráfico de projetos culturais.",
   },
+  {
+    arquivo: "como-trabalho",
+    titulo: "Como trabalho | Josah Oliveira",
+    descricao: "As etapas do trabalho, do briefing à entrega, depoimentos e perguntas frequentes.",
+  },
 ];
 for (const pagina of PAGINAS) {
   const conteudo = (await readFile(`paginas/${pagina.arquivo}.html`, "utf8")).replace(/^<!--[\s\S]*?-->\n/, "");

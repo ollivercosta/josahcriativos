@@ -31,8 +31,8 @@ import { TRABALHOS } from "../dados/trabalhos.js";
 const REVELADOS = [
   ".trabalhos__cabeca",
   ".servicos__cabeca",
-  ".servicos__mapa",
-  ".servicos__paineis",
+  ".servicos__grupo",
+  ".depoimento__figura",
   ".processo__cabeca",
   ".processo__quadro",
   ".depoimentos__titulo",
@@ -64,7 +64,7 @@ class Site {
     this.secoes.trabalhos = se(".trabalhos", (raiz) => new Trabalhos(raiz, TRABALHOS));
     this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz));
-    this.secoes.servicos = se(".servicos", (raiz) => new Servicos(raiz));
+    this.secoes.servicos = se(".servicos__mapa", () => new Servicos($(".servicos")));
     this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
     this.secoes.depoimentos = se(".depoimentos", (raiz) => new Depoimentos(raiz));
