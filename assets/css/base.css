@@ -1,10 +1,7 @@
 /* =========================================================================
    BASE
-   Tokens da identidade e o reset mínimo. Paleta v3 "ameixa e jade":
-   cinza lilás nos fundos (dois degraus alternados), ameixa como estrutura e
-   único bloco de cor cheia (contato), jade só para ação e interação, malva
-   em detalhes. Trocar a paleta é trocar o :root (escalas.py --root).
-   Escalas, papéis, contraste e regras em docs/design/cor.md.
+   Tokens da identidade e o reset mínimo. Paleta "terracota, ocre e petróleo".
+   Trocar a paleta é trocar o :root.
    Nenhuma classe daqui é aplicada a elementos das seções.
    ========================================================================= */
 
@@ -22,94 +19,103 @@
 
 
 :root {
-  /* PALETA: marrom profundo, quase branco, branco, vinho profundo, vinho, marrom secundário e oliva.
-     Identidade visual editorial, elegante e sofisticada. */
-  --espresso: #30050e;
-  --espresso-suave: #5A2610;
-  --terracota: #4D0C12;
-  --terracota-escuro: #30050E;
-  --terracota-claro: #F2E6E7;
-  --creme: #FBFBFB;
-  --pedra: #ECEEEA; /* claro neutro levemente frio: separa a seção sem puxar para o vinho */
-  --ouro: #5A2610;
-  --ouro-claro: #EFE7E1;
-  --branco: #ffffff;
-  --linha: #E6DFDC;
-  --linha-2: #CFC2BC;
-  --sucesso: #464828;
-  --sucesso-claro: #E6E7D9;
-  --aviso: #5A2610;
-  --aviso-claro: #EFE4DD;
+  /* PALETA "terracota, ocre e petróleo" (lógica do IMS): base branca dominante,
+     uma cor-assinatura quente (terracota) com contraponto frio (petróleo) e
+     o ocre como faísca. O escuro é quase preto e neutro, só para pausa. */
+  --branco: #FFFFFF;
+  --creme: #FAFAFA;
+  --cinza: #F2F2F2;
+  --tinta: #141414;
+  --terracota: #A4493D;
+  --terracota-escuro: #8A3A30;
+  --ocre: #D99C1B;
+  --ocre-escuro: #8A5A00;
+  --ocre-claro: #F4EBDD;
+  --petroleo: #245C78;
+  --petroleo-escuro: #1B475D;
+  --petroleo-claro: #E4EDF2;
+  --linha: #E4E4E4;
+  --linha-2: #CFCFCF;
+  --sucesso: #2F6B4F;
+  --sucesso-claro: #E3EFE8;
+  --aviso: var(--ocre-escuro);
+  --aviso-claro: var(--ocre-claro);
 
-  /* fundos por seção: o vinho fica só na faixa do contato (o encerramento);
-     os blocos escuros usam a oliva e o marrom-quase-preto, e os claros
-     alternam branco e quase branco, com um neutro quente no processo */
-  --fundo-hero: var(--creme);
-  --fundo-trabalhos: var(--creme);
-  --fundo-manifesto: var(--espresso);
-  --fundo-servicos: var(--branco);
-  --fundo-processo: var(--pedra);
+  /* nomes antigos ainda usados nas seções, apontando para a paleta nova */
+  --espresso: var(--tinta);
+  --espresso-suave: #3A3A3A;
+  --terracota-claro: var(--ocre-claro);
+  --ouro: var(--ocre);
+  --ouro-claro: var(--ocre-claro);
+  --pedra: var(--cinza);
+
+  /* fundos por seção, na ordem da página */
+  --fundo-hero: var(--branco);
+  --fundo-servicos: var(--ocre-claro);
+  --fundo-trabalhos: var(--branco);
+  --fundo-manifesto: var(--tinta);
+  --fundo-processo: var(--cinza);
   --fundo-depoimentos: var(--branco);
-  --fundo-faq: var(--creme);
-  --fundo-contato: var(--creme);
-  --fundo-faixa-contato: var(--terracota);
-  --fundo-rodape: var(--texto);
+  --fundo-faq: var(--cinza);
+  --fundo-contato: var(--branco);
+  --fundo-faixa-contato: var(--petroleo);
+  --fundo-rodape: var(--tinta);
 
   /* papéis usados pelos componentes */
-  --fundo: var(--creme);
-  --fundo-alt: var(--branco);
+  --fundo: var(--branco);
+  --fundo-alt: var(--cinza);
   --superficie: var(--branco);
   --borda: var(--linha);
   --borda-forte: var(--linha-2);
-  --borda-controle: #8D7B74;
-  --ink: var(--espresso);
-  --texto: #1E100F;
-  --suave: #685550;
-  --texto-titulo: var(--espresso);
+  --borda-controle: #8A8A8A;
+  --ink: var(--tinta);
+  --texto: #141414;
+  --suave: #5E5E5E;
+  --texto-titulo: var(--tinta);
   --texto-sobre-cor: var(--creme);
   --acao: var(--terracota);
   --acao-hover: var(--terracota-escuro);
-  --acao-escuro: var(--ouro);
-  --acao-escuro-hover: #471D0C;
-  --acao-2: var(--espresso);
-  --acao-2-hover: #30050E;
-  --link: var(--terracota);
-  --foco: var(--terracota);
-  --selecao: var(--ouro-claro);
+  --acao-escuro: var(--petroleo);
+  --acao-escuro-hover: var(--petroleo-escuro);
+  --acao-2: var(--tinta);
+  --acao-2-hover: #000000;
+  --link: var(--petroleo);
+  --foco: var(--petroleo);
+  --selecao: var(--ocre-claro);
   --nevoa: var(--creme);
   --destaque: var(--terracota);
-  --rotulo: var(--terracota-escuro);
-  --azul: var(--espresso);
-  --azul-2: #30050E;
-  --azul-3: #4D0C12;
-  --azul-s: var(--creme);
+  --rotulo: var(--terracota);
+  --azul: var(--petroleo);
+  --azul-2: var(--petroleo-escuro);
+  --azul-3: var(--petroleo);
+  --azul-s: var(--petroleo-claro);
   --azul-ss: var(--branco);
-  --areia: var(--ouro);
+  --areia: var(--ocre);
   --fundo-claro: var(--creme);
-  --cor-fundo: var(--creme);
-  --cor-tinta: var(--espresso);
-  --cor-vermelho: var(--terracota-escuro);
-  --cor-tinta-suave: #685550;
+  --cor-fundo: var(--branco);
+  --cor-tinta: var(--tinta);
+  --cor-vermelho: var(--terracota);
+  --cor-tinta-suave: #5E5E5E;
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
-  --cor-cinza-claro: var(--creme);
+  --cor-cinza-claro: var(--cinza);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 30 16 15;
-  --escuro-rgb: 30 16 15;
-  --fundo-rgb: 251 251 251;
-  --fundo-alt-rgb: 255 255 255;
+  --sombra-rgb: 20 20 20;
+  --escuro-rgb: 20 20 20;
+  --fundo-rgb: 255 255 255;
+  --fundo-alt-rgb: 242 242 242;
   --superficie-rgb: 255 255 255;
-  --sobre-cor-rgb: 251 251 251;
+  --sobre-cor-rgb: 250 250 250;
 
   /* cursores do título (Titulo.js) */
-  --agente-grid: var(--espresso);
-  --agente-contorno: #4D0C12;
-  --agente-curvas: #5A2610;
-  --agente-vetores: var(--sucesso);
+  --agente-grid: var(--tinta);
+  --agente-contorno: var(--terracota);
+  --agente-curvas: var(--petroleo);
+  --agente-vetores: var(--ocre-escuro);
   --agente-cor: var(--terracota);
-  --agente-espaco: var(--aviso);
-  --agente-medidas: #30050E;
+  --agente-espaco: var(--petroleo-escuro);
+  --agente-medidas: var(--tinta);
 
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --curva: cubic-bezier(0.22, 1, 0.36, 1);

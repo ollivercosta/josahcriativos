@@ -16,7 +16,7 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #6a1620 0%, transparent 70%),
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #2F7396 0%, transparent 70%),
     var(--fundo-faixa-contato);
   color: var(--texto-sobre-cor);
   text-align: center;
@@ -57,7 +57,7 @@
   padding: 15px 32px;
   border-radius: 999px;
   background: var(--creme);
-  color: var(--terracota);
+  color: var(--petroleo);
   font-weight: 650;
   text-decoration: none;
   transition:

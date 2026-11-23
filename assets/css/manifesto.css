@@ -41,5 +41,5 @@
 }
 
 .manifesto__texto--leitura .manifesto__forte .manifesto__palavra--acesa {
-  color: #d94000;
+  color: var(--ocre);
 }
