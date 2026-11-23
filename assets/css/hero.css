@@ -345,3 +345,46 @@
     animation: none;
   }
 }
+
+/* ---------- fundo: malha de pontos que reage ao mouse ----------
+   A malha é uma imagem fixa (custo zero). A lente é uma segunda malha, de
+   pontos maiores e mais escuros, visível só num círculo em volta do cursor;
+   Hero.js move o círculo apenas enquanto o mouse se mexe. */
+.hero__pontos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, #000 30%, transparent 100%);
+}
+
+.hero__pontos-base,
+.hero__pontos-lente {
+  position: absolute;
+  inset: 0;
+  background-size: 26px 26px;
+}
+
+.hero__pontos-base {
+  background-image: radial-gradient(circle, var(--tinta) 1.1px, transparent 1.5px);
+  opacity: 0.08;
+}
+
+.hero__pontos-lente {
+  background-image: radial-gradient(circle, var(--tinta) 2px, transparent 2.5px);
+  opacity: 0;
+  transition: opacity 0.5s var(--curva);
+  -webkit-mask-image: radial-gradient(circle 170px at var(--mx, 50%) var(--my, 50%), #000 0, transparent 100%);
+  mask-image: radial-gradient(circle 170px at var(--mx, 50%) var(--my, 50%), #000 0, transparent 100%);
+}
+
+.hero--lente .hero__pontos-lente {
+  opacity: 0.32;
+}
+
+.hero > *:not(.hero__pontos) {
+  position: relative;
+  z-index: 1;
+}
+
