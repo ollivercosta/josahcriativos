@@ -1,13 +1,14 @@
 /* =========================================================================
    QUEM JÁ TRABALHOU COMIGO (depoimentos)
-   Os nomes numa coluna de abas à esquerda; à direita, o depoimento num
-   cartão claro, com a ficha (projeto, serviço, fomento) embaixo. Com mais
+   Os nomes numa coluna de abas à esquerda; à direita, o depoimento em tom
+   discreto (itálico, sem cartão, só um fio à esquerda), com a ficha
+   (projeto, serviço, fomento) embaixo. Com mais
    de um depoimento, a aba ativa mostra o tempo até a troca automática.
    ========================================================================= */
 
 .depoimentos {
   padding: var(--espaco-secao) var(--margem);
-  background: var(--creme:);
+  background: var(--fundo-depoimentos);
 }
 
 .depoimentos__titulo,
@@ -62,8 +63,7 @@
 }
 
 .depoimentos__aba[aria-selected="true"] {
-  background: var(--superficie);
-  box-shadow: var(--sombra);
+  background: rgb(var(--superficie-rgb) / 0.7);
 }
 
 .depoimentos__aba-conteudo {
@@ -111,10 +111,8 @@
 
 .depoimentos__item {
   grid-area: 1 / 1;
-  padding: clamp(28px, 4vw, 48px);
-  border-radius: var(--raio-g);
-  background: var(--superficie);
-  box-shadow: var(--sombra);
+  padding: 4px 0 4px clamp(20px, 3vw, 32px);
+  border-left: 2px solid var(--linha-2);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -130,22 +128,23 @@
 
 .depoimentos__citacao {
   margin: 0;
-  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--texto);
 }
 
 .depoimentos__citacao::before {
   content: "“";
   display: block;
-  height: 0.6em;
-  margin-bottom: 6px;
-  font-size: 3.2rem;
-  font-weight: 700;
+  height: 0.55em;
+  margin-bottom: 4px;
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 600;
   line-height: 1;
-  color: var(--areia);
+  color: var(--linha-2);
 }
 
 .depoimentos__dados {

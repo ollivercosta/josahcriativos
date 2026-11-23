@@ -347,3 +347,57 @@
     animation: none;
   }
 }
+
+/* ---------- fundo vivo: manchas de cor muito suaves que se movem devagar ---------- */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: 0.16;
+  will-change: transform;
+}
+
+.hero::before {
+  top: -38vmax;
+  left: -22vmax;
+  background: radial-gradient(closest-side, var(--terracota), transparent);
+  animation: hero-vivo-a 34s ease-in-out infinite alternate;
+}
+
+.hero::after {
+  top: -46vmax;
+  right: -28vmax;
+  background: radial-gradient(closest-side, var(--sucesso), transparent);
+  opacity: 0.14;
+  animation: hero-vivo-b 42s ease-in-out infinite alternate;
+}
+
+@keyframes hero-vivo-a {
+  to {
+    transform: translate(18vmax, 4vmax) scale(1.15);
+  }
+}
+
+@keyframes hero-vivo-b {
+  to {
+    transform: translate(-22vmax, 6vmax) scale(0.9);
+  }
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero::after {
+    animation: none;
+  }
+}

@@ -32,7 +32,7 @@
   --creme: #FBFBFB;
   --ouro: #5A2610;
   --ouro-claro: #EFE7E1;
-  --branco: #ffffff5e;
+  --branco: #ffffff;
   --linha: #E6DFDC;
   --linha-2: #CFC2BC;
   --sucesso: #464828;
@@ -40,17 +40,19 @@
   --aviso: #5A2610;
   --aviso-claro: #EFE4DD;
 
-  /* fundos por seção */
+  /* fundos por seção: o vinho fica só na faixa do contato (o encerramento);
+     os blocos escuros usam a oliva e o marrom-quase-preto, e os claros
+     alternam branco e quase branco, com um neutro quente no processo */
   --fundo-hero: var(--creme);
   --fundo-trabalhos: var(--branco);
-  --fundo-manifesto: var(--espresso);
+  --fundo-manifesto: var(--sucesso);
   --fundo-servicos: var(--creme);
-  --fundo-processo: var(--ouro-claro);
+  --fundo-processo: #f3f0eb;
   --fundo-depoimentos: var(--branco);
   --fundo-faq: var(--creme);
   --fundo-contato: var(--creme);
-  --fundo-faixa-contato: var(--terracota-escuro);
-  --fundo-rodape: var(--espresso);
+  --fundo-faixa-contato: var(--terracota);
+  --fundo-rodape: var(--texto);
 
   /* papéis usados pelos componentes */
   --fundo: var(--creme);

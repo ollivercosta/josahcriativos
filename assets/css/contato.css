@@ -16,7 +16,7 @@
   padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 64px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #6c0c20 0%, transparent 70%),
+    radial-gradient(70% 90% at var(--luz-x, 50%) var(--luz-y, 0%), #6a1620 0%, transparent 70%),
     var(--fundo-faixa-contato);
   color: var(--texto-sobre-cor);
   text-align: center;
@@ -55,8 +55,8 @@
   margin-top: 32px;
   padding: 15px 32px;
   border-radius: 999px;
-  background: var(--espresso);
-  color: var(--creme);
+  background: var(--creme);
+  color: var(--terracota);
   font-weight: 650;
   text-decoration: none;
   transition:
@@ -66,7 +66,7 @@
 
 .contato__botao:hover {
   transform: translateY(-2px);
-  background: #4a332d;
+  background: var(--branco);
   box-shadow: 0 14px 30px -12px rgb(var(--sombra-rgb) / 0.6);
 }
 
