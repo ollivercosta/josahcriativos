@@ -25,11 +25,11 @@
      seções claras sem tingir a página. */
   --branco: #FFFFFF;
   --creme: #FAFAFA;
-  --cinza: #F2F2F2;
+  --cinza: #F6F5F3; /* papel: quase branco, levemente quente */
   --tinta: #0E0E0E;
-  --vermelho: #D7140A;
-  --vermelho-escuro: #B50E05;
-  --vermelho-vivo: #FF4A3D; /* só sobre o preto, onde o vermelho base perde força */
+  --vermelho: #A8201A; /* vermelho laca: profundo e quente, sem puxar para o magenta */
+  --vermelho-escuro: #861A15;
+  --vermelho-vivo: #E0483E; /* só sobre o preto, onde o vermelho base perde força */
 
   /* apelidos dos nomes da paleta anterior, para as seções não quebrarem */
   --terracota: var(--vermelho);
@@ -60,12 +60,12 @@
   --fundo-servicos: var(--branco);
   --fundo-trabalhos: var(--branco);
   --fundo-manifesto: var(--tinta);
-  --fundo-processo: var(--cinza);
+  --fundo-processo: var(--branco);
   --fundo-depoimentos: var(--branco);
   --fundo-depoimento: var(--cinza);
-  --fundo-faq: var(--cinza);
+  --fundo-faq: var(--branco);
   --fundo-contato: var(--branco);
-  --fundo-faixa-contato: var(--cinza);
+  --fundo-faixa-contato: transparent;
   --fundo-rodape: var(--tinta);
 
   /* papéis usados pelos componentes */
@@ -88,7 +88,7 @@
   --acao-2-hover: #000000;
   --link: var(--vermelho);
   --foco: var(--vermelho);
-  --selecao: #FBD9D4;
+  --selecao: #F3D6D3;
   --nevoa: var(--creme);
   --destaque: var(--terracota);
   --rotulo: var(--terracota);

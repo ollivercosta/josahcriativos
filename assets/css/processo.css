@@ -12,7 +12,6 @@
   padding: var(--espaco-secao) var(--margem);
   background: var(--fundo-processo);
   /* o painel da etapa fica branco sobre o ouro claro */
-  --fundo-alt: var(--branco);
 }
 
 .processo__cabeca,
