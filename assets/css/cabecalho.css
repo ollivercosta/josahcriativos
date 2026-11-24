@@ -19,21 +19,6 @@
     border-color 0.4s var(--curva);
 }
 
-/* sobre o hero: sem fundo e com o texto claro, para não cobrir a abertura; o fundo volta ao sair dele */
-.cabecalho--sobre-hero {
-  --azul: var(--papel);
-  --ink: var(--papel);
-  --suave: rgb(246 241 234 / 0.75);
-  --superficie: rgb(246 241 234 / 0.16);
-  --sombra-rgb: 246 241 234;
-  --acao-2: var(--papel);
-  --texto-sobre-cor: var(--prof);
-  background: transparent;
-  border-bottom-color: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
 /* a linha de leitura: cresce da esquerda conforme a página é rolada */
 .cabecalho::after {
   content: "";
@@ -56,6 +41,21 @@
 .cabecalho--menu-aberto {
   background: rgb(var(--fundo-rgb) / 0.86);
   border-bottom-color: var(--borda);
+}
+
+/* sobre o hero (vem depois de --rolou para vencer): sem fundo e com o texto claro, para não cobrir a abertura; o fundo volta ao sair dele */
+.cabecalho--sobre-hero {
+  --azul: var(--papel);
+  --ink: var(--papel);
+  --suave: rgb(246 241 234 / 0.75);
+  --superficie: rgb(246 241 234 / 0.16);
+  --sombra-rgb: 246 241 234;
+  --acao-2: var(--papel);
+  --texto-sobre-cor: var(--prof);
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .cabecalho__faixa {
