@@ -26,10 +26,11 @@
 }
 
 .processo__titulo {
+  font-family: var(--fonte-titulo);
   font-size: var(--titulo-secao);
-  font-weight: 750;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 

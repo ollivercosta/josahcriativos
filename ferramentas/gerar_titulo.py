@@ -1,6 +1,6 @@
 """Gera assets/dados/titulo.js: o contorno de cada letra do título da abertura
-("Design e cultura") na fonte Inter, peso 760, com o mesmo espaçamento do CSS
-(letter-spacing -0.06em) e o kerning da fonte. A animação do título
+("Design e cultura") na fonte Fraunces, peso 650, com o mesmo espaçamento do CSS
+(letter-spacing -0.035em) e o kerning da fonte. A animação do título
 (assets/js/secoes/Titulo.js) desenha esses contornos.
 
 Uso: python3 ferramentas/gerar_titulo.py   (precisa de fonttools, brotli e uharfbuzz)
@@ -15,10 +15,10 @@ import uharfbuzz as hb
 import io
 
 TEXTO = "Design e cultura"
-PESO = 760
-ESPACO = -0.06  # em
+PESO = 650
+ESPACO = -0.035  # em
 
-fonte = TTFont("assets/fontes/inter.woff2")
+fonte = TTFont("assets/fontes/fraunces.woff2")
 fonte = instancer.instantiateVariableFont(fonte, {"wght": PESO})
 buf = io.BytesIO(); fonte.flavor = None; fonte.save(buf); dados = buf.getvalue()
 upem = fonte["head"].unitsPerEm
@@ -43,7 +43,7 @@ titulo = {"upem": upem, "largura": largura, "capa": -os2.sCapHeight, "xAltura": 
           "ascendente": -round(fonte["hhea"].ascent * 0.92), "descendente": round(-fonte["hhea"].descent * 0.62),
           "glifos": saida}
 js = ("/* Gerado por ferramentas/gerar_titulo.py: o contorno de cada letra do título da abertura,\n"
-      "   em unidades da fonte (Inter 760), com a linha de base em y = 0. Não edite à mão. */\n"
+      "   em unidades da fonte (Fraunces 650), com a linha de base em y = 0. Não edite à mão. */\n"
       "export const TITULO = " + json.dumps(titulo, ensure_ascii=False) + ";\n")
 open("assets/dados/titulo.js", "w").write(js)
 print(largura, len(saida), titulo["capa"], titulo["xAltura"], titulo["ascendente"], titulo["descendente"], len(js))

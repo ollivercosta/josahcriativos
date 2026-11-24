@@ -113,10 +113,11 @@
 }
 
 .projeto__titulo {
+  font-family: var(--fonte-titulo);
   margin: 18px 0 0;
   font-size: var(--titulo-secao, clamp(2.6rem, 4.6vw, 5.2rem));
   line-height: 0.9;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
 }
 
 .projeto__titulo-fino {
@@ -311,6 +312,7 @@
 
 .projeto__pecas-titulo {
   margin: 0;
+  font-family: var(--fonte-titulo);
   font-size: clamp(2.2rem, 3.4vw, 3.6rem);
   font-weight: 300;
   line-height: 0.9;
@@ -614,9 +616,10 @@
   align-items: baseline;
   gap: 24px;
   flex: 1;
+  font-family: var(--fonte-titulo);
   font-size: clamp(1.8rem, 3vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1;
   text-align: left;
 }

@@ -7,6 +7,17 @@
 .servicos {
   padding: var(--espaco-secao) var(--margem);
   background: var(--fundo-servicos);
+  /* seção no petróleo: as cores do texto se invertem só aqui */
+  --ink: var(--papel);
+  --texto: var(--papel);
+  --suave: rgb(246 241 234 / 0.68);
+  --borda: rgb(246 241 234 / 0.12);
+  --borda-forte: rgb(246 241 234 / 0.22);
+  --terracota: var(--acento-vivo);
+  --acao: var(--papel);
+  --acao-2: var(--acento-vivo);
+  --texto-sobre-cor: var(--prof);
+  color: var(--papel);
 }
 
 .servicos__cabeca,
@@ -17,10 +28,11 @@
 }
 
 .servicos__titulo {
+  font-family: var(--fonte-titulo);
   font-size: var(--titulo-secao);
-  font-weight: 750;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
@@ -52,10 +64,11 @@
 }
 
 .servicos__grupo-nome {
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  font-family: var(--fonte-titulo);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--argila-clara);
 }
 
 .servicos__grupo-texto {

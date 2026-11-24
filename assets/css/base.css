@@ -1,9 +1,17 @@
 /* =========================================================================
    BASE
-   Tokens da identidade e o reset mínimo. Paleta "preto, vermelho e branco".
+   Tokens da identidade e o reset mínimo. Paleta "petróleo, argila e cinábrio"; títulos em Fraunces.
    Trocar a paleta é trocar o :root.
    Nenhuma classe daqui é aplicada a elementos das seções.
    ========================================================================= */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fontes/fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Inter";
@@ -19,111 +27,121 @@
 
 
 :root {
-  /* PALETA "preto, vermelho e branco": o branco domina, o preto é o texto e a
-     pausa (manifesto, rodapé), e o vermelho é a única cor, usada pouco:
-     ação, marcas dos títulos, a faixa de contato. Um cinza neutro separa
-     seções claras sem tingir a página. */
+  /* PALETA "petróleo, argila e cinábrio"
+     Profundo (sofisticação): petróleo-noite em três tons, no hero, em Serviços e no rodapé.
+     Humano (terra): argila e areia, na faixa do manifesto, no contato e em detalhes.
+     Base: papel quente, nos trabalhos e no depoimento.
+     Energia: cinábrio, pouco e em pontos certos (botões, destaques, marcas dos títulos). */
   --branco: #FFFFFF;
-  --creme: #FAFAFA;
-  --cinza: #F6F5F3; /* papel: quase branco, levemente quente */
-  --tinta: #0E0E0E;
-  --vermelho: #8C1515; /* cardeal: profundo e sóbrio */
-  --vermelho-escuro: #6E1010;
-  --vermelho-vivo: #E0483E; /* só sobre o preto, onde o vermelho base perde força */
+  --papel: #F6F1EA;
+  --areia: #E7DCCD;
+  --argila: #B8876A;
+  --argila-clara: #D9B79C;
+  --prof: #13262B;
+  --prof-2: #1A3238;
+  --prof-3: #0C1A1E;
+  --acento: #C23A22; /* cinábrio, sobre claro */
+  --acento-escuro: #9E2E1A;
+  --acento-vivo: #FF6A45; /* cinábrio, sobre o profundo */
 
-  /* apelidos dos nomes da paleta anterior, para as seções não quebrarem */
-  --terracota: var(--vermelho);
-  --terracota-escuro: var(--vermelho-escuro);
-  --ocre: var(--vermelho-vivo);
-  --ocre-escuro: var(--vermelho-escuro);
-  --ocre-claro: var(--cinza);
-  --petroleo: var(--tinta);
-  --petroleo-escuro: #000000;
-  --petroleo-claro: var(--cinza);
-  --linha: #E4E4E4;
-  --linha-2: #CFCFCF;
-  --sucesso: var(--tinta);
-  --sucesso-claro: var(--cinza);
-  --aviso: #555555;
-  --aviso-claro: var(--cinza);
-
-  /* nomes antigos ainda usados nas seções, apontando para a paleta nova */
-  --espresso: var(--tinta);
-  --espresso-suave: #3A3A3A;
-  --terracota-claro: var(--ocre-claro);
-  --ouro: var(--ocre);
-  --ouro-claro: var(--ocre-claro);
-  --pedra: var(--cinza);
+  /* apelidos dos nomes de paletas anteriores, para as seções não quebrarem */
+  --creme: var(--papel);
+  --cinza: var(--areia);
+  --tinta: var(--prof);
+  --vermelho: var(--acento);
+  --vermelho-escuro: var(--acento-escuro);
+  --vermelho-vivo: var(--acento-vivo);
+  --terracota: var(--acento);
+  --terracota-escuro: var(--acento-escuro);
+  --terracota-claro: var(--areia);
+  --ocre: var(--acento);
+  --ocre-escuro: var(--acento-escuro);
+  --ocre-claro: var(--areia);
+  --ouro: var(--argila);
+  --ouro-claro: var(--areia);
+  --petroleo: var(--prof);
+  --petroleo-escuro: var(--prof-3);
+  --petroleo-claro: var(--areia);
+  --espresso: var(--prof);
+  --espresso-suave: var(--prof-2);
+  --pedra: var(--areia);
+  --linha: #DDD3C6;
+  --linha-2: #C9BCAC;
+  --sucesso: var(--prof);
+  --sucesso-claro: var(--areia);
+  --aviso: var(--argila);
+  --aviso-claro: var(--areia);
 
   /* fundos por seção, na ordem da página */
-  --fundo-hero: var(--branco);
-  --fundo-servicos: var(--branco);
-  --fundo-trabalhos: var(--branco);
-  --fundo-manifesto: var(--tinta);
-  --fundo-processo: var(--branco);
-  --fundo-depoimentos: var(--branco);
-  --fundo-depoimento: var(--cinza);
-  --fundo-faq: var(--branco);
-  --fundo-contato: var(--branco);
+  --fundo-hero: var(--prof);
+  --fundo-trabalhos: var(--papel);
+  --fundo-manifesto: var(--areia);
+  --fundo-servicos: var(--prof-2);
+  --fundo-depoimento: var(--papel);
+  --fundo-contato: var(--areia);
   --fundo-faixa-contato: transparent;
-  --fundo-rodape: var(--tinta);
+  --fundo-rodape: var(--prof-3);
+  --fundo-processo: var(--papel);
+  --fundo-depoimentos: var(--branco);
+  --fundo-faq: var(--papel);
 
   /* papéis usados pelos componentes */
-  --fundo: var(--branco);
-  --fundo-alt: var(--cinza);
+  --fundo: var(--papel);
+  --fundo-alt: var(--areia);
   --superficie: var(--branco);
   --borda: var(--linha);
   --borda-forte: var(--linha-2);
-  --borda-controle: #8A8A8A;
-  --ink: var(--tinta);
-  --texto: #0E0E0E;
-  --suave: #5E5E5E;
-  --texto-titulo: var(--tinta);
-  --texto-sobre-cor: var(--creme);
-  --acao: var(--terracota);
-  --acao-hover: var(--terracota-escuro);
-  --acao-escuro: var(--petroleo);
-  --acao-escuro-hover: var(--petroleo-escuro);
-  --acao-2: var(--tinta);
-  --acao-2-hover: #000000;
-  --link: var(--vermelho);
-  --foco: var(--vermelho);
-  --selecao: #F3D6D3;
-  --nevoa: var(--creme);
-  --destaque: var(--terracota);
-  --rotulo: var(--terracota);
-  --azul: var(--petroleo);
-  --azul-2: var(--petroleo-escuro);
-  --azul-3: var(--petroleo);
-  --azul-s: var(--petroleo-claro);
+  --borda-controle: #8C8174;
+  --ink: var(--prof);
+  --texto: var(--prof);
+  --suave: #55615F;
+  --texto-titulo: var(--prof);
+  --texto-sobre-cor: var(--papel);
+  --acao: var(--acento);
+  --acao-hover: var(--acento-escuro);
+  --acao-escuro: var(--prof);
+  --acao-escuro-hover: var(--prof-3);
+  --acao-2: var(--prof);
+  --acao-2-hover: var(--prof-3);
+  --link: var(--acento);
+  --foco: var(--acento);
+  --selecao: #F2D3C8;
+  --nevoa: var(--papel);
+  --destaque: var(--acento);
+  --rotulo: var(--acento);
+  --azul: var(--prof);
+  --azul-2: var(--prof-3);
+  --azul-3: var(--prof-2);
+  --azul-s: var(--areia);
   --azul-ss: var(--branco);
-  --areia: var(--ocre);
-  --fundo-claro: var(--creme);
-  --cor-fundo: var(--branco);
-  --cor-tinta: var(--tinta);
-  --cor-vermelho: var(--terracota);
-  --cor-tinta-suave: #5E5E5E;
+  --fundo-claro: var(--papel);
+  --cor-fundo: var(--papel);
+  --cor-tinta: var(--prof);
+  --cor-vermelho: var(--acento);
+  --cor-tinta-suave: #55615F;
   --cor-linha: var(--linha);
   --cor-linha-forte: var(--linha-2);
-  --cor-cinza-claro: var(--cinza);
+  --cor-cinza-claro: var(--areia);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 14 14 14;
-  --escuro-rgb: 14 14 14;
-  --fundo-rgb: 255 255 255;
-  --fundo-alt-rgb: 242 242 242;
+  --sombra-rgb: 19 38 43;
+  --escuro-rgb: 19 38 43;
+  --fundo-rgb: 246 241 234;
+  --fundo-alt-rgb: 231 220 205;
   --superficie-rgb: 255 255 255;
-  --sobre-cor-rgb: 250 250 250;
+  --sobre-cor-rgb: 246 241 234;
 
-  /* cursores do título (Titulo.js) */
-  --agente-grid: var(--tinta);
-  --agente-contorno: var(--vermelho);
-  --agente-curvas: #555555;
-  --agente-vetores: var(--vermelho-escuro);
-  --agente-cor: var(--terracota);
-  --agente-espaco: #333333;
-  --agente-medidas: var(--tinta);
+  /* cursores do título (Titulo.js), sobre o petróleo do hero */
+  --agente-grid: var(--argila-clara);
+  --agente-contorno: var(--acento-vivo);
+  --agente-curvas: var(--argila);
+  --agente-vetores: var(--acento-vivo);
+  --agente-cor: var(--acento-vivo);
+  --agente-espaco: var(--argila-clara);
+  --agente-medidas: var(--papel);
 
+  /* títulos em Fraunces (serifada contemporânea); o resto do texto em Inter */
+  --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
   --fonte: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --curva: cubic-bezier(0.22, 1, 0.36, 1);
   --curva-suave: cubic-bezier(0.22, 0.61, 0.36, 1);

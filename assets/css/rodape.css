@@ -7,9 +7,9 @@
 .rodape {
   background: var(--fundo-rodape);
   /* rodapé escuro: as cores do texto se invertem só aqui */
-  --suave: #B8B8B8;
-  --azul: var(--creme);
-  --link: var(--ouro);
+  --suave: rgb(246 241 234 / 0.62);
+  --azul: var(--papel);
+  --link: var(--acento-vivo);
 }
 
 .rodape__linha {

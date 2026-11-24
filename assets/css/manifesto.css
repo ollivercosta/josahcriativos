@@ -7,19 +7,18 @@
 .manifesto {
   padding: var(--espaco-secao) var(--margem);
   background: var(--fundo-manifesto);
-  /* seção escura: as cores do texto se invertem só aqui */
-  --ink: var(--creme);
-  --linha-2: rgb(var(--sobre-cor-rgb) / 0.26);
-  --terracota: var(--ouro);
+  /* faixa de areia: texto no petróleo, a palavra que resume a ideia em cinábrio */
+  --linha-2: rgb(var(--escuro-rgb) / 0.22);
 }
 
 .manifesto__texto {
   max-width: 1080px;
   margin-inline: auto;
+  font-family: var(--fonte-titulo);
   font-size: clamp(1.9rem, 4.2vw, 3.6rem);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.035em;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   color: var(--ink);
   text-align: center;
   text-wrap: balance;
@@ -41,5 +40,5 @@
 }
 
 .manifesto__texto--leitura .manifesto__forte .manifesto__palavra--acesa {
-  color: var(--ocre);
+  color: var(--acento);
 }

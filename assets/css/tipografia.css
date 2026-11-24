@@ -1,6 +1,6 @@
 /* =========================================================================
    TIPOGRAFIA DOS TÍTULOS DAS PÁGINAS INTERNAS
-   A Inter em peso 650 a 700, com o espaçamento fechado do sistema. Os
+   A Fraunces (--fonte-titulo), como nos títulos da inicial. Os
    títulos da inicial têm o estilo no arquivo de cada seção; aqui ficam os
    da página Sobre e das páginas de trabalho, que vêm em duas partes
    (fina e forte) e passam a ser uma linha só, com a parte forte em azul.
@@ -9,10 +9,10 @@
 
 .sobre__titulo,
 .projeto__titulo {
-  font-family: var(--fonte);
-  font-weight: 700;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
   line-height: 1.04;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   color: var(--ink);
   text-transform: none;
 }
@@ -37,10 +37,11 @@
 }
 
 .projeto__titulo-fino {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .sobre__titulo {
+  font-family: var(--fonte-titulo);
   font-size: var(--titulo-secao);
 }
 
