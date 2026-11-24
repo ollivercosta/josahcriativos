@@ -4,152 +4,95 @@
   a tela final de contato e o rodapé do index.html.
   Reúne o que saiu da inicial: o processo em seis etapas, os depoimentos e as perguntas frequentes.
 -->
-      <!-- DO PRIMEIRO CONTATO À ENTREGA: as seis etapas numa linha; cada etapa mostra o texto e uma cena animada
-           do que acontece nela. assets/js/secoes/Processo.js avança sozinho enquanto a seção está na tela. -->
-      <section class="processo" id="processo" aria-labelledby="processo-titulo">
-        <div class="processo__cabeca">
-          <h1 class="processo__titulo" id="processo-titulo">Do primeiro contato à entrega</h1>
-          <p class="processo__lede">Cada etapa é combinada antes de ser executada.</p>
+      <!-- DO PRIMEIRO CONTATO À ENTREGA: o processo como ele é registrado de verdade, numa planilha de
+           cronograma. Indicadores no topo (como um painel) e a planilha com as etapas, quem faz,
+           a duração de exemplo e as barras no tempo, que avançam com a linha de "hoje". -->
+      <section class="cronograma" id="processo" aria-labelledby="processo-titulo">
+        <div class="cronograma__cabeca">
+          <h1 class="cronograma__titulo" id="processo-titulo">Do primeiro contato à entrega</h1>
+          <p class="cronograma__lede">Cada etapa é combinada antes de ser executada.</p>
         </div>
-        <div class="processo__quadro">
-          <div class="processo__trilha">
-            <span class="processo__trilho" aria-hidden="true"><span class="processo__trilho-cheio"></span></span>
-            <ol class="processo__etapas" role="tablist" aria-label="Etapas do trabalho">
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-1" aria-controls="processo-painel-1" aria-selected="true"><span class="processo__numero">1</span><span class="processo__etapa-nome">Briefing</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-2" aria-controls="processo-painel-2" aria-selected="false" tabindex="-1"><span class="processo__numero">2</span><span class="processo__etapa-nome">Proposta e orçamento</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-3" aria-controls="processo-painel-3" aria-selected="false" tabindex="-1"><span class="processo__numero">3</span><span class="processo__etapa-nome">Produção</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-4" aria-controls="processo-painel-4" aria-selected="false" tabindex="-1"><span class="processo__numero">4</span><span class="processo__etapa-nome">Revisão</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-5" aria-controls="processo-painel-5" aria-selected="false" tabindex="-1"><span class="processo__numero">5</span><span class="processo__etapa-nome">Aprovação</span></button></li>
-          <li class="processo__etapa" role="presentation"><button type="button" class="processo__no" role="tab" id="processo-aba-6" aria-controls="processo-painel-6" aria-selected="false" tabindex="-1"><span class="processo__numero">6</span><span class="processo__etapa-nome">Entrega</span></button></li>
-            </ol>
+        <div class="cronograma__painel">
+          <ul class="cronograma__indicadores">
+            <li class="cronograma__indicador"><b class="cronograma__valor">6</b><span class="cronograma__rotulo">etapas, do briefing à entrega</span></li>
+            <li class="cronograma__indicador"><b class="cronograma__valor">3</b><span class="cronograma__rotulo">rodadas de revisão por entrega</span></li>
+            <li class="cronograma__indicador"><b class="cronograma__valor">100%</b><span class="cronograma__rotulo">do escopo aceito antes da produção</span></li>
+            <li class="cronograma__indicador"><b class="cronograma__valor cronograma__valor--andamento">0%</b><span class="cronograma__rotulo">do projeto de exemplo concluído</span></li>
+          </ul>
+          <div class="cronograma__planilha" tabindex="0" role="region" aria-label="Planilha do cronograma de exemplo">
+            <table class="cronograma__tabela">
+              <thead>
+                <tr class="cronograma__letras"><th class="cronograma__canto" aria-hidden="true"></th><th class="cronograma__letra" aria-hidden="true">A</th><th class="cronograma__letra" aria-hidden="true">B</th><th class="cronograma__letra" aria-hidden="true">C</th><th class="cronograma__letra" aria-hidden="true">D</th><th class="cronograma__letra" aria-hidden="true">E</th><th class="cronograma__letra" aria-hidden="true">F</th><th class="cronograma__letra" aria-hidden="true">G</th><th class="cronograma__letra" aria-hidden="true">H</th><th class="cronograma__letra" aria-hidden="true">I</th><th class="cronograma__letra" aria-hidden="true">J</th><th class="cronograma__letra" aria-hidden="true">K</th></tr>
+                <tr class="cronograma__colunas">
+                  <th class="cronograma__num" scope="col">1</th>
+                  <th scope="col">Etapa</th>
+                  <th scope="col">O que acontece</th>
+                  <th scope="col">Quem</th>
+                  <th scope="col">Duração</th>
+                  <th class="cronograma__semana" scope="col">S1</th><th class="cronograma__semana" scope="col">S2</th><th class="cronograma__semana" scope="col">S3</th><th class="cronograma__semana" scope="col">S4</th><th class="cronograma__semana" scope="col">S5</th><th class="cronograma__semana" scope="col">S6</th>
+                  <th scope="col">Situação</th>
+                </tr>
+              </thead>
+              <tbody>
+            <tr class="cronograma__linha" style="--ini: 0; --fim: 1">
+              <th class="cronograma__num" scope="row">2</th>
+              <td class="cronograma__etapa">Briefing</td>
+              <td class="cronograma__acao">Entender o projeto, o público e as exigências do edital.</td>
+              <td class="cronograma__quem">Você e eu</td>
+              <td class="cronograma__duracao">1 a 3 dias</td>
+              <td class="cronograma__tempo" colspan="6"><span class="cronograma__barra"><span class="cronograma__barra-cheia"></span></span></td>
+              <td class="cronograma__status"><span class="cronograma__selo" data-status="previsto">Previsto</span></td>
+            </tr>
+            <tr class="cronograma__linha" style="--ini: 0.6; --fim: 1.6">
+              <th class="cronograma__num" scope="row">3</th>
+              <td class="cronograma__etapa">Proposta e orçamento</td>
+              <td class="cronograma__acao">Escopo, prazo e valores por escrito, aceitos antes da produção.</td>
+              <td class="cronograma__quem">Eu, com o seu aceite</td>
+              <td class="cronograma__duracao">2 a 4 dias</td>
+              <td class="cronograma__tempo" colspan="6"><span class="cronograma__barra"><span class="cronograma__barra-cheia"></span></span></td>
+              <td class="cronograma__status"><span class="cronograma__selo" data-status="previsto">Previsto</span></td>
+            </tr>
+            <tr class="cronograma__linha" style="--ini: 1.4; --fim: 4.2">
+              <th class="cronograma__num" scope="row">4</th>
+              <td class="cronograma__etapa">Produção</td>
+              <td class="cronograma__acao">Criação das peças, começando pelo que o prazo mais exige.</td>
+              <td class="cronograma__quem">Eu</td>
+              <td class="cronograma__duracao">Conforme o volume</td>
+              <td class="cronograma__tempo" colspan="6"><span class="cronograma__barra"><span class="cronograma__barra-cheia"></span></span></td>
+              <td class="cronograma__status"><span class="cronograma__selo" data-status="previsto">Previsto</span></td>
+            </tr>
+            <tr class="cronograma__linha" style="--ini: 3.4; --fim: 5.0">
+              <th class="cronograma__num" scope="row">5</th>
+              <td class="cronograma__etapa">Revisão</td>
+              <td class="cronograma__acao">Até 3 rodadas por entrega.</td>
+              <td class="cronograma__quem">Você e eu</td>
+              <td class="cronograma__duracao">Conforme os ajustes</td>
+              <td class="cronograma__tempo" colspan="6"><span class="cronograma__barra"><span class="cronograma__barra-cheia"></span></span></td>
+              <td class="cronograma__status"><span class="cronograma__selo" data-status="previsto">Previsto</span></td>
+            </tr>
+            <tr class="cronograma__linha" style="--ini: 4.8; --fim: 5.4">
+              <th class="cronograma__num" scope="row">6</th>
+              <td class="cronograma__etapa">Aprovação</td>
+              <td class="cronograma__acao">Você aprova as peças finais; o saldo é pago.</td>
+              <td class="cronograma__quem">Você</td>
+              <td class="cronograma__duracao">1 a 2 dias</td>
+              <td class="cronograma__tempo" colspan="6"><span class="cronograma__barra"><span class="cronograma__barra-cheia"></span></span></td>
+              <td class="cronograma__status"><span class="cronograma__selo" data-status="previsto">Previsto</span></td>
+            </tr>
+            <tr class="cronograma__linha" style="--ini: 5.3; --fim: 6.0">
+              <th class="cronograma__num" scope="row">7</th>
+              <td class="cronograma__etapa">Entrega</td>
+              <td class="cronograma__acao">Arquivos finais em alta resolução, nos formatos necessários.</td>
+              <td class="cronograma__quem">Eu</td>
+              <td class="cronograma__duracao">1 a 2 dias</td>
+              <td class="cronograma__tempo" colspan="6"><span class="cronograma__barra"><span class="cronograma__barra-cheia"></span></span></td>
+              <td class="cronograma__status"><span class="cronograma__selo" data-status="previsto">Previsto</span></td>
+            </tr>
+              </tbody>
+            </table>
+            <span class="cronograma__hoje" aria-hidden="true"><span class="cronograma__hoje-rotulo">hoje</span></span>
           </div>
-          <div class="processo__paineis">
-          <div class="processo__painel" id="processo-painel-1" role="tabpanel" aria-labelledby="processo-aba-1">
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 1 de 6</p>
-              <h3 class="processo__nome">Briefing</h3>
-              <p class="processo__texto">Conversa para entender o projeto, o público e as exigências do edital ou do financiador. Daqui saem a lista de peças e o cronograma.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Briefing do projeto</p>
-                <ul class="processo__checklist">
-                  <li class="processo__checado">Projeto e proposta</li>
-                  <li class="processo__checado">Público</li>
-                  <li class="processo__checado">Exigências do edital</li>
-                  <li class="processo__checado">Marcas do financiador</li>
-                </ul>
-              </div>
-              <div class="processo__saidas">
-                <span class="processo__selo">Lista de peças</span>
-                <span class="processo__selo">Cronograma</span>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-2" role="tabpanel" aria-labelledby="processo-aba-2" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 2 de 6</p>
-              <h3 class="processo__nome">Proposta e orçamento</h3>
-              <p class="processo__texto">Escopo, prazo e valores por escrito, aceitos antes de qualquer produção.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao processo__cartao--documento">
-                <p class="processo__cartao-titulo">Proposta</p>
-                <dl class="processo__linhas">
-                  <div class="processo__linha"><dt>Escopo</dt><dd><span class="processo__barra" style="--l: 92%"></span></dd></div>
-                  <div class="processo__linha"><dt>Prazo</dt><dd><span class="processo__barra" style="--l: 54%"></span></dd></div>
-                  <div class="processo__linha"><dt>Valores</dt><dd><span class="processo__barra" style="--l: 70%"></span></dd></div>
-                </dl>
-                <span class="processo__botao"><span class="processo__antes">Aceitar proposta</span><span class="processo__depois">Aceita por escrito</span></span>
-                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-3" role="tabpanel" aria-labelledby="processo-aba-3" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 3 de 6</p>
-              <h3 class="processo__nome">Produção</h3>
-              <p class="processo__texto">Criação das peças a partir do briefing e das regras de marca informadas. As entregas acontecem por etapa, começando pelo que o prazo mais exige. O prazo conta a partir do briefing concluído, da entrada paga e do material recebido.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Cronograma de produção</p>
-                <ul class="processo__gantt">
-                  <li class="processo__tarefa" style="--i: 0; --de: 0%; --ate: 38%"><span>Identidade visual</span><i></i></li>
-                  <li class="processo__tarefa" style="--i: 1; --de: 30%; --ate: 70%"><span>Book de captação</span><i></i></li>
-                  <li class="processo__tarefa" style="--i: 2; --de: 52%; --ate: 84%"><span>Redes sociais</span><i></i></li>
-                  <li class="processo__tarefa" style="--i: 3; --de: 70%; --ate: 100%"><span>Material de palco</span><i></i></li>
-                </ul>
-                <p class="processo__nota">Primeiro o que o prazo mais exige</p>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-4" role="tabpanel" aria-labelledby="processo-aba-4" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 4 de 6</p>
-              <h3 class="processo__nome">Revisão</h3>
-              <p class="processo__texto">Até 3 rodadas de revisão por entrega, dentro do que foi combinado na proposta.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Revisão da entrega</p>
-                <div class="processo__prancha">
-                  <span class="processo__forma processo__forma--a"></span>
-                  <span class="processo__forma processo__forma--b"></span>
-                  <span class="processo__forma processo__forma--c"></span>
-                  <span class="processo__pino" style="--i: 0; --x: 22%; --y: 30%">1</span>
-                  <span class="processo__pino" style="--i: 1; --x: 70%; --y: 24%">2</span>
-                  <span class="processo__pino" style="--i: 2; --x: 56%; --y: 72%">3</span>
-                </div>
-                <div class="processo__rodadas">
-                  <span class="processo__rodada" style="--i: 0">Rodada 1</span>
-                  <span class="processo__rodada" style="--i: 1">Rodada 2</span>
-                  <span class="processo__rodada" style="--i: 2">Rodada 3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-5" role="tabpanel" aria-labelledby="processo-aba-5" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 5 de 6</p>
-              <h3 class="processo__nome">Aprovação</h3>
-              <p class="processo__texto">O cliente aprova as peças finais, e o saldo é pago conforme o combinado na proposta.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Aprovação</p>
-                <div class="processo__aprova">
-                  <span class="processo__aprova-nome">Peças finais</span>
-                  <span class="processo__botao processo__botao--aprovar"><span class="processo__antes">Aprovar</span><span class="processo__depois">Aprovado</span></span>
-                </div>
-                <div class="processo__aprova">
-                  <span class="processo__aprova-nome">Saldo da proposta</span>
-                  <span class="processo__estado"><span class="processo__antes">Pendente</span><span class="processo__depois">Pago</span></span>
-                </div>
-                <svg class="processo__cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" /></svg>
-              </div>
-            </div>
-          </div>
-          <div class="processo__painel" id="processo-painel-6" role="tabpanel" aria-labelledby="processo-aba-6" hidden>
-            <div class="processo__info">
-              <p class="processo__passo">Etapa 6 de 6</p>
-              <h3 class="processo__nome">Entrega</h3>
-              <p class="processo__texto">Arquivos finais em alta resolução, nos formatos necessários, liberados após a compensação do pagamento.</p>
-            </div>
-            <div class="processo__cena" aria-hidden="true">
-              <div class="processo__cartao">
-                <p class="processo__cartao-titulo">Arquivos finais</p>
-                <ul class="processo__arquivos">
-                  <li class="processo__arquivo" style="--i: 0"><span>book-de-captacao.pdf</span><i></i></li>
-                  <li class="processo__arquivo" style="--i: 1"><span>identidade-visual.svg</span><i></i></li>
-                  <li class="processo__arquivo" style="--i: 2"><span>campanha-redes.png</span><i></i></li>
-                  <li class="processo__arquivo" style="--i: 3"><span>spot-radio.mp3</span><i></i></li>
-                </ul>
-                <p class="processo__nota processo__nota--ok">Liberados após a compensação do pagamento</p>
-              </div>
-            </div>
-          </div>
-          </div>
+          <p class="cronograma__nota">Prazos de exemplo. Cada projeto recebe o próprio cronograma na proposta, conforme o volume de peças de cada etapa.</p>
         </div>
       </section>
 
