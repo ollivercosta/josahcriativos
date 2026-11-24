@@ -40,7 +40,8 @@
   --prof: #1B2A3A;
   --prof-2: #002F63;
   --prof-3: #001E43;
-  --petroleo-fundo: #002654; /* fundo do hero, de Serviços e do rodapé */
+  --petroleo-fundo: #002654;
+  --amarelo: #FFBC00; /* destaque quente sobre o azul (texto de abertura) */ /* fundo do hero, de Serviços e do rodapé */
   --acento: #C62828; /* cinábrio, sobre claro */
   --acento-escuro: #9F1F1F;
   --acento-vivo: #F1D584; /* cinábrio, sobre o profundo */
@@ -133,13 +134,13 @@
   --sobre-cor-rgb: 246 241 234;
 
   /* cursores do título (Titulo.js), sobre o petróleo do hero */
-  --agente-grid: var(--argila-clara);
-  --agente-contorno: var(--acento-vivo);
-  --agente-curvas: var(--argila);
-  --agente-vetores: var(--acento-vivo);
-  --agente-cor: var(--acento-vivo);
-  --agente-espaco: var(--argila-clara);
-  --agente-medidas: var(--papel);
+  --agente-grid: #8FB8FF; /* cada agente com a sua cor, todas legíveis sobre o azul do hero */
+  --agente-contorno: #FFBC00;
+  --agente-curvas: #FF7A66;
+  --agente-vetores: #6FD3C1;
+  --agente-cor: #E7A8FF;
+  --agente-espaco: #C79A42;
+  --agente-medidas: #FFFFFF;
 
   /* títulos em Fraunces (serifada contemporânea); o resto do texto em Inter */
   --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;

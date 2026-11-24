@@ -20,6 +20,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 | T-06 | Respostas em português, técnicas, sem travessão, explicando cada arquivo entregue e sempre com "Próximos passos". |
 | T-07 | Nos textos que apresentam o Josah, nunca "especializado"; usar "com foco em". |
 | T-08 | Sugestões fogem do padrão gerado por IA (faixas numeradas, grades de cartões iguais, rótulos acima de títulos, ícones genéricos). Se a ideia é a primeira que qualquer IA daria, ela não serve. |
+| T-09 | Nunca usar travessão (traço longo) em nenhum texto do site, do código ou das respostas. Usar vírgula, ponto, dois-pontos ou hífen. |
 
 ## 2. Código
 
