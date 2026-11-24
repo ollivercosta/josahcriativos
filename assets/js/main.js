@@ -62,7 +62,7 @@ class Site {
     this.secoes.trabalhos = se(".trabalhos", (raiz) => new Trabalhos(raiz, TRABALHOS));
     this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz));
-    this.secoes.servicos = se(".servicos__mapa", () => new Servicos($(".servicos")));
+    this.secoes.servicos = se(".servicos__ilustracao", () => new Servicos($(".servicos")));
     this.secoes.cronograma = se(".cronograma", (raiz) => new Cronograma(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
     this.secoes.depoimentos = se(".depoimentos", (raiz) => new Depoimentos(raiz));

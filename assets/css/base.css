@@ -84,7 +84,7 @@
   --fundo-faixa-contato: transparent;
   --fundo-rodape: var(--petroleo-fundo);
   --fundo-processo: var(--papel);
-  --fundo-depoimentos: var(--branco);
+  --fundo-depoimentos: var(--petroleo-fundo);
   --fundo-faq: var(--papel);
 
   /* papéis usados pelos componentes */

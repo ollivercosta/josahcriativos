@@ -7,8 +7,21 @@
    ========================================================================= */
 
 .depoimentos {
+  position: relative;
+  z-index: 1;
   padding: var(--espaco-secao) var(--margem);
   background: var(--fundo-depoimentos);
+  /* mesma sombra suave das outras seções azuis */
+  box-shadow: 0 26px 40px -22px rgb(0 38 84 / 0.45);
+  /* seção no azul: as cores do texto se invertem só aqui */
+  --ink: var(--branco);
+  --texto: rgb(255 255 255 / 0.9);
+  --suave: rgb(255 255 255 / 0.66);
+  --linha: rgb(255 255 255 / 0.14);
+  --linha-2: rgb(255 255 255 / 0.3);
+  --terracota: var(--acento-vivo);
+  --aba-fundo: rgb(255 255 255 / 0.08);
+  color: var(--branco);
 }
 
 .depoimentos__titulo {
@@ -66,11 +79,11 @@
 }
 
 .depoimentos__aba:hover {
-  background: rgb(var(--superficie-rgb) / 0.7);
+  background: var(--aba-fundo);
 }
 
 .depoimentos__aba[aria-selected="true"] {
-  background: rgb(var(--superficie-rgb) / 0.7);
+  background: var(--aba-fundo);
 }
 
 .depoimentos__aba-conteudo {

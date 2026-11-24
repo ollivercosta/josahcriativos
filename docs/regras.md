@@ -4,7 +4,7 @@ Arquivo de consulta obrigatória. Antes de sugerir, propor ou aplicar qualquer
 mudança no site, ler este arquivo inteiro e conferir se a ideia já foi
 reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 
-Última atualização: 24/11/2026 (planilha do processo aprovada).
+Última atualização: 24/11/2026 (paleta TJBA aprovada; ilustração de Serviços com cortina).
 
 ---
 
@@ -48,7 +48,9 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 ## 3. Decisões em vigor
 
 **Cor e tipografia**
-- Paleta "petróleo, argila e cinábrio": fundo do hero, de Serviços e do rodapé `#012631`; texto `#0A1518`; argila `#B8876A`, argila clara `#D9B79C`, areia `#E7DCCD`, papel `#F6F1EA`; cinábrio `#C23A22` (sobre claro) e `#FF6A45` (sobre escuro), usado pouco.
+- Paleta aprovada em 24/11/2026, a partir do portal do TJBA: fundo branco `#FFFFFF`; azul profundo `#002654` nas seções escuras (hero com degradê horizontal `#001D40` > `#063867` > `#002654`, Serviços, depoimentos e rodapé); texto dos títulos `#1B2A3A`; vermelho `#C62828` como ação; dourado `#C79A42` e dourado claro `#F1D584` como apoio; amarelo `#FFBC00` só no texto de abertura do hero e no caminho tracejado da ilustração.
+- Seções azuis com sombra suave no fim, caindo sobre a seção seguinte.
+- Toda página alterna branco e azul; nenhuma página interna fica toda branca.
 - Títulos em Fraunces; texto corrido, menu e botões em Inter.
 
 **Estrutura da inicial**
@@ -62,9 +64,9 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Hero: título construído pelos agentes, em Fraunces; fundo liso; rótulo "Comunicação para projetos culturais" sem destaque de cor.
 - Manifesto: sempre 3 linhas no computador.
 - Trabalhos: galeria de quadrados, 6 visíveis; "Ver mais trabalhos" em texto à direita, sem formato de botão e sem número; em pares no celular; nome sobre a imagem ao passar o mouse; sem contador de trabalhos.
-- Serviços: três frentes em painéis, botão "Como trabalho".
+- Serviços: ilustração autoral "Do edital ao palco" (edital, prancheta, palco com cortina que abre e fecha) e três frentes em painéis, botão "Como trabalho". Cada painel acende a sua cena; a frase das regras marca a régua de logos no edital e no palco.
 - Processo (/como-trabalho): planilha de cronograma com indicadores no topo (estilo painel), letras de coluna e números de linha, barras por semana e a linha "hoje" atravessando; prazos sempre de exemplo, com aviso de que cada projeto tem o próprio cronograma.
-- Depoimentos: discretos, só em /como-trabalho.
+- Depoimentos: discretos, só em /como-trabalho, na faixa azul da página.
 - Contato: sem fundo, botão como único elemento de cor.
 - A foto do Josah fica só na página Sobre. O foco do site é o trabalho, não ele.
 

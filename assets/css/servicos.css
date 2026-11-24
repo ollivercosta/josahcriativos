@@ -37,6 +37,108 @@
   margin: clamp(24px, 4vw, 48px) auto 0;
 }
 
+/* ---- a ilustração conversa com os painéis ----
+   Cada frente acende a sua cena (Apresentação: o edital; Digital: a prancheta
+   com a página do projeto; Visual e mídia: o palco) e as outras recuam.
+   A frase das regras acende a régua de logos no edital e na arte do palco.
+   O estado vem de data-foco na seção, posto por assets/js/secoes/Servicos.js. */
+
+.servicos__cena {
+  transition: opacity 0.45s var(--curva);
+}
+
+.servicos[data-foco="apresentacao"] .servicos__cena:not([data-cena="apresentacao"]) {
+  opacity: 0.28;
+}
+
+.servicos[data-foco="digital"] .servicos__cena:not([data-cena="digital"]) {
+  opacity: 0.28;
+}
+
+.servicos[data-foco="visual"] .servicos__cena:not([data-cena="visual"]) {
+  opacity: 0.28;
+}
+
+.servicos__fluxo {
+  animation: servicos-fluxo 2.4s linear infinite paused;
+  transition: opacity 0.45s var(--curva);
+}
+
+.servicos[data-foco] .servicos__fluxo {
+  opacity: 0.35;
+}
+
+.servicos--visivel .servicos__fluxo {
+  animation-play-state: running;
+}
+
+@keyframes servicos-fluxo {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+/* a cortina: fechada, cobre o palco; aberta, as duas metades se recolhem nas laterais */
+.servicos__cortina {
+  transform-box: fill-box;
+  transition: transform 1.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.servicos__cortina--esq {
+  transform-origin: left center;
+}
+
+.servicos__cortina--dir {
+  transform-origin: right center;
+}
+
+.servicos--cortina-aberta .servicos__cortina {
+  transform: scaleX(0.2);
+}
+
+/* a luz do palco só acende com a cortina aberta */
+.servicos__foco {
+  opacity: 0;
+  transition: opacity 0.9s var(--curva);
+}
+
+.servicos--cortina-aberta .servicos__foco {
+  opacity: 1;
+  transition-delay: 0.5s;
+}
+
+.servicos__regua-marca {
+  fill: none;
+  stroke: #ffbc00;
+  stroke-width: 2;
+  stroke-dasharray: 3 4;
+  opacity: 0;
+  transition: opacity 0.35s var(--curva);
+}
+
+.servicos[data-foco="regua"] .servicos__regua-marca {
+  opacity: 1;
+}
+
+.servicos__grupo--ativo {
+  border-color: rgb(217 183 156 / 0.45);
+  background: rgb(246 241 234 / 0.07);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .servicos__fluxo {
+    animation: none;
+  }
+
+  .servicos__cortina {
+    transition: none;
+  }
+
+  .servicos__foco {
+    transition: none;
+  }
+}
+
 .servicos__indice {
   max-width: var(--largura);
   margin-inline: auto;
@@ -131,6 +233,7 @@
 
 .servicos__regras {
   max-width: 40em;
+  cursor: default;
   font-size: 0.98rem;
   color: var(--suave);
 }

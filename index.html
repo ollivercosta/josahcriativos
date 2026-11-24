@@ -335,10 +335,118 @@
         <div class="servicos__cabeca">
           <h2 class="servicos__titulo" id="servicos-titulo">Do edital ao palco</h2>
           <p class="servicos__lede">Cada fonte de recurso tem regras próprias de marca e de entrega. As exigências informadas no briefing orientam todo o trabalho.</p>
-          <img class="servicos__ilustracao" src="/assets/imagens/ilustracoes/edital-palco.svg" alt="" width="935" height="330" loading="lazy" />
+          <svg class="servicos__ilustracao" xmlns="http://www.w3.org/2000/svg" viewBox="40 50 935 330" role="img" aria-labelledby="servicos-ilu-titulo">
+            <title id="servicos-ilu-titulo">Do edital ao palco: o edital com a régua de logos, a designer criando a página do projeto e o palco onde a cortina abre para a arte do evento</title>
+            <defs>
+              <linearGradient id="ilu-fundo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B3E7A"/><stop offset="1" stop-color="#062F5F"/></linearGradient>
+              <linearGradient id="ilu-areia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6E3A8"/><stop offset="1" stop-color="#E9C977"/></linearGradient>
+              <linearGradient id="ilu-arbusto" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C7FC4"/><stop offset="1" stop-color="#173F7A"/></linearGradient>
+              <linearGradient id="ilu-arbusto2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B6BAE"/><stop offset="1" stop-color="#0F2F60"/></linearGradient>
+              <linearGradient id="ilu-dobras" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="20" y2="0" spreadMethod="reflect"><stop offset="0" stop-color="#7E1515"/><stop offset=".55" stop-color="#D23A2E"/><stop offset="1" stop-color="#A82519"/></linearGradient>
+              <linearGradient id="ilu-sombra-cortina" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A0606" stop-opacity=".55"/><stop offset=".25" stop-color="#3A0606" stop-opacity="0"/></linearGradient>
+              <linearGradient id="ilu-tablado" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E1B45A"/><stop offset="1" stop-color="#B07F2E"/></linearGradient>
+              <linearGradient id="ilu-luz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4C8" stop-opacity=".85"/><stop offset="1" stop-color="#FFF4C8" stop-opacity="0"/></linearGradient>
+              <linearGradient id="ilu-blusa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC93D"/><stop offset="1" stop-color="#F0A800"/></linearGradient>
+              <linearGradient id="ilu-cabelo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D3E7C"/><stop offset="1" stop-color="#0A1F45"/></linearGradient>
+              <linearGradient id="ilu-mesa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7B866"/><stop offset="1" stop-color="#C58E3C"/></linearGradient>
+              <linearGradient id="ilu-tela" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C62828"/><stop offset="1" stop-color="#7E1515"/></linearGradient>
+              <radialGradient id="ilu-brilho" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient>
+            </defs>
+
+            <!-- fundo -->
+            <path d="M70 360 C40 250 120 150 250 140 C330 134 360 70 470 64 C600 58 650 140 760 130 C880 120 930 230 900 360 Z" fill="url(#ilu-fundo)"/>
+            <path d="M250 360 C230 290 300 220 380 226 C440 230 470 190 540 196 C620 204 660 262 640 360 Z" fill="url(#ilu-areia)" opacity=".92"/>
+            <path d="M78 362 C54 342 58 300 84 292 C80 262 108 244 130 258 C150 240 182 258 176 286 C202 296 200 340 176 362 Z" fill="url(#ilu-arbusto)"/>
+            <path d="M128 362 V282 M128 330 L108 312 M128 312 L148 296" stroke="#0A1F45" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+            <!-- caminho tracejado: do edital à tela e da tela ao palco -->
+            <path class="servicos__fluxo" d="M286 230 C320 200 350 196 380 214 M560 196 C600 160 640 150 690 170" fill="none" stroke="#FFBC00" stroke-width="2.4" stroke-dasharray="2 9" stroke-linecap="round"/>
+
+            <!-- APRESENTAÇÃO: o edital, com selo e a régua de logos do financiador -->
+            <g class="servicos__cena" data-cena="apresentacao">
+              <g transform="translate(176 216) rotate(-6)">
+                <rect x="10" y="8" width="96" height="124" rx="6" fill="#DCE6F5"/>
+                <rect x="0" y="0" width="96" height="124" rx="6" fill="#FFFFFF"/>
+                <rect x="12" y="14" width="52" height="7" rx="3.5" fill="#1B2A3A"/>
+                <rect x="12" y="30" width="72" height="4" rx="2" fill="#B9C6D8"/><rect x="12" y="40" width="64" height="4" rx="2" fill="#B9C6D8"/><rect x="12" y="50" width="70" height="4" rx="2" fill="#B9C6D8"/><rect x="12" y="60" width="48" height="4" rx="2" fill="#B9C6D8"/>
+                <circle cx="74" cy="78" r="12" fill="#C79A42"/><circle cx="74" cy="78" r="7" fill="none" stroke="#FFF4C8" stroke-width="1.6"/>
+                <g class="servicos__regua">
+                  <rect x="12" y="98" width="16" height="12" rx="2" fill="#1B2A3A"/><rect x="32" y="98" width="16" height="12" rx="2" fill="#C62828"/><rect x="52" y="98" width="16" height="12" rx="2" fill="#C79A42"/><rect x="72" y="98" width="12" height="12" rx="2" fill="#6B88B5"/>
+                  <rect class="servicos__regua-marca" x="7" y="93" width="82" height="22" rx="5"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- DIGITAL: a designer na prancheta, com a página do projeto na tela -->
+            <g class="servicos__cena" data-cena="digital">
+              <path d="M372 360 L392 268 M520 360 L500 268" stroke="#8A5A1E" stroke-width="7" stroke-linecap="round"/>
+              <path d="M360 270 L534 252 L540 266 L366 286 Z" fill="url(#ilu-mesa)"/>
+              <rect x="400" y="172" width="100" height="78" rx="6" fill="#0A1F45"/>
+              <rect x="406" y="178" width="88" height="66" rx="3" fill="#FFFFFF"/>
+              <rect x="406" y="178" width="88" height="9" rx="3" fill="#DCE6F5"/>
+              <circle cx="412" cy="182.5" r="1.8" fill="#C62828"/><circle cx="418" cy="182.5" r="1.8" fill="#C79A42"/><circle cx="424" cy="182.5" r="1.8" fill="#6B88B5"/>
+              <rect x="410" y="191" width="80" height="30" rx="2" fill="url(#ilu-tela)"/>
+              <circle cx="474" cy="204" r="9" fill="#FFBC00"/>
+              <rect x="415" y="199" width="30" height="5" rx="2.5" fill="#FFF4E0"/><rect x="415" y="208" width="20" height="3" rx="1.5" fill="#FFF4E0" opacity=".7"/>
+              <rect x="410" y="226" width="24" height="13" rx="2" fill="#DCE6F5"/><rect x="438" y="226" width="24" height="13" rx="2" fill="#DCE6F5"/><rect x="466" y="226" width="24" height="13" rx="2" fill="#DCE6F5"/>
+              <path d="M444 250 L440 262 H462 L456 250 Z" fill="#0A1F45"/>
+              <!-- celular com a postagem da campanha -->
+              <rect x="372" y="222" width="22" height="38" rx="4" fill="#0A1F45" transform="rotate(-8 383 241)"/>
+              <rect x="375" y="226" width="16" height="30" rx="2" fill="#FFFFFF" transform="rotate(-8 383 241)"/>
+              <rect x="375" y="229" width="16" height="14" fill="url(#ilu-tela)" transform="rotate(-8 383 241)"/>
+              <circle cx="381" cy="248" r="2" fill="#C62828" transform="rotate(-8 383 241)"/>
+              <!-- banco -->
+              <path d="M566 306 L560 362 M606 306 L614 362 M572 336 H604" stroke="#7A4A16" stroke-width="5" stroke-linecap="round"/>
+              <rect x="556" y="298" width="58" height="10" rx="5" fill="#A86C26"/>
+              <!-- pernas -->
+              <path d="M596 300 C580 300 556 300 540 304" stroke="#1B2A3A" stroke-width="20" stroke-linecap="round" fill="none"/>
+              <path d="M542 304 C538 324 536 340 538 354" stroke="#1B2A3A" stroke-width="16" stroke-linecap="round" fill="none"/>
+              <path d="M528 352 C534 348 548 348 556 354 C556 360 548 362 528 362 Z" fill="#F6F1EA"/>
+              <path d="M528 358 H556" stroke="#C62828" stroke-width="2.5"/>
+              <!-- cabelo, tronco, braço e rosto -->
+              <path d="M584 178 C606 180 616 206 612 236 C610 256 616 270 624 280 C604 284 590 270 588 250 Z" fill="url(#ilu-cabelo)"/>
+              <path d="M560 236 C566 222 594 220 604 236 C612 256 612 284 606 304 C590 310 570 310 560 304 C556 282 556 254 560 236 Z" fill="url(#ilu-blusa)"/>
+              <path d="M560 284 C574 288 594 288 608 284" stroke="#FFFFFF" stroke-width="4" opacity=".85" fill="none"/>
+              <path d="M572 240 C560 254 548 262 528 262" stroke="#F0A800" stroke-width="13" stroke-linecap="round" fill="none"/>
+              <path d="M560 254 L548 262" stroke="#FFFFFF" stroke-width="3" opacity=".85"/>
+              <circle cx="522" cy="262" r="6.5" fill="#B9774E"/>
+              <path d="M516 262 L506 270" stroke="#1B2A3A" stroke-width="3" stroke-linecap="round"/>
+              <rect x="572" y="210" width="12" height="16" rx="5" fill="#B9774E"/>
+              <path d="M566 182 C566 168 578 160 590 162 C600 164 604 176 602 188 C600 200 594 210 584 212 C576 214 570 208 568 202 L562 198 L566 192 Z" fill="#C98A64"/>
+              <circle cx="574" cy="186" r="1.8" fill="#0A1F45"/>
+              <path d="M570 202 C573 203 576 203 578 201" stroke="#8A4E33" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <path d="M566 182 C562 160 590 150 604 166 C612 176 610 196 604 206 C602 190 594 176 578 176 C574 178 570 180 566 182 Z" fill="url(#ilu-cabelo)"/>
+            </g>
+
+            <!-- VISUAL E MÍDIA: o palco, com a arte do evento, a luz e a cortina -->
+            <g class="servicos__cena" data-cena="visual">
+              <path class="servicos__foco" d="M766 116 L790 116 L846 322 L708 322 Z" fill="url(#ilu-luz)"/>
+              <ellipse class="servicos__foco" cx="775" cy="320" rx="84" ry="14" fill="url(#ilu-brilho)"/>
+              <rect x="680" y="320" width="196" height="40" rx="6" fill="url(#ilu-tablado)"/>
+              <rect x="680" y="320" width="196" height="8" rx="4" fill="#F2CE7A"/>
+              <rect x="732" y="150" width="88" height="112" rx="4" fill="#FFFFFF"/>
+              <rect x="740" y="158" width="72" height="54" rx="2" fill="#0B3E7A"/>
+              <circle cx="790" cy="178" r="12" fill="#FFBC00"/>
+              <rect x="740" y="220" width="46" height="7" rx="3.5" fill="#1B2A3A"/><rect x="740" y="232" width="34" height="4" rx="2" fill="#B9C6D8"/>
+              <g class="servicos__regua">
+                <rect x="740" y="246" width="14" height="9" rx="1.5" fill="#1B2A3A"/><rect x="757" y="246" width="14" height="9" rx="1.5" fill="#C62828"/><rect x="774" y="246" width="14" height="9" rx="1.5" fill="#C79A42"/><rect x="791" y="246" width="11" height="9" rx="1.5" fill="#6B88B5"/>
+                <rect class="servicos__regua-marca" x="735" y="241" width="72" height="19" rx="4"/>
+              </g>
+              <path d="M846 320 V256" stroke="#0A1F45" stroke-width="3"/><rect x="841" y="244" width="10" height="16" rx="5" fill="#0A1F45"/>
+              <g class="servicos__cortina servicos__cortina--esq"><path d="M664 104 H783 V326 Q773.1 334 763.2 326 Q753.2 334 743.3 326 Q733.4 334 723.5 326 Q713.6 334 703.7 326 Q693.8 334 683.8 326 Q673.9 334 664.0 326 Z" fill="url(#ilu-dobras)"/><rect x="779" y="104" width="4" height="222" fill="#4A0808" opacity=".45"/></g>
+              <g class="servicos__cortina servicos__cortina--dir"><path d="M777 104 H896 V326 Q886.1 334 876.2 326 Q866.2 334 856.3 326 Q846.4 334 836.5 326 Q826.6 334 816.7 326 Q806.8 334 796.8 326 Q786.9 334 777.0 326 Z" fill="url(#ilu-dobras)"/><rect x="777" y="104" width="3" height="222" fill="#4A0808" opacity=".3"/></g>
+              <rect x="660" y="104" width="240" height="60" fill="url(#ilu-sombra-cortina)" pointer-events="none"/>
+              <path d="M656 88 H900 V112 C860 126 820 106 780 118 C740 128 700 108 656 120 Z" fill="#8E1B1B"/>
+              <rect x="764" y="110" width="28" height="12" rx="4" fill="#0A1F45"/>
+            </g>
+
+            <path d="M902 364 C884 346 886 312 904 304 C902 282 924 270 940 282 C958 276 970 300 958 318 C972 334 964 356 948 364 Z" fill="url(#ilu-arbusto2)"/>
+            <path d="M926 364 V300 M926 336 L912 322" stroke="#0A1F45" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="480" cy="364" rx="430" ry="12" fill="#001D40" opacity=".55"/>
+          </svg>
         </div>
         <div class="servicos__indice">
-          <div class="servicos__grupo">
+          <div class="servicos__grupo" data-cena="apresentacao">
             <h3 class="servicos__grupo-nome">Apresentação</h3>
             <p class="servicos__grupo-texto">Propostas visuais para editais, pareceristas, leis de incentivo e patrocinadores.</p>
             <ul class="servicos__linhas">
@@ -347,7 +455,7 @@
               <li class="servicos__linha">Portfólio artístico</li>
             </ul>
           </div>
-          <div class="servicos__grupo">
+          <div class="servicos__grupo" data-cena="digital">
             <h3 class="servicos__grupo-nome">Digital</h3>
             <p class="servicos__grupo-texto">Comunicação online, fluxo de inscrições e relacionamento com o público do evento.</p>
             <ul class="servicos__linhas">
@@ -356,7 +464,7 @@
               <li class="servicos__linha">Campanhas para redes sociais</li>
             </ul>
           </div>
-          <div class="servicos__grupo">
+          <div class="servicos__grupo" data-cena="visual">
             <h3 class="servicos__grupo-nome">Visual e mídia</h3>
             <p class="servicos__grupo-texto">Artes digitais para espaços de eventos, palco e canais de difusão do projeto.</p>
             <ul class="servicos__linhas">
@@ -367,7 +475,7 @@
           </div>
         </div>
         <div class="servicos__rodape">
-          <p class="servicos__regras">Em todo projeto: régua de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a prestação de contas.</p>
+          <p class="servicos__regras" data-cena="regua">Em todo projeto: régua de logos na ordem e na proporção do financiador, peças dentro das normas do edital e arquivos prontos para a prestação de contas.</p>
           <a class="servicos__link" href="/como-trabalho">Como trabalho</a>
         </div>
       </section>
