@@ -1,8 +1,7 @@
 /* =========================================================================
    ABERTURA (hero)
-   O rótulo, o título grande montado por agentes (Titulo.js) e um texto
-   curto. A faixa de serviços
-   corre de lado e fecha a abertura. Os books folheáveis ficam nas páginas
+   O rótulo, o título grande montado por agentes (Titulo.js), um texto
+   curto, as duas ações e, fechando, a linha das leis de incentivo. Os books folheáveis ficam nas páginas
    de cada trabalho de book.
    ========================================================================= */
 
@@ -274,64 +273,52 @@
   color: var(--amarelo);
 }
 
-/* ---------- a faixa de serviços ---------- */
-.hero__faixa {
-  display: flex;
-  justify-content: center;
-  max-width: 1120px;
-  margin: clamp(56px, 7vw, 88px) auto 0;
-}
-
-.hero__servicos {
+/* ---------- as duas ações e a linha do fomento ---------- */
+.hero__acoes {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px 28px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  gap: 12px 14px;
+  margin-top: 36px;
 }
 
-.hero__servico {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.hero__acao {
+  padding: 14px 28px;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  border-radius: 999px;
+  color: var(--branco);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--curva),
+    border-color 0.3s var(--curva),
+    color 0.3s var(--curva);
+}
+
+.hero__acao:hover {
+  border-color: var(--branco);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.hero__acao--principal {
+  border-color: var(--branco);
+  background: var(--branco);
+  color: var(--prof-3);
+}
+
+.hero__acao--principal:hover {
+  background: var(--areia);
+}
+
+.hero__fomento {
+  position: relative;
+  z-index: 2;
+  max-width: 1080px;
+  margin: clamp(56px, 7vw, 88px) auto 0;
+  padding-top: 22px;
+  border-top: 1px solid rgb(255 255 255 / 0.14);
   font-size: 0.95rem;
-  font-weight: 500;
   color: var(--suave);
-  white-space: nowrap;
-}
-
-.hero__servico::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--terracota-claro);
-}
-
-@keyframes hero-faixa {
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-.hero__faixa--correndo {
-  justify-content: flex-start;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-}
-
-.hero__faixa--correndo .hero__servicos {
-  flex: none;
-  flex-wrap: nowrap;
-  padding-right: 28px;
-  animation: hero-faixa 38s linear infinite;
-}
-
-.hero__faixa--correndo:hover .hero__servicos {
-  animation-play-state: paused;
 }
 
 /* ---------- entrada: uma sequência só ao abrir a página ---------- */
@@ -350,7 +337,11 @@
   animation: hero-sobe 0.9s var(--curva) both;
 }
 
-.hero__faixa {
+.hero__acoes {
+  animation: hero-sobe 0.9s var(--curva) both;
+}
+
+.hero__fomento {
   animation: hero-sobe 0.9s var(--curva) both;
 }
 
@@ -358,7 +349,11 @@
   animation-delay: 0.3s;
 }
 
-.hero__faixa {
+.hero__acoes {
+  animation-delay: 0.55s;
+}
+
+.hero__fomento {
   animation-delay: 0.85s;
 }
 
