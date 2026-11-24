@@ -29,6 +29,14 @@
   margin-inline: auto;
 }
 
+.servicos__ilustracao {
+  display: block;
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+  margin: clamp(24px, 4vw, 48px) auto 0;
+}
+
 .servicos__indice {
   max-width: var(--largura);
   margin-inline: auto;
