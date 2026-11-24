@@ -61,8 +61,14 @@ export class RolagemSuave {
     }
     const alvo = this.#alvoDoEndereco(window.location.href);
     if (!alvo) return;
+    /* depois de chegar, o # sai do endereço: assim, ao atualizar a página, ela não volta para a seção */
+    const limpar = () => window.history.replaceState(null, "", window.location.pathname + window.location.search);
     /* o pulo do navegador acontece até o fim do carregamento: a correção vem depois dele */
-    const corrigir = () => window.requestAnimationFrame(() => this.rolarPara(alvo, true));
+    const corrigir = () =>
+      window.requestAnimationFrame(() => {
+        this.rolarPara(alvo, true);
+        limpar();
+      });
     if (document.readyState === "complete") corrigir();
     else window.addEventListener("load", corrigir, { once: true });
   }
@@ -109,7 +115,8 @@ export class RolagemSuave {
       const alvo = this.#alvoDoEndereco(link.href);
       if (!alvo) return;
       evento.preventDefault();
-      if (window.location.hash !== `#${alvo.id}`) window.history.pushState(null, "", `#${alvo.id}`);
+      /* o endereço fica limpo, sem #: atualizar a página mantém o visitante onde ele está */
+      if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
       this.rolarPara(alvo);
     });
   }
