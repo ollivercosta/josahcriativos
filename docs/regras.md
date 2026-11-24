@@ -70,6 +70,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Depoimento em corpo grande ocupando a tela.
 - Informação empilhada: descrição longa embaixo de cada item de lista.
 - Esmaecer o hero ao rolar.
+- Traço curto antes de itens de lista (parece travessão).
 - Retícula concentrada num canto apresentada como "textura". A textura em vigor é o grão de papel no site inteiro.
 - Número de itens restantes no "Ver mais" e "Ver mais" em formato de botão.
 
