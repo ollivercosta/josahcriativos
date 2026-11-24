@@ -21,10 +21,25 @@
   --linha-2: rgb(246 241 234 / 0.3);
   color: var(--papel);
   position: relative;
+  isolation: isolate;
   overflow: clip;
   padding: calc(var(--altura-cabecalho) + clamp(48px, 8vw, 104px)) var(--margem) clamp(48px, 6vw, 80px);
   background: var(--fundo-hero);
   text-align: center;
+}
+
+/* textura de destaque: a retícula de gráfica (pontos de impressão offset), que nasce no canto
+   superior direito e some em degradê; fica atrás do conteúdo e não se mexe */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(246 241 234 / 0.16) 1.4px, transparent 1.8px);
+  background-size: 9px 9px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 90% at 100% 0%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse 70% 90% at 100% 0%, #000 0%, transparent 70%);
 }
 
 .hero__texto-bloco {

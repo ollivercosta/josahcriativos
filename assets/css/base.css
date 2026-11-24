@@ -403,3 +403,16 @@ p {
 main [id] {
   scroll-margin-top: calc(var(--altura-cabecalho) + 16px);
 }
+
+/* textura de base: grão de papel finíssimo sobre o site inteiro, como papel impresso.
+   É uma imagem fixa por cima de tudo, sem animação e sem receber cliques. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("/assets/imagens/textura-grao.webp");
+  background-size: 160px 160px;
+  opacity: 0.07;
+}
