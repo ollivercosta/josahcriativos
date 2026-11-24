@@ -136,16 +136,6 @@
   outline-color: var(--texto-sobre-cor);
 }
 
-/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
-.contato__titulo::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 6px;
-  margin: 0 auto clamp(18px, 2vw, 26px);
-  border-radius: 1px;
-  background: var(--texto-sobre-cor);
-}
 
 /* atalho para as perguntas frequentes, logo abaixo do botão */
 .contato__duvidas {

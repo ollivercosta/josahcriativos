@@ -11,13 +11,18 @@
   background: var(--fundo-depoimentos);
 }
 
-.depoimentos__titulo,
+.depoimentos__titulo {
+  max-width: var(--largura);
+  margin-inline: auto;
+}
+
 .depoimentos__grade {
   max-width: var(--largura);
   margin-inline: auto;
 }
 
 .depoimentos__titulo {
+  text-align: center;
   font-family: var(--fonte-titulo);
   font-size: var(--titulo-secao);
   font-weight: 600;
@@ -184,13 +189,3 @@
   }
 }
 
-/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
-.depoimentos__titulo::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 6px;
-  margin: 0 0 clamp(18px, 2vw, 26px);
-  border-radius: 1px;
-  background: var(--terracota);
-}

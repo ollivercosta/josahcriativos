@@ -6,12 +6,14 @@
 
 .faq {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: start;
+  gap: var(--espaco-titulo);
   max-width: calc(var(--largura) + 2 * var(--margem));
   margin-inline: auto;
   padding: var(--espaco-secao) var(--margem);
+}
+
+.faq__lado {
+  text-align: center;
 }
 
 .faq__titulo {
@@ -24,7 +26,8 @@
 }
 
 .faq__lede {
-  margin-top: 16px;
+  max-width: 40em;
+  margin: 16px auto 0;
   font-size: 1.1rem;
   color: var(--suave);
 }
@@ -43,6 +46,9 @@
 .faq__lista {
   display: grid;
   gap: 10px;
+  width: 100%;
+  max-width: 860px;
+  margin-inline: auto;
 }
 
 .faq__item {
@@ -119,12 +125,6 @@
   color: var(--suave);
 }
 
-@media (max-width: 860px) {
-  .faq {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 /* aberta: o sinal passa ao acento (estado de interação) */
 .faq__item[open] .faq__sinal {
   background: var(--terracota-claro);
@@ -135,13 +135,3 @@
   background: var(--terracota-escuro);
 }
 
-/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
-.faq__titulo::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 6px;
-  margin: 0 0 clamp(18px, 2vw, 26px);
-  border-radius: 1px;
-  background: var(--terracota);
-}

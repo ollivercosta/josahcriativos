@@ -267,3 +267,60 @@
     columns: 1;
   }
 }
+
+/* ---------- título Sobre: Fraunces, em uma linha só, com a parte forte destacada (vinha de tipografia.css) ---------- */
+
+.sobre__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-transform: none;
+}
+
+.sobre__titulo-corpo {
+  display: inline;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.sobre__titulo-leve {
+  display: inline;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.sobre__titulo-leve-texto {
+  display: inline;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.sobre__titulo-pesado {
+  display: inline;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.sobre__titulo-leve::after {
+  content: none;
+}
+
+.sobre__titulo-destaque {
+  color: var(--azul);
+}
+
+.sobre__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--titulo-secao);
+}
+
+/* as duas partes do título vinham em linhas separadas: na mesma linha, precisam do espaço entre elas */
+.sobre__titulo-pesado {
+  margin-left: 0.25em;
+}

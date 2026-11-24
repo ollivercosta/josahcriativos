@@ -39,6 +39,10 @@ export class Cabecalho {
 
   #aoRolar() {
     this.raiz.classList.toggle("cabecalho--rolou", window.scrollY > 8);
+    /* enquanto o hero ocupa o topo, o cabeçalho fica sem fundo (e com o menu do celular fechado) */
+    const hero = document.querySelector(".hero");
+    const sobreHero = !!hero && hero.getBoundingClientRect().bottom > this.raiz.offsetHeight && !this.menuAberto;
+    this.raiz.classList.toggle("cabecalho--sobre-hero", sobreHero);
     /* quanto da página já foi lido: a linha azul na base do cabeçalho */
     const maximo = document.documentElement.scrollHeight - window.innerHeight;
     this.raiz.style.setProperty("--lido", maximo > 0 ? Math.min(1, window.scrollY / maximo).toFixed(4) : "0");
@@ -85,6 +89,7 @@ export class Cabecalho {
     this.menu.classList.toggle("menu-movel--aberto", abrir);
     this.menu.setAttribute("aria-hidden", abrir ? "false" : "true");
     this.raiz.classList.toggle("cabecalho--menu-aberto", abrir);
+    this.#aoRolar();
     this.botaoMenu.setAttribute("aria-expanded", abrir ? "true" : "false");
     this.botaoMenu.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
     this.iconeMenu.innerHTML = abrir

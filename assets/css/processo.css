@@ -19,13 +19,18 @@
   --rotulo: var(--suave);
 }
 
-.processo__cabeca,
+.processo__cabeca {
+  max-width: var(--largura);
+  margin-inline: auto;
+}
+
 .processo__quadro {
   max-width: var(--largura);
   margin-inline: auto;
 }
 
 .processo__titulo {
+  text-align: center;
   font-family: var(--fonte-titulo);
   font-size: var(--titulo-secao);
   font-weight: 600;
@@ -36,6 +41,7 @@
 
 .processo__lede {
   margin-top: 16px;
+  text-align: center;
   font-size: 1.15rem;
   color: var(--suave);
 }
@@ -366,7 +372,11 @@
   font-weight: 600;
 }
 
-.processo__antes,
+.processo__antes {
+  grid-area: 1 / 1;
+  text-align: center;
+}
+
 .processo__depois {
   grid-area: 1 / 1;
   text-align: center;
@@ -378,7 +388,11 @@
 
 /* o botão começa preto com o texto de antes e, no clique, troca para o de depois */
 @keyframes processo-botao {
-  0%,
+  0% {
+    background-color: var(--azul);
+    transform: scale(1);
+  }
+
   62% {
     background-color: var(--azul);
     transform: scale(1);
@@ -389,22 +403,34 @@
 }
 
 @keyframes processo-sai {
-  0%,
+  0% {
+    opacity: 1;
+  }
+
   60% {
     opacity: 1;
   }
-  64%,
+  64% {
+    opacity: 0;
+  }
+
   100% {
     opacity: 0;
   }
 }
 
 @keyframes processo-entra {
-  0%,
+  0% {
+    opacity: 0;
+  }
+
   60% {
     opacity: 0;
   }
-  64%,
+  64% {
+    opacity: 1;
+  }
+
   100% {
     opacity: 1;
   }
@@ -457,7 +483,11 @@
     transform: translate(0, 0) scale(1);
     opacity: 1;
   }
-  80%,
+  80% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+
   100% {
     opacity: 0;
     transform: translate(0, 0);
@@ -650,7 +680,11 @@
 }
 
 @keyframes processo-pago {
-  0%,
+  0% {
+    background-color: var(--aviso-claro);
+    color: var(--aviso);
+  }
+
   62% {
     background-color: var(--aviso-claro);
     color: var(--aviso);
@@ -762,13 +796,3 @@
   }
 }
 
-/* marca do título: uma barra curta e grossa na cor de ação, que dá peso e ponto de entrada à seção */
-.processo__titulo::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 6px;
-  margin: 0 0 clamp(18px, 2vw, 26px);
-  border-radius: 1px;
-  background: var(--vermelho);
-}

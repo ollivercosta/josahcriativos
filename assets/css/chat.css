@@ -49,7 +49,10 @@
   transition: fill 0.5s ease;
 }
 
-.chat__selo-cabelo,
+.chat__selo-cabelo {
+  fill: #2a1c15;
+}
+
 .chat__selo-franja {
   fill: #2a1c15;
 }
@@ -244,7 +247,21 @@
   opacity: 0.8;
 }
 
-.chat__reiniciar,
+.chat__reiniciar {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+
 .chat__fechar {
   flex: none;
   width: 36px;
@@ -260,7 +277,10 @@
   transition: background 0.4s ease;
 }
 
-.chat__reiniciar:hover,
+.chat__reiniciar:hover {
+  background: rgb(var(--sobre-cor-rgb) / 0.16);
+}
+
 .chat__fechar:hover {
   background: rgb(var(--sobre-cor-rgb) / 0.16);
 }
@@ -490,8 +510,16 @@
 }
 
 @keyframes chat-ponto {
-  0%,
-  80%,
+  0% {
+    opacity: 0.3;
+    transform: none;
+  }
+
+  80% {
+    opacity: 0.3;
+    transform: none;
+  }
+
   100% {
     opacity: 0.3;
     transform: none;

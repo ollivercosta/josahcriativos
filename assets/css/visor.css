@@ -64,8 +64,36 @@
   gap: 6px;
 }
 
-.visor__anterior,
-.visor__posterior,
+.visor__anterior {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+.visor__posterior {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
 .visor__fechar {
   width: 40px;
   height: 40px;
@@ -81,7 +109,10 @@
     color 0.4s ease;
 }
 
-.visor__anterior:hover,
+.visor__anterior:hover {
+  background: var(--cor-cinza-claro);
+}
+
 .visor__posterior:hover {
   background: var(--cor-cinza-claro);
 }
@@ -96,9 +127,24 @@
   background: var(--cor-vermelho);
 }
 
-.visor__icone-voltar,
-.visor__icone-anterior,
-.visor__icone-posterior,
+.visor__icone-voltar {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.visor__icone-anterior {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.visor__icone-posterior {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
 .visor__icone-fechar {
   width: 18px;
   height: 18px;

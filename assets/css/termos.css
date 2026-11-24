@@ -129,7 +129,13 @@
   color: var(--texto-sobre-cor);
 }
 
-.termos__aba-icone,
+.termos__aba-icone {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
 .termos__aba-seta {
   flex: none;
   width: 16px;
@@ -169,7 +175,11 @@
     border-color 0.4s ease;
 }
 
-.termos__indice-link:hover,
+.termos__indice-link:hover {
+  color: var(--cor-tinta);
+  border-left-color: var(--acao);
+}
+
 .termos__indice-link--atual {
   color: var(--cor-tinta);
   border-left-color: var(--acao);
@@ -209,7 +219,10 @@
   color: var(--rotulo);
 }
 
-.termos__paragrafo,
+.termos__paragrafo {
+  margin: 0 0 16px;
+}
+
 .termos__lista {
   margin: 0 0 16px;
 }
@@ -244,7 +257,10 @@
     flex: none;
   }
 
-  .termos__aba-seta,
+  .termos__aba-seta {
+    display: none;
+  }
+
   .termos__indice {
     display: none;
   }

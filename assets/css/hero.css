@@ -338,8 +338,14 @@
   }
 }
 
-.hero__rotulo,
-.hero__texto,
+.hero__rotulo {
+  animation: hero-sobe 0.9s var(--curva) both;
+}
+
+.hero__texto {
+  animation: hero-sobe 0.9s var(--curva) both;
+}
+
 .hero__faixa {
   animation: hero-sobe 0.9s var(--curva) both;
 }

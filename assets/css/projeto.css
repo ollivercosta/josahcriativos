@@ -29,8 +29,20 @@
   border-bottom: 1px solid var(--cor-linha);
 }
 
-.projeto__voltar,
-.projeto__marca,
+.projeto__voltar {
+  color: var(--cor-tinta);
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0;
+}
+
+.projeto__marca {
+  color: var(--cor-tinta);
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0;
+}
+
 .projeto__vizinho {
   color: var(--cor-tinta);
   text-decoration: none;
@@ -79,13 +91,48 @@
   padding-top: var(--barra);
 }
 
-.projeto__abertura,
-.projeto__ficha,
-.projeto__chave,
-.projeto__caso,
-.projeto__pecas,
-.projeto__regua,
-.projeto__mais,
+.projeto__abertura {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projeto__ficha {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projeto__chave {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projeto__caso {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projeto__pecas {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projeto__regua {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projeto__mais {
+  width: min(var(--largura), calc(100% - 2 * var(--margem)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .projeto__seguinte {
   width: min(var(--largura), calc(100% - 2 * var(--margem)));
   margin-left: auto;
@@ -418,7 +465,12 @@
   cursor: zoom-in;
 }
 
-.projeto__prancha-imagem,
+.projeto__prancha-imagem {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .projeto__imagem {
   display: block;
   width: 100%;
@@ -666,8 +718,40 @@
   margin: 40px auto;
 }
 
-.ampliada__fechar,
-.ampliada__anterior,
+.ampliada__fechar {
+  position: fixed;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgb(var(--sobre-cor-rgb) / 0.3);
+  border-radius: 50%;
+  background: rgb(var(--escuro-rgb) / 0.6);
+  color: var(--texto-sobre-cor);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s var(--curva);
+}
+
+.ampliada__anterior {
+  position: fixed;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgb(var(--sobre-cor-rgb) / 0.3);
+  border-radius: 50%;
+  background: rgb(var(--escuro-rgb) / 0.6);
+  color: var(--texto-sobre-cor);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s var(--curva);
+}
+
 .ampliada__seguinte {
   position: fixed;
   z-index: 1;
@@ -685,8 +769,14 @@
   transition: background 0.3s var(--curva);
 }
 
-.ampliada__fechar:hover,
-.ampliada__anterior:hover,
+.ampliada__fechar:hover {
+  background: rgb(var(--sobre-cor-rgb) / 0.16);
+}
+
+.ampliada__anterior:hover {
+  background: rgb(var(--sobre-cor-rgb) / 0.16);
+}
+
 .ampliada__seguinte:hover {
   background: rgb(var(--sobre-cor-rgb) / 0.16);
 }
@@ -753,9 +843,15 @@
     grid-template-columns: 1fr auto;
   }
 
-  .projeto__abertura,
+  .projeto__abertura {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .projeto__peca,
-  .projeto__peca:nth-of-type(even),
+  .projeto__peca:nth-of-type(even) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .projeto__regua {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -785,10 +881,34 @@
     margin: 72px 0 96px;
   }
 
-  .ampliada__anterior,
+  .ampliada__anterior {
+    top: auto;
+    bottom: 20px;
+    transform: none;
+  }
+
   .ampliada__seguinte {
     top: auto;
     bottom: 20px;
     transform: none;
   }
+}
+
+/* ---------- título das páginas de trabalho: Fraunces, em uma linha só, com a parte forte destacada (vinha de tipografia.css) ---------- */
+
+.projeto__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-transform: none;
+}
+
+.projeto__titulo-forte {
+  color: var(--azul);
+}
+
+.projeto__titulo-fino {
+  font-weight: 400;
 }

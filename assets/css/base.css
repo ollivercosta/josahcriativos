@@ -40,6 +40,7 @@
   --prof: #0A1518;
   --prof-2: #0E1C20;
   --prof-3: #060D0F;
+  --petroleo-fundo: #012631; /* fundo do hero, de Serviços e do rodapé */
   --acento: #C23A22; /* cinábrio, sobre claro */
   --acento-escuro: #9E2E1A;
   --acento-vivo: #FF6A45; /* cinábrio, sobre o profundo */
@@ -73,14 +74,14 @@
   --aviso-claro: var(--areia);
 
   /* fundos por seção, na ordem da página */
-  --fundo-hero: var(--prof);
+  --fundo-hero: var(--petroleo-fundo);
   --fundo-trabalhos: var(--papel);
   --fundo-manifesto: var(--areia);
-  --fundo-servicos: var(--prof-2);
+  --fundo-servicos: var(--petroleo-fundo);
   --fundo-depoimento: var(--papel);
   --fundo-contato: var(--areia);
   --fundo-faixa-contato: transparent;
-  --fundo-rodape: var(--prof-3);
+  --fundo-rodape: var(--petroleo-fundo);
   --fundo-processo: var(--papel);
   --fundo-depoimentos: var(--branco);
   --fundo-faq: var(--papel);
@@ -170,8 +171,14 @@
 
 
 
-*,
-*::before,
+* {
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
 *::after {
   box-sizing: border-box;
 }
@@ -181,7 +188,10 @@ html {
   scroll-padding-top: calc(var(--altura-cabecalho) + 24px);
 }
 
-html,
+html {
+  overflow-x: clip;
+}
+
 body {
   overflow-x: clip;
 }
@@ -217,8 +227,16 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-img,
-video,
+img {
+  display: block;
+  max-width: 100%;
+}
+
+video {
+  display: block;
+  max-width: 100%;
+}
+
 iframe {
   display: block;
   max-width: 100%;
@@ -228,27 +246,66 @@ a {
   color: inherit;
 }
 
-button,
-input,
+button {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+input {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
 textarea {
   font: inherit;
   letter-spacing: inherit;
   color: inherit;
 }
 
-h1,
-h2,
-h3,
-p,
-figure,
-blockquote,
-dl,
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+blockquote {
+  margin: 0;
+}
+
+dl {
+  margin: 0;
+}
+
 dd {
   margin: 0;
 }
 
-h1,
-h2,
+h1 {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+h2 {
+  color: var(--ink);
+  text-wrap: balance;
+}
+
 h3 {
   color: var(--ink);
   text-wrap: balance;
@@ -311,8 +368,20 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
+  * {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+
+  *::before {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+
   *::after {
     animation-duration: 0.001ms !important;
     animation-delay: 0s !important;
