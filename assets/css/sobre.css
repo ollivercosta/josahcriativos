@@ -165,10 +165,10 @@
 }
 
 .sobre__manchete-frase {
-  max-width: 17em;
+  max-width: 23em;
   margin: 0 auto;
   font-family: var(--fonte-titulo);
-  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.025em;

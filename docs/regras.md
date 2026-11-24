@@ -4,7 +4,7 @@ Arquivo de consulta obrigatória. Antes de sugerir, propor ou aplicar qualquer
 mudança no site, ler este arquivo inteiro e conferir se a ideia já foi
 reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 
-Última atualização: 24/11/2026 (hero com ações, Sobre como casa e quarto, páginas dos trabalhos no sistema).
+Última atualização: 24/11/2026 (texto sem empilhar, pensamento no hero, favicon na paleta).
 
 ---
 
@@ -21,6 +21,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 | T-07 | Nos textos que apresentam o Josah, nunca "especializado"; usar "com foco em". |
 | T-08 | Sugestões fogem do padrão gerado por IA (faixas numeradas, grades de cartões iguais, rótulos acima de títulos, ícones genéricos). Se a ideia é a primeira que qualquer IA daria, ela não serve. |
 | T-09 | Nunca usar travessão (traço longo) em nenhum texto do site, do código ou das respostas. Usar vírgula, ponto, dois-pontos ou hífen. |
+| T-10 | Nunca empilhar texto. Frases de destaque ganham largura para respirar: no máximo 2 ou 3 linhas no computador, conforme o volume (o manifesto, 3; o texto de abertura do hero e a frase do Sobre, 2). Conferir o número de linhas em 1280, 1366 e 1920 antes de entregar. |
 
 ## 1.1 Com quem o site fala
 
@@ -61,7 +62,8 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 **Componentes**
 - Títulos e subtítulos das seções centralizados, sem nada acima deles.
 - Cabeçalho sem fundo e com texto claro enquanto está sobre o hero; o fundo aparece ao sair do hero.
-- Hero: título construído pelos agentes, em Fraunces; fundo liso; rótulo "Comunicação para projetos culturais" sem destaque de cor; texto de abertura em Fraunces, amarelo, como continuação do título; duas ações (Ver trabalhos, em branco; Fale comigo, em contorno); fechando, a linha "Para projetos com edital, lei de incentivo, patrocínio direto ou recursos próprios." Sem a faixa de serviços correndo.
+- Hero: título construído pelos agentes, em Fraunces; fundo liso; rótulo "Comunicação para projetos culturais" sem destaque de cor; texto de abertura em Fraunces, amarelo, como continuação do título; duas ações (Ver trabalhos, em branco; Fale comigo, em contorno); fechando, o pensamento "Design é o que faz uma ideia ser vista antes de acontecer.", em Fraunces itálico, numa linha. Sem a faixa de serviços correndo.
+- Favicon: o "J" branco sobre o degradê azul do hero, com o ponto amarelo.
 - Manifesto: sempre 3 linhas no computador.
 - Trabalhos: galeria de quadrados, 6 visíveis; "Ver mais trabalhos" em texto à direita, sem formato de botão e sem número; em pares no celular; nome sobre a imagem ao passar o mouse; sem contador de trabalhos.
 - Serviços: ilustração autoral "Do edital ao palco" (edital, prancheta, palco com cortina que abre e fecha) e três frentes em painéis, botão "Como trabalho". Cada painel acende a sua cena; a frase das regras marca a régua de logos no edital e no palco.
@@ -93,6 +95,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Retícula concentrada num canto apresentada como "textura". A textura em vigor é o grão de papel no site inteiro.
 - Número de itens restantes no "Ver mais" e "Ver mais" em formato de botão.
 - Frase que restringe o alcance, como listar leis específicas ("Projetos realizados com Lei Rouanet, Fazcultura e Lei Paulo Gustavo"). Frases de abrangência, sim; de limite, não.
+- Repetir a lista de serviços ou de fontes de recurso em frases de destaque. O site já diz o que é feito; a frase de destaque traduz o trabalho, como um pensamento.
 
 **Fluxo do processo**
 - Faixa horizontal com etapas numeradas, grade de cartões numerados, lista sanfonada, linha do tempo vertical longa.

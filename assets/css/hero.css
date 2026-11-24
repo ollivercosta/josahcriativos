@@ -268,10 +268,10 @@
 /* o texto de abertura na voz dos títulos (Fraunces), maior e com medida curta:
    lê como a continuação do título, não como legenda */
 .hero__texto {
-  max-width: 24em;
+  max-width: 31em;
   margin: 30px auto 0;
   font-family: var(--fonte-titulo);
-  font-size: clamp(1.3rem, 2.3vw, 1.85rem);
+  font-size: clamp(1.15rem, 2.1vw, 1.7rem);
   font-weight: 400;
   line-height: 1.32;
   letter-spacing: -0.01em;
@@ -316,6 +316,7 @@
   background: var(--areia);
 }
 
+/* o pensamento que fecha a abertura: em Fraunces, numa linha só no computador */
 .hero__fomento {
   position: relative;
   z-index: 2;
@@ -323,7 +324,9 @@
   margin: clamp(56px, 7vw, 88px) auto 0;
   padding-top: 22px;
   border-top: 1px solid rgb(var(--claro-rgb) / 0.14);
-  font-size: 0.95rem;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-style: italic;
   color: var(--suave);
 }
 
