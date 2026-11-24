@@ -24,7 +24,7 @@ MAPA = {
   "trombone-criativo": "arq/SITE TROMBONE CRIATIVO.png",
   "rider-tecnico": "rider.img",
   "amazonia-motiro": "arq/Ópera  Contemporânea Amazônia Motirô (2).pdf",
-  "orquestra-jovem-do-reconcavo": "arq/ORQUESTRA JOVEM DO RECÔNCAVO – PLANO ANUAL.png",
+  "orquestra-jovem-do-reconcavo": "arq/ORQUESTRA JOVEM DO RECÔNCAVO - PLANO ANUAL.png",
 }
 
 def capa(im, saida, topo=True):

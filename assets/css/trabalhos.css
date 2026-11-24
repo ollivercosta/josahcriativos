@@ -196,7 +196,8 @@
   display: grid;
   gap: 6px;
   padding: 56px 22px 20px;
-  background: linear-gradient(to top, rgb(var(--escuro-rgb) / 0.85), transparent);
+  /* a mesma cor dos títulos, para não brigar com as cores da imagem */
+  background: linear-gradient(to top, rgb(var(--titulo-rgb) / 0.88), transparent);
   transform: translateY(101%);
   transition: transform 0.55s var(--curva);
 }

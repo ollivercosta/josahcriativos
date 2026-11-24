@@ -5,8 +5,12 @@
    ========================================================================= */
 
 .servicos {
+  position: relative;
+  z-index: 1;
   padding: var(--espaco-secao) var(--margem);
   background: var(--fundo-servicos);
+  /* sombra suave no fim da seção azul, caindo sobre a seção seguinte */
+  box-shadow: 0 26px 40px -22px rgb(0 38 84 / 0.45);
   /* seção no petróleo: as cores do texto se invertem só aqui */
   --ink: var(--papel);
   --texto: var(--papel);
@@ -23,6 +27,14 @@
 .servicos__cabeca {
   max-width: var(--largura);
   margin-inline: auto;
+}
+
+.servicos__ilustracao {
+  display: block;
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+  margin: clamp(24px, 4vw, 48px) auto 0;
 }
 
 .servicos__indice {
