@@ -14,9 +14,9 @@
   /* seção no petróleo: as cores do texto se invertem só aqui */
   --ink: var(--papel);
   --texto: var(--papel);
-  --suave: rgb(246 241 234 / 0.68);
-  --borda: rgb(246 241 234 / 0.12);
-  --borda-forte: rgb(246 241 234 / 0.22);
+  --suave: rgb(var(--claro-rgb) / 0.68);
+  --borda: rgb(var(--claro-rgb) / 0.12);
+  --borda-forte: rgb(var(--claro-rgb) / 0.22);
   --terracota: var(--acento-vivo);
   --acao: var(--papel);
   --acao-2: var(--acento-vivo);
@@ -121,8 +121,8 @@
 }
 
 .servicos__grupo--ativo {
-  border-color: rgb(217 183 156 / 0.45);
-  background: rgb(246 241 234 / 0.07);
+  border-color: rgb(var(--dourado-claro-rgb) / 0.45);
+  background: rgb(var(--claro-rgb) / 0.07);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -182,15 +182,15 @@
   padding: clamp(24px, 2.6vw, 36px);
   border: 1px solid var(--borda);
   border-radius: 14px;
-  background: rgb(246 241 234 / 0.04);
+  background: rgb(var(--claro-rgb) / 0.04);
   transition:
     border-color 0.4s var(--curva),
     background-color 0.4s var(--curva);
 }
 
 .servicos__grupo:hover {
-  border-color: rgb(217 183 156 / 0.45);
-  background: rgb(246 241 234 / 0.07);
+  border-color: rgb(var(--dourado-claro-rgb) / 0.45);
+  background: rgb(var(--claro-rgb) / 0.07);
 }
 
 .servicos__grupo-nome {

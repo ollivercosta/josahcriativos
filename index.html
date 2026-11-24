@@ -294,7 +294,7 @@
             <a class="hero__acao" href="https://wa.me/5571991448218?text=Ol%C3%A1%2C%20Josah!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Fale comigo</a>
           </div>
         </div>
-        <p class="hero__fomento">Projetos realizados com Lei Rouanet, Fazcultura e Lei Paulo Gustavo</p>
+        <p class="hero__fomento">Para projetos com edital, lei de incentivo, patrocínio direto ou recursos próprios.</p>
       </section>
 
       <!-- TRABALHOS: a grade é montada por assets/js/secoes/Trabalhos.js a partir de assets/dados/trabalhos.js
@@ -1400,22 +1400,33 @@
         aria-label="Abrir dúvidas e solicitações"
       >
         <svg class="chat__selo" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-          <defs><clipPath id="chat-recorte"><circle cx="60" cy="60" r="49" /></clipPath></defs>
+          <!-- a mesma designer da ilustração de Serviços, de frente, no mesmo acabamento (degradês da paleta) -->
+          <defs>
+            <clipPath id="chat-recorte"><circle cx="60" cy="60" r="49" /></clipPath>
+            <linearGradient id="chat-ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B3E7A" /><stop offset="1" stop-color="#062F5F" /></linearGradient>
+            <linearGradient id="chat-areia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6E3A8" /><stop offset="1" stop-color="#E9C977" /></linearGradient>
+            <linearGradient id="chat-cabelo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D3E7C" /><stop offset="1" stop-color="#0A1F45" /></linearGradient>
+            <linearGradient id="chat-blusa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC93D" /><stop offset="1" stop-color="#F0A800" /></linearGradient>
+            <linearGradient id="chat-pele" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6976F" /><stop offset="1" stop-color="#C08259" /></linearGradient>
+          </defs>
           <circle class="chat__selo-fundo" cx="60" cy="60" r="58" />
           <circle class="chat__selo-disco" cx="60" cy="60" r="49" />
           <g class="chat__selo-rosto" clip-path="url(#chat-recorte)">
-            <path class="chat__selo-cabelo" d="M37 62c-2-23 9-36 23-36s25 13 23 36l1 22c-6 5-13 6-19 5V72H55v17c-6 1-13 0-19-5Z" />
-            <path class="chat__selo-roupa" d="M18 122c2-24 18-36 42-36s40 12 42 36Z" />
-            <path class="chat__selo-pescoco" d="M52 74h16v13c-5 5-11 5-16 0Z" />
+            <circle class="chat__selo-morro" cx="60" cy="80" r="36" />
+            <path class="chat__selo-cabelo" d="M35 64C33 40 45 27 60 27s27 13 25 37c0 14 4 26 9 34H26c5-8 9-20 9-34Z" />
+            <path class="chat__selo-roupa" d="M18 122c2-23 18-34 42-34s40 11 42 34Z" />
+            <path class="chat__selo-listra" d="M22 108c22-6 54-6 76 0" />
+            <path class="chat__selo-pescoco" d="M53 72h14v15c-4.5 4-9.5 4-14 0Z" />
             <ellipse class="chat__selo-pele" cx="42.6" cy="61" rx="3.6" ry="5" />
             <ellipse class="chat__selo-pele" cx="77.4" cy="61" rx="3.6" ry="5" />
             <ellipse class="chat__selo-pele" cx="60" cy="58" rx="17.4" ry="20.4" />
-            <path class="chat__selo-franja" d="M42.2 57c-.6-14 7.4-22 18.4-22 10.4 0 17.6 7.6 17.2 20-7.6-1.6-15-6-19.6-12.4-3.2 7.4-9.2 12.2-16 14.4Z" />
+            <path class="chat__selo-franja" d="M42 59c-2-17 7-27 19-27 12 0 19 9 17.6 22-8.6-2-16.6-7.6-20.6-14-3 8-8.6 15-16 19Z" />
+            <circle class="chat__selo-bochecha" cx="49" cy="66" r="3" />
+            <circle class="chat__selo-bochecha" cx="71" cy="66" r="3" />
             <circle class="chat__selo-olho" cx="53" cy="60" r="2.1" />
             <circle class="chat__selo-olho" cx="67" cy="60" r="2.1" />
             <path class="chat__selo-traco" d="M49.6 54.6c2-1.4 4.6-1.6 6.8-.6M63.6 54c2.2-1 4.8-.8 6.8.6" />
-            <path class="chat__selo-traco" d="M54.4 67.6c3.4 3 7.8 3 11.2 0" />
-            <path class="chat__selo-gola" d="M51 87l9 9 9-9" />
+            <path class="chat__selo-boca" d="M54.4 67.6c3.4 3 7.8 3 11.2 0" />
           </g>
         </svg>
         <svg class="chat__botao-fechar" viewBox="0 0 256 256" aria-hidden="true" focusable="false">

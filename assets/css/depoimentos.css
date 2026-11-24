@@ -15,12 +15,12 @@
   box-shadow: 0 26px 40px -22px rgb(0 38 84 / 0.45);
   /* seção no azul: as cores do texto se invertem só aqui */
   --ink: var(--branco);
-  --texto: rgb(255 255 255 / 0.9);
-  --suave: rgb(255 255 255 / 0.66);
-  --linha: rgb(255 255 255 / 0.14);
-  --linha-2: rgb(255 255 255 / 0.3);
+  --texto: rgb(var(--claro-rgb) / 0.9);
+  --suave: rgb(var(--claro-rgb) / 0.66);
+  --linha: rgb(var(--claro-rgb) / 0.14);
+  --linha-2: rgb(var(--claro-rgb) / 0.3);
   --terracota: var(--acento-vivo);
-  --aba-fundo: rgb(255 255 255 / 0.08);
+  --aba-fundo: rgb(var(--claro-rgb) / 0.08);
   color: var(--branco);
 }
 

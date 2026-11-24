@@ -3,11 +3,13 @@
   Só o conteúdo da página. O build (ferramentas/build.mjs) junta com o cabeçalho,
   a tela final de contato e o rodapé do index.html.
 -->
-      <!-- QUEM DÁ VIDA A ISSO: um perfil em três tempos, como numa revista:
-           a capa (colagem com o retrato e a apresentação), a manchete (a frase que resume
-           o jeito de trabalhar) e a trajetória, em texto corrido -->
-      <section class="sobre" id="sobre" aria-labelledby="sobre-titulo">
-        <div class="sobre__capa">
+      <!-- QUEM DÁ VIDA A ISSO
+           A casa é a mesma do resto do site (cores, Fraunces nos títulos, alternância
+           de branco e azul, nada de rótulo acima de título nem palavra colorida).
+           O quarto é o que só existe aqui: o retrato, a colagem com as linhas de
+           composição, as anotações de quem ele é e o texto corrido em primeira pessoa. -->
+      <div class="sobre">
+        <section class="sobre__capa" aria-labelledby="sobre-titulo">
           <figure class="sobre__colagem">
             <span class="sobre__bloco" aria-hidden="true"></span>
             <div class="sobre__foto">
@@ -32,24 +34,22 @@
             </figcaption>
           </figure>
           <div class="sobre__apresentacao">
-            <p class="sobre__rotulo">Sobre</p>
-            <h1 class="sobre__titulo" id="sobre-titulo" aria-label="Quem dá vida a isso"><span class="sobre__titulo-corpo" aria-hidden="true"><span class="sobre__titulo-leve"><span class="sobre__titulo-leve-texto">Quem dá</span></span><span class="sobre__titulo-pesado"><span class="sobre__titulo-destaque">vida</span> a isso</span></span></h1>
+            <h1 class="sobre__titulo" id="sobre-titulo">Quem dá vida a isso</h1>
             <p class="sobre__abertura">
               Sou <strong class="sobre__nome">Josah Oliveira</strong>, designer gráfico. Há mais de dez anos desenvolvo
               identidades visuais, sistemas visuais e soluções de comunicação para projetos culturais e digitais.
             </p>
           </div>
-        </div>
+        </section>
 
-        <blockquote class="sobre__manchete">
-          <p class="sobre__manchete-frase">
-            Menos sobre <span class="sobre__manchete-leve">estética isolada,</span> mais sobre
-            <strong class="sobre__manchete-forte">estruturar informação e narrativa.</strong>
-          </p>
-        </blockquote>
+        <section class="sobre__faixa" aria-label="Como eu trabalho">
+          <blockquote class="sobre__manchete">
+            <p class="sobre__manchete-frase">Menos sobre estética isolada, mais sobre estruturar informação e narrativa.</p>
+          </blockquote>
+        </section>
 
-        <div class="sobre__historia">
-          <h3 class="sobre__historia-titulo">Trajetória</h3>
+        <section class="sobre__historia" aria-labelledby="sobre-historia-titulo">
+          <h2 class="sobre__historia-titulo" id="sobre-historia-titulo">Trajetória</h2>
           <div class="sobre__historia-texto">
             <p class="sobre__historia-paragrafo">
               Atuo como designer gráfico com foco em identidade visual, sistemas visuais e comunicação para projetos
@@ -59,8 +59,8 @@
               aplicação física ainda orienta minhas decisões de legibilidade, escala e acabamento.
             </p>
             <p class="sobre__historia-paragrafo">
-              A <span class="sobre__trajetoria">música</span> me aproximou da
-              <span class="sobre__trajetoria">produção cultural</span>. Sou estudante de Música Popular na
+              A música me aproximou da
+              produção cultural. Sou estudante de Música Popular na
               <strong class="sobre__historia-nome">Universidade Federal da Bahia</strong> e, em 2021, lecionei violão e
               ukulele na Escola de Música Villa Lobos, em Teixeira de Freitas (BA). Essa vivência me deu repertório sobre
               a linguagem e as demandas dos projetos culturais que atendo.
@@ -83,5 +83,5 @@
               desenvolvimento web para que projetos culturais comuniquem com clareza em qualquer meio.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>

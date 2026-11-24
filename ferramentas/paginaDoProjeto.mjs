@@ -85,7 +85,7 @@ function caso(trabalho) {
         ${blocos
           .map(
             ([rotulo, texto]) => `<article class="projeto__caso-bloco">
-          <h2 class="projeto__rotulo projeto__rotulo--vermelho">${rotulo}</h2>
+          <h2 class="projeto__caso-titulo">${rotulo}</h2>
           ${paragrafos(texto, "projeto__caso-texto")}
         </article>`,
           )
@@ -217,22 +217,17 @@ function pecas(trabalho) {
           ${quadro}
           </div>
           <div class="projeto__peca-texto">
-            ${prancha.frente ? `<p class="projeto__rotulo projeto__rotulo--vermelho">${escapar(prancha.frente)}</p>` : ""}
             <h3 class="projeto__peca-nome">${escapar(prancha.nome)}</h3>
+            ${prancha.frente ? `<p class="projeto__peca-frente">${escapar(prancha.frente)}</p>` : ""}
             ${prancha.texto ? paragrafos(prancha.texto, "projeto__peca-paragrafo") : ""}
             ${etiquetas(prancha.itens)}
           </div>
         </article>`;
     })
     .join("\n        ");
-  // conta as frentes, não as pranchas: uma frente pode ter mais de uma prancha
-  const frentes = new Set(pranchas.map((prancha) => prancha.frente)).size;
-  const contagem = `${frentes} ${frentes > 1 ? "frentes" : "frente"}`;
   return `<section class="projeto__pecas" aria-labelledby="pecas-titulo">
         <div class="projeto__pecas-cabeca">
-          <h2 class="projeto__pecas-titulo" id="pecas-titulo">As <b>peças</b></h2>
-          <span class="projeto__pecas-fio" aria-hidden="true"></span>
-          <span class="projeto__rotulo">${contagem}</span>
+          <h2 class="projeto__pecas-titulo" id="pecas-titulo">As peças</h2>
         </div>
         ${corpo}
       </section>`;
@@ -240,6 +235,7 @@ function pecas(trabalho) {
 
 export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, partes }) {
   const ficha = [
+    ["Frente", trabalho.categoria],
     ["Cliente", trabalho.cliente],
     ["Proponente", trabalho.proponente],
     ["Local", trabalho.local],
@@ -258,7 +254,7 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
   const livro = livroDoTrabalho(trabalho);
   const mais = relacionados.length
     ? `<section class="projeto__mais" aria-labelledby="projeto-mais-titulo">
-        <h2 class="projeto__rotulo" id="projeto-mais-titulo">Mais com a ${escapar(trabalho.cliente)}</h2>
+        <h2 class="projeto__mais-titulo" id="projeto-mais-titulo">Mais com a ${escapar(trabalho.cliente)}</h2>
         <ul class="projeto__mais-lista">
           ${relacionados
             .map(
@@ -291,13 +287,12 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
     </header>
 
     <main id="conteudo" class="projeto__corpo" data-imagens="${escapar(JSON.stringify(imagensAmpliaveis(trabalho)))}">
-      <!-- ABERTURA: a categoria, o nome e o desafio -->
+      <!-- ABERTURA: o nome e o desafio (a frente fica na ficha) -->
       <section class="projeto__abertura">
         <div class="projeto__abertura-nome">
-          <p class="projeto__rotulo projeto__rotulo--vermelho">${escapar(trabalho.categoria || "Projeto")}</p>
           <h1 class="projeto__titulo">${titulo(trabalho)}</h1>
         </div>
-        ${desafio ? `<p class="projeto__desafio"><span class="projeto__rotulo projeto__rotulo--vermelho projeto__desafio-rotulo">${trabalho.desafio ? "Desafio" : "O projeto"}</span>${escapar(desafio)}</p>` : ""}
+        ${desafio ? `<p class="projeto__desafio"><span class="projeto__rotulo projeto__desafio-rotulo">${trabalho.desafio ? "Desafio" : "O projeto"}</span>${escapar(desafio)}</p>` : ""}
       </section>
 
       <!-- FICHA TÉCNICA: uma linha -->
@@ -316,17 +311,20 @@ export function paginaDoProjeto(trabalho, { anterior, seguinte, relacionados, pa
 
       ${trabalho.regua ? `<!-- RÉGUA DE MARCAS -->
       <section class="projeto__regua" aria-label="Régua de marcas">
-        <p class="projeto__rotulo projeto__rotulo--vermelho">Régua de marcas</p>
+        <h2 class="projeto__regua-titulo">Régua de marcas</h2>
         ${paragrafos(trabalho.regua, "projeto__regua-texto")}
         ${trabalho.reguaImagem ? `<figure class="projeto__regua-figura"><img class="projeto__regua-imagem" src="${escapar(trabalho.reguaImagem)}" alt="Régua de marcas de ${escapar(trabalho.nome)}: realização, apoio e patrocínio" loading="lazy" decoding="async" /></figure>` : ""}
       </section>` : ""}
 
+      <!-- FIM DA PÁGINA, NA FAIXA AZUL: mais com o cliente e o próximo trabalho -->
+      <div class="projeto__fim">
       ${mais}
 
       <a class="projeto__seguinte" href="${enderecoDoTrabalho(seguinte)}">
-        <span class="projeto__rotulo">Próximo trabalho</span>
+        <span class="projeto__seguinte-rotulo">Próximo trabalho</span>
         <span class="projeto__seguinte-nome">${escapar(seguinte.nome)} <span class="projeto__seguinte-seta" aria-hidden="true">&rarr;</span></span>
       </a>
+      </div>
 
       ${partes.contato.trim()}
     </main>

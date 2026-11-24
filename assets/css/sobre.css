@@ -1,15 +1,14 @@
 /* =========================================================================
-   QUEM DÁ VIDA A ISSO
-   Um perfil em três tempos, como numa revista:
-     a capa       a colagem (bloco vermelho, retrato recortado e linhas de
-                  composição) ao lado da apresentação
-     a manchete   a frase que resume o jeito de trabalhar, em tamanho de título
-     a trajetória   em texto corrido, em duas colunas
+   SOBRE (/sobre): QUEM DÁ VIDA A ISSO
+   A casa e o quarto. A casa é o sistema do site inteiro: as cores, Fraunces
+   nos títulos, a alternância de branco e azul, sem rótulo acima de título e
+   sem palavra colorida. O quarto é o que só existe nesta página: o retrato,
+   a colagem com as linhas de composição, as anotações de quem ele é e o
+   texto corrido em primeira pessoa, em duas colunas, como numa matéria.
+     a capa        colagem ao lado da apresentação (branco)
+     a faixa       a frase que resume o jeito de trabalhar (azul)
+     a trajetória  título e texto corrido (branco)
    ========================================================================= */
-
-.sobre {
-  padding: var(--espaco-secao) var(--margem);
-}
 
 /* ---------- a capa ---------- */
 .sobre__capa {
@@ -17,6 +16,9 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 6vw;
   align-items: center;
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding: calc(var(--altura-cabecalho) + clamp(32px, 6vw, 72px)) var(--margem) var(--espaco-secao);
 }
 
 .sobre__colagem {
@@ -25,13 +27,14 @@
   aspect-ratio: 1;
 }
 
+/* o bloco atrás do retrato, no azul da casa */
 .sobre__bloco {
   position: absolute;
   right: 0;
   top: 6%;
   width: 44%;
   height: 58%;
-  background: var(--cor-vermelho);
+  background: linear-gradient(160deg, #063867 0%, var(--petroleo-fundo) 100%);
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1.4s var(--curva-entra-sai) 0.2s;
 }
@@ -50,6 +53,7 @@
   height: auto;
 }
 
+/* as linhas de composição: o rascunho do designer sobre a própria foto */
 .sobre__linhas {
   position: absolute;
   inset: 0;
@@ -63,16 +67,15 @@
 
 .sobre__linha {
   fill: none;
-  stroke: var(--cor-tinta);
+  stroke: var(--prof);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
 .sobre__ponto {
-  fill: var(--cor-tinta);
+  fill: var(--prof);
 }
 
-/* anotações: à esquerda do bloco e abaixo da foto, sobre o branco */
 .sobre__anotacao-papeis {
   position: absolute;
   right: 47%;
@@ -89,20 +92,22 @@
   display: block;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0;
   line-height: 1.8;
+  color: var(--ink);
 }
 
 .sobre__anotacao-linha {
   display: block;
   font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 1.8;
-  color: var(--cor-tinta-suave);
+  color: var(--suave);
 }
 
-.sobre__colagem--visivel .sobre__bloco,
+.sobre__colagem--visivel .sobre__bloco {
+  clip-path: inset(0 0 0 0);
+}
+
 .sobre__colagem--visivel .sobre__foto {
   clip-path: inset(0 0 0 0);
 }
@@ -116,106 +121,78 @@
   transform: none;
 }
 
-/* ---------- a apresentação ---------- */
 .sobre__apresentacao {
   display: grid;
-  gap: clamp(22px, 3vh, 34px);
+  gap: clamp(20px, 3vh, 30px);
 }
 
-/* o rótulo abre a página em vermelho, como a retranca de uma revista */
-.sobre__rotulo {
-  margin: 0;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  color: var(--rotulo);
-}
-
-.sobre__titulo-palavra {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  padding: 0 0.08em 0.1em 0.04em;
-  margin: 0 -0.08em -0.1em -0.04em;
-}
-
-.sobre__titulo-miolo {
-  display: inline-block;
-  transform: translateY(110%);
-  transition: transform 1.2s var(--curva);
-  transition-delay: calc(var(--k, 0) * 60ms);
-}
-
-.sobre__titulo--visivel .sobre__titulo-miolo {
-  transform: none;
+.sobre__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.6rem, 5.4vw, 5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  color: var(--ink);
 }
 
 .sobre__abertura {
   margin: 0;
   max-width: 24em;
-  font-size: clamp(1.25rem, 1.7vw, 1.75rem);
-  font-weight: 300;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--texto);
 }
 
 .sobre__nome {
   font-weight: 700;
 }
 
-/* ---------- a manchete ---------- */
-.sobre__manchete {
+/* ---------- a faixa azul com a frase ---------- */
+.sobre__faixa {
   position: relative;
-  margin: clamp(64px, 12vh, 140px) 0 0;
-  padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 6vw, 80px) clamp(64px, 9vw, 150px);
-  border-top: 3px solid var(--cor-tinta);
+  z-index: 1;
+  padding: var(--espaco-secao) var(--margem);
+  background: var(--petroleo-fundo);
+  /* mesma sombra suave das outras seções azuis */
+  box-shadow: 0 26px 40px -22px rgb(var(--escuro-rgb) / 0.45);
+  color: var(--branco);
+  text-align: center;
 }
 
-/* as aspas grandes, em vermelho, penduradas na margem da frase */
-.sobre__manchete::before {
-  content: "\201C";
-  position: absolute;
-  left: -0.04em;
-  top: 0.04em;
-  font-size: clamp(7rem, 13vw, 14rem);
-  font-weight: 700;
-  line-height: 1;
-  color: var(--destaque);
+.sobre__manchete {
+  margin: 0;
 }
 
 .sobre__manchete-frase {
-  margin: 0;
   max-width: 17em;
-  font-size: clamp(2.2rem, 4.4vw, 4.8rem);
-  font-weight: 300;
-  line-height: 1.02;
-  letter-spacing: -0.045em;
+  margin: 0 auto;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
-.sobre__manchete-leve {
-  color: var(--cor-tinta-suave);
-}
-
-.sobre__manchete-forte {
-  font-weight: 700;
-  color: var(--destaque);
-}
-
-/* ---------- a trajetória: um texto corrido em duas colunas, como numa matéria ---------- */
+/* ---------- a trajetória: título e texto corrido em duas colunas ---------- */
 .sobre__historia {
   display: grid;
   grid-template-columns: minmax(0, 0.32fr) minmax(0, 1fr);
   gap: clamp(32px, 5vw, 80px);
-  padding-top: 22px;
-  border-top: 1px solid var(--cor-linha-forte);
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding: var(--espaco-secao) var(--margem) 0;
 }
 
 .sobre__historia-titulo {
   margin: 0;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  color: var(--rotulo);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .sobre__historia-texto {
@@ -226,23 +203,20 @@
 .sobre__historia-paragrafo {
   margin: 0 0 1.2em;
   break-inside: avoid;
-  font-size: 1.12rem;
-  line-height: 1.65;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--texto);
 }
 
 .sobre__historia-nome {
   font-weight: 700;
-}
-
-.sobre__trajetoria {
-  font-weight: 700;
-  color: var(--cor-vermelho);
+  color: var(--ink);
 }
 
 .sobre__parceira {
   font-weight: 700;
-  color: inherit;
-  text-decoration-color: var(--acao);
+  color: var(--ink);
+  text-decoration-color: var(--acento);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
@@ -253,11 +227,6 @@
     gap: 40px;
   }
 
-  .sobre__manchete {
-    padding-left: 0;
-    padding-top: clamp(96px, 26vw, 130px);
-  }
-
   .sobre__historia {
     grid-template-columns: minmax(0, 1fr);
     gap: 18px;
@@ -266,61 +235,4 @@
   .sobre__historia-texto {
     columns: 1;
   }
-}
-
-/* ---------- título Sobre: Fraunces, em uma linha só, com a parte forte destacada (vinha de tipografia.css) ---------- */
-
-.sobre__titulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  text-transform: none;
-}
-
-.sobre__titulo-corpo {
-  display: inline;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: none;
-}
-
-.sobre__titulo-leve {
-  display: inline;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: none;
-}
-
-.sobre__titulo-leve-texto {
-  display: inline;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: none;
-}
-
-.sobre__titulo-pesado {
-  display: inline;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: none;
-}
-
-.sobre__titulo-leve::after {
-  content: none;
-}
-
-.sobre__titulo-destaque {
-  color: var(--azul);
-}
-
-.sobre__titulo {
-  font-family: var(--fonte-titulo);
-  font-size: var(--titulo-secao);
-}
-
-/* as duas partes do título vinham em linhas separadas: na mesma linha, precisam do espaço entre elas */
-.sobre__titulo-pesado {
-  margin-left: 0.25em;
 }

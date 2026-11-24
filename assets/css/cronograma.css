@@ -186,7 +186,7 @@
 }
 
 .cronograma__linha--andamento {
-  background: rgb(231 220 205 / 0.35);
+  background: rgb(var(--escuro-rgb) / 0.045);
 }
 
 .cronograma__etapa {
@@ -258,12 +258,12 @@
 }
 
 .cronograma__selo[data-status="previsto"] {
-  background: var(--papel);
+  background: var(--areia);
   color: var(--suave);
 }
 
 .cronograma__selo[data-status="andamento"] {
-  background: rgb(194 58 34 / 0.12);
+  background: rgb(var(--acento-rgb) / 0.1);
   color: var(--acento);
 }
 

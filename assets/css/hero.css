@@ -1,7 +1,7 @@
 /* =========================================================================
    ABERTURA (hero)
    O rótulo, o título grande montado por agentes (Titulo.js), um texto
-   curto, as duas ações e, fechando, a linha das leis de incentivo. Os books folheáveis ficam nas páginas
+   curto, as duas ações e, fechando, a linha das fontes de recurso. Os books folheáveis ficam nas páginas
    de cada trabalho de book.
    ========================================================================= */
 
@@ -10,14 +10,14 @@
   --tinta: var(--papel);
   --ink: var(--papel);
   --texto: var(--papel);
-  --suave: rgb(246 241 234 / 0.72);
+  --suave: rgb(var(--claro-rgb) / 0.72);
   --azul-2: var(--argila-clara);
   --texto-sobre-cor: var(--prof);
   --espresso: var(--papel);
   --superficie: var(--prof);
   --terracota-claro: var(--argila);
-  --linha: rgb(246 241 234 / 0.18);
-  --linha-2: rgb(246 241 234 / 0.3);
+  --linha: rgb(var(--claro-rgb) / 0.18);
+  --linha-2: rgb(var(--claro-rgb) / 0.3);
   color: var(--papel);
   position: relative;
   z-index: 1;
@@ -265,11 +265,17 @@
   transform: translateX(-50%);
 }
 
+/* o texto de abertura na voz dos títulos (Fraunces), maior e com medida curta:
+   lê como a continuação do título, não como legenda */
 .hero__texto {
-  max-width: 34em;
-  margin: 28px auto 0;
-  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-  line-height: 1.5;
+  max-width: 24em;
+  margin: 30px auto 0;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.3rem, 2.3vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
   color: var(--amarelo);
 }
 
@@ -284,7 +290,7 @@
 
 .hero__acao {
   padding: 14px 28px;
-  border: 1px solid rgb(255 255 255 / 0.45);
+  border: 1px solid rgb(var(--claro-rgb) / 0.45);
   border-radius: 999px;
   color: var(--branco);
   font-weight: 600;
@@ -297,7 +303,7 @@
 
 .hero__acao:hover {
   border-color: var(--branco);
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--claro-rgb) / 0.08);
 }
 
 .hero__acao--principal {
@@ -316,7 +322,7 @@
   max-width: 1080px;
   margin: clamp(56px, 7vw, 88px) auto 0;
   padding-top: 22px;
-  border-top: 1px solid rgb(255 255 255 / 0.14);
+  border-top: 1px solid rgb(var(--claro-rgb) / 0.14);
   font-size: 0.95rem;
   color: var(--suave);
 }

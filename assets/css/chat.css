@@ -39,53 +39,70 @@
 }
 
 .chat__selo-fundo {
-  fill: var(--texto-sobre-cor);
-  stroke: var(--cor-tinta);
+  fill: var(--branco);
+  stroke: var(--petroleo-fundo);
   stroke-width: 2.5;
 }
 
+/* o céu azul e o morro de areia da ilustração de Serviços */
 .chat__selo-disco {
-  fill: var(--fundo-alt);
+  fill: url(#chat-ceu);
   transition: fill 0.5s ease;
 }
 
+.chat__selo-morro {
+  fill: url(#chat-areia);
+  opacity: 0.92;
+}
+
 .chat__selo-cabelo {
-  fill: #2a1c15;
+  fill: url(#chat-cabelo);
 }
 
 .chat__selo-franja {
-  fill: #2a1c15;
+  fill: url(#chat-cabelo);
 }
 
 .chat__selo-pele {
-  fill: #c68960;
+  fill: url(#chat-pele);
 }
 
 .chat__selo-pescoco {
-  fill: #ad7049;
+  fill: #b9774e;
 }
 
 .chat__selo-roupa {
-  fill: var(--terracota-escuro);
+  fill: url(#chat-blusa);
+}
+
+.chat__selo-listra {
+  fill: none;
+  stroke: var(--branco);
+  stroke-width: 3.4;
+  opacity: 0.85;
+}
+
+.chat__selo-bochecha {
+  fill: #e39a7a;
+  opacity: 0.45;
 }
 
 .chat__selo-olho {
-  fill: #2a1c15;
+  fill: #0a1f45;
 }
 
 .chat__selo-traco {
   fill: none;
-  stroke: #2a1c15;
+  stroke: #0a1f45;
   stroke-width: 2;
   stroke-linecap: round;
 }
 
-.chat__selo-gola {
+.chat__selo-boca {
   fill: none;
-  stroke: var(--texto-sobre-cor);
-  stroke-width: 2.4;
+  stroke: #8a4e33;
+  stroke-width: 2;
   stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .chat__selo-rosto {
@@ -538,12 +555,22 @@
   }
 
   .chat__botao {
-    width: 68px;
-    height: 68px;
+    width: 58px;
+    height: 58px;
+    transition:
+      transform 0.45s var(--curva),
+      opacity 0.3s ease;
+  }
+
+  /* enquanto a pessoa rola, o botão desce e some; volta quando ela para */
+  .chat--rolando .chat__botao {
+    opacity: 0;
+    transform: translateY(24px);
+    pointer-events: none;
   }
 
   .chat__convite {
-    bottom: 80px;
+    bottom: 70px;
   }
 
   .chat__painel {

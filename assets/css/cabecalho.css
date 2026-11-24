@@ -47,8 +47,8 @@
 .cabecalho--sobre-hero {
   --azul: var(--papel);
   --ink: var(--papel);
-  --suave: rgb(246 241 234 / 0.75);
-  --superficie: rgb(246 241 234 / 0.16);
+  --suave: rgb(var(--claro-rgb) / 0.75);
+  --superficie: rgb(var(--claro-rgb) / 0.16);
   --sombra-rgb: 246 241 234;
   --acao-2: var(--papel);
   --texto-sobre-cor: var(--prof);

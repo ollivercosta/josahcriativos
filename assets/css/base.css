@@ -44,6 +44,7 @@
   --amarelo: #FFBC00; /* destaque quente sobre o azul (texto de abertura) */ /* fundo do hero, de Serviços e do rodapé */
   --acento: #C62828; /* cinábrio, sobre claro */
   --acento-escuro: #9F1F1F;
+  --acento-rgb: 198 40 40;
   --acento-vivo: #F1D584; /* cinábrio, sobre o profundo */
 
   /* apelidos dos nomes de paletas anteriores, para as seções não quebrarem */
@@ -128,6 +129,9 @@
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
   --sombra-rgb: 0 38 84;
   --escuro-rgb: 0 38 84;
+  /* texto claro e dourado claro sobre o azul, para transparências */
+  --claro-rgb: 255 255 255;
+  --dourado-claro-rgb: 241 213 132;
   --fundo-rgb: 255 255 255;
   --fundo-alt-rgb: 243 244 246;
   --superficie-rgb: 255 255 255;

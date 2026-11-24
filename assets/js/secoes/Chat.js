@@ -57,6 +57,22 @@ export class Chat {
     });
     this.formulario.addEventListener("submit", (evento) => this.#enviar(evento));
     this.#agendarConvite();
+    this.#recolherAoRolar(raiz);
+  }
+
+  /** No celular, o botão sai de cena enquanto a pessoa rola e volta quando ela para, para não cobrir o texto. */
+  #recolherAoRolar(raiz) {
+    let espera = 0;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!this.painel.hidden) return;
+        raiz.classList.add("chat--rolando");
+        clearTimeout(espera);
+        espera = setTimeout(() => raiz.classList.remove("chat--rolando"), 700);
+      },
+      { passive: true },
+    );
   }
 
   /* ---------------- abrir e fechar ---------------- */

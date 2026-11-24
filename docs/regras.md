@@ -4,7 +4,7 @@ Arquivo de consulta obrigatória. Antes de sugerir, propor ou aplicar qualquer
 mudança no site, ler este arquivo inteiro e conferir se a ideia já foi
 reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 
-Última atualização: 24/11/2026 (paleta TJBA aprovada; ilustração de Serviços com cortina).
+Última atualização: 24/11/2026 (hero com ações, Sobre como casa e quarto, páginas dos trabalhos no sistema).
 
 ---
 
@@ -61,7 +61,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 **Componentes**
 - Títulos e subtítulos das seções centralizados, sem nada acima deles.
 - Cabeçalho sem fundo e com texto claro enquanto está sobre o hero; o fundo aparece ao sair do hero.
-- Hero: título construído pelos agentes, em Fraunces; fundo liso; rótulo "Comunicação para projetos culturais" sem destaque de cor.
+- Hero: título construído pelos agentes, em Fraunces; fundo liso; rótulo "Comunicação para projetos culturais" sem destaque de cor; texto de abertura em Fraunces, amarelo, como continuação do título; duas ações (Ver trabalhos, em branco; Fale comigo, em contorno); fechando, a linha "Para projetos com edital, lei de incentivo, patrocínio direto ou recursos próprios." Sem a faixa de serviços correndo.
 - Manifesto: sempre 3 linhas no computador.
 - Trabalhos: galeria de quadrados, 6 visíveis; "Ver mais trabalhos" em texto à direita, sem formato de botão e sem número; em pares no celular; nome sobre a imagem ao passar o mouse; sem contador de trabalhos.
 - Serviços: ilustração autoral "Do edital ao palco" (edital, prancheta, palco com cortina que abre e fecha) e três frentes em painéis, botão "Como trabalho". Cada painel acende a sua cena; a frase das regras marca a régua de logos no edital e no palco.
@@ -69,6 +69,10 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Depoimentos: discretos, só em /como-trabalho, na faixa azul da página.
 - Contato: sem fundo, botão como único elemento de cor.
 - A foto do Josah fica só na página Sobre. O foco do site é o trabalho, não ele.
+- Sobre é "a casa e o quarto": segue o sistema da casa (cores, Fraunces, alternância branco e azul, sem rótulo acima de título, sem palavra colorida) e guarda o que é pessoal e só existe ali: o retrato, a colagem com as linhas de composição e o bloco azul, as anotações (Designer gráfico, Músico, Dev) e o texto corrido em duas colunas. A frase "Menos sobre estética isolada..." fica na faixa azul.
+- Páginas dos trabalhos: título em Fraunces com peso único; a frente vai para a ficha; Contexto, Solução, Resultado e Régua de marcas como títulos em Fraunces, sem rótulo vermelho; "As peças" centralizado; "Mais com o cliente" e "Próximo trabalho" na faixa azul antes do contato.
+- Chat: o rosto é a designer da ilustração de Serviços, no mesmo acabamento. No celular o botão é menor e sai de cena enquanto a pessoa rola.
+- Vermelho `#C62828` é cor de ação (botões, linha "hoje" da planilha); não vira rótulo nem enfeite.
 
 ## 4. Reprovados: não sugerir de novo
 
@@ -88,6 +92,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Traço curto antes de itens de lista (parece travessão).
 - Retícula concentrada num canto apresentada como "textura". A textura em vigor é o grão de papel no site inteiro.
 - Número de itens restantes no "Ver mais" e "Ver mais" em formato de botão.
+- Frase que restringe o alcance, como listar leis específicas ("Projetos realizados com Lei Rouanet, Fazcultura e Lei Paulo Gustavo"). Frases de abrangência, sim; de limite, não.
 
 **Fluxo do processo**
 - Faixa horizontal com etapas numeradas, grade de cartões numerados, lista sanfonada, linha do tempo vertical longa.

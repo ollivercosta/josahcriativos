@@ -7,7 +7,7 @@
 .rodape {
   background: var(--fundo-rodape);
   /* rodapé escuro: as cores do texto se invertem só aqui */
-  --suave: rgb(246 241 234 / 0.62);
+  --suave: rgb(var(--claro-rgb) / 0.62);
   --azul: var(--papel);
   --link: var(--acento-vivo);
 }
