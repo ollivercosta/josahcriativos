@@ -131,6 +131,7 @@
   --fundo-rgb: 255 255 255;
   --fundo-alt-rgb: 243 244 246;
   --superficie-rgb: 255 255 255;
+  --titulo-rgb: 27 42 58; /* a cor dos títulos (--prof), em canais, para transparências */
   --sobre-cor-rgb: 246 241 234;
 
   /* cursores do título (Titulo.js), sobre o petróleo do hero */
