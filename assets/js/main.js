@@ -32,7 +32,6 @@ const REVELADOS = [
   ".trabalhos__cabeca",
   ".servicos__cabeca",
   ".servicos__grupo",
-  ".depoimento__figura",
   ".processo__cabeca",
   ".processo__quadro",
   ".depoimentos__titulo",

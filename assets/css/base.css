@@ -28,18 +28,18 @@
 
 :root {
   /* PALETA "petróleo, argila e cinábrio"
-     Profundo (sofisticação): petróleo-noite em três tons, no hero, em Serviços e no rodapé.
+     Profundo (sofisticação): petróleo quase preto em três tons, no hero, em Serviços e no rodapé.
      Humano (terra): argila e areia, na faixa do manifesto, no contato e em detalhes.
-     Base: papel quente, nos trabalhos e no depoimento.
+     Base: papel quente, nos trabalhos.
      Energia: cinábrio, pouco e em pontos certos (botões, destaques, marcas dos títulos). */
   --branco: #FFFFFF;
   --papel: #F6F1EA;
   --areia: #E7DCCD;
   --argila: #B8876A;
   --argila-clara: #D9B79C;
-  --prof: #13262B;
-  --prof-2: #1A3238;
-  --prof-3: #0C1A1E;
+  --prof: #0A1518;
+  --prof-2: #0E1C20;
+  --prof-3: #060D0F;
   --acento: #C23A22; /* cinábrio, sobre claro */
   --acento-escuro: #9E2E1A;
   --acento-vivo: #FF6A45; /* cinábrio, sobre o profundo */
@@ -124,8 +124,8 @@
   --cor-cinza-claro: var(--areia);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 19 38 43;
-  --escuro-rgb: 19 38 43;
+  --sombra-rgb: 10 21 24;
+  --escuro-rgb: 10 21 24;
   --fundo-rgb: 246 241 234;
   --fundo-alt-rgb: 231 220 205;
   --superficie-rgb: 255 255 255;

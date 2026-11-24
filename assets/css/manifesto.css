@@ -12,7 +12,7 @@
 }
 
 .manifesto__texto {
-  max-width: 1080px;
+  max-width: 20.5em; /* em: a quebra acompanha o tamanho da letra, sempre em 3 linhas no computador */
   margin-inline: auto;
   font-family: var(--fonte-titulo);
   font-size: clamp(1.9rem, 4.2vw, 3.6rem);
