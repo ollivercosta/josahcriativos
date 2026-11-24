@@ -4,7 +4,7 @@ Arquivo de consulta obrigatória. Antes de sugerir, propor ou aplicar qualquer
 mudança no site, ler este arquivo inteiro e conferir se a ideia já foi
 reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 
-Última atualização: 24/11/2026.
+Última atualização: 24/11/2026 (planilha do processo aprovada).
 
 ---
 
@@ -48,8 +48,9 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Cabeçalho sem fundo e com texto claro enquanto está sobre o hero; o fundo aparece ao sair do hero.
 - Hero: título construído pelos agentes, em Fraunces; fundo liso; rótulo "Comunicação para projetos culturais" sem destaque de cor.
 - Manifesto: sempre 3 linhas no computador.
-- Trabalhos: galeria de quadrados, 6 visíveis e "Ver mais"; em pares no celular; nome sobre a imagem ao passar o mouse; sem contador de trabalhos.
+- Trabalhos: galeria de quadrados, 6 visíveis; "Ver mais trabalhos" em texto à direita, sem formato de botão e sem número; em pares no celular; nome sobre a imagem ao passar o mouse; sem contador de trabalhos.
 - Serviços: três frentes em painéis, botão "Como trabalho".
+- Processo (/como-trabalho): planilha de cronograma com indicadores no topo (estilo painel), letras de coluna e números de linha, barras por semana e a linha "hoje" atravessando; prazos sempre de exemplo, com aviso de que cada projeto tem o próprio cronograma.
 - Depoimentos: discretos, só em /como-trabalho.
 - Contato: sem fundo, botão como único elemento de cor.
 - A foto do Josah fica só na página Sobre. O foco do site é o trabalho, não ele.
@@ -69,7 +70,8 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 - Depoimento em corpo grande ocupando a tela.
 - Informação empilhada: descrição longa embaixo de cada item de lista.
 - Esmaecer o hero ao rolar.
-- Retícula concentrada num canto apresentada como "textura".
+- Retícula concentrada num canto apresentada como "textura". A textura em vigor é o grão de papel no site inteiro.
+- Número de itens restantes no "Ver mais" e "Ver mais" em formato de botão.
 
 **Fluxo do processo**
 - Faixa horizontal com etapas numeradas, grade de cartões numerados, lista sanfonada, linha do tempo vertical longa.

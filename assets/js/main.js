@@ -18,7 +18,6 @@ import { Depoimentos } from "./secoes/Depoimentos.js";
 import { Faq } from "./secoes/Faq.js";
 import { Hero } from "./secoes/Hero.js";
 import { Manifesto } from "./secoes/Manifesto.js";
-import { Processo } from "./secoes/Processo.js";
 import { Cronograma } from "./secoes/Cronograma.js";
 import { Servicos } from "./secoes/Servicos.js";
 import { Sobre } from "./secoes/Sobre.js";
@@ -33,9 +32,7 @@ const REVELADOS = [
   ".trabalhos__cabeca",
   ".servicos__cabeca",
   ".servicos__grupo",
-  ".processo__cabeca",
   ".cronograma__cabeca",
-  ".processo__quadro",
   ".depoimentos__titulo",
   ".depoimentos__grade",
   ".faq__lado",
@@ -66,7 +63,6 @@ class Site {
     this.secoes.hero = se(".hero", (raiz) => new Hero(raiz));
     this.secoes.manifesto = se(".manifesto", (raiz) => new Manifesto(raiz));
     this.secoes.servicos = se(".servicos__mapa", () => new Servicos($(".servicos")));
-    this.secoes.processo = se(".processo", (raiz) => new Processo(raiz));
     this.secoes.cronograma = se(".cronograma", (raiz) => new Cronograma(raiz));
     this.secoes.sobre = se(".sobre", (raiz) => new Sobre(raiz));
     this.secoes.depoimentos = se(".depoimentos", (raiz) => new Depoimentos(raiz));

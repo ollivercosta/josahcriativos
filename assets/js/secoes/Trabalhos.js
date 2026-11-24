@@ -129,7 +129,7 @@ export class Trabalhos {
     this.#aplicar(true);
   }
 
-  /** O botão "Ver mais" abaixo da parede: mostra o resto da categoria. */
+  /** O "Ver mais trabalhos", em texto à direita, abaixo da parede: mostra o resto da categoria. */
   #montarMais() {
     this.mais = this.#elemento("button", "trabalhos__mais", "Ver mais trabalhos");
     this.mais.type = "button";
@@ -157,7 +157,7 @@ export class Trabalhos {
     this.primeiroNovo = entram[0]?.firstElementChild;
     const restam = daCategoria.length - mostrados.size;
     this.mais.hidden = restam <= 0;
-    this.mais.textContent = `Ver mais trabalhos (${restam})`;
+    this.mais.textContent = "Ver mais trabalhos";
     this.contador.textContent = `${daCategoria.length} trabalhos`;
 
     if (!animar || Ambiente.reduzMovimento || !Element.prototype.animate) {
