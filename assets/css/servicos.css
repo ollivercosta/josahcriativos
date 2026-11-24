@@ -101,24 +101,11 @@
 }
 
 .servicos__linha {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
   padding: 12px 0;
   border-top: 1px solid var(--borda);
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--ink);
-}
-
-/* um traço curto em argila marca cada serviço da lista */
-.servicos__linha::before {
-  content: "";
-  flex: none;
-  width: 12px;
-  height: 2px;
-  transform: translateY(-4px);
-  background: var(--argila);
 }
 
 .servicos__rodape {
