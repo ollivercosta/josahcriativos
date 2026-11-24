@@ -22,6 +22,12 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 | T-08 | Sugestões fogem do padrão gerado por IA (faixas numeradas, grades de cartões iguais, rótulos acima de títulos, ícones genéricos). Se a ideia é a primeira que qualquer IA daria, ela não serve. |
 | T-09 | Nunca usar travessão (traço longo) em nenhum texto do site, do código ou das respostas. Usar vírgula, ponto, dois-pontos ou hífen. |
 
+## 1.1 Com quem o site fala
+
+- O público é produtor cultural, gestor de projeto, parecerista e patrocinador: pessoas que se comunicam no tom atual do site, correto e direto. Não propor mudar a voz dos textos para um tom informal.
+- Todas as imagens do site são reais e 100% autorais. O site mostra o resultado; o processo de cada trabalho já é contado nos textos da página do trabalho. Não propor fotos de bastidores, rascunhos ou processo.
+- O amarelo `#FFBC00` só com muita cautela: fora do texto de abertura do hero, ele vira poluição visual.
+
 ## 2. Código
 
 | Código | Regra |
@@ -59,7 +65,7 @@ reprovada. Toda decisão nova do Josah entra aqui no mesmo dia.
 ## 4. Reprovados: não sugerir de novo
 
 **Elementos e efeitos**
-- Ícones ou ilustrações grandes animadas, inclusive cenas desenhadas que se montam (como o cartaz que "se constrói" nas etapas).
+- Ícones ou ilustrações de traço pobre, sem identidade (como os ícones grandes da primeira versão e o cartaz que "se constrói"). Ilustração autoral em flat design com qualidade (degradês, paleta harmônica, detalhe) é permitida; a referência de nível é a imagem "Ask me about design" que o Josah enviou, usada só como padrão de qualidade, nunca para copiar.
 - Qualquer fundo animado atrás do hero: luzes e manchas desfocadas, cerca de losangos, facetas e polígonos, grid de quadrados, módulos que deslizam, colunas, malha de pontos que reage ao mouse.
 - Triângulos e formas pontiagudas.
 - Imagens dos trabalhos correndo no hero.
