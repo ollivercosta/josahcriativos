@@ -27,23 +27,23 @@
 
 
 :root {
-  /* PALETA "petróleo, argila e cinábrio"
+  /* TESTE: paleta do site do TJBA (azul-marinho, dourado e vermelho). Só nesta prévia. Antes: PALETA "petróleo, argila e cinábrio"
      Profundo (sofisticação): petróleo quase preto em três tons, no hero, em Serviços e no rodapé.
      Humano (terra): argila e areia, na faixa do manifesto, no contato e em detalhes.
      Base: papel quente, nos trabalhos.
      Energia: cinábrio, pouco e em pontos certos (botões, destaques, marcas dos títulos). */
   --branco: #FFFFFF;
-  --papel: #F6F1EA;
-  --areia: #E7DCCD;
-  --argila: #B8876A;
-  --argila-clara: #D9B79C;
-  --prof: #0A1518;
-  --prof-2: #0E1C20;
-  --prof-3: #060D0F;
-  --petroleo-fundo: #012631; /* fundo do hero, de Serviços e do rodapé */
-  --acento: #C23A22; /* cinábrio, sobre claro */
-  --acento-escuro: #9E2E1A;
-  --acento-vivo: #FF6A45; /* cinábrio, sobre o profundo */
+  --papel: #F7F2E8;
+  --areia: #EEF5FF;
+  --argila: #C79A42;
+  --argila-clara: #F1D584;
+  --prof: #1B2A3A;
+  --prof-2: #002F63;
+  --prof-3: #001E43;
+  --petroleo-fundo: #002654; /* fundo do hero, de Serviços e do rodapé */
+  --acento: #C62828; /* cinábrio, sobre claro */
+  --acento-escuro: #9F1F1F;
+  --acento-vivo: #F1D584; /* cinábrio, sobre o profundo */
 
   /* apelidos dos nomes de paletas anteriores, para as seções não quebrarem */
   --creme: var(--papel);
@@ -66,8 +66,8 @@
   --espresso: var(--prof);
   --espresso-suave: var(--prof-2);
   --pedra: var(--areia);
-  --linha: #DDD3C6;
-  --linha-2: #C9BCAC;
+  --linha: #D8E0EA;
+  --linha-2: #C3CEDC;
   --sucesso: var(--prof);
   --sucesso-claro: var(--areia);
   --aviso: var(--argila);
@@ -95,7 +95,7 @@
   --borda-controle: #8C8174;
   --ink: var(--prof);
   --texto: var(--prof);
-  --suave: #55615F;
+  --suave: #4A5868;
   --texto-titulo: var(--prof);
   --texto-sobre-cor: var(--papel);
   --acao: var(--acento);
@@ -125,10 +125,10 @@
   --cor-cinza-claro: var(--areia);
 
   /* canais para transparências: rgb(var(--sombra-rgb) / 0.1) */
-  --sombra-rgb: 10 21 24;
-  --escuro-rgb: 10 21 24;
-  --fundo-rgb: 246 241 234;
-  --fundo-alt-rgb: 231 220 205;
+  --sombra-rgb: 0 38 84;
+  --escuro-rgb: 0 38 84;
+  --fundo-rgb: 247 242 232;
+  --fundo-alt-rgb: 238 245 255;
   --superficie-rgb: 255 255 255;
   --sobre-cor-rgb: 246 241 234;
 
